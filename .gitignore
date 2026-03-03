@@ -50,6 +50,9 @@ yarn-error.log*
 # src/**/*.png
 # public/imgs/*.png
 
+# Playwright and debugging
+.playwright-mcp/
+
 # Temp files
 *.tmp
 *.temp
