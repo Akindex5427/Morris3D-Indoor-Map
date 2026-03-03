@@ -1,0 +1,57 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+yarn.lock
+package-lock.json
+
+# testing
+/coverage
+
+# production
+/build
+/dist
+.next/
+out/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.code-workspace
+*.sublime-project
+*.sublime-workspace
+
+# misc
+.DS_Store
+Thumbs.db
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# media files (unused pictures/images)
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.ico
+# Uncomment below if you want to also ignore png in certain folders
+# src/**/*.png
+# public/imgs/*.png
+
+# Temp files
+*.tmp
+*.temp
+.tmp/
+*.tsbuildinfo
