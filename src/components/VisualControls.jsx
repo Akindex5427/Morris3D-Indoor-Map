@@ -12,93 +12,122 @@ const VisualControls = ({
   setBasemapStyle,
 }) => {
   const [collapsed, setCollapsed] = useState(false);
+  const stopMapDrag = (event) => {
+    event.stopPropagation();
+  };
+  const handleTranslucencyChange = (event) => {
+    setTranslucency(parseInt(event.target.value, 10));
+  };
+  const handleHeightExaggerationChange = (event) => {
+    setHeightExaggeration(parseFloat(event.target.value));
+  };
 
   return (
-    <div className={`visual-controls floating ${collapsed ? "collapsed" : ""}`}>
+    <div
+      className={`visual-controls floating ${collapsed ? "collapsed" : ""}`}
+      onPointerDown={stopMapDrag}
+      onMouseDown={stopMapDrag}
+      onTouchStart={stopMapDrag}
+      onWheel={stopMapDrag}
+    >
       <div className="vc-header">
-        <button
-          className="vc-toggle"
-          onClick={() => setCollapsed((c) => !c)}
-          aria-label={
-            collapsed ? "Open visual controls" : "Close visual controls"
-          }
-        >
-          {collapsed ? "Open" : "Visual"}
-        </button>
-        {!collapsed && (
+        <div className="vc-heading">
+          <span className="vc-kicker">Display</span>
+          {!collapsed && <strong>Visual controls</strong>}
+        </div>
+        <div className="vc-actions">
           <button
-            className="vc-close"
-            onClick={() => setCollapsed(true)}
-            aria-label="Hide visual controls"
+            className="vc-toggle"
+            onClick={() => setCollapsed((current) => !current)}
+            aria-label={
+              collapsed ? "Open visual controls" : "Collapse visual controls"
+            }
           >
-            &times;
+            {collapsed ? "Open" : "Collapse"}
           </button>
-        )}
+          {!collapsed && (
+            <button
+              className="vc-close"
+              onClick={() => setCollapsed(true)}
+              aria-label="Hide visual controls"
+            >
+              x
+            </button>
+          )}
+        </div>
       </div>
 
       {!collapsed && (
         <div className="vc-body">
           <div className="control-row">
-            <label>
-              Basemap Style:
-              <select
-                value={basemapStyle}
-                onChange={(e) => setBasemapStyle(e.target.value)}
-                style={{
-                  width: "100%",
-                  padding: "0.4rem",
-                  marginTop: "0.3rem",
-                  borderRadius: "4px",
-                  border: "1px solid #ccc",
-                  fontSize: "0.9rem",
-                }}
-              >
-                {Object.entries(BASEMAP_STYLES).map(([key, style]) => (
-                  <option key={key} value={key}>
-                    {style.name} - {style.description}
-                  </option>
-                ))}
-              </select>
+            <label className="control-label" htmlFor="basemap-style-select">
+              <span>Basemap style</span>
             </label>
+            <select
+              id="basemap-style-select"
+              className="control-select"
+              value={basemapStyle}
+              onChange={(e) => setBasemapStyle(e.target.value)}
+            >
+              {Object.entries(BASEMAP_STYLES).map(([key, style]) => (
+                <option key={key} value={key}>
+                  {style.name} - {style.description}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="control-row">
-            <label>
+            <label className="control-toggle" htmlFor="lighting-toggle">
+              <span>Enable lighting</span>
               <input
+                id="lighting-toggle"
                 type="checkbox"
                 checked={lightingEnabled}
                 onChange={(e) => setLightingEnabled(e.target.checked)}
               />
-              Enable Lighting
             </label>
           </div>
 
           <div className="control-row">
-            <label>
-              Translucency: {translucency}%
-              <input
-                type="range"
-                min={10}
-                max={100}
-                value={translucency}
-                onChange={(e) => setTranslucency(parseInt(e.target.value, 10))}
-              />
+            <label className="control-label" htmlFor="translucency-range">
+              <span className="control-label-row">
+                <span>Translucency</span>
+                <strong className="control-value">{translucency}%</strong>
+              </span>
             </label>
+            <input
+              id="translucency-range"
+              className="control-range"
+              type="range"
+              min={10}
+              max={100}
+              value={translucency}
+              onInput={handleTranslucencyChange}
+              onChange={handleTranslucencyChange}
+            />
           </div>
+
           <div className="control-row">
-            <label>
-              Height Exaggeration: {heightExaggeration}x
-              <input
-                type="range"
-                min={0.5}
-                max={6}
-                step={0.1}
-                value={heightExaggeration}
-                onChange={(e) =>
-                  setHeightExaggeration(parseFloat(e.target.value))
-                }
-              />
+            <label className="control-label" htmlFor="height-range">
+              <span className="control-label-row">
+                <span>Height exaggeration</span>
+                <strong className="control-value">
+                  {heightExaggeration}x
+                </strong>
+              </span>
             </label>
+            <input
+              id="height-range"
+              className="control-range"
+              type="range"
+              min={0.5}
+              max={6}
+              step={0.1}
+              value={heightExaggeration}
+              onInput={handleHeightExaggerationChange}
+              onChange={handleHeightExaggerationChange}
+            />
           </div>
         </div>
       )}

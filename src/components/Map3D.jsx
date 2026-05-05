@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import DeckGL from "@deck.gl/react";
 import Map from "react-map-gl";
-import {
-  PathLayer,
-  ScatterplotLayer,
-  TextLayer,
-  IconLayer,
-} from "@deck.gl/layers";
+import { PathLayer, TextLayer, IconLayer } from "@deck.gl/layers";
 import { useIndoorBuilding } from "./IndoorBuilding";
+import { useBuildingWallLayers } from "../layers/buildingWallLayer";
+import { usePerimeterWallLayer } from "../layers/perimeterWallLayer";
+import { useStackedWallLayer } from "../layers/stackedWallLayer";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 // Mapbox API token - Get yours free at https://account.mapbox.com/access-tokens/
@@ -33,25 +31,10 @@ export const BASEMAP_STYLES = {
   },
 };
 
-// Floor base elevation mapping (in meters) - must match IndoorBuilding.js
-const FLOOR_BASE_ELEVATIONS = {
-  0: 4.5, // Basement
-  1: 13.5, // Level 1
-  2: 22.5, // Level 2
-  3: 31.5, // Level 3
-  4: 40.5, // Level 4
-  5: 49.5, // Level 5
-  6: 58.5, // Level 6
-  7: 67.5, // Level 7
-};
+const BUILDING_FLOOR_SPACING = 4.5;
 
 // Marker elevation offset (in meters) - to ensure markers appear above floor surface
 const MARKER_ELEVATION_OFFSET = 2.0; // Raise markers 2m above floor
-
-// Helper function to get elevation for a coordinate at a specific floor
-const getFloorElevation = (floor) => {
-  return FLOOR_BASE_ELEVATIONS[floor] ?? floor * 9; // Default to 9m per floor
-};
 
 const Map3D = ({
   selectedFloor,
@@ -68,8 +51,14 @@ const Map3D = ({
   viewState: externalViewState,
   onViewStateChange,
   routePath = null,
+  routeRenderPath = null,
+  routeFloorId = null,
   roomsData = [],
+  centerlinesData = {},
+  activeFloor = "all",
   basemapStyle = "satellite", // default to satellite view
+  showPerimeterWall = true,
+  perimeterWallUrl = "/wall.geojson",
 }) => {
   const [geojsonData, setGeojsonData] = useState(null);
   const [initialViewState, setInitialViewState] = useState({
@@ -84,6 +73,8 @@ const Map3D = ({
   const [webglError, setWebglError] = useState(null);
   const deckRef = useRef(null);
   const containerRef = useRef(null);
+  const isAllFloorsSelected =
+    selectedFloor === "all" || selectedFloor === "F-ALL";
 
   // Wait for component to mount before initializing DeckGL
   useEffect(() => {
@@ -160,7 +151,7 @@ const Map3D = ({
     else if (
       selectedFloor !== undefined &&
       selectedFloor !== null &&
-      selectedFloor !== "all"
+      !isAllFloorsSelected
     ) {
       features = features.filter((feature) => {
         const floor =
@@ -211,7 +202,7 @@ const Map3D = ({
       return selectedFloors;
     }
     // If F-ALL is selected, pass all available floors to enable dollhouse mode
-    if (selectedFloor === "all") {
+    if (isAllFloorsSelected) {
       return allAvailableFloors;
     }
     // If a single floor is selected
@@ -220,7 +211,7 @@ const Map3D = ({
     }
     // Default: empty array
     return [];
-  }, [selectedFloors, selectedFloor, allAvailableFloors]);
+  }, [selectedFloors, selectedFloor, isAllFloorsSelected, allAvailableFloors]);
 
   // Use the new IndoorBuilding hook for ArcGIS Indoors-style visualization
   const displayData = getDisplayData();
@@ -236,7 +227,7 @@ const Map3D = ({
     selectedFloors: floorsToDisplay,
     translucency: translucency / 100, // Convert from 0-100 to 0-1
     heightExaggeration,
-    floorSpacing: 4.5, // 4.5m vertical spacing between floors (matches provided stack)
+    floorSpacing: BUILDING_FLOOR_SPACING, // 4.5m vertical spacing between floors (matches provided stack)
     highlightedRoomId,
     onRoomClick: (roomProps) => {
       const roomId = roomProps?.id || roomProps?.name || "";
@@ -249,32 +240,153 @@ const Map3D = ({
     lightingEffect: null,
   };
 
+  const singleFloorWallIds = useMemo(() => {
+    if ((selectedFloors?.length ?? 0) > 0) {
+      return selectedFloors;
+    }
+
+    if (isAllFloorsSelected) {
+      return [];
+    }
+
+    return selectedFloor !== undefined && selectedFloor !== null
+      ? [selectedFloor]
+      : [];
+  }, [selectedFloor, selectedFloors, isAllFloorsSelected]);
+
+  const singleFloorWallLayers = useBuildingWallLayers({
+    visibleFloorIds: singleFloorWallIds,
+  });
+
+  const hasFloorSpecificWalls = singleFloorWallIds.length > 0;
+  const perimeterWallLayers = usePerimeterWallLayer({
+    url: perimeterWallUrl,
+    enabled: showPerimeterWall && isAllFloorsSelected && !hasFloorSpecificWalls,
+  });
+
+  const stackedWallLayers = useStackedWallLayer({
+    activeFloor: selectedFloor,
+    selectedFloor,
+    selectedFloors,
+  });
+
   console.log("[Map3D] Indoor layers:", indoorLayers?.length || 0);
 
-  const layers = [...indoorLayers];
+  const layers = [
+    ...indoorLayers,
+    ...singleFloorWallLayers,
+    ...perimeterWallLayers,
+    ...stackedWallLayers,
+  ];
+  const activeRenderPath =
+    routeRenderPath && routeRenderPath.length > 1 ? routeRenderPath : routePath;
+  const shouldRenderRoute =
+    activeRenderPath &&
+    activeRenderPath.length > 1 &&
+    routeFloorId !== null &&
+    (selectedFloors?.length ?? 0) === 0 &&
+    activeFloor !== "all" &&
+    Number(activeFloor) === routeFloorId;
+
+  // Add centerline graph overlay as blue lines
+  const centerlinePaths = useMemo(() => {
+    // Determine which floors' centerlines to show
+    const floorsToShow =
+      activeFloor === "all"
+        ? Object.keys(centerlinesData).map(Number)
+        : [
+            typeof activeFloor === "number"
+              ? activeFloor
+              : parseInt(activeFloor, 10),
+          ].filter(Number.isFinite);
+
+    const paths = [];
+    for (const floor of floorsToShow) {
+      const geojson = centerlinesData[floor];
+      if (!geojson) continue;
+
+      const features = geojson.features || [];
+      for (const feature of features) {
+        if (!feature.geometry) continue;
+        const geomType = feature.geometry.type;
+        const coordSets =
+          geomType === "LineString"
+            ? [feature.geometry.coordinates]
+            : geomType === "MultiLineString"
+              ? feature.geometry.coordinates
+              : [];
+
+        for (const coords of coordSets) {
+          if (coords.length < 2) continue;
+          paths.push({
+            path: coords.map((c) => [c[0], c[1]]),
+            floor,
+          });
+        }
+      }
+    }
+    return paths;
+  }, [centerlinesData, activeFloor]);
+
+  // REFACTOR: Centerline network is now hidden by default
+  // The centerline data remains loaded in memory for graph-based routing,
+  // but is NOT rendered as visible layers on the map.
+  // Only computed routes are shown to users (see route rendering below).
+  // This provides a clean map interface - users only see their requested route,
+  // not the entire digitized centerline network.
+  /*
+  if (centerlinePaths.length > 0) {
+    const isDollhouse =
+      selectedFloor === "all" || (selectedFloors && selectedFloors.length > 1);
+    const centerlineElev = (floorNum) =>
+      isDollhouse ? floorNum * BUILDING_FLOOR_SPACING + 0.02 : 0.02;
+
+    const pathsWithElev = centerlinePaths.map((d) => ({
+      path: d.path.map((c) => [c[0], c[1], centerlineElev(d.floor)]),
+    }));
+
+    layers.push(
+      new PathLayer({
+        id: "centerline-graph-lines",
+        data: pathsWithElev,
+        getPath: (d) => d.path,
+        getColor: [40, 120, 255, 180], // blue with slight transparency
+        getWidth: 1.5,
+        widthMinPixels: 1,
+        widthMaxPixels: 4,
+        widthScale: 1,
+        rounded: true,
+        billboard: false,
+        pickable: false,
+        parameters: { depthTest: false, depthMask: false },
+      }),
+    );
+  }
+  */
 
   // Add route visualization layers if route exists
   console.log("[Map3D] routePath prop:", routePath);
-  if (routePath && routePath.length > 1) {
-    console.log("[Map3D] Rendering route with", routePath.length, "waypoints");
+  console.log("[Map3D] routeRenderPath prop:", routeRenderPath);
+  if (shouldRenderRoute) {
+    console.log(
+      "[Map3D] Rendering route with",
+      activeRenderPath.length,
+      "graph points",
+    );
 
-    // Create path coordinates using actual room base elevations
-    const PATH_ELEVATION_OFFSET = 0.5; // Just above floor for clear visibility
-    const pathCoords = routePath.map((point) => {
-      // Try to get base elevation from room features
-      let baseElevation = getFloorElevation(point.floor);
+    // Elevation strategy:
+    // - In single-floor mode, IndoorBuilding normalizes the selected floor so
+    //   the floor surface sits near Z=0 while stairs can still rise above it.
+    // - In dollhouse mode, floors are stacked at floorNum * floorSpacing.
+    // So: single-floor → path at Z≈0; dollhouse → path at floorNum * spacing.
+    const isDollhouse =
+      selectedFloor === "all" || (selectedFloors && selectedFloors.length > 1);
+    const pathElevation = (floorNum) =>
+      isDollhouse ? floorNum * BUILDING_FLOOR_SPACING + 0.05 : 0.05;
 
-      if (point.features?.[0]?.properties?.base_height !== undefined) {
-        baseElevation = parseFloat(point.features[0].properties.base_height);
-      } else if (point.features?.[0]?.properties?.base_heigh !== undefined) {
-        baseElevation = parseFloat(point.features[0].properties.base_heigh);
-      }
-
-      const totalElevation = baseElevation + PATH_ELEVATION_OFFSET;
-      console.log(
-        `[Map3D] Path point: floor=${point.floor}, baseElev=${baseElevation}, totalElev=${totalElevation}, room=${point.name}`,
-      );
-      return [...point.coords, totalElevation]; // [lon, lat, elevation]
+    const pathCoords = activeRenderPath.map((point) => {
+      const floorNum = typeof point.floor === "number" ? point.floor : 0;
+      return [...point.coords, pathElevation(floorNum)]; // [lon, lat, elevation]
     });
 
     console.log("[Map3D] Route path coordinates:", pathCoords);
@@ -287,87 +399,57 @@ const Map3D = ({
       pathCoords[pathCoords.length - 1],
     );
 
-    // Narrower blue route path like Google Maps (outer border)
+    // Route line – depthTest disabled so it always paints on top of floor geometry
+    // without being occluded by 3D room extrusions or suffering z-fighting.
+
+    // Outer dark-blue border for contrast
     layers.push(
       new PathLayer({
         id: "route-path-border",
         data: [{ path: pathCoords }],
         getPath: (d) => d.path,
-        getColor: [30, 80, 180, 180],
-        getWidth: 10,
-        widthMinPixels: 7,
-        widthMaxPixels: 14,
+        getColor: [10, 60, 160, 220],
+        getWidth: 5,
+        widthMinPixels: 3,
+        widthMaxPixels: 8,
         widthScale: 1,
         rounded: true,
         billboard: false,
         pickable: false,
-        opacity: 0.7,
+        parameters: { depthTest: false, depthMask: false },
       }),
     );
 
-    // Main bold blue path (like Google Maps) - narrower
+    // Main Google-blue fill
     layers.push(
       new PathLayer({
         id: "route-path-main",
         data: [{ path: pathCoords }],
         getPath: (d) => d.path,
-        getColor: [66, 133, 244, 255], // Google Maps blue
-        getWidth: 7,
-        widthMinPixels: 5,
-        widthMaxPixels: 10,
-        widthScale: 1,
-        rounded: true,
-        billboard: false,
-        pickable: true,
-        opacity: 1.0,
-      }),
-    );
-
-    // Inner highlight for 3D effect - narrower
-    layers.push(
-      new PathLayer({
-        id: "route-path-highlight",
-        data: [
-          {
-            path: pathCoords.map((c) => [c[0], c[1], c[2] + 0.1]),
-          },
-        ],
-        getPath: (d) => d.path,
-        getColor: [130, 180, 255, 150],
+        getColor: [26, 115, 232, 255], // vivid Google blue
         getWidth: 3,
         widthMinPixels: 2,
         widthMaxPixels: 5,
         widthScale: 1,
         rounded: true,
         billboard: false,
-        pickable: false,
-        opacity: 0.6,
+        pickable: true,
+        parameters: { depthTest: false, depthMask: false },
       }),
     );
 
-    // Start and end point markers - place ON the floor surface using room's actual base elevation
-    // Get the actual room features to read their base_height property
-    const startRoom = routePath[0].features?.[0];
-    const endRoom = routePath[routePath.length - 1].features?.[0];
-
-    // Calculate base elevation from room properties
-    const getBaseElevation = (room, floor) => {
-      if (room?.properties?.base_height !== undefined) {
-        return parseFloat(room.properties.base_height);
-      }
-      if (room?.properties?.base_heigh !== undefined) {
-        return parseFloat(room.properties.base_heigh);
-      }
-      // Fallback to floor-based elevation
-      return getFloorElevation(floor);
+    // Start and end point markers - same mode-aware elevation as path line
+    const MARKER_FLOOR_OFFSET = 0.1; // pin base sits on floor surface
+    const floorElev = (floor) => {
+      const n = typeof floor === "number" ? floor : 0;
+      return isDollhouse ? n * BUILDING_FLOOR_SPACING : 0;
     };
 
-    const MARKER_FLOOR_OFFSET = 2.0; // Raised above floor to prevent any sinking
     const markerData = [
       {
         position: [
           ...routePath[0].coords,
-          getBaseElevation(startRoom, routePath[0].floor) + MARKER_FLOOR_OFFSET,
+          floorElev(routePath[0].floor) + MARKER_FLOOR_OFFSET,
         ],
         type: "start",
         floor: routePath[0].floor,
@@ -376,7 +458,7 @@ const Map3D = ({
       {
         position: [
           ...routePath[routePath.length - 1].coords,
-          getBaseElevation(endRoom, routePath[routePath.length - 1].floor) +
+          floorElev(routePath[routePath.length - 1].floor) +
             MARKER_FLOOR_OFFSET,
         ],
         type: "end",
@@ -454,113 +536,32 @@ const Map3D = ({
       }),
     );
 
-    // Waypoint markers with enhanced creative styling
+    // Waypoint labels only - clean visualization
     if (routePath.length > 2) {
-      const WAYPOINT_ELEVATION_OFFSET = 2.0;
+      const WAYPOINT_ELEVATION_OFFSET = 0.1; // label sits on floor surface
       const waypoints = routePath.slice(1, -1);
 
-      // Glow for waypoints
-      layers.push(
-        new ScatterplotLayer({
-          id: "route-waypoints-glow",
-          data: waypoints,
-          getPosition: (d) => {
-            let baseElevation = getFloorElevation(d.floor);
-            if (d.features?.[0]?.properties?.base_height !== undefined) {
-              baseElevation = parseFloat(d.features[0].properties.base_height);
-            } else if (d.features?.[0]?.properties?.base_heigh !== undefined) {
-              baseElevation = parseFloat(d.features[0].properties.base_heigh);
-            }
-            return [
-              ...d.coords,
-              baseElevation + WAYPOINT_ELEVATION_OFFSET - 0.05,
-            ];
-          },
-          getFillColor: [255, 180, 80, 150],
-          getRadius: 14,
-          radiusUnits: "pixels",
-          pickable: false,
-          opacity: 0.6,
-        }),
-      );
-
-      // Thin blue line connecting waypoints
-      const waypointCoords = waypoints.map((d) => {
-        let baseElevation = getFloorElevation(d.floor);
-        if (d.features?.[0]?.properties?.base_height !== undefined) {
-          baseElevation = parseFloat(d.features[0].properties.base_height);
-        } else if (d.features?.[0]?.properties?.base_heigh !== undefined) {
-          baseElevation = parseFloat(d.features[0].properties.base_heigh);
-        }
-        return [...d.coords, baseElevation + WAYPOINT_ELEVATION_OFFSET];
-      });
-
-      layers.push(
-        new PathLayer({
-          id: "waypoint-connector-line",
-          data: [{ path: waypointCoords }],
-          getPath: (d) => d.path,
-          getColor: [66, 133, 244, 200], // Blue
-          getWidth: 2,
-          widthMinPixels: 1,
-          widthMaxPixels: 3,
-          rounded: false,
-          billboard: false,
-          pickable: false,
-          opacity: 0.6,
-        }),
-      );
-
-      // Main waypoint markers - smaller dots
-      layers.push(
-        new ScatterplotLayer({
-          id: "route-waypoints-main",
-          data: waypoints,
-          getPosition: (d) => {
-            let baseElevation = getFloorElevation(d.floor);
-            if (d.features?.[0]?.properties?.base_height !== undefined) {
-              baseElevation = parseFloat(d.features[0].properties.base_height);
-            } else if (d.features?.[0]?.properties?.base_heigh !== undefined) {
-              baseElevation = parseFloat(d.features[0].properties.base_heigh);
-            }
-            return [...d.coords, baseElevation + WAYPOINT_ELEVATION_OFFSET];
-          },
-          getFillColor: [255, 255, 255, 255], // White
-          getRadius: 5,
-          radiusUnits: "pixels",
-          pickable: false,
-          stroked: true,
-          lineWidthMinPixels: 1,
-          getLineColor: [100, 150, 255, 255], // Light blue stroke
-        }),
-      );
-
-      // Waypoint labels using TextLayer - smaller with black text
+      // Waypoint labels using TextLayer - bold black text
       layers.push(
         new TextLayer({
           id: "route-waypoint-labels",
           data: waypoints,
           getPosition: (d) => {
-            let baseElevation = getFloorElevation(d.floor);
-            if (d.features?.[0]?.properties?.base_height !== undefined) {
-              baseElevation = parseFloat(d.features[0].properties.base_height);
-            } else if (d.features?.[0]?.properties?.base_heigh !== undefined) {
-              baseElevation = parseFloat(d.features[0].properties.base_heigh);
-            }
-            return [...d.coords, baseElevation + WAYPOINT_ELEVATION_OFFSET + 2];
+            const baseElevation = floorElev(d.floor);
+            return [...d.coords, baseElevation + WAYPOINT_ELEVATION_OFFSET];
           },
           getText: (d) => d.name || "Waypoint",
-          getSize: 9,
-          getColor: [0, 0, 0, 255], // Black text
+          getSize: 9.5,
+          getColor: [0, 0, 0, 255], // Deep black text with full opacity
           getTextAnchor: "middle",
           getAlignmentBaseline: "center",
           sizeUnits: "pixels",
           pickable: false,
           billboard: true,
           fontSettings: {
-            fontSize: 9,
+            fontSize: 10,
             fontFamily: "Arial, sans-serif",
-            fontWeight: "normal",
+            fontWeight: "800",
           },
         }),
       );
@@ -572,7 +573,7 @@ const Map3D = ({
     return (
       <div
         ref={containerRef}
-        className="map-3d-container"
+        className="map-3d-container map-error-state"
         style={{
           width: "100%",
           height: "100%",
@@ -636,30 +637,14 @@ const Map3D = ({
     geojsonData.features.length === 0
   ) {
     return (
-      <div
-        ref={containerRef}
-        className="map-3d-container"
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#1a1a1a",
-          color: "#ffffff",
-        }}
-      >
+      <div ref={containerRef} className="map-3d-container map-loading-state">
         Loading map data...
       </div>
     );
   }
 
   return (
-    <div
-      ref={containerRef}
-      className="map-3d-container"
-      style={{ width: "100%", height: "100%", position: "relative" }}
-    >
+    <div ref={containerRef} className="map-3d-container">
       <DeckGL
         ref={deckRef}
         width="100%"

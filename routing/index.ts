@@ -1,5 +1,12 @@
 export { IndoorRouter } from './router';
-export type { IndoorRouterOptions, RouteResult } from './router';
+export type {
+  IndoorRouterOptions,
+  RouteCoordinate,
+  RouteDebugInfo,
+  RouteResult,
+  RouteSegmentValidation,
+  RouteSnapDebug,
+} from './router';
 
 export { aStarGraphPath } from './astarGraph';
 export type { AStarGraphOptions, AStarGraphResult } from './astarGraph';

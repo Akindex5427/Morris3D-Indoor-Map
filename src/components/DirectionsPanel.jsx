@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./DirectionsPanel.css";
 import {
   generateDirections,
@@ -15,19 +15,16 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
   const [speechRate, setSpeechRate] = useState(1.0);
   const [collapsed, setCollapsed] = useState(false);
 
-  // Generate directions from route path
   const directions = useMemo(() => {
     if (!routePath) return [];
     return generateDirections(routePath);
   }, [routePath]);
 
-  // Calculate route statistics
   const stats = useMemo(() => {
     if (!routePath) return null;
     return calculateRouteStats(routePath);
   }, [routePath]);
 
-  // Format time for display
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = Math.round(seconds % 60);
@@ -35,7 +32,6 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
     return secs > 0 ? `${mins} min ${secs} sec` : `${mins} min`;
   };
 
-  // Format distance for display
   const formatDistance = (meters) => {
     if (meters < 1000) {
       return `${Math.round(meters)} m`;
@@ -43,14 +39,11 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
     return `${(meters / 1000).toFixed(2)} km`;
   };
 
-  // Check if speech synthesis is supported
   const isSpeechSupported = "speechSynthesis" in window;
 
-  // Speak a direction step
   const speak = (text, rate = speechRate) => {
     if (!isSpeechSupported || !voiceEnabled) return;
 
-    // Cancel any ongoing speech
     window.speechSynthesis.cancel();
 
     const utterance = new SpeechSynthesisUtterance(text);
@@ -62,11 +55,10 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
     utterance.onend = () => {
       setIsSpeaking(false);
 
-      // Auto-advance to next step if autoPlay is enabled
       if (autoPlay && currentStep < directions.length - 1) {
         setTimeout(() => {
           setCurrentStep((prev) => prev + 1);
-        }, 1000); // 1 second delay between steps
+        }, 1000);
       }
     };
     utterance.onerror = () => setIsSpeaking(false);
@@ -74,7 +66,6 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
     window.speechSynthesis.speak(utterance);
   };
 
-  // Stop speaking
   const stopSpeaking = () => {
     if (isSpeechSupported) {
       window.speechSynthesis.cancel();
@@ -82,7 +73,6 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
     }
   };
 
-  // Speak current step
   const speakCurrentStep = () => {
     if (directions.length > 0 && currentStep < directions.length) {
       const step = directions[currentStep];
@@ -91,18 +81,15 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
     }
   };
 
-  // Speak all directions
   const speakAllDirections = () => {
     const text = generateSpeechText(directions);
-    speak(text, speechRate * 0.9); // Slightly slower for full route
+    speak(text, speechRate * 0.9);
   };
 
-  // Handle step navigation
   const goToStep = (index) => {
     setCurrentStep(index);
     stopSpeaking();
 
-    // Notify parent to highlight this step on map
     if (onStepClick && directions[index]) {
       onStepClick(directions[index]);
     }
@@ -120,14 +107,12 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
     }
   };
 
-  // Auto-speak when step changes and voice is enabled
   useEffect(() => {
     if (voiceEnabled && !isSpeaking && autoPlay) {
       speakCurrentStep();
     }
   }, [currentStep, voiceEnabled, autoPlay]);
 
-  // Cleanup speech on unmount
   useEffect(() => {
     return () => {
       stopSpeaking();
@@ -142,77 +127,76 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
 
   return (
     <div className={`directions-panel ${collapsed ? "collapsed" : ""}`}>
-      {/* Header */}
       <div className="directions-header">
-        <div className="directions-title">
-          <h3>📍 Directions</h3>
-          <button
-            className="toggle-btn"
-            onClick={() => setCollapsed(!collapsed)}
-            title={collapsed ? "Expand" : "Collapse"}
-          >
-            {collapsed ? "▼" : "▲"}
-          </button>
+        <div className="directions-title-block">
+          <div className="directions-title">
+            <h3>Directions</h3>
+            <button
+              className="directions-toggle-btn"
+              onClick={() => setCollapsed(!collapsed)}
+              title={collapsed ? "Expand directions" : "Collapse directions"}
+            >
+              {collapsed ? "+" : "-"}
+            </button>
+          </div>
+          {routeInfo?.start && routeInfo?.end && (
+            <p className="directions-subtitle">
+              {routeInfo.start} to {routeInfo.end}
+            </p>
+          )}
         </div>
-        <button className="close-btn" onClick={onClose} title="Close">
-          ×
+        <button
+          className="directions-close-btn"
+          onClick={onClose}
+          title="Close directions"
+        >
+          x
         </button>
       </div>
 
       {!collapsed && (
         <>
-          {/* Route Summary */}
           {stats && (
             <div className="route-summary">
               <div className="summary-item">
-                <span className="summary-icon">📏</span>
-                <div>
-                  <div className="summary-label">Distance</div>
-                  <div className="summary-value">
-                    {formatDistance(stats.totalDistance)}
-                  </div>
+                <div className="summary-label">Distance</div>
+                <div className="summary-value">
+                  {formatDistance(stats.totalDistance)}
                 </div>
               </div>
               <div className="summary-item">
-                <span className="summary-icon">⏱️</span>
-                <div>
-                  <div className="summary-label">Est. Time</div>
-                  <div className="summary-value">
-                    {formatTime(stats.estimatedTime)}
-                  </div>
+                <div className="summary-label">Est. Time</div>
+                <div className="summary-value">
+                  {formatTime(stats.estimatedTime)}
                 </div>
               </div>
               <div className="summary-item">
-                <span className="summary-icon">🏢</span>
-                <div>
-                  <div className="summary-label">Floors</div>
-                  <div className="summary-value">{stats.floors.join(", ")}</div>
-                </div>
+                <div className="summary-label">Floors</div>
+                <div className="summary-value">{stats.floors.join(", ")}</div>
               </div>
             </div>
           )}
 
-          {/* Voice Controls */}
           {isSpeechSupported && (
             <div className="voice-controls">
               <label className="voice-toggle">
+                <span>Voice guidance</span>
                 <input
                   type="checkbox"
                   checked={voiceEnabled}
                   onChange={(e) => setVoiceEnabled(e.target.checked)}
                 />
-                <span>🔊 Voice Guidance</span>
               </label>
 
               {voiceEnabled && (
                 <>
                   <label className="voice-toggle">
+                    <span>Auto-play steps</span>
                     <input
                       type="checkbox"
                       checked={autoPlay}
                       onChange={(e) => setAutoPlay(e.target.checked)}
                     />
-                    <span>▶️ Auto-play steps</span>
                   </label>
 
                   <div className="voice-actions">
@@ -222,7 +206,7 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
                       disabled={isSpeaking}
                       title="Speak current step"
                     >
-                      🔊 Step
+                      Speak step
                     </button>
                     <button
                       className="btn-voice"
@@ -230,7 +214,7 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
                       disabled={isSpeaking}
                       title="Speak all directions"
                     >
-                      🔊 All
+                      Speak all
                     </button>
                     <button
                       className="btn-voice btn-stop"
@@ -238,38 +222,38 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
                       disabled={!isSpeaking}
                       title="Stop speaking"
                     >
-                      ⏹️ Stop
+                      Stop
                     </button>
                   </div>
 
                   <div className="speed-control">
-                    <label>
+                    <label htmlFor="speech-rate-range">
                       Speed: {speechRate.toFixed(1)}x
-                      <input
-                        type="range"
-                        min="0.5"
-                        max="2.0"
-                        step="0.1"
-                        value={speechRate}
-                        onChange={(e) =>
-                          setSpeechRate(parseFloat(e.target.value))
-                        }
-                      />
                     </label>
+                    <input
+                      id="speech-rate-range"
+                      type="range"
+                      min="0.5"
+                      max="2.0"
+                      step="0.1"
+                      value={speechRate}
+                      onChange={(e) =>
+                        setSpeechRate(parseFloat(e.target.value))
+                      }
+                    />
                   </div>
                 </>
               )}
             </div>
           )}
 
-          {/* Current Step Display */}
           <div className="current-step-card">
             <div className="step-header">
               <span className="step-number">
                 Step {currentStep + 1} of {directions.length}
               </span>
               <span className={`step-type ${currentDirection.type}`}>
-                {currentDirection.icon || "➡️"}
+                {currentDirection.icon || ">"}
               </span>
             </div>
             <div className="step-instruction">
@@ -283,33 +267,31 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
             <div className="step-floor">
               Floor {currentDirection.floor}
               {currentDirection.targetFloor !== undefined && (
-                <> → Floor {currentDirection.targetFloor}</>
+                <>{` -> Floor ${currentDirection.targetFloor}`}</>
               )}
             </div>
           </div>
 
-          {/* Step Navigation */}
           <div className="step-navigation">
             <button
-              className="nav-btn"
+              className="directions-nav-btn"
               onClick={previousStep}
               disabled={currentStep === 0}
             >
-              ← Previous
+              Previous
             </button>
             <div className="step-indicator">
               {currentStep + 1} / {directions.length}
             </div>
             <button
-              className="nav-btn"
+              className="directions-nav-btn"
               onClick={nextStep}
               disabled={currentStep === directions.length - 1}
             >
-              Next →
+              Next
             </button>
           </div>
 
-          {/* Progress Bar */}
           <div className="progress-container">
             <div
               className="progress-bar"
@@ -319,7 +301,6 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
             />
           </div>
 
-          {/* All Steps List */}
           <div className="directions-list">
             <div className="list-header">All Steps</div>
             {directions.map((direction, index) => (
@@ -330,7 +311,7 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
                 } ${direction.type}`}
                 onClick={() => goToStep(index)}
               >
-                <div className="direction-icon">{direction.icon || "➡️"}</div>
+                <div className="direction-icon">{direction.icon || ">"}</div>
                 <div className="direction-content">
                   <div className="direction-instruction">
                     {direction.instruction}
@@ -338,7 +319,7 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
                   <div className="direction-meta">
                     Floor {direction.floor}
                     {direction.distance > 1 && (
-                      <> · {formatDistance(direction.distance)}</>
+                      <> - {formatDistance(direction.distance)}</>
                     )}
                   </div>
                 </div>
