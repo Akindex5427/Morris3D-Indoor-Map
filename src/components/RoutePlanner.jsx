@@ -1,11 +1,13 @@
-import React, { useState, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./RoutePlanner.css";
 
 const RoutePlanner = ({
   rooms,
   onRouteCalculate,
+  onClearRoute,
   onClose,
   selectedFloors = [],
+  activeFloor = "all",
 }) => {
   const [startRoom, setStartRoom] = useState("");
   const [endRoom, setEndRoom] = useState("");
@@ -17,12 +19,22 @@ const RoutePlanner = ({
   const [isSearching, setIsSearching] = useState(false);
   const [currentLocation, setCurrentLocation] = useState(null);
   const [useCurrentLocation, setUseCurrentLocation] = useState(false);
-  const [routePreferences, setRoutePreferences] = useState("shortest"); // "shortest" or "stairs_first"
-  const [accessibility, setAccessibility] = useState("standard"); // "standard", "wheelchair", "stairs_avoid"
+  const [routePreferences, setRoutePreferences] = useState("shortest");
+  const [accessibility, setAccessibility] = useState("standard");
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [recentDestinations, setRecentDestinations] = useState([]);
 
-  // Get room name/ID for display
+  useEffect(() => {
+    if (typeof activeFloor === "number") {
+      setSelectedFloor(String(activeFloor));
+      return;
+    }
+
+    if (activeFloor === "all") {
+      setSelectedFloor("");
+    }
+  }, [activeFloor]);
+
   const getRoomName = (room) => {
     return (
       room.properties?.name ||
@@ -32,7 +44,6 @@ const RoutePlanner = ({
     );
   };
 
-  // Get room floor
   const getRoomFloor = (room) => {
     return (
       room.properties?.floor ||
@@ -42,20 +53,17 @@ const RoutePlanner = ({
     );
   };
 
-  // Get available floors from rooms
   const availableFloors = useMemo(() => {
-    const floorSet = new Set(rooms.map((r) => getRoomFloor(r)));
+    const floorSet = new Set(rooms.map((room) => getRoomFloor(room)));
     return Array.from(floorSet).sort((a, b) => a - b);
   }, [rooms]);
 
-  // Filter rooms based on search input and optional floor
   const filterRooms = (searchText, filterFloor = null) => {
     if (!searchText || searchText.length < 1) return [];
 
     const lowerSearch = searchText.toLowerCase();
     return rooms
       .filter((room) => {
-        // If a floor is selected, only show rooms on that floor
         if (filterFloor !== null && getRoomFloor(room) !== filterFloor) {
           return false;
         }
@@ -70,47 +78,40 @@ const RoutePlanner = ({
       .slice(0, 10);
   };
 
-  // Handle start room input
   const handleStartChange = (e) => {
     const value = e.target.value;
     setStartRoom(value);
-    const floorFilter = selectedFloor ? parseInt(selectedFloor) : null;
+    const floorFilter = selectedFloor ? parseInt(selectedFloor, 10) : null;
     setStartSuggestions(filterRooms(value, floorFilter));
     setShowStartSuggestions(true);
   };
 
-  // Handle end room input
   const handleEndChange = (e) => {
     const value = e.target.value;
     setEndRoom(value);
-    const floorFilter = selectedFloor ? parseInt(selectedFloor) : null;
+    const floorFilter = selectedFloor ? parseInt(selectedFloor, 10) : null;
     setEndSuggestions(filterRooms(value, floorFilter));
     setShowEndSuggestions(true);
   };
 
-  // Handle floor selection
   const handleFloorChange = (e) => {
     setSelectedFloor(e.target.value);
-    // Clear previous suggestions when floor changes
     setStartRoom("");
     setEndRoom("");
     setStartSuggestions([]);
     setEndSuggestions([]);
   };
 
-  // Select start room
   const selectStartRoom = (room) => {
     setStartRoom(getRoomName(room));
     setShowStartSuggestions(false);
   };
 
-  // Select end room
   const selectEndRoom = (room) => {
     setEndRoom(getRoomName(room));
     setShowEndSuggestions(false);
   };
 
-  // Set current location
   const setCurrentLocationHandler = (room) => {
     setCurrentLocation(room);
     setStartRoom(getRoomName(room));
@@ -118,17 +119,15 @@ const RoutePlanner = ({
     setShowStartSuggestions(false);
   };
 
-  // Calculate route
   const handleCalculateRoute = () => {
-    // Find room objects
     const startRoomObj = useCurrentLocation
       ? currentLocation
       : rooms.find(
-          (r) => getRoomName(r).toLowerCase() === startRoom.toLowerCase(),
+          (room) => getRoomName(room).toLowerCase() === startRoom.toLowerCase(),
         );
 
     const endRoomObj = rooms.find(
-      (r) => getRoomName(r).toLowerCase() === endRoom.toLowerCase(),
+      (room) => getRoomName(room).toLowerCase() === endRoom.toLowerCase(),
     );
 
     if (!startRoomObj || !endRoomObj) {
@@ -136,9 +135,8 @@ const RoutePlanner = ({
       return;
     }
 
-    // Check if rooms are on the same floor when a floor is selected
     if (selectedFloor) {
-      const floorNum = parseInt(selectedFloor);
+      const floorNum = parseInt(selectedFloor, 10);
       if (
         getRoomFloor(startRoomObj) !== floorNum ||
         getRoomFloor(endRoomObj) !== floorNum
@@ -150,18 +148,17 @@ const RoutePlanner = ({
 
     setIsSearching(true);
 
-    // Add to recent destinations
     const destName = getRoomName(endRoomObj);
     setRecentDestinations((prev) =>
-      [destName, ...prev.filter((d) => d !== destName)].slice(0, 5),
+      [destName, ...prev.filter((destination) => destination !== destName)]
+        .slice(0, 5),
     );
 
-    // Use setTimeout to prevent UI blocking during route calculation
     setTimeout(() => {
       onRouteCalculate(
         startRoomObj,
         endRoomObj,
-        selectedFloor ? parseInt(selectedFloor) : null,
+        selectedFloor ? parseInt(selectedFloor, 10) : null,
         {
           preferences: routePreferences,
           accessibility,
@@ -171,33 +168,40 @@ const RoutePlanner = ({
     }, 0);
   };
 
-  // Clear route
   const handleClearRoute = () => {
     setStartRoom("");
     setEndRoom("");
-    onRouteCalculate(null, null);
+    if (onClearRoute) {
+      onClearRoute();
+    }
   };
 
   return (
     <div className="route-planner-overlay">
       <div className="route-planner">
         <div className="route-header">
-          <h3>🗺️ Route Planner</h3>
+          <div className="route-header-copy">
+            <h3>Route Planner</h3>
+            <p className="route-subtitle">
+              Choose a start and destination room without changing the current
+              workflow.
+            </p>
+          </div>
           <button
-            className="close-btn"
+            className="route-close-btn"
             onClick={onClose}
             aria-label="Close route planner"
           >
-            &times;
+            x
           </button>
         </div>
 
         <div className="route-body">
-          {/* Floor selection when multiple floors available */}
           {availableFloors.length > 1 && (
             <div className="route-input-group">
-              <label>Select Floor (Optional)</label>
+              <label htmlFor="planner-floor-select">Select Floor (Optional)</label>
               <select
+                id="planner-floor-select"
                 className="route-input"
                 value={selectedFloor}
                 onChange={handleFloorChange}
@@ -213,16 +217,17 @@ const RoutePlanner = ({
           )}
 
           <div className="route-input-group">
-            <label>
+            <label htmlFor="planner-start-input">
               Start Room{" "}
               {useCurrentLocation && (
                 <span className="current-location-indicator">
-                  📍 Current Location
+                  Current location
                 </span>
               )}
             </label>
             <div className="route-input-wrapper">
               <input
+                id="planner-start-input"
                 type="text"
                 className="route-input"
                 placeholder="Search start room..."
@@ -235,8 +240,8 @@ const RoutePlanner = ({
                   {startSuggestions.map((room, idx) => (
                     <div key={idx} className="route-suggestion-item">
                       <div
+                        className="route-suggestion-body"
                         onClick={() => selectStartRoom(room)}
-                        style={{ cursor: "pointer", flex: 1 }}
                       >
                         <div className="route-suggestion-name">
                           {getRoomName(room)}
@@ -253,7 +258,7 @@ const RoutePlanner = ({
                         onClick={() => setCurrentLocationHandler(room)}
                         title="Set as current location"
                       >
-                        📍
+                        Current
                       </button>
                     </div>
                   ))}
@@ -263,9 +268,10 @@ const RoutePlanner = ({
           </div>
 
           <div className="route-input-group">
-            <label>End Room</label>
+            <label htmlFor="planner-end-input">End Room</label>
             <div className="route-input-wrapper">
               <input
+                id="planner-end-input"
                 type="text"
                 className="route-input"
                 placeholder="Search end room..."
@@ -279,35 +285,41 @@ const RoutePlanner = ({
                     endSuggestions.map((room, idx) => (
                       <div
                         key={idx}
-                        className="route-suggestion-item"
+                        className="route-suggestion-item route-suggestion-item-clickable"
                         onClick={() => selectEndRoom(room)}
                       >
-                        <div className="route-suggestion-name">
-                          {getRoomName(room)}
-                        </div>
-                        <div className="route-suggestion-meta">
-                          Floor {getRoomFloor(room)} |{" "}
-                          {room.properties?.type ||
-                            room.properties?.tipo ||
-                            "Room"}
+                        <div className="route-suggestion-body">
+                          <div className="route-suggestion-name">
+                            {getRoomName(room)}
+                          </div>
+                          <div className="route-suggestion-meta">
+                            Floor {getRoomFloor(room)} |{" "}
+                            {room.properties?.type ||
+                              room.properties?.tipo ||
+                              "Room"}
+                          </div>
                         </div>
                       </div>
                     ))
                   ) : recentDestinations.length > 0 && !endRoom ? (
                     <>
                       <div className="route-suggestions-header">
-                        📌 Recent Destinations
+                        Recent Destinations
                       </div>
-                      {recentDestinations.map((dest, idx) => (
+                      {recentDestinations.map((destination, idx) => (
                         <div
                           key={idx}
-                          className="route-suggestion-item"
+                          className="route-suggestion-item route-suggestion-item-clickable"
                           onClick={() => {
-                            setEndRoom(dest);
+                            setEndRoom(destination);
                             setShowEndSuggestions(false);
                           }}
                         >
-                          <div className="route-suggestion-name">{dest}</div>
+                          <div className="route-suggestion-body">
+                            <div className="route-suggestion-name">
+                              {destination}
+                            </div>
+                          </div>
                         </div>
                       ))}
                     </>
@@ -317,41 +329,47 @@ const RoutePlanner = ({
             </div>
           </div>
 
-          {/* Advanced Options */}
           <div className="advanced-options">
             <button
               className="advanced-toggle"
               onClick={() => setShowAdvanced(!showAdvanced)}
               aria-expanded={showAdvanced}
             >
-              {showAdvanced ? "▼" : "▶"} Advanced Options
+              <span>Advanced options</span>
+              <span className="advanced-toggle-indicator">
+                {showAdvanced ? "Hide" : "Show"}
+              </span>
             </button>
 
             {showAdvanced && (
               <div className="advanced-panel">
                 <div className="route-input-group">
-                  <label>Route Preference</label>
+                  <label htmlFor="route-preference-select">
+                    Route Preference
+                  </label>
                   <select
+                    id="route-preference-select"
                     className="route-input"
                     value={routePreferences}
                     onChange={(e) => setRoutePreferences(e.target.value)}
                   >
-                    <option value="shortest">⚡ Shortest Route</option>
-                    <option value="stairs_first">🪜 Prefer Stairs</option>
-                    <option value="elevator_first">🛗 Prefer Elevator</option>
+                    <option value="shortest">Shortest Route</option>
+                    <option value="stairs_first">Prefer Stairs</option>
+                    <option value="elevator_first">Prefer Elevator</option>
                   </select>
                 </div>
 
                 <div className="route-input-group">
-                  <label>Accessibility</label>
+                  <label htmlFor="accessibility-select">Accessibility</label>
                   <select
+                    id="accessibility-select"
                     className="route-input"
                     value={accessibility}
                     onChange={(e) => setAccessibility(e.target.value)}
                   >
                     <option value="standard">Standard</option>
-                    <option value="wheelchair">♿ Wheelchair Accessible</option>
-                    <option value="stairs_avoid">🚫 Avoid Stairs</option>
+                    <option value="wheelchair">Wheelchair Accessible</option>
+                    <option value="stairs_avoid">Avoid Stairs</option>
                   </select>
                 </div>
               </div>
@@ -365,7 +383,7 @@ const RoutePlanner = ({
               disabled={!startRoom || !endRoom || isSearching}
               aria-busy={isSearching}
             >
-              {isSearching ? "🔍 Searching..." : "🚀 Find Route"}
+              {isSearching ? "Searching..." : "Find Route"}
             </button>
             <button
               className="btn-secondary"

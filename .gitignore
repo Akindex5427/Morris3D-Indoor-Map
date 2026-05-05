@@ -32,6 +32,7 @@ Thumbs.db
 .Trashes
 ehthumbs.db
 .env.local
+.env
 .env.development.local
 .env.test.local
 .env.production.local
@@ -39,16 +40,16 @@ ehthumbs.db
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+vite*.log
+.vite*.log
 
 # media files (unused pictures/images)
 *.jpg
 *.jpeg
+*.png
 *.gif
 *.webp
 *.ico
-# Uncomment below if you want to also ignore png in certain folders
-# src/**/*.png
-# public/imgs/*.png
 
 # Playwright and debugging
 .playwright-mcp/

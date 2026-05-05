@@ -31,6 +31,7 @@ import {
   DirectionalLight,
   PointLight,
 } from "@deck.gl/core";
+import { parseFeatureColor } from "../utils/featureColors";
 
 // ============================================================================
 // LIGHTING CONFIGURATION
@@ -81,64 +82,6 @@ function createIndoorLighting(isDollhouseMode = false) {
 // COLOR PARSING UTILITIES
 // ============================================================================
 
-/**
- * Parse color from various formats (hex, rgb, named)
- * @param {string|Array} colorValue - Color in any format
- * @returns {Array<number>} RGB array [r, g, b]
- */
-function parseColor(colorValue) {
-  const namedColors = {
-    grey: [100, 100, 100],
-    gray: [100, 100, 100],
-    lightgrey: [150, 150, 150],
-    white: [220, 220, 220],
-    black: [50, 50, 50],
-    lightpink: [255, 182, 193],
-    pink: [255, 192, 203],
-    red: [255, 0, 0],
-    salmon: [250, 128, 114],
-    brown: [165, 42, 42],
-    orange: [255, 165, 0],
-    yellow: [255, 255, 0],
-    gold: [255, 215, 0],
-    green: [0, 128, 0],
-    lightgreen: [144, 238, 144],
-    blue: [0, 0, 255],
-    lightblue: [173, 216, 230],
-    navy: [0, 0, 128],
-    purple: [128, 0, 128],
-    cyan: [0, 255, 255],
-  };
-
-  if (!colorValue) return [100, 150, 200];
-
-  const colorLower =
-    typeof colorValue === "string" ? colorValue.toLowerCase() : "";
-
-  // Named color
-  if (namedColors[colorLower]) {
-    return namedColors[colorLower];
-  }
-
-  // Hex color
-  if (typeof colorValue === "string" && colorValue.startsWith("#")) {
-    const hex = colorValue.replace("#", "");
-    return [
-      parseInt(hex.substring(0, 2), 16),
-      parseInt(hex.substring(2, 4), 16),
-      parseInt(hex.substring(4, 6), 16),
-    ];
-  }
-
-  // RGB array
-  if (Array.isArray(colorValue) && colorValue.length >= 3) {
-    return colorValue.slice(0, 3);
-  }
-
-  // Default
-  return [100, 150, 200];
-}
-
 // Identify floor surface polygons by name or type metadata
 function isFloorSurface(props = {}) {
   const nameLower =
@@ -170,7 +113,9 @@ function getFloorSurfaceColor(floorNum, isDollhouseMode) {
 
 /**
  * Compute extrusion height for a feature.
- * Base elevation is applied directly on geometry; this returns only the height.
+ * Returns the room's wall thickness (height - base_height) rather than the
+ * absolute height, so that rooms display at their correct proportions
+ * regardless of which floor is selected.
  *
  * @param {Object} feature - GeoJSON feature
  * @param {number} floorSpacing - Vertical spacing between floors (meters)
@@ -182,11 +127,14 @@ function computeElevation(
   feature,
   floorSpacing,
   heightExaggeration,
-  isStacked = true
+  isStacked = true,
 ) {
-  const height = getFeatureHeight(feature.properties || {});
-  // Always use the actual height from GeoJSON for proper room extrusion
-  return height * heightExaggeration;
+  const props = feature.properties || {};
+  const height = getFeatureHeight(props);
+  const base = getBaseHeight(props);
+  // Use room thickness (height - base_height) for correct proportions
+  const thickness = Math.max(0.5, height - base);
+  return thickness * heightExaggeration;
 }
 
 // ============================================================================
@@ -198,22 +146,41 @@ function getFloorNumber(props = {}) {
   return props.level ?? props.floor ?? props.nivel ?? 0;
 }
 
+function parseNumericValue(value) {
+  const parsed = parseFloat(value);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
 // Base height (used for stairs/ramps) with typo tolerance
 function getBaseHeight(props = {}) {
-  const raw =
+  const explicitBaseHeight = parseNumericValue(
     props.base_height ??
-    props.base_heigh ??
-    props.baseHeight ??
-    props.baseheight ??
-    props.z_values;
-  const parsed = parseFloat(raw);
-  return Number.isFinite(parsed) ? parsed : 0;
+      props.base_heigh ??
+      props.baseHeight ??
+      props.baseheight,
+  );
+  if (explicitBaseHeight !== null) {
+    return explicitBaseHeight;
+  }
+
+  // Some exports include absolute z-values rather than relative base heights.
+  // Only use z_values when it is compatible with the feature height.
+  const zValues = parseNumericValue(props.z_values);
+  if (zValues === null) {
+    return 0;
+  }
+
+  const featureHeight = parseNumericValue(props.height ?? props.altura);
+  if (featureHeight === null || zValues <= featureHeight) {
+    return zValues;
+  }
+
+  return 0;
 }
 
 // Structure height with fallback
 function getFeatureHeight(props = {}) {
-  const raw = props.height ?? props.altura;
-  const parsed = parseFloat(raw);
+  const parsed = parseNumericValue(props.height ?? props.altura);
   if (Number.isFinite(parsed) && parsed > 0) return parsed;
   return 3.0;
 }
@@ -249,6 +216,56 @@ function applyBaseToGeometry(geometry, baseZ = 0) {
   return geometry;
 }
 
+function buildFilteredIndoorFeatureCollection(
+  data,
+  selectedFloors,
+  floorSpacing,
+) {
+  if (!data || !data.features) {
+    return { type: "FeatureCollection", features: [] };
+  }
+
+  const isDollhouseMode = selectedFloors.length > 1;
+  const selectedPolygonFeatures = data.features.filter((feature) => {
+    const floor = getFloorNumber(feature.properties || {});
+    const geomType = feature.geometry?.type;
+    const isPolygon = geomType === "Polygon" || geomType === "MultiPolygon";
+    return selectedFloors.includes(floor) && isPolygon;
+  });
+
+  let floorBaseOffset = 0;
+  if (!isDollhouseMode && selectedPolygonFeatures.length > 0) {
+    floorBaseOffset = Infinity;
+    for (const feature of selectedPolygonFeatures) {
+      const baseHeight = getBaseHeight(feature.properties || {});
+      if (baseHeight < floorBaseOffset) {
+        floorBaseOffset = baseHeight;
+      }
+    }
+
+    if (!Number.isFinite(floorBaseOffset)) {
+      floorBaseOffset = 0;
+    }
+  }
+
+  return {
+    type: "FeatureCollection",
+    features: selectedPolygonFeatures.map((feature) => {
+      const props = feature.properties || {};
+      const floorNum = getFloorNumber(props);
+      const featureBase = getBaseHeight(props);
+      const baseZ = isDollhouseMode
+        ? featureBase + floorNum * floorSpacing
+        : featureBase - floorBaseOffset;
+
+      return {
+        ...feature,
+        geometry: applyBaseToGeometry(feature.geometry, baseZ),
+      };
+    }),
+  };
+}
+
 // ============================================================================
 // MAIN INDOOR BUILDING COMPONENT
 // ============================================================================
@@ -271,7 +288,7 @@ const IndoorBuilding = ({
       zoom: 17,
       pitch: 45,
       bearing: 0,
-    }
+    },
   );
 
   // ============================================================================
@@ -324,41 +341,11 @@ const IndoorBuilding = ({
   // ============================================================================
 
   const filteredData = useMemo(() => {
-    if (!geojsonData || !geojsonData.features) {
-      return { type: "FeatureCollection", features: [] };
-    }
-
-    // Filter to selected floors and polygonal geometries only, then apply base Z
-    const isDollhouseMode = selectedFloors.length > 1;
-
-    const features = geojsonData.features
-      .filter((feature) => {
-        const floor = getFloorNumber(feature.properties || {});
-        const geomType = feature.geometry?.type;
-        const isPolygon = geomType === "Polygon" || geomType === "MultiPolygon";
-        return selectedFloors.includes(floor) && isPolygon;
-      })
-      .map((feature) => {
-        const props = feature.properties || {};
-        const floorNum = getFloorNumber(props);
-        const featureBase = getBaseHeight(props);
-
-        // For single floor view: display at ground level (ignore base_height from GeoJSON)
-        // For dollhouse mode: apply both base_height and floor stacking
-        const baseZ = isDollhouseMode
-          ? featureBase + floorNum * floorSpacing
-          : 0; // Single floor always starts at ground level
-
-        return {
-          ...feature,
-          geometry: applyBaseToGeometry(feature.geometry, baseZ),
-        };
-      });
-
-    return {
-      type: "FeatureCollection",
-      features: features,
-    };
+    return buildFilteredIndoorFeatureCollection(
+      geojsonData,
+      selectedFloors,
+      floorSpacing,
+    );
   }, [geojsonData, selectedFloors, floorSpacing]);
 
   // ============================================================================
@@ -410,7 +397,7 @@ const IndoorBuilding = ({
         }
 
         // Parse base color from GeoJSON
-        const baseColor = parseColor(props.color);
+        const baseColor = parseFeatureColor(props.color);
 
         // Check if this is a special compartment that should preserve exact colors
         const nameLower =
@@ -431,7 +418,7 @@ const IndoorBuilding = ({
           // Apply very subtle floor-based shading for regular rooms only
           const shadeFactor = Math.max(
             0.9,
-            Math.min(1.1, 0.98 + floorNum * 0.02)
+            Math.min(1.1, 0.98 + floorNum * 0.02),
           );
           shadedColor = [
             Math.min(255, Math.round(baseColor[0] * shadeFactor)),
@@ -517,7 +504,7 @@ const IndoorBuilding = ({
           feature,
           floorSpacing,
           heightExaggeration,
-          isDollhouseMode
+          isDollhouseMode,
         ),
 
       // Update triggers
@@ -620,6 +607,12 @@ export const useIndoorBuilding = ({
 }) => {
   // Filter data by selected floors
   const filteredData = useMemo(() => {
+    return buildFilteredIndoorFeatureCollection(
+      data,
+      selectedFloors,
+      floorSpacing,
+    );
+
     if (!data || !data.features) {
       return { type: "FeatureCollection", features: [] };
     }
@@ -730,7 +723,7 @@ export const useIndoorBuilding = ({
             return getFloorSurfaceColor(floorNum, isDollhouseMode);
           }
 
-          const baseColor = parseColor(props.color);
+          const baseColor = parseFeatureColor(props.color);
 
           const nameLower =
             typeof props.name === "string" ? props.name.toLowerCase() : "";
@@ -749,7 +742,7 @@ export const useIndoorBuilding = ({
             // Apply very subtle floor-based shading for regular rooms only
             const shadeFactor = Math.max(
               0.9,
-              Math.min(1.1, 0.98 + floorNum * 0.02)
+              Math.min(1.1, 0.98 + floorNum * 0.02),
             );
             shadedColor = [
               Math.min(255, Math.round(baseColor[0] * shadeFactor)),
@@ -769,8 +762,8 @@ export const useIndoorBuilding = ({
               alpha = isFacade
                 ? 0
                 : isOuterWall
-                ? Math.round(255 * 0.15)
-                : Math.round(255 * translucency);
+                  ? Math.round(255 * 0.15)
+                  : Math.round(255 * translucency);
             } else {
               const maxFloor = Math.max(...selectedFloors);
               const minFloor = Math.min(...selectedFloors);
@@ -827,7 +820,7 @@ export const useIndoorBuilding = ({
             feature,
             floorSpacing,
             heightExaggeration,
-            isDollhouseMode
+            isDollhouseMode,
           ),
 
         onClick: (info) => {
@@ -870,4 +863,4 @@ export default IndoorBuilding;
 // HELPER EXPORTS
 // ============================================================================
 
-export { createIndoorLighting, parseColor, computeElevation };
+export { createIndoorLighting, computeElevation };

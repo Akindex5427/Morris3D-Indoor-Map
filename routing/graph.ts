@@ -94,6 +94,7 @@ export interface NavigationGraph {
   nodeToleranceMeters: number;
   validationSampleStepMeters: number;
   componentCount: number;
+  validationFallbackUsed: boolean;
 }
 
 export interface BuildNavigationGraphOptions {
@@ -200,8 +201,7 @@ export function buildNavigationGraph(options: BuildNavigationGraphOptions): Navi
 
   return {
     ...fallbackGraph,
-    walkablePolygons,
-    obstaclePolygons,
+    validationFallbackUsed: true,
   };
 }
 
@@ -317,6 +317,7 @@ export function buildQueryGraph(
     nodeToleranceMeters: baseGraph.nodeToleranceMeters,
     validationSampleStepMeters: baseGraph.validationSampleStepMeters,
     componentCount: baseGraph.componentCount,
+    validationFallbackUsed: baseGraph.validationFallbackUsed,
   };
 
   const edgeIdsByPair = new Map<string, string>();
@@ -393,9 +394,10 @@ export function isSegmentNavigable(
   end: Point2D,
   walkablePolygons: MultiPolygon,
   obstaclePolygons: MultiPolygon,
-  sampleStepMeters = 0.5
+  sampleStepMeters = 0.5,
+  checkObstacleCollisions = false
 ): boolean {
-  if (obstaclePolygons.length > 0) {
+  if (checkObstacleCollisions && obstaclePolygons.length > 0) {
     if (segmentIntersectsAnyPolygon(start, end, obstaclePolygons)) {
       return false;
     }
@@ -415,7 +417,11 @@ export function isSegmentNavigable(
       return false;
     }
 
-    if (obstaclePolygons.length > 0 && pointInMultiPolygon(point, obstaclePolygons)) {
+    if (
+      checkObstacleCollisions &&
+      obstaclePolygons.length > 0 &&
+      pointInMultiPolygon(point, obstaclePolygons)
+    ) {
       return false;
     }
   }
@@ -528,6 +534,7 @@ function assembleGraph(options: AssembleGraphOptions): NavigationGraph {
     nodeToleranceMeters,
     validationSampleStepMeters,
     componentCount,
+    validationFallbackUsed: false,
   };
 }
 

@@ -206,9 +206,37 @@ function pointInRing(px: number, py: number, ring: Ring): boolean {
   return inside;
 }
 
+function pointOnRingBoundary(
+  point: Point2D,
+  ring: Ring,
+  toleranceMeters = 1e-4
+): boolean {
+  for (let index = 0; index < ring.length; index += 1) {
+    const start = ring[index];
+    const end = ring[(index + 1) % ring.length];
+
+    if (
+      pointOnSegment(
+        point,
+        { x: start[0], y: start[1] },
+        { x: end[0], y: end[1] },
+        toleranceMeters
+      )
+    ) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 export function pointInPolygon(point: Point2D, polygon: Polygon): boolean {
   if (polygon.length === 0) {
     return false;
+  }
+
+  if (pointOnRingBoundary(point, polygon[0])) {
+    return true;
   }
 
   if (!pointInRing(point.x, point.y, polygon[0])) {
@@ -216,6 +244,10 @@ export function pointInPolygon(point: Point2D, polygon: Polygon): boolean {
   }
 
   for (let index = 1; index < polygon.length; index += 1) {
+    if (pointOnRingBoundary(point, polygon[index])) {
+      return false;
+    }
+
     if (pointInRing(point.x, point.y, polygon[index])) {
       return false;
     }

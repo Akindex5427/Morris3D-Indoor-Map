@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FlyToInterpolator } from "@deck.gl/core";
 import "./App.css";
 import Map3D from "./components/Map3D";
@@ -13,6 +13,84 @@ import LoadingSpinner from "./components/LoadingSpinner";
 import HelpOverlay from "./components/HelpOverlay";
 import DirectionsPanel from "./components/DirectionsPanel";
 import { IndoorRouter } from "../routing";
+import {
+  buildRoomAnchorIndex,
+  getRoomCentroid,
+  getRoomFloor,
+  getRoomName,
+  resolveRoomRoutingTarget,
+} from "./utils/routeAnchors";
+import {
+  countFeaturesMissingBaseHeight,
+  countFeaturesMissingColor,
+  enrichMissingFeatureDisplayProperties,
+} from "./utils/featureColors";
+
+const centerlinesHaveRoomAnchors = (centerlinesGeoJson) =>
+  Array.isArray(centerlinesGeoJson?.features) &&
+  centerlinesGeoJson.features.some((feature) => {
+    const properties = feature?.properties || {};
+    return Boolean(properties.startroom || properties.endroom);
+  });
+
+const ROUTER_CONFIG = [
+  {
+    floor: 0,
+    centerline: "/basemment_centerlines.geojson",
+    walkable: "/room_basement_walkable.geojson",
+    obstacle: "/room_basement_obstacle_buffered.geojson",
+    label: "Basement",
+  },
+  {
+    floor: 1,
+    centerline: "/room_level_1_centerlines.geojson",
+    walkable: "/room_level_1_walkable.geojson",
+    obstacle: "/room_level_1_obstacle_buffered.geojson",
+    label: "Level 1",
+  },
+  {
+    floor: 2,
+    centerline: "/room_level_2_centerlines.geojson",
+    walkable: "/room_level_2_walkable.geojson",
+    obstacle: "/room_level_2_obstacle_buffered.geojson",
+    label: "Level 2",
+  },
+  {
+    floor: 3,
+    centerline: "/room_level_3_centerlines.geojson",
+    walkable: "/room_level_3_walkable.geojson",
+    obstacle: "/room_level_3_obstacle_buffered.geojson",
+    label: "Level 3",
+  },
+  {
+    floor: 4,
+    centerline: "/room_level_4_centerlines.geojson",
+    walkable: "/room_level_4_walkable.geojson",
+    obstacle: "/room_level_4_obstacle_buffered.geojson",
+    label: "Level 4",
+  },
+  {
+    floor: 5,
+    centerline: "/room_level_5_centerlines.geojson",
+    walkable: "/room_level_5_walkable.geojson",
+    obstacle: "/room_level_5_obstacle_buffered.geojson",
+    label: "Level 5",
+  },
+  {
+    floor: 6,
+    centerline: "/room_level_6_centerlines.geojson",
+    label: "Level 6",
+    useCenterlineOnlyRouting: true,
+    simplifyCollinearPoints: false,
+  },
+  {
+    floor: 7,
+    centerline: "/room_level_7_centerlines.geojson",
+    walkable: "/room_level_7_walkable.geojson",
+    obstacle: "/room_level_7_obstacle_buffered.geojson",
+    label: "Level 7",
+  },
+];
 
 function App() {
   const [selectedFloor, setSelectedFloor] = useState("all");
@@ -36,60 +114,115 @@ function App() {
   const [heightExaggeration, setHeightExaggeration] = useState(1);
   const [basemapStyle, setBasemapStyle] = useState("satellite"); // satellite, topographic, or streets
   const [showRoutePlanner, setShowRoutePlanner] = useState(false);
-  const [routePath, setRoutePath] = useState(null);
-  const [routeInfo, setRouteInfo] = useState(null);
+  const [routeContext, setRouteContext] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
   const [hoveredRoomId, setHoveredRoomId] = useState(null);
   const [showHelp, setShowHelp] = useState(false);
   const [showDirections, setShowDirections] = useState(true);
   const [highlightedStep, setHighlightedStep] = useState(null);
-  const [router, setRouter] = useState(null);
+  const [routers, setRouters] = useState({});
   const [routerError, setRouterError] = useState(null);
+  const [centerlinesData, setCenterlinesData] = useState({});
+  const [roomAnchorIndexes, setRoomAnchorIndexes] = useState({});
+  const allFloorsColorReferenceRef = useRef(null);
 
-  // Initialize IndoorRouter with graph-based routing
+  // Initialize IndoorRouter with graph-based routing for all floors
   useEffect(() => {
-    const initializeRouter = async () => {
+    const initializeRouters = async () => {
       try {
-        // Load centerlines and constraint GeoJSON files
-        const [centerlineRes, walkableRes, obstacleRes] = await Promise.all([
-          fetch("/basemment_centerlines.geojson"),
-          fetch("/room_basement_walkable.geojson"),
-          fetch("/room_basement_obstacle_buffered.geojson"),
-        ]);
+        const loadGeoJson = async (path, { required = false } = {}) => {
+          if (!path) {
+            return null;
+          }
 
-        if (!centerlineRes.ok || !walkableRes.ok || !obstacleRes.ok) {
-          throw new Error("Failed to load routing data files");
+          const response = await fetch(path);
+          if (!response.ok) {
+            if (required) {
+              throw new Error(`Unable to load required routing data from ${path}.`);
+            }
+            return null;
+          }
+
+          return response.json();
+        };
+
+        const newRouters = {};
+        const newCenterlines = {};
+        const newRoomAnchorIndexes = {};
+
+        for (const config of ROUTER_CONFIG) {
+          try {
+            const [centerlines, walkable, obstacles] = await Promise.all([
+              loadGeoJson(config.centerline, { required: true }),
+              loadGeoJson(config.walkable),
+              loadGeoJson(config.obstacle),
+            ]);
+
+            if (
+              !config.useCenterlineOnlyRouting &&
+              (!walkable || !obstacles)
+            ) {
+              console.warn(
+                `⚠ Routing data missing for ${config.label} (floor ${config.floor}). Skipping...`,
+              );
+            }
+
+            const router = new IndoorRouter(
+              centerlines,
+              config.useCenterlineOnlyRouting ? null : walkable,
+              config.useCenterlineOnlyRouting ? null : obstacles,
+              {
+                maxSnapDistanceMeters: 50,
+                nodeToleranceMeters: 0.05,
+                validationSampleStepMeters: 0.5,
+                simplifyCollinearPoints:
+                  config.simplifyCollinearPoints ??
+                  (config.floor !== 1 &&
+                    config.floor !== 3 &&
+                    config.floor !== 5),
+              },
+            );
+            newRouters[config.floor] = router;
+
+            if (router.getGraph().validationFallbackUsed) {
+              console.warn(
+                `[Routing] Validation data rejected the graph for ${config.label} (floor ${config.floor}). Using centerline-only routing.`,
+              );
+            }
+
+            // Store raw centerlines GeoJSON for blue-line overlay
+            newCenterlines[config.floor] = centerlines;
+
+            if (centerlinesHaveRoomAnchors(centerlines)) {
+              newRoomAnchorIndexes[config.floor] =
+                buildRoomAnchorIndex(centerlines);
+            }
+
+            console.log(
+              `✓ Router initialized for ${config.label} (floor ${config.floor})`,
+            );
+          } catch (floorError) {
+            console.error(
+              `Error initializing router for floor ${config.floor}:`,
+              floorError,
+            );
+          }
         }
 
-        const [centerlines, walkable, obstacles] = await Promise.all([
-          centerlineRes.json(),
-          walkableRes.json(),
-          obstacleRes.json(),
-        ]);
-
-        // Create router instance
-        const indoorRouter = new IndoorRouter(
-          centerlines,
-          walkable,
-          obstacles,
-          {
-            maxSnapDistanceMeters: 50,
-            nodeToleranceMeters: 0.05,
-            validationSampleStepMeters: 0.5,
-            simplifyCollinearPoints: true,
-          },
+        setRouters(newRouters);
+        setCenterlinesData(newCenterlines);
+        setRoomAnchorIndexes(newRoomAnchorIndexes);
+        console.log(
+          `✓ Graph-based routers initialized for ${Object.keys(newRouters).length} floors`,
         );
-
-        setRouter(indoorRouter);
-        console.log("✓ Graph-based router initialized successfully");
       } catch (error) {
         console.error("Router initialization failed:", error);
         setRouterError(error.message);
       }
     };
 
-    initializeRouter();
+    initializeRouters();
   }, []);
 
   // Apply dark mode to body
@@ -222,6 +355,18 @@ function App() {
     return response.json();
   };
 
+  const loadAllFloorDisplayReference = async () => {
+    if (!allFloorsColorReferenceRef.current) {
+      allFloorsColorReferenceRef.current = fetchGeoJson(FLOOR_POLYGON_MAP.all)
+        .catch((error) => {
+          allFloorsColorReferenceRef.current = null;
+          throw error;
+        });
+    }
+
+    return allFloorsColorReferenceRef.current;
+  };
+
   // Load GeoJSON data based on selected floor
   useEffect(() => {
     const loadGeojson = async () => {
@@ -234,7 +379,28 @@ function App() {
         if (!response.ok) throw new Error(`Failed to load ${polygonUrl}`);
         const data = await response.json();
 
-        const polygons = data.features || [];
+        let polygons = data.features || [];
+
+        const needsDisplayMetadataRepair =
+          selectedFloor !== "all" &&
+          (countFeaturesMissingColor(polygons) > 0 ||
+            countFeaturesMissingBaseHeight(polygons) > 0);
+
+        if (needsDisplayMetadataRepair) {
+          try {
+            const displayReference = await loadAllFloorDisplayReference();
+            polygons = enrichMissingFeatureDisplayProperties(
+              polygons,
+              displayReference.features || [],
+              { floor: Number(selectedFloor) },
+            );
+          } catch (displayMetadataError) {
+            console.warn(
+              `[Display Metadata] Unable to enrich missing floor metadata for floor ${selectedFloor}.`,
+              displayMetadataError,
+            );
+          }
+        }
 
         // In F-ALL mode, keep level metadata as-is for stacking
         const features =
@@ -314,7 +480,14 @@ function App() {
   }, [selectedFloor]);
 
   const handleFloorChange = (floor) => {
+    if (routeContext && routeContext.floorId !== floor) {
+      setRouteContext(null);
+      setShowDirections(false);
+      setHighlightedStep(null);
+    }
+
     setSelectedFloor(floor);
+    setSelectedFloors([]);
     setSelectedRoom(null);
     setHighlightedRoomId(null);
   };
@@ -377,6 +550,12 @@ function App() {
     const { roomIds: ids = [], selectedFloors: floors = [] } = roomIds || {};
     setFilteredRooms(ids);
     setSelectedFloors(floors);
+
+    if (floors.length > 0) {
+      setRouteContext(null);
+      setShowDirections(false);
+      setHighlightedStep(null);
+    }
   };
 
   const handleClosePopup = () => {
@@ -441,78 +620,229 @@ function App() {
     }
   };
 
+  const clearRouteState = () => {
+    setRouteContext(null);
+    setShowDirections(false);
+    setHighlightedStep(null);
+  };
+
+  const visibleRouteContext =
+    routeContext &&
+    selectedFloors.length === 0 &&
+    selectedFloor !== "all" &&
+    Number(selectedFloor) === routeContext.floorId
+      ? routeContext
+      : null;
+
   const handleRouteCalculate = (startRoom, endRoom, targetFloor = null) => {
-    if (!startRoom || !endRoom || !router) {
-      setRoutePath(null);
-      setRouteInfo(null);
-      setShowDirections(false);
+    // Guard: if either room is missing, treat as a clear request
+    if (!startRoom || !endRoom) {
+      clearRouteState();
+      return;
+    }
+
+    const startFloor = getRoomFloor(startRoom);
+    const endFloor = getRoomFloor(endRoom);
+    const activeFloor =
+      typeof selectedFloor === "number" ? selectedFloor : null;
+
+    // Single-floor routing: prefer the explicit planner floor, otherwise infer
+    // the only valid floor from the selected rooms or the currently active floor.
+    let floorForRouting = null;
+
+    if (typeof targetFloor === "number") {
+      floorForRouting = targetFloor;
+    } else if (startFloor !== null && endFloor !== null) {
+      if (startFloor !== endFloor) {
+        alert(
+          "Routing currently supports same-floor routes only. Please choose rooms on the same floor.",
+        );
+        clearRouteState();
+        return;
+      }
+
+      floorForRouting = startFloor;
+    } else {
+      floorForRouting = startFloor ?? endFloor ?? activeFloor;
+    }
+
+    if (floorForRouting === null) {
+      alert(
+        "Unable to determine which floor to route on. Please pick a floor in the planner and try again.",
+      );
+      clearRouteState();
+      return;
+    }
+
+    if (
+      (startFloor !== null && startFloor !== floorForRouting) ||
+      (endFloor !== null && endFloor !== floorForRouting)
+    ) {
+      alert(
+        `Start and end locations must both belong to Floor ${floorForRouting}.`,
+      );
+      clearRouteState();
+      return;
+    }
+
+    // Get the appropriate router for the target floor
+    const floorRouter = routers[floorForRouting];
+
+    if (!startRoom || !endRoom || !floorRouter) {
+      if (!floorRouter) {
+        alert(
+          `Routing is not available for Floor ${floorForRouting}. Please try another floor.`,
+        );
+      }
+      clearRouteState();
       return;
     }
 
     try {
-      // Extract start and end coordinates from room centroids
-      const getCoords = (room) => {
-        if (room.geometry.type === "Polygon") {
-          const coord = room.geometry.coordinates[0][0];
-          return { lng: coord[0], lat: coord[1] };
-        } else if (room.geometry.type === "MultiPolygon") {
-          const coord = room.geometry.coordinates[0][0][0];
-          return { lng: coord[0], lat: coord[1] };
-        }
-        return { lng: 0, lat: 0 };
-      };
+      const floorHasRoomAnchors =
+        (roomAnchorIndexes[floorForRouting]?.size ?? 0) > 0;
+      const startTarget = resolveRoomRoutingTarget({
+        room: startRoom,
+        floorId: floorForRouting,
+        router: floorRouter,
+        roomAnchorIndex: roomAnchorIndexes[floorForRouting],
+        role: "start",
+      });
+      const endTarget = resolveRoomRoutingTarget({
+        room: endRoom,
+        floorId: floorForRouting,
+        router: floorRouter,
+        roomAnchorIndex: roomAnchorIndexes[floorForRouting],
+        role: "destination",
+      });
+      const startCoords = startTarget?.coordinates;
+      const endCoords = endTarget?.coordinates;
 
-      const startCoords = getCoords(startRoom);
-      const endCoords = getCoords(endRoom);
+      if (!startCoords) {
+        throw new Error(
+          floorHasRoomAnchors
+            ? `Unable to resolve a valid route start anchor for ${getRoomName(startRoom)}.`
+            : "Unable to determine room centers for routing.",
+        );
+      }
 
-      // Use graph-based router
-      const result = router.computeRoute(startCoords, endCoords);
+      if (!endCoords) {
+        throw new Error(
+          floorHasRoomAnchors
+            ? `Unable to resolve a valid centerline access anchor for ${getRoomName(endRoom)}.`
+            : "Unable to determine room centers for routing.",
+        );
+      }
+
+      // Use graph-based router for the selected floor
+      const result = floorRouter.computeRoute(startCoords, endCoords);
 
       if (result.success) {
-        console.log("[Route] Computing route...", { startCoords, endCoords });
+        const renderedSegments = result.debug?.renderedSegments ?? [];
+        const hasInvalidRenderedSegment = renderedSegments.some(
+          (segment) => segment.intersectsObstacle || !segment.valid,
+        );
+
+        if (floorHasRoomAnchors && hasInvalidRenderedSegment) {
+          console.error("[Route] Rejected invalid rendered route", {
+            start: startTarget?.debug,
+            destination: endTarget?.debug,
+            routerDebug: result.debug,
+          });
+          throw new Error(
+            `Computed route for ${getRoomName(endRoom)} leaves the valid centerline graph on Floor ${floorForRouting}.`,
+          );
+        }
+
+        console.log("[Route] Computing route for floor", floorForRouting, {
+          startCoords,
+          endCoords,
+          startTarget: startTarget?.debug,
+          endTarget: endTarget?.debug,
+        });
         console.log("[Route] Router result:", result);
+
+        if (floorForRouting === 1) {
+          console.log("[Route][Level1 Debug]", {
+            selectedDestinationName: getRoomName(endRoom),
+            destinationGeometryType: endTarget?.debug?.geometryType ?? null,
+            destinationCentroid:
+              endTarget?.debug?.centroid ?? getRoomCentroid(endRoom),
+            snappedGraphNodeOrEdge:
+              result.debug?.endSnap ?? endTarget?.debug?.snappedTarget ?? null,
+            finalGraphEndpoint: result.debug?.finalGraphEnd ?? null,
+            postExtensionAdded: false,
+            renderedSegmentIntersectsObstacle: renderedSegments.some(
+              (segment) => segment.intersectsObstacle,
+            ),
+            renderedSegments,
+          });
+        }
 
         // Convert result to path format for visualization
         const path = result.coordinates.map((coord, idx) => ({
           coords: [coord.lng, coord.lat],
           name:
             idx === 0
-              ? startRoom.properties?.name
+              ? getRoomName(startRoom)
               : idx === result.coordinates.length - 1
-                ? endRoom.properties?.name
+                ? getRoomName(endRoom)
                 : `Waypoint ${idx}`,
-          floor: targetFloor !== null ? targetFloor : 0,
-          features: [startRoom],
+          floor: floorForRouting,
+          features:
+            idx === 0
+              ? [startRoom]
+              : idx === result.coordinates.length - 1
+                ? [endRoom]
+              : [],
+        }));
+        const renderPath = (
+          result.renderCoordinates?.length
+            ? result.renderCoordinates
+            : result.debug?.graphCoordinates?.length
+              ? result.debug.graphCoordinates
+              : result.coordinates
+        ).map((coord) => ({
+          coords: [coord.lng, coord.lat],
+          floor: floorForRouting,
         }));
 
         console.log("[Route] Path array created:", path);
 
-        setRoutePath(path);
-        setRouteInfo({
-          start: startRoom.properties?.name || startRoom.properties?.id,
-          end: endRoom.properties?.name || endRoom.properties?.id,
+        const info = {
+          start: getRoomName(startRoom),
+          end: getRoomName(endRoom),
           distance: result.distance.toFixed(1),
-          floors: targetFloor !== null ? [targetFloor] : [0],
-          targetFloor: targetFloor,
+          floors: [floorForRouting],
+          targetFloor: floorForRouting,
           waypointCount: result.waypointCount,
+        };
+
+        setSelectedFloors([]);
+        setSelectedFloor(floorForRouting);
+        setRouteContext({
+          floorId: floorForRouting,
+          graph: floorRouter.getGraph(),
+          route: {
+            path,
+            renderPath,
+            info,
+            result,
+          },
         });
         setShowRoutePlanner(false);
         setShowDirections(true);
         console.log(
-          `✓ Route found: ${result.distance.toFixed(1)}m, ${result.waypointCount} waypoints`,
+          `✓ Route found on Floor ${floorForRouting}: ${result.distance.toFixed(1)}m, ${result.waypointCount} waypoints`,
         );
       } else {
         alert(`No route found: ${result.error}`);
-        setRoutePath(null);
-        setRouteInfo(null);
-        setShowDirections(false);
+        clearRouteState();
       }
     } catch (error) {
       console.error("Error calculating route:", error);
       alert(`Routing error: ${error.message}`);
-      setRoutePath(null);
-      setRouteInfo(null);
-      setShowDirections(false);
+      clearRouteState();
     }
   };
 
@@ -539,6 +869,14 @@ function App() {
     return <LoadingSpinner message="Loading 3D building model..." />;
   }
 
+  const currentFloorLabel =
+    selectedFloor === "all"
+      ? "All Floors"
+      : selectedFloor === -1 || selectedFloor === 0
+        ? "F0 Basement"
+        : `F${selectedFloor}`;
+  const activeRouteInfo = visibleRouteContext?.route?.info ?? null;
+
   return (
     <div className="App">
       {/* Help Overlay */}
@@ -556,15 +894,33 @@ function App() {
       <div className="app-container">
         {/* Header */}
         <header className="app-header">
-          <h1> 3D Indoor Map Viewer</h1>
-          <p>Interactive 3D building floor navigation and room explorer</p>
+          <div className="app-header-content">
+            <div className="app-header-copy">
+              <span className="app-kicker">Indoor navigation workspace</span>
+              <h1>3D Indoor Map Viewer</h1>
+              <p>Interactive 3D building floor navigation and room explorer</p>
+            </div>
+            <div className="app-header-meta">
+              <div className="header-chip">
+                <span className="header-chip-label">Current floor</span>
+                <strong>{currentFloorLabel}</strong>
+              </div>
+            </div>
+          </div>
         </header>
 
         {/* Main Content */}
         <div className="main-content">
           {/* Left Panel */}
-          <div className="left-panel">
-            <div className="panel-section">
+          <aside className="left-panel">
+            <div className="panel-section panel-card">
+              <div className="panel-heading">
+                <span className="panel-kicker">Explore</span>
+                <h2 className="panel-title">Search rooms</h2>
+                <p className="panel-description">
+                  Find rooms by name, type, or room number.
+                </p>
+              </div>
               <SearchBar
                 rooms={allRooms}
                 onSearch={handleSearch}
@@ -572,7 +928,7 @@ function App() {
               />
             </div>
 
-            <div className="panel-section">
+            <div className="panel-section panel-card">
               <FloorSwitcher
                 currentFloor={selectedFloor}
                 onFloorChange={handleFloorChange}
@@ -580,58 +936,53 @@ function App() {
               />
             </div>
 
-            <div className="panel-section">
+            <div className="panel-section panel-card">
+              <div className="panel-heading">
+                <span className="panel-kicker">Routing</span>
+                <h2 className="panel-title">Planner</h2>
+                <p className="panel-description">
+                  Build same-floor routes and keep directions visible while you
+                  navigate.
+                </p>
+              </div>
               <button
                 className="btn-filter"
                 onClick={() => setShowRoutePlanner(!showRoutePlanner)}
               >
                 Plan Route
               </button>
-              {routeInfo && (
-                <div
-                  style={{
-                    marginTop: "0.8rem",
-                    fontSize: "0.85rem",
-                    color: "#666",
-                  }}
-                >
-                  <strong>Active Route:</strong>
-                  <div style={{ marginTop: "0.4rem" }}>
-                    From: {routeInfo.start}
-                    <br />
-                    To: {routeInfo.end}
-                    <br />
-                    Distance: ~{routeInfo.distance}m<br />
-                    Floors: {routeInfo.floors.join(", ")}
+              {activeRouteInfo && (
+                <div className="route-status">
+                  <div className="route-status-header">
+                    <strong>Active Route</strong>
+                    <span className="route-status-chip">
+                      Floor {activeRouteInfo.floors.join(", ")}
+                    </span>
                   </div>
-                  <div
-                    style={{
-                      marginTop: "0.6rem",
-                      display: "flex",
-                      gap: "0.5rem",
-                    }}
-                  >
+                  <div className="route-status-grid">
+                    <div className="route-status-item">
+                      <span>From</span>
+                      <strong>{activeRouteInfo.start}</strong>
+                    </div>
+                    <div className="route-status-item">
+                      <span>To</span>
+                      <strong>{activeRouteInfo.end}</strong>
+                    </div>
+                    <div className="route-status-item">
+                      <span>Distance</span>
+                      <strong>~{activeRouteInfo.distance}m</strong>
+                    </div>
+                  </div>
+                  <div className="route-status-actions">
                     <button
-                      className="btn-secondary"
-                      style={{
-                        flex: 1,
-                        padding: "0.5rem",
-                      }}
+                      className="btn-secondary route-status-button"
                       onClick={() => setShowDirections(!showDirections)}
                     >
                       {showDirections ? "Hide" : "Show"} Directions
                     </button>
                     <button
-                      className="btn-secondary"
-                      style={{
-                        flex: 1,
-                        padding: "0.5rem",
-                      }}
-                      onClick={() => {
-                        setRoutePath(null);
-                        setRouteInfo(null);
-                        setShowDirections(false);
-                      }}
+                      className="btn-secondary route-status-button"
+                      onClick={clearRouteState}
                     >
                       Clear Route
                     </button>
@@ -648,24 +999,14 @@ function App() {
               />
             )}
 
-            <div className="panel-info">
-              <p>
-                <strong>Current Floor:</strong>{" "}
-                {selectedFloor === "all"
-                  ? "All Floors"
-                  : selectedFloor === -1 || selectedFloor === 0
-                    ? "F0 (Basement)"
-                    : `F${selectedFloor}`}
-              </p>
-              <p>
-                <strong>Rooms Displayed:</strong>{" "}
-                {filteredRooms.length > 0 ? filteredRooms.length : "All"}
-              </p>
-              <p>
-                <strong>Total Rooms:</strong> {allRooms.length}
-              </p>
+            <div className="panel-info panel-card legend-sidebar-card">
+              <Legend
+                selectedFloor={selectedFloor}
+                selectedFloors={selectedFloors}
+                translucency={translucency}
+              />
             </div>
-          </div>
+          </aside>
 
           {/* Map Container */}
           <div className="map-container">
@@ -684,8 +1025,12 @@ function App() {
               translucency={translucency}
               heightExaggeration={heightExaggeration}
               basemapStyle={basemapStyle}
-              routePath={routePath}
+              routePath={visibleRouteContext?.route?.path || null}
+              routeRenderPath={visibleRouteContext?.route?.renderPath || null}
+              routeFloorId={visibleRouteContext?.floorId ?? null}
               roomsData={allRooms}
+              centerlinesData={centerlinesData}
+              activeFloor={selectedFloor}
             />
 
             <VisualControls
@@ -697,11 +1042,6 @@ function App() {
               setHeightExaggeration={setHeightExaggeration}
               basemapStyle={basemapStyle}
               setBasemapStyle={setBasemapStyle}
-            />
-            <Legend
-              selectedFloor={selectedFloor}
-              selectedFloors={selectedFloors}
-              translucency={translucency}
             />
 
             {/* Room Info Popup */}
@@ -718,21 +1058,19 @@ function App() {
               <RoutePlanner
                 rooms={allRooms}
                 onRouteCalculate={handleRouteCalculate}
+                onClearRoute={clearRouteState}
                 onClose={() => setShowRoutePlanner(false)}
                 selectedFloors={selectedFloors}
+                activeFloor={selectedFloor}
               />
             )}
 
             {/* Directions Panel */}
-            {showDirections && routePath && (
+            {showDirections && visibleRouteContext?.route?.path && (
               <DirectionsPanel
-                routePath={routePath}
-                routeInfo={routeInfo}
-                onClose={() => {
-                  setShowDirections(false);
-                  setRoutePath(null);
-                  setRouteInfo(null);
-                }}
+                routePath={visibleRouteContext.route.path}
+                routeInfo={visibleRouteContext.route.info}
+                onClose={clearRouteState}
                 onStepClick={handleStepClick}
               />
             )}

@@ -10,6 +10,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@deck.gl/mesh-layers": "^8.9.35",
     "deck.gl": "^8.9.35",
     "mapbox-gl": "^3.17.0",
     "react": "^18.3.1",

@@ -5,28 +5,33 @@ const FilterPanel = ({ rooms, onFilter, onClose }) => {
   const [selectedFloors, setSelectedFloors] = useState([]);
   const [areaRange, setAreaRange] = useState([0, 1000]);
 
-  // Extract unique room types and floors from data
   const uniqueTypes = [
     ...new Set(
-      rooms.map((r) => r.properties?.tipo || r.properties?.type || "Unknown")
+      rooms.map((room) => room.properties?.tipo || room.properties?.type || "Unknown"),
     ),
   ];
   const uniqueFloors = [
     ...new Set(
-      rooms.map((r) => r.properties?.floor || r.properties?.nivel || 0)
+      rooms.map(
+        (room) =>
+          room.properties?.floor ??
+          room.properties?.nivel ??
+          room.properties?.level ??
+          0,
+      ),
     ),
   ].sort((a, b) => a - b);
 
   const handleTypeToggle = (type) => {
     const updated = selectedTypes.includes(type)
-      ? selectedTypes.filter((t) => t !== type)
+      ? selectedTypes.filter((value) => value !== type)
       : [...selectedTypes, type];
     setSelectedTypes(updated);
   };
 
   const handleFloorToggle = (floor) => {
     const updated = selectedFloors.includes(floor)
-      ? selectedFloors.filter((f) => f !== floor)
+      ? selectedFloors.filter((value) => value !== floor)
       : [...selectedFloors, floor];
     setSelectedFloors(updated);
   };
@@ -35,20 +40,24 @@ const FilterPanel = ({ rooms, onFilter, onClose }) => {
     const filtered = rooms.filter((room) => {
       const roomType =
         room.properties?.tipo || room.properties?.type || "Unknown";
-      const roomFloor = room.properties?.floor || room.properties?.nivel || 0;
+      const normalizedRoomFloor =
+        room.properties?.floor ??
+        room.properties?.nivel ??
+        room.properties?.level ??
+        0;
 
       const typeMatch =
         selectedTypes.length === 0 || selectedTypes.includes(roomType);
       const floorMatch =
-        selectedFloors.length === 0 || selectedFloors.includes(roomFloor);
+        selectedFloors.length === 0 ||
+        selectedFloors.includes(normalizedRoomFloor);
 
       return typeMatch && floorMatch;
     });
 
     const filteredIds = filtered.map(
-      (r) => r.properties?.id || r.properties?.name || ""
+      (room) => room.properties?.id || room.properties?.name || "",
     );
-    // Pass both filtered room ids and the list of selected floors
     onFilter({ roomIds: filteredIds, selectedFloors });
   };
 
@@ -65,11 +74,11 @@ const FilterPanel = ({ rooms, onFilter, onClose }) => {
         <div className="filter-header">
           <h3>Filter Rooms</h3>
           <button
-            className="close-btn"
+            className="filter-close-btn"
             onClick={onClose}
             aria-label="Close filter panel"
           >
-            &times;
+            x
           </button>
         </div>
 

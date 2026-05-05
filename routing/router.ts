@@ -7,14 +7,58 @@ import {
   NavigationGraph,
   snapPointToGraph,
 } from './graph';
-import { distance, Point2D } from './geometry';
+import { distance, Point2D, segmentIntersectsAnyPolygon } from './geometry';
+
+export interface RouteCoordinate {
+  lat: number;
+  lng: number;
+}
+
+export interface RouteSnapDebug {
+  kind: 'node' | 'edge';
+  point: RouteCoordinate;
+  distanceMeters: number;
+  componentId: number;
+  nodeId?: string;
+  edgeId?: string;
+  edgeFromNodeId?: string;
+  edgeToNodeId?: string;
+  t?: number;
+}
+
+export interface RouteSegmentValidation {
+  segmentIndex: number;
+  start: RouteCoordinate;
+  end: RouteCoordinate;
+  intersectsObstacle: boolean;
+  valid: boolean;
+}
+
+export interface RouteDebugInfo {
+  startSnap?: RouteSnapDebug;
+  endSnap?: RouteSnapDebug;
+  graphNodeIds?: string[];
+  graphCoordinates?: RouteCoordinate[];
+  renderedCoordinates?: RouteCoordinate[];
+  validationFallbackUsed?: boolean;
+  finalGraphStart?: RouteCoordinate;
+  finalGraphEnd?: RouteCoordinate;
+  renderedSegments?: RouteSegmentValidation[];
+}
+
+export interface PolylineValidationResult {
+  valid: boolean;
+  segments: RouteSegmentValidation[];
+}
 
 export interface RouteResult {
   success: boolean;
-  coordinates: Array<{ lat: number; lng: number }>;
+  coordinates: RouteCoordinate[];
+  renderCoordinates: RouteCoordinate[];
   distance: number;
   waypointCount: number;
   error?: string;
+  debug?: RouteDebugInfo;
 }
 
 export interface IndoorRouterOptions {
@@ -30,8 +74,8 @@ export class IndoorRouter {
 
   constructor(
     centerlinesGeoJSON: GeoJSONInput,
-    walkableGeoJSON: GeoJSONInput,
-    obstaclesGeoJSON: GeoJSONInput,
+    walkableGeoJSON?: GeoJSONInput | null,
+    obstaclesGeoJSON?: GeoJSONInput | null,
     options: IndoorRouterOptions = {}
   ) {
     this.options = options;
@@ -48,9 +92,55 @@ export class IndoorRouter {
     return this.graph;
   }
 
+  snapToGraph(point: RouteCoordinate): RouteSnapDebug | null {
+    const projectedPoint = this.graph.projection.project(point.lng, point.lat);
+    const snap = snapPointToGraph(projectedPoint, this.graph, {
+      maxSnapDistanceMeters: this.options.maxSnapDistanceMeters,
+    });
+
+    return snap ? toRouteSnapDebug(this.graph, snap) : null;
+  }
+
+  validatePolyline(coordinates: RouteCoordinate[]): PolylineValidationResult {
+    const segments: RouteSegmentValidation[] = [];
+    const checkObstacleCollisions = this.options.simplifyCollinearPoints !== false;
+
+    for (let index = 1; index < coordinates.length; index += 1) {
+      const start = coordinates[index - 1];
+      const end = coordinates[index];
+      const startPoint = this.graph.projection.project(start.lng, start.lat);
+      const endPoint = this.graph.projection.project(end.lng, end.lat);
+      const intersectsObstacle =
+        checkObstacleCollisions &&
+        this.graph.obstaclePolygons.length > 0 &&
+        segmentIntersectsAnyPolygon(startPoint, endPoint, this.graph.obstaclePolygons);
+      const valid = isSegmentNavigable(
+        startPoint,
+        endPoint,
+        this.graph.walkablePolygons,
+        this.graph.obstaclePolygons,
+        this.graph.validationSampleStepMeters,
+        checkObstacleCollisions
+      );
+
+      segments.push({
+        segmentIndex: index - 1,
+        start,
+        end,
+        intersectsObstacle,
+        valid,
+      });
+    }
+
+    return {
+      valid: segments.every((segment) => segment.valid && !segment.intersectsObstacle),
+      segments,
+    };
+  }
+
   computeRoute(
-    start: { lat: number; lng: number },
-    end: { lat: number; lng: number }
+    start: RouteCoordinate,
+    end: RouteCoordinate
   ): RouteResult {
     try {
       const startPoint = this.graph.projection.project(start.lng, start.lat);
@@ -89,25 +179,43 @@ export class IndoorRouter {
         .map((nodeId) => query.graph.nodes.get(nodeId)?.point)
         .filter((point): point is Point2D => point !== undefined);
 
-      const worldPath = this.options.simplifyCollinearPoints === false
-        ? dedupeConsecutivePoints(rawPath)
+      const graphPath = dedupeConsecutivePoints(rawPath);
+      const renderedPath = this.options.simplifyCollinearPoints === false
+        ? graphPath
         : simplifyPath(
-          rawPath,
+          graphPath,
           query.graph.walkablePolygons,
           query.graph.obstaclePolygons,
           query.graph.validationSampleStepMeters
         );
 
-      const coordinates = worldPath.map((point) => {
+      const graphCoordinates = graphPath.map((point) => {
         const { lng, lat } = query.graph.projection.unproject(point.x, point.y);
         return { lat, lng };
       });
+      const coordinates = renderedPath.map((point) => {
+        const { lng, lat } = query.graph.projection.unproject(point.x, point.y);
+        return { lat, lng };
+      });
+      const routeValidation = this.validatePolyline(coordinates);
 
       return {
         success: true,
         coordinates,
-        distance: Math.round(pathLength(worldPath) * 100) / 100,
+        renderCoordinates: graphCoordinates,
+        distance: Math.round(result.distance * 100) / 100,
         waypointCount: coordinates.length,
+        debug: {
+          startSnap: toRouteSnapDebug(this.graph, startSnap),
+          endSnap: toRouteSnapDebug(this.graph, endSnap),
+          graphNodeIds: result.nodeIds,
+          graphCoordinates,
+          renderedCoordinates: coordinates,
+          validationFallbackUsed: this.graph.validationFallbackUsed,
+          finalGraphStart: graphCoordinates[0],
+          finalGraphEnd: graphCoordinates[graphCoordinates.length - 1],
+          renderedSegments: routeValidation.segments,
+        },
       };
     } catch (error) {
       return this.failure(
@@ -120,11 +228,31 @@ export class IndoorRouter {
     return {
       success: false,
       coordinates: [],
+      renderCoordinates: [],
       distance: 0,
       waypointCount: 0,
       error,
     };
   }
+}
+
+function toRouteSnapDebug(
+  graph: NavigationGraph,
+  snap: NonNullable<ReturnType<typeof snapPointToGraph>>
+): RouteSnapDebug {
+  const { lng, lat } = graph.projection.unproject(snap.point.x, snap.point.y);
+
+  return {
+    kind: snap.kind,
+    point: { lat, lng },
+    distanceMeters: snap.distanceMeters,
+    componentId: snap.componentId,
+    nodeId: snap.nodeId,
+    edgeId: snap.edgeId,
+    edgeFromNodeId: snap.edgeFromNodeId,
+    edgeToNodeId: snap.edgeToNodeId,
+    t: snap.t,
+  };
 }
 
 function dedupeConsecutivePoints(points: Point2D[], toleranceMeters = 1e-6): Point2D[] {
@@ -164,7 +292,14 @@ function simplifyPath(
 
     if (
       isNearlyCollinear(previous, current, next) &&
-      isSegmentNavigable(previous, next, walkablePolygons, obstaclePolygons, sampleStepMeters)
+      isSegmentNavigable(
+        previous,
+        next,
+        walkablePolygons,
+        obstaclePolygons,
+        sampleStepMeters,
+        obstaclePolygons.length > 0
+      )
     ) {
       continue;
     }
@@ -193,14 +328,4 @@ function isNearlyCollinear(
   );
 
   return twiceTriangleArea / baseLength <= toleranceMeters;
-}
-
-function pathLength(points: Point2D[]): number {
-  let total = 0;
-
-  for (let index = 1; index < points.length; index += 1) {
-    total += distance(points[index - 1], points[index]);
-  }
-
-  return total;
 }
