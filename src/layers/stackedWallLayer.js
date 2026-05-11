@@ -22,6 +22,32 @@ const STACKED_WALL_MATERIAL = {
   specularColor: [80, 80, 80],
 };
 
+const clamp01 = (value) => Math.max(0, Math.min(1, value));
+
+function getWallFloorIndex(floorKey, visibleFloorKeys) {
+  const index = visibleFloorKeys.indexOf(floorKey);
+  return index === -1 ? 0 : index;
+}
+
+function getStackedWallRevealProgress({
+  floorKey,
+  visibleFloorKeys,
+  revealProgress = 1,
+  initialRevealActive = false,
+}) {
+  const progress = clamp01(revealProgress);
+  if (!initialRevealActive && progress >= 1) {
+    return 1;
+  }
+
+  const floorIndex = getWallFloorIndex(floorKey, visibleFloorKeys);
+  const floorCount = Math.max(1, visibleFloorKeys.length);
+  const stagger = 0.65;
+  const raw = progress * (floorCount + stagger) - floorIndex;
+  const normalized = clamp01(raw / stagger);
+  return normalized * normalized * (3 - 2 * normalized);
+}
+
 function toWallStackUrl(fileName) {
   return fileName.startsWith("/") ? fileName : `/${fileName}`;
 }
@@ -67,6 +93,7 @@ export function useStackedWallLayer({
   selectedFloors = [],
   wallStackConfig = stackedWallConfig,
   enabled = true,
+  presentation = {},
 } = {}) {
   const [wallDataByFloor, setWallDataByFloor] = useState({});
 
@@ -138,13 +165,27 @@ export function useStackedWallLayer({
         return [];
       }
 
-      return buildWallMeshes(wallData).map((wall, index) => (
+      const wallRevealProgress = getStackedWallRevealProgress({
+        floorKey,
+        visibleFloorKeys,
+        revealProgress: presentation.revealProgress,
+        initialRevealActive: presentation.initialRevealActive,
+      });
+
+      return buildWallMeshes(wallData, {
+        getRevealProgress: () => wallRevealProgress,
+      }).map((wall, index) => (
         new SimpleMeshLayer({
           id: `building-stacked-wall-${floorKey}-${wall.id}-${index}`,
           data: [{ ...wall, floorKey }],
           mesh: wall.mesh,
           getPosition: (d) => d.origin,
-          getColor: (d) => d.color,
+          getColor: (d) => [
+            d.color[0],
+            d.color[1],
+            d.color[2],
+            Math.round((d.color[3] ?? 255) * d.revealProgress),
+          ],
           getScale: [1, 1, 1],
           getOrientation: [0, 0, 0],
           getTranslation: [0, 0, 0],
@@ -163,6 +204,7 @@ export function useStackedWallLayer({
   }, [
     activeFloor,
     enabled,
+    presentation,
     selectedFloor,
     selectedFloors,
     wallDataByFloor,

@@ -686,6 +686,50 @@
   gap: 10px;
 }
 
+.control-row-inline {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.control-checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-strong);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.control-checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.control-action-button {
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  background: var(--bg-layer-2);
+  color: var(--text-strong);
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 8px 10px;
+}
+
+.control-action-button:not(:disabled):hover {
+  background: var(--accent-soft);
+  border-color: var(--accent-soft-strong);
+  color: var(--accent-strong);
+}
+
+.control-action-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
 .control-value {
   color: var(--text-muted);
   font-size: 0.8rem;

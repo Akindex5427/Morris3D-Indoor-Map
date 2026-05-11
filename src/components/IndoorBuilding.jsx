@@ -146,6 +146,10 @@ function getFloorNumber(props = {}) {
   return props.level ?? props.floor ?? props.nivel ?? 0;
 }
 
+function getFeatureRoomId(props = {}) {
+  return props.id || props.name || props.room_id || props.OBJECTID || null;
+}
+
 function parseNumericValue(value) {
   const parsed = parseFloat(value);
   return Number.isFinite(parsed) ? parsed : null;
@@ -220,6 +224,7 @@ function buildFilteredIndoorFeatureCollection(
   data,
   selectedFloors,
   floorSpacing,
+  presentation = {},
 ) {
   if (!data || !data.features) {
     return { type: "FeatureCollection", features: [] };
@@ -248,18 +253,40 @@ function buildFilteredIndoorFeatureCollection(
     }
   }
 
+  const revealProgress =
+    typeof presentation.revealProgress === "number"
+      ? Math.max(0, Math.min(1, presentation.revealProgress))
+      : 1;
+  const sortedFloors = [...new Set(selectedPolygonFeatures.map((feature) =>
+    getFloorNumber(feature.properties || {}),
+  ))].sort((a, b) => a - b);
+  const floorRevealProgress = (floorNum) => {
+    if (!presentation.initialRevealActive && revealProgress >= 1) return 1;
+    const index = Math.max(0, sortedFloors.indexOf(floorNum));
+    const floorCount = Math.max(1, sortedFloors.length);
+    const stagger = 0.65;
+    const raw = revealProgress * (floorCount + stagger) - index;
+    const normalized = Math.max(0, Math.min(1, raw / stagger));
+    return normalized * normalized * (3 - 2 * normalized);
+  };
+
   return {
     type: "FeatureCollection",
     features: selectedPolygonFeatures.map((feature) => {
       const props = feature.properties || {};
       const floorNum = getFloorNumber(props);
       const featureBase = getBaseHeight(props);
+      const reveal = floorRevealProgress(floorNum);
       const baseZ = isDollhouseMode
-        ? featureBase + floorNum * floorSpacing
-        : featureBase - floorBaseOffset;
+        ? (featureBase + floorNum * floorSpacing) * reveal
+        : (featureBase - floorBaseOffset) * reveal;
 
       return {
         ...feature,
+        properties: {
+          ...props,
+          __presentationReveal: reveal,
+        },
         geometry: applyBaseToGeometry(feature.geometry, baseZ),
       };
     }),
@@ -603,6 +630,7 @@ export const useIndoorBuilding = ({
   heightExaggeration = 1.0,
   floorSpacing = 4.5,
   highlightedRoomId = null,
+  presentation = {},
   onRoomClick = null,
 }) => {
   // Filter data by selected floors
@@ -611,6 +639,7 @@ export const useIndoorBuilding = ({
       data,
       selectedFloors,
       floorSpacing,
+      presentation,
     );
 
     if (!data || !data.features) {
@@ -666,7 +695,7 @@ export const useIndoorBuilding = ({
       type: "FeatureCollection",
       features: features,
     };
-  }, [data, selectedFloors, floorSpacing]);
+  }, [data, selectedFloors, floorSpacing, presentation]);
 
   // Create layers and lighting
   const { layers, lightingEffect } = useMemo(() => {
@@ -676,6 +705,16 @@ export const useIndoorBuilding = ({
 
     const isDollhouseMode = selectedFloors.length > 1;
     const isSingleFloorMode = selectedFloors.length === 1;
+    const routeFocus = presentation.routeFocus || {};
+    const routeFocusActive = Boolean(routeFocus.active);
+    const focusRoomIds = new Set(
+      [routeFocus.startRoomId, routeFocus.endRoomId].filter(Boolean),
+    );
+    const focusFloors = new Set(
+      (routeFocus.involvedFloors || []).map((floor) => Number(floor)),
+    );
+    const isFocusFloor = (floorNum) =>
+      routeFocusActive && focusFloors.has(Number(floorNum));
 
     try {
       // Create GeoJSON layer
@@ -712,15 +751,27 @@ export const useIndoorBuilding = ({
 
         getFillColor: (feature) => {
           const props = feature.properties || {};
-          const roomId = props.id || props.name || "";
+          const roomId = getFeatureRoomId(props);
           const floorNum = props.level ?? props.floor ?? props.nivel ?? 0;
+          const reveal = props.__presentationReveal ?? 1;
+          const isFocusedRoom = focusRoomIds.has(roomId);
+          const shouldDeemphasize =
+            isFocusFloor(floorNum) &&
+            !isFocusedRoom &&
+            !isFloorSurface(props);
 
           if (highlightedRoomId === roomId) {
-            return [255, 200, 0, 255];
+            return [255, 200, 0, Math.round(255 * reveal)];
           }
 
           if (isFloorSurface(props)) {
-            return getFloorSurfaceColor(floorNum, isDollhouseMode);
+            const floorColor = getFloorSurfaceColor(floorNum, isDollhouseMode);
+            return [
+              floorColor[0],
+              floorColor[1],
+              floorColor[2],
+              Math.round(floorColor[3] * reveal),
+            ];
           }
 
           const baseColor = parseFeatureColor(props.color);
@@ -785,12 +836,31 @@ export const useIndoorBuilding = ({
             alpha = 255;
           }
 
+          if (isFocusedRoom) {
+            shadedColor = [
+              Math.min(255, Math.round(shadedColor[0] * 1.22 + 24)),
+              Math.min(255, Math.round(shadedColor[1] * 1.22 + 24)),
+              Math.min(255, Math.round(shadedColor[2] * 1.22 + 24)),
+            ];
+            alpha = 255;
+          } else if (shouldDeemphasize) {
+            alpha = Math.min(alpha, 70);
+            shadedColor = [
+              Math.round(shadedColor[0] * 0.72),
+              Math.round(shadedColor[1] * 0.72),
+              Math.round(shadedColor[2] * 0.72),
+            ];
+          }
+
+          alpha = Math.round(alpha * reveal);
           return [...shadedColor, alpha];
         },
 
         getLineColor: (feature) => {
           const props = feature.properties || {};
           const floorNum = props.level ?? props.floor ?? props.nivel ?? 0;
+          const roomId = getFeatureRoomId(props);
+          const reveal = props.__presentationReveal ?? 1;
           let alpha = 220;
 
           if (isDollhouseMode) {
@@ -811,17 +881,31 @@ export const useIndoorBuilding = ({
             alpha = selectedFloors.includes(floorNum) ? 255 : 220;
           }
 
+          if (focusRoomIds.has(roomId)) {
+            return [5, 57, 132, Math.round(255 * reveal)];
+          }
+
+          if (isFocusFloor(floorNum) && !isFloorSurface(props)) {
+            alpha = Math.min(alpha, 80);
+          }
+
           const edgeColor = isDollhouseMode || isSingleFloorMode ? 25 : 40;
-          return [edgeColor, edgeColor, edgeColor, alpha];
+          return [edgeColor, edgeColor, edgeColor, Math.round(alpha * reveal)];
         },
 
-        getElevation: (feature) =>
-          computeElevation(
+        getElevation: (feature) => {
+          const props = feature.properties || {};
+          const reveal = props.__presentationReveal ?? 1;
+          const baseElevation = computeElevation(
             feature,
             floorSpacing,
             heightExaggeration,
             isDollhouseMode,
-          ),
+          );
+          const roomId = getFeatureRoomId(props);
+          const focusLift = focusRoomIds.has(roomId) ? 0.45 : 0;
+          return baseElevation * reveal + focusLift;
+        },
 
         onClick: (info) => {
           if (info.object && onRoomClick) {
@@ -830,9 +914,14 @@ export const useIndoorBuilding = ({
         },
 
         updateTriggers: {
-          getFillColor: [highlightedRoomId, translucency, selectedFloors],
-          getLineColor: [selectedFloors, translucency],
-          getElevation: [floorSpacing, heightExaggeration],
+          getFillColor: [
+            highlightedRoomId,
+            translucency,
+            selectedFloors,
+            presentation,
+          ],
+          getLineColor: [selectedFloors, translucency, presentation],
+          getElevation: [floorSpacing, heightExaggeration, presentation],
         },
       });
 
@@ -851,6 +940,7 @@ export const useIndoorBuilding = ({
     heightExaggeration,
     floorSpacing,
     highlightedRoomId,
+    presentation,
     onRoomClick,
   ]);
 

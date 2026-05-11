@@ -1,7 +1,12 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import DeckGL from "@deck.gl/react";
 import Map from "react-map-gl";
-import { PathLayer, TextLayer, IconLayer } from "@deck.gl/layers";
+import {
+  PathLayer,
+  TextLayer,
+  IconLayer,
+  ScatterplotLayer,
+} from "@deck.gl/layers";
 import { useIndoorBuilding } from "./IndoorBuilding";
 import { useBuildingWallLayers } from "../layers/buildingWallLayer";
 import { usePerimeterWallLayer } from "../layers/perimeterWallLayer";
@@ -27,6 +32,93 @@ export const BASEMAP_STYLES = {
 };
 
 const BUILDING_FLOOR_SPACING = 4.5;
+const INITIAL_REVEAL_DURATION_MS = 2400;
+
+const clamp01 = (value) => Math.max(0, Math.min(1, value));
+
+const easeOutCubic = (value) => 1 - Math.pow(1 - clamp01(value), 3);
+
+const getRoomFeatureId = (featureOrRoom) => {
+  const props = featureOrRoom?.properties || featureOrRoom || {};
+  return props.id || props.name || props.room_id || props.OBJECTID || null;
+};
+
+const getRoomFeatureName = (featureOrRoom, fallback = "Room") => {
+  const props = featureOrRoom?.properties || featureOrRoom || {};
+  return props.name || props.id || props.room_id || fallback;
+};
+
+const getRoomFeatureFloor = (featureOrRoom) => {
+  const props = featureOrRoom?.properties || featureOrRoom || {};
+  return props.level ?? props.floor ?? props.nivel ?? 0;
+};
+
+const getGeometryCoordinates = (geometry) => {
+  if (!geometry) return [];
+  if (geometry.type === "Polygon") return geometry.coordinates.flat();
+  if (geometry.type === "MultiPolygon") {
+    return geometry.coordinates.flatMap((polygon) => polygon.flat());
+  }
+  if (geometry.type === "LineString") return geometry.coordinates;
+  if (geometry.type === "MultiLineString") return geometry.coordinates.flat();
+  return [];
+};
+
+const getFeatureCentroid = (feature) => {
+  const coords = getGeometryCoordinates(feature?.geometry).filter(
+    (coord) => Number.isFinite(coord?.[0]) && Number.isFinite(coord?.[1]),
+  );
+  if (coords.length === 0) return null;
+  const sum = coords.reduce(
+    (acc, coord) => [acc[0] + coord[0], acc[1] + coord[1]],
+    [0, 0],
+  );
+  return [sum[0] / coords.length, sum[1] / coords.length];
+};
+
+const interpolateRoutePoint = (path, targetDistance) => {
+  if (!Array.isArray(path) || path.length < 2) return null;
+  let walked = 0;
+  for (let index = 1; index < path.length; index += 1) {
+    const from = path[index - 1];
+    const to = path[index];
+    const dx = to[0] - from[0];
+    const dy = to[1] - from[1];
+    const segmentLength = Math.hypot(dx, dy);
+    if (segmentLength <= 0) continue;
+    if (walked + segmentLength >= targetDistance) {
+      const t = (targetDistance - walked) / segmentLength;
+      return {
+        position: [
+          from[0] + dx * t,
+          from[1] + dy * t,
+          from[2] + ((to[2] || 0) - (from[2] || 0)) * t,
+        ],
+        angle: 90 - (Math.atan2(dy, dx) * 180) / Math.PI,
+      };
+    }
+    walked += segmentLength;
+  }
+  const last = path[path.length - 1];
+  return { position: last, angle: 0 };
+};
+
+const buildFlowMarkers = (path, phase, count = 7) => {
+  if (!Array.isArray(path) || path.length < 2) return [];
+  let totalLength = 0;
+  for (let index = 1; index < path.length; index += 1) {
+    const from = path[index - 1];
+    const to = path[index];
+    const length = Math.hypot(to[0] - from[0], to[1] - from[1]);
+    totalLength += length;
+  }
+  if (totalLength <= 0) return [];
+  const markerCount = Math.min(count, Math.max(2, Math.floor(totalLength / 0.00003)));
+  return Array.from({ length: markerCount }, (_, index) => {
+    const offset = ((index / markerCount + phase) % 1) * totalLength;
+    return interpolateRoutePoint(path, offset);
+  }).filter(Boolean);
+};
 
 // Marker elevation offset (in meters) - to ensure markers appear above floor surface
 const MARKER_ELEVATION_OFFSET = 2.0; // Raise markers 2m above floor
@@ -49,6 +141,7 @@ const Map3D = ({
   routeRenderPath = null,
   routeSegments = null,
   routeTransitionMarkers = null,
+  routeFocus = null,
   routeFloorId = null,
   roomsData = [],
   centerlinesData = {},
@@ -56,6 +149,8 @@ const Map3D = ({
   basemapStyle = "topographic",
   showPerimeterWall = true,
   perimeterWallUrl = "/wall.geojson",
+  cinematicAnimationsEnabled = true,
+  initialRevealReplayKey = 0,
 }) => {
   const [geojsonData, setGeojsonData] = useState(null);
   const [initialViewState, setInitialViewState] = useState({
@@ -68,6 +163,10 @@ const Map3D = ({
   const [internalViewState, setInternalViewState] = useState(initialViewState);
   const [isMounted, setIsMounted] = useState(false);
   const [webglError, setWebglError] = useState(null);
+  const [revealProgress, setRevealProgress] = useState(
+    cinematicAnimationsEnabled ? 0 : 1,
+  );
+  const [routeAnimationPhase, setRouteAnimationPhase] = useState(0);
   const deckRef = useRef(null);
   const containerRef = useRef(null);
   const isAllFloorsSelected =
@@ -80,6 +179,46 @@ const Map3D = ({
     }, 100);
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (!cinematicAnimationsEnabled) {
+      setRevealProgress(1);
+      return undefined;
+    }
+
+    let frameId;
+    const start = performance.now();
+    const animate = (now) => {
+      const progress = (now - start) / INITIAL_REVEAL_DURATION_MS;
+      setRevealProgress(easeOutCubic(progress));
+      if (progress < 1) {
+        frameId = requestAnimationFrame(animate);
+      } else {
+        setRevealProgress(1);
+      }
+    };
+
+    setRevealProgress(0);
+    frameId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frameId);
+  }, [cinematicAnimationsEnabled, initialRevealReplayKey]);
+
+  useEffect(() => {
+    if (!cinematicAnimationsEnabled || !routePath?.length) {
+      setRouteAnimationPhase(0);
+      return undefined;
+    }
+
+    let frameId;
+    const start = performance.now();
+    const animate = (now) => {
+      setRouteAnimationPhase(((now - start) / 1800) % 1);
+      frameId = requestAnimationFrame(animate);
+    };
+
+    frameId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frameId);
+  }, [cinematicAnimationsEnabled, routePath]);
 
   // Convert roomsData to GeoJSON format and update geojsonData
   useEffect(() => {
@@ -210,6 +349,20 @@ const Map3D = ({
     return [];
   }, [selectedFloors, selectedFloor, isAllFloorsSelected, allAvailableFloors]);
 
+  const indoorPresentation = useMemo(
+    () => ({
+      initialRevealActive: cinematicAnimationsEnabled && revealProgress < 1,
+      revealProgress,
+      routeFocus: routeFocus
+        ? {
+            ...routeFocus,
+            active: true,
+          }
+        : null,
+    }),
+    [cinematicAnimationsEnabled, revealProgress, routeFocus],
+  );
+
   // Use the new IndoorBuilding hook for ArcGIS Indoors-style visualization
   const displayData = getDisplayData();
   console.log("[Map3D] Display data:", {
@@ -226,6 +379,7 @@ const Map3D = ({
     heightExaggeration,
     floorSpacing: BUILDING_FLOOR_SPACING, // 4.5m vertical spacing between floors (matches provided stack)
     highlightedRoomId,
+    presentation: indoorPresentation,
     onRoomClick: (roomProps) => {
       const roomId = roomProps?.id || roomProps?.name || "";
       onRoomSelect(roomProps, roomId);
@@ -265,6 +419,7 @@ const Map3D = ({
     activeFloor: selectedFloor,
     selectedFloor,
     selectedFloors,
+    presentation: indoorPresentation,
   });
 
   console.log("[Map3D] Indoor layers:", indoorLayers?.length || 0);
@@ -303,6 +458,73 @@ const Map3D = ({
   const visibleTransitionMarkers = Array.isArray(routeTransitionMarkers)
     ? routeTransitionMarkers.filter((marker) => shouldShowRouteFloor(marker.floor))
     : [];
+  const routeChevronIcon = useMemo(() => {
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+      <path d="M10 6l12 10-12 10" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M10 6l12 10-12 10" fill="none" stroke="#052f7c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>`;
+    return {
+      url: `data:image/svg+xml;base64,${btoa(svg)}`,
+      width: 32,
+      height: 32,
+      anchorX: 16,
+      anchorY: 16,
+    };
+  }, []);
+  const routePinIcons = useMemo(() => {
+    const createPinSVG = (color) => {
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 48 48">
+        <defs>
+          <filter id="shadow">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.35"/>
+          </filter>
+        </defs>
+        <path d="M24 2C15.2 2 8 9.2 8 18c0 10.5 14 26 16 28 2-2 16-17.5 16-28 0-8.8-7.2-16-16-16zm0 22c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z"
+          fill="${color}" filter="url(#shadow)"/>
+        <circle cx="24" cy="18" r="5" fill="white" opacity="0.92"/>
+      </svg>`;
+      return `data:image/svg+xml;base64,${btoa(svg)}`;
+    };
+    return {
+      start: { url: createPinSVG("#16a34a"), width: 42, height: 42, anchorY: 42 },
+      end: { url: createPinSVG("#dc2626"), width: 42, height: 42, anchorY: 42 },
+    };
+  }, []);
+  const activeSingleRoutePathCoords =
+    shouldRenderRoute && activeRenderPath?.length > 1
+      ? activeRenderPath.map((point) => [
+          point.coords[0],
+          point.coords[1],
+          routeElevation(point.floor, 0.08),
+        ])
+      : null;
+  const routeFocusMarkers = useMemo(() => {
+    if (!routeFocus) return [];
+
+    const markers = [
+      { id: routeFocus.startRoomId, type: "start", label: "Start" },
+      { id: routeFocus.endRoomId, type: "end", label: "Destination" },
+    ];
+
+    return markers
+      .map((marker) => {
+        const feature = roomsData.find(
+          (room) => getRoomFeatureId(room) === marker.id,
+        );
+        const coords = getFeatureCentroid(feature);
+        if (!feature || !coords) return null;
+        const floor = getRoomFeatureFloor(feature);
+        if (!shouldShowRouteFloor(floor)) return null;
+        return {
+          ...marker,
+          roomName: getRoomFeatureName(feature, marker.label),
+          floor,
+          position: [coords[0], coords[1], routeElevation(floor, 1.1)],
+          glowPosition: [coords[0], coords[1], routeElevation(floor, 0.18)],
+        };
+      })
+      .filter(Boolean);
+  }, [roomsData, routeFocus, selectedFloor, selectedFloors, activeFloor]);
 
   // Add centerline graph overlay as blue lines
   const centerlinePaths = useMemo(() => {
@@ -423,6 +645,33 @@ const Map3D = ({
         parameters: { depthTest: false, depthMask: false },
       }),
     );
+
+    if (cinematicAnimationsEnabled) {
+      const flowData = pathLayerData.flatMap((routeSegment, segmentIndex) =>
+        buildFlowMarkers(routeSegment.path, routeAnimationPhase, 6).map(
+          (marker, markerIndex) => ({
+            ...marker,
+            id: `${segmentIndex}-${markerIndex}`,
+          }),
+        ),
+      );
+
+      layers.push(
+        new IconLayer({
+          id: "multi-floor-route-flow-chevrons",
+          data: flowData,
+          getPosition: (d) => d.position,
+          getIcon: () => routeChevronIcon,
+          getAngle: (d) => d.angle,
+          getSize: 22,
+          sizeUnits: "pixels",
+          pickable: false,
+          billboard: true,
+          opacity: 0.92,
+          parameters: { depthTest: false, depthMask: false },
+        }),
+      );
+    }
   }
 
   if (visibleTransitionMarkers.length > 0) {
@@ -476,6 +725,72 @@ const Map3D = ({
         sizeUnits: "pixels",
         pickable: false,
         billboard: true,
+      }),
+    );
+  }
+
+  if (routeFocusMarkers.length > 0) {
+    const pulse = cinematicAnimationsEnabled
+      ? 1 + Math.sin(routeAnimationPhase * Math.PI * 2) * 0.12
+      : 1;
+
+    layers.push(
+      new ScatterplotLayer({
+        id: "route-focus-room-glow",
+        data: routeFocusMarkers,
+        getPosition: (d) => d.glowPosition,
+        getRadius: (d) => (d.type === "start" ? 2.3 : 2.5) * pulse,
+        radiusUnits: "meters",
+        getFillColor: (d) =>
+          d.type === "start" ? [22, 163, 74, 95] : [220, 38, 38, 95],
+        getLineColor: (d) =>
+          d.type === "start" ? [20, 83, 45, 210] : [127, 29, 29, 210],
+        lineWidthMinPixels: 2,
+        stroked: true,
+        filled: true,
+        pickable: false,
+        parameters: { depthTest: false, depthMask: false },
+      }),
+    );
+
+    layers.push(
+      new IconLayer({
+        id: "route-focus-start-end-markers",
+        data: routeFocusMarkers,
+        getPosition: (d) => d.position,
+        getIcon: (d) => routePinIcons[d.type],
+        getSize: () => 40 * pulse,
+        sizeUnits: "pixels",
+        pickable: true,
+        billboard: true,
+        opacity: cinematicAnimationsEnabled
+          ? Math.min(1, 0.55 + routeAnimationPhase * 1.8)
+          : 1,
+        parameters: { depthTest: false, depthMask: false },
+      }),
+    );
+
+    layers.push(
+      new TextLayer({
+        id: "route-focus-room-labels",
+        data: routeFocusMarkers,
+        getPosition: (d) => [
+          d.position[0],
+          d.position[1],
+          d.position[2] + 0.55,
+        ],
+        getText: (d) => d.roomName,
+        getSize: 12,
+        getColor: [8, 37, 82, 255],
+        getBackgroundColor: [255, 255, 255, 230],
+        background: true,
+        backgroundPadding: [4, 3],
+        getTextAnchor: "middle",
+        getAlignmentBaseline: "bottom",
+        sizeUnits: "pixels",
+        billboard: true,
+        pickable: false,
+        parameters: { depthTest: false, depthMask: false },
       }),
     );
   }
@@ -554,103 +869,33 @@ const Map3D = ({
       }),
     );
 
-    // Start and end point markers - same mode-aware elevation as path line
-    const MARKER_FLOOR_OFFSET = 0.1; // pin base sits on floor surface
+    if (cinematicAnimationsEnabled && activeSingleRoutePathCoords) {
+      const flowData = buildFlowMarkers(
+        activeSingleRoutePathCoords,
+        routeAnimationPhase,
+        8,
+      );
+      layers.push(
+        new IconLayer({
+          id: "route-flow-chevrons",
+          data: flowData,
+          getPosition: (d) => d.position,
+          getIcon: () => routeChevronIcon,
+          getAngle: (d) => d.angle,
+          getSize: 22,
+          sizeUnits: "pixels",
+          pickable: false,
+          billboard: true,
+          opacity: 0.95,
+          parameters: { depthTest: false, depthMask: false },
+        }),
+      );
+    }
+
     const floorElev = (floor) => {
       const n = typeof floor === "number" ? floor : 0;
       return isDollhouse ? n * BUILDING_FLOOR_SPACING : 0;
     };
-
-    const markerData = [
-      {
-        position: [
-          ...routePath[0].coords,
-          floorElev(routePath[0].floor) + MARKER_FLOOR_OFFSET,
-        ],
-        type: "start",
-        floor: routePath[0].floor,
-        roomName: routePath[0].name || "Start",
-      },
-      {
-        position: [
-          ...routePath[routePath.length - 1].coords,
-          floorElev(routePath[routePath.length - 1].floor) +
-            MARKER_FLOOR_OFFSET,
-        ],
-        type: "end",
-        floor: routePath[routePath.length - 1].floor,
-        roomName: routePath[routePath.length - 1].name || "End",
-      },
-    ];
-
-    console.log(
-      "[Map3D] Route Start - Floor:",
-      routePath[0].floor,
-      "Coords:",
-      routePath[0].coords,
-      "Elevation:",
-      markerData[0].position[2],
-    );
-    console.log(
-      "[Map3D] Route End - Floor:",
-      routePath[routePath.length - 1].floor,
-      "Coords:",
-      routePath[routePath.length - 1].coords,
-      "Elevation:",
-      markerData[1].position[2],
-    );
-
-    // Google Maps-style location pin markers using IconLayer
-    // Create SVG data URLs for green and red pins
-    const createPinSVG = (color) => {
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 48 48">
-        <defs>
-          <filter id="shadow">
-            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
-          </filter>
-        </defs>
-        <path d="M24 2C15.2 2 8 9.2 8 18c0 10.5 14 26 16 28 2-2 16-17.5 16-28 0-8.8-7.2-16-16-16zm0 22c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6z" 
-              fill="${color}" filter="url(#shadow)"/>
-        <circle cx="24" cy="18" r="5" fill="white" opacity="0.9"/>
-      </svg>`;
-      return `data:image/svg+xml;base64,${btoa(svg)}`;
-    };
-
-    // Calculate marker size based on zoom level to maintain consistent screen size
-    // Fixed pixel sizes - markers appear at constant screen size regardless of zoom
-    const markerScreenSize = 40;
-    const waypointScreenSize = 14;
-    const waypointGlowSize = 16;
-
-    const pinMapping = {
-      start: {
-        url: createPinSVG("#34A853"), // Google green
-        width: 36,
-        height: 36,
-        anchorY: 36,
-      },
-      end: {
-        url: createPinSVG("#EA4335"), // Google red
-        width: 36,
-        height: 36,
-        anchorY: 36,
-      },
-    };
-
-    layers.push(
-      new IconLayer({
-        id: "route-pin-markers",
-        data: markerData,
-        getPosition: (d) => d.position,
-        getIcon: (d) => pinMapping[d.type],
-        getSize: 36,
-        sizeUnits: "pixels",
-        sizeScale: 1,
-        pickable: true,
-        billboard: true,
-        opacity: 1.0,
-      }),
-    );
 
     // Waypoint labels only - clean visualization
     if (routePath.length > 2) {

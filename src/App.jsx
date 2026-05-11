@@ -42,6 +42,13 @@ const MIN_SIDEBAR_WIDTH = 280;
 const MAX_SIDEBAR_WIDTH = 520;
 const SIDEBAR_COLLAPSE_THRESHOLD = 180;
 
+const getRoomDisplayId = (room) =>
+  room?.properties?.id ||
+  room?.properties?.name ||
+  room?.properties?.room_id ||
+  room?.properties?.OBJECTID ||
+  null;
+
 const ROUTER_CONFIG = [
   {
     floor: 0,
@@ -136,6 +143,12 @@ function App() {
   const [centerlinesData, setCenterlinesData] = useState({});
   const [roomAnchorIndexes, setRoomAnchorIndexes] = useState({});
   const [allFloorRouteRooms, setAllFloorRouteRooms] = useState([]);
+  const [cinematicAnimationsEnabled, setCinematicAnimationsEnabled] = useState(
+    () =>
+      typeof window === "undefined" ||
+      !window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches,
+  );
+  const [initialRevealReplayKey, setInitialRevealReplayKey] = useState(0);
   const allFloorsColorReferenceRef = useRef(null);
   const sidebarDragRef = useRef(null);
   const suppressSidebarClickRef = useRef(false);
@@ -982,6 +995,13 @@ function App() {
             renderPath,
             info,
             result,
+            focus: {
+              startRoomId: getRoomDisplayId(startRoom),
+              endRoomId: getRoomDisplayId(endRoom),
+              startFloor,
+              endFloor,
+              involvedFloors: [floorForRouting],
+            },
           },
         });
         setShowRoutePlanner(false);
@@ -1190,6 +1210,19 @@ function App() {
           transitionMarkers,
           info,
           result: multiFloorResult,
+          focus: {
+            startRoomId: getRoomDisplayId(startRoom),
+            endRoomId: getRoomDisplayId(endRoom),
+            startFloor,
+            endFloor,
+            involvedFloors: Array.from(
+              new Set([
+                startFloor,
+                endFloor,
+                ...routeSegments.map((segment) => Number(segment.floorId)),
+              ]),
+            ).sort((a, b) => a - b),
+          },
         },
       });
       setShowRoutePlanner(false);
@@ -1417,10 +1450,13 @@ function App() {
               routeTransitionMarkers={
                 visibleRouteContext?.route?.transitionMarkers || null
               }
+              routeFocus={visibleRouteContext?.route?.focus || null}
               routeFloorId={visibleRouteContext?.floorId ?? null}
               roomsData={allRooms}
               centerlinesData={centerlinesData}
               activeFloor={selectedFloor}
+              cinematicAnimationsEnabled={cinematicAnimationsEnabled}
+              initialRevealReplayKey={initialRevealReplayKey}
             />
 
             <VisualControls
@@ -1430,6 +1466,11 @@ function App() {
               setTranslucency={setTranslucency}
               basemapStyle={basemapStyle}
               setBasemapStyle={setBasemapStyle}
+              cinematicAnimationsEnabled={cinematicAnimationsEnabled}
+              setCinematicAnimationsEnabled={setCinematicAnimationsEnabled}
+              onReplayInitialReveal={() =>
+                setInitialRevealReplayKey((key) => key + 1)
+              }
             />
 
             {/* Room Info Popup */}

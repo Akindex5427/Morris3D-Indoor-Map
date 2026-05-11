@@ -311,7 +311,7 @@ function getWallFeatures(input) {
   return [];
 }
 
-export function buildWallMeshes(geojson) {
+export function buildWallMeshes(geojson, { getRevealProgress } = {}) {
   return getWallFeatures(geojson).flatMap((feature, featureIndex) => {
     const lineCoordinateSets = getLineCoordinateSets(feature.geometry);
     const validCoordinates = lineCoordinateSets.flatMap((line) =>
@@ -324,7 +324,15 @@ export function buildWallMeshes(geojson) {
     }
 
     const origin = getOrigin(validCoordinates);
-    const mesh = buildFeatureWallMesh(lineCoordinateSets, origin, zRange);
+    const revealProgress =
+      typeof getRevealProgress === "function"
+        ? Math.max(0, Math.min(1, getRevealProgress(feature, featureIndex)))
+        : 1;
+    const renderZRange = {
+      bottom: zRange.bottom,
+      top: zRange.bottom + (zRange.top - zRange.bottom) * revealProgress,
+    };
+    const mesh = buildFeatureWallMesh(lineCoordinateSets, origin, renderZRange);
 
     if (!mesh) {
       return [];
@@ -338,6 +346,7 @@ export function buildWallMeshes(geojson) {
         color: parseWallColor(feature.properties?.color),
         bottom: zRange.bottom,
         top: zRange.top,
+        revealProgress,
         mesh,
       },
     ];
