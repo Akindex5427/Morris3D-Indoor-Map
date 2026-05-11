@@ -413,6 +413,7 @@ const Map3D = ({
   const perimeterWallLayers = usePerimeterWallLayer({
     url: perimeterWallUrl,
     enabled: showPerimeterWall && isAllFloorsSelected && !hasFloorSpecificWalls,
+    presentation: indoorPresentation,
   });
 
   const stackedWallLayers = useStackedWallLayer({

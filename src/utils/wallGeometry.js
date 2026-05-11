@@ -346,6 +346,7 @@ export function buildWallMeshes(geojson, { getRevealProgress } = {}) {
         color: parseWallColor(feature.properties?.color),
         bottom: zRange.bottom,
         top: zRange.top,
+        animatedTop: renderZRange.top,
         revealProgress,
         mesh,
       },
