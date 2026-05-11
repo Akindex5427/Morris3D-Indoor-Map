@@ -14,11 +14,6 @@ const MAPBOX_ACCESS_TOKEN =
 
 // Available basemap styles
 export const BASEMAP_STYLES = {
-  satellite: {
-    url: "mapbox://styles/mapbox/satellite-streets-v12",
-    name: "Satellite",
-    description: "Satellite imagery with street labels",
-  },
   topographic: {
     url: "mapbox://styles/mapbox/outdoors-v12",
     name: "Topographic",
@@ -52,11 +47,13 @@ const Map3D = ({
   onViewStateChange,
   routePath = null,
   routeRenderPath = null,
+  routeSegments = null,
+  routeTransitionMarkers = null,
   routeFloorId = null,
   roomsData = [],
   centerlinesData = {},
   activeFloor = "all",
-  basemapStyle = "satellite", // default to satellite view
+  basemapStyle = "topographic",
   showPerimeterWall = true,
   perimeterWallUrl = "/wall.geojson",
 }) => {
@@ -287,6 +284,25 @@ const Map3D = ({
     (selectedFloors?.length ?? 0) === 0 &&
     activeFloor !== "all" &&
     Number(activeFloor) === routeFloorId;
+  const isRouteDollhouse =
+    selectedFloor === "all" || (selectedFloors && selectedFloors.length > 1);
+  const routeElevation = (floorNum, offset = 0.05) => {
+    const n = typeof floorNum === "number" ? floorNum : Number(floorNum) || 0;
+    return isRouteDollhouse ? n * BUILDING_FLOOR_SPACING + offset : offset;
+  };
+  const shouldShowRouteFloor = (floor) =>
+    activeFloor === "all" || Number(activeFloor) === Number(floor);
+  const visibleRouteSegments = Array.isArray(routeSegments)
+    ? routeSegments.filter(
+        (segment) =>
+          segment?.type === "horizontal" &&
+          segment.path?.length > 1 &&
+          shouldShowRouteFloor(segment.floorId),
+      )
+    : [];
+  const visibleTransitionMarkers = Array.isArray(routeTransitionMarkers)
+    ? routeTransitionMarkers.filter((marker) => shouldShowRouteFloor(marker.floor))
+    : [];
 
   // Add centerline graph overlay as blue lines
   const centerlinePaths = useMemo(() => {
@@ -363,6 +379,106 @@ const Map3D = ({
     );
   }
   */
+
+  if (visibleRouteSegments.length > 0) {
+    const pathLayerData = visibleRouteSegments.map((segment) => ({
+      path: segment.path.map((point) => [
+        point.coords[0],
+        point.coords[1],
+        routeElevation(point.floor, 0.08),
+      ]),
+      floor: segment.floorId,
+    }));
+
+    layers.push(
+      new PathLayer({
+        id: "multi-floor-route-path-border",
+        data: pathLayerData,
+        getPath: (d) => d.path,
+        getColor: [10, 60, 160, 220],
+        getWidth: 5,
+        widthMinPixels: 3,
+        widthMaxPixels: 8,
+        widthScale: 1,
+        rounded: true,
+        billboard: false,
+        pickable: false,
+        parameters: { depthTest: false, depthMask: false },
+      }),
+    );
+
+    layers.push(
+      new PathLayer({
+        id: "multi-floor-route-path-main",
+        data: pathLayerData,
+        getPath: (d) => d.path,
+        getColor: [26, 115, 232, 255],
+        getWidth: 3,
+        widthMinPixels: 2,
+        widthMaxPixels: 5,
+        widthScale: 1,
+        rounded: true,
+        billboard: false,
+        pickable: true,
+        parameters: { depthTest: false, depthMask: false },
+      }),
+    );
+  }
+
+  if (visibleTransitionMarkers.length > 0) {
+    const createStairSVG = () => {
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="18" fill="#fbbc04" stroke="#8a5f00" stroke-width="3"/>
+        <path d="M14 31h6v-5h6v-5h8" fill="none" stroke="#202124" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>`;
+      return `data:image/svg+xml;base64,${btoa(svg)}`;
+    };
+    const stairIcon = {
+      url: createStairSVG(),
+      width: 36,
+      height: 36,
+      anchorY: 18,
+    };
+    const markerData = visibleTransitionMarkers.map((marker) => ({
+      ...marker,
+      position: [
+        marker.coords[0],
+        marker.coords[1],
+        routeElevation(marker.floor, 0.35),
+      ],
+    }));
+
+    layers.push(
+      new IconLayer({
+        id: "route-transition-markers",
+        data: markerData,
+        getPosition: (d) => d.position,
+        getIcon: () => stairIcon,
+        getSize: 30,
+        sizeUnits: "pixels",
+        sizeScale: 1,
+        pickable: true,
+        billboard: true,
+        opacity: 1,
+      }),
+    );
+
+    layers.push(
+      new TextLayer({
+        id: "route-transition-labels",
+        data: markerData,
+        getPosition: (d) => [d.position[0], d.position[1], d.position[2] + 0.1],
+        getText: () => "Stairs",
+        getSize: 10,
+        getColor: [32, 33, 36, 255],
+        getTextAnchor: "middle",
+        getAlignmentBaseline: "bottom",
+        sizeUnits: "pixels",
+        pickable: false,
+        billboard: true,
+      }),
+    );
+  }
 
   // Add route visualization layers if route exists
   console.log("[Map3D] routePath prop:", routePath);
@@ -703,7 +819,7 @@ const Map3D = ({
               mapboxAccessToken={MAPBOX_ACCESS_TOKEN}
               mapStyle={
                 BASEMAP_STYLES[basemapStyle]?.url ||
-                BASEMAP_STYLES.satellite.url
+                BASEMAP_STYLES.topographic.url
               }
               dragPan={false}
               dragRotate={false}

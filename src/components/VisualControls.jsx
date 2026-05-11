@@ -6,8 +6,6 @@ const VisualControls = ({
   setLightingEnabled,
   translucency,
   setTranslucency,
-  heightExaggeration,
-  setHeightExaggeration,
   basemapStyle,
   setBasemapStyle,
 }) => {
@@ -17,9 +15,6 @@ const VisualControls = ({
   };
   const handleTranslucencyChange = (event) => {
     setTranslucency(parseInt(event.target.value, 10));
-  };
-  const handleHeightExaggerationChange = (event) => {
-    setHeightExaggeration(parseFloat(event.target.value));
   };
 
   return (
@@ -108,27 +103,6 @@ const VisualControls = ({
             />
           </div>
 
-          <div className="control-row">
-            <label className="control-label" htmlFor="height-range">
-              <span className="control-label-row">
-                <span>Height exaggeration</span>
-                <strong className="control-value">
-                  {heightExaggeration}x
-                </strong>
-              </span>
-            </label>
-            <input
-              id="height-range"
-              className="control-range"
-              type="range"
-              min={0.5}
-              max={6}
-              step={0.1}
-              value={heightExaggeration}
-              onInput={handleHeightExaggerationChange}
-              onChange={handleHeightExaggerationChange}
-            />
-          </div>
         </div>
       )}
     </div>

@@ -1,4 +1,9 @@
 export { IndoorRouter } from './router';
+export {
+  buildStairConnectors,
+  buildVerticalConnectors,
+  computeMultiFloorRoute,
+} from './multiFloorRouter';
 export type {
   IndoorRouterOptions,
   RouteCoordinate,
@@ -7,6 +12,14 @@ export type {
   RouteSegmentValidation,
   RouteSnapDebug,
 } from './router';
+export type {
+  ComputeMultiFloorRouteOptions,
+  HorizontalRouteSegment,
+  MultiFloorRouteResult,
+  MultiFloorRouteSegment,
+  VerticalConnector,
+  VerticalTransitionSegment,
+} from './multiFloorRouter';
 
 export { aStarGraphPath } from './astarGraph';
 export type { AStarGraphOptions, AStarGraphResult } from './astarGraph';

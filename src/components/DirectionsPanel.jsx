@@ -16,14 +16,25 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
   const [collapsed, setCollapsed] = useState(false);
 
   const directions = useMemo(() => {
+    if (routeInfo?.directions?.length) return routeInfo.directions;
     if (!routePath) return [];
     return generateDirections(routePath);
-  }, [routePath]);
+  }, [routePath, routeInfo]);
 
   const stats = useMemo(() => {
+    if (routeInfo?.routeType === "multi-floor") {
+      return {
+        totalDistance: routeInfo.totalDistance ?? Number(routeInfo.distance) ?? 0,
+        estimatedTime:
+          (routeInfo.totalDistance ?? Number(routeInfo.distance) ?? 0) / 1.4 +
+          Math.max(0, (routeInfo.floors?.length ?? 1) - 1) * 30,
+        floors: routeInfo.floors ?? [],
+        floorChanges: Math.max(0, (routeInfo.floors?.length ?? 1) - 1),
+      };
+    }
     if (!routePath) return null;
     return calculateRouteStats(routePath);
-  }, [routePath]);
+  }, [routePath, routeInfo]);
 
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);

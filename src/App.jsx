@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { FlyToInterpolator } from "@deck.gl/core";
 import "./App.css";
 import Map3D from "./components/Map3D";
@@ -12,7 +12,7 @@ import RoutePlanner from "./components/RoutePlanner";
 import LoadingSpinner from "./components/LoadingSpinner";
 import HelpOverlay from "./components/HelpOverlay";
 import DirectionsPanel from "./components/DirectionsPanel";
-import { IndoorRouter } from "../routing";
+import { computeMultiFloorRoute, IndoorRouter } from "../routing";
 import {
   buildRoomAnchorIndex,
   getRoomCentroid,
@@ -25,6 +25,10 @@ import {
   countFeaturesMissingColor,
   enrichMissingFeatureDisplayProperties,
 } from "./utils/featureColors";
+import {
+  generateMultiFloorRouteInstructions,
+  generateRouteInstructions,
+} from "./utils/routeInstructions";
 
 const centerlinesHaveRoomAnchors = (centerlinesGeoJson) =>
   Array.isArray(centerlinesGeoJson?.features) &&
@@ -32,6 +36,11 @@ const centerlinesHaveRoomAnchors = (centerlinesGeoJson) =>
     const properties = feature?.properties || {};
     return Boolean(properties.startroom || properties.endroom);
   });
+
+const DEFAULT_SIDEBAR_WIDTH = 360;
+const MIN_SIDEBAR_WIDTH = 280;
+const MAX_SIDEBAR_WIDTH = 520;
+const SIDEBAR_COLLAPSE_THRESHOLD = 180;
 
 const ROUTER_CONFIG = [
   {
@@ -111,8 +120,7 @@ function App() {
   });
   const [lightingEnabled, setLightingEnabled] = useState(true);
   const [translucency, setTranslucency] = useState(60); // default translucency percentage for non-selected floors
-  const [heightExaggeration, setHeightExaggeration] = useState(1);
-  const [basemapStyle, setBasemapStyle] = useState("satellite"); // satellite, topographic, or streets
+  const [basemapStyle, setBasemapStyle] = useState("topographic"); // topographic or streets
   const [showRoutePlanner, setShowRoutePlanner] = useState(false);
   const [routeContext, setRouteContext] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -121,11 +129,16 @@ function App() {
   const [showHelp, setShowHelp] = useState(false);
   const [showDirections, setShowDirections] = useState(true);
   const [highlightedStep, setHighlightedStep] = useState(null);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [sidebarWidth, setSidebarWidth] = useState(DEFAULT_SIDEBAR_WIDTH);
   const [routers, setRouters] = useState({});
   const [routerError, setRouterError] = useState(null);
   const [centerlinesData, setCenterlinesData] = useState({});
   const [roomAnchorIndexes, setRoomAnchorIndexes] = useState({});
+  const [allFloorRouteRooms, setAllFloorRouteRooms] = useState([]);
   const allFloorsColorReferenceRef = useRef(null);
+  const sidebarDragRef = useRef(null);
+  const suppressSidebarClickRef = useRef(false);
 
   // Initialize IndoorRouter with graph-based routing for all floors
   useEffect(() => {
@@ -355,6 +368,117 @@ function App() {
     return response.json();
   };
 
+  useEffect(() => {
+    const loadRouteRoomIndex = async () => {
+      try {
+        const data = await fetchGeoJson(FLOOR_POLYGON_MAP.all);
+        setAllFloorRouteRooms(data.features || []);
+      } catch (error) {
+        console.warn(
+          "[Routing] Unable to load all-floor room data for multi-floor routing.",
+          error,
+        );
+      }
+    };
+
+    loadRouteRoomIndex();
+  }, []);
+
+  useEffect(() => {
+    const resizeTimer = window.setTimeout(() => {
+      window.dispatchEvent(new Event("resize"));
+    }, 240);
+
+    return () => window.clearTimeout(resizeTimer);
+  }, [sidebarCollapsed, sidebarWidth]);
+
+  const handleSidebarToggleClick = () => {
+    if (suppressSidebarClickRef.current) {
+      suppressSidebarClickRef.current = false;
+      return;
+    }
+
+    setSidebarCollapsed((collapsed) => !collapsed);
+  };
+
+  const handleSidebarDragStart = (event) => {
+    if (event.button !== 0) {
+      return;
+    }
+
+    sidebarDragRef.current = {
+      startX: event.clientX,
+      startWidth: sidebarCollapsed ? 0 : sidebarWidth,
+      hasDragged: false,
+    };
+
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+  };
+
+  const handleSidebarDragMove = (event) => {
+    const dragState = sidebarDragRef.current;
+    if (!dragState) {
+      return;
+    }
+
+    const deltaX = event.clientX - dragState.startX;
+    const nextWidth = dragState.startWidth + deltaX;
+
+    if (Math.abs(deltaX) > 4) {
+      dragState.hasDragged = true;
+      suppressSidebarClickRef.current = true;
+    }
+
+    if (!dragState.hasDragged) {
+      return;
+    }
+
+    if (nextWidth < SIDEBAR_COLLAPSE_THRESHOLD) {
+      setSidebarCollapsed(true);
+      return;
+    }
+
+    const clampedWidth = Math.min(
+      MAX_SIDEBAR_WIDTH,
+      Math.max(MIN_SIDEBAR_WIDTH, nextWidth),
+    );
+
+    setSidebarCollapsed(false);
+    setSidebarWidth(clampedWidth);
+  };
+
+  const handleSidebarDragEnd = (event) => {
+    const dragState = sidebarDragRef.current;
+    sidebarDragRef.current = null;
+    event.currentTarget.releasePointerCapture?.(event.pointerId);
+
+    if (!dragState?.hasDragged) {
+      return;
+    }
+
+    window.setTimeout(() => {
+      suppressSidebarClickRef.current = false;
+    }, 0);
+  };
+
+  const routeRoomsByFloor = useMemo(() => {
+    const grouped = {};
+    const sourceRooms = allFloorRouteRooms.length > 0 ? allFloorRouteRooms : allRooms;
+
+    for (const room of sourceRooms) {
+      const floor = getRoomFloor(room);
+      if (floor === null) {
+        continue;
+      }
+
+      const floorKey = String(floor);
+      grouped[floorKey] = grouped[floorKey] || [];
+      grouped[floorKey].push(room);
+    }
+
+    return grouped;
+  }, [allFloorRouteRooms, allRooms]);
+
   const loadAllFloorDisplayReference = async () => {
     if (!allFloorsColorReferenceRef.current) {
       allFloorsColorReferenceRef.current = fetchGeoJson(FLOOR_POLYGON_MAP.all)
@@ -480,7 +604,13 @@ function App() {
   }, [selectedFloor]);
 
   const handleFloorChange = (floor) => {
-    if (routeContext && routeContext.floorId !== floor) {
+    const routeFloors = routeContext?.route?.info?.floors ?? [];
+    const routeVisibleOnFloor =
+      routeContext?.type === "multi-floor"
+        ? floor === "all" || routeFloors.includes(Number(floor))
+        : routeContext?.floorId === floor;
+
+    if (routeContext && !routeVisibleOnFloor) {
       setRouteContext(null);
       setShowDirections(false);
       setHighlightedStep(null);
@@ -627,14 +757,23 @@ function App() {
   };
 
   const visibleRouteContext =
-    routeContext &&
-    selectedFloors.length === 0 &&
-    selectedFloor !== "all" &&
-    Number(selectedFloor) === routeContext.floorId
-      ? routeContext
+    routeContext && selectedFloors.length === 0
+      ? routeContext.type === "multi-floor"
+        ? selectedFloor === "all" ||
+          routeContext.route.info.floors.includes(Number(selectedFloor))
+          ? routeContext
+          : null
+        : selectedFloor !== "all" && Number(selectedFloor) === routeContext.floorId
+          ? routeContext
+          : null
       : null;
 
-  const handleRouteCalculate = (startRoom, endRoom, targetFloor = null) => {
+  const handleSameFloorRouteCalculate = (
+    startRoom,
+    endRoom,
+    targetFloor = null,
+    routeOptions = {},
+  ) => {
     // Guard: if either room is missing, treat as a clear request
     if (!startRoom || !endRoom) {
       clearRouteState();
@@ -806,6 +945,19 @@ function App() {
           coords: [coord.lng, coord.lat],
           floor: floorForRouting,
         }));
+        const directions = generateRouteInstructions({
+          routeResult: result,
+          floorId: floorForRouting,
+          graph: floorRouter.getGraph(),
+          startName: getRoomName(startRoom),
+          destinationName: getRoomName(endRoom),
+          options: {
+            userPreference:
+              routeOptions.accessibility === "wheelchair"
+                ? "accessible"
+                : routeOptions.preferences,
+          },
+        });
 
         console.log("[Route] Path array created:", path);
 
@@ -816,6 +968,8 @@ function App() {
           floors: [floorForRouting],
           targetFloor: floorForRouting,
           waypointCount: result.waypointCount,
+          directions,
+          routeType: "same-floor",
         };
 
         setSelectedFloors([]);
@@ -839,6 +993,208 @@ function App() {
         alert(`No route found: ${result.error}`);
         clearRouteState();
       }
+    } catch (error) {
+      console.error("Error calculating route:", error);
+      alert(`Routing error: ${error.message}`);
+      clearRouteState();
+    }
+  };
+
+  const handleRouteCalculate = (
+    startRoom,
+    endRoom,
+    targetFloor = null,
+    routeOptions = {},
+  ) => {
+    if (!startRoom || !endRoom) {
+      clearRouteState();
+      return;
+    }
+
+    const startFloor = getRoomFloor(startRoom);
+    const endFloor = getRoomFloor(endRoom);
+
+    if (startFloor === null || endFloor === null) {
+      alert(
+        "Unable to determine start or destination floor. Please choose rooms with floor metadata.",
+      );
+      clearRouteState();
+      return;
+    }
+
+    if (startFloor === endFloor || typeof targetFloor === "number") {
+      handleSameFloorRouteCalculate(startRoom, endRoom, targetFloor, routeOptions);
+      return;
+    }
+
+    const resolveTarget = (room, floorId, role) => {
+      const router = routers[floorId];
+      if (!router) {
+        throw new Error(
+          `Routing is not available for Floor ${floorId}. Please try another floor.`,
+        );
+      }
+
+      const floorHasRoomAnchors = (roomAnchorIndexes[floorId]?.size ?? 0) > 0;
+      const target = resolveRoomRoutingTarget({
+        room,
+        floorId,
+        router,
+        roomAnchorIndex: roomAnchorIndexes[floorId],
+        role,
+      });
+
+      if (!target?.coordinates) {
+        throw new Error(
+          floorHasRoomAnchors
+            ? `Unable to resolve a valid centerline access anchor for ${getRoomName(room)}.`
+            : "Unable to determine room centers for routing.",
+        );
+      }
+
+      return { target, router, floorHasRoomAnchors };
+    };
+
+    const toPath = (result, floorId, startName, endName, startFeature, endFeature) =>
+      result.coordinates.map((coord, idx) => ({
+        coords: [coord.lng, coord.lat],
+        name:
+          idx === 0
+            ? startName
+            : idx === result.coordinates.length - 1
+              ? endName
+              : `Waypoint ${idx}`,
+        floor: floorId,
+        features:
+          idx === 0 && startFeature
+            ? [startFeature]
+            : idx === result.coordinates.length - 1 && endFeature
+              ? [endFeature]
+              : [],
+      }));
+
+    try {
+      const { target: startTarget } = resolveTarget(startRoom, startFloor, "start");
+      const { target: endTarget } = resolveTarget(
+        endRoom,
+        endFloor,
+        "destination",
+      );
+      const multiFloorResult = computeMultiFloorRoute({
+        start: startTarget.coordinates,
+        startFloor,
+        destination: endTarget.coordinates,
+        destinationFloor: endFloor,
+        routers,
+        roomsByFloor: routeRoomsByFloor,
+        userPreference:
+          routeOptions.accessibility === "wheelchair"
+            ? "accessible"
+            : routeOptions.preferences,
+      });
+
+      if (!multiFloorResult.success) {
+        alert(`No route found: ${multiFloorResult.error}`);
+        clearRouteState();
+        return;
+      }
+
+      const horizontalSegments = multiFloorResult.segments.filter(
+        (segment) => segment.type === "horizontal",
+      );
+      const transitionSegments = multiFloorResult.segments.filter(
+        (segment) => segment.type === "vertical-transition",
+      );
+
+      const routeSegments = horizontalSegments.map((segment) => ({
+        floorId: Number(segment.floorId),
+        type: "horizontal",
+        path: segment.renderCoordinates.map((coord) => ({
+          coords: [coord.lng, coord.lat],
+          floor: Number(segment.floorId),
+        })),
+      }));
+      const transitionMarkers = transitionSegments.flatMap((segment) => [
+        {
+          floor: Number(segment.fromFloor),
+          coords: [segment.fromAccessPoint.lng, segment.fromAccessPoint.lat],
+          instruction: segment.instruction,
+          connectorType: segment.connectorType,
+          role: "from",
+        },
+        {
+          floor: Number(segment.toFloor),
+          coords: [segment.toAccessPoint.lng, segment.toAccessPoint.lat],
+          instruction: segment.instruction,
+          connectorType: segment.connectorType,
+          role: "to",
+        },
+      ]);
+      const startPath = toPath(
+        horizontalSegments[0].route,
+        startFloor,
+        getRoomName(startRoom),
+        "Staircase",
+        startRoom,
+        null,
+      );
+      const destinationPath = toPath(
+        horizontalSegments[horizontalSegments.length - 1].route,
+        endFloor,
+        "Staircase",
+        getRoomName(endRoom),
+        null,
+        endRoom,
+      );
+      const path = [...startPath, ...destinationPath];
+      const renderPath = routeSegments.flatMap((segment) => segment.path);
+      const directionSteps = generateMultiFloorRouteInstructions({
+        segments: multiFloorResult.segments,
+        graphsByFloor: Object.entries(routers).reduce((graphs, [floor, router]) => {
+          graphs[floor] = router.getGraph();
+          graphs[String(floor).startsWith("F") ? String(floor) : `F${floor}`] =
+            router.getGraph();
+          return graphs;
+        }, {}),
+        startName: getRoomName(startRoom),
+        destinationName: getRoomName(endRoom),
+        options: {
+          userPreference:
+            routeOptions.accessibility === "wheelchair"
+              ? "accessible"
+              : routeOptions.preferences,
+        },
+      });
+      const floors = [startFloor, endFloor].sort((a, b) => a - b);
+      const info = {
+        start: getRoomName(startRoom),
+        end: getRoomName(endRoom),
+        distance: multiFloorResult.totalDistance.toFixed(1),
+        totalDistance: multiFloorResult.totalDistance,
+        floors,
+        targetFloor: endFloor,
+        waypointCount: path.length,
+        directions: directionSteps,
+        routeType: "multi-floor",
+      };
+
+      setSelectedFloors([]);
+      setSelectedFloor("all");
+      setRouteContext({
+        type: "multi-floor",
+        floorId: null,
+        route: {
+          path,
+          renderPath,
+          routeSegments,
+          transitionMarkers,
+          info,
+          result: multiFloorResult,
+        },
+      });
+      setShowRoutePlanner(false);
+      setShowDirections(true);
+      console.log("[Route] Multi-floor route found", multiFloorResult);
     } catch (error) {
       console.error("Error calculating route:", error);
       alert(`Routing error: ${error.message}`);
@@ -910,9 +1266,17 @@ function App() {
         </header>
 
         {/* Main Content */}
-        <div className="main-content">
+        <div
+          className={`main-content ${sidebarCollapsed ? "sidebar-collapsed" : ""}`}
+          style={{ "--sidebar-width": `${sidebarWidth}px` }}
+        >
           {/* Left Panel */}
-          <aside className="left-panel">
+          <aside
+            id="app-sidebar"
+            className="left-panel"
+            aria-hidden={sidebarCollapsed}
+            inert={sidebarCollapsed ? "" : undefined}
+          >
             <div className="panel-section panel-card">
               <div className="panel-heading">
                 <span className="panel-kicker">Explore</span>
@@ -941,7 +1305,7 @@ function App() {
                 <span className="panel-kicker">Routing</span>
                 <h2 className="panel-title">Planner</h2>
                 <p className="panel-description">
-                  Build same-floor routes and keep directions visible while you
+                  Build floor-aware routes and keep directions visible while you
                   navigate.
                 </p>
               </div>
@@ -1008,6 +1372,28 @@ function App() {
             </div>
           </aside>
 
+          <button
+            type="button"
+            className="sidebar-toggle"
+            onClick={handleSidebarToggleClick}
+            onPointerDown={handleSidebarDragStart}
+            onPointerMove={handleSidebarDragMove}
+            onPointerUp={handleSidebarDragEnd}
+            onPointerCancel={handleSidebarDragEnd}
+            aria-controls="app-sidebar"
+            aria-expanded={!sidebarCollapsed}
+            aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+            title={
+              sidebarCollapsed
+                ? "Expand sidebar or drag right"
+                : "Collapse sidebar or drag to resize"
+            }
+          >
+            <span aria-hidden="true" className="sidebar-toggle-icon">
+              {sidebarCollapsed ? ">" : "<"}
+            </span>
+          </button>
+
           {/* Map Container */}
           <div className="map-container">
             <Map3D
@@ -1023,10 +1409,14 @@ function App() {
               onViewStateChange={setViewState}
               lightingEnabled={lightingEnabled}
               translucency={translucency}
-              heightExaggeration={heightExaggeration}
+              heightExaggeration={1}
               basemapStyle={basemapStyle}
               routePath={visibleRouteContext?.route?.path || null}
               routeRenderPath={visibleRouteContext?.route?.renderPath || null}
+              routeSegments={visibleRouteContext?.route?.routeSegments || null}
+              routeTransitionMarkers={
+                visibleRouteContext?.route?.transitionMarkers || null
+              }
               routeFloorId={visibleRouteContext?.floorId ?? null}
               roomsData={allRooms}
               centerlinesData={centerlinesData}
@@ -1038,8 +1428,6 @@ function App() {
               setLightingEnabled={setLightingEnabled}
               translucency={translucency}
               setTranslucency={setTranslucency}
-              heightExaggeration={heightExaggeration}
-              setHeightExaggeration={setHeightExaggeration}
               basemapStyle={basemapStyle}
               setBasemapStyle={setBasemapStyle}
             />
@@ -1056,7 +1444,9 @@ function App() {
             {/* Route Planner */}
             {showRoutePlanner && (
               <RoutePlanner
-                rooms={allRooms}
+                rooms={
+                  allFloorRouteRooms.length > 0 ? allFloorRouteRooms : allRooms
+                }
                 onRouteCalculate={handleRouteCalculate}
                 onClearRoute={clearRouteState}
                 onClose={() => setShowRoutePlanner(false)}
