@@ -3,6 +3,10 @@ const DEFAULT_THRESHOLDS = {
   slightMaxDegrees: 60,
   turnMaxDegrees: 135,
   minInstructionDistanceMeters: 2,
+  minSegmentDistanceMeters: 1.2,
+  duplicatePointDistanceMeters: 0.35,
+  waypointLabelDistanceMeters: 4,
+  landmarkSegmentMinDistanceMeters: 14,
 };
 
 const ORDINALS = ["first", "second", "third", "fourth"];
@@ -143,13 +147,16 @@ export const generateRouteInstructions = ({
   options = {},
 }) => {
   const thresholds = { ...DEFAULT_THRESHOLDS, ...(options.thresholds ?? {}) };
-  const points = normalizeRoutePoints(routeResult);
+  const renderedPoints = normalizeRoutePoints(routeResult);
+  const points = simplifyRoutePolyline(renderedPoints, thresholds);
+  const waypointLabels = normalizeWaypointLabels(options.waypointLabels ?? options.waypoints);
   const floorKey = normalizeFloorId(floorId);
   const analysis = analyzeRouteGeometry({
     points,
     graph,
-    nodeIds: routeResult?.debug?.graphNodeIds ?? [],
+    nodeIds: [],
     thresholds,
+    waypointLabels,
   });
 
   if (points.length < 2) {
@@ -165,10 +172,20 @@ export const generateRouteInstructions = ({
     logInstructionDebug({
       routeType: options.routeType ?? "same-floor",
       floorId: floorKey,
+      renderedRouteCoordinateCount: renderedPoints.length,
+      simplifiedRouteCoordinateCount: points.length,
       orderedRouteCoordinates: points,
       bearings: analysis.bearings,
       turnAngles: analysis.turnAngles,
       classifiedTurnDirections: analysis.classifiedTurnDirections,
+      meaningfulTurnCount: analysis.meaningfulTurns.length,
+      waypointLabelsByTurn: analysis.meaningfulTurns.map((turn) => ({
+        waypointIndex: turn.waypointIndex,
+        label: turn.nearestWaypointLabel?.label ?? null,
+        distanceMeters: turn.nearestWaypointLabel
+          ? round(turn.nearestWaypointLabel.distanceMeters, 1)
+          : null,
+      })),
       generatedInstructions: instructions,
       enabled: options.debug,
     });
@@ -180,91 +197,103 @@ export const generateRouteInstructions = ({
       id: `${floorKey}-start`,
       floorId: floorKey,
       type: "start",
-      text: `Start on ${formatFloor(floorKey)}.`,
+      text: `Start at ${startName}.`,
       coordinate: points[0],
       icon: ">",
     }),
   ];
 
-  let straightRun = 0;
+  let actionStartIndex = 0;
   let cumulativeDistance = 0;
 
-  for (let index = 1; index < points.length - 1; index += 1) {
-    const previous = points[index - 1];
-    const current = points[index];
-    const next = points[index + 1];
-    const distanceIntoWaypoint = haversineDistance(previous, current);
-    const nextDistance = haversineDistance(current, next);
-    straightRun += distanceIntoWaypoint;
-    cumulativeDistance += distanceIntoWaypoint;
+  for (const turn of analysis.meaningfulTurns) {
+    const segmentDistance = estimateSegmentDistance(
+      points.slice(actionStartIndex, turn.waypointIndex + 1),
+    );
+    cumulativeDistance += segmentDistance;
+    const landmark = findHelpfulLandmarkOnSegment({
+      waypointLabels,
+      start: points[actionStartIndex],
+      end: turn.coordinate,
+      excludeLabel: turn.nearestWaypointLabel?.label,
+      thresholds,
+    });
+    const turnText = buildTurnInstructionText({
+      turnDirection: turn.turnDirection,
+      waypointLabel: turn.nearestWaypointLabel?.label,
+      approachLabel: landmark?.label,
+      destinationName,
+      isFinalTurn: turn.waypointIndex === points.length - 2,
+    });
 
-    const analysisAtWaypoint = analysis.waypoints[index - 1];
-    const angle = analysisAtWaypoint?.turnAngle ?? computeTurnAngle(previous, current, next);
-    const turnDirection =
-      analysisAtWaypoint?.turnDirection ?? classifyTurn(angle, thresholds);
-
-    if (turnDirection === "straight") {
-      continue;
-    }
-
-    if (straightRun >= thresholds.minInstructionDistanceMeters) {
+    if (
+      segmentDistance >= thresholds.minInstructionDistanceMeters &&
+      !landmark &&
+      !turn.nearestWaypointLabel
+    ) {
       instructions.push(
         normalizeInstruction({
-          id: `${floorKey}-straight-${index}`,
+          id: `${floorKey}-straight-${turn.waypointIndex}`,
           floorId: floorKey,
           type: "straight",
-          text: `Go straight for ${formatDistance(straightRun)}.`,
-          distanceMeters: straightRun,
+          text: `Continue straight for ${formatDistance(segmentDistance)}.`,
+          distanceMeters: segmentDistance,
           turnDirection: "straight",
-          coordinate: current,
+          coordinate: turn.coordinate,
           cumulativeDistance,
           icon: ">",
         }),
       );
     }
 
-    const intersectionChoice = detectIntersectionChoice({
-      graph,
-      nodeId: routeResult?.debug?.graphNodeIds?.[index],
-      previousPoint: previous,
-      nextPoint: next,
-      thresholds,
-    });
-    const turnText = intersectionChoice?.text ?? turnDirectionToText(turnDirection);
-    const text = `${turnText}${nextDistance >= 1 ? ` and continue for ${formatDistance(nextDistance)}` : ""}.`;
-
     instructions.push(
       normalizeInstruction({
-        id: `${floorKey}-turn-${index}`,
+        id: `${floorKey}-turn-${turn.waypointIndex}`,
         floorId: floorKey,
         type: "turn",
-        text,
-        distanceMeters: nextDistance,
-        turnDirection,
-        coordinate: current,
+        text: turnText,
+        distanceMeters:
+          landmark || turn.nearestWaypointLabel ? segmentDistance : 0,
+        turnDirection: turn.turnDirection,
+        waypointLabelUsed:
+          landmark?.label ?? turn.nearestWaypointLabel?.label ?? null,
+        coordinate: turn.coordinate,
         cumulativeDistance,
-        icon: turnDirection.includes("left") ? "<" : turnDirection.includes("right") ? ">" : "U",
+        icon: turn.turnDirection.includes("left")
+          ? "<"
+          : turn.turnDirection.includes("right")
+            ? ">"
+            : "U",
       }),
     );
 
-    straightRun = 0;
+    actionStartIndex = turn.waypointIndex;
   }
 
-  const lastSegmentDistance = haversineDistance(
-    points[points.length - 2],
-    points[points.length - 1],
-  );
-  straightRun += lastSegmentDistance;
-  cumulativeDistance += lastSegmentDistance;
+  const remainingDistance = estimateSegmentDistance(points.slice(actionStartIndex));
+  cumulativeDistance += remainingDistance;
 
-  if (straightRun >= thresholds.minInstructionDistanceMeters) {
+  if (remainingDistance >= thresholds.minInstructionDistanceMeters) {
+    const landmark = findHelpfulLandmarkOnSegment({
+      waypointLabels,
+      start: points[actionStartIndex],
+      end: points[points.length - 1],
+      thresholds,
+    });
+    const text = analysis.meaningfulTurns.length === 0
+      ? landmark
+        ? `Continue straight past ${landmark.label} for ${formatDistance(remainingDistance)}.`
+        : `Continue straight for ${formatDistance(remainingDistance)}.`
+      : landmark
+        ? `Continue past ${landmark.label} for ${formatDistance(remainingDistance)}.`
+        : `Continue for ${formatDistance(remainingDistance)}.`;
     instructions.push(
       normalizeInstruction({
         id: `${floorKey}-final-straight`,
         floorId: floorKey,
         type: "straight",
-        text: `Continue straight for ${formatDistance(straightRun)}.`,
-        distanceMeters: straightRun,
+        text,
+        distanceMeters: remainingDistance,
         turnDirection: "straight",
         coordinate: points[points.length - 1],
         cumulativeDistance,
@@ -288,10 +317,24 @@ export const generateRouteInstructions = ({
   logInstructionDebug({
     routeType: options.routeType ?? "same-floor",
     floorId: floorKey,
+    renderedRouteCoordinateCount: renderedPoints.length,
+    simplifiedRouteCoordinateCount: points.length,
     orderedRouteCoordinates: points,
     bearings: analysis.bearings,
     turnAngles: analysis.turnAngles,
     classifiedTurnDirections: analysis.classifiedTurnDirections,
+    meaningfulTurnCount: analysis.meaningfulTurns.length,
+    waypointLabelsByTurn: analysis.meaningfulTurns.map((turn) => ({
+      waypointIndex: turn.waypointIndex,
+      label:
+        instructions.find(
+          (instruction) => instruction.id === `${floorKey}-turn-${turn.waypointIndex}`,
+        )?.waypointLabelUsed ?? null,
+      nearestTurnLabel: turn.nearestWaypointLabel?.label ?? null,
+      nearestTurnLabelDistanceMeters: turn.nearestWaypointLabel
+        ? round(turn.nearestWaypointLabel.distanceMeters, 1)
+        : null,
+    })),
     generatedInstructions: instructions,
     enabled: options.debug,
   });
@@ -323,6 +366,11 @@ export const generateMultiFloorRouteInstructions = ({
         destinationName: isLastHorizontal ? destinationName : "vertical connector",
         options: {
           ...options,
+          waypointLabels:
+            options.waypointLabelsByFloor?.[segment.floorId] ??
+            options.waypointLabelsByFloor?.[Number(segment.floorId)] ??
+            options.waypointLabelsByFloor?.[normalizeFloorId(segment.floorId)] ??
+            [],
           routeType: "multi-floor",
           debug: false,
         },
@@ -342,18 +390,39 @@ export const generateMultiFloorRouteInstructions = ({
       }
       instructions.push(...filtered);
       const segmentPoints = normalizeRoutePoints(segment.route);
+      const segmentWaypointLabels = normalizeWaypointLabels(
+        options.waypointLabelsByFloor?.[segment.floorId] ??
+          options.waypointLabelsByFloor?.[Number(segment.floorId)] ??
+          options.waypointLabelsByFloor?.[normalizeFloorId(segment.floorId)] ??
+          [],
+      );
+      const simplifiedSegmentPoints = simplifyRoutePolyline(segmentPoints, {
+        ...DEFAULT_THRESHOLDS,
+        ...(options.thresholds ?? {}),
+      });
       const segmentAnalysis = analyzeRouteGeometry({
-        points: segmentPoints,
+        points: simplifiedSegmentPoints,
         graph: graphsByFloor[segment.floorId] ?? graphsByFloor[normalizeFloorId(segment.floorId)],
         nodeIds: segment.route?.debug?.graphNodeIds ?? [],
         thresholds: { ...DEFAULT_THRESHOLDS, ...(options.thresholds ?? {}) },
+        waypointLabels: segmentWaypointLabels,
       });
       segmentDebug.push({
         floorId: normalizeFloorId(segment.floorId),
-        orderedRouteCoordinates: segmentPoints,
+        renderedRouteCoordinateCount: segmentPoints.length,
+        simplifiedRouteCoordinateCount: simplifiedSegmentPoints.length,
+        orderedRouteCoordinates: simplifiedSegmentPoints,
         computedBearings: segmentAnalysis.bearings,
         computedTurnAngles: segmentAnalysis.turnAngles,
         classifiedTurnDirections: segmentAnalysis.classifiedTurnDirections,
+        meaningfulTurnCount: segmentAnalysis.meaningfulTurns.length,
+        waypointLabelsByTurn: segmentAnalysis.meaningfulTurns.map((turn) => ({
+          waypointIndex: turn.waypointIndex,
+          label: turn.nearestWaypointLabel?.label ?? null,
+          distanceMeters: turn.nearestWaypointLabel
+            ? round(turn.nearestWaypointLabel.distanceMeters, 1)
+            : null,
+        })),
         instructionCount: filtered.length,
       });
       continue;
@@ -393,6 +462,7 @@ export const analyzeRouteGeometry = ({
   graph,
   nodeIds = [],
   thresholds = DEFAULT_THRESHOLDS,
+  waypointLabels = [],
 }) => {
   const bearings = [];
   for (let index = 1; index < points.length; index += 1) {
@@ -417,6 +487,12 @@ export const analyzeRouteGeometry = ({
       thresholds,
     });
 
+    const nearestWaypointLabel = findNearestWaypointLabel(
+      points[index],
+      waypointLabels,
+      thresholds.waypointLabelDistanceMeters,
+    );
+
     waypoints.push({
       waypointIndex: index,
       coordinate: points[index],
@@ -425,12 +501,18 @@ export const analyzeRouteGeometry = ({
       turnAngle: round(turnAngle, 1),
       turnDirection,
       intersectionChoice,
+      nearestWaypointLabel,
     });
   }
+
+  const meaningfulTurns = waypoints.filter(
+    (waypoint) => waypoint.turnDirection !== "straight",
+  );
 
   return {
     bearings,
     waypoints,
+    meaningfulTurns,
     turnAngles: waypoints.map((waypoint) => ({
       waypointIndex: waypoint.waypointIndex,
       angle: waypoint.turnAngle,
@@ -439,6 +521,12 @@ export const analyzeRouteGeometry = ({
       waypointIndex: waypoint.waypointIndex,
       turnDirection: waypoint.turnDirection,
       intersectionChoice: waypoint.intersectionChoice,
+      nearestWaypointLabel: waypoint.nearestWaypointLabel
+        ? {
+            label: waypoint.nearestWaypointLabel.label,
+            distanceMeters: round(waypoint.nearestWaypointLabel.distanceMeters, 1),
+          }
+        : null,
     })),
   };
 };
@@ -457,6 +545,203 @@ function normalizeRoutePoints(routeResult) {
       lng: point.lng,
     }))
     .filter((point) => Number.isFinite(point.lat) && Number.isFinite(point.lng));
+}
+
+function simplifyRoutePolyline(points, thresholds = DEFAULT_THRESHOLDS) {
+  if (!Array.isArray(points) || points.length < 3) return points ?? [];
+
+  const cleaned = [];
+  for (const point of points) {
+    const previous = cleaned[cleaned.length - 1];
+    if (
+      previous &&
+      haversineDistance(previous, point) < thresholds.duplicatePointDistanceMeters
+    ) {
+      continue;
+    }
+    cleaned.push(point);
+  }
+
+  if (cleaned.length < 3) return cleaned;
+
+  let simplified = cleaned;
+  let changed = true;
+  let pass = 0;
+
+  while (changed && pass < 4) {
+    changed = false;
+    pass += 1;
+    const next = [simplified[0]];
+
+    for (let index = 1; index < simplified.length - 1; index += 1) {
+      const previous = next[next.length - 1];
+      const current = simplified[index];
+      const following = simplified[index + 1];
+      const incomingDistance = haversineDistance(previous, current);
+      const outgoingDistance = haversineDistance(current, following);
+      const angle = computeTurnAngle(previous, current, following);
+      const magnitude = Math.abs(angle);
+      const isTinySegment =
+        Math.min(incomingDistance, outgoingDistance) <
+        thresholds.minSegmentDistanceMeters;
+
+      if (
+        magnitude < thresholds.straightMaxDegrees ||
+        (isTinySegment && magnitude < thresholds.slightMaxDegrees)
+      ) {
+        changed = true;
+        continue;
+      }
+
+      next.push(current);
+    }
+
+    next.push(simplified[simplified.length - 1]);
+    simplified = next;
+  }
+
+  return simplified;
+}
+
+function normalizeWaypointLabels(waypoints) {
+  if (!Array.isArray(waypoints)) return [];
+
+  return waypoints
+    .map((waypoint) => {
+      const label = waypoint?.label ?? waypoint?.name;
+      const coords = waypoint?.coords;
+      const point =
+        waypoint?.lat !== undefined && waypoint?.lng !== undefined
+          ? { lat: waypoint.lat, lng: waypoint.lng }
+          : Array.isArray(coords) && coords.length >= 2
+            ? { lng: coords[0], lat: coords[1] }
+            : null;
+
+      if (
+        !label ||
+        !point ||
+        !Number.isFinite(point.lat) ||
+        !Number.isFinite(point.lng)
+      ) {
+        return null;
+      }
+
+      return {
+        label: String(label),
+        point,
+      };
+    })
+    .filter(Boolean);
+}
+
+function findNearestWaypointLabel(point, waypointLabels, maxDistanceMeters) {
+  if (!point || !Array.isArray(waypointLabels) || waypointLabels.length === 0) {
+    return null;
+  }
+
+  let nearest = null;
+  for (const waypoint of waypointLabels) {
+    const distanceMeters = haversineDistance(point, waypoint.point);
+    if (distanceMeters > maxDistanceMeters) continue;
+    if (!nearest || distanceMeters < nearest.distanceMeters) {
+      nearest = {
+        ...waypoint,
+        distanceMeters,
+      };
+    }
+  }
+  return nearest;
+}
+
+function findHelpfulLandmarkOnSegment({
+  waypointLabels,
+  start,
+  end,
+  excludeLabel,
+  thresholds,
+}) {
+  if (
+    !Array.isArray(waypointLabels) ||
+    waypointLabels.length === 0 ||
+    !start ||
+    !end
+  ) {
+    return null;
+  }
+
+  const segmentDistance = haversineDistance(start, end);
+  if (segmentDistance < thresholds.landmarkSegmentMinDistanceMeters) return null;
+
+  const candidates = waypointLabels
+    .filter((waypoint) => waypoint.label !== excludeLabel)
+    .map((waypoint) => {
+      const along = distanceAlongSegment(start, end, waypoint.point);
+      return {
+        ...waypoint,
+        ...along,
+      };
+    })
+    .filter(
+      (waypoint) =>
+        waypoint.t > 0.2 &&
+        waypoint.t < 0.8 &&
+        waypoint.crossTrackDistanceMeters <=
+          thresholds.waypointLabelDistanceMeters,
+    )
+    .sort((left, right) => left.t - right.t);
+
+  return candidates[0] ?? null;
+}
+
+function distanceAlongSegment(start, end, point) {
+  const origin = projectLocalMeters(start, start);
+  const segmentEnd = projectLocalMeters(end, start);
+  const projectedPoint = projectLocalMeters(point, start);
+  const dx = segmentEnd.x - origin.x;
+  const dy = segmentEnd.y - origin.y;
+  const lengthSquared = dx * dx + dy * dy;
+  const rawT =
+    lengthSquared > 0
+      ? ((projectedPoint.x - origin.x) * dx + (projectedPoint.y - origin.y) * dy) /
+        lengthSquared
+      : 0;
+  const t = Math.max(0, Math.min(1, rawT));
+  const closest = {
+    x: origin.x + dx * t,
+    y: origin.y + dy * t,
+  };
+  return {
+    t,
+    crossTrackDistanceMeters: Math.hypot(
+      projectedPoint.x - closest.x,
+      projectedPoint.y - closest.y,
+    ),
+  };
+}
+
+function projectLocalMeters(point, origin) {
+  const metersPerDegreeLat = 111320;
+  const metersPerDegreeLng =
+    metersPerDegreeLat * Math.cos(toRadians(origin.lat));
+  return {
+    x: (point.lng - origin.lng) * metersPerDegreeLng,
+    y: (point.lat - origin.lat) * metersPerDegreeLat,
+  };
+}
+
+function buildTurnInstructionText({
+  turnDirection,
+  waypointLabel,
+  approachLabel,
+  destinationName,
+  isFinalTurn,
+}) {
+  const turnText = turnDirectionToText(turnDirection);
+  const lowerTurnText = lowercaseFirst(turnText);
+  if (approachLabel) return `Continue past ${approachLabel}, then ${lowerTurnText}.`;
+  if (waypointLabel) return `Continue to ${waypointLabel}, then ${lowerTurnText}.`;
+  if (isFinalTurn) return `${turnText} toward ${destinationName}.`;
+  return `${turnText}.`;
 }
 
 function normalizeInstruction(instruction) {
@@ -549,10 +834,14 @@ function logInstructionDebug({
   routeType,
   floorId,
   floorSegments,
+  renderedRouteCoordinateCount,
+  simplifiedRouteCoordinateCount,
   orderedRouteCoordinates,
   bearings,
   turnAngles,
   classifiedTurnDirections,
+  meaningfulTurnCount,
+  waypointLabelsByTurn,
   selectedVerticalConnector,
   generatedInstructions,
   enabled,
@@ -567,11 +856,17 @@ function logInstructionDebug({
     routeType,
     floorId,
     floorSegments,
+    renderedRouteCoordinateCount,
+    simplifiedRouteCoordinateCount,
     orderedRouteCoordinates,
     computedBearings: bearings,
     computedTurnAngles: turnAngles,
     classifiedTurnDirections,
+    meaningfulTurnCount,
+    turnAngles: turnAngles?.map((turn) => turn.angle),
+    waypointLabelsByTurn,
     selectedVerticalConnector,
+    generatedInstructionCount: generatedInstructions?.length ?? 0,
     generatedInstructionList: generatedInstructions,
   });
 }

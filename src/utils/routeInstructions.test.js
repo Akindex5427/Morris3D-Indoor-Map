@@ -49,6 +49,35 @@ describe("routeInstructions", () => {
     });
   });
 
+  it("uses waypoint labels as turn landmarks only when they clarify the route", () => {
+    const instructions = generateRouteInstructions({
+      routeResult: routeResult([
+        { lng: -89.2203, lat: 37.715 },
+        { lng: -89.2201, lat: 37.715 },
+        { lng: -89.2201, lat: 37.7151 },
+      ]),
+      floorId: 1,
+      startName: "Start",
+      destinationName: "Destination",
+      options: {
+        waypointLabels: [
+          {
+            name: "Waypoint 3",
+            coords: [-89.2202, 37.715],
+          },
+        ],
+      },
+    });
+
+    const turnInstructions = instructions.filter(
+      (instruction) => instruction.type === "turn",
+    );
+    expect(turnInstructions).toHaveLength(1);
+    expect(turnInstructions[0].text).toBe(
+      "Continue past Waypoint 3, then turn left.",
+    );
+  });
+
   it("uses graph topology to describe intersection turn choice", () => {
     const nodes = new Map([
       ["prev", { id: "prev", point: { x: 0, y: -10 } }],

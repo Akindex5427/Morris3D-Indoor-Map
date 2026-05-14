@@ -33,6 +33,11 @@ export const BASEMAP_STYLES = {
 
 const BUILDING_FLOOR_SPACING = 4.5;
 const INITIAL_REVEAL_DURATION_MS = 2400;
+const ROUTE_FLOW_ANIMATION_DURATION_MS = 7000;
+const ROUTE_FLOW_MAX_MARKERS = 3;
+const ROUTE_FLOW_MARKER_SPACING_DEGREES = 0.000095;
+const ROUTE_FLOW_MARKER_SIZE_PX = 16;
+const ROUTE_FLOW_MARKER_OPACITY = 0.78;
 
 const clamp01 = (value) => Math.max(0, Math.min(1, value));
 
@@ -76,6 +81,12 @@ const getFeatureCentroid = (feature) => {
   return [sum[0] / coords.length, sum[1] / coords.length];
 };
 
+const getRouteSegmentAngle = (from, to) => {
+  const dx = to[0] - from[0];
+  const dy = to[1] - from[1];
+  return ((Math.atan2(dx, dy) * 180) / Math.PI + 360) % 360;
+};
+
 const interpolateRoutePoint = (path, targetDistance) => {
   if (!Array.isArray(path) || path.length < 2) return null;
   let walked = 0;
@@ -94,16 +105,17 @@ const interpolateRoutePoint = (path, targetDistance) => {
           from[1] + dy * t,
           from[2] + ((to[2] || 0) - (from[2] || 0)) * t,
         ],
-        angle: 90 - (Math.atan2(dy, dx) * 180) / Math.PI,
+        angle: getRouteSegmentAngle(from, to),
       };
     }
     walked += segmentLength;
   }
   const last = path[path.length - 1];
-  return { position: last, angle: 0 };
+  const previous = path[path.length - 2];
+  return { position: last, angle: getRouteSegmentAngle(previous, last) };
 };
 
-const buildFlowMarkers = (path, phase, count = 7) => {
+const buildFlowMarkers = (path, phase, count = ROUTE_FLOW_MAX_MARKERS) => {
   if (!Array.isArray(path) || path.length < 2) return [];
   let totalLength = 0;
   for (let index = 1; index < path.length; index += 1) {
@@ -113,7 +125,10 @@ const buildFlowMarkers = (path, phase, count = 7) => {
     totalLength += length;
   }
   if (totalLength <= 0) return [];
-  const markerCount = Math.min(count, Math.max(2, Math.floor(totalLength / 0.00003)));
+  const markerCount = Math.min(
+    count,
+    Math.max(1, Math.floor(totalLength / ROUTE_FLOW_MARKER_SPACING_DEGREES)),
+  );
   return Array.from({ length: markerCount }, (_, index) => {
     const offset = ((index / markerCount + phase) % 1) * totalLength;
     return interpolateRoutePoint(path, offset);
@@ -212,7 +227,9 @@ const Map3D = ({
     let frameId;
     const start = performance.now();
     const animate = (now) => {
-      setRouteAnimationPhase(((now - start) / 1800) % 1);
+      setRouteAnimationPhase(
+        ((now - start) / ROUTE_FLOW_ANIMATION_DURATION_MS) % 1,
+      );
       frameId = requestAnimationFrame(animate);
     };
 
@@ -461,8 +478,7 @@ const Map3D = ({
     : [];
   const routeChevronIcon = useMemo(() => {
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-      <path d="M10 6l12 10-12 10" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M10 6l12 10-12 10" fill="none" stroke="#052f7c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M16 5l10 14h-6v8h-8v-8H6z" fill="#ffffff" stroke="#052f7c" stroke-width="2" stroke-linejoin="round"/>
     </svg>`;
     return {
       url: `data:image/svg+xml;base64,${btoa(svg)}`,
@@ -487,8 +503,8 @@ const Map3D = ({
       return `data:image/svg+xml;base64,${btoa(svg)}`;
     };
     return {
-      start: { url: createPinSVG("#16a34a"), width: 42, height: 42, anchorY: 42 },
-      end: { url: createPinSVG("#dc2626"), width: 42, height: 42, anchorY: 42 },
+      start: { url: createPinSVG("#16a34a"), width: 34, height: 34, anchorY: 34 },
+      end: { url: createPinSVG("#dc2626"), width: 34, height: 34, anchorY: 34 },
     };
   }, []);
   const activeSingleRoutePathCoords =
@@ -649,7 +665,7 @@ const Map3D = ({
 
     if (cinematicAnimationsEnabled) {
       const flowData = pathLayerData.flatMap((routeSegment, segmentIndex) =>
-        buildFlowMarkers(routeSegment.path, routeAnimationPhase, 6).map(
+        buildFlowMarkers(routeSegment.path, routeAnimationPhase).map(
           (marker, markerIndex) => ({
             ...marker,
             id: `${segmentIndex}-${markerIndex}`,
@@ -664,11 +680,11 @@ const Map3D = ({
           getPosition: (d) => d.position,
           getIcon: () => routeChevronIcon,
           getAngle: (d) => d.angle,
-          getSize: 22,
+          getSize: ROUTE_FLOW_MARKER_SIZE_PX,
           sizeUnits: "pixels",
           pickable: false,
           billboard: true,
-          opacity: 0.92,
+          opacity: ROUTE_FLOW_MARKER_OPACITY,
           parameters: { depthTest: false, depthMask: false },
         }),
       );
@@ -740,7 +756,7 @@ const Map3D = ({
         id: "route-focus-room-glow",
         data: routeFocusMarkers,
         getPosition: (d) => d.glowPosition,
-        getRadius: (d) => (d.type === "start" ? 2.3 : 2.5) * pulse,
+        getRadius: (d) => (d.type === "start" ? 1.55 : 1.7) * pulse,
         radiusUnits: "meters",
         getFillColor: (d) =>
           d.type === "start" ? [22, 163, 74, 95] : [220, 38, 38, 95],
@@ -760,7 +776,7 @@ const Map3D = ({
         data: routeFocusMarkers,
         getPosition: (d) => d.position,
         getIcon: (d) => routePinIcons[d.type],
-        getSize: () => 40 * pulse,
+        getSize: () => 30 * pulse,
         sizeUnits: "pixels",
         pickable: true,
         billboard: true,
@@ -874,7 +890,6 @@ const Map3D = ({
       const flowData = buildFlowMarkers(
         activeSingleRoutePathCoords,
         routeAnimationPhase,
-        8,
       );
       layers.push(
         new IconLayer({
@@ -883,11 +898,11 @@ const Map3D = ({
           getPosition: (d) => d.position,
           getIcon: () => routeChevronIcon,
           getAngle: (d) => d.angle,
-          getSize: 22,
+          getSize: ROUTE_FLOW_MARKER_SIZE_PX,
           sizeUnits: "pixels",
           pickable: false,
           billboard: true,
-          opacity: 0.95,
+          opacity: ROUTE_FLOW_MARKER_OPACITY,
           parameters: { depthTest: false, depthMask: false },
         }),
       );

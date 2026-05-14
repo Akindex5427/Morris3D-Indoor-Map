@@ -34,6 +34,12 @@ const level5Obstacles = readGeoJson(
 const level5Rooms = readGeoJson("public/rooms-level-5-WGS.geojson").features;
 const level6Centerlines = readGeoJson("public/room_level_6_centerlines.geojson");
 const level6Rooms = readGeoJson("public/rooms-level-6-WGS.geojson").features;
+const level7Centerlines = readGeoJson("public/room_level_7_centerlines.geojson");
+const level7Walkable = readGeoJson("public/room_level_7_walkable.geojson");
+const level7Obstacles = readGeoJson(
+  "public/room_level_7_obstacle_buffered.geojson",
+);
+const level7Rooms = readGeoJson("public/rooms-level-7-WGS.geojson").features;
 
 const router = new IndoorRouter(centerlines, walkable, obstacles, {
   maxSnapDistanceMeters: 50,
@@ -78,6 +84,29 @@ const level6Router = new IndoorRouter(
   },
 );
 const level6RoomAnchorIndex = buildRoomAnchorIndex(level6Centerlines);
+const level7Router = new IndoorRouter(
+  level7Centerlines,
+  level7Walkable,
+  level7Obstacles,
+  {
+    maxSnapDistanceMeters: 50,
+    nodeToleranceMeters: 0.05,
+    validationSampleStepMeters: 0.5,
+    simplifyCollinearPoints: false,
+  },
+);
+const level7CenterlineOnlyRouter = new IndoorRouter(
+  level7Centerlines,
+  null,
+  null,
+  {
+    maxSnapDistanceMeters: 50,
+    nodeToleranceMeters: 0.05,
+    validationSampleStepMeters: 0.5,
+    simplifyCollinearPoints: false,
+  },
+);
+const level7RoomAnchorIndex = buildRoomAnchorIndex(level7Centerlines);
 
 const getRoom = (roomFeatures, name) => {
   const room = roomFeatures.find(
@@ -338,6 +367,92 @@ describe("room_level_6 centerline routing", () => {
     );
     expectCoordinateClose(
       result.renderCoordinates[result.renderCoordinates.length - 1],
+      endTarget.coordinates,
+      0.0001,
+    );
+  });
+});
+
+describe("room_level_7 centerline routing", () => {
+  it("uses the classroom 0752-side anchor when classroom 0752 is selected", () => {
+    const startTarget = resolveRoomRoutingTarget({
+      room: getRoom(level7Rooms, "classroom 0752"),
+      floorId: 7,
+      router: level7CenterlineOnlyRouter,
+      roomAnchorIndex: level7RoomAnchorIndex,
+      role: "start",
+    });
+    const endTarget = resolveRoomRoutingTarget({
+      room: getRoom(level7Rooms, "center for learning support services"),
+      floorId: 7,
+      router: level7CenterlineOnlyRouter,
+      roomAnchorIndex: level7RoomAnchorIndex,
+      role: "destination",
+    });
+
+    expect(startTarget?.debug?.source).toBe("level7_geometry_anchor");
+    expectCoordinateClose(startTarget?.coordinates, {
+      lng: -89.22063510999548,
+      lat: 37.7153596647848,
+    });
+
+    const result = level7CenterlineOnlyRouter.computeRoute(
+      startTarget.coordinates,
+      endTarget.coordinates,
+    );
+
+    expect(result.success).toBe(true);
+    expectCoordinateClose(
+      result.renderCoordinates[0],
+      startTarget.coordinates,
+      0.0001,
+    );
+  });
+
+  it("keeps Center for Learning Support Services routes attached to the full centerline", () => {
+    const startTarget = resolveRoomRoutingTarget({
+      room: getRoom(level7Rooms, "center for learning support services"),
+      floorId: 7,
+      router: level7CenterlineOnlyRouter,
+      roomAnchorIndex: level7RoomAnchorIndex,
+      role: "start",
+    });
+    const endTarget = resolveRoomRoutingTarget({
+      room: getRoom(level7Rooms, "classroom 0754"),
+      floorId: 7,
+      router: level7CenterlineOnlyRouter,
+      roomAnchorIndex: level7RoomAnchorIndex,
+      role: "destination",
+    });
+
+    expect(startTarget?.debug?.source).toBe("level7_centerline_anchor");
+    expect(endTarget?.debug?.source).toBe("level7_centerline_anchor");
+    expectCoordinateClose(startTarget?.coordinates, {
+      lng: -89.22073495235739,
+      lat: 37.71506942198426,
+    });
+
+    const prunedRoute = level7Router.computeRoute(
+      startTarget.coordinates,
+      endTarget.coordinates,
+    );
+    const centerlineRoute = level7CenterlineOnlyRouter.computeRoute(
+      startTarget.coordinates,
+      endTarget.coordinates,
+    );
+
+    expect(prunedRoute.success).toBe(true);
+    expect(centerlineRoute.success).toBe(true);
+    expect(centerlineRoute.renderCoordinates.length).toBeGreaterThan(
+      prunedRoute.renderCoordinates.length,
+    );
+    expectCoordinateClose(
+      centerlineRoute.renderCoordinates[0],
+      startTarget.coordinates,
+      0.0001,
+    );
+    expectCoordinateClose(
+      centerlineRoute.renderCoordinates[centerlineRoute.renderCoordinates.length - 1],
       endTarget.coordinates,
       0.0001,
     );

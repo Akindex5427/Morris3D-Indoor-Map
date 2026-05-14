@@ -105,6 +105,8 @@ const ROUTER_CONFIG = [
     walkable: "/room_level_7_walkable.geojson",
     obstacle: "/room_level_7_obstacle_buffered.geojson",
     label: "Level 7",
+    useCenterlineOnlyRouting: true,
+    simplifyCollinearPoints: false,
   },
 ];
 
@@ -969,6 +971,7 @@ function App() {
               routeOptions.accessibility === "wheelchair"
                 ? "accessible"
                 : routeOptions.preferences,
+            waypointLabels: path.slice(1, -1),
           },
         });
 
@@ -1168,6 +1171,10 @@ function App() {
       );
       const path = [...startPath, ...destinationPath];
       const renderPath = routeSegments.flatMap((segment) => segment.path);
+      const waypointLabelsByFloor = {
+        [startFloor]: startPath.slice(1, -1),
+        [endFloor]: destinationPath.slice(1, -1),
+      };
       const directionSteps = generateMultiFloorRouteInstructions({
         segments: multiFloorResult.segments,
         graphsByFloor: Object.entries(routers).reduce((graphs, [floor, router]) => {
@@ -1183,6 +1190,7 @@ function App() {
             routeOptions.accessibility === "wheelchair"
               ? "accessible"
               : routeOptions.preferences,
+          waypointLabelsByFloor,
         },
       });
       const floors = [startFloor, endFloor].sort((a, b) => a - b);

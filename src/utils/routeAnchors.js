@@ -3,6 +3,8 @@ import { distance, lerpPoint, segmentIntersectsAnyPolygon } from "../../routing"
 const MAX_GEOMETRY_SNAP_DISTANCE_METERS = 25;
 const BOUNDARY_SAMPLE_SPACING_METERS = 1.25;
 const MAX_BOUNDARY_SAMPLES = 160;
+const EXPLICIT_ANCHOR_MAX_REASONABLE_DISTANCE_METERS = 8;
+const GEOMETRY_ANCHOR_IMPROVEMENT_METERS = 1.5;
 
 const isLikelyLngLatCoordinate = (coordinate) =>
   Array.isArray(coordinate) &&
@@ -143,6 +145,27 @@ export const resolveRoomRoutingTarget = ({
     router,
     roomAnchorIndex,
   );
+  const geometryAnchor = findGeometryDerivedAnchor(room, router);
+
+  if (
+    explicitAnchor &&
+    geometryAnchor &&
+    explicitAnchor.score > EXPLICIT_ANCHOR_MAX_REASONABLE_DISTANCE_METERS &&
+    geometryAnchor.score + GEOMETRY_ANCHOR_IMPROVEMENT_METERS <
+      explicitAnchor.score
+  ) {
+    return {
+      coordinates: geometryAnchor.coordinates,
+      debug: {
+        ...debugBase,
+        source: createAnchorDebugSource(floorId, "geometry_anchor"),
+        snappedTarget: geometryAnchor.snappedTarget,
+        boundarySampleCount: geometryAnchor.sampleCount,
+        replacedAnchorFeatureId: explicitAnchor.featureId,
+        replacedAnchorRole: explicitAnchor.role,
+      },
+    };
+  }
 
   if (explicitAnchor) {
     return {
@@ -158,7 +181,6 @@ export const resolveRoomRoutingTarget = ({
     };
   }
 
-  const geometryAnchor = findGeometryDerivedAnchor(room, router);
   if (geometryAnchor) {
     return {
       coordinates: geometryAnchor.coordinates,

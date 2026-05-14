@@ -71,13 +71,9 @@ describe("featureColors", () => {
     );
   });
 
-  it("restores missing level-2 display metadata from the all-floor dataset", () => {
-    expect(countFeaturesMissingColor(level2Rooms.features)).toBe(
-      level2Rooms.features.length,
-    );
-    expect(countFeaturesMissingBaseHeight(level2Rooms.features)).toBe(
-      level2Rooms.features.length,
-    );
+  it("preserves complete level-2 display metadata from the floor dataset", () => {
+    expect(countFeaturesMissingColor(level2Rooms.features)).toBe(0);
+    expect(countFeaturesMissingBaseHeight(level2Rooms.features)).toBe(0);
 
     const enrichedFeatures = enrichMissingFeatureDisplayProperties(
       level2Rooms.features,
@@ -89,25 +85,24 @@ describe("featureColors", () => {
     expect(countFeaturesMissingBaseHeight(enrichedFeatures)).toBe(0);
 
     const floorFeature = enrichedFeatures.find(
-      (feature) => feature.properties?.OBJECTID === 643,
+      (feature) => feature.properties?.FID === 1,
     );
     const structureFeature = enrichedFeatures.find(
-      (feature) => feature.properties?.OBJECTID === 647,
+      (feature) => feature.properties?.FID === 3,
     );
     const stairBaseFeature = enrichedFeatures.find(
-      (feature) => feature.properties?.OBJECTID === 658,
+      (feature) => feature.properties?.FID === 7,
     );
     const stairFeature = enrichedFeatures.find(
-      (feature) => feature.properties?.OBJECTID === 659,
+      (feature) => feature.properties?.FID === 8,
     );
 
-    expect(floorFeature?.properties?.base_heigh).toBe(9);
-    expect(floorFeature?.properties?.base_height).toBe(9);
+    expect(floorFeature?.properties?.base_heigh).toBe(0);
     expect(floorFeature?.properties?.color).toBe("lightgrey");
     expect(structureFeature?.properties?.color).toBe("grey");
-    expect(stairBaseFeature?.properties?.base_heigh).toBe(9);
+    expect(stairBaseFeature?.properties?.base_heigh).toBe(0);
     expect(stairBaseFeature?.properties?.color).toBe("brown");
-    expect(stairFeature?.properties?.base_heigh).toBe(13.1);
+    expect(stairFeature?.properties?.base_heigh).toBe(4.2);
     expect(stairFeature?.properties?.color).toBe("brown");
   });
 

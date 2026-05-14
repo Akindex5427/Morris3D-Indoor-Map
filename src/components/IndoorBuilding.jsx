@@ -100,6 +100,25 @@ function isFloorSurface(props = {}) {
   );
 }
 
+function isStairFeature(props = {}) {
+  const searchableText = [
+    props.name,
+    props.type,
+    props.id,
+    props.room_id,
+    props.roomname,
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  return (
+    searchableText.includes("stair") ||
+    searchableText.includes("stair_case") ||
+    searchableText.includes("staircase")
+  );
+}
+
 // Provide transparent color for floor surfaces
 function getFloorSurfaceColor(floorNum, isDollhouseMode) {
   const baseColor = [255, 255, 255]; // white
@@ -755,9 +774,11 @@ export const useIndoorBuilding = ({
           const floorNum = props.level ?? props.floor ?? props.nivel ?? 0;
           const reveal = props.__presentationReveal ?? 1;
           const isFocusedRoom = focusRoomIds.has(roomId);
+          const shouldKeepVisibleForRoute =
+            isFocusedRoom || (isFocusFloor(floorNum) && isStairFeature(props));
           const shouldDeemphasize =
             isFocusFloor(floorNum) &&
-            !isFocusedRoom &&
+            !shouldKeepVisibleForRoute &&
             !isFloorSurface(props);
 
           if (highlightedRoomId === roomId) {
@@ -836,7 +857,7 @@ export const useIndoorBuilding = ({
             alpha = 255;
           }
 
-          if (isFocusedRoom) {
+          if (shouldKeepVisibleForRoute) {
             shadedColor = [
               Math.min(255, Math.round(shadedColor[0] * 1.22 + 24)),
               Math.min(255, Math.round(shadedColor[1] * 1.22 + 24)),
@@ -861,6 +882,9 @@ export const useIndoorBuilding = ({
           const floorNum = props.level ?? props.floor ?? props.nivel ?? 0;
           const roomId = getFeatureRoomId(props);
           const reveal = props.__presentationReveal ?? 1;
+          const shouldKeepVisibleForRoute =
+            focusRoomIds.has(roomId) ||
+            (isFocusFloor(floorNum) && isStairFeature(props));
           let alpha = 220;
 
           if (isDollhouseMode) {
@@ -885,7 +909,11 @@ export const useIndoorBuilding = ({
             return [5, 57, 132, Math.round(255 * reveal)];
           }
 
-          if (isFocusFloor(floorNum) && !isFloorSurface(props)) {
+          if (
+            isFocusFloor(floorNum) &&
+            !shouldKeepVisibleForRoute &&
+            !isFloorSurface(props)
+          ) {
             alpha = Math.min(alpha, 80);
           }
 
