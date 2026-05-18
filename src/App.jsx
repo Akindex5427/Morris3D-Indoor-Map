@@ -7,7 +7,6 @@ import SearchBar from "./components/SearchBar";
 import RoomInfoPopup from "./components/RoomInfoPopup";
 import FilterPanel from "./components/FilterPanel";
 import VisualControls from "./components/VisualControls";
-import Legend from "./components/Legend";
 import RoutePlanner from "./components/RoutePlanner";
 import LoadingSpinner from "./components/LoadingSpinner";
 import HelpOverlay from "./components/HelpOverlay";
@@ -52,7 +51,7 @@ const getRoomDisplayId = (room) =>
 const ROUTER_CONFIG = [
   {
     floor: 0,
-    centerline: "/basemment_centerlines.geojson",
+    centerline: "/basement_centerlines.geojson",
     walkable: "/room_basement_walkable.geojson",
     obstacle: "/room_basement_obstacle_buffered.geojson",
     label: "Basement",
@@ -132,6 +131,7 @@ function App() {
   const [basemapStyle, setBasemapStyle] = useState("topographic"); // topographic or streets
   const [showRoutePlanner, setShowRoutePlanner] = useState(false);
   const [routeContext, setRouteContext] = useState(null);
+  const [routeCameraKey, setRouteCameraKey] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
   const [hoveredRoomId, setHoveredRoomId] = useState(null);
@@ -296,6 +296,7 @@ function App() {
           setShowFilterPanel((prev) => !prev);
           break;
         case "p":
+          setSidebarCollapsed(false);
           setShowRoutePlanner((prev) => !prev);
           break;
         case "?":
@@ -363,6 +364,10 @@ function App() {
     all: "/rooms-all-WGS-v6.geojson",
   };
 
+  const ROUTE_ROOM_INDEX_OVERRIDES = {
+    0: FLOOR_POLYGON_MAP[0],
+  };
+
   // Line overlays are optional - removed since we're using polygons now
   const FLOOR_LINE_MAP = {
     "-1": null,
@@ -387,7 +392,33 @@ function App() {
     const loadRouteRoomIndex = async () => {
       try {
         const data = await fetchGeoJson(FLOOR_POLYGON_MAP.all);
-        setAllFloorRouteRooms(data.features || []);
+        let routeRooms = data.features || [];
+
+        const overrideEntries = Object.entries(ROUTE_ROOM_INDEX_OVERRIDES);
+        if (overrideEntries.length > 0) {
+          const overrideResults = await Promise.all(
+            overrideEntries.map(async ([floor, url]) => {
+              const floorData = await fetchGeoJson(url);
+              return {
+                floor: Number(floor),
+                features: floorData.features || [],
+              };
+            }),
+          );
+
+          const overrideFloors = new Set(
+            overrideResults.map(({ floor }) => floor),
+          );
+          routeRooms = routeRooms.filter(
+            (room) => !overrideFloors.has(getRoomFloor(room)),
+          );
+
+          for (const { features } of overrideResults) {
+            routeRooms.push(...features);
+          }
+        }
+
+        setAllFloorRouteRooms(routeRooms);
       } catch (error) {
         console.warn(
           "[Routing] Unable to load all-floor room data for multi-floor routing.",
@@ -414,6 +445,16 @@ function App() {
     }
 
     setSidebarCollapsed((collapsed) => !collapsed);
+  };
+
+  const handleRoutePlannerToggle = () => {
+    setShowRoutePlanner((isOpen) => {
+      const nextOpen = !isOpen;
+      if (nextOpen && sidebarCollapsed) {
+        setSidebarCollapsed(false);
+      }
+      return nextOpen;
+    });
   };
 
   const handleSidebarDragStart = (event) => {
@@ -771,6 +812,11 @@ function App() {
     setHighlightedStep(null);
   };
 
+  const requestRouteCameraFit = () => {
+    window.dispatchEvent(new Event("resize"));
+    setRouteCameraKey((key) => key + 1);
+  };
+
   const visibleRouteContext =
     routeContext && selectedFloors.length === 0
       ? routeContext.type === "multi-floor"
@@ -1009,6 +1055,7 @@ function App() {
         });
         setShowRoutePlanner(false);
         setShowDirections(true);
+        requestRouteCameraFit();
         console.log(
           `✓ Route found on Floor ${floorForRouting}: ${result.distance.toFixed(1)}m, ${result.waypointCount} waypoints`,
         );
@@ -1235,6 +1282,7 @@ function App() {
       });
       setShowRoutePlanner(false);
       setShowDirections(true);
+      requestRouteCameraFit();
       console.log("[Route] Multi-floor route found", multiFloorResult);
     } catch (error) {
       console.error("Error calculating route:", error);
@@ -1352,10 +1400,23 @@ function App() {
               </div>
               <button
                 className="btn-filter"
-                onClick={() => setShowRoutePlanner(!showRoutePlanner)}
+                onClick={handleRoutePlannerToggle}
+                aria-expanded={showRoutePlanner}
               >
-                Plan Route
+                {showRoutePlanner ? "Close Planner" : "Plan Route"}
               </button>
+              {showRoutePlanner && (
+                <RoutePlanner
+                  rooms={
+                    allFloorRouteRooms.length > 0 ? allFloorRouteRooms : allRooms
+                  }
+                  onRouteCalculate={handleRouteCalculate}
+                  onClearRoute={clearRouteState}
+                  onClose={() => setShowRoutePlanner(false)}
+                  selectedFloors={selectedFloors}
+                  activeFloor={selectedFloor}
+                />
+              )}
               {activeRouteInfo && (
                 <div className="route-status">
                   <div className="route-status-header">
@@ -1403,14 +1464,6 @@ function App() {
                 onClose={() => setShowFilterPanel(false)}
               />
             )}
-
-            <div className="panel-info panel-card legend-sidebar-card">
-              <Legend
-                selectedFloor={selectedFloor}
-                selectedFloors={selectedFloors}
-                translucency={translucency}
-              />
-            </div>
           </aside>
 
           <button
@@ -1460,6 +1513,7 @@ function App() {
               }
               routeFocus={visibleRouteContext?.route?.focus || null}
               routeFloorId={visibleRouteContext?.floorId ?? null}
+              routeCameraKey={routeCameraKey}
               roomsData={allRooms}
               centerlinesData={centerlinesData}
               activeFloor={selectedFloor}
@@ -1487,20 +1541,6 @@ function App() {
                 room={selectedRoom}
                 onClose={handleClosePopup}
                 position={popupPosition}
-              />
-            )}
-
-            {/* Route Planner */}
-            {showRoutePlanner && (
-              <RoutePlanner
-                rooms={
-                  allFloorRouteRooms.length > 0 ? allFloorRouteRooms : allRooms
-                }
-                onRouteCalculate={handleRouteCalculate}
-                onClearRoute={clearRouteState}
-                onClose={() => setShowRoutePlanner(false)}
-                selectedFloors={selectedFloors}
-                activeFloor={selectedFloor}
               />
             )}
 

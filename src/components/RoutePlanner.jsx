@@ -177,8 +177,7 @@ const RoutePlanner = ({
   };
 
   return (
-    <div className="route-planner-overlay">
-      <div className="route-planner">
+    <div className="route-planner route-planner-inline">
         <div className="route-header">
           <div className="route-header-copy">
             <h3>Route Planner</h3>
@@ -394,7 +393,6 @@ const RoutePlanner = ({
             </button>
           </div>
         </div>
-      </div>
     </div>
   );
 };

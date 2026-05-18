@@ -7,6 +7,7 @@ import {
   IconLayer,
   ScatterplotLayer,
 } from "@deck.gl/layers";
+import { FlyToInterpolator, WebMercatorViewport } from "@deck.gl/core";
 import { useIndoorBuilding } from "./IndoorBuilding";
 import { useBuildingWallLayers } from "../layers/buildingWallLayer";
 import { usePerimeterWallLayer } from "../layers/perimeterWallLayer";
@@ -38,6 +39,10 @@ const ROUTE_FLOW_MAX_MARKERS = 3;
 const ROUTE_FLOW_MARKER_SPACING_DEGREES = 0.000095;
 const ROUTE_FLOW_MARKER_SIZE_PX = 16;
 const ROUTE_FLOW_MARKER_OPACITY = 0.78;
+const ROUTE_CAMERA_PADDING_PX = 96;
+const ROUTE_CAMERA_TRANSITION_MS = 1200;
+const ROUTE_CAMERA_MIN_ZOOM = 16.5;
+const ROUTE_CAMERA_MAX_ZOOM = 20.5;
 
 const clamp01 = (value) => Math.max(0, Math.min(1, value));
 
@@ -80,6 +85,13 @@ const getFeatureCentroid = (feature) => {
   );
   return [sum[0] / coords.length, sum[1] / coords.length];
 };
+
+const isValidLngLat = (coords) =>
+  Array.isArray(coords) &&
+  Number.isFinite(coords[0]) &&
+  Number.isFinite(coords[1]);
+
+const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
 const getRouteSegmentAngle = (from, to) => {
   const dx = to[0] - from[0];
@@ -158,6 +170,7 @@ const Map3D = ({
   routeTransitionMarkers = null,
   routeFocus = null,
   routeFloorId = null,
+  routeCameraKey = 0,
   roomsData = [],
   centerlinesData = {},
   activeFloor = "all",
@@ -184,6 +197,7 @@ const Map3D = ({
   const [routeAnimationPhase, setRouteAnimationPhase] = useState(0);
   const deckRef = useRef(null);
   const containerRef = useRef(null);
+  const lastRouteCameraKeyRef = useRef(0);
   const isAllFloorsSelected =
     selectedFloor === "all" || selectedFloor === "F-ALL";
 
@@ -236,6 +250,33 @@ const Map3D = ({
     frameId = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(frameId);
   }, [cinematicAnimationsEnabled, routePath]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || typeof ResizeObserver === "undefined") {
+      return undefined;
+    }
+
+    let frameId = null;
+    const resizeObserver = new ResizeObserver(() => {
+      if (frameId !== null) {
+        cancelAnimationFrame(frameId);
+      }
+
+      frameId = requestAnimationFrame(() => {
+        window.dispatchEvent(new Event("resize"));
+        deckRef.current?.deck?.redraw(true);
+      });
+    });
+
+    resizeObserver.observe(container);
+    return () => {
+      if (frameId !== null) {
+        cancelAnimationFrame(frameId);
+      }
+      resizeObserver.disconnect();
+    };
+  }, []);
 
   // Convert roomsData to GeoJSON format and update geojsonData
   useEffect(() => {
@@ -542,6 +583,102 @@ const Map3D = ({
       })
       .filter(Boolean);
   }, [roomsData, routeFocus, selectedFloor, selectedFloors, activeFloor]);
+
+  useEffect(() => {
+    if (
+      !routeCameraKey ||
+      routeCameraKey === lastRouteCameraKeyRef.current ||
+      !onViewStateChange
+    ) {
+      return;
+    }
+
+    const routePoints = [];
+    const addPoint = (coords) => {
+      if (isValidLngLat(coords)) {
+        routePoints.push([coords[0], coords[1]]);
+      }
+    };
+
+    if (visibleRouteSegments.length > 0) {
+      visibleRouteSegments.forEach((segment) => {
+        segment.path?.forEach((point) => addPoint(point.coords));
+      });
+    } else if (shouldRenderRoute && activeRenderPath?.length > 0) {
+      activeRenderPath.forEach((point) => addPoint(point.coords));
+    }
+
+    visibleTransitionMarkers.forEach((marker) => addPoint(marker.coords));
+    routeFocusMarkers.forEach((marker) => addPoint(marker.position));
+
+    if (routePoints.length === 0) {
+      return;
+    }
+
+    const lngs = routePoints.map((point) => point[0]);
+    const lats = routePoints.map((point) => point[1]);
+    const minLng = Math.min(...lngs);
+    const maxLng = Math.max(...lngs);
+    const minLat = Math.min(...lats);
+    const maxLat = Math.max(...lats);
+    const center = [(minLng + maxLng) / 2, (minLat + maxLat) / 2];
+    const containerBounds = containerRef.current?.getBoundingClientRect();
+    const width = Math.max(320, containerBounds?.width || window.innerWidth);
+    const height = Math.max(320, containerBounds?.height || window.innerHeight);
+    const samePoint = minLng === maxLng && minLat === maxLat;
+
+    let fittedViewState = {
+      longitude: center[0],
+      latitude: center[1],
+      zoom: ROUTE_CAMERA_MAX_ZOOM,
+    };
+
+    if (!samePoint) {
+      try {
+        fittedViewState = new WebMercatorViewport({ width, height }).fitBounds(
+          [
+            [minLng, minLat],
+            [maxLng, maxLat],
+          ],
+          {
+            padding: Math.min(
+              ROUTE_CAMERA_PADDING_PX,
+              Math.floor(Math.min(width, height) * 0.22),
+            ),
+          },
+        );
+      } catch (error) {
+        console.warn("[RouteCamera] Unable to fit route bounds.", error);
+      }
+    }
+
+    lastRouteCameraKeyRef.current = routeCameraKey;
+    window.dispatchEvent(new Event("resize"));
+    onViewStateChange({
+      ...(externalViewState || internalViewState),
+      longitude: fittedViewState.longitude,
+      latitude: fittedViewState.latitude,
+      zoom: clamp(
+        fittedViewState.zoom,
+        ROUTE_CAMERA_MIN_ZOOM,
+        ROUTE_CAMERA_MAX_ZOOM,
+      ),
+      pitch: 0,
+      bearing: 0,
+      transitionDuration: ROUTE_CAMERA_TRANSITION_MS,
+      transitionInterpolator: new FlyToInterpolator(),
+    });
+  }, [
+    activeRenderPath,
+    externalViewState,
+    internalViewState,
+    onViewStateChange,
+    routeCameraKey,
+    routeFocusMarkers,
+    shouldRenderRoute,
+    visibleRouteSegments,
+    visibleTransitionMarkers,
+  ]);
 
   // Add centerline graph overlay as blue lines
   const centerlinePaths = useMemo(() => {
@@ -1026,7 +1163,7 @@ const Map3D = ({
         ref={deckRef}
         width="100%"
         height="100%"
-        initialViewState={externalViewState || internalViewState}
+        viewState={externalViewState || internalViewState}
         onViewStateChange={({ viewState: newViewState }) => {
           setInternalViewState(newViewState);
           if (onViewStateChange) {

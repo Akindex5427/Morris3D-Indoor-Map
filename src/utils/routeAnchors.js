@@ -319,6 +319,7 @@ function findExplicitRoomAnchor(roomName, centroid, router, roomAnchorIndex) {
   }
 
   const graph = router.getGraph();
+  const componentNodeCounts = getComponentNodeCounts(graph);
   const centroidPoint = centroid
     ? graph.projection.project(centroid.lng, centroid.lat)
     : null;
@@ -335,19 +336,37 @@ function findExplicitRoomAnchor(roomName, centroid, router, roomAnchorIndex) {
     const score =
       (centroidPoint ? distance(centroidPoint, anchorPoint) : 0) +
       (snappedTarget?.kind === "edge" ? 0.05 : 0);
+    const componentNodeCount =
+      componentNodeCounts.get(snappedTarget?.componentId) ?? 0;
 
-    if (!bestAnchor || score < bestAnchor.score) {
+    if (
+      !bestAnchor ||
+      componentNodeCount > bestAnchor.componentNodeCount ||
+      (componentNodeCount === bestAnchor.componentNodeCount &&
+        score < bestAnchor.score)
+    ) {
       bestAnchor = {
         ...anchor,
         coordinates: resolvedCoordinates,
         snappedTarget,
         anchorCount: anchors.length,
+        componentNodeCount,
         score,
       };
     }
   }
 
   return bestAnchor;
+}
+
+function getComponentNodeCounts(graph) {
+  const counts = new Map();
+
+  for (const node of graph.nodes.values()) {
+    counts.set(node.componentId, (counts.get(node.componentId) ?? 0) + 1);
+  }
+
+  return counts;
 }
 
 function findGeometryDerivedAnchor(room, router) {

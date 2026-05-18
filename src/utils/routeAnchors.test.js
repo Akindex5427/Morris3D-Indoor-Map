@@ -40,6 +40,12 @@ const level7Obstacles = readGeoJson(
   "public/room_level_7_obstacle_buffered.geojson",
 );
 const level7Rooms = readGeoJson("public/rooms-level-7-WGS.geojson").features;
+const basementCenterlines = readGeoJson("public/basement_centerlines.geojson");
+const basementWalkable = readGeoJson("public/room_basement_walkable.geojson");
+const basementObstacles = readGeoJson(
+  "public/room_basement_obstacle_buffered.geojson",
+);
+const basementRooms = readGeoJson("public/rooms-basement-WGS.geojson").features;
 
 const router = new IndoorRouter(centerlines, walkable, obstacles, {
   maxSnapDistanceMeters: 50,
@@ -107,6 +113,18 @@ const level7CenterlineOnlyRouter = new IndoorRouter(
   },
 );
 const level7RoomAnchorIndex = buildRoomAnchorIndex(level7Centerlines);
+const basementRouter = new IndoorRouter(
+  basementCenterlines,
+  basementWalkable,
+  basementObstacles,
+  {
+    maxSnapDistanceMeters: 50,
+    nodeToleranceMeters: 0.05,
+    validationSampleStepMeters: 0.5,
+    simplifyCollinearPoints: false,
+  },
+);
+const basementRoomAnchorIndex = buildRoomAnchorIndex(basementCenterlines);
 
 const getRoom = (roomFeatures, name) => {
   const room = roomFeatures.find(
@@ -214,6 +232,39 @@ describe("room_level_1 routing anchors", () => {
       ),
     ).toBe(true);
     expectCoordinateClose(result.debug?.finalGraphEnd, endTarget.coordinates);
+  });
+});
+
+describe("room_basement routing anchors", () => {
+  it("routes national union catalog from the connected basement centerline component", () => {
+    const startTarget = resolveRoomRoutingTarget({
+      room: getRoom(basementRooms, "national union catalog"),
+      floorId: 0,
+      router: basementRouter,
+      roomAnchorIndex: basementRoomAnchorIndex,
+      role: "start",
+    });
+    const endTarget = resolveRoomRoutingTarget({
+      room: getRoom(basementRooms, "dewey books 001 to 330"),
+      floorId: 0,
+      router: basementRouter,
+      roomAnchorIndex: basementRoomAnchorIndex,
+      role: "destination",
+    });
+
+    expect(startTarget?.debug?.source).toBe("level0_centerline_anchor");
+    expect(endTarget?.debug?.source).toBe("level0_centerline_anchor");
+
+    const result = basementRouter.computeRoute(
+      startTarget.coordinates,
+      endTarget.coordinates,
+    );
+
+    expect(result.success).toBe(true);
+    expect(result.renderCoordinates.length).toBeGreaterThan(1);
+    expect(result.debug?.startSnap?.componentId).toBe(
+      result.debug?.endSnap?.componentId,
+    );
   });
 });
 
