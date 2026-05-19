@@ -5,7 +5,7 @@ const DEFAULT_THRESHOLDS = {
   minInstructionDistanceMeters: 2,
   minSegmentDistanceMeters: 1.2,
   duplicatePointDistanceMeters: 0.35,
-  waypointLabelDistanceMeters: 4,
+  landmarkDistanceMeters: 4.5,
   landmarkSegmentMinDistanceMeters: 14,
 };
 
@@ -149,15 +149,15 @@ export const generateRouteInstructions = ({
   const thresholds = { ...DEFAULT_THRESHOLDS, ...(options.thresholds ?? {}) };
   const renderedPoints = normalizeRoutePoints(routeResult);
   const points = simplifyRoutePolyline(renderedPoints, thresholds);
-  const waypointLabels = normalizeWaypointLabels(options.waypointLabels ?? options.waypoints);
+  const landmarks = normalizeRouteLandmarks(options.landmarks ?? []);
   const floorKey = normalizeFloorId(floorId);
   const analysis = analyzeRouteGeometry({
     points,
     graph,
     nodeIds: [],
     thresholds,
-    waypointLabels,
   });
+  const usedLandmarkIds = new Set();
 
   if (points.length < 2) {
     const instructions = [
@@ -179,12 +179,10 @@ export const generateRouteInstructions = ({
       turnAngles: analysis.turnAngles,
       classifiedTurnDirections: analysis.classifiedTurnDirections,
       meaningfulTurnCount: analysis.meaningfulTurns.length,
-      waypointLabelsByTurn: analysis.meaningfulTurns.map((turn) => ({
+      landmarksByTurn: analysis.meaningfulTurns.map((turn) => ({
         waypointIndex: turn.waypointIndex,
-        label: turn.nearestWaypointLabel?.label ?? null,
-        distanceMeters: turn.nearestWaypointLabel
-          ? round(turn.nearestWaypointLabel.distanceMeters, 1)
-          : null,
+        label: null,
+        distanceMeters: null,
       })),
       generatedInstructions: instructions,
       enabled: options.debug,
@@ -212,24 +210,22 @@ export const generateRouteInstructions = ({
     );
     cumulativeDistance += segmentDistance;
     const landmark = findHelpfulLandmarkOnSegment({
-      waypointLabels,
+      landmarks,
       start: points[actionStartIndex],
       end: turn.coordinate,
-      excludeLabel: turn.nearestWaypointLabel?.label,
       thresholds,
+      usedLandmarkIds,
     });
     const turnText = buildTurnInstructionText({
       turnDirection: turn.turnDirection,
-      waypointLabel: turn.nearestWaypointLabel?.label,
-      approachLabel: landmark?.label,
+      approachLandmark: landmark,
       destinationName,
       isFinalTurn: turn.waypointIndex === points.length - 2,
     });
 
     if (
       segmentDistance >= thresholds.minInstructionDistanceMeters &&
-      !landmark &&
-      !turn.nearestWaypointLabel
+      !landmark
     ) {
       instructions.push(
         normalizeInstruction({
@@ -253,10 +249,9 @@ export const generateRouteInstructions = ({
         type: "turn",
         text: turnText,
         distanceMeters:
-          landmark || turn.nearestWaypointLabel ? segmentDistance : 0,
+          landmark ? segmentDistance : 0,
         turnDirection: turn.turnDirection,
-        waypointLabelUsed:
-          landmark?.label ?? turn.nearestWaypointLabel?.label ?? null,
+        landmarkUsed: landmark?.label ?? null,
         coordinate: turn.coordinate,
         cumulativeDistance,
         icon: turn.turnDirection.includes("left")
@@ -275,17 +270,18 @@ export const generateRouteInstructions = ({
 
   if (remainingDistance >= thresholds.minInstructionDistanceMeters) {
     const landmark = findHelpfulLandmarkOnSegment({
-      waypointLabels,
+      landmarks,
       start: points[actionStartIndex],
       end: points[points.length - 1],
       thresholds,
+      usedLandmarkIds,
     });
     const text = analysis.meaningfulTurns.length === 0
       ? landmark
-        ? `Continue straight past ${landmark.label} for ${formatDistance(remainingDistance)}.`
+        ? `Continue straight, passing ${formatLandmarkWithSide(landmark)}, for ${formatDistance(remainingDistance)}.`
         : `Continue straight for ${formatDistance(remainingDistance)}.`
       : landmark
-        ? `Continue past ${landmark.label} for ${formatDistance(remainingDistance)}.`
+        ? `Continue, passing ${formatLandmarkWithSide(landmark)}, for ${formatDistance(remainingDistance)}.`
         : `Continue for ${formatDistance(remainingDistance)}.`;
     instructions.push(
       normalizeInstruction({
@@ -324,16 +320,14 @@ export const generateRouteInstructions = ({
     turnAngles: analysis.turnAngles,
     classifiedTurnDirections: analysis.classifiedTurnDirections,
     meaningfulTurnCount: analysis.meaningfulTurns.length,
-    waypointLabelsByTurn: analysis.meaningfulTurns.map((turn) => ({
+    landmarksByTurn: analysis.meaningfulTurns.map((turn) => ({
       waypointIndex: turn.waypointIndex,
       label:
         instructions.find(
           (instruction) => instruction.id === `${floorKey}-turn-${turn.waypointIndex}`,
-        )?.waypointLabelUsed ?? null,
-      nearestTurnLabel: turn.nearestWaypointLabel?.label ?? null,
-      nearestTurnLabelDistanceMeters: turn.nearestWaypointLabel
-        ? round(turn.nearestWaypointLabel.distanceMeters, 1)
-        : null,
+        )?.landmarkUsed ?? null,
+      nearestTurnLabel: null,
+      nearestTurnLabelDistanceMeters: null,
     })),
     generatedInstructions: instructions,
     enabled: options.debug,
@@ -366,10 +360,10 @@ export const generateMultiFloorRouteInstructions = ({
         destinationName: isLastHorizontal ? destinationName : "vertical connector",
         options: {
           ...options,
-          waypointLabels:
-            options.waypointLabelsByFloor?.[segment.floorId] ??
-            options.waypointLabelsByFloor?.[Number(segment.floorId)] ??
-            options.waypointLabelsByFloor?.[normalizeFloorId(segment.floorId)] ??
+          landmarks:
+            options.landmarksByFloor?.[segment.floorId] ??
+            options.landmarksByFloor?.[Number(segment.floorId)] ??
+            options.landmarksByFloor?.[normalizeFloorId(segment.floorId)] ??
             [],
           routeType: "multi-floor",
           debug: false,
@@ -390,12 +384,6 @@ export const generateMultiFloorRouteInstructions = ({
       }
       instructions.push(...filtered);
       const segmentPoints = normalizeRoutePoints(segment.route);
-      const segmentWaypointLabels = normalizeWaypointLabels(
-        options.waypointLabelsByFloor?.[segment.floorId] ??
-          options.waypointLabelsByFloor?.[Number(segment.floorId)] ??
-          options.waypointLabelsByFloor?.[normalizeFloorId(segment.floorId)] ??
-          [],
-      );
       const simplifiedSegmentPoints = simplifyRoutePolyline(segmentPoints, {
         ...DEFAULT_THRESHOLDS,
         ...(options.thresholds ?? {}),
@@ -405,7 +393,6 @@ export const generateMultiFloorRouteInstructions = ({
         graph: graphsByFloor[segment.floorId] ?? graphsByFloor[normalizeFloorId(segment.floorId)],
         nodeIds: segment.route?.debug?.graphNodeIds ?? [],
         thresholds: { ...DEFAULT_THRESHOLDS, ...(options.thresholds ?? {}) },
-        waypointLabels: segmentWaypointLabels,
       });
       segmentDebug.push({
         floorId: normalizeFloorId(segment.floorId),
@@ -416,12 +403,10 @@ export const generateMultiFloorRouteInstructions = ({
         computedTurnAngles: segmentAnalysis.turnAngles,
         classifiedTurnDirections: segmentAnalysis.classifiedTurnDirections,
         meaningfulTurnCount: segmentAnalysis.meaningfulTurns.length,
-        waypointLabelsByTurn: segmentAnalysis.meaningfulTurns.map((turn) => ({
+        landmarksByTurn: segmentAnalysis.meaningfulTurns.map((turn) => ({
           waypointIndex: turn.waypointIndex,
-          label: turn.nearestWaypointLabel?.label ?? null,
-          distanceMeters: turn.nearestWaypointLabel
-            ? round(turn.nearestWaypointLabel.distanceMeters, 1)
-            : null,
+          label: null,
+          distanceMeters: null,
         })),
         instructionCount: filtered.length,
       });
@@ -462,7 +447,6 @@ export const analyzeRouteGeometry = ({
   graph,
   nodeIds = [],
   thresholds = DEFAULT_THRESHOLDS,
-  waypointLabels = [],
 }) => {
   const bearings = [];
   for (let index = 1; index < points.length; index += 1) {
@@ -487,12 +471,6 @@ export const analyzeRouteGeometry = ({
       thresholds,
     });
 
-    const nearestWaypointLabel = findNearestWaypointLabel(
-      points[index],
-      waypointLabels,
-      thresholds.waypointLabelDistanceMeters,
-    );
-
     waypoints.push({
       waypointIndex: index,
       coordinate: points[index],
@@ -501,7 +479,6 @@ export const analyzeRouteGeometry = ({
       turnAngle: round(turnAngle, 1),
       turnDirection,
       intersectionChoice,
-      nearestWaypointLabel,
     });
   }
 
@@ -521,12 +498,7 @@ export const analyzeRouteGeometry = ({
       waypointIndex: waypoint.waypointIndex,
       turnDirection: waypoint.turnDirection,
       intersectionChoice: waypoint.intersectionChoice,
-      nearestWaypointLabel: waypoint.nearestWaypointLabel
-        ? {
-            label: waypoint.nearestWaypointLabel.label,
-            distanceMeters: round(waypoint.nearestWaypointLabel.distanceMeters, 1),
-          }
-        : null,
+      nearestLandmark: null,
     })),
   };
 };
@@ -603,19 +575,64 @@ function simplifyRoutePolyline(points, thresholds = DEFAULT_THRESHOLDS) {
   return simplified;
 }
 
-function normalizeWaypointLabels(waypoints) {
-  if (!Array.isArray(waypoints)) return [];
+function findHelpfulLandmarkOnSegment({
+  landmarks,
+  start,
+  end,
+  thresholds,
+  usedLandmarkIds,
+}) {
+  if (
+    !Array.isArray(landmarks) ||
+    landmarks.length === 0 ||
+    !start ||
+    !end
+  ) {
+    return null;
+  }
 
-  return waypoints
-    .map((waypoint) => {
-      const label = waypoint?.label ?? waypoint?.name;
-      const coords = waypoint?.coords;
+  const segmentDistance = haversineDistance(start, end);
+  if (segmentDistance < thresholds.landmarkSegmentMinDistanceMeters) return null;
+
+  const candidates = landmarks
+    .filter((landmark) => !usedLandmarkIds?.has(landmark.id))
+    .map((landmark) => {
+      const along = distanceAlongSegment(start, end, landmark.point);
+      return {
+        ...landmark,
+        ...along,
+      };
+    })
+    .filter(
+      (waypoint) =>
+        waypoint.t > 0.2 &&
+        waypoint.t < 0.8 &&
+        waypoint.crossTrackDistanceMeters <=
+          thresholds.landmarkDistanceMeters,
+    )
+    .sort((left, right) => left.t - right.t);
+
+  const landmark = candidates[0] ?? null;
+  if (landmark?.id) usedLandmarkIds?.add(landmark.id);
+  return landmark;
+}
+
+function normalizeRouteLandmarks(landmarks) {
+  if (!Array.isArray(landmarks)) return [];
+
+  return landmarks
+    .map((landmark, index) => {
+      const label = landmark?.label ?? landmark?.name;
+      const coordinate = landmark?.coordinate;
+      const coords = landmark?.coords;
       const point =
-        waypoint?.lat !== undefined && waypoint?.lng !== undefined
-          ? { lat: waypoint.lat, lng: waypoint.lng }
-          : Array.isArray(coords) && coords.length >= 2
-            ? { lng: coords[0], lat: coords[1] }
-            : null;
+        coordinate?.lat !== undefined && coordinate?.lng !== undefined
+          ? { lat: coordinate.lat, lng: coordinate.lng }
+          : landmark?.lat !== undefined && landmark?.lng !== undefined
+            ? { lat: landmark.lat, lng: landmark.lng }
+            : Array.isArray(coords) && coords.length >= 2
+              ? { lng: coords[0], lat: coords[1] }
+              : null;
 
       if (
         !label ||
@@ -627,70 +644,17 @@ function normalizeWaypointLabels(waypoints) {
       }
 
       return {
+        ...landmark,
+        id: landmark.id ?? landmark.roomId ?? `${label}-${index}`,
         label: String(label),
+        side:
+          landmark.side === "left" || landmark.side === "right"
+            ? landmark.side
+            : null,
         point,
       };
     })
     .filter(Boolean);
-}
-
-function findNearestWaypointLabel(point, waypointLabels, maxDistanceMeters) {
-  if (!point || !Array.isArray(waypointLabels) || waypointLabels.length === 0) {
-    return null;
-  }
-
-  let nearest = null;
-  for (const waypoint of waypointLabels) {
-    const distanceMeters = haversineDistance(point, waypoint.point);
-    if (distanceMeters > maxDistanceMeters) continue;
-    if (!nearest || distanceMeters < nearest.distanceMeters) {
-      nearest = {
-        ...waypoint,
-        distanceMeters,
-      };
-    }
-  }
-  return nearest;
-}
-
-function findHelpfulLandmarkOnSegment({
-  waypointLabels,
-  start,
-  end,
-  excludeLabel,
-  thresholds,
-}) {
-  if (
-    !Array.isArray(waypointLabels) ||
-    waypointLabels.length === 0 ||
-    !start ||
-    !end
-  ) {
-    return null;
-  }
-
-  const segmentDistance = haversineDistance(start, end);
-  if (segmentDistance < thresholds.landmarkSegmentMinDistanceMeters) return null;
-
-  const candidates = waypointLabels
-    .filter((waypoint) => waypoint.label !== excludeLabel)
-    .map((waypoint) => {
-      const along = distanceAlongSegment(start, end, waypoint.point);
-      return {
-        ...waypoint,
-        ...along,
-      };
-    })
-    .filter(
-      (waypoint) =>
-        waypoint.t > 0.2 &&
-        waypoint.t < 0.8 &&
-        waypoint.crossTrackDistanceMeters <=
-          thresholds.waypointLabelDistanceMeters,
-    )
-    .sort((left, right) => left.t - right.t);
-
-  return candidates[0] ?? null;
 }
 
 function distanceAlongSegment(start, end, point) {
@@ -731,17 +695,22 @@ function projectLocalMeters(point, origin) {
 
 function buildTurnInstructionText({
   turnDirection,
-  waypointLabel,
-  approachLabel,
+  approachLandmark,
   destinationName,
   isFinalTurn,
 }) {
   const turnText = turnDirectionToText(turnDirection);
   const lowerTurnText = lowercaseFirst(turnText);
-  if (approachLabel) return `Continue past ${approachLabel}, then ${lowerTurnText}.`;
-  if (waypointLabel) return `Continue to ${waypointLabel}, then ${lowerTurnText}.`;
+  if (approachLandmark) {
+    return `Continue past ${formatLandmarkWithSide(approachLandmark)}, then ${lowerTurnText}.`;
+  }
   if (isFinalTurn) return `${turnText} toward ${destinationName}.`;
   return `${turnText}.`;
+}
+
+function formatLandmarkWithSide(landmark) {
+  if (!landmark?.side) return landmark?.label ?? "the landmark";
+  return `${landmark.label} on your ${landmark.side}`;
 }
 
 function normalizeInstruction(instruction) {
@@ -841,7 +810,7 @@ function logInstructionDebug({
   turnAngles,
   classifiedTurnDirections,
   meaningfulTurnCount,
-  waypointLabelsByTurn,
+  landmarksByTurn,
   selectedVerticalConnector,
   generatedInstructions,
   enabled,
@@ -864,7 +833,7 @@ function logInstructionDebug({
     classifiedTurnDirections,
     meaningfulTurnCount,
     turnAngles: turnAngles?.map((turn) => turn.angle),
-    waypointLabelsByTurn,
+    landmarksByTurn,
     selectedVerticalConnector,
     generatedInstructionCount: generatedInstructions?.length ?? 0,
     generatedInstructionList: generatedInstructions,

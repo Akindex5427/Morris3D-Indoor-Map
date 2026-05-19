@@ -134,6 +134,30 @@
   margin-top: 12px;
 }
 
+.voice-guidance-card {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  background: var(--bg-layer-2);
+  border: 1px solid var(--border-subtle);
+}
+
+.voice-guidance-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--accent-strong);
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.voice-guidance-card p {
+  color: var(--text-strong);
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
 .btn-voice,
 .directions-nav-btn {
   display: inline-flex;
@@ -157,6 +181,9 @@
 
 .btn-voice {
   flex: 1;
+  min-width: 0;
+  white-space: normal;
+  line-height: 1.2;
 }
 
 .btn-stop {

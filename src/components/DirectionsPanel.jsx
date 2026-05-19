@@ -4,15 +4,15 @@ import {
   generateDirections,
   generateStepSpeech,
   calculateRouteStats,
-  generateSpeechText,
 } from "../utils/directionsGenerator";
 
 const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [voiceEnabled, setVoiceEnabled] = useState(false);
-  const [autoPlay, setAutoPlay] = useState(false);
-  const [speechRate, setSpeechRate] = useState(1.0);
+  const [speechRate, setSpeechRate] = useState(0.5);
+  const [awaitingStepConfirmation, setAwaitingStepConfirmation] =
+    useState(false);
   const [collapsed, setCollapsed] = useState(false);
 
   const directions = useMemo(() => {
@@ -52,10 +52,18 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
 
   const isSpeechSupported = "speechSynthesis" in window;
 
+  const stopSpeaking = () => {
+    if (isSpeechSupported) {
+      window.speechSynthesis.cancel();
+    }
+    setIsSpeaking(false);
+  };
+
   const speak = (text, rate = speechRate) => {
     if (!isSpeechSupported || !voiceEnabled) return;
 
     window.speechSynthesis.cancel();
+    setAwaitingStepConfirmation(false);
 
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.rate = rate;
@@ -65,23 +73,14 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
     utterance.onstart = () => setIsSpeaking(true);
     utterance.onend = () => {
       setIsSpeaking(false);
-
-      if (autoPlay && currentStep < directions.length - 1) {
-        setTimeout(() => {
-          setCurrentStep((prev) => prev + 1);
-        }, 1000);
-      }
+      setAwaitingStepConfirmation(true);
     };
-    utterance.onerror = () => setIsSpeaking(false);
+    utterance.onerror = () => {
+      setIsSpeaking(false);
+      setAwaitingStepConfirmation(false);
+    };
 
     window.speechSynthesis.speak(utterance);
-  };
-
-  const stopSpeaking = () => {
-    if (isSpeechSupported) {
-      window.speechSynthesis.cancel();
-      setIsSpeaking(false);
-    }
   };
 
   const speakCurrentStep = () => {
@@ -92,13 +91,9 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
     }
   };
 
-  const speakAllDirections = () => {
-    const text = generateSpeechText(directions);
-    speak(text, speechRate * 0.9);
-  };
-
   const goToStep = (index) => {
     setCurrentStep(index);
+    setAwaitingStepConfirmation(false);
     stopSpeaking();
 
     if (onStepClick && directions[index]) {
@@ -112,6 +107,32 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
     }
   };
 
+  const confirmStepComplete = () => {
+    if (currentStep >= directions.length - 1) {
+      setAwaitingStepConfirmation(false);
+      stopSpeaking();
+      return;
+    }
+
+    const nextIndex = currentStep + 1;
+    setCurrentStep(nextIndex);
+    setAwaitingStepConfirmation(false);
+    if (onStepClick && directions[nextIndex]) {
+      onStepClick(directions[nextIndex]);
+    }
+
+    window.setTimeout(() => {
+      const nextStepText = generateStepSpeech(directions[nextIndex]);
+      speak(nextStepText);
+    }, 120);
+  };
+
+  const stopVoiceGuidance = () => {
+    setVoiceEnabled(false);
+    setAwaitingStepConfirmation(false);
+    stopSpeaking();
+  };
+
   const previousStep = () => {
     if (currentStep > 0) {
       goToStep(currentStep - 1);
@@ -119,16 +140,17 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
   };
 
   useEffect(() => {
-    if (voiceEnabled && !isSpeaking && autoPlay) {
-      speakCurrentStep();
-    }
-  }, [currentStep, voiceEnabled, autoPlay]);
-
-  useEffect(() => {
     return () => {
       stopSpeaking();
     };
   }, []);
+
+  useEffect(() => {
+    setCurrentStep(0);
+    setVoiceEnabled(false);
+    setAwaitingStepConfirmation(false);
+    stopSpeaking();
+  }, [routeInfo, routePath]);
 
   if (!routePath || directions.length === 0) {
     return null;
@@ -195,20 +217,24 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
                 <input
                   type="checkbox"
                   checked={voiceEnabled}
-                  onChange={(e) => setVoiceEnabled(e.target.checked)}
+                  onChange={(e) => {
+                    setVoiceEnabled(e.target.checked);
+                    setAwaitingStepConfirmation(false);
+                    if (!e.target.checked) {
+                      stopSpeaking();
+                    }
+                  }}
                 />
               </label>
 
               {voiceEnabled && (
                 <>
-                  <label className="voice-toggle">
-                    <span>Auto-play steps</span>
-                    <input
-                      type="checkbox"
-                      checked={autoPlay}
-                      onChange={(e) => setAutoPlay(e.target.checked)}
-                    />
-                  </label>
+                  <div className="voice-guidance-card">
+                    <span className="voice-guidance-label">
+                      Have you completed this step?
+                    </span>
+                    <p>{currentDirection.instruction}</p>
+                  </div>
 
                   <div className="voice-actions">
                     <button
@@ -217,23 +243,26 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
                       disabled={isSpeaking}
                       title="Speak current step"
                     >
-                      Speak step
+                      {awaitingStepConfirmation ? "Repeat instruction" : "Speak step"}
                     </button>
                     <button
                       className="btn-voice"
-                      onClick={speakAllDirections}
-                      disabled={isSpeaking}
-                      title="Speak all directions"
+                      onClick={confirmStepComplete}
+                      disabled={
+                        isSpeaking ||
+                        !awaitingStepConfirmation ||
+                        currentStep >= directions.length - 1
+                      }
+                      title="Continue to next instruction"
                     >
-                      Speak all
+                      Yes, next instruction
                     </button>
                     <button
                       className="btn-voice btn-stop"
-                      onClick={stopSpeaking}
-                      disabled={!isSpeaking}
-                      title="Stop speaking"
+                      onClick={stopVoiceGuidance}
+                      title="Stop guidance"
                     >
-                      Stop
+                      Stop guidance
                     </button>
                   </div>
 

@@ -43,6 +43,7 @@ const ROUTE_CAMERA_PADDING_PX = 96;
 const ROUTE_CAMERA_TRANSITION_MS = 1200;
 const ROUTE_CAMERA_MIN_ZOOM = 16.5;
 const ROUTE_CAMERA_MAX_ZOOM = 20.5;
+const ROUTE_LANDMARK_LABEL_LIMIT = 8;
 
 const clamp01 = (value) => Math.max(0, Math.min(1, value));
 
@@ -583,6 +584,36 @@ const Map3D = ({
       })
       .filter(Boolean);
   }, [roomsData, routeFocus, selectedFloor, selectedFloors, activeFloor]);
+  const routeLandmarkMarkers = useMemo(() => {
+    if (!routeFocus?.landmarkRoomIds?.length) return [];
+
+    const seen = new Set();
+    const markers = [];
+    for (const id of routeFocus.landmarkRoomIds) {
+      if (!id || seen.has(id)) continue;
+      seen.add(id);
+
+      const feature = roomsData.find((room) => getRoomFeatureId(room) === id);
+      const coords = getFeatureCentroid(feature);
+      if (!feature || !coords) continue;
+
+      const floor = getRoomFeatureFloor(feature);
+      if (!shouldShowRouteFloor(floor)) continue;
+
+      markers.push({
+        id,
+        type: "landmark",
+        roomName: getRoomFeatureName(feature, "Landmark"),
+        floor,
+        position: [coords[0], coords[1], routeElevation(floor, 0.86)],
+        glowPosition: [coords[0], coords[1], routeElevation(floor, 0.14)],
+      });
+
+      if (markers.length >= ROUTE_LANDMARK_LABEL_LIMIT) break;
+    }
+
+    return markers;
+  }, [roomsData, routeFocus, selectedFloor, selectedFloors, activeFloor]);
 
   useEffect(() => {
     if (
@@ -610,6 +641,7 @@ const Map3D = ({
 
     visibleTransitionMarkers.forEach((marker) => addPoint(marker.coords));
     routeFocusMarkers.forEach((marker) => addPoint(marker.position));
+    routeLandmarkMarkers.forEach((marker) => addPoint(marker.position));
 
     if (routePoints.length === 0) {
       return;
@@ -675,6 +707,7 @@ const Map3D = ({
     onViewStateChange,
     routeCameraKey,
     routeFocusMarkers,
+    routeLandmarkMarkers,
     shouldRenderRoute,
     visibleRouteSegments,
     visibleTransitionMarkers,
@@ -949,6 +982,45 @@ const Map3D = ({
     );
   }
 
+  if (routeLandmarkMarkers.length > 0) {
+    layers.push(
+      new ScatterplotLayer({
+        id: "route-landmark-room-glow",
+        data: routeLandmarkMarkers,
+        getPosition: (d) => d.glowPosition,
+        getRadius: 1.15,
+        radiusUnits: "meters",
+        getFillColor: [26, 115, 232, 62],
+        getLineColor: [26, 115, 232, 170],
+        lineWidthMinPixels: 1,
+        stroked: true,
+        filled: true,
+        pickable: false,
+        parameters: { depthTest: false, depthMask: false },
+      }),
+    );
+
+    layers.push(
+      new TextLayer({
+        id: "route-landmark-room-labels",
+        data: routeLandmarkMarkers,
+        getPosition: (d) => d.position,
+        getText: (d) => d.roomName,
+        getSize: 10.5,
+        getColor: [8, 37, 82, 235],
+        getBackgroundColor: [239, 246, 255, 220],
+        background: true,
+        backgroundPadding: [4, 3],
+        getTextAnchor: "middle",
+        getAlignmentBaseline: "bottom",
+        sizeUnits: "pixels",
+        billboard: true,
+        pickable: true,
+        parameters: { depthTest: false, depthMask: false },
+      }),
+    );
+  }
+
   // Add route visualization layers if route exists
   console.log("[Map3D] routePath prop:", routePath);
   console.log("[Map3D] routeRenderPath prop:", routeRenderPath);
@@ -1045,41 +1117,6 @@ const Map3D = ({
       );
     }
 
-    const floorElev = (floor) => {
-      const n = typeof floor === "number" ? floor : 0;
-      return isDollhouse ? n * BUILDING_FLOOR_SPACING : 0;
-    };
-
-    // Waypoint labels only - clean visualization
-    if (routePath.length > 2) {
-      const WAYPOINT_ELEVATION_OFFSET = 0.1; // label sits on floor surface
-      const waypoints = routePath.slice(1, -1);
-
-      // Waypoint labels using TextLayer - bold black text
-      layers.push(
-        new TextLayer({
-          id: "route-waypoint-labels",
-          data: waypoints,
-          getPosition: (d) => {
-            const baseElevation = floorElev(d.floor);
-            return [...d.coords, baseElevation + WAYPOINT_ELEVATION_OFFSET];
-          },
-          getText: (d) => d.name || "Waypoint",
-          getSize: 9.5,
-          getColor: [0, 0, 0, 255], // Deep black text with full opacity
-          getTextAnchor: "middle",
-          getAlignmentBaseline: "center",
-          sizeUnits: "pixels",
-          pickable: false,
-          billboard: true,
-          fontSettings: {
-            fontSize: 10,
-            fontFamily: "Arial, sans-serif",
-            fontWeight: "800",
-          },
-        }),
-      );
-    }
   }
 
   // Show WebGL error if detected

@@ -49,7 +49,7 @@ describe("routeInstructions", () => {
     });
   });
 
-  it("uses waypoint labels as turn landmarks only when they clarify the route", () => {
+  it("uses route-adjacent landmarks as turn context only when they clarify the route", () => {
     const instructions = generateRouteInstructions({
       routeResult: routeResult([
         { lng: -89.2203, lat: 37.715 },
@@ -60,9 +60,11 @@ describe("routeInstructions", () => {
       startName: "Start",
       destinationName: "Destination",
       options: {
-        waypointLabels: [
+        landmarks: [
           {
-            name: "Waypoint 3",
+            id: "browsing-room",
+            label: "Browsing Room",
+            side: "left",
             coords: [-89.2202, 37.715],
           },
         ],
@@ -74,7 +76,7 @@ describe("routeInstructions", () => {
     );
     expect(turnInstructions).toHaveLength(1);
     expect(turnInstructions[0].text).toBe(
-      "Continue past Waypoint 3, then turn left.",
+      "Continue past Browsing Room on your left, then turn left.",
     );
   });
 

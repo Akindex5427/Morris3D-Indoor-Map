@@ -729,6 +729,7 @@ export const useIndoorBuilding = ({
     const focusRoomIds = new Set(
       [routeFocus.startRoomId, routeFocus.endRoomId].filter(Boolean),
     );
+    const landmarkRoomIds = new Set(routeFocus.landmarkRoomIds || []);
     const focusFloors = new Set(
       (routeFocus.involvedFloors || []).map((floor) => Number(floor)),
     );
@@ -774,8 +775,11 @@ export const useIndoorBuilding = ({
           const floorNum = props.level ?? props.floor ?? props.nivel ?? 0;
           const reveal = props.__presentationReveal ?? 1;
           const isFocusedRoom = focusRoomIds.has(roomId);
+          const isRouteLandmark = landmarkRoomIds.has(roomId);
           const shouldKeepVisibleForRoute =
-            isFocusedRoom || (isFocusFloor(floorNum) && isStairFeature(props));
+            isFocusedRoom ||
+            isRouteLandmark ||
+            (isFocusFloor(floorNum) && isStairFeature(props));
           const shouldDeemphasize =
             isFocusFloor(floorNum) &&
             !shouldKeepVisibleForRoute &&
@@ -858,12 +862,14 @@ export const useIndoorBuilding = ({
           }
 
           if (shouldKeepVisibleForRoute) {
+            const boost = isFocusedRoom ? 1.22 : 1.1;
+            const lift = isFocusedRoom ? 24 : 12;
             shadedColor = [
-              Math.min(255, Math.round(shadedColor[0] * 1.22 + 24)),
-              Math.min(255, Math.round(shadedColor[1] * 1.22 + 24)),
-              Math.min(255, Math.round(shadedColor[2] * 1.22 + 24)),
+              Math.min(255, Math.round(shadedColor[0] * boost + lift)),
+              Math.min(255, Math.round(shadedColor[1] * boost + lift)),
+              Math.min(255, Math.round(shadedColor[2] * boost + lift)),
             ];
-            alpha = 255;
+            alpha = isFocusedRoom ? 255 : Math.max(alpha, 205);
           } else if (shouldDeemphasize) {
             alpha = Math.min(alpha, 70);
             shadedColor = [
@@ -884,6 +890,7 @@ export const useIndoorBuilding = ({
           const reveal = props.__presentationReveal ?? 1;
           const shouldKeepVisibleForRoute =
             focusRoomIds.has(roomId) ||
+            landmarkRoomIds.has(roomId) ||
             (isFocusFloor(floorNum) && isStairFeature(props));
           let alpha = 220;
 
@@ -907,6 +914,10 @@ export const useIndoorBuilding = ({
 
           if (focusRoomIds.has(roomId)) {
             return [5, 57, 132, Math.round(255 * reveal)];
+          }
+
+          if (landmarkRoomIds.has(roomId)) {
+            return [26, 115, 232, Math.round(210 * reveal)];
           }
 
           if (

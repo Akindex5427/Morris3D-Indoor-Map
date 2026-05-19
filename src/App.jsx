@@ -28,6 +28,10 @@ import {
   generateMultiFloorRouteInstructions,
   generateRouteInstructions,
 } from "./utils/routeInstructions";
+import {
+  findRouteLandmarks,
+  groupLandmarksByFloor,
+} from "./utils/routeLandmarks";
 
 const centerlinesHaveRoomAnchors = (centerlinesGeoJson) =>
   Array.isArray(centerlinesGeoJson?.features) &&
@@ -40,6 +44,7 @@ const DEFAULT_SIDEBAR_WIDTH = 360;
 const MIN_SIDEBAR_WIDTH = 280;
 const MAX_SIDEBAR_WIDTH = 520;
 const SIDEBAR_COLLAPSE_THRESHOLD = 180;
+const routeLandmarkLabelDistanceMeters = 4.5;
 
 const getRoomDisplayId = (room) =>
   room?.properties?.id ||
@@ -984,10 +989,10 @@ function App() {
           coords: [coord.lng, coord.lat],
           name:
             idx === 0
-              ? getRoomName(startRoom)
-              : idx === result.coordinates.length - 1
-                ? getRoomName(endRoom)
-                : `Waypoint ${idx}`,
+                ? getRoomName(startRoom)
+                : idx === result.coordinates.length - 1
+                  ? getRoomName(endRoom)
+                : `Route point ${idx}`,
           floor: floorForRouting,
           features:
             idx === 0
@@ -1006,6 +1011,16 @@ function App() {
           coords: [coord.lng, coord.lat],
           floor: floorForRouting,
         }));
+        const routeLandmarks = findRouteLandmarks({
+          routeResult: result,
+          rooms: routeRoomsByFloor[String(floorForRouting)] ?? [],
+          floorId: floorForRouting,
+          startRoom,
+          endRoom,
+          options: {
+            distanceThresholdMeters: routeLandmarkLabelDistanceMeters,
+          },
+        });
         const directions = generateRouteInstructions({
           routeResult: result,
           floorId: floorForRouting,
@@ -1017,7 +1032,7 @@ function App() {
               routeOptions.accessibility === "wheelchair"
                 ? "accessible"
                 : routeOptions.preferences,
-            waypointLabels: path.slice(1, -1),
+            landmarks: routeLandmarks,
           },
         });
 
@@ -1047,6 +1062,7 @@ function App() {
             focus: {
               startRoomId: getRoomDisplayId(startRoom),
               endRoomId: getRoomDisplayId(endRoom),
+              landmarkRoomIds: routeLandmarks.map((landmark) => landmark.roomId),
               startFloor,
               endFloor,
               involvedFloors: [floorForRouting],
@@ -1133,7 +1149,7 @@ function App() {
             ? startName
             : idx === result.coordinates.length - 1
               ? endName
-              : `Waypoint ${idx}`,
+              : `Route point ${idx}`,
         floor: floorId,
         features:
           idx === 0 && startFeature
@@ -1218,10 +1234,19 @@ function App() {
       );
       const path = [...startPath, ...destinationPath];
       const renderPath = routeSegments.flatMap((segment) => segment.path);
-      const waypointLabelsByFloor = {
-        [startFloor]: startPath.slice(1, -1),
-        [endFloor]: destinationPath.slice(1, -1),
-      };
+      const routeLandmarks = horizontalSegments.flatMap((segment) =>
+        findRouteLandmarks({
+          routeResult: segment.route,
+          rooms: routeRoomsByFloor[String(segment.floorId)] ?? [],
+          floorId: Number(segment.floorId),
+          startRoom,
+          endRoom,
+          options: {
+            distanceThresholdMeters: routeLandmarkLabelDistanceMeters,
+          },
+        }),
+      );
+      const landmarksByFloor = groupLandmarksByFloor(routeLandmarks);
       const directionSteps = generateMultiFloorRouteInstructions({
         segments: multiFloorResult.segments,
         graphsByFloor: Object.entries(routers).reduce((graphs, [floor, router]) => {
@@ -1237,7 +1262,7 @@ function App() {
             routeOptions.accessibility === "wheelchair"
               ? "accessible"
               : routeOptions.preferences,
-          waypointLabelsByFloor,
+          landmarksByFloor,
         },
       });
       const floors = [startFloor, endFloor].sort((a, b) => a - b);
@@ -1268,6 +1293,7 @@ function App() {
           focus: {
             startRoomId: getRoomDisplayId(startRoom),
             endRoomId: getRoomDisplayId(endRoom),
+            landmarkRoomIds: routeLandmarks.map((landmark) => landmark.roomId),
             startFloor,
             endFloor,
             involvedFloors: Array.from(
