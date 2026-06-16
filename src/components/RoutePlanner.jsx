@@ -11,6 +11,8 @@ const RoutePlanner = ({
 }) => {
   const [startRoom, setStartRoom] = useState("");
   const [endRoom, setEndRoom] = useState("");
+  const [selectedStartRoom, setSelectedStartRoom] = useState(null);
+  const [selectedEndRoom, setSelectedEndRoom] = useState(null);
   const [selectedFloor, setSelectedFloor] = useState("");
   const [startSuggestions, setStartSuggestions] = useState([]);
   const [endSuggestions, setEndSuggestions] = useState([]);
@@ -81,6 +83,8 @@ const RoutePlanner = ({
   const handleStartChange = (e) => {
     const value = e.target.value;
     setStartRoom(value);
+    setSelectedStartRoom(null);
+    setUseCurrentLocation(false);
     const floorFilter = selectedFloor ? parseInt(selectedFloor, 10) : null;
     setStartSuggestions(filterRooms(value, floorFilter));
     setShowStartSuggestions(true);
@@ -89,6 +93,7 @@ const RoutePlanner = ({
   const handleEndChange = (e) => {
     const value = e.target.value;
     setEndRoom(value);
+    setSelectedEndRoom(null);
     const floorFilter = selectedFloor ? parseInt(selectedFloor, 10) : null;
     setEndSuggestions(filterRooms(value, floorFilter));
     setShowEndSuggestions(true);
@@ -98,37 +103,59 @@ const RoutePlanner = ({
     setSelectedFloor(e.target.value);
     setStartRoom("");
     setEndRoom("");
+    setSelectedStartRoom(null);
+    setSelectedEndRoom(null);
+    setCurrentLocation(null);
+    setUseCurrentLocation(false);
     setStartSuggestions([]);
     setEndSuggestions([]);
   };
 
   const selectStartRoom = (room) => {
     setStartRoom(getRoomName(room));
+    setSelectedStartRoom(room);
+    setUseCurrentLocation(false);
     setShowStartSuggestions(false);
   };
 
   const selectEndRoom = (room) => {
     setEndRoom(getRoomName(room));
+    setSelectedEndRoom(room);
     setShowEndSuggestions(false);
   };
 
   const setCurrentLocationHandler = (room) => {
     setCurrentLocation(room);
+    setSelectedStartRoom(room);
     setStartRoom(getRoomName(room));
     setUseCurrentLocation(true);
     setShowStartSuggestions(false);
   };
 
+  const findRoomByName = (roomName) => {
+    const floorFilter = selectedFloor ? parseInt(selectedFloor, 10) : null;
+    const normalizedRoomName = roomName.toLowerCase();
+
+    return rooms.find(
+      (room) =>
+        getRoomName(room).toLowerCase() === normalizedRoomName &&
+        (floorFilter === null || getRoomFloor(room) === floorFilter),
+    );
+  };
+
   const handleCalculateRoute = () => {
     const startRoomObj = useCurrentLocation
       ? currentLocation
-      : rooms.find(
-          (room) => getRoomName(room).toLowerCase() === startRoom.toLowerCase(),
-        );
+      : selectedStartRoom &&
+          getRoomName(selectedStartRoom).toLowerCase() === startRoom.toLowerCase()
+        ? selectedStartRoom
+        : findRoomByName(startRoom);
 
-    const endRoomObj = rooms.find(
-      (room) => getRoomName(room).toLowerCase() === endRoom.toLowerCase(),
-    );
+    const endRoomObj =
+      selectedEndRoom &&
+      getRoomName(selectedEndRoom).toLowerCase() === endRoom.toLowerCase()
+        ? selectedEndRoom
+        : findRoomByName(endRoom);
 
     if (!startRoomObj || !endRoomObj) {
       alert("Please select valid start and end rooms");
@@ -171,6 +198,10 @@ const RoutePlanner = ({
   const handleClearRoute = () => {
     setStartRoom("");
     setEndRoom("");
+    setSelectedStartRoom(null);
+    setSelectedEndRoom(null);
+    setCurrentLocation(null);
+    setUseCurrentLocation(false);
     if (onClearRoute) {
       onClearRoute();
     }

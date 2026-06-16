@@ -1,25 +1,29 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./DirectionsPanel.css";
 import {
-  generateDirections,
   generateStepSpeech,
   calculateRouteStats,
 } from "../utils/directionsGenerator";
 
-const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
+const DirectionsPanel = ({
+  routePath,
+  routeInfo,
+  onClose,
+  onStepClick,
+  cameraMode,
+  onRecenterRoute,
+}) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [voiceEnabled, setVoiceEnabled] = useState(false);
-  const [speechRate, setSpeechRate] = useState(0.5);
+  const [speechRate, setSpeechRate] = useState(0.7);
   const [awaitingStepConfirmation, setAwaitingStepConfirmation] =
     useState(false);
-  const [collapsed, setCollapsed] = useState(false);
 
   const directions = useMemo(() => {
     if (routeInfo?.directions?.length) return routeInfo.directions;
-    if (!routePath) return [];
-    return generateDirections(routePath);
-  }, [routePath, routeInfo]);
+    return [];
+  }, [routeInfo]);
 
   const stats = useMemo(() => {
     if (routeInfo?.routeType === "multi-floor") {
@@ -51,6 +55,8 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
   };
 
   const isSpeechSupported = "speechSynthesis" in window;
+  const getDirectionText = (direction) =>
+    direction?.text ?? direction?.instruction ?? "";
 
   const stopSpeaking = () => {
     if (isSpeechSupported) {
@@ -59,14 +65,14 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
     setIsSpeaking(false);
   };
 
-  const speak = (text, rate = speechRate) => {
-    if (!isSpeechSupported || !voiceEnabled) return;
+  const speak = (text, rate = speechRate, options = {}) => {
+    if (!isSpeechSupported || (!voiceEnabled && !options.force)) return;
 
     window.speechSynthesis.cancel();
     setAwaitingStepConfirmation(false);
 
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = rate;
+    utterance.rate = Math.max(0.5, Math.min(2, rate));
     utterance.pitch = 1.0;
     utterance.volume = 1.0;
 
@@ -95,9 +101,14 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
     setCurrentStep(index);
     setAwaitingStepConfirmation(false);
     stopSpeaking();
-
     if (onStepClick && directions[index]) {
       onStepClick(directions[index]);
+    }
+
+    if (voiceEnabled && directions[index]) {
+      window.setTimeout(() => {
+        speak(generateStepSpeech(directions[index]));
+      }, 120);
     }
   };
 
@@ -113,18 +124,7 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
       stopSpeaking();
       return;
     }
-
-    const nextIndex = currentStep + 1;
-    setCurrentStep(nextIndex);
-    setAwaitingStepConfirmation(false);
-    if (onStepClick && directions[nextIndex]) {
-      onStepClick(directions[nextIndex]);
-    }
-
-    window.setTimeout(() => {
-      const nextStepText = generateStepSpeech(directions[nextIndex]);
-      speak(nextStepText);
-    }, 120);
+    goToStep(currentStep + 1);
   };
 
   const stopVoiceGuidance = () => {
@@ -159,18 +159,11 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
   const currentDirection = directions[currentStep];
 
   return (
-    <div className={`directions-panel ${collapsed ? "collapsed" : ""}`}>
+    <div className="directions-panel">
       <div className="directions-header">
         <div className="directions-title-block">
           <div className="directions-title">
             <h3>Directions</h3>
-            <button
-              className="directions-toggle-btn"
-              onClick={() => setCollapsed(!collapsed)}
-              title={collapsed ? "Expand directions" : "Collapse directions"}
-            >
-              {collapsed ? "+" : "-"}
-            </button>
           </div>
           {routeInfo?.start && routeInfo?.end && (
             <p className="directions-subtitle">
@@ -178,6 +171,15 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
             </p>
           )}
         </div>
+        {cameraMode === "manual" && onRecenterRoute && (
+          <button
+            className="directions-recenter-btn"
+            onClick={onRecenterRoute}
+            title="Recenter map on route"
+          >
+            Recenter
+          </button>
+        )}
         <button
           className="directions-close-btn"
           onClick={onClose}
@@ -187,188 +189,173 @@ const DirectionsPanel = ({ routePath, routeInfo, onClose, onStepClick }) => {
         </button>
       </div>
 
-      {!collapsed && (
-        <>
-          {stats && (
-            <div className="route-summary">
-              <div className="summary-item">
-                <div className="summary-label">Distance</div>
-                <div className="summary-value">
-                  {formatDistance(stats.totalDistance)}
-                </div>
-              </div>
-              <div className="summary-item">
-                <div className="summary-label">Est. Time</div>
-                <div className="summary-value">
-                  {formatTime(stats.estimatedTime)}
-                </div>
-              </div>
-              <div className="summary-item">
-                <div className="summary-label">Floors</div>
-                <div className="summary-value">{stats.floors.join(", ")}</div>
-              </div>
-            </div>
-          )}
-
-          {isSpeechSupported && (
-            <div className="voice-controls">
-              <label className="voice-toggle">
-                <span>Voice guidance</span>
-                <input
-                  type="checkbox"
-                  checked={voiceEnabled}
-                  onChange={(e) => {
-                    setVoiceEnabled(e.target.checked);
-                    setAwaitingStepConfirmation(false);
-                    if (!e.target.checked) {
-                      stopSpeaking();
-                    }
-                  }}
-                />
-              </label>
-
-              {voiceEnabled && (
-                <>
-                  <div className="voice-guidance-card">
-                    <span className="voice-guidance-label">
-                      Have you completed this step?
-                    </span>
-                    <p>{currentDirection.instruction}</p>
-                  </div>
-
-                  <div className="voice-actions">
-                    <button
-                      className="btn-voice"
-                      onClick={speakCurrentStep}
-                      disabled={isSpeaking}
-                      title="Speak current step"
-                    >
-                      {awaitingStepConfirmation ? "Repeat instruction" : "Speak step"}
-                    </button>
-                    <button
-                      className="btn-voice"
-                      onClick={confirmStepComplete}
-                      disabled={
-                        isSpeaking ||
-                        !awaitingStepConfirmation ||
-                        currentStep >= directions.length - 1
-                      }
-                      title="Continue to next instruction"
-                    >
-                      Yes, next instruction
-                    </button>
-                    <button
-                      className="btn-voice btn-stop"
-                      onClick={stopVoiceGuidance}
-                      title="Stop guidance"
-                    >
-                      Stop guidance
-                    </button>
-                  </div>
-
-                  <div className="speed-control">
-                    <label htmlFor="speech-rate-range">
-                      Speed: {speechRate.toFixed(1)}x
-                    </label>
-                    <input
-                      id="speech-rate-range"
-                      type="range"
-                      min="0.5"
-                      max="2.0"
-                      step="0.1"
-                      value={speechRate}
-                      onChange={(e) =>
-                        setSpeechRate(parseFloat(e.target.value))
-                      }
-                    />
-                  </div>
-                </>
-              )}
-            </div>
-          )}
-
-          <div className="current-step-card">
-            <div className="step-header">
-              <span className="step-number">
-                Step {currentStep + 1} of {directions.length}
-              </span>
-              <span className={`step-type ${currentDirection.type}`}>
-                {currentDirection.icon || ">"}
-              </span>
-            </div>
-            <div className="step-instruction">
-              {currentDirection.instruction}
-            </div>
-            {currentDirection.distance > 1 && (
-              <div className="step-distance">
-                {formatDistance(currentDirection.distance)}
-              </div>
-            )}
-            <div className="step-floor">
-              Floor {currentDirection.floor}
-              {currentDirection.targetFloor !== undefined && (
-                <>{` -> Floor ${currentDirection.targetFloor}`}</>
-              )}
-            </div>
+      {stats && (
+        <div className="route-summary">
+          <div className="summary-item">
+            <div className="summary-label">Distance</div>
+            <div className="summary-value">{formatDistance(stats.totalDistance)}</div>
           </div>
-
-          <div className="step-navigation">
-            <button
-              className="directions-nav-btn"
-              onClick={previousStep}
-              disabled={currentStep === 0}
-            >
-              Previous
-            </button>
-            <div className="step-indicator">
-              {currentStep + 1} / {directions.length}
-            </div>
-            <button
-              className="directions-nav-btn"
-              onClick={nextStep}
-              disabled={currentStep === directions.length - 1}
-            >
-              Next
-            </button>
+          <div className="summary-item">
+            <div className="summary-label">Est. Time</div>
+            <div className="summary-value">{formatTime(stats.estimatedTime)}</div>
           </div>
+          <div className="summary-item">
+            <div className="summary-label">Floors</div>
+            <div className="summary-value">{stats.floors.join(", ")}</div>
+          </div>
+        </div>
+      )}
 
-          <div className="progress-container">
-            <div
-              className="progress-bar"
-              style={{
-                width: `${((currentStep + 1) / directions.length) * 100}%`,
+      {isSpeechSupported && (
+        <div className="voice-controls">
+          <label className="voice-toggle">
+            <span>Voice guidance</span>
+            <input
+              type="checkbox"
+              checked={voiceEnabled}
+              onChange={(e) => {
+                const enabled = e.target.checked;
+                setVoiceEnabled(enabled);
+                setAwaitingStepConfirmation(false);
+                if (!enabled) {
+                  stopSpeaking();
+                } else if (directions[currentStep]) {
+                  window.setTimeout(() => {
+                    speak(
+                      generateStepSpeech(directions[currentStep]),
+                      speechRate,
+                      { force: true },
+                    );
+                  }, 120);
+                }
               }}
             />
-          </div>
+          </label>
 
-          <div className="directions-list">
-            <div className="list-header">All Steps</div>
-            {directions.map((direction, index) => (
-              <div
-                key={direction.id}
-                className={`direction-item ${
-                  index === currentStep ? "active" : ""
-                } ${direction.type}`}
-                onClick={() => goToStep(index)}
-              >
-                <div className="direction-icon">{direction.icon || ">"}</div>
-                <div className="direction-content">
-                  <div className="direction-instruction">
-                    {direction.instruction}
-                  </div>
-                  <div className="direction-meta">
-                    Floor {direction.floor}
-                    {direction.distance > 1 && (
-                      <> - {formatDistance(direction.distance)}</>
-                    )}
-                  </div>
-                </div>
-                <div className="direction-step-number">{index + 1}</div>
+          {voiceEnabled && (
+            <>
+              <div className="voice-guidance-card">
+                <span className="voice-guidance-label">
+                  Have you completed this step?
+                </span>
+                <p>{getDirectionText(currentDirection)}</p>
               </div>
-            ))}
-          </div>
-        </>
+
+              <div className="voice-actions">
+                <button
+                  className="btn-voice"
+                  onClick={speakCurrentStep}
+                  disabled={isSpeaking}
+                  title="Speak current step"
+                >
+                  {awaitingStepConfirmation ? "Repeat instruction" : "Speak step"}
+                </button>
+                <button
+                  className="btn-voice"
+                  onClick={confirmStepComplete}
+                  disabled={
+                    isSpeaking ||
+                    !awaitingStepConfirmation ||
+                    currentStep >= directions.length - 1
+                  }
+                  title="Continue to next instruction"
+                >
+                  Yes, next instruction
+                </button>
+                <button
+                  className="btn-voice btn-stop"
+                  onClick={stopVoiceGuidance}
+                  title="Stop guidance"
+                >
+                  Stop guidance
+                </button>
+              </div>
+
+              <div className="speed-control">
+                <label htmlFor="speech-rate-range">
+                  Speed: {speechRate.toFixed(1)}x
+                </label>
+                <input
+                  id="speech-rate-range"
+                  type="range"
+                  min="0.5"
+                  max="2.0"
+                  step="0.1"
+                  value={speechRate}
+                  onChange={(e) => setSpeechRate(parseFloat(e.target.value))}
+                />
+              </div>
+            </>
+          )}
+        </div>
       )}
+
+      <div className="current-step-card">
+        <div className="step-header">
+          <span className="step-number">
+            Step {currentStep + 1} of {directions.length}
+          </span>
+          <span className={`step-type ${currentDirection.type}`}>
+            {currentDirection.icon || ">"}
+          </span>
+        </div>
+        <div className="step-instruction">
+          {getDirectionText(currentDirection)}
+        </div>
+        <div className="step-floor">
+          Floor {currentDirection.floor}
+          {currentDirection.targetFloor !== undefined && (
+            <>{` -> Floor ${currentDirection.targetFloor}`}</>
+          )}
+        </div>
+      </div>
+
+      <div className="step-navigation">
+        <button
+          className="directions-nav-btn"
+          onClick={previousStep}
+          disabled={currentStep === 0}
+        >
+          Previous
+        </button>
+        <div className="step-indicator">
+          {currentStep + 1} / {directions.length}
+        </div>
+        <button
+          className="directions-nav-btn"
+          onClick={nextStep}
+          disabled={currentStep === directions.length - 1}
+        >
+          Next
+        </button>
+      </div>
+
+      <div className="progress-container">
+        <div
+          className="progress-bar"
+          style={{ width: `${((currentStep + 1) / directions.length) * 100}%` }}
+        />
+      </div>
+
+      <div className="directions-list">
+        <div className="list-header">All Steps</div>
+        {directions.map((direction, index) => (
+          <div
+            key={direction.id}
+            className={`direction-item ${index === currentStep ? "active" : ""} ${direction.type}`}
+            onClick={() => goToStep(index)}
+          >
+            <div className="direction-icon">{direction.icon || ">"}</div>
+            <div className="direction-content">
+              <div className="direction-instruction">
+                {getDirectionText(direction)}
+              </div>
+              <div className="direction-meta">Floor {direction.floor}</div>
+            </div>
+            <div className="direction-step-number">{index + 1}</div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

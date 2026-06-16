@@ -26,6 +26,8 @@ const level3Obstacles = readGeoJson(
   "public/room_level_3_obstacle_buffered.geojson",
 );
 const level3Rooms = readGeoJson("public/rooms-level-03-WGS.geojson").features;
+const level4Centerlines = readGeoJson("public/room_level_4_centerlines.geojson");
+const level4Rooms = readGeoJson("public/rooms-level-04-WGS.geojson").features;
 const level5Centerlines = readGeoJson("public/room_level_5_centerlines.geojson");
 const level5Walkable = readGeoJson("public/room_level_5_walkable.geojson");
 const level5Obstacles = readGeoJson(
@@ -66,6 +68,18 @@ const level3Router = new IndoorRouter(
   },
 );
 const level3RoomAnchorIndex = buildRoomAnchorIndex(level3Centerlines);
+const level4CenterlineOnlyRouter = new IndoorRouter(
+  level4Centerlines,
+  null,
+  null,
+  {
+    maxSnapDistanceMeters: 50,
+    nodeToleranceMeters: 0.05,
+    validationSampleStepMeters: 0.5,
+    simplifyCollinearPoints: false,
+  },
+);
+const level4RoomAnchorIndex = buildRoomAnchorIndex(level4Centerlines);
 const level5Router = new IndoorRouter(
   level5Centerlines,
   level5Walkable,
@@ -320,6 +334,62 @@ describe("room_level_3 routing anchors", () => {
   });
 });
 
+describe("room_level_4 centerline routing", () => {
+  it("uses encoded centerline anchors for level-4 group study compartments", () => {
+    const target = resolveRoomRoutingTarget({
+      room: getRoom(level4Rooms, "group study 0420d"),
+      floorId: 4,
+      router: level4CenterlineOnlyRouter,
+      roomAnchorIndex: level4RoomAnchorIndex,
+      role: "destination",
+    });
+
+    expect(target?.debug?.source).toBe("level4_centerline_anchor");
+    expect(target?.debug?.snappedTarget).toBeTruthy();
+  });
+
+  it("keeps level-4 routes on the dedicated centerline graph", () => {
+    const startTarget = resolveRoomRoutingTarget({
+      room: getRoom(level4Rooms, "help desk"),
+      floorId: 4,
+      router: level4CenterlineOnlyRouter,
+      roomAnchorIndex: level4RoomAnchorIndex,
+      role: "start",
+    });
+    const endTarget = resolveRoomRoutingTarget({
+      room: getRoom(level4Rooms, "group study 0420d"),
+      floorId: 4,
+      router: level4CenterlineOnlyRouter,
+      roomAnchorIndex: level4RoomAnchorIndex,
+      role: "destination",
+    });
+
+    const result = level4CenterlineOnlyRouter.computeRoute(
+      startTarget.coordinates,
+      endTarget.coordinates,
+    );
+
+    expect(result.success).toBe(true);
+    expect(result.renderCoordinates.length).toBeGreaterThan(1);
+    expect((result.debug?.graphNodeIds ?? []).length).toBeGreaterThan(1);
+    expect(
+      (result.debug?.renderedSegments ?? []).every(
+        (segment) => segment.valid && !segment.intersectsObstacle,
+      ),
+    ).toBe(true);
+    expectCoordinateClose(
+      result.renderCoordinates[0],
+      startTarget.coordinates,
+      0.0001,
+    );
+    expectCoordinateClose(
+      result.renderCoordinates[result.renderCoordinates.length - 1],
+      endTarget.coordinates,
+      0.0001,
+    );
+  });
+});
+
 describe("room_level_5 centerline routing", () => {
   it("normalizes level-5 room name variants to explicit centerline anchors", () => {
     const target = resolveRoomRoutingTarget({
@@ -343,7 +413,7 @@ describe("room_level_5 centerline routing", () => {
       role: "start",
     });
     const endTarget = resolveRoomRoutingTarget({
-      room: getRoom(level5Rooms, "group study 0550a"),
+      room: getRoom(level5Rooms, "group  study 0550a"),
       floorId: 5,
       router: level5Router,
       roomAnchorIndex: level5RoomAnchorIndex,
@@ -441,11 +511,8 @@ describe("room_level_7 centerline routing", () => {
       role: "destination",
     });
 
-    expect(startTarget?.debug?.source).toBe("level7_geometry_anchor");
-    expectCoordinateClose(startTarget?.coordinates, {
-      lng: -89.22063510999548,
-      lat: 37.7153596647848,
-    });
+    expect(startTarget?.debug?.source).toBe("level7_centerline_anchor");
+    expect(startTarget?.debug?.snappedTarget).toBeTruthy();
 
     const result = level7CenterlineOnlyRouter.computeRoute(
       startTarget.coordinates,

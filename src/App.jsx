@@ -45,6 +45,7 @@ const MIN_SIDEBAR_WIDTH = 280;
 const MAX_SIDEBAR_WIDTH = 520;
 const SIDEBAR_COLLAPSE_THRESHOLD = 180;
 const routeLandmarkLabelDistanceMeters = 4.5;
+const ROUTE_DEBUG_ENABLED = import.meta.env?.DEV !== false;
 
 const getRoomDisplayId = (room) =>
   room?.properties?.id ||
@@ -56,10 +57,11 @@ const getRoomDisplayId = (room) =>
 const ROUTER_CONFIG = [
   {
     floor: 0,
-    centerline: "/basement_centerlines.geojson",
+    centerline: "/basemment_centerlines.geojson",
     walkable: "/room_basement_walkable.geojson",
     obstacle: "/room_basement_obstacle_buffered.geojson",
     label: "Basement",
+    simplifyCollinearPoints: false,
   },
   {
     floor: 1,
@@ -88,6 +90,8 @@ const ROUTER_CONFIG = [
     walkable: "/room_level_4_walkable.geojson",
     obstacle: "/room_level_4_obstacle_buffered.geojson",
     label: "Level 4",
+    useCenterlineOnlyRouting: true,
+    simplifyCollinearPoints: false,
   },
   {
     floor: 5,
@@ -143,7 +147,8 @@ function App() {
   const [showHelp, setShowHelp] = useState(false);
   const [showDirections, setShowDirections] = useState(true);
   const [highlightedStep, setHighlightedStep] = useState(null);
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [cameraMode, setCameraMode] = useState("overview");
+const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [sidebarWidth, setSidebarWidth] = useState(DEFAULT_SIDEBAR_WIDTH);
   const [routers, setRouters] = useState({});
   const [routerError, setRouterError] = useState(null);
@@ -369,8 +374,15 @@ function App() {
     all: "/rooms-all-WGS-v6.geojson",
   };
 
-  const ROUTE_ROOM_INDEX_OVERRIDES = {
+  const ROUTE_ROOM_FLOOR_MAP = {
     0: FLOOR_POLYGON_MAP[0],
+    1: FLOOR_POLYGON_MAP[1],
+    2: FLOOR_POLYGON_MAP[2],
+    3: FLOOR_POLYGON_MAP[3],
+    4: FLOOR_POLYGON_MAP[4],
+    5: FLOOR_POLYGON_MAP[5],
+    6: FLOOR_POLYGON_MAP[6],
+    7: FLOOR_POLYGON_MAP[7],
   };
 
   // Line overlays are optional - removed since we're using polygons now
@@ -395,40 +407,101 @@ function App() {
 
   useEffect(() => {
     const loadRouteRoomIndex = async () => {
+      const normalizeRouteRoomFeature = (feature, floor) => ({
+        ...feature,
+        properties: {
+          ...feature.properties,
+          floor,
+          level:
+            feature.properties?.level ??
+            feature.properties?.floor ??
+            feature.properties?.nivel ??
+            floor,
+        },
+      });
+
+      const loadAllFloorFallback = async () => {
+        try {
+          const data = await fetchGeoJson(FLOOR_POLYGON_MAP.all);
+          return data.features || [];
+        } catch (error) {
+          console.warn(
+            "[Routing] Unable to load all-floor room fallback data.",
+            error,
+          );
+          return [];
+        }
+      };
+
       try {
-        const data = await fetchGeoJson(FLOOR_POLYGON_MAP.all);
-        let routeRooms = data.features || [];
-
-        const overrideEntries = Object.entries(ROUTE_ROOM_INDEX_OVERRIDES);
-        if (overrideEntries.length > 0) {
-          const overrideResults = await Promise.all(
-            overrideEntries.map(async ([floor, url]) => {
+        const routeRoomResults = await Promise.all(
+          Object.entries(ROUTE_ROOM_FLOOR_MAP).map(
+            async ([floorKey, url]) => {
+              const floor = Number(floorKey);
               const floorData = await fetchGeoJson(url);
+
               return {
-                floor: Number(floor),
-                features: floorData.features || [],
+                floor,
+                source: url,
+                features: (floorData.features || []).map((feature) =>
+                  normalizeRouteRoomFeature(feature, floor),
+                ),
               };
-            }),
-          );
+            },
+          ),
+        );
 
-          const overrideFloors = new Set(
-            overrideResults.map(({ floor }) => floor),
-          );
-          routeRooms = routeRooms.filter(
-            (room) => !overrideFloors.has(getRoomFloor(room)),
-          );
+        const routeRooms = [];
 
-          for (const { features } of overrideResults) {
-            routeRooms.push(...features);
-          }
+        for (const { features } of routeRoomResults) {
+          routeRooms.push(...features);
         }
 
         setAllFloorRouteRooms(routeRooms);
       } catch (error) {
         console.warn(
-          "[Routing] Unable to load all-floor room data for multi-floor routing.",
+          "[Routing] Unable to load one or more individual floor room files. Falling back to all-floor room data where needed.",
           error,
         );
+
+        const allFloorFallbackRooms = await loadAllFloorFallback();
+        const routeRooms = [];
+
+        for (const [floorKey, url] of Object.entries(ROUTE_ROOM_FLOOR_MAP)) {
+          const floor = Number(floorKey);
+
+          try {
+            const floorData = await fetchGeoJson(url);
+            const features = (floorData.features || []).map((feature) =>
+              normalizeRouteRoomFeature(feature, floor),
+            );
+            routeRooms.push(...features);
+          } catch (floorError) {
+            const fallbackFeatures = allFloorFallbackRooms
+              .filter((room) => getRoomFloor(room) === floor)
+              .map((feature) => normalizeRouteRoomFeature(feature, floor));
+
+            if (fallbackFeatures.length > 0) {
+              routeRooms.push(...fallbackFeatures);
+            } else {
+              console.warn(
+                `[Routing] No route room data available for floor ${floor}.`,
+                floorError,
+              );
+            }
+          }
+        }
+
+        if (routeRooms.length > 0) {
+          setAllFloorRouteRooms(routeRooms);
+        } else {
+          setAllFloorRouteRooms(
+            allFloorFallbackRooms.map((feature) => {
+              const floor = getRoomFloor(feature);
+              return normalizeRouteRoomFeature(feature, floor ?? 0);
+            }),
+          );
+        }
       }
     };
 
@@ -1019,6 +1092,7 @@ function App() {
           endRoom,
           options: {
             distanceThresholdMeters: routeLandmarkLabelDistanceMeters,
+            debug: ROUTE_DEBUG_ENABLED,
           },
         });
         const directions = generateRouteInstructions({
@@ -1033,6 +1107,7 @@ function App() {
                 ? "accessible"
                 : routeOptions.preferences,
             landmarks: routeLandmarks,
+            debug: ROUTE_DEBUG_ENABLED,
           },
         });
 
@@ -1063,12 +1138,15 @@ function App() {
               startRoomId: getRoomDisplayId(startRoom),
               endRoomId: getRoomDisplayId(endRoom),
               landmarkRoomIds: routeLandmarks.map((landmark) => landmark.roomId),
+              landmarks: routeLandmarks,
               startFloor,
               endFloor,
               involvedFloors: [floorForRouting],
+              connectorRoomIds: [],
             },
           },
         });
+        setCameraMode("overview");
         setShowRoutePlanner(false);
         setShowDirections(true);
         requestRouteCameraFit();
@@ -1243,6 +1321,7 @@ function App() {
           endRoom,
           options: {
             distanceThresholdMeters: routeLandmarkLabelDistanceMeters,
+            debug: ROUTE_DEBUG_ENABLED,
           },
         }),
       );
@@ -1263,6 +1342,7 @@ function App() {
               ? "accessible"
               : routeOptions.preferences,
           landmarksByFloor,
+          debug: ROUTE_DEBUG_ENABLED,
         },
       });
       const floors = [startFloor, endFloor].sort((a, b) => a - b);
@@ -1294,6 +1374,7 @@ function App() {
             startRoomId: getRoomDisplayId(startRoom),
             endRoomId: getRoomDisplayId(endRoom),
             landmarkRoomIds: routeLandmarks.map((landmark) => landmark.roomId),
+            landmarks: routeLandmarks,
             startFloor,
             endFloor,
             involvedFloors: Array.from(
@@ -1303,9 +1384,13 @@ function App() {
                 ...routeSegments.map((segment) => Number(segment.floorId)),
               ]),
             ).sort((a, b) => a - b),
+            connectorRoomIds: transitionSegments
+              .map((seg) => seg.connectorName)
+              .filter(Boolean),
           },
         },
       });
+      setCameraMode("overview");
       setShowRoutePlanner(false);
       setShowDirections(true);
       requestRouteCameraFit();
@@ -1318,21 +1403,44 @@ function App() {
   };
 
   const handleStepClick = (step) => {
-    // Highlight the step location on the map
     setHighlightedStep(step);
 
-    // Animate camera to step location
-    if (step && step.coords) {
+    if (step?.coords && cameraMode !== "manual") {
+      if (import.meta.env?.DEV !== false) {
+        console.log("[RouteCamera] step click -> overhead pan", {
+          type: step.type,
+          turnDirection: step.turnDirection ?? null,
+          outgoingBearing: step.outgoingBearing ?? null,
+          cameraMode,
+          action: "overhead pan with north-up bearing",
+        });
+      }
+      setCameraMode("overview");
       setViewState((prev) => ({
         ...prev,
         longitude: step.coords[0],
         latitude: step.coords[1],
         zoom: 19.5,
-        pitch: 50,
+        pitch: 0,
+        bearing: 0,
         transitionDuration: 800,
         transitionInterpolator: new FlyToInterpolator(),
       }));
+    } else if (import.meta.env?.DEV !== false) {
+      console.log("[RouteCamera] step click skipped", {
+        type: step?.type ?? null,
+        cameraMode,
+        reason: cameraMode === "manual" ? "user has manual control" : "no coords on step",
+      });
     }
+  };
+  const handleUserCameraInteraction = () => {
+    setCameraMode("manual");
+  };
+
+  const handleRecenterRoute = () => {
+    setCameraMode("overview");
+    requestRouteCameraFit();
   };
 
   // Show loading screen while data is loading
@@ -1490,6 +1598,35 @@ function App() {
                 onClose={() => setShowFilterPanel(false)}
               />
             )}
+
+            {showDirections && visibleRouteContext?.route?.path && (
+              <div className="panel-section panel-card">
+                <DirectionsPanel
+                  routePath={visibleRouteContext.route.path}
+                  routeInfo={visibleRouteContext.route.info}
+                  onClose={clearRouteState}
+                  onStepClick={handleStepClick}
+                  cameraMode={cameraMode}
+                  onRecenterRoute={handleRecenterRoute}
+                />
+              </div>
+            )}
+
+            <div className="panel-section panel-card">
+              <VisualControls
+                lightingEnabled={lightingEnabled}
+                setLightingEnabled={setLightingEnabled}
+                translucency={translucency}
+                setTranslucency={setTranslucency}
+                basemapStyle={basemapStyle}
+                setBasemapStyle={setBasemapStyle}
+                cinematicAnimationsEnabled={cinematicAnimationsEnabled}
+                setCinematicAnimationsEnabled={setCinematicAnimationsEnabled}
+                onReplayInitialReveal={() =>
+                  setInitialRevealReplayKey((key) => key + 1)
+                }
+              />
+            </div>
           </aside>
 
           <button
@@ -1527,6 +1664,7 @@ function App() {
               colorScheme="default"
               viewState={viewState}
               onViewStateChange={setViewState}
+              onUserCameraInteraction={handleUserCameraInteraction}
               lightingEnabled={lightingEnabled}
               translucency={translucency}
               heightExaggeration={1}
@@ -1547,20 +1685,6 @@ function App() {
               initialRevealReplayKey={initialRevealReplayKey}
             />
 
-            <VisualControls
-              lightingEnabled={lightingEnabled}
-              setLightingEnabled={setLightingEnabled}
-              translucency={translucency}
-              setTranslucency={setTranslucency}
-              basemapStyle={basemapStyle}
-              setBasemapStyle={setBasemapStyle}
-              cinematicAnimationsEnabled={cinematicAnimationsEnabled}
-              setCinematicAnimationsEnabled={setCinematicAnimationsEnabled}
-              onReplayInitialReveal={() =>
-                setInitialRevealReplayKey((key) => key + 1)
-              }
-            />
-
             {/* Room Info Popup */}
             {selectedRoom && (
               <RoomInfoPopup
@@ -1570,14 +1694,15 @@ function App() {
               />
             )}
 
-            {/* Directions Panel */}
-            {showDirections && visibleRouteContext?.route?.path && (
-              <DirectionsPanel
-                routePath={visibleRouteContext.route.path}
-                routeInfo={visibleRouteContext.route.info}
-                onClose={clearRouteState}
-                onStepClick={handleStepClick}
-              />
+            {/* Directions badge when sidebar is collapsed */}
+            {sidebarCollapsed && showDirections && visibleRouteContext?.route?.path && (
+              <button
+                className="directions-sidebar-badge"
+                onClick={() => setSidebarCollapsed(false)}
+                title="Open sidebar to view directions"
+              >
+                ↗ Directions
+              </button>
             )}
           </div>
         </div>

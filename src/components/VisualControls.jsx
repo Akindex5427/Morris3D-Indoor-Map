@@ -13,9 +13,6 @@ const VisualControls = ({
   onReplayInitialReveal,
 }) => {
   const [collapsed, setCollapsed] = useState(false);
-  const stopMapDrag = (event) => {
-    event.stopPropagation();
-  };
   const handleTranslucencyChange = (event) => {
     setTranslucency(parseInt(event.target.value, 10));
   };
@@ -24,37 +21,22 @@ const VisualControls = ({
   };
 
   return (
-    <div
-      className={`visual-controls floating ${collapsed ? "collapsed" : ""}`}
-      onPointerDown={stopMapDrag}
-      onMouseDown={stopMapDrag}
-      onTouchStart={stopMapDrag}
-      onWheel={stopMapDrag}
-    >
+    <div className={`visual-controls ${collapsed ? "collapsed" : ""}`}>
       <div className="vc-header">
         <div className="vc-heading">
           <span className="vc-kicker">Display</span>
-          {!collapsed && <strong>Visual controls</strong>}
+          {!collapsed && <strong>Visual settings</strong>}
         </div>
         <div className="vc-actions">
           <button
             className="vc-toggle"
             onClick={() => setCollapsed((current) => !current)}
             aria-label={
-              collapsed ? "Open visual controls" : "Collapse visual controls"
+              collapsed ? "Open display settings" : "Collapse display settings"
             }
           >
-            {collapsed ? "Open" : "Collapse"}
+            {collapsed ? "Expand" : "Collapse"}
           </button>
-          {!collapsed && (
-            <button
-              className="vc-close"
-              onClick={() => setCollapsed(true)}
-              aria-label="Hide visual controls"
-            >
-              x
-            </button>
-          )}
         </div>
       </div>
 

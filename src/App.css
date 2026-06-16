@@ -548,7 +548,6 @@
   flex: 1;
 }
 
-.visual-controls.floating,
 .room-info-popup,
 .filter-panel,
 .help-overlay-content {
@@ -558,21 +557,12 @@
   box-shadow: var(--shadow-md);
 }
 
-.visual-controls.floating {
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  z-index: 260;
-  width: 280px;
-  padding: 16px;
-  border-radius: 22px;
-  pointer-events: auto;
+.visual-controls {
+  width: 100%;
 }
 
-.visual-controls.floating.collapsed {
-  width: auto;
-  min-width: 0;
-  padding: 12px;
+.visual-controls.collapsed .vc-body {
+  display: none;
 }
 
 .vc-header {
@@ -1177,6 +1167,33 @@
   box-shadow: 0 22px 34px rgba(46, 93, 135, 0.34);
 }
 
+.directions-sidebar-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 200;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(46, 93, 135, 0.28);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.directions-sidebar-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 22px rgba(46, 93, 135, 0.34);
+}
+
 .left-panel::-webkit-scrollbar,
 .room-info-popup::-webkit-scrollbar,
 .suggestions-list::-webkit-scrollbar,
@@ -1259,9 +1276,6 @@
     min-height: 54vh;
   }
 
-  .visual-controls.floating {
-    width: 250px;
-  }
 
   .app-footer {
     text-align: left;
@@ -1292,11 +1306,6 @@
     flex-direction: column;
   }
 
-  .visual-controls.floating {
-    top: 12px;
-    right: 12px;
-    width: min(250px, calc(100% - 24px));
-  }
 }
 
 @media (max-width: 560px) {

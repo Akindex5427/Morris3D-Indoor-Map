@@ -320,40 +320,35 @@ export const generateDirections = (routePath) => {
 export const generateSpeechText = (directions) => {
   if (!directions || directions.length === 0) return "";
 
-  const texts = directions.map((dir) => {
-    let text = dir.instruction;
+  const texts = directions
+    .map((dir) => dir?.text ?? dir?.instruction)
+    .filter(Boolean);
 
-    // Add distance information for all but start and destination
-    if (
-      dir.type !== "start" &&
-      dir.type !== "destination" &&
-      dir.distance > 1
-    ) {
-      text += `, in ${formatDistance(dir.distance)}`;
-    }
-
-    return text;
-  });
-
-  return texts.join(". ") + ".";
+  return joinSpeechSentences(texts);
 };
 
 // Generate speech for a single direction step
 export const generateStepSpeech = (direction) => {
   if (!direction) return "";
 
-  let text = direction.instruction;
-
-  if (direction.distance && direction.distance > 1) {
-    text += `. Distance: ${formatDistance(direction.distance)}`;
-  }
-
-  if (direction.targetFloor !== undefined) {
-    text += `. Moving from Floor ${direction.floor} to Floor ${direction.targetFloor}`;
-  }
-
-  return text;
+  const raw = direction.text ?? direction.instruction ?? "";
+  return normalizeSpeechText(raw);
 };
+
+function normalizeSpeechText(text) {
+  return String(text)
+    .replace(/\s*[–—]\s*/g, " to ")    // en-dash/em-dash ranges → "to" (e.g. "Journals A–D")
+    .replace(/\bF(\d+)\b/g, "Floor $1") // F1 → Floor 1 (defensive, shouldn't appear in text)
+    .replace(/([^.!?])$/, "$1.")         // ensure sentence ends with a period for natural TTS pause
+    .trim();
+}
+
+const joinSpeechSentences = (sentences) =>
+  sentences
+    .map((sentence) => String(sentence).trim())
+    .filter(Boolean)
+    .map((sentence) => (/[.!?]$/.test(sentence) ? sentence : `${sentence}.`))
+    .join(" ");
 
 // Calculate total route statistics
 export const calculateRouteStats = (routePath) => {

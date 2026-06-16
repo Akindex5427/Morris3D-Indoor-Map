@@ -8,6 +8,7 @@ import {
   ScatterplotLayer,
 } from "@deck.gl/layers";
 import { FlyToInterpolator, WebMercatorViewport } from "@deck.gl/core";
+import { CollisionFilterExtension } from "@deck.gl/extensions";
 import { useIndoorBuilding } from "./IndoorBuilding";
 import { useBuildingWallLayers } from "../layers/buildingWallLayer";
 import { usePerimeterWallLayer } from "../layers/perimeterWallLayer";
@@ -44,6 +45,7 @@ const ROUTE_CAMERA_TRANSITION_MS = 1200;
 const ROUTE_CAMERA_MIN_ZOOM = 16.5;
 const ROUTE_CAMERA_MAX_ZOOM = 20.5;
 const ROUTE_LANDMARK_LABEL_LIMIT = 8;
+const routeLabelCollisionExtension = new CollisionFilterExtension();
 
 const clamp01 = (value) => Math.max(0, Math.min(1, value));
 
@@ -57,6 +59,42 @@ const getRoomFeatureId = (featureOrRoom) => {
 const getRoomFeatureName = (featureOrRoom, fallback = "Room") => {
   const props = featureOrRoom?.properties || featureOrRoom || {};
   return props.name || props.id || props.room_id || fallback;
+};
+
+const normalizeRouteKey = (value) =>
+  String(value ?? "")
+    .trim()
+    .toLowerCase()
+    .replace(/[\s_-]+/g, " ");
+
+const getConnectorFeatureType = (featureOrRoom) => {
+  const props = featureOrRoom?.properties || featureOrRoom || {};
+  const searchableText = [
+    props.name,
+    props.type,
+    props.id,
+    props.room_id,
+    props.roomname,
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  if (/\belevators?\b|\blifts?\b/.test(searchableText)) return "elevator";
+  if (/\bstairs?\b|\bstair\s*case\b|\bstaircase\b/.test(searchableText)) {
+    return "stairs";
+  }
+  return null;
+};
+
+const distanceLngLatMeters = (a, b) => {
+  if (!isValidLngLat(a) || !isValidLngLat(b)) return Infinity;
+  const lat = ((a[1] + b[1]) / 2) * (Math.PI / 180);
+  const metersPerDegreeLat = 111_320;
+  const metersPerDegreeLng = Math.cos(lat) * metersPerDegreeLat;
+  const dx = (a[0] - b[0]) * metersPerDegreeLng;
+  const dy = (a[1] - b[1]) * metersPerDegreeLat;
+  return Math.hypot(dx, dy);
 };
 
 const getRoomFeatureFloor = (featureOrRoom) => {
@@ -91,6 +129,151 @@ const isValidLngLat = (coords) =>
   Array.isArray(coords) &&
   Number.isFinite(coords[0]) &&
   Number.isFinite(coords[1]);
+
+// ── Label geometry helpers ────────────────────────────────────────────────────
+
+// Area-weighted centroid of a closed ring via the Shoelace theorem.
+// Returns [lng, lat] or null for degenerate input.
+const polygonRingCentroid = (ring) => {
+  if (!Array.isArray(ring) || ring.length < 3) return null;
+  let area = 0;
+  let cx = 0;
+  let cy = 0;
+  for (let i = 0; i < ring.length - 1; i++) {
+    const [x0, y0] = ring[i];
+    const [x1, y1] = ring[i + 1];
+    const cross = x0 * y1 - x1 * y0;
+    area += cross;
+    cx += (x0 + x1) * cross;
+    cy += (y0 + y1) * cross;
+  }
+  area /= 2;
+  if (Math.abs(area) < 1e-14) {
+    // Degenerate polygon — vertex average of exterior ring (skip closing vertex)
+    const pts = ring.slice(0, -1);
+    if (!pts.length) return null;
+    const sum = pts.reduce((a, [x, y]) => [a[0] + x, a[1] + y], [0, 0]);
+    return [sum[0] / pts.length, sum[1] / pts.length];
+  }
+  return [cx / (6 * area), cy / (6 * area)];
+};
+
+// Ray-casting point-in-polygon (2-D; accurate enough for indoor WGS-84 scales).
+const pointInPolygonRing = ([px, py], ring) => {
+  let inside = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const [xi, yi] = ring[i];
+    const [xj, yj] = ring[j];
+    if (
+      (yi > py) !== (yj > py) &&
+      px < ((xj - xi) * (py - yi)) / (yj - yi) + xi
+    ) {
+      inside = !inside;
+    }
+  }
+  return inside;
+};
+
+const pointInPolygonRings = (point, rings) => {
+  const [exterior, ...holes] = rings;
+  if (!exterior || !pointInPolygonRing(point, exterior)) return false;
+  return !holes.some((hole) => pointInPolygonRing(point, hole));
+};
+
+const distanceToSegment = (point, start, end) => {
+  const dx = end[0] - start[0];
+  const dy = end[1] - start[1];
+  const lengthSquared = dx * dx + dy * dy;
+  if (lengthSquared <= 0) return Math.hypot(point[0] - start[0], point[1] - start[1]);
+  const t = Math.max(
+    0,
+    Math.min(1, ((point[0] - start[0]) * dx + (point[1] - start[1]) * dy) / lengthSquared),
+  );
+  return Math.hypot(point[0] - (start[0] + dx * t), point[1] - (start[1] + dy * t));
+};
+
+const distanceToPolygonEdges = (point, rings) => {
+  let best = Infinity;
+  for (const ring of rings) {
+    for (let index = 0; index < ring.length - 1; index += 1) {
+      best = Math.min(best, distanceToSegment(point, ring[index], ring[index + 1]));
+    }
+  }
+  return best;
+};
+
+const pointOnSurface = (rings) => {
+  const exterior = rings[0];
+  if (!exterior?.length) return null;
+
+  const lngs = exterior.map((coord) => coord[0]);
+  const lats = exterior.map((coord) => coord[1]);
+  const minLng = Math.min(...lngs);
+  const maxLng = Math.max(...lngs);
+  const minLat = Math.min(...lats);
+  const maxLat = Math.max(...lats);
+  const candidates = [];
+
+  const steps = 8;
+  for (let xIndex = 1; xIndex < steps; xIndex += 1) {
+    for (let yIndex = 1; yIndex < steps; yIndex += 1) {
+      candidates.push([
+        minLng + ((maxLng - minLng) * xIndex) / steps,
+        minLat + ((maxLat - minLat) * yIndex) / steps,
+      ]);
+    }
+  }
+
+  return candidates
+    .filter((point) => pointInPolygonRings(point, rings))
+    .sort(
+      (left, right) =>
+        distanceToPolygonEdges(right, rings) - distanceToPolygonEdges(left, rings),
+    )[0] ?? null;
+};
+
+// Returns the best label anchor position [lng, lat] for a GeoJSON feature:
+//   1. Area-weighted centroid of the exterior ring — if it lies inside the polygon
+//   2. Midpoint of the longest edge whose midpoint is inside the polygon
+//   3. Vertex-average centroid as last resort
+// Using area-weighted centroid instead of vertex-average prevents the label from
+// drifting toward clusters of closely-spaced vertices (e.g. one busy corner of
+// an L-shaped room), and the interior check guarantees the anchor is actually
+// inside the room rather than in the adjacent corridor.
+const getLabelPosition = (feature) => {
+  let polygons = [];
+  if (feature?.geometry?.type === "Polygon") {
+    polygons = [feature.geometry.coordinates].filter(Boolean);
+  } else if (feature?.geometry?.type === "MultiPolygon") {
+    polygons = feature.geometry.coordinates.filter(Boolean);
+  }
+  if (polygons.length === 0) return null;
+
+  // For multi-polygon, select the ring with the largest bounding-box area.
+  const bestRings = polygons.reduce((best, rings) => {
+    const exterior = rings?.[0];
+    if (!exterior || exterior.length < 3) return best;
+    const lngs = exterior.map((c) => c[0]);
+    const lats = exterior.map((c) => c[1]);
+    const area =
+      (Math.max(...lngs) - Math.min(...lngs)) *
+      (Math.max(...lats) - Math.min(...lats));
+    return !best || area > best.area ? { rings, area } : best;
+  }, null)?.rings;
+
+  if (!bestRings?.length) return null;
+  const bestRing = bestRings[0];
+
+  const centroid = polygonRingCentroid(bestRing);
+  if (!centroid || !Number.isFinite(centroid[0])) return null;
+
+  // If centroid is inside the polygon we are done.
+  if (pointInPolygonRings(centroid, bestRings)) return centroid;
+
+  // Centroid falls outside (concave/L-shaped room) — use the midpoint of the
+  // longest edge that itself lies inside the polygon.
+  return pointOnSurface(bestRings) ?? centroid;
+};
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
@@ -165,6 +348,7 @@ const Map3D = ({
   colorScheme,
   viewState: externalViewState,
   onViewStateChange,
+  onUserCameraInteraction,
   routePath = null,
   routeRenderPath = null,
   routeSegments = null,
@@ -565,12 +749,12 @@ const Map3D = ({
       { id: routeFocus.endRoomId, type: "end", label: "Destination" },
     ];
 
-    return markers
+    const focusMarkers = markers
       .map((marker) => {
         const feature = roomsData.find(
           (room) => getRoomFeatureId(room) === marker.id,
         );
-        const coords = getFeatureCentroid(feature);
+        const coords = getLabelPosition(feature) ?? getFeatureCentroid(feature);
         if (!feature || !coords) return null;
         const floor = getRoomFeatureFloor(feature);
         if (!shouldShowRouteFloor(floor)) return null;
@@ -583,19 +767,52 @@ const Map3D = ({
         };
       })
       .filter(Boolean);
+
+    if (import.meta.env?.DEV !== false && focusMarkers.length > 0) {
+      console.group(`[RouteLabels] Focus markers — ${focusMarkers.length}`);
+      console.table(
+        focusMarkers.map((m) => ({
+          type: m.type,
+          roomName: m.roomName,
+          lng: m.position[0].toFixed(6),
+          lat: m.position[1].toFixed(6),
+          elev: m.position[2].toFixed(2),
+        })),
+      );
+      console.groupEnd();
+    }
+
+    return focusMarkers;
   }, [roomsData, routeFocus, selectedFloor, selectedFloors, activeFloor]);
   const routeLandmarkMarkers = useMemo(() => {
-    if (!routeFocus?.landmarkRoomIds?.length) return [];
+    const landmarkItems = Array.isArray(routeFocus?.landmarks)
+      ? routeFocus.landmarks
+      : (routeFocus?.landmarkRoomIds || []).map((id) => ({ roomId: id }));
+    if (!landmarkItems.length) return [];
 
     const seen = new Set();
     const markers = [];
-    for (const id of routeFocus.landmarkRoomIds) {
+    for (const landmark of landmarkItems) {
+      const id = landmark.roomId || landmark.id;
       if (!id || seen.has(id)) continue;
       seen.add(id);
 
       const feature = roomsData.find((room) => getRoomFeatureId(room) === id);
-      const coords = getFeatureCentroid(feature);
-      if (!feature || !coords) continue;
+      // Route-closest point: glow dot sits on the route line to connect the label
+      // visually to the path.
+      const routeCoords = Array.isArray(landmark.coords) ? landmark.coords : null;
+      const landmarkLabelCoords = Array.isArray(landmark.labelCoords)
+        ? landmark.labelCoords
+        : null;
+      // Label anchor: polygon interior point computed from the feature geometry.
+      // Priority: area-weighted centroid (inside polygon) → routing-system roomCoords
+      // → route access point (last resort, may be on centerline).
+      const labelCoords =
+        getLabelPosition(feature) ??
+        landmarkLabelCoords ??
+        (Array.isArray(landmark.roomCoords) ? landmark.roomCoords : null) ??
+        getFeatureCentroid(feature);
+      if (!feature || !labelCoords) continue;
 
       const floor = getRoomFeatureFloor(feature);
       if (!shouldShowRouteFloor(floor)) continue;
@@ -605,22 +822,212 @@ const Map3D = ({
         type: "landmark",
         roomName: getRoomFeatureName(feature, "Landmark"),
         floor,
-        position: [coords[0], coords[1], routeElevation(floor, 0.86)],
-        glowPosition: [coords[0], coords[1], routeElevation(floor, 0.14)],
+        side: landmark.side ?? null,
+        position: [labelCoords[0], labelCoords[1], routeElevation(floor, 0.86)],
+        routePosition: routeCoords,
+        glowPosition: [labelCoords[0], labelCoords[1], routeElevation(floor, 0.14)],
+        pixelOffset: [0, 0],
+        collisionPriority: 40 - markers.length,
       });
 
       if (markers.length >= ROUTE_LANDMARK_LABEL_LIMIT) break;
     }
 
+    if (import.meta.env?.DEV !== false && markers.length > 0) {
+      console.group(`[RouteLabels] Landmark markers — ${markers.length}`);
+      console.table(
+        markers.map((m) => ({
+          name: m.roomName,
+          side: m.side ?? "—",
+          labelLng: m.position[0].toFixed(6),
+          labelLat: m.position[1].toFixed(6),
+          glowLng: m.glowPosition[0].toFixed(6),
+          glowLat: m.glowPosition[1].toFixed(6),
+          pixelOffset: m.pixelOffset.join(", "),
+        })),
+      );
+      console.groupEnd();
+    }
+
     return markers;
   }, [roomsData, routeFocus, selectedFloor, selectedFloors, activeFloor]);
 
+  const usedConnectorRoomMarkers = useMemo(() => {
+    const connectorKeys = new Set(
+      (routeFocus?.connectorRoomIds || []).map(normalizeRouteKey).filter(Boolean),
+    );
+    const connectorFloors = new Set(
+      visibleTransitionMarkers.map((marker) => Number(marker.floor)),
+    );
+    if (connectorKeys.size === 0 && visibleTransitionMarkers.length === 0) {
+      return [];
+    }
+
+    const markers = [];
+    const seen = new Set();
+    const addConnectorFeature = (feature, connectorType, source) => {
+      if (!feature) return false;
+      const floor = getRoomFeatureFloor(feature);
+      if (!shouldShowRouteFloor(floor)) return false;
+      if (connectorFloors.size > 0 && !connectorFloors.has(Number(floor))) {
+        return false;
+      }
+      const featureType = connectorType ?? getConnectorFeatureType(feature);
+      if (!featureType) return false;
+
+      const id = getRoomFeatureId(feature) ?? `${featureType}-${floor}-${markers.length}`;
+      const markerKey = `${id}-${floor}`;
+      if (seen.has(markerKey)) return false;
+
+      const coords = getLabelPosition(feature) ?? getFeatureCentroid(feature);
+      if (!coords) return false;
+
+      seen.add(markerKey);
+      markers.push({
+        id,
+        type: "connector",
+        connectorType: featureType,
+        source,
+        roomName: getRoomFeatureName(
+          feature,
+          featureType === "elevator" ? "Elevator" : "Stairs",
+        ),
+        floor,
+        position: [coords[0], coords[1], routeElevation(floor, 0.98)],
+        glowPosition: [coords[0], coords[1], routeElevation(floor, 0.16)],
+        collisionPriority: 80 - markers.length,
+      });
+      return true;
+    };
+
+    for (const feature of roomsData) {
+      const connectorType = getConnectorFeatureType(feature);
+      if (!connectorType) continue;
+      const props = feature.properties || {};
+      const featureKeys = [
+        getRoomFeatureId(feature),
+        props.name,
+        props.id,
+        props.room_id,
+        props.OBJECTID,
+      ]
+        .map(normalizeRouteKey)
+        .filter(Boolean);
+
+      if (featureKeys.some((key) => connectorKeys.has(key))) {
+        addConnectorFeature(feature, connectorType, "feature");
+      }
+    }
+
+    for (const transition of visibleTransitionMarkers) {
+      const transitionCoords = transition.coords;
+      const transitionType = transition.connectorType;
+      const matchingFeature = roomsData
+        .filter((feature) => {
+          if (Number(getRoomFeatureFloor(feature)) !== Number(transition.floor)) {
+            return false;
+          }
+          const featureType = getConnectorFeatureType(feature);
+          return (
+            featureType &&
+            (!transitionType || featureType === transitionType)
+          );
+        })
+        .map((feature) => {
+          const coords = getLabelPosition(feature) ?? getFeatureCentroid(feature);
+          return {
+            feature,
+            coords,
+            distanceMeters: distanceLngLatMeters(coords, transitionCoords),
+          };
+        })
+        .filter((candidate) => candidate.coords && candidate.distanceMeters <= 12)
+        .sort((left, right) => left.distanceMeters - right.distanceMeters)[0]
+        ?.feature;
+
+      if (matchingFeature) {
+        addConnectorFeature(matchingFeature, transitionType, "feature");
+        continue;
+      }
+
+      if (!isValidLngLat(transitionCoords)) continue;
+      const fallbackKey = `${transitionType}-${transition.floor}-${transition.role}`;
+      if (seen.has(fallbackKey)) continue;
+      seen.add(fallbackKey);
+      markers.push({
+        id: fallbackKey,
+        type: "connector",
+        connectorType: transitionType,
+        source: "transition",
+        roomName: transitionType === "elevator" ? "Elevator" : "Stairs",
+        floor: transition.floor,
+        position: [
+          transitionCoords[0],
+          transitionCoords[1],
+          routeElevation(transition.floor, 0.98),
+        ],
+        glowPosition: [
+          transitionCoords[0],
+          transitionCoords[1],
+          routeElevation(transition.floor, 0.16),
+        ],
+        collisionPriority: 70 - markers.length,
+      });
+    }
+
+    if (import.meta.env?.DEV !== false) {
+      console.group(
+        `[RouteLabels] Used connector markers — ${markers.length}`,
+      );
+      if (markers.length > 0) {
+        console.table(
+          markers.map((marker) => ({
+            name: marker.roomName,
+            type: marker.connectorType,
+            source: marker.source,
+            floor: marker.floor,
+            labelLng: marker.position[0].toFixed(6),
+            labelLat: marker.position[1].toFixed(6),
+          })),
+        );
+      } else {
+        console.log("none");
+      }
+      console.groupEnd();
+    }
+
+    return markers;
+  }, [
+    roomsData,
+    routeFocus,
+    selectedFloor,
+    selectedFloors,
+    activeFloor,
+    visibleTransitionMarkers,
+  ]);
+
   useEffect(() => {
-    if (
-      !routeCameraKey ||
-      routeCameraKey === lastRouteCameraKeyRef.current ||
-      !onViewStateChange
-    ) {
+    if (!routeCameraKey) {
+      return;
+    }
+
+    if (routeCameraKey === lastRouteCameraKeyRef.current) {
+      if (import.meta.env?.DEV !== false) {
+        console.log("[RouteCamera] auto-fit skipped", {
+          reason: "route already fitted",
+          routeCameraKey,
+        });
+      }
+      return;
+    }
+
+    if (!onViewStateChange) {
+      if (import.meta.env?.DEV !== false) {
+        console.log("[RouteCamera] auto-fit skipped", {
+          reason: "missing view-state handler",
+          routeCameraKey,
+        });
+      }
       return;
     }
 
@@ -642,8 +1049,12 @@ const Map3D = ({
     visibleTransitionMarkers.forEach((marker) => addPoint(marker.coords));
     routeFocusMarkers.forEach((marker) => addPoint(marker.position));
     routeLandmarkMarkers.forEach((marker) => addPoint(marker.position));
+    usedConnectorRoomMarkers.forEach((marker) => addPoint(marker.position));
 
     if (routePoints.length === 0) {
+      if (import.meta.env?.DEV !== false) {
+        console.log("[RouteCamera] auto-fit skipped — no route points collected");
+      }
       return;
     }
 
@@ -684,6 +1095,14 @@ const Map3D = ({
       }
     }
 
+    if (import.meta.env?.DEV !== false) {
+      console.log("[RouteCamera] auto-fit triggered", {
+        pointCount: routePoints.length,
+        center,
+        zoom: clamp(fittedViewState.zoom, ROUTE_CAMERA_MIN_ZOOM, ROUTE_CAMERA_MAX_ZOOM),
+      });
+    }
+
     lastRouteCameraKeyRef.current = routeCameraKey;
     window.dispatchEvent(new Event("resize"));
     onViewStateChange({
@@ -709,6 +1128,7 @@ const Map3D = ({
     routeFocusMarkers,
     routeLandmarkMarkers,
     shouldRenderRoute,
+    usedConnectorRoomMarkers,
     visibleRouteSegments,
     visibleTransitionMarkers,
   ]);
@@ -869,8 +1289,22 @@ const Map3D = ({
       </svg>`;
       return `data:image/svg+xml;base64,${btoa(svg)}`;
     };
+    const createElevatorSVG = () => {
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="18" fill="#dbeafe" stroke="#1d4ed8" stroke-width="3"/>
+        <rect x="15" y="13" width="18" height="22" rx="2" fill="none" stroke="#1e3a8a" stroke-width="3"/>
+        <path d="M24 16v16M19 21l-3-3-3 3M29 27l3 3 3-3" fill="none" stroke="#1e3a8a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>`;
+      return `data:image/svg+xml;base64,${btoa(svg)}`;
+    };
     const stairIcon = {
       url: createStairSVG(),
+      width: 36,
+      height: 36,
+      anchorY: 18,
+    };
+    const elevatorIcon = {
+      url: createElevatorSVG(),
       width: 36,
       height: 36,
       anchorY: 18,
@@ -889,7 +1323,8 @@ const Map3D = ({
         id: "route-transition-markers",
         data: markerData,
         getPosition: (d) => d.position,
-        getIcon: () => stairIcon,
+        getIcon: (d) =>
+          d.connectorType === "elevator" ? elevatorIcon : stairIcon,
         getSize: 30,
         sizeUnits: "pixels",
         sizeScale: 1,
@@ -902,9 +1337,17 @@ const Map3D = ({
     layers.push(
       new TextLayer({
         id: "route-transition-labels",
-        data: markerData,
+        data: markerData.filter(
+          (marker) =>
+            !usedConnectorRoomMarkers.some(
+              (connector) =>
+                connector.source === "feature" &&
+                Number(connector.floor) === Number(marker.floor) &&
+                connector.connectorType === marker.connectorType,
+            ),
+        ),
         getPosition: (d) => [d.position[0], d.position[1], d.position[2] + 0.1],
-        getText: () => "Stairs",
+        getText: (d) => (d.connectorType === "elevator" ? "Elevator" : "Stairs"),
         getSize: 10,
         getColor: [32, 33, 36, 255],
         getTextAnchor: "middle",
@@ -912,6 +1355,49 @@ const Map3D = ({
         sizeUnits: "pixels",
         pickable: false,
         billboard: true,
+      }),
+    );
+  }
+
+  if (usedConnectorRoomMarkers.length > 0) {
+    layers.push(
+      new ScatterplotLayer({
+        id: "route-used-connector-room-glow",
+        data: usedConnectorRoomMarkers,
+        getPosition: (d) => d.glowPosition,
+        getRadius: 1.25,
+        radiusUnits: "meters",
+        getFillColor: [251, 188, 4, 78],
+        getLineColor: [138, 95, 0, 190],
+        lineWidthMinPixels: 1,
+        stroked: true,
+        filled: true,
+        pickable: false,
+        parameters: { depthTest: false, depthMask: false },
+      }),
+    );
+
+    layers.push(
+      new TextLayer({
+        id: "route-used-connector-room-labels",
+        data: usedConnectorRoomMarkers,
+        getPosition: (d) => d.position,
+        getText: (d) => d.roomName,
+        getSize: 10.5,
+        getColor: [73, 48, 0, 245],
+        getBackgroundColor: [255, 248, 220, 232],
+        background: true,
+        backgroundPadding: [4, 3],
+        getTextAnchor: "middle",
+        getAlignmentBaseline: "center",
+        sizeUnits: "pixels",
+        billboard: true,
+        extensions: [routeLabelCollisionExtension],
+        collisionEnabled: true,
+        collisionGroup: "route-room-labels",
+        getCollisionPriority: (d) => d.collisionPriority,
+        pickable: true,
+        parameters: { depthTest: false, depthMask: false },
       }),
     );
   }
@@ -976,6 +1462,10 @@ const Map3D = ({
         getAlignmentBaseline: "bottom",
         sizeUnits: "pixels",
         billboard: true,
+        extensions: [routeLabelCollisionExtension],
+        collisionEnabled: true,
+        collisionGroup: "route-room-labels",
+        getCollisionPriority: (d) => (d.type === "end" ? 110 : 100),
         pickable: false,
         parameters: { depthTest: false, depthMask: false },
       }),
@@ -1011,10 +1501,15 @@ const Map3D = ({
         getBackgroundColor: [239, 246, 255, 220],
         background: true,
         backgroundPadding: [4, 3],
+        getPixelOffset: (d) => d.pixelOffset,
         getTextAnchor: "middle",
-        getAlignmentBaseline: "bottom",
+        getAlignmentBaseline: "center",
         sizeUnits: "pixels",
         billboard: true,
+        extensions: [routeLabelCollisionExtension],
+        collisionEnabled: true,
+        collisionGroup: "route-room-labels",
+        getCollisionPriority: (d) => d.collisionPriority,
         pickable: true,
         parameters: { depthTest: false, depthMask: false },
       }),
@@ -1201,10 +1696,20 @@ const Map3D = ({
         width="100%"
         height="100%"
         viewState={externalViewState || internalViewState}
-        onViewStateChange={({ viewState: newViewState }) => {
+        onViewStateChange={({ viewState: newViewState, interactionState }) => {
           setInternalViewState(newViewState);
           if (onViewStateChange) {
             onViewStateChange(newViewState);
+          }
+          if (
+            onUserCameraInteraction &&
+            interactionState &&
+            (interactionState.isDragging ||
+              interactionState.isPanning ||
+              interactionState.isRotating ||
+              interactionState.isZooming)
+          ) {
+            onUserCameraInteraction();
           }
         }}
         controller={{

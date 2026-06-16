@@ -100,7 +100,7 @@ function isFloorSurface(props = {}) {
   );
 }
 
-function isStairFeature(props = {}) {
+function isVerticalConnectorFeature(props = {}) {
   const searchableText = [
     props.name,
     props.type,
@@ -115,7 +115,9 @@ function isStairFeature(props = {}) {
   return (
     searchableText.includes("stair") ||
     searchableText.includes("stair_case") ||
-    searchableText.includes("staircase")
+    searchableText.includes("staircase") ||
+    searchableText.includes("elevator") ||
+    searchableText.includes("lift")
   );
 }
 
@@ -736,6 +738,28 @@ export const useIndoorBuilding = ({
     const isFocusFloor = (floorNum) =>
       routeFocusActive && focusFloors.has(Number(floorNum));
 
+    // connectorRoomIds: array of connector feature names (props.name) from the
+    // active multi-floor route.  An empty array means a same-floor route (no
+    // used connectors).  undefined means old data without the field (fall back
+    // to blanket vertical-connector detection).
+    const connectorNamesFromRoute = routeFocus.connectorRoomIds;
+    const isUsedConnector = (roomId, floorNum, props) => {
+      if (Array.isArray(connectorNamesFromRoute)) {
+        if (connectorNamesFromRoute.length === 0) return false;
+        if (focusFloors.size > 0 && !focusFloors.has(Number(floorNum))) {
+          return false;
+        }
+        const ridLower = (roomId || "").toLowerCase();
+        const nameLower = (props.name || "").toLowerCase();
+        return connectorNamesFromRoute.some((n) => {
+          const lower = (n || "").toLowerCase().trim();
+          return lower.length > 0 && (nameLower === lower || ridLower === lower);
+        });
+      }
+      // Backward compat: no explicit list → keep all vertical connectors on route floors visible
+      return isFocusFloor(floorNum) && isVerticalConnectorFeature(props);
+    };
+
     try {
       // Create GeoJSON layer
       const layer = new GeoJsonLayer({
@@ -774,14 +798,15 @@ export const useIndoorBuilding = ({
           const roomId = getFeatureRoomId(props);
           const floorNum = props.level ?? props.floor ?? props.nivel ?? 0;
           const reveal = props.__presentationReveal ?? 1;
-          const isFocusedRoom = focusRoomIds.has(roomId);
+          const isStartRoom = routeFocus.startRoomId === roomId;
+          const isEndRoom = routeFocus.endRoomId === roomId;
+          const isFocusedRoom = isStartRoom || isEndRoom || focusRoomIds.has(roomId);
           const isRouteLandmark = landmarkRoomIds.has(roomId);
+          const isConnectorUsed = isUsedConnector(roomId, floorNum, props);
           const shouldKeepVisibleForRoute =
-            isFocusedRoom ||
-            isRouteLandmark ||
-            (isFocusFloor(floorNum) && isStairFeature(props));
+            isFocusedRoom || isRouteLandmark || isConnectorUsed;
           const shouldDeemphasize =
-            isFocusFloor(floorNum) &&
+            routeFocusActive &&
             !shouldKeepVisibleForRoute &&
             !isFloorSurface(props);
 
@@ -862,14 +887,24 @@ export const useIndoorBuilding = ({
           }
 
           if (shouldKeepVisibleForRoute) {
-            const boost = isFocusedRoom ? 1.22 : 1.1;
-            const lift = isFocusedRoom ? 24 : 12;
-            shadedColor = [
-              Math.min(255, Math.round(shadedColor[0] * boost + lift)),
-              Math.min(255, Math.round(shadedColor[1] * boost + lift)),
-              Math.min(255, Math.round(shadedColor[2] * boost + lift)),
-            ];
-            alpha = isFocusedRoom ? 255 : Math.max(alpha, 205);
+            // Three-tier emphasis:
+            //  focus rooms (start/end) — strongest
+            //  used connectors (stairs/elevators) — mid
+            //  landmarks — moderate
+            if (isStartRoom) {
+              shadedColor = [34, 197, 94];
+            } else if (isEndRoom) {
+              shadedColor = [239, 68, 68];
+            } else {
+              const boost = isConnectorUsed ? 1.15 : 1.1;
+              const lift = isConnectorUsed ? 18 : 12;
+              shadedColor = [
+                Math.min(255, Math.round(shadedColor[0] * boost + lift)),
+                Math.min(255, Math.round(shadedColor[1] * boost + lift)),
+                Math.min(255, Math.round(shadedColor[2] * boost + lift)),
+              ];
+            }
+            alpha = isFocusedRoom ? 255 : isConnectorUsed ? 235 : Math.max(alpha, 205);
           } else if (shouldDeemphasize) {
             alpha = Math.min(alpha, 70);
             shadedColor = [
@@ -888,10 +923,11 @@ export const useIndoorBuilding = ({
           const floorNum = props.level ?? props.floor ?? props.nivel ?? 0;
           const roomId = getFeatureRoomId(props);
           const reveal = props.__presentationReveal ?? 1;
+          const isConnectorUsedLine = isUsedConnector(roomId, floorNum, props);
           const shouldKeepVisibleForRoute =
             focusRoomIds.has(roomId) ||
             landmarkRoomIds.has(roomId) ||
-            (isFocusFloor(floorNum) && isStairFeature(props));
+            isConnectorUsedLine;
           let alpha = 220;
 
           if (isDollhouseMode) {
@@ -916,12 +952,16 @@ export const useIndoorBuilding = ({
             return [5, 57, 132, Math.round(255 * reveal)];
           }
 
+          if (isConnectorUsedLine) {
+            return [160, 100, 10, Math.round(220 * reveal)];
+          }
+
           if (landmarkRoomIds.has(roomId)) {
             return [26, 115, 232, Math.round(210 * reveal)];
           }
 
           if (
-            isFocusFloor(floorNum) &&
+            routeFocusActive &&
             !shouldKeepVisibleForRoute &&
             !isFloorSurface(props)
           ) {
