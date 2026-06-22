@@ -6,6 +6,11 @@ const MAX_BOUNDARY_SAMPLES = 160;
 const EXPLICIT_ANCHOR_MAX_REASONABLE_DISTANCE_METERS = 8;
 const GEOMETRY_ANCHOR_IMPROVEMENT_METERS = 1.5;
 
+// Room polygon property names checked for an inline door/access-point coordinate.
+// Value must be a [lng, lat] array or a { lng, lat } / { longitude, latitude } object.
+const INLINE_DOOR_PROPERTY_NAMES = ["door_anchor", "access_point", "entry_point"];
+const INLINE_DOOR_MAX_SNAP_DISTANCE_METERS = 30;
+
 const isLikelyLngLatCoordinate = (coordinate) =>
   Array.isArray(coordinate) &&
   coordinate.length >= 2 &&
@@ -102,6 +107,14 @@ export const buildRoomAnchorIndex = (centerlinesGeoJSON) => {
   return anchors;
 };
 
+// Priority chain:
+//   1. Inline door/access-point coordinate on the room polygon feature properties
+//   2. Explicit centerline anchor encoded as startroom/endroom on a centerline feature
+//   3. Geometry-derived anchor — closest room-boundary point that snaps to the graph
+//      without crossing an obstacle.  Always attempted regardless of anchor index.
+//   4. Centroid snapped to graph — last resort; may terminate inside the room polygon.
+//      Returns null for destinations on floors with an explicit anchor index, so the
+//      caller can surface a helpful error instead of silently routing to the wrong point.
 export const resolveRoomRoutingTarget = ({
   room,
   floorId,
@@ -126,27 +139,34 @@ export const resolveRoomRoutingTarget = ({
     postExtensionAdded: false,
   };
 
-  if (!hasRoomAnchorIndex(roomAnchorIndex)) {
-    return centroid
-      ? {
-          coordinates: centroid,
-          debug: {
-            ...debugBase,
-            source: "room_centroid",
-            snappedTarget: router.snapToGraph(centroid),
-          },
-        }
-      : null;
+  // ── Tier 1: inline door/access-point property on the room feature ──────────
+  const inlineDoorAnchor = findInlineRoomDoorAnchor(room, router);
+  if (inlineDoorAnchor) {
+    return {
+      coordinates: inlineDoorAnchor.coordinates,
+      debug: {
+        ...debugBase,
+        source: createAnchorDebugSource(floorId, "inline_door_anchor"),
+        snappedTarget: inlineDoorAnchor.snappedTarget,
+        sourceProp: inlineDoorAnchor.sourceProp,
+      },
+    };
   }
 
-  const explicitAnchor = findExplicitRoomAnchor(
-    roomName,
-    centroid,
-    router,
-    roomAnchorIndex,
-  );
+  // ── Tier 2: explicit centerline anchor (startroom / endroom props) ─────────
+  const explicitAnchor = hasRoomAnchorIndex(roomAnchorIndex)
+    ? findExplicitRoomAnchor(roomName, centroid, router, roomAnchorIndex)
+    : null;
+
+  // ── Tier 3: geometry-derived anchor — always attempted ────────────────────
+  // Samples the room polygon boundary and finds the closest point that snaps
+  // to the graph without crossing obstacle polygons.  Works for both
+  // centerline-only routers (no obstacles) and full walk/obstacle routers.
   const geometryAnchor = findGeometryDerivedAnchor(room, router);
 
+  // Prefer geometry over an explicit anchor that landed suspiciously far from
+  // the room (bad anchor data) and where geometry provides a meaningfully
+  // closer result.
   if (
     explicitAnchor &&
     geometryAnchor &&
@@ -193,7 +213,12 @@ export const resolveRoomRoutingTarget = ({
     };
   }
 
-  if (role === "destination") {
+  // ── Tier 4: centroid fallback ─────────────────────────────────────────────
+  // Floors that have an explicit anchor index but still reach here have a room
+  // that is genuinely unreachable from the centerline network.  Return null for
+  // destinations so the caller can surface a helpful error.
+  // Floors with no anchor index fall back to the raw centroid (best-effort).
+  if (hasRoomAnchorIndex(roomAnchorIndex) && role === "destination") {
     return {
       coordinates: null,
       debug: {
@@ -310,6 +335,46 @@ function registerRoomAnchor(anchors, roomName, coordinates, metadata) {
   }
 
   anchors.set(normalizedRoomName, existing);
+}
+
+// Extracts a door/access-point coordinate from the room feature's own properties.
+// Supports [lng, lat] arrays and { lng, lat } / { longitude, latitude } objects.
+// The extracted coordinate is snapped to the nearest graph point so the router
+// can connect to it directly without additional snapping at route-computation time.
+function findInlineRoomDoorAnchor(room, router) {
+  for (const prop of INLINE_DOOR_PROPERTY_NAMES) {
+    const value = room?.properties?.[prop];
+    if (value == null) continue;
+
+    let lng, lat;
+
+    if (Array.isArray(value) && value.length >= 2) {
+      [lng, lat] = value;
+    } else if (typeof value === "object") {
+      lng = value.lng ?? value.longitude;
+      lat = value.lat ?? value.latitude;
+    }
+
+    if (!Number.isFinite(lng) || !Number.isFinite(lat)) continue;
+
+    const raw = { lng, lat };
+    const snappedTarget = router.snapToGraph(raw);
+
+    if (
+      !snappedTarget ||
+      snappedTarget.distanceMeters > INLINE_DOOR_MAX_SNAP_DISTANCE_METERS
+    ) {
+      continue;
+    }
+
+    return {
+      coordinates: snappedTarget.point,
+      snappedTarget,
+      sourceProp: prop,
+    };
+  }
+
+  return null;
 }
 
 function findExplicitRoomAnchor(roomName, centroid, router, roomAnchorIndex) {

@@ -11,6 +11,7 @@ import RoutePlanner from "./components/RoutePlanner";
 import LoadingSpinner from "./components/LoadingSpinner";
 import HelpOverlay from "./components/HelpOverlay";
 import DirectionsPanel from "./components/DirectionsPanel";
+import { useRoutePreview } from "./hooks/useRoutePreview";
 import { computeMultiFloorRoute, IndoorRouter } from "../routing";
 import {
   buildRoomAnchorIndex,
@@ -147,6 +148,7 @@ function App() {
   const [showHelp, setShowHelp] = useState(false);
   const [showDirections, setShowDirections] = useState(true);
   const [highlightedStep, setHighlightedStep] = useState(null);
+  const [showPreview, setShowPreview] = useState(false);
   const [cameraMode, setCameraMode] = useState("overview");
 const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [sidebarWidth, setSidebarWidth] = useState(DEFAULT_SIDEBAR_WIDTH);
@@ -888,6 +890,7 @@ const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
     setRouteContext(null);
     setShowDirections(false);
     setHighlightedStep(null);
+    setShowPreview(false);
   };
 
   const requestRouteCameraFit = () => {
@@ -905,6 +908,39 @@ const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
         : selectedFloor !== "all" && Number(selectedFloor) === routeContext.floorId
           ? routeContext
           : null
+      : null;
+
+  // Route preview animation — always called (hook rules), inactive when no route
+  const {
+    isPlaying: previewIsPlaying,
+    progressFraction: previewProgressFraction,
+    traveledPath: previewTraveledPath,
+    remainingPath: previewRemainingPath,
+    cursorPosition: previewCursorPosition,
+    startPreview,
+    stopPreview,
+    togglePlayPause: togglePreviewPlayPause,
+    seekTo: seekPreviewTo,
+  } = useRoutePreview({
+    renderPath: visibleRouteContext?.route?.renderPath ?? null,
+  });
+
+  // Reset preview when the route is cleared or changes
+  const prevRouteContextRef = React.useRef(null);
+  if (prevRouteContextRef.current !== routeContext) {
+    prevRouteContextRef.current = routeContext;
+    if (!routeContext && showPreview) {
+      // Route was cleared — hide preview (setShowPreview called in clearRouteState)
+    }
+  }
+
+  const activeRoutePreview =
+    showPreview && previewCursorPosition
+      ? {
+          traveledPath: previewTraveledPath,
+          remainingPath: previewRemainingPath,
+          cursorPosition: previewCursorPosition,
+        }
       : null;
 
   const handleSameFloorRouteCalculate = (
@@ -1587,6 +1623,58 @@ const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
                       Clear Route
                     </button>
                   </div>
+
+                  {/* Route preview controls */}
+                  {!showPreview ? (
+                    <button
+                      className="btn-secondary route-preview-launch-btn"
+                      onClick={() => {
+                        setShowPreview(true);
+                        startPreview();
+                      }}
+                    >
+                      ▶ Preview Route
+                    </button>
+                  ) : (
+                    <div className="route-preview-controls">
+                      <div className="route-preview-buttons">
+                        <button
+                          className="route-preview-btn"
+                          onClick={togglePreviewPlayPause}
+                          title={previewIsPlaying ? "Pause preview" : "Resume preview"}
+                        >
+                          {previewIsPlaying ? "⏸" : "▶"}
+                        </button>
+                        <button
+                          className="route-preview-btn route-preview-restart"
+                          onClick={startPreview}
+                          title="Restart preview"
+                        >
+                          ↺
+                        </button>
+                        <button
+                          className="route-preview-btn route-preview-stop"
+                          onClick={() => {
+                            stopPreview();
+                            setShowPreview(false);
+                          }}
+                          title="Stop preview"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                      <input
+                        className="route-preview-scrubber"
+                        type="range"
+                        min={0}
+                        max={1}
+                        step={0.005}
+                        value={previewProgressFraction}
+                        onChange={(e) => seekPreviewTo(parseFloat(e.target.value))}
+                        aria-label="Preview progress"
+                      />
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -1683,6 +1771,8 @@ const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
               activeFloor={selectedFloor}
               cinematicAnimationsEnabled={cinematicAnimationsEnabled}
               initialRevealReplayKey={initialRevealReplayKey}
+              routePreview={activeRoutePreview}
+              highlightedStep={highlightedStep}
             />
 
             {/* Room Info Popup */}

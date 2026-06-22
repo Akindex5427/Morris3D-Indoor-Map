@@ -576,3 +576,206 @@ describe("room_level_7 centerline routing", () => {
     );
   });
 });
+
+// ─── Inline door / access-point anchor ───────────────────────────────────────
+
+describe("inline door anchor on room polygon properties", () => {
+  // Build a synthetic room feature centred near a known Level-1 anchor point so
+  // the injected door_anchor coordinate is close enough to snap to the graph.
+  const knownAnchor = { lng: -89.22052834598013, lat: 37.71504417328312 };
+  const delta = 0.0002;
+
+  const makeSyntheticRoom = (props) => ({
+    type: "Feature",
+    geometry: {
+      type: "Polygon",
+      coordinates: [[
+        [knownAnchor.lng - delta, knownAnchor.lat - delta],
+        [knownAnchor.lng + delta, knownAnchor.lat - delta],
+        [knownAnchor.lng + delta, knownAnchor.lat + delta],
+        [knownAnchor.lng - delta, knownAnchor.lat + delta],
+        [knownAnchor.lng - delta, knownAnchor.lat - delta],
+      ]],
+    },
+    properties: { name: "synthetic test room", level: 1, ...props },
+  });
+
+  it("uses door_anchor array property and snaps it to the graph", () => {
+    const room = makeSyntheticRoom({
+      door_anchor: [knownAnchor.lng, knownAnchor.lat],
+    });
+
+    const target = resolveRoomRoutingTarget({
+      room,
+      floorId: 1,
+      router,
+      roomAnchorIndex,
+      role: "destination",
+    });
+
+    expect(target?.debug?.source).toBe("level1_inline_door_anchor");
+    expect(target?.debug?.sourceProp).toBe("door_anchor");
+    expect(target?.coordinates).toBeTruthy();
+    expect(target?.debug?.snappedTarget).toBeTruthy();
+  });
+
+  it("uses access_point object property { lng, lat }", () => {
+    const room = makeSyntheticRoom({
+      access_point: { lng: knownAnchor.lng, lat: knownAnchor.lat },
+    });
+
+    const target = resolveRoomRoutingTarget({
+      room,
+      floorId: 1,
+      router,
+      roomAnchorIndex,
+      role: "destination",
+    });
+
+    expect(target?.debug?.source).toBe("level1_inline_door_anchor");
+    expect(target?.debug?.sourceProp).toBe("access_point");
+    expect(target?.coordinates).toBeTruthy();
+  });
+
+  it("inline anchor takes precedence over an explicit centerline anchor", () => {
+    // University honors has an explicit centerline anchor; the inline property
+    // should override it.
+    const base = getRoom(rooms, "University honors");
+    const roomWithInline = {
+      ...base,
+      properties: {
+        ...base.properties,
+        door_anchor: [knownAnchor.lng, knownAnchor.lat],
+      },
+    };
+
+    const target = resolveRoomRoutingTarget({
+      room: roomWithInline,
+      floorId: 1,
+      router,
+      roomAnchorIndex,
+      role: "destination",
+    });
+
+    expect(target?.debug?.source).toBe("level1_inline_door_anchor");
+  });
+
+  it("falls through to the next tier when inline anchor coordinate is invalid", () => {
+    const room = makeSyntheticRoom({ door_anchor: [null, "bad"] });
+
+    const target = resolveRoomRoutingTarget({
+      room,
+      floorId: 1,
+      router,
+      roomAnchorIndex,
+      role: "destination",
+    });
+
+    // Should not use inline anchor; source will be one of the lower tiers.
+    expect(target?.debug?.source).not.toContain("inline_door_anchor");
+  });
+});
+
+// ─── Geometry-derived anchor without an explicit anchor index ─────────────────
+
+describe("geometry-derived anchor as universal fallback", () => {
+  it("never returns the old room_centroid source when no anchor index is provided", () => {
+    // The old code path short-circuited to "room_centroid" without ever
+    // attempting the geometry anchor.  With the new priority chain, the geometry
+    // anchor is always attempted first.  The source will be one of:
+    //   - geometry_anchor   → geometry snap succeeded
+    //   - centroid_fallback → geometry snap found no clear sight-line to the graph
+    //                         (room surrounded by obstacles), but we still TRIED
+    // Either is acceptable.  The old "room_centroid" label must never appear.
+    const room = getRoom(rooms, "information desk");
+
+    const target = resolveRoomRoutingTarget({
+      room,
+      floorId: 1,
+      router,
+      roomAnchorIndex: new Map(),
+      role: "destination",
+    });
+
+    expect(target?.coordinates).toBeTruthy();
+    expect(target?.debug?.source).not.toContain("room_centroid");
+  });
+
+  it("returns geometry_anchor for a centerline-only floor with no obstacle data", () => {
+    // Level-4 uses a centerline-only router (no obstacle polygons), so the
+    // obstacle-intersection check is skipped and findGeometryDerivedAnchor will
+    // always find the closest boundary point to the graph.
+    const room = getRoom(level4Rooms, "help desk");
+
+    const target = resolveRoomRoutingTarget({
+      room,
+      floorId: 4,
+      router: level4CenterlineOnlyRouter,
+      roomAnchorIndex: new Map(), // no explicit anchor index
+      role: "destination",
+    });
+
+    expect(target?.coordinates).toBeTruthy();
+    expect(target?.debug?.source).toContain("geometry_anchor");
+    expect(target?.debug?.snappedTarget).toBeTruthy();
+    expect(target?.debug?.snappedTarget?.distanceMeters).toBeLessThanOrEqual(25);
+  });
+
+  it("geometry-derived anchor routes without crossing obstacles", () => {
+    const startTarget = resolveRoomRoutingTarget({
+      room: getRoom(rooms, "information desk"),
+      floorId: 1,
+      router,
+      roomAnchorIndex: new Map(),
+      role: "start",
+    });
+    const endTarget = resolveRoomRoutingTarget({
+      room: getRoom(rooms, "University honors"),
+      floorId: 1,
+      router,
+      roomAnchorIndex: new Map(),
+      role: "destination",
+    });
+
+    expect(startTarget?.coordinates).toBeTruthy();
+    expect(endTarget?.coordinates).toBeTruthy();
+
+    const result = router.computeRoute(
+      startTarget.coordinates,
+      endTarget.coordinates,
+    );
+
+    expect(result.success).toBe(true);
+    expect(
+      (result.debug?.renderedSegments ?? []).every(
+        (segment) => segment.valid && !segment.intersectsObstacle,
+      ),
+    ).toBe(true);
+  });
+
+  it("returns centroid fallback for start role when geometry snap finds nothing", () => {
+    // A room whose polygon is entirely outside the graph snap radius will fail
+    // geometry snap.  Construct one by offsetting far from the building.
+    const farRoom = {
+      type: "Feature",
+      geometry: {
+        type: "Polygon",
+        coordinates: [[
+          [-88.0, 37.0], [-87.9, 37.0], [-87.9, 37.1],
+          [-88.0, 37.1], [-88.0, 37.0],
+        ]],
+      },
+      properties: { name: "far away room", level: 1 },
+    };
+
+    const target = resolveRoomRoutingTarget({
+      room: farRoom,
+      floorId: 1,
+      router,
+      roomAnchorIndex: new Map(),
+      role: "start",
+    });
+
+    expect(target?.debug?.source).toContain("centroid_fallback");
+  });
+});

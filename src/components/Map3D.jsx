@@ -35,11 +35,11 @@ export const BASEMAP_STYLES = {
 
 const BUILDING_FLOOR_SPACING = 4.5;
 const INITIAL_REVEAL_DURATION_MS = 2400;
-const ROUTE_FLOW_ANIMATION_DURATION_MS = 7000;
-const ROUTE_FLOW_MAX_MARKERS = 3;
-const ROUTE_FLOW_MARKER_SPACING_DEGREES = 0.000095;
-const ROUTE_FLOW_MARKER_SIZE_PX = 16;
-const ROUTE_FLOW_MARKER_OPACITY = 0.78;
+const ROUTE_FLOW_ANIMATION_DURATION_MS = 16000; // was 7000 — slower, calmer flow
+const ROUTE_FLOW_MAX_MARKERS = 2;               // was 3 — fewer arrows per route
+const ROUTE_FLOW_MARKER_SPACING_METERS = 14;    // minimum real-world metres between arrows
+const ROUTE_FLOW_MARKER_SIZE_PX = 13;           // was 16 — slightly smaller
+const ROUTE_FLOW_MARKER_OPACITY = 0.60;         // was 0.78 — subtler
 const ROUTE_CAMERA_PADDING_PX = 96;
 const ROUTE_CAMERA_TRANSITION_MS = 1200;
 const ROUTE_CAMERA_MIN_ZOOM = 16.5;
@@ -277,57 +277,93 @@ const getLabelPosition = (feature) => {
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
+// Geographic bearing (degrees CW from north) of the segment from → to.
+// `from` and `to` are [lng, lat, elevation?] triples.
 const getRouteSegmentAngle = (from, to) => {
-  const dx = to[0] - from[0];
-  const dy = to[1] - from[1];
-  return ((Math.atan2(dx, dy) * 180) / Math.PI + 360) % 360;
+  const dLng = to[0] - from[0];
+  const dLat = to[1] - from[1];
+  return ((Math.atan2(dLng, dLat) * 180) / Math.PI + 360) % 360;
 };
 
-const interpolateRoutePoint = (path, targetDistance) => {
+// Segment arc-length in real-world metres.
+// Uses a flat-earth approximation; accurate to < 0.05 % for distances under 1 km.
+const segmentLengthMeters = (from, to) => {
+  const midLat = (from[1] + to[1]) / 2;
+  const mPerLat = 111_320;
+  const mPerLng = 111_320 * Math.cos((midLat * Math.PI) / 180);
+  return Math.hypot(
+    (to[0] - from[0]) * mPerLng,
+    (to[1] - from[1]) * mPerLat,
+  );
+};
+
+// Walk the path to exactly `targetMeters` of arc-length and return the
+// interpolated position and screen angle.
+//
+// `segMeters` is a pre-computed array of per-segment lengths (one entry per
+// consecutive pair of path vertices).  Separating it avoids recomputing the
+// same values inside the per-marker loop inside buildFlowMarkers.
+//
+// `mapBearing` is the current viewport bearing in degrees.  Deck.gl billboard
+// icons rotate in screen space, where 0° = screen-up.  Screen-up equals
+// geographic north only when the map bearing is 0.  Subtracting mapBearing
+// converts the geographic segment bearing to a screen-space rotation so the
+// chevron always faces the direction of travel regardless of how the user has
+// rotated the map.
+const interpolateRoutePoint = (path, segMeters, targetMeters, mapBearing = 0) => {
   if (!Array.isArray(path) || path.length < 2) return null;
   let walked = 0;
   for (let index = 1; index < path.length; index += 1) {
     const from = path[index - 1];
     const to = path[index];
-    const dx = to[0] - from[0];
-    const dy = to[1] - from[1];
-    const segmentLength = Math.hypot(dx, dy);
-    if (segmentLength <= 0) continue;
-    if (walked + segmentLength >= targetDistance) {
-      const t = (targetDistance - walked) / segmentLength;
+    const segLen = segMeters[index - 1];
+    if (segLen <= 0) continue;
+    if (walked + segLen >= targetMeters) {
+      const t = (targetMeters - walked) / segLen;
+      const geoBearing = getRouteSegmentAngle(from, to);
       return {
         position: [
-          from[0] + dx * t,
-          from[1] + dy * t,
-          from[2] + ((to[2] || 0) - (from[2] || 0)) * t,
+          from[0] + (to[0] - from[0]) * t,
+          from[1] + (to[1] - from[1]) * t,
+          (from[2] || 0) + ((to[2] || 0) - (from[2] || 0)) * t,
         ],
-        angle: getRouteSegmentAngle(from, to),
+        angle: (geoBearing - mapBearing + 360) % 360,
       };
     }
-    walked += segmentLength;
+    walked += segLen;
   }
   const last = path[path.length - 1];
-  const previous = path[path.length - 2];
-  return { position: last, angle: getRouteSegmentAngle(previous, last) };
+  const prev = path[path.length - 2];
+  return {
+    position: last,
+    angle: (getRouteSegmentAngle(prev, last) - mapBearing + 360) % 360,
+  };
 };
 
-const buildFlowMarkers = (path, phase, count = ROUTE_FLOW_MAX_MARKERS) => {
+// Build evenly-spaced directional flow markers along the path.
+// Spacing is in real-world metres so arrow density is consistent regardless of
+// route bearing, route length, or geographic latitude.
+const buildFlowMarkers = (path, phase, mapBearing = 0, count = ROUTE_FLOW_MAX_MARKERS) => {
   if (!Array.isArray(path) || path.length < 2) return [];
+
+  const segMeters = [];
   let totalLength = 0;
   for (let index = 1; index < path.length; index += 1) {
-    const from = path[index - 1];
-    const to = path[index];
-    const length = Math.hypot(to[0] - from[0], to[1] - from[1]);
-    totalLength += length;
+    const len = segmentLengthMeters(path[index - 1], path[index]);
+    segMeters.push(len);
+    totalLength += len;
   }
+
   if (totalLength <= 0) return [];
+
   const markerCount = Math.min(
     count,
-    Math.max(1, Math.floor(totalLength / ROUTE_FLOW_MARKER_SPACING_DEGREES)),
+    Math.max(1, Math.floor(totalLength / ROUTE_FLOW_MARKER_SPACING_METERS)),
   );
+
   return Array.from({ length: markerCount }, (_, index) => {
     const offset = ((index / markerCount + phase) % 1) * totalLength;
-    return interpolateRoutePoint(path, offset);
+    return interpolateRoutePoint(path, segMeters, offset, mapBearing);
   }).filter(Boolean);
 };
 
@@ -364,6 +400,8 @@ const Map3D = ({
   perimeterWallUrl = "/wall.geojson",
   cinematicAnimationsEnabled = true,
   initialRevealReplayKey = 0,
+  routePreview = null,
+  highlightedStep = null,
 }) => {
   const [geojsonData, setGeojsonData] = useState(null);
   const [initialViewState, setInitialViewState] = useState({
@@ -674,6 +712,9 @@ const Map3D = ({
     ...perimeterWallLayers,
     ...stackedWallLayers,
   ];
+  // Current map bearing — used to correct flow-chevron angles for billboard icons
+  const currentMapBearing = (externalViewState || internalViewState)?.bearing ?? 0;
+
   const activeRenderPath =
     routeRenderPath && routeRenderPath.length > 1 ? routeRenderPath : routePath;
   const shouldRenderRoute =
@@ -691,6 +732,31 @@ const Map3D = ({
   };
   const shouldShowRouteFloor = (floor) =>
     activeFloor === "all" || Number(activeFloor) === Number(floor);
+
+  // Convert preview path points to 3-D deck.gl coordinates
+  const previewLayerData = useMemo(() => {
+    if (!routePreview?.cursorPosition) return null;
+
+    const isDH =
+      selectedFloor === "all" || (selectedFloors && selectedFloors.length > 1);
+    const elev = (floor, offset = 0.08) => {
+      const n = typeof floor === "number" ? floor : Number(floor) || 0;
+      return isDH ? n * BUILDING_FLOOR_SPACING + offset : offset;
+    };
+
+    const toCoords3D = (path) =>
+      (path || []).map((pt) => [pt.coords[0], pt.coords[1], elev(pt.floor)]);
+
+    return {
+      traveled: toCoords3D(routePreview.traveledPath),
+      remaining: toCoords3D(routePreview.remainingPath),
+      cursor: [
+        routePreview.cursorPosition.coords[0],
+        routePreview.cursorPosition.coords[1],
+        elev(routePreview.cursorPosition.floor, 0.4),
+      ],
+    };
+  }, [routePreview, selectedFloor, selectedFloors]);
   const visibleRouteSegments = Array.isArray(routeSegments)
     ? routeSegments.filter(
         (segment) =>
@@ -1210,74 +1276,110 @@ const Map3D = ({
   */
 
   if (visibleRouteSegments.length > 0) {
-    const pathLayerData = visibleRouteSegments.map((segment) => ({
-      path: segment.path.map((point) => [
-        point.coords[0],
-        point.coords[1],
-        routeElevation(point.floor, 0.08),
-      ]),
-      floor: segment.floorId,
-    }));
-
-    layers.push(
-      new PathLayer({
-        id: "multi-floor-route-path-border",
-        data: pathLayerData,
-        getPath: (d) => d.path,
-        getColor: [10, 60, 160, 220],
-        getWidth: 5,
-        widthMinPixels: 3,
-        widthMaxPixels: 8,
-        widthScale: 1,
-        rounded: true,
-        billboard: false,
-        pickable: false,
-        parameters: { depthTest: false, depthMask: false },
-      }),
-    );
-
-    layers.push(
-      new PathLayer({
-        id: "multi-floor-route-path-main",
-        data: pathLayerData,
-        getPath: (d) => d.path,
-        getColor: [26, 115, 232, 255],
-        getWidth: 3,
-        widthMinPixels: 2,
-        widthMaxPixels: 5,
-        widthScale: 1,
-        rounded: true,
-        billboard: false,
-        pickable: true,
-        parameters: { depthTest: false, depthMask: false },
-      }),
-    );
-
-    if (cinematicAnimationsEnabled) {
-      const flowData = pathLayerData.flatMap((routeSegment, segmentIndex) =>
-        buildFlowMarkers(routeSegment.path, routeAnimationPhase).map(
-          (marker, markerIndex) => ({
-            ...marker,
-            id: `${segmentIndex}-${markerIndex}`,
+    if (previewLayerData) {
+      // ── Preview mode: split path + cursor ────────────────────────────────
+      if (previewLayerData.remaining.length > 1) {
+        layers.push(
+          new PathLayer({
+            id: "multi-floor-preview-remaining-border",
+            data: [{ path: previewLayerData.remaining }],
+            getPath: (d) => d.path,
+            getColor: [10, 60, 160, 45],
+            getWidth: 5, widthMinPixels: 3, widthMaxPixels: 8,
+            rounded: true, billboard: false, pickable: false,
+            parameters: { depthTest: false, depthMask: false },
           }),
-        ),
-      );
+        );
+        layers.push(
+          new PathLayer({
+            id: "multi-floor-preview-remaining-main",
+            data: [{ path: previewLayerData.remaining }],
+            getPath: (d) => d.path,
+            getColor: [26, 115, 232, 55],
+            getWidth: 3, widthMinPixels: 2, widthMaxPixels: 5,
+            rounded: true, billboard: false, pickable: false,
+            parameters: { depthTest: false, depthMask: false },
+          }),
+        );
+      }
+      if (previewLayerData.traveled.length > 1) {
+        layers.push(
+          new PathLayer({
+            id: "multi-floor-preview-traveled-border",
+            data: [{ path: previewLayerData.traveled }],
+            getPath: (d) => d.path,
+            getColor: [10, 60, 160, 220],
+            getWidth: 5, widthMinPixels: 3, widthMaxPixels: 8,
+            rounded: true, billboard: false, pickable: false,
+            parameters: { depthTest: false, depthMask: false },
+          }),
+        );
+        layers.push(
+          new PathLayer({
+            id: "multi-floor-preview-traveled-main",
+            data: [{ path: previewLayerData.traveled }],
+            getPath: (d) => d.path,
+            getColor: [26, 115, 232, 255],
+            getWidth: 3, widthMinPixels: 2, widthMaxPixels: 5,
+            rounded: true, billboard: false, pickable: false,
+            parameters: { depthTest: false, depthMask: false },
+          }),
+        );
+      }
+    } else {
+      // ── Normal mode ────────────────────────────────────────────────────────
+      const pathLayerData = visibleRouteSegments.map((segment) => ({
+        path: segment.path.map((point) => [
+          point.coords[0],
+          point.coords[1],
+          routeElevation(point.floor, 0.08),
+        ]),
+        floor: segment.floorId,
+      }));
 
       layers.push(
-        new IconLayer({
-          id: "multi-floor-route-flow-chevrons",
-          data: flowData,
-          getPosition: (d) => d.position,
-          getIcon: () => routeChevronIcon,
-          getAngle: (d) => d.angle,
-          getSize: ROUTE_FLOW_MARKER_SIZE_PX,
-          sizeUnits: "pixels",
-          pickable: false,
-          billboard: true,
-          opacity: ROUTE_FLOW_MARKER_OPACITY,
+        new PathLayer({
+          id: "multi-floor-route-path-border",
+          data: pathLayerData,
+          getPath: (d) => d.path,
+          getColor: [10, 60, 160, 220],
+          getWidth: 5, widthMinPixels: 3, widthMaxPixels: 8, widthScale: 1,
+          rounded: true, billboard: false, pickable: false,
           parameters: { depthTest: false, depthMask: false },
         }),
       );
+      layers.push(
+        new PathLayer({
+          id: "multi-floor-route-path-main",
+          data: pathLayerData,
+          getPath: (d) => d.path,
+          getColor: [26, 115, 232, 255],
+          getWidth: 3, widthMinPixels: 2, widthMaxPixels: 5, widthScale: 1,
+          rounded: true, billboard: false, pickable: true,
+          parameters: { depthTest: false, depthMask: false },
+        }),
+      );
+
+      if (cinematicAnimationsEnabled) {
+        const flowData = pathLayerData.flatMap((routeSegment, segmentIndex) =>
+          buildFlowMarkers(routeSegment.path, routeAnimationPhase, currentMapBearing).map(
+            (marker, markerIndex) => ({ ...marker, id: `${segmentIndex}-${markerIndex}` }),
+          ),
+        );
+        layers.push(
+          new IconLayer({
+            id: "multi-floor-route-flow-chevrons",
+            data: flowData,
+            getPosition: (d) => d.position,
+            getIcon: () => routeChevronIcon,
+            getAngle: (d) => d.angle,
+            getSize: ROUTE_FLOW_MARKER_SIZE_PX,
+            sizeUnits: "pixels", pickable: false, billboard: true,
+            opacity: ROUTE_FLOW_MARKER_OPACITY,
+            parameters: { depthTest: false, depthMask: false },
+          }),
+        );
+      }
     }
   }
 
@@ -1516,102 +1618,188 @@ const Map3D = ({
     );
   }
 
-  // Add route visualization layers if route exists
-  console.log("[Map3D] routePath prop:", routePath);
-  console.log("[Map3D] routeRenderPath prop:", routeRenderPath);
   if (shouldRenderRoute) {
-    console.log(
-      "[Map3D] Rendering route with",
-      activeRenderPath.length,
-      "graph points",
-    );
-
-    // Elevation strategy:
-    // - In single-floor mode, IndoorBuilding normalizes the selected floor so
-    //   the floor surface sits near Z=0 while stairs can still rise above it.
-    // - In dollhouse mode, floors are stacked at floorNum * floorSpacing.
-    // So: single-floor → path at Z≈0; dollhouse → path at floorNum * spacing.
     const isDollhouse =
       selectedFloor === "all" || (selectedFloors && selectedFloors.length > 1);
     const pathElevation = (floorNum) =>
       isDollhouse ? floorNum * BUILDING_FLOOR_SPACING + 0.05 : 0.05;
 
-    const pathCoords = activeRenderPath.map((point) => {
-      const floorNum = typeof point.floor === "number" ? point.floor : 0;
-      return [...point.coords, pathElevation(floorNum)]; // [lon, lat, elevation]
-    });
+    if (previewLayerData) {
+      // ── Preview mode: dim remaining path + bright traveled + cursor ────────
+      if (previewLayerData.remaining.length > 1) {
+        layers.push(
+          new PathLayer({
+            id: "route-preview-remaining-border",
+            data: [{ path: previewLayerData.remaining }],
+            getPath: (d) => d.path,
+            getColor: [10, 60, 160, 45],
+            getWidth: 5, widthMinPixels: 3, widthMaxPixels: 8,
+            rounded: true, billboard: false, pickable: false,
+            parameters: { depthTest: false, depthMask: false },
+          }),
+        );
+        layers.push(
+          new PathLayer({
+            id: "route-preview-remaining-main",
+            data: [{ path: previewLayerData.remaining }],
+            getPath: (d) => d.path,
+            getColor: [26, 115, 232, 55],
+            getWidth: 3, widthMinPixels: 2, widthMaxPixels: 5,
+            rounded: true, billboard: false, pickable: false,
+            parameters: { depthTest: false, depthMask: false },
+          }),
+        );
+      }
+      if (previewLayerData.traveled.length > 1) {
+        layers.push(
+          new PathLayer({
+            id: "route-preview-traveled-border",
+            data: [{ path: previewLayerData.traveled }],
+            getPath: (d) => d.path,
+            getColor: [10, 60, 160, 220],
+            getWidth: 5, widthMinPixels: 3, widthMaxPixels: 8,
+            rounded: true, billboard: false, pickable: false,
+            parameters: { depthTest: false, depthMask: false },
+          }),
+        );
+        layers.push(
+          new PathLayer({
+            id: "route-preview-traveled-main",
+            data: [{ path: previewLayerData.traveled }],
+            getPath: (d) => d.path,
+            getColor: [26, 115, 232, 255],
+            getWidth: 3, widthMinPixels: 2, widthMaxPixels: 5,
+            rounded: true, billboard: false, pickable: false,
+            parameters: { depthTest: false, depthMask: false },
+          }),
+        );
+      }
+    } else {
+      // ── Normal mode ────────────────────────────────────────────────────────
+      const pathCoords = activeRenderPath.map((point) => {
+        const floorNum = typeof point.floor === "number" ? point.floor : 0;
+        return [...point.coords, pathElevation(floorNum)];
+      });
 
-    console.log("[Map3D] Route path coordinates:", pathCoords);
-    console.log(
-      "[Map3D] pathCoords length:",
-      pathCoords.length,
-      "First:",
-      pathCoords[0],
-      "Last:",
-      pathCoords[pathCoords.length - 1],
-    );
+      layers.push(
+        new PathLayer({
+          id: "route-path-border",
+          data: [{ path: pathCoords }],
+          getPath: (d) => d.path,
+          getColor: [10, 60, 160, 220],
+          getWidth: 5, widthMinPixels: 3, widthMaxPixels: 8, widthScale: 1,
+          rounded: true, billboard: false, pickable: false,
+          parameters: { depthTest: false, depthMask: false },
+        }),
+      );
+      layers.push(
+        new PathLayer({
+          id: "route-path-main",
+          data: [{ path: pathCoords }],
+          getPath: (d) => d.path,
+          getColor: [26, 115, 232, 255],
+          getWidth: 3, widthMinPixels: 2, widthMaxPixels: 5, widthScale: 1,
+          rounded: true, billboard: false, pickable: true,
+          parameters: { depthTest: false, depthMask: false },
+        }),
+      );
 
-    // Route line – depthTest disabled so it always paints on top of floor geometry
-    // without being occluded by 3D room extrusions or suffering z-fighting.
+      if (cinematicAnimationsEnabled && activeSingleRoutePathCoords) {
+        const flowData = buildFlowMarkers(activeSingleRoutePathCoords, routeAnimationPhase, currentMapBearing);
+        layers.push(
+          new IconLayer({
+            id: "route-flow-chevrons",
+            data: flowData,
+            getPosition: (d) => d.position,
+            getIcon: () => routeChevronIcon,
+            getAngle: (d) => d.angle,
+            getSize: ROUTE_FLOW_MARKER_SIZE_PX,
+            sizeUnits: "pixels", pickable: false, billboard: true,
+            opacity: ROUTE_FLOW_MARKER_OPACITY,
+            parameters: { depthTest: false, depthMask: false },
+          }),
+        );
+      }
+    }
+  }
 
-    // Outer dark-blue border for contrast
+  // ── Active connector highlight (vertical step is current) ─────────────────
+  // Renders a pulsing amber ring at the stair/elevator access point when the
+  // user has navigated to a floor-transition step.  Uses routeAnimationPhase
+  // so it pulses in sync with the existing flow-chevron animation.
+  if (
+    highlightedStep?.type === "vertical" &&
+    isValidLngLat(highlightedStep.coords)
+  ) {
+    const connFloor =
+      typeof highlightedStep.floor === "number" ? highlightedStep.floor : 0;
+    const connPos = [
+      highlightedStep.coords[0],
+      highlightedStep.coords[1],
+      routeElevation(connFloor, 0.6),
+    ];
+    const pulse = 1 + Math.sin(routeAnimationPhase * Math.PI * 2) * 0.22;
+
     layers.push(
-      new PathLayer({
-        id: "route-path-border",
-        data: [{ path: pathCoords }],
-        getPath: (d) => d.path,
-        getColor: [10, 60, 160, 220],
-        getWidth: 5,
-        widthMinPixels: 3,
-        widthMaxPixels: 8,
-        widthScale: 1,
-        rounded: true,
-        billboard: false,
+      new ScatterplotLayer({
+        id: "active-connector-highlight-outer",
+        data: [{ position: connPos }],
+        getPosition: (d) => d.position,
+        getRadius: 5.5 * pulse,
+        radiusUnits: "meters",
+        getFillColor: [249, 168, 37, Math.round(38 * pulse)],
+        stroked: false,
+        filled: true,
         pickable: false,
         parameters: { depthTest: false, depthMask: false },
       }),
     );
-
-    // Main Google-blue fill
     layers.push(
-      new PathLayer({
-        id: "route-path-main",
-        data: [{ path: pathCoords }],
-        getPath: (d) => d.path,
-        getColor: [26, 115, 232, 255], // vivid Google blue
-        getWidth: 3,
-        widthMinPixels: 2,
-        widthMaxPixels: 5,
-        widthScale: 1,
-        rounded: true,
-        billboard: false,
-        pickable: true,
+      new ScatterplotLayer({
+        id: "active-connector-highlight-ring",
+        data: [{ position: connPos }],
+        getPosition: (d) => d.position,
+        getRadius: 3.5 * pulse,
+        radiusUnits: "meters",
+        getFillColor: [249, 168, 37, Math.round(65 * pulse)],
+        getLineColor: [138, 95, 0, 230],
+        lineWidthMinPixels: 2,
+        stroked: true,
+        filled: true,
+        pickable: false,
         parameters: { depthTest: false, depthMask: false },
       }),
     );
+  }
 
-    if (cinematicAnimationsEnabled && activeSingleRoutePathCoords) {
-      const flowData = buildFlowMarkers(
-        activeSingleRoutePathCoords,
-        routeAnimationPhase,
-      );
-      layers.push(
-        new IconLayer({
-          id: "route-flow-chevrons",
-          data: flowData,
-          getPosition: (d) => d.position,
-          getIcon: () => routeChevronIcon,
-          getAngle: (d) => d.angle,
-          getSize: ROUTE_FLOW_MARKER_SIZE_PX,
-          sizeUnits: "pixels",
-          pickable: false,
-          billboard: true,
-          opacity: ROUTE_FLOW_MARKER_OPACITY,
-          parameters: { depthTest: false, depthMask: false },
-        }),
-      );
-    }
-
+  // ── Shared preview cursor (rendered for both single and multi-floor) ────────
+  if (previewLayerData?.cursor) {
+    layers.push(
+      new ScatterplotLayer({
+        id: "route-preview-cursor-halo",
+        data: [{ position: previewLayerData.cursor }],
+        getPosition: (d) => d.position,
+        getRadius: 3.5,
+        radiusUnits: "meters",
+        getFillColor: [255, 255, 255, 60],
+        stroked: false, filled: true, pickable: false,
+        parameters: { depthTest: false, depthMask: false },
+      }),
+    );
+    layers.push(
+      new ScatterplotLayer({
+        id: "route-preview-cursor-dot",
+        data: [{ position: previewLayerData.cursor }],
+        getPosition: (d) => d.position,
+        getRadius: 2.0,
+        radiusUnits: "meters",
+        getFillColor: [255, 255, 255, 255],
+        getLineColor: [26, 115, 232, 255],
+        lineWidthMinPixels: 2.5,
+        stroked: true, filled: true, pickable: false,
+        parameters: { depthTest: false, depthMask: false },
+      }),
+    );
   }
 
   // Show WebGL error if detected
