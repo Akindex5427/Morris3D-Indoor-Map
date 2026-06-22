@@ -35,11 +35,7 @@ export const BASEMAP_STYLES = {
 
 const BUILDING_FLOOR_SPACING = 4.5;
 const INITIAL_REVEAL_DURATION_MS = 2400;
-const ROUTE_FLOW_ANIMATION_DURATION_MS = 16000; // was 7000 — slower, calmer flow
-const ROUTE_FLOW_MAX_MARKERS = 2;               // was 3 — fewer arrows per route
-const ROUTE_FLOW_MARKER_SPACING_METERS = 14;    // minimum real-world metres between arrows
-const ROUTE_FLOW_MARKER_SIZE_PX = 13;           // was 16 — slightly smaller
-const ROUTE_FLOW_MARKER_OPACITY = 0.60;         // was 0.78 — subtler
+const ROUTE_MARKER_PULSE_DURATION_MS = 16000;
 const ROUTE_CAMERA_PADDING_PX = 96;
 const ROUTE_CAMERA_TRANSITION_MS = 1200;
 const ROUTE_CAMERA_MIN_ZOOM = 16.5;
@@ -277,96 +273,6 @@ const getLabelPosition = (feature) => {
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
-// Geographic bearing (degrees CW from north) of the segment from → to.
-// `from` and `to` are [lng, lat, elevation?] triples.
-const getRouteSegmentAngle = (from, to) => {
-  const dLng = to[0] - from[0];
-  const dLat = to[1] - from[1];
-  return ((Math.atan2(dLng, dLat) * 180) / Math.PI + 360) % 360;
-};
-
-// Segment arc-length in real-world metres.
-// Uses a flat-earth approximation; accurate to < 0.05 % for distances under 1 km.
-const segmentLengthMeters = (from, to) => {
-  const midLat = (from[1] + to[1]) / 2;
-  const mPerLat = 111_320;
-  const mPerLng = 111_320 * Math.cos((midLat * Math.PI) / 180);
-  return Math.hypot(
-    (to[0] - from[0]) * mPerLng,
-    (to[1] - from[1]) * mPerLat,
-  );
-};
-
-// Walk the path to exactly `targetMeters` of arc-length and return the
-// interpolated position and screen angle.
-//
-// `segMeters` is a pre-computed array of per-segment lengths (one entry per
-// consecutive pair of path vertices).  Separating it avoids recomputing the
-// same values inside the per-marker loop inside buildFlowMarkers.
-//
-// `mapBearing` is the current viewport bearing in degrees.  Deck.gl billboard
-// icons rotate in screen space, where 0° = screen-up.  Screen-up equals
-// geographic north only when the map bearing is 0.  Subtracting mapBearing
-// converts the geographic segment bearing to a screen-space rotation so the
-// chevron always faces the direction of travel regardless of how the user has
-// rotated the map.
-const interpolateRoutePoint = (path, segMeters, targetMeters, mapBearing = 0) => {
-  if (!Array.isArray(path) || path.length < 2) return null;
-  let walked = 0;
-  for (let index = 1; index < path.length; index += 1) {
-    const from = path[index - 1];
-    const to = path[index];
-    const segLen = segMeters[index - 1];
-    if (segLen <= 0) continue;
-    if (walked + segLen >= targetMeters) {
-      const t = (targetMeters - walked) / segLen;
-      const geoBearing = getRouteSegmentAngle(from, to);
-      return {
-        position: [
-          from[0] + (to[0] - from[0]) * t,
-          from[1] + (to[1] - from[1]) * t,
-          (from[2] || 0) + ((to[2] || 0) - (from[2] || 0)) * t,
-        ],
-        angle: (geoBearing - mapBearing + 360) % 360,
-      };
-    }
-    walked += segLen;
-  }
-  const last = path[path.length - 1];
-  const prev = path[path.length - 2];
-  return {
-    position: last,
-    angle: (getRouteSegmentAngle(prev, last) - mapBearing + 360) % 360,
-  };
-};
-
-// Build evenly-spaced directional flow markers along the path.
-// Spacing is in real-world metres so arrow density is consistent regardless of
-// route bearing, route length, or geographic latitude.
-const buildFlowMarkers = (path, phase, mapBearing = 0, count = ROUTE_FLOW_MAX_MARKERS) => {
-  if (!Array.isArray(path) || path.length < 2) return [];
-
-  const segMeters = [];
-  let totalLength = 0;
-  for (let index = 1; index < path.length; index += 1) {
-    const len = segmentLengthMeters(path[index - 1], path[index]);
-    segMeters.push(len);
-    totalLength += len;
-  }
-
-  if (totalLength <= 0) return [];
-
-  const markerCount = Math.min(
-    count,
-    Math.max(1, Math.floor(totalLength / ROUTE_FLOW_MARKER_SPACING_METERS)),
-  );
-
-  return Array.from({ length: markerCount }, (_, index) => {
-    const offset = ((index / markerCount + phase) % 1) * totalLength;
-    return interpolateRoutePoint(path, segMeters, offset, mapBearing);
-  }).filter(Boolean);
-};
-
 // Marker elevation offset (in meters) - to ensure markers appear above floor surface
 const MARKER_ELEVATION_OFFSET = 2.0; // Raise markers 2m above floor
 
@@ -465,7 +371,7 @@ const Map3D = ({
     const start = performance.now();
     const animate = (now) => {
       setRouteAnimationPhase(
-        ((now - start) / ROUTE_FLOW_ANIMATION_DURATION_MS) % 1,
+        ((now - start) / ROUTE_MARKER_PULSE_DURATION_MS) % 1,
       );
       frameId = requestAnimationFrame(animate);
     };
@@ -712,9 +618,6 @@ const Map3D = ({
     ...perimeterWallLayers,
     ...stackedWallLayers,
   ];
-  // Current map bearing — used to correct flow-chevron angles for billboard icons
-  const currentMapBearing = (externalViewState || internalViewState)?.bearing ?? 0;
-
   const activeRenderPath =
     routeRenderPath && routeRenderPath.length > 1 ? routeRenderPath : routePath;
   const shouldRenderRoute =
@@ -768,18 +671,6 @@ const Map3D = ({
   const visibleTransitionMarkers = Array.isArray(routeTransitionMarkers)
     ? routeTransitionMarkers.filter((marker) => shouldShowRouteFloor(marker.floor))
     : [];
-  const routeChevronIcon = useMemo(() => {
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-      <path d="M16 5l10 14h-6v8h-8v-8H6z" fill="#ffffff" stroke="#052f7c" stroke-width="2" stroke-linejoin="round"/>
-    </svg>`;
-    return {
-      url: `data:image/svg+xml;base64,${btoa(svg)}`,
-      width: 32,
-      height: 32,
-      anchorX: 16,
-      anchorY: 16,
-    };
-  }, []);
   const routePinIcons = useMemo(() => {
     const createPinSVG = (color) => {
       const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 48 48">
@@ -799,14 +690,6 @@ const Map3D = ({
       end: { url: createPinSVG("#dc2626"), width: 34, height: 34, anchorY: 34 },
     };
   }, []);
-  const activeSingleRoutePathCoords =
-    shouldRenderRoute && activeRenderPath?.length > 1
-      ? activeRenderPath.map((point) => [
-          point.coords[0],
-          point.coords[1],
-          routeElevation(point.floor, 0.08),
-        ])
-      : null;
   const routeFocusMarkers = useMemo(() => {
     if (!routeFocus) return [];
 
@@ -1359,27 +1242,6 @@ const Map3D = ({
           parameters: { depthTest: false, depthMask: false },
         }),
       );
-
-      if (cinematicAnimationsEnabled) {
-        const flowData = pathLayerData.flatMap((routeSegment, segmentIndex) =>
-          buildFlowMarkers(routeSegment.path, routeAnimationPhase, currentMapBearing).map(
-            (marker, markerIndex) => ({ ...marker, id: `${segmentIndex}-${markerIndex}` }),
-          ),
-        );
-        layers.push(
-          new IconLayer({
-            id: "multi-floor-route-flow-chevrons",
-            data: flowData,
-            getPosition: (d) => d.position,
-            getIcon: () => routeChevronIcon,
-            getAngle: (d) => d.angle,
-            getSize: ROUTE_FLOW_MARKER_SIZE_PX,
-            sizeUnits: "pixels", pickable: false, billboard: true,
-            opacity: ROUTE_FLOW_MARKER_OPACITY,
-            parameters: { depthTest: false, depthMask: false },
-          }),
-        );
-      }
     }
   }
 
@@ -1703,30 +1565,12 @@ const Map3D = ({
           parameters: { depthTest: false, depthMask: false },
         }),
       );
-
-      if (cinematicAnimationsEnabled && activeSingleRoutePathCoords) {
-        const flowData = buildFlowMarkers(activeSingleRoutePathCoords, routeAnimationPhase, currentMapBearing);
-        layers.push(
-          new IconLayer({
-            id: "route-flow-chevrons",
-            data: flowData,
-            getPosition: (d) => d.position,
-            getIcon: () => routeChevronIcon,
-            getAngle: (d) => d.angle,
-            getSize: ROUTE_FLOW_MARKER_SIZE_PX,
-            sizeUnits: "pixels", pickable: false, billboard: true,
-            opacity: ROUTE_FLOW_MARKER_OPACITY,
-            parameters: { depthTest: false, depthMask: false },
-          }),
-        );
-      }
     }
   }
 
   // ── Active connector highlight (vertical step is current) ─────────────────
   // Renders a pulsing amber ring at the stair/elevator access point when the
-  // user has navigated to a floor-transition step.  Uses routeAnimationPhase
-  // so it pulses in sync with the existing flow-chevron animation.
+  // user has navigated to a floor-transition step.
   if (
     highlightedStep?.type === "vertical" &&
     isValidLngLat(highlightedStep.coords)

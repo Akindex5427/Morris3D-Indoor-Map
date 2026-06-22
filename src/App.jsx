@@ -925,14 +925,14 @@ const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
     renderPath: visibleRouteContext?.route?.renderPath ?? null,
   });
 
-  // Reset preview when the route is cleared or changes
-  const prevRouteContextRef = React.useRef(null);
-  if (prevRouteContextRef.current !== routeContext) {
-    prevRouteContextRef.current = routeContext;
-    if (!routeContext && showPreview) {
-      // Route was cleared — hide preview (setShowPreview called in clearRouteState)
+  // Auto-play the route preview as soon as a new route is generated; cancel
+  // it (via clearRouteState's setShowPreview(false)) when the route is cleared.
+  useEffect(() => {
+    if (routeContext) {
+      setShowPreview(true);
+      startPreview();
     }
-  }
+  }, [routeContext]);
 
   const activeRoutePreview =
     showPreview && previewCursorPosition

@@ -24,8 +24,9 @@
 
 import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 
-// Default preview speed — roughly 2× comfortable walking pace.
-const DEFAULT_SPEED_MS = 3.0;
+// Default preview speed — slow enough to be easy to follow on screen,
+// well under real walking pace (~1.4 m/s).
+const DEFAULT_SPEED_MS = 0.8;
 
 // ── Geometry helpers ──────────────────────────────────────────────────────────
 
