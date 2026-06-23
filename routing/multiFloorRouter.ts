@@ -33,6 +33,7 @@ export interface HorizontalRouteSegment {
 export interface VerticalTransitionSegment {
   type: 'vertical-transition';
   connectorType: 'stairs' | 'elevator';
+  availableConnectorTypes?: Array<'stairs' | 'elevator'>;
   connectorId: string;
   connectorName?: string;
   fromFloor: string;
@@ -92,6 +93,7 @@ const CONNECTOR_CLUSTER_DISTANCE_METERS = 14;
 const STAIR_BOUNDARY_SAMPLE_SPACING_METERS = 1.25;
 const MAX_STAIR_BOUNDARY_SAMPLES = 80;
 const DEFAULT_VERTICAL_TRANSITION_PENALTY = 30;
+const CONNECTOR_PREFERENCE_PENALTY = 100000;
 
 export function computeMultiFloorRoute(
   options: ComputeMultiFloorRouteOptions,
@@ -151,6 +153,7 @@ export function computeMultiFloorRoute(
 
   let bestCandidate: MultiFloorRouteResult | null = null;
   let bestDebug: Record<string, unknown> | null = null;
+  const successfulConnectorTypes = new Set<'stairs' | 'elevator'>();
 
   for (const connector of candidateConnectors) {
     const startRouter = routers[startFloorKey];
@@ -179,7 +182,8 @@ export function computeMultiFloorRoute(
     const verticalCost =
       verticalTransitionPenalty * Math.max(1, Number.isFinite(floorDelta) ? floorDelta : 1);
     const totalDistance = startFloorRoute.distance + destinationFloorRoute.distance;
-    const totalCost = totalDistance + verticalCost;
+    const preferenceCost = connectorPreferenceScore(connector, userPreference);
+    const totalCost = totalDistance + verticalCost + preferenceCost;
     const result: MultiFloorRouteResult = {
       success: true,
       type: 'multi-floor',
@@ -210,6 +214,7 @@ export function computeMultiFloorRoute(
         totalCost,
       },
     };
+    successfulConnectorTypes.add(connector.type);
 
     if (!bestCandidate || result.totalCost < bestCandidate.totalCost) {
       bestCandidate = result;
@@ -228,6 +233,15 @@ export function computeMultiFloorRoute(
       },
     );
   }
+
+  const availableConnectorTypes = Array.from(successfulConnectorTypes).sort(
+    compareConnectorTypes,
+  );
+  bestCandidate.segments = bestCandidate.segments.map((segment) =>
+    segment.type === 'vertical-transition'
+      ? { ...segment, availableConnectorTypes }
+      : segment,
+  );
 
   console.log('[MultiFloorRoute] selected vertical connector', bestCandidate.connector);
   console.log('[MultiFloorRoute] start floor route distance', bestDebug?.startFloorRouteDistance);
@@ -547,15 +561,28 @@ function connectorPreferenceScore(
   connector: VerticalConnector,
   userPreference?: string,
 ): number {
-  if (userPreference === 'accessible' || userPreference === 'elevator') {
-    return connector.type === 'elevator' ? 0 : 1000;
+  if (
+    userPreference === 'accessible' ||
+    userPreference === 'elevator' ||
+    userPreference === 'elevator_first' ||
+    userPreference === 'stairs_avoid'
+  ) {
+    return connector.type === 'elevator' ? 0 : CONNECTOR_PREFERENCE_PENALTY;
   }
 
   if (userPreference === 'stairs' || userPreference === 'stairs_first') {
-    return connector.type === 'stairs' ? 0 : 1000;
+    return connector.type === 'stairs' ? 0 : CONNECTOR_PREFERENCE_PENALTY;
   }
 
-  return connector.type === 'elevator' ? 10 : 0;
+  return 0;
+}
+
+function compareConnectorTypes(
+  left: 'stairs' | 'elevator',
+  right: 'stairs' | 'elevator',
+): number {
+  const order = { stairs: 0, elevator: 1 };
+  return order[left] - order[right];
 }
 
 function getFeatureCentroid(feature: GeoJSONFeature): RouteCoordinate | null {

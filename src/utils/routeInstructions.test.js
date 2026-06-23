@@ -351,6 +351,7 @@ describe("routeInstructions", () => {
         {
           type: "vertical-transition",
           connectorType: "stairs",
+          availableConnectorTypes: ["stairs", "elevator"],
           fromFloor: "1",
           toFloor: "7",
           fromAccessPoint: { lng: -89.22, lat: 37.715 },
@@ -362,7 +363,8 @@ describe("routeInstructions", () => {
 
     expect(multiFloor[0]).toMatchObject({
       connectorType: "stairs",
-      text: "Take the stairs to Floor 7.",
+      connectorOptions: ["stairs", "elevator"],
+      text: "Take the stairs to Floor 7. An elevator route is also available from route preferences.",
     });
   });
 

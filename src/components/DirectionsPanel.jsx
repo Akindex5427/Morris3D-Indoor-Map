@@ -94,6 +94,23 @@ const DirectionsPanel = ({
 
   const getDirectionText = (d) => d?.text ?? d?.instruction ?? "";
 
+  const hasElevatorOption = (d) =>
+    Array.isArray(d?.connectorOptions) && d.connectorOptions.includes("elevator");
+
+  const hasStairsOption = (d) =>
+    Array.isArray(d?.connectorOptions) && d.connectorOptions.includes("stairs");
+
+  const getConnectorLabel = (d) => {
+    return d?.connectorType === "elevator" ? "Elevator" : "Stairs";
+  };
+
+  const getConnectorTitle = (d) => {
+    if (hasElevatorOption(d) && hasStairsOption(d)) {
+      return `${getConnectorLabel(d)} selected; alternate connector available`;
+    }
+    return getConnectorLabel(d);
+  };
+
   // Returns a displayable icon for any step, replacing the raw "^"/"E" glyphs
   // that the instruction generator uses for vertical transitions.
   const getStepIcon = (d) => {
@@ -249,13 +266,18 @@ const DirectionsPanel = ({
                     )}
                   </span>
                 ) : (
-                  <span
-                    className={`dp-journey-chip dp-journey-connector ${stateClass}`}
-                    title={item.connectorType === "elevator" ? "Elevator" : "Stairs"}
-                    aria-label={item.connectorType === "elevator" ? "Elevator" : "Stairs"}
-                  >
-                    {item.connectorType === "elevator" ? "🛗" : "🪜"}
-                  </span>
+                  (() => {
+                    const connectorStep = directions[item.dirIndex];
+                    return (
+                      <span
+                        className={`dp-journey-chip dp-journey-connector ${stateClass}`}
+                        title={getConnectorTitle(connectorStep)}
+                        aria-label={getConnectorTitle(connectorStep)}
+                      >
+                        {getStepIcon(connectorStep)}
+                      </span>
+                    );
+                  })()
                 )}
               </React.Fragment>
             );
@@ -291,7 +313,7 @@ const DirectionsPanel = ({
         {step.type === "vertical" && step.targetFloor !== undefined && (
           <div className="dp-connector-transition">
             <span className="dp-ct-label">
-              {step.connectorType === "elevator" ? "Elevator" : "Stairs"}
+              {getConnectorLabel(step)}
             </span>
             <span className="dp-ct-floors">
               <span className="dp-ct-from">F{step.floor}</span>

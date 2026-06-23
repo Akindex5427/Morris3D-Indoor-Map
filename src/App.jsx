@@ -1139,7 +1139,8 @@ const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
           destinationName: getRoomName(endRoom),
           options: {
             userPreference:
-              routeOptions.accessibility === "wheelchair"
+              routeOptions.accessibility === "wheelchair" ||
+              routeOptions.accessibility === "stairs_avoid"
                 ? "accessible"
                 : routeOptions.preferences,
             landmarks: routeLandmarks,
@@ -1288,7 +1289,8 @@ const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
         routers,
         roomsByFloor: routeRoomsByFloor,
         userPreference:
-          routeOptions.accessibility === "wheelchair"
+          routeOptions.accessibility === "wheelchair" ||
+          routeOptions.accessibility === "stairs_avoid"
             ? "accessible"
             : routeOptions.preferences,
       });
@@ -1330,18 +1332,21 @@ const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
           role: "to",
         },
       ]);
+      const primaryTransition = transitionSegments[0];
+      const selectedConnectorLabel =
+        primaryTransition?.connectorType === "elevator" ? "Elevator" : "Staircase";
       const startPath = toPath(
         horizontalSegments[0].route,
         startFloor,
         getRoomName(startRoom),
-        "Staircase",
+        selectedConnectorLabel,
         startRoom,
         null,
       );
       const destinationPath = toPath(
         horizontalSegments[horizontalSegments.length - 1].route,
         endFloor,
-        "Staircase",
+        selectedConnectorLabel,
         getRoomName(endRoom),
         null,
         endRoom,
@@ -1374,7 +1379,8 @@ const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
         destinationName: getRoomName(endRoom),
         options: {
           userPreference:
-            routeOptions.accessibility === "wheelchair"
+            routeOptions.accessibility === "wheelchair" ||
+            routeOptions.accessibility === "stairs_avoid"
               ? "accessible"
               : routeOptions.preferences,
           landmarksByFloor,

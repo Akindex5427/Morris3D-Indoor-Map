@@ -54,21 +54,24 @@ export const estimateSegmentDistance = (points) => {
 
 export const generateVerticalInstruction = (verticalSegment, options = {}) => {
   const connectorType = normalizeConnectorType(verticalSegment, options.userPreference);
+  const connectorOptions = getAvailableConnectorTypes(verticalSegment, connectorType);
   const fromFloor = normalizeFloorId(verticalSegment.fromFloor);
   const toFloor = normalizeFloorId(verticalSegment.toFloor);
   const connectorNoun = getConnectorNoun(connectorType, verticalSegment);
+  const alternateConnectorText = getAlternateConnectorText(connectorType, connectorOptions);
 
   const instruction = normalizeInstruction({
     id: options.id ?? `vertical-${fromFloor}-${toFloor}`,
     floorId: fromFloor,
     type: "vertical",
-    text: `Take the ${connectorNoun} to ${formatFloor(toFloor)}.`,
+    text: `Take the ${connectorNoun} to ${formatFloor(toFloor)}.${alternateConnectorText}`,
     connectorType,
+    connectorOptions,
     fromFloor,
     toFloor,
     targetFloor: Number(String(toFloor).replace(/^F/i, "")),
     coordinate: verticalSegment.fromAccessPoint,
-    icon: connectorType === "elevator" ? "E" : "^",
+    icon: connectorOptions.includes("elevator") ? "E" : "^",
   });
 
   logInstructionDebug({
@@ -1321,6 +1324,24 @@ function getConnectorNoun(connectorType, verticalSegment) {
   return "stairs";
 }
 
+function getAvailableConnectorTypes(verticalSegment, fallbackConnectorType) {
+  const types = Array.isArray(verticalSegment?.availableConnectorTypes)
+    ? verticalSegment.availableConnectorTypes
+    : Array.isArray(verticalSegment?.connectorOptions)
+      ? verticalSegment.connectorOptions
+      : [];
+
+  const normalized = types
+    .map((type) => normalizeConnectorType(type))
+    .filter((type) => type === "stairs" || type === "elevator");
+
+  if (!normalized.includes(fallbackConnectorType)) {
+    normalized.unshift(fallbackConnectorType);
+  }
+
+  return Array.from(new Set(normalized)).sort(compareConnectorTypes);
+}
+
 // Returns a definite-article display name for use in approach instructions.
 // e.g. "the elevator", "the staircase", "the stairs"
 function getConnectorDisplayName(connectorType, connectorName) {
@@ -1332,6 +1353,23 @@ function getConnectorDisplayName(connectorType, connectorName) {
   const name = String(connectorName ?? "").toLowerCase();
   if (name.includes("stair case") || name.includes("staircase")) return "the staircase";
   return "the stairs";
+}
+
+function getAlternateConnectorText(connectorType, connectorOptions) {
+  if (!connectorOptions.includes("stairs") || !connectorOptions.includes("elevator")) {
+    return "";
+  }
+
+  if (connectorType === "stairs") {
+    return " An elevator route is also available from route preferences.";
+  }
+
+  return " A stairs route is also available from route preferences.";
+}
+
+function compareConnectorTypes(left, right) {
+  const order = { stairs: 0, elevator: 1 };
+  return order[left] - order[right];
 }
 
 function turnDirectionToText(turnDirection) {
