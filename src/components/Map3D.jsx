@@ -41,9 +41,56 @@ const ROUTE_CAMERA_TRANSITION_MS = 1200;
 const ROUTE_CAMERA_MIN_ZOOM = 16.5;
 const ROUTE_CAMERA_MAX_ZOOM = 20.5;
 const ROUTE_LANDMARK_LABEL_LIMIT = 8;
+// Minimum real-world distance (meters) the "next point" must be from the
+// route start before its direction is trusted for the initial bearing —
+// closer points are noisy due to door/snap jitter.
+const ROUTE_INITIAL_BEARING_MIN_METERS = 3;
 const routeLabelCollisionExtension = new CollisionFilterExtension();
 
 const clamp01 = (value) => Math.max(0, Math.min(1, value));
+
+const haversineDistanceMeters = ([lng1, lat1], [lng2, lat2]) => {
+  const R = 6_371_000;
+  const toRad = (deg) => (deg * Math.PI) / 180;
+  const dLat = toRad(lat2 - lat1);
+  const dLng = toRad(lng2 - lng1);
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+};
+
+// Compass bearing (0-360, clockwise from north) from point A to point B.
+const computeBearingDegrees = ([lng1, lat1], [lng2, lat2]) => {
+  const toRad = (deg) => (deg * Math.PI) / 180;
+  const φ1 = toRad(lat1);
+  const φ2 = toRad(lat2);
+  const Δλ = toRad(lng2 - lng1);
+  const y = Math.sin(Δλ) * Math.cos(φ2);
+  const x =
+    Math.cos(φ1) * Math.sin(φ2) - Math.sin(φ1) * Math.cos(φ2) * Math.cos(Δλ);
+  const θ = Math.atan2(y, x);
+  return ((θ * 180) / Math.PI + 360) % 360;
+};
+
+// Finds the first point in an ordered route at least `minMeters` from the
+// start, then returns the compass bearing start -> that point. Falls back to
+// the route's last point if every point is within the noise threshold.
+const computeInitialRouteBearing = (orderedPoints, minMeters) => {
+  if (!Array.isArray(orderedPoints) || orderedPoints.length < 2) return null;
+
+  const start = orderedPoints[0];
+  for (let i = 1; i < orderedPoints.length; i++) {
+    if (haversineDistanceMeters(start, orderedPoints[i]) >= minMeters) {
+      return computeBearingDegrees(start, orderedPoints[i]);
+    }
+  }
+
+  const last = orderedPoints[orderedPoints.length - 1];
+  return haversineDistanceMeters(start, last) > 0
+    ? computeBearingDegrees(start, last)
+    : null;
+};
 
 const easeOutCubic = (value) => 1 - Math.pow(1 - clamp01(value), 3);
 
@@ -995,6 +1042,10 @@ const Map3D = ({
       activeRenderPath.forEach((point) => addPoint(point.coords));
     }
 
+    // Snapshot the route's own ordered points (start -> end) before markers
+    // get appended below, so the initial bearing reflects travel direction.
+    const orderedRoutePathPoints = [...routePoints];
+
     visibleTransitionMarkers.forEach((marker) => addPoint(marker.coords));
     routeFocusMarkers.forEach((marker) => addPoint(marker.position));
     routeLandmarkMarkers.forEach((marker) => addPoint(marker.position));
@@ -1018,6 +1069,17 @@ const Map3D = ({
     const width = Math.max(320, containerBounds?.width || window.innerWidth);
     const height = Math.max(320, containerBounds?.height || window.innerHeight);
     const samePoint = minLng === maxLng && minLat === maxLat;
+
+    // Route-aligned bearing: rotate the map so the first real movement away
+    // from the start room points toward the top of the screen, like a
+    // turn-by-turn nav view, instead of staying fixed north-up.
+    const routeAlignedBearing = computeInitialRouteBearing(
+      orderedRoutePathPoints,
+      ROUTE_INITIAL_BEARING_MIN_METERS,
+    );
+    const baseViewState = externalViewState || internalViewState;
+    const nextBearing =
+      routeAlignedBearing !== null ? routeAlignedBearing : baseViewState.bearing;
 
     let fittedViewState = {
       longitude: center[0],
@@ -1049,13 +1111,14 @@ const Map3D = ({
         pointCount: routePoints.length,
         center,
         zoom: clamp(fittedViewState.zoom, ROUTE_CAMERA_MIN_ZOOM, ROUTE_CAMERA_MAX_ZOOM),
+        bearing: nextBearing,
       });
     }
 
     lastRouteCameraKeyRef.current = routeCameraKey;
     window.dispatchEvent(new Event("resize"));
     onViewStateChange({
-      ...(externalViewState || internalViewState),
+      ...baseViewState,
       longitude: fittedViewState.longitude,
       latitude: fittedViewState.latitude,
       zoom: clamp(
@@ -1064,7 +1127,7 @@ const Map3D = ({
         ROUTE_CAMERA_MAX_ZOOM,
       ),
       pitch: 0,
-      bearing: 0,
+      bearing: nextBearing,
       transitionDuration: ROUTE_CAMERA_TRANSITION_MS,
       transitionInterpolator: new FlyToInterpolator(),
     });

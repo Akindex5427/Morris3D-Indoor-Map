@@ -47,6 +47,10 @@ const MAX_SIDEBAR_WIDTH = 520;
 const SIDEBAR_COLLAPSE_THRESHOLD = 180;
 const routeLandmarkLabelDistanceMeters = 4.5;
 const ROUTE_DEBUG_ENABLED = import.meta.env?.DEV !== false;
+// Delay before the moving route-preview indicator starts animating, so the
+// preview doesn't begin the instant the route appears (the app has no real
+// user-movement tracking yet to justify an immediate start).
+const ROUTE_PREVIEW_START_DELAY_MS = 3000;
 
 const getRoomDisplayId = (room) =>
   room?.properties?.id ||
@@ -925,14 +929,15 @@ const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
     renderPath: visibleRouteContext?.route?.renderPath ?? null,
   });
 
-  // Auto-play the route preview as soon as a new route is generated; cancel
-  // it (via clearRouteState's setShowPreview(false)) when the route is cleared.
+  // Auto-play the route preview a fixed delay after a new route is generated
+  // (cancelled/restarted if the route changes or is cleared again before it fires).
   useEffect(() => {
-    if (routeContext) {
-      setShowPreview(true);
-      startPreview();
-    }
-  }, [routeContext]);
+    if (!routeContext) return;
+
+    setShowPreview(true);
+    const timerId = setTimeout(startPreview, ROUTE_PREVIEW_START_DELAY_MS);
+    return () => clearTimeout(timerId);
+  }, [routeContext, startPreview]);
 
   const activeRoutePreview =
     showPreview && previewCursorPosition
