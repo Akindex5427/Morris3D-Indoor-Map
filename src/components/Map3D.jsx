@@ -173,6 +173,41 @@ const isValidLngLat = (coords) =>
   Number.isFinite(coords[0]) &&
   Number.isFinite(coords[1]);
 
+const getLngLatBounds = (points) => {
+  const validPoints = (points || []).filter(isValidLngLat);
+  if (validPoints.length === 0) return null;
+
+  const lngs = validPoints.map((point) => point[0]);
+  const lats = validPoints.map((point) => point[1]);
+  const minLng = Math.min(...lngs);
+  const maxLng = Math.max(...lngs);
+  const minLat = Math.min(...lats);
+  const maxLat = Math.max(...lats);
+
+  return {
+    minLng,
+    maxLng,
+    minLat,
+    maxLat,
+    center: [(minLng + maxLng) / 2, (minLat + maxLat) / 2],
+    pointCount: validPoints.length,
+  };
+};
+
+const getBoundsSizeMeters = (bounds) => {
+  if (!bounds) return { widthMeters: 0, heightMeters: 0, diagonalMeters: 0 };
+  const southWest = [bounds.minLng, bounds.minLat];
+  const southEast = [bounds.maxLng, bounds.minLat];
+  const northWest = [bounds.minLng, bounds.maxLat];
+  const widthMeters = haversineDistanceMeters(southWest, southEast);
+  const heightMeters = haversineDistanceMeters(southWest, northWest);
+  return {
+    widthMeters,
+    heightMeters,
+    diagonalMeters: Math.hypot(widthMeters, heightMeters),
+  };
+};
+
 // ── Label geometry helpers ────────────────────────────────────────────────────
 
 // Area-weighted centroid of a closed ring via the Shoelace theorem.
@@ -356,6 +391,7 @@ const Map3D = ({
   routePreview = null,
   highlightedStep = null,
   layoutSignal = 0,
+  layoutDiagnostics = null,
 }) => {
   const [geojsonData, setGeojsonData] = useState(null);
   const [initialViewState, setInitialViewState] = useState({
@@ -1042,6 +1078,17 @@ const Map3D = ({
       return;
     }
 
+    let mapResizeCalled = false;
+    const resizeMapForCameraFit = () => {
+      const map = mapRef.current?.getMap?.() ?? mapRef.current;
+      map?.resize?.();
+      deckRef.current?.deck?.redraw(true);
+      window.dispatchEvent(new Event("resize"));
+      mapResizeCalled = true;
+    };
+
+    resizeMapForCameraFit();
+
     const routePoints = [];
     const addPoint = (coords) => {
       if (isValidLngLat(coords)) {
@@ -1057,14 +1104,9 @@ const Map3D = ({
       activeRenderPath.forEach((point) => addPoint(point.coords));
     }
 
-    // Snapshot the route's own ordered points (start -> end) before markers
-    // get appended below, so the initial bearing reflects travel direction.
+    // Snapshot horizontal route geometry only. Marker, label, and vertical
+    // transition positions are intentionally excluded from camera bounds.
     const orderedRoutePathPoints = [...routePoints];
-
-    visibleTransitionMarkers.forEach((marker) => addPoint(marker.coords));
-    routeFocusMarkers.forEach((marker) => addPoint(marker.position));
-    routeLandmarkMarkers.forEach((marker) => addPoint(marker.position));
-    usedConnectorRoomMarkers.forEach((marker) => addPoint(marker.position));
 
     if (routePoints.length === 0) {
       if (import.meta.env?.DEV !== false) {
@@ -1073,16 +1115,55 @@ const Map3D = ({
       return;
     }
 
-    const lngs = routePoints.map((point) => point[0]);
-    const lats = routePoints.map((point) => point[1]);
-    const minLng = Math.min(...lngs);
-    const maxLng = Math.max(...lngs);
-    const minLat = Math.min(...lats);
-    const maxLat = Math.max(...lats);
-    const center = [(minLng + maxLng) / 2, (minLat + maxLat) / 2];
+    const routeBounds = getLngLatBounds(routePoints);
+    const buildingBounds = getLngLatBounds(
+      (roomsData || []).flatMap((feature) =>
+        getGeometryCoordinates(feature?.geometry)
+          .filter(isValidLngLat)
+          .map((coord) => [coord[0], coord[1]]),
+      ),
+    );
     const containerBounds = containerRef.current?.getBoundingClientRect();
     const width = Math.max(320, containerBounds?.width || window.innerWidth);
     const height = Math.max(320, containerBounds?.height || window.innerHeight);
+    const padding = Math.min(
+      ROUTE_CAMERA_PADDING_PX,
+      Math.floor(Math.min(width, height) * 0.22),
+    );
+    const isMultiFloorRoute =
+      routeFloorId === null &&
+      (visibleRouteSegments.length > 0 ||
+        (routeFocus?.involvedFloors?.length ?? 0) > 1 ||
+        selectedFloor === "all");
+    const routeSize = getBoundsSizeMeters(routeBounds);
+    const routeBoundsAreStable =
+      routeBounds &&
+      routeSize.diagonalMeters >= 2 &&
+      routeSize.diagonalMeters <= 500;
+    const boundsForFit =
+      isMultiFloorRoute && buildingBounds
+        ? buildingBounds
+        : routeBoundsAreStable
+          ? routeBounds
+          : buildingBounds ?? routeBounds;
+    const fitSource =
+      boundsForFit === buildingBounds
+        ? routeBoundsAreStable && isMultiFloorRoute
+          ? "building-bounds-for-multi-floor-stability"
+          : "building-bounds-fallback"
+        : "route-bounds";
+
+    if (!boundsForFit) {
+      if (import.meta.env?.DEV !== false) {
+        console.log("[RouteCamera] auto-fit skipped", {
+          reason: "no usable route or building bounds",
+          routeCameraKey,
+        });
+      }
+      return;
+    }
+
+    const { minLng, maxLng, minLat, maxLat, center } = boundsForFit;
     const samePoint = minLng === maxLng && minLat === maxLat;
 
     // Route-aligned bearing: rotate the map so the first real movement away
@@ -1109,30 +1190,14 @@ const Map3D = ({
             [minLng, minLat],
             [maxLng, maxLat],
           ],
-          {
-            padding: Math.min(
-              ROUTE_CAMERA_PADDING_PX,
-              Math.floor(Math.min(width, height) * 0.22),
-            ),
-          },
+          { padding },
         );
       } catch (error) {
         console.warn("[RouteCamera] Unable to fit route bounds.", error);
       }
     }
 
-    if (import.meta.env?.DEV !== false) {
-      console.log("[RouteCamera] auto-fit triggered", {
-        pointCount: routePoints.length,
-        center,
-        zoom: clamp(fittedViewState.zoom, ROUTE_CAMERA_MIN_ZOOM, ROUTE_CAMERA_MAX_ZOOM),
-        bearing: nextBearing,
-      });
-    }
-
-    lastRouteCameraKeyRef.current = routeCameraKey;
-    window.dispatchEvent(new Event("resize"));
-    onViewStateChange({
+    const finalViewState = {
       ...baseViewState,
       longitude: fittedViewState.longitude,
       latitude: fittedViewState.latitude,
@@ -1145,15 +1210,43 @@ const Map3D = ({
       bearing: nextBearing,
       transitionDuration: ROUTE_CAMERA_TRANSITION_MS,
       transitionInterpolator: new FlyToInterpolator(),
-    });
+    };
+
+    if (import.meta.env?.DEV !== false) {
+      console.log("[RouteCamera] auto-fit triggered", {
+        routeType: isMultiFloorRoute ? "multi-floor" : "same-floor",
+        activeFloor: selectedFloor,
+        segmentFloors: visibleRouteSegments.map((segment) => segment.floorId),
+        cameraBoundsCoordinates: routePoints,
+        computedRouteBounds: routeBounds,
+        computedRouteBoundsSizeMeters: routeSize,
+        buildingBounds,
+        fitSource,
+        finalCameraCenter: [finalViewState.longitude, finalViewState.latitude],
+        finalZoom: finalViewState.zoom,
+        finalBearing: finalViewState.bearing,
+        finalPitch: finalViewState.pitch,
+        appliedPadding: padding,
+        layout: layoutDiagnostics,
+        mapResizeCalled,
+      });
+    }
+
+    lastRouteCameraKeyRef.current = routeCameraKey;
+    onViewStateChange(finalViewState);
   }, [
     activeRenderPath,
     externalViewState,
     internalViewState,
+    layoutDiagnostics,
     onViewStateChange,
     routeCameraKey,
+    routeFloorId,
+    routeFocus,
     routeFocusMarkers,
     routeLandmarkMarkers,
+    roomsData,
+    selectedFloor,
     shouldRenderRoute,
     usedConnectorRoomMarkers,
     visibleRouteSegments,

@@ -962,6 +962,104 @@ function App() {
     setRouteCameraKey((key) => key + 1);
   };
 
+  const routeLayoutDiagnostics = useMemo(
+    () => ({
+      sidebarCollapsed,
+      sidebarWidth,
+      layoutMode,
+      routePlannerOpen: showRoutePlanner,
+      directionsOpen: showDirections,
+      filterPanelOpen: showFilterPanel,
+    }),
+    [
+      layoutMode,
+      showDirections,
+      showFilterPanel,
+      showRoutePlanner,
+      sidebarCollapsed,
+      sidebarWidth,
+    ],
+  );
+
+  const getRouteDiagnosticsLayoutState = () => routeLayoutDiagnostics;
+
+  const logRouteExecutionDiagnostics = ({
+    routeType,
+    activeFloorBefore,
+    activeFloorAfter,
+    routeSegments = [],
+    routeCoordinates = [],
+    buildingBounds = null,
+    appliedPadding = null,
+  }) => {
+    if (import.meta.env?.DEV === false) return;
+
+    const collectGeometryCoordinates = (geometry) => {
+      if (!geometry) return [];
+      if (geometry.type === "Polygon") return geometry.coordinates.flat();
+      if (geometry.type === "MultiPolygon") {
+        return geometry.coordinates.flatMap((polygon) => polygon.flat());
+      }
+      if (geometry.type === "LineString") return geometry.coordinates;
+      if (geometry.type === "MultiLineString") return geometry.coordinates.flat();
+      return [];
+    };
+    const validRouteCoordinates = routeCoordinates.filter(
+      (coord) =>
+        Array.isArray(coord) &&
+        Number.isFinite(coord[0]) &&
+        Number.isFinite(coord[1]),
+    );
+    const validBuildingCoordinates = allRooms
+      .flatMap((room) => collectGeometryCoordinates(room?.geometry))
+      .filter(
+        (coord) =>
+          Array.isArray(coord) &&
+          Number.isFinite(coord[0]) &&
+          Number.isFinite(coord[1]),
+      );
+    const routeLngs = validRouteCoordinates.map((coord) => coord[0]);
+    const routeLats = validRouteCoordinates.map((coord) => coord[1]);
+    const buildingLngs = validBuildingCoordinates.map((coord) => coord[0]);
+    const buildingLats = validBuildingCoordinates.map((coord) => coord[1]);
+    const computedRouteBounds =
+      validRouteCoordinates.length > 0
+        ? {
+            minLng: Math.min(...routeLngs),
+            maxLng: Math.max(...routeLngs),
+            minLat: Math.min(...routeLats),
+            maxLat: Math.max(...routeLats),
+          }
+        : null;
+    const computedBuildingBounds =
+      buildingBounds ??
+      (validBuildingCoordinates.length > 0
+        ? {
+            minLng: Math.min(...buildingLngs),
+            maxLng: Math.max(...buildingLngs),
+            minLat: Math.min(...buildingLats),
+            maxLat: Math.max(...buildingLats),
+          }
+        : null);
+
+    console.log("[RouteDiagnostics] Find Route clicked", {
+      routeType,
+      activeFloorBefore,
+      activeFloorAfter,
+      routeSegmentFloors: routeSegments.map((segment) => segment.floorId),
+      cameraBoundsCoordinates: validRouteCoordinates,
+      computedRouteBounds,
+      buildingBounds: computedBuildingBounds,
+      finalCameraCenter: null,
+      finalZoom: null,
+      finalBearing: null,
+      finalPitch: null,
+      appliedPadding,
+      layout: getRouteDiagnosticsLayoutState(),
+      mapResizeCalled: "pending in Map3D route-camera effect",
+    });
+  };
+
   const visibleRouteContext =
     routeContext && selectedFloors.length === 0
       ? routeContext.type === "multi-floor"
@@ -1226,6 +1324,14 @@ function App() {
           routeType: "same-floor",
         };
 
+        logRouteExecutionDiagnostics({
+          routeType: "same-floor",
+          activeFloorBefore: selectedFloor,
+          activeFloorAfter: floorForRouting,
+          routeSegments: [{ floorId: floorForRouting, type: "horizontal" }],
+          routeCoordinates: renderPath.map((point) => point.coords),
+        });
+
         setSelectedFloors([]);
         setSelectedFloor(floorForRouting);
         setRouteContext({
@@ -1464,6 +1570,14 @@ function App() {
         directions: directionSteps,
         routeType: "multi-floor",
       };
+
+      logRouteExecutionDiagnostics({
+        routeType: "multi-floor",
+        activeFloorBefore: selectedFloor,
+        activeFloorAfter: "all",
+        routeSegments,
+        routeCoordinates: renderPath.map((point) => point.coords),
+      });
 
       setSelectedFloors([]);
       setSelectedFloor("all");
@@ -1915,6 +2029,7 @@ function App() {
               routePreview={activeRoutePreview}
               highlightedStep={highlightedStep}
               layoutSignal={layoutSignal}
+              layoutDiagnostics={routeLayoutDiagnostics}
             />
 
             {/* Room Info Popup */}
