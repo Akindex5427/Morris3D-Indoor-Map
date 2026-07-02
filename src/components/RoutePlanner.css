@@ -81,6 +81,7 @@
 
 .route-input {
   width: 100%;
+  min-height: 44px;
   padding: 0.78rem 0.85rem;
   border: 1px solid var(--border-subtle);
   border-radius: 16px;
@@ -159,6 +160,7 @@
 
 .set-current-btn {
   min-width: 74px;
+  min-height: 40px;
   padding: 0.5rem 0.7rem;
   border: 1px solid var(--border-subtle);
   border-radius: 12px;
@@ -188,6 +190,7 @@
 
 .advanced-toggle {
   width: 100%;
+  min-height: 44px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -259,5 +262,17 @@
 
   .route-close-btn {
     align-self: flex-end;
+    width: 44px;
+    height: 44px;
+  }
+
+  .set-current-btn,
+  .advanced-toggle,
+  .route-actions > * {
+    min-height: 48px;
+  }
+
+  .route-suggestions {
+    max-height: 42vh;
   }
 }

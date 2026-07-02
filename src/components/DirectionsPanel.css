@@ -66,6 +66,7 @@
 
 .directions-recenter-btn {
   padding: 6px 12px;
+  min-height: 36px;
   font-size: 0.78rem;
   font-weight: 700;
   white-space: nowrap;
@@ -678,6 +679,31 @@
 /* ─── Responsive ─────────────────────────────────────────────────────────────── */
 
 @media (max-width: 640px) {
+  .directions-header {
+    flex-direction: column;
+  }
+
+  .directions-header-btns {
+    width: 100%;
+  }
+
+  .directions-recenter-btn,
+  .directions-close-btn,
+  .dp-nav-btn,
+  .dp-repeat-btn,
+  .dp-stop-btn {
+    min-height: 44px;
+  }
+
+  .directions-recenter-btn {
+    flex: 1;
+  }
+
+  .directions-close-btn {
+    width: 44px;
+    height: 44px;
+  }
+
   .dp-voice-controls {
     flex-wrap: wrap;
   }

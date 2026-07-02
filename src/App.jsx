@@ -154,8 +154,10 @@ function App() {
   const [highlightedStep, setHighlightedStep] = useState(null);
   const [showPreview, setShowPreview] = useState(false);
   const [cameraMode, setCameraMode] = useState("overview");
-const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [sidebarWidth, setSidebarWidth] = useState(DEFAULT_SIDEBAR_WIDTH);
+  const [layoutMode, setLayoutMode] = useState("desktop");
+  const [layoutSignal, setLayoutSignal] = useState(0);
   const [routers, setRouters] = useState({});
   const [routerError, setRouterError] = useState(null);
   const [centerlinesData, setCenterlinesData] = useState({});
@@ -170,6 +172,7 @@ const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const allFloorsColorReferenceRef = useRef(null);
   const sidebarDragRef = useRef(null);
   const suppressSidebarClickRef = useRef(false);
+  const previousLayoutModeRef = useRef("desktop");
 
   // Initialize IndoorRouter with graph-based routing for all floors
   useEffect(() => {
@@ -515,12 +518,59 @@ const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   }, []);
 
   useEffect(() => {
-    const resizeTimer = window.setTimeout(() => {
-      window.dispatchEvent(new Event("resize"));
-    }, 240);
+    if (typeof window === "undefined") {
+      return undefined;
+    }
 
-    return () => window.clearTimeout(resizeTimer);
-  }, [sidebarCollapsed, sidebarWidth]);
+    const readLayoutMode = () => {
+      const width = window.innerWidth;
+      if (width < 768) return "mobile";
+      if (width < 1024) return "tablet";
+      return "desktop";
+    };
+
+    const handleViewportChange = () => {
+      const nextMode = readLayoutMode();
+      setLayoutMode(nextMode);
+      setLayoutSignal((signal) => signal + 1);
+    };
+
+    handleViewportChange();
+    window.addEventListener("resize", handleViewportChange);
+    window.addEventListener("orientationchange", handleViewportChange);
+
+    return () => {
+      window.removeEventListener("resize", handleViewportChange);
+      window.removeEventListener("orientationchange", handleViewportChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    const previousMode = previousLayoutModeRef.current;
+    const enteringCompactLayout =
+      previousMode === "desktop" && layoutMode !== "desktop";
+    const enteringDesktopLayout =
+      previousMode !== "desktop" && layoutMode === "desktop";
+
+    if (enteringCompactLayout) {
+      setSidebarCollapsed(true);
+    } else if (enteringDesktopLayout) {
+      setSidebarCollapsed(false);
+    }
+
+    previousLayoutModeRef.current = layoutMode;
+  }, [layoutMode]);
+
+  useEffect(() => {
+    const timers = [40, 180, 360].map((delay) =>
+      window.setTimeout(() => {
+        window.dispatchEvent(new Event("resize"));
+        setLayoutSignal((signal) => signal + 1);
+      }, delay),
+    );
+
+    return () => timers.forEach((timer) => window.clearTimeout(timer));
+  }, [sidebarCollapsed, sidebarWidth, layoutMode]);
 
   const handleSidebarToggleClick = () => {
     if (suppressSidebarClickRef.current) {
@@ -542,7 +592,7 @@ const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   };
 
   const handleSidebarDragStart = (event) => {
-    if (event.button !== 0) {
+    if (layoutMode !== "desktop" || event.button !== 0) {
       return;
     }
 
@@ -556,6 +606,10 @@ const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   };
 
   const handleSidebarDragMove = (event) => {
+    if (layoutMode !== "desktop") {
+      return;
+    }
+
     const dragState = sidebarDragRef.current;
     if (!dragState) {
       return;
@@ -599,6 +653,12 @@ const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
     window.setTimeout(() => {
       suppressSidebarClickRef.current = false;
     }, 0);
+  };
+
+  const closeCompactDrawer = () => {
+    if (layoutMode !== "desktop") {
+      setSidebarCollapsed(true);
+    }
   };
 
   const routeRoomsByFloor = useMemo(() => {
@@ -1537,9 +1597,40 @@ const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
         {/* Main Content */}
         <div
-          className={`main-content ${sidebarCollapsed ? "sidebar-collapsed" : ""}`}
+          className={`main-content layout-${layoutMode} ${
+            sidebarCollapsed ? "sidebar-collapsed" : "sidebar-open"
+          }`}
           style={{ "--sidebar-width": `${sidebarWidth}px` }}
         >
+          <div
+            className="drawer-backdrop"
+            aria-hidden="true"
+            onClick={closeCompactDrawer}
+          />
+
+          {layoutMode !== "desktop" && (
+            <div className="mobile-map-toolbar" aria-label="Map controls">
+              <button
+                type="button"
+                className="mobile-drawer-toggle"
+                onClick={handleSidebarToggleClick}
+                aria-controls="app-sidebar"
+                aria-expanded={!sidebarCollapsed}
+                aria-label={
+                  sidebarCollapsed
+                    ? "Open navigation panel"
+                    : "Close navigation panel"
+                }
+              >
+                {sidebarCollapsed ? "Menu" : "Close"}
+              </button>
+              <div className="mobile-toolbar-status" aria-live="polite">
+                <span>{currentFloorLabel}</span>
+                {activeRouteInfo && <strong>Route active</strong>}
+              </div>
+            </div>
+          )}
+
           {/* Left Panel */}
           <aside
             id="app-sidebar"
@@ -1547,7 +1638,34 @@ const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
             aria-hidden={sidebarCollapsed}
             inert={sidebarCollapsed ? "" : undefined}
           >
-            <div className="panel-section panel-card">
+            {layoutMode !== "desktop" && (
+              <div className="drawer-header">
+                <div>
+                  <span className="panel-kicker">Navigation</span>
+                  <h2 className="panel-title">Map tools</h2>
+                </div>
+                <button
+                  type="button"
+                  className="drawer-close"
+                  onClick={closeCompactDrawer}
+                  aria-label="Close navigation panel"
+                >
+                  ×
+                </button>
+              </div>
+            )}
+
+            {layoutMode !== "desktop" && (
+              <nav className="drawer-tabs" aria-label="Panel sections">
+                <a href="#panel-search">Search</a>
+                <a href="#panel-floors">Floors</a>
+                <a href="#panel-route">Route</a>
+                {activeRouteInfo && <a href="#panel-directions">Directions</a>}
+                <a href="#panel-settings">Settings</a>
+              </nav>
+            )}
+
+            <div className="panel-section panel-card" id="panel-search">
               <div className="panel-heading">
                 <span className="panel-kicker">Explore</span>
                 <h2 className="panel-title">Search rooms</h2>
@@ -1562,7 +1680,7 @@ const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
               />
             </div>
 
-            <div className="panel-section panel-card">
+            <div className="panel-section panel-card" id="panel-floors">
               <FloorSwitcher
                 currentFloor={selectedFloor}
                 onFloorChange={handleFloorChange}
@@ -1570,7 +1688,7 @@ const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
               />
             </div>
 
-            <div className="panel-section panel-card">
+            <div className="panel-section panel-card" id="panel-route">
               <div className="panel-heading">
                 <span className="panel-kicker">Routing</span>
                 <h2 className="panel-title">Planner</h2>
@@ -1699,7 +1817,7 @@ const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
             )}
 
             {showDirections && visibleRouteContext?.route?.path && (
-              <div className="panel-section panel-card">
+              <div className="panel-section panel-card" id="panel-directions">
                 <DirectionsPanel
                   routePath={visibleRouteContext.route.path}
                   routeInfo={visibleRouteContext.route.info}
@@ -1711,7 +1829,7 @@ const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
               </div>
             )}
 
-            <div className="panel-section panel-card">
+            <div className="panel-section panel-card" id="panel-settings">
               <VisualControls
                 lightingEnabled={lightingEnabled}
                 setLightingEnabled={setLightingEnabled}
@@ -1738,15 +1856,27 @@ const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
             onPointerCancel={handleSidebarDragEnd}
             aria-controls="app-sidebar"
             aria-expanded={!sidebarCollapsed}
-            aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+            aria-label={
+              layoutMode === "desktop"
+                ? sidebarCollapsed
+                  ? "Expand sidebar"
+                  : "Collapse sidebar"
+                : sidebarCollapsed
+                  ? "Open navigation panel"
+                  : "Close navigation panel"
+            }
             title={
               sidebarCollapsed
-                ? "Expand sidebar or drag right"
-                : "Collapse sidebar or drag to resize"
+                ? layoutMode === "desktop"
+                  ? "Expand sidebar or drag right"
+                  : "Open navigation panel"
+                : layoutMode === "desktop"
+                  ? "Collapse sidebar or drag to resize"
+                  : "Close navigation panel"
             }
           >
             <span aria-hidden="true" className="sidebar-toggle-icon">
-              {sidebarCollapsed ? ">" : "<"}
+              {layoutMode === "desktop" ? (sidebarCollapsed ? ">" : "<") : "☰"}
             </span>
           </button>
 
@@ -1784,6 +1914,7 @@ const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
               initialRevealReplayKey={initialRevealReplayKey}
               routePreview={activeRoutePreview}
               highlightedStep={highlightedStep}
+              layoutSignal={layoutSignal}
             />
 
             {/* Room Info Popup */}

@@ -355,6 +355,7 @@ const Map3D = ({
   initialRevealReplayKey = 0,
   routePreview = null,
   highlightedStep = null,
+  layoutSignal = 0,
 }) => {
   const [geojsonData, setGeojsonData] = useState(null);
   const [initialViewState, setInitialViewState] = useState({
@@ -372,6 +373,7 @@ const Map3D = ({
   );
   const [routeAnimationPhase, setRouteAnimationPhase] = useState(0);
   const deckRef = useRef(null);
+  const mapRef = useRef(null);
   const containerRef = useRef(null);
   const lastRouteCameraKeyRef = useRef(0);
   const isAllFloorsSelected =
@@ -453,6 +455,19 @@ const Map3D = ({
       resizeObserver.disconnect();
     };
   }, []);
+
+  useEffect(() => {
+    const timers = [0, 120, 320].map((delay) =>
+      window.setTimeout(() => {
+        const map = mapRef.current?.getMap?.() ?? mapRef.current;
+        map?.resize?.();
+        deckRef.current?.deck?.redraw(true);
+        window.dispatchEvent(new Event("resize"));
+      }, delay),
+    );
+
+    return () => timers.forEach((timer) => window.clearTimeout(timer));
+  }, [layoutSignal]);
 
   // Convert roomsData to GeoJSON format and update geojsonData
   useEffect(() => {
@@ -1851,6 +1866,7 @@ const Map3D = ({
         {MAPBOX_ACCESS_TOKEN &&
           MAPBOX_ACCESS_TOKEN !== "YOUR_MAPBOX_TOKEN_HERE" && (
             <Map
+              ref={mapRef}
               mapboxAccessToken={MAPBOX_ACCESS_TOKEN}
               mapStyle={
                 BASEMAP_STYLES[basemapStyle]?.url ||
