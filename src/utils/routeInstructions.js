@@ -71,7 +71,7 @@ export const generateVerticalInstruction = (verticalSegment, options = {}) => {
     toFloor,
     targetFloor: Number(String(toFloor).replace(/^F/i, "")),
     coordinate: verticalSegment.fromAccessPoint,
-    icon: connectorOptions.includes("elevator") ? "E" : "^",
+    icon: connectorType === "elevator" ? "E" : connectorType === "ramp" ? "R" : "^",
   });
 
   logInstructionDebug({
@@ -1303,8 +1303,13 @@ function normalizeConnectorType(connector, userPreference) {
   const normalized = String(typeText ?? "").toLowerCase();
 
   if (/\belevators?\b|\blifts?\b/.test(normalized)) return "elevator";
+  if (/\b(?:accessible\s*)?ramps?\b/.test(normalized)) return "ramp";
   if (/\baccessible\b/.test(normalized)) return "elevator";
   if (/\bstairs?\b|\bstair\s*case\b|\bstaircase\b/.test(normalized)) return "stairs";
+
+  if (userPreference === "ramp" || userPreference === "ramp_first") {
+    return "ramp";
+  }
 
   if (userPreference === "accessible" || userPreference === "elevator" || userPreference === "elevator_first") {
     return "elevator";
@@ -1315,6 +1320,7 @@ function normalizeConnectorType(connector, userPreference) {
 
 function getConnectorNoun(connectorType, verticalSegment) {
   if (connectorType === "elevator") return "elevator";
+  if (connectorType === "ramp") return "ramp";
 
   const name = String(verticalSegment.connectorName ?? "").toLowerCase();
   if (name.includes("stair case") || name.includes("staircase")) {
@@ -1333,7 +1339,7 @@ function getAvailableConnectorTypes(verticalSegment, fallbackConnectorType) {
 
   const normalized = types
     .map((type) => normalizeConnectorType(type))
-    .filter((type) => type === "stairs" || type === "elevator");
+    .filter((type) => type === "stairs" || type === "elevator" || type === "ramp");
 
   if (!normalized.includes(fallbackConnectorType)) {
     normalized.unshift(fallbackConnectorType);
@@ -1350,6 +1356,7 @@ function getConnectorDisplayName(connectorType, connectorName) {
     connectorName,
   });
   if (inferredType === "elevator") return "the elevator";
+  if (inferredType === "ramp") return "the ramp";
   const name = String(connectorName ?? "").toLowerCase();
   if (name.includes("stair case") || name.includes("staircase")) return "the staircase";
   return "the stairs";
@@ -1368,7 +1375,7 @@ function getAlternateConnectorText(connectorType, connectorOptions) {
 }
 
 function compareConnectorTypes(left, right) {
-  const order = { stairs: 0, elevator: 1 };
+  const order = { elevator: 0, ramp: 1, stairs: 2 };
   return order[left] - order[right];
 }
 

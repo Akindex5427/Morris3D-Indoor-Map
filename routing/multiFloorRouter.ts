@@ -8,9 +8,11 @@ import {
 } from './geometry';
 import { GeoJSONFeature } from './graph';
 
+export type VerticalConnectorType = 'elevator' | 'ramp' | 'stairs';
+
 export interface VerticalConnector {
   id: string;
-  type: 'stairs' | 'elevator';
+  type: VerticalConnectorType;
   floors: string[];
   accessPoints: Record<string, RouteCoordinate>;
   name?: string;
@@ -32,8 +34,8 @@ export interface HorizontalRouteSegment {
 
 export interface VerticalTransitionSegment {
   type: 'vertical-transition';
-  connectorType: 'stairs' | 'elevator';
-  availableConnectorTypes?: Array<'stairs' | 'elevator'>;
+  connectorType: VerticalConnectorType;
+  availableConnectorTypes?: VerticalConnectorType[];
   connectorId: string;
   connectorName?: string;
   fromFloor: string;
@@ -66,13 +68,13 @@ export interface ComputeMultiFloorRouteOptions {
   routers: Record<string, IndoorRouter>;
   roomsByFloor: Record<string, GeoJSONFeature[]>;
   verticalTransitionPenalty?: number;
-  userPreference?: 'stairs' | 'elevator' | 'accessible' | string;
+  userPreference?: 'stairs' | 'elevator' | 'ramp' | 'accessible' | string;
 }
 
 interface StairFeatureCandidate {
   id: string;
   name: string;
-  connectorType: 'stairs' | 'elevator';
+  connectorType: VerticalConnectorType;
   floorKey: string;
   feature: GeoJSONFeature;
   centroid: RouteCoordinate;
@@ -82,18 +84,24 @@ interface StairFeatureCandidate {
 interface StairCluster {
   id: string;
   name: string;
-  connectorType: 'stairs' | 'elevator';
+  connectorType: VerticalConnectorType;
   features: StairFeatureCandidate[];
   centroid: Point2D;
 }
 
 const STAIR_NAME_PATTERN = /stairs?|stair\s*case|stairs?\s*area/i;
 const ELEVATOR_NAME_PATTERN = /elevators?|lift/i;
+const RAMP_NAME_PATTERN = /(?:accessible\s*)?ramps?/i;
 const CONNECTOR_CLUSTER_DISTANCE_METERS = 14;
 const STAIR_BOUNDARY_SAMPLE_SPACING_METERS = 1.25;
 const MAX_STAIR_BOUNDARY_SAMPLES = 80;
 const DEFAULT_VERTICAL_TRANSITION_PENALTY = 30;
-const CONNECTOR_PREFERENCE_PENALTY = 100000;
+const CONNECTOR_PREFERENCE_PENALTY = 1_000_000_000;
+const DEFAULT_CONNECTOR_PREFERENCE: VerticalConnectorType[] = [
+  'elevator',
+  'ramp',
+  'stairs',
+];
 
 export function computeMultiFloorRoute(
   options: ComputeMultiFloorRouteOptions,
@@ -153,7 +161,7 @@ export function computeMultiFloorRoute(
 
   let bestCandidate: MultiFloorRouteResult | null = null;
   let bestDebug: Record<string, unknown> | null = null;
-  const successfulConnectorTypes = new Set<'stairs' | 'elevator'>();
+  const successfulConnectorTypes = new Set<VerticalConnectorType>();
 
   for (const connector of candidateConnectors) {
     const startRouter = routers[startFloorKey];
@@ -202,7 +210,7 @@ export function computeMultiFloorRoute(
           toFloor: destinationFloorKey,
           fromAccessPoint: startAccessPoint,
           toAccessPoint: destinationAccessPoint,
-          instruction: `Take the ${connector.type === 'elevator' ? 'elevator' : 'stairs'} from ${formatFloorLabel(startFloorKey)} to ${formatFloorLabel(destinationFloorKey)}`,
+          instruction: `Take the ${formatConnectorInstructionNoun(connector)} from ${formatFloorLabel(startFloorKey)} to ${formatFloorLabel(destinationFloorKey)}`,
         },
         toHorizontalSegment(destinationFloorKey, destinationFloorRoute),
       ],
@@ -545,9 +553,13 @@ function getFeatureName(feature: GeoJSONFeature): string {
   );
 }
 
-function getConnectorType(name: string): 'stairs' | 'elevator' | null {
+function getConnectorType(name: string): VerticalConnectorType | null {
   if (ELEVATOR_NAME_PATTERN.test(name)) {
     return 'elevator';
+  }
+
+  if (RAMP_NAME_PATTERN.test(name)) {
+    return 'ramp';
   }
 
   if (STAIR_NAME_PATTERN.test(name)) {
@@ -561,28 +573,46 @@ function connectorPreferenceScore(
   connector: VerticalConnector,
   userPreference?: string,
 ): number {
-  if (
-    userPreference === 'accessible' ||
-    userPreference === 'elevator' ||
-    userPreference === 'elevator_first' ||
-    userPreference === 'stairs_avoid'
-  ) {
-    return connector.type === 'elevator' ? 0 : CONNECTOR_PREFERENCE_PENALTY;
+  const hierarchy = getConnectorPreferenceHierarchy(userPreference);
+  const index = hierarchy.indexOf(connector.type);
+
+  if (index >= 0) {
+    return index * CONNECTOR_PREFERENCE_PENALTY;
   }
 
-  if (userPreference === 'stairs' || userPreference === 'stairs_first') {
-    return connector.type === 'stairs' ? 0 : CONNECTOR_PREFERENCE_PENALTY;
-  }
-
-  return 0;
+  return hierarchy.length * CONNECTOR_PREFERENCE_PENALTY;
 }
 
-function compareConnectorTypes(
-  left: 'stairs' | 'elevator',
-  right: 'stairs' | 'elevator',
-): number {
-  const order = { stairs: 0, elevator: 1 };
+function getConnectorPreferenceHierarchy(userPreference?: string): VerticalConnectorType[] {
+  if (userPreference === 'stairs' || userPreference === 'stairs_first') {
+    return ['stairs', 'elevator', 'ramp'];
+  }
+
+  if (userPreference === 'ramp' || userPreference === 'ramp_first') {
+    return ['ramp', 'elevator', 'stairs'];
+  }
+
+  return DEFAULT_CONNECTOR_PREFERENCE;
+}
+
+function compareConnectorTypes(left: VerticalConnectorType, right: VerticalConnectorType): number {
+  const order = { elevator: 0, ramp: 1, stairs: 2 };
   return order[left] - order[right];
+}
+
+function formatConnectorInstructionNoun(connector: VerticalConnector): string {
+  if (connector.type === 'elevator') {
+    return 'elevator';
+  }
+
+  if (connector.type === 'ramp') {
+    return 'ramp';
+  }
+
+  const name = String(connector.name ?? '').toLowerCase();
+  return name.includes('stair case') || name.includes('staircase')
+    ? 'staircase'
+    : 'stairs';
 }
 
 function getFeatureCentroid(feature: GeoJSONFeature): RouteCoordinate | null {

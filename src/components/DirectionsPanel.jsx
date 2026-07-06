@@ -101,7 +101,9 @@ const DirectionsPanel = ({
     Array.isArray(d?.connectorOptions) && d.connectorOptions.includes("stairs");
 
   const getConnectorLabel = (d) => {
-    return d?.connectorType === "elevator" ? "Elevator" : "Stairs";
+    if (d?.connectorType === "elevator") return "Elevator";
+    if (d?.connectorType === "ramp") return "Ramp";
+    return "Stairs";
   };
 
   const getConnectorTitle = (d) => {
@@ -115,7 +117,9 @@ const DirectionsPanel = ({
   // that the instruction generator uses for vertical transitions.
   const getStepIcon = (d) => {
     if (d.type === "vertical") {
-      return d.connectorType === "elevator" ? "🛗" : "🪜";
+      if (d.connectorType === "elevator") return "E";
+      if (d.connectorType === "ramp") return "R";
+      return "^";
     }
     return d.icon || ">";
   };

@@ -363,7 +363,7 @@ describe("routeInstructions", () => {
 
     expect(multiFloor[0]).toMatchObject({
       connectorType: "stairs",
-      connectorOptions: ["stairs", "elevator"],
+      connectorOptions: ["elevator", "stairs"],
       text: "Take the stairs to Floor 7. An elevator route is also available from route preferences.",
     });
   });

@@ -124,10 +124,17 @@ const getConnectorFeatureType = (featureOrRoom) => {
     .toLowerCase();
 
   if (/\belevators?\b|\blifts?\b/.test(searchableText)) return "elevator";
+  if (/\b(?:accessible\s*)?ramps?\b/.test(searchableText)) return "ramp";
   if (/\bstairs?\b|\bstair\s*case\b|\bstaircase\b/.test(searchableText)) {
     return "stairs";
   }
   return null;
+};
+
+const getConnectorFallbackName = (connectorType) => {
+  if (connectorType === "elevator") return "Elevator";
+  if (connectorType === "ramp") return "Ramp";
+  return "Stairs";
 };
 
 const distanceLngLatMeters = (a, b) => {
@@ -935,10 +942,7 @@ const Map3D = ({
         type: "connector",
         connectorType: featureType,
         source,
-        roomName: getRoomFeatureName(
-          feature,
-          featureType === "elevator" ? "Elevator" : "Stairs",
-        ),
+        roomName: getRoomFeatureName(feature, getConnectorFallbackName(featureType)),
         floor,
         position: [coords[0], coords[1], routeElevation(floor, 0.98)],
         glowPosition: [coords[0], coords[1], routeElevation(floor, 0.16)],
@@ -1006,7 +1010,7 @@ const Map3D = ({
         type: "connector",
         connectorType: transitionType,
         source: "transition",
-        roomName: transitionType === "elevator" ? "Elevator" : "Stairs",
+        roomName: getConnectorFallbackName(transitionType),
         floor: transition.floor,
         position: [
           transitionCoords[0],
@@ -1432,6 +1436,13 @@ const Map3D = ({
       </svg>`;
       return `data:image/svg+xml;base64,${btoa(svg)}`;
     };
+    const createRampSVG = () => {
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="18" fill="#dcfce7" stroke="#15803d" stroke-width="3"/>
+        <path d="M13 31h7l11-13h4" fill="none" stroke="#14532d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>`;
+      return `data:image/svg+xml;base64,${btoa(svg)}`;
+    };
     const stairIcon = {
       url: createStairSVG(),
       width: 36,
@@ -1440,6 +1451,12 @@ const Map3D = ({
     };
     const elevatorIcon = {
       url: createElevatorSVG(),
+      width: 36,
+      height: 36,
+      anchorY: 18,
+    };
+    const rampIcon = {
+      url: createRampSVG(),
       width: 36,
       height: 36,
       anchorY: 18,
@@ -1459,7 +1476,11 @@ const Map3D = ({
         data: markerData,
         getPosition: (d) => d.position,
         getIcon: (d) =>
-          d.connectorType === "elevator" ? elevatorIcon : stairIcon,
+          d.connectorType === "elevator"
+            ? elevatorIcon
+            : d.connectorType === "ramp"
+              ? rampIcon
+              : stairIcon,
         getSize: 30,
         sizeUnits: "pixels",
         sizeScale: 1,
@@ -1482,7 +1503,7 @@ const Map3D = ({
             ),
         ),
         getPosition: (d) => [d.position[0], d.position[1], d.position[2] + 0.1],
-        getText: (d) => (d.connectorType === "elevator" ? "Elevator" : "Stairs"),
+        getText: (d) => getConnectorFallbackName(d.connectorType),
         getSize: 10,
         getColor: [32, 33, 36, 255],
         getTextAnchor: "middle",

@@ -11,6 +11,7 @@ import RoutePlanner from "./components/RoutePlanner";
 import LoadingSpinner from "./components/LoadingSpinner";
 import HelpOverlay from "./components/HelpOverlay";
 import DirectionsPanel from "./components/DirectionsPanel";
+import MultiFloorRouteTimeline from "./components/MultiFloorRouteTimeline";
 import { useRoutePreview } from "./hooks/useRoutePreview";
 import { computeMultiFloorRoute, IndoorRouter } from "../routing";
 import {
@@ -154,6 +155,7 @@ function App() {
   const [highlightedStep, setHighlightedStep] = useState(null);
   const [showPreview, setShowPreview] = useState(false);
   const [cameraMode, setCameraMode] = useState("overview");
+  const [routeVisualizationMode, setRouteVisualizationMode] = useState("timeline");
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [sidebarWidth, setSidebarWidth] = useState(DEFAULT_SIDEBAR_WIDTH);
   const [layoutMode, setLayoutMode] = useState("desktop");
@@ -955,6 +957,7 @@ function App() {
     setShowDirections(false);
     setHighlightedStep(null);
     setShowPreview(false);
+    setRouteVisualizationMode("timeline");
   };
 
   const requestRouteCameraFit = () => {
@@ -1058,6 +1061,98 @@ function App() {
       layout: getRouteDiagnosticsLayoutState(),
       mapResizeCalled: "pending in Map3D route-camera effect",
     });
+  };
+
+  const getRoutePathBounds = (path = []) => {
+    const validCoords = path
+      .map((point) => point.coords)
+      .filter(
+        (coord) =>
+          Array.isArray(coord) &&
+          Number.isFinite(coord[0]) &&
+          Number.isFinite(coord[1]),
+      );
+
+    if (validCoords.length < 2) {
+      return null;
+    }
+
+    const lngs = validCoords.map((coord) => coord[0]);
+    const lats = validCoords.map((coord) => coord[1]);
+    return {
+      minLng: Math.min(...lngs),
+      maxLng: Math.max(...lngs),
+      minLat: Math.min(...lats),
+      maxLat: Math.max(...lats),
+      coordinateCount: validCoords.length,
+    };
+  };
+
+  const buildMultiFloorVisualizationModel = ({
+    segments,
+    routeSegments,
+    transitionMarkers,
+    startFloor,
+    endFloor,
+  }) => {
+    const horizontalSegments = segments.filter(
+      (segment) => segment.type === "horizontal",
+    );
+    const verticalSegments = segments.filter(
+      (segment) => segment.type === "vertical-transition",
+    );
+    const routeSegmentByFloor = new Map(
+      routeSegments.map((segment) => [String(segment.floorId), segment]),
+    );
+
+    const panels = horizontalSegments.map((segment, index) => {
+      const floorId = Number(segment.floorId);
+      const routeSegment = routeSegmentByFloor.get(String(floorId));
+      const path = routeSegment?.path ?? [];
+      const panelTransitionMarkers = transitionMarkers.filter(
+        (marker) => Number(marker.floor) === floorId,
+      );
+      const role =
+        floorId === Number(startFloor)
+          ? "start"
+          : floorId === Number(endFloor)
+            ? "destination"
+            : "transfer";
+
+      return {
+        id: `floor-${segment.floorId}-${index}`,
+        type: "floor-segment",
+        floorId,
+        role,
+        title:
+          role === "start"
+            ? `Start on F${floorId}`
+            : role === "destination"
+              ? `Continue on F${floorId}`
+              : `Transfer on F${floorId}`,
+        path,
+        distance: segment.distance,
+        coordinateCount: path.length,
+        transitionMarkers: panelTransitionMarkers,
+        cameraBounds: getRoutePathBounds(path),
+      };
+    });
+
+    const transitions = verticalSegments.map((segment, index) => ({
+      id: `transition-${segment.connectorId}-${index}`,
+      type: "vertical-transition",
+      connectorType: segment.connectorType,
+      connectorId: segment.connectorId,
+      connectorName: segment.connectorName,
+      fromFloor: Number(segment.fromFloor),
+      toFloor: Number(segment.toFloor),
+      instruction:
+        segment.instruction.endsWith(".")
+          ? segment.instruction
+          : `${segment.instruction}.`,
+    }));
+
+    return { panels, transitions };
   };
 
   const visibleRouteContext =
@@ -1505,7 +1600,11 @@ function App() {
       ]);
       const primaryTransition = transitionSegments[0];
       const selectedConnectorLabel =
-        primaryTransition?.connectorType === "elevator" ? "Elevator" : "Staircase";
+        primaryTransition?.connectorType === "elevator"
+          ? "Elevator"
+          : primaryTransition?.connectorType === "ramp"
+            ? "Ramp"
+            : "Staircase";
       const startPath = toPath(
         horizontalSegments[0].route,
         startFloor,
@@ -1524,6 +1623,13 @@ function App() {
       );
       const path = [...startPath, ...destinationPath];
       const renderPath = routeSegments.flatMap((segment) => segment.path);
+      const routeVisualization = buildMultiFloorVisualizationModel({
+        segments: multiFloorResult.segments,
+        routeSegments,
+        transitionMarkers,
+        startFloor,
+        endFloor,
+      });
       const routeLandmarks = horizontalSegments.flatMap((segment) =>
         findRouteLandmarks({
           routeResult: segment.route,
@@ -1558,7 +1664,7 @@ function App() {
           debug: ROUTE_DEBUG_ENABLED,
         },
       });
-      const floors = [startFloor, endFloor].sort((a, b) => a - b);
+      const floors = routeVisualization.panels.map((panel) => panel.floorId);
       const info = {
         start: getRoomName(startRoom),
         end: getRoomName(endRoom),
@@ -1571,6 +1677,48 @@ function App() {
         routeType: "multi-floor",
       };
 
+      if (ROUTE_DEBUG_ENABLED) {
+        console.group("[MultiFloorRouteView] generated visualization model");
+        console.log("selected start floor", startFloor);
+        console.log("selected destination floor", endFloor);
+        console.log("floors involved in computed route", floors);
+        console.log("route segment count", multiFloorResult.segments.length);
+        console.table(
+          multiFloorResult.segments.map((segment, index) => ({
+            index,
+            type: segment.type,
+            floor:
+              segment.type === "horizontal"
+                ? segment.floorId
+                : `${segment.fromFloor}->${segment.toFloor}`,
+            coordinateCount:
+              segment.type === "horizontal"
+                ? segment.renderCoordinates?.length ?? segment.coordinates?.length ?? 0
+                : null,
+            connectorType:
+              segment.type === "vertical-transition"
+                ? segment.connectorType
+                : null,
+            connectorId:
+              segment.type === "vertical-transition"
+                ? segment.connectorId
+                : null,
+          })),
+        );
+        console.table(
+          routeVisualization.panels.map((panel) => ({
+            panelId: panel.id,
+            floor: panel.floorId,
+            role: panel.role,
+            coordinateCount: panel.coordinateCount,
+            cameraBounds: panel.cameraBounds
+              ? `${panel.cameraBounds.minLng.toFixed(6)},${panel.cameraBounds.minLat.toFixed(6)} -> ${panel.cameraBounds.maxLng.toFixed(6)},${panel.cameraBounds.maxLat.toFixed(6)}`
+              : "floor-bounds fallback in panel map",
+          })),
+        );
+        console.groupEnd();
+      }
+
       logRouteExecutionDiagnostics({
         routeType: "multi-floor",
         activeFloorBefore: selectedFloor,
@@ -1581,6 +1729,7 @@ function App() {
 
       setSelectedFloors([]);
       setSelectedFloor("all");
+      setRouteVisualizationMode("timeline");
       setRouteContext({
         type: "multi-floor",
         floorId: null,
@@ -1589,6 +1738,8 @@ function App() {
           renderPath,
           routeSegments,
           transitionMarkers,
+          visualizationPanels: routeVisualization.panels,
+          visualizationTransitions: routeVisualization.transitions,
           info,
           result: multiFloorResult,
           focus: {
@@ -1676,6 +1827,9 @@ function App() {
         ? "F0 Basement"
         : `F${selectedFloor}`;
   const activeRouteInfo = visibleRouteContext?.route?.info ?? null;
+  const isMultiFloorTimelineActive =
+    visibleRouteContext?.type === "multi-floor" &&
+    routeVisualizationMode === "timeline";
 
   return (
     <div className="App">
@@ -1866,12 +2020,48 @@ function App() {
                       Clear Route
                     </button>
                   </div>
+                  {activeRouteInfo.routeType === "multi-floor" && (
+                    <div
+                      className="route-view-toggle"
+                      role="group"
+                      aria-label="Multi-floor route view"
+                    >
+                      <button
+                        type="button"
+                        className={
+                          routeVisualizationMode === "timeline" ? "active" : ""
+                        }
+                        onClick={() => setRouteVisualizationMode("timeline")}
+                      >
+                        Timeline view
+                      </button>
+                      <button
+                        type="button"
+                        className={
+                          routeVisualizationMode === "stacked" ? "active" : ""
+                        }
+                        onClick={() => {
+                          setRouteVisualizationMode("stacked");
+                          requestRouteCameraFit();
+                        }}
+                      >
+                        Stacked overview
+                      </button>
+                    </div>
+                  )}
 
                   {/* Route preview controls */}
                   {!showPreview ? (
                     <button
                       className="btn-secondary route-preview-launch-btn"
                       onClick={() => {
+                        if (
+                          activeRouteInfo.routeType === "multi-floor" &&
+                          routeVisualizationMode === "timeline"
+                        ) {
+                          setRouteVisualizationMode("stacked");
+                          requestRouteCameraFit();
+                        }
                         setShowPreview(true);
                         startPreview();
                       }}
@@ -1996,41 +2186,54 @@ function App() {
 
           {/* Map Container */}
           <div className="map-container">
-            <Map3D
-              selectedFloor={selectedFloor}
-              selectedFloors={selectedFloors}
-              onRoomSelect={handleRoomSelect}
-              filteredRooms={filteredRooms}
-              highlightedRoomId={highlightedRoomId}
-              hoveredRoomId={hoveredRoomId}
-              onRoomHover={setHoveredRoomId}
-              colorScheme="default"
-              viewState={viewState}
-              onViewStateChange={setViewState}
-              onUserCameraInteraction={handleUserCameraInteraction}
-              lightingEnabled={lightingEnabled}
-              translucency={translucency}
-              heightExaggeration={1}
-              basemapStyle={basemapStyle}
-              routePath={visibleRouteContext?.route?.path || null}
-              routeRenderPath={visibleRouteContext?.route?.renderPath || null}
-              routeSegments={visibleRouteContext?.route?.routeSegments || null}
-              routeTransitionMarkers={
-                visibleRouteContext?.route?.transitionMarkers || null
-              }
-              routeFocus={visibleRouteContext?.route?.focus || null}
-              routeFloorId={visibleRouteContext?.floorId ?? null}
-              routeCameraKey={routeCameraKey}
-              roomsData={allRooms}
-              centerlinesData={centerlinesData}
-              activeFloor={selectedFloor}
-              cinematicAnimationsEnabled={cinematicAnimationsEnabled}
-              initialRevealReplayKey={initialRevealReplayKey}
-              routePreview={activeRoutePreview}
-              highlightedStep={highlightedStep}
-              layoutSignal={layoutSignal}
-              layoutDiagnostics={routeLayoutDiagnostics}
-            />
+            {isMultiFloorTimelineActive ? (
+              <MultiFloorRouteTimeline
+                route={visibleRouteContext.route}
+                roomsData={allRooms}
+                centerlinesData={centerlinesData}
+                lightingEnabled={lightingEnabled}
+                translucency={translucency}
+                basemapStyle={basemapStyle}
+                cinematicAnimationsEnabled={cinematicAnimationsEnabled}
+                layoutSignal={layoutSignal}
+              />
+            ) : (
+              <Map3D
+                selectedFloor={selectedFloor}
+                selectedFloors={selectedFloors}
+                onRoomSelect={handleRoomSelect}
+                filteredRooms={filteredRooms}
+                highlightedRoomId={highlightedRoomId}
+                hoveredRoomId={hoveredRoomId}
+                onRoomHover={setHoveredRoomId}
+                colorScheme="default"
+                viewState={viewState}
+                onViewStateChange={setViewState}
+                onUserCameraInteraction={handleUserCameraInteraction}
+                lightingEnabled={lightingEnabled}
+                translucency={translucency}
+                heightExaggeration={1}
+                basemapStyle={basemapStyle}
+                routePath={visibleRouteContext?.route?.path || null}
+                routeRenderPath={visibleRouteContext?.route?.renderPath || null}
+                routeSegments={visibleRouteContext?.route?.routeSegments || null}
+                routeTransitionMarkers={
+                  visibleRouteContext?.route?.transitionMarkers || null
+                }
+                routeFocus={visibleRouteContext?.route?.focus || null}
+                routeFloorId={visibleRouteContext?.floorId ?? null}
+                routeCameraKey={routeCameraKey}
+                roomsData={allRooms}
+                centerlinesData={centerlinesData}
+                activeFloor={selectedFloor}
+                cinematicAnimationsEnabled={cinematicAnimationsEnabled}
+                initialRevealReplayKey={initialRevealReplayKey}
+                routePreview={activeRoutePreview}
+                highlightedStep={highlightedStep}
+                layoutSignal={layoutSignal}
+                layoutDiagnostics={routeLayoutDiagnostics}
+              />
+            )}
 
             {/* Room Info Popup */}
             {selectedRoom && (

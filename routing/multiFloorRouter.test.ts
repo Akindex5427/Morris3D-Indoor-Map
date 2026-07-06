@@ -115,7 +115,7 @@ describe('multi-floor routing orchestration', () => {
     );
   });
 
-  it('selects an elevator when elevator-first routing is requested', () => {
+  it('selects an elevator by default when one connects both route floors', () => {
     const floor1Router = makeRouter();
     const floor7Router = makeRouter();
     const roomsByFloor = {
@@ -136,7 +136,6 @@ describe('multi-floor routing orchestration', () => {
       destinationFloor: 7,
       routers: { 1: floor1Router, 7: floor7Router },
       roomsByFloor,
-      userPreference: 'elevator_first',
     });
 
     const transition = result.segments.find(
@@ -146,7 +145,73 @@ describe('multi-floor routing orchestration', () => {
     expect(result.success).toBe(true);
     expect(transition).toMatchObject({
       connectorType: 'elevator',
-      availableConnectorTypes: ['stairs', 'elevator'],
+      availableConnectorTypes: ['elevator', 'stairs'],
+    });
+  });
+
+  it('allows explicit stairs-first routing to override the default elevator preference', () => {
+    const floor1Router = makeRouter();
+    const floor7Router = makeRouter();
+    const roomsByFloor = {
+      1: [
+        makeRoom(1, 'stairs area', { lng: -89.22, lat: 37.71 }),
+        makeRoom(1, 'elevator', { lng: -89.225, lat: 37.715 }),
+      ],
+      7: [
+        makeRoom(7, 'stair case', { lng: -89.22001, lat: 37.71001 }),
+        makeRoom(7, 'elevator', { lng: -89.22501, lat: 37.71501 }),
+      ],
+    };
+
+    const result = computeMultiFloorRoute({
+      start: { lng: -89.221, lat: 37.711 },
+      startFloor: 1,
+      destination: { lng: -89.219, lat: 37.709 },
+      destinationFloor: 7,
+      routers: { 1: floor1Router, 7: floor7Router },
+      roomsByFloor,
+      userPreference: 'stairs_first',
+    });
+
+    const transition = result.segments.find(
+      (segment) => segment.type === 'vertical-transition',
+    );
+
+    expect(result.success).toBe(true);
+    expect(transition).toMatchObject({
+      connectorType: 'stairs',
+      availableConnectorTypes: ['elevator', 'stairs'],
+    });
+  });
+
+  it('falls back to stairs when no elevator connects both route floors', () => {
+    const floor1Router = makeRouter();
+    const floor7Router = makeRouter();
+    const roomsByFloor = {
+      1: [
+        makeRoom(1, 'stairs area', { lng: -89.22, lat: 37.71 }),
+        makeRoom(1, 'elevator', { lng: -89.225, lat: 37.715 }),
+      ],
+      7: [makeRoom(7, 'stair case', { lng: -89.22001, lat: 37.71001 })],
+    };
+
+    const result = computeMultiFloorRoute({
+      start: { lng: -89.221, lat: 37.711 },
+      startFloor: 1,
+      destination: { lng: -89.219, lat: 37.709 },
+      destinationFloor: 7,
+      routers: { 1: floor1Router, 7: floor7Router },
+      roomsByFloor,
+    });
+
+    const transition = result.segments.find(
+      (segment) => segment.type === 'vertical-transition',
+    );
+
+    expect(result.success).toBe(true);
+    expect(transition).toMatchObject({
+      connectorType: 'stairs',
+      availableConnectorTypes: ['stairs'],
     });
   });
 });
