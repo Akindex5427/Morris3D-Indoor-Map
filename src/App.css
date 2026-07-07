@@ -273,10 +273,14 @@
   padding: 16px;
   background: linear-gradient(180deg, #e7eef2 0%, #cedbe2 100%);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .multi-floor-route-scroll {
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: minmax(360px, 42vw);
@@ -298,6 +302,21 @@
   border: 1px solid var(--border-subtle);
   background: var(--bg-layer-1);
   box-shadow: var(--shadow-sm);
+  animation: routeTimelineCardIn 420ms ease both;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.route-timeline-card:nth-of-type(2) {
+  animation-delay: 80ms;
+}
+
+.route-timeline-card-active {
+  border-color: var(--accent-soft-strong);
+  box-shadow: 0 16px 32px rgba(26, 115, 232, 0.18);
+  transform: translateY(-1px);
 }
 
 .route-timeline-card-header {
@@ -355,6 +374,18 @@
   background: rgba(255, 248, 220, 0.94);
   color: #493000;
   box-shadow: var(--shadow-sm);
+  transition:
+    border-color var(--transition-fast),
+    background var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.route-timeline-transition-active {
+  border-color: rgba(249, 168, 37, 0.78);
+  background: #fff4c2;
+  box-shadow: 0 14px 28px rgba(138, 95, 0, 0.18);
+  transform: scale(1.02);
 }
 
 .route-transition-icon {
@@ -380,6 +411,18 @@
   color: #493000;
   font-size: 0.88rem;
   line-height: 1.35;
+}
+
+@keyframes routeTimelineCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .map-loading-state {

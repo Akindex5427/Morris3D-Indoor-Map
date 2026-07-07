@@ -12,12 +12,14 @@ const DirectionsPanel = ({
   onStepClick,
   cameraMode,
   onRecenterRoute,
+  activeStepIndex = null,
 }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [voiceEnabled, setVoiceEnabled] = useState(false);
   const [speechRate, setSpeechRate] = useState(0.7);
   const [showStepList, setShowStepList] = useState(false);
+  const lastAutoStepRef = React.useRef(null);
 
   const directions = useMemo(() => {
     if (routeInfo?.directions?.length) return routeInfo.directions;
@@ -183,8 +185,27 @@ const DirectionsPanel = ({
   useEffect(() => {
     setCurrentStep(0);
     setVoiceEnabled(false);
+    lastAutoStepRef.current = null;
     stopSpeaking();
   }, [routeInfo, routePath]);
+
+  useEffect(() => {
+    if (
+      activeStepIndex === null ||
+      !Number.isInteger(activeStepIndex) ||
+      activeStepIndex < 0 ||
+      activeStepIndex >= directions.length ||
+      activeStepIndex === lastAutoStepRef.current
+    ) {
+      return;
+    }
+
+    lastAutoStepRef.current = activeStepIndex;
+    setCurrentStep(activeStepIndex);
+    if (voiceEnabled && directions[activeStepIndex]) {
+      speakText(generateStepSpeech(directions[activeStepIndex]));
+    }
+  }, [activeStepIndex, directions, voiceEnabled]);
 
   if (!routePath || directions.length === 0) return null;
 

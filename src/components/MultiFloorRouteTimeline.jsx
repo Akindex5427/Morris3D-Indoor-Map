@@ -1,5 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Map3D from "./Map3D";
+import {
+  buildPathMetrics,
+  positionAtDistance,
+  splitPath,
+} from "../hooks/useRoutePreview";
 
 const formatFloorLabel = (floor) => `F${floor}`;
 
@@ -33,6 +38,7 @@ const MultiFloorRoutePanelMap = ({
   routeFocus,
   cinematicAnimationsEnabled,
   layoutSignal,
+  routePreview,
 }) => {
   const [viewState, setViewState] = useState({
     longitude: 0,
@@ -66,7 +72,13 @@ const MultiFloorRoutePanelMap = ({
       hoveredRoomId={null}
       colorScheme="default"
       viewState={viewState}
-      onViewStateChange={setViewState}
+      onViewStateChange={(nextViewState) =>
+        setViewState({
+          ...nextViewState,
+          pitch: 0,
+          bearing: 0,
+        })
+      }
       lightingEnabled={lightingEnabled}
       translucency={translucency}
       heightExaggeration={1}
@@ -83,7 +95,7 @@ const MultiFloorRoutePanelMap = ({
       activeFloor={panel.floorId}
       cinematicAnimationsEnabled={cinematicAnimationsEnabled}
       initialRevealReplayKey={0}
-      routePreview={null}
+      routePreview={routePreview}
       highlightedStep={null}
       layoutSignal={layoutSignal}
       layoutDiagnostics={{
@@ -104,9 +116,68 @@ const MultiFloorRouteTimeline = ({
   basemapStyle,
   cinematicAnimationsEnabled,
   layoutSignal,
+  routePreview = null,
 }) => {
   const panels = route?.visualizationPanels || [];
   const transitions = route?.visualizationTransitions || [];
+  const playbackModels = useMemo(() => {
+    let cumulativeMeters = 0;
+    return panels.map((panel) => {
+      const metrics = buildPathMetrics(panel.path);
+      const startMeters = cumulativeMeters;
+      const endMeters = cumulativeMeters + metrics.total;
+      cumulativeMeters = endMeters;
+      const localProgress = Math.max(
+        0,
+        Math.min(
+          metrics.total,
+          (routePreview?.progressMeters ?? 0) - startMeters,
+        ),
+      );
+      const cursorPosition = positionAtDistance(
+        panel.path,
+        metrics.cumulative,
+        localProgress,
+      );
+      const split = splitPath(panel.path, metrics.cumulative, localProgress);
+
+      return {
+        panelId: panel.id,
+        startMeters,
+        endMeters,
+        totalMeters: metrics.total,
+        localProgress,
+        isActive:
+          Boolean(routePreview) &&
+          routePreview.progressMeters >= startMeters &&
+          routePreview.progressMeters <= endMeters,
+        routePreview:
+          routePreview && cursorPosition
+            ? {
+                traveledPath: split.traveled,
+                remainingPath: split.remaining,
+                cursorPosition,
+              }
+            : null,
+      };
+    });
+  }, [panels, routePreview]);
+  const playbackByPanelId = useMemo(
+    () =>
+      new Map(
+        playbackModels.map((model) => [
+          model.panelId,
+          model,
+        ]),
+      ),
+    [playbackModels],
+  );
+  const activeTransitionIndex = playbackModels.findIndex(
+    (model, index) =>
+      index < transitions.length &&
+      routePreview &&
+      Math.abs((routePreview.progressMeters ?? 0) - model.endMeters) < 0.75,
+  );
 
   if (!route || panels.length === 0) {
     return null;
@@ -117,9 +188,14 @@ const MultiFloorRouteTimeline = ({
       <div className="multi-floor-route-scroll">
         {panels.map((panel, index) => {
           const nextTransition = transitions[index] || null;
+          const panelPlayback = playbackByPanelId.get(panel.id);
           return (
             <React.Fragment key={panel.id}>
-              <section className="route-timeline-card">
+              <section
+                className={`route-timeline-card${
+                  panelPlayback?.isActive ? " route-timeline-card-active" : ""
+                }`}
+              >
                 <div className="route-timeline-card-header">
                   <div>
                     <span className="route-timeline-kicker">
@@ -144,12 +220,19 @@ const MultiFloorRouteTimeline = ({
                     routeFocus={route.focus}
                     cinematicAnimationsEnabled={cinematicAnimationsEnabled}
                     layoutSignal={layoutSignal}
+                    routePreview={panelPlayback?.routePreview ?? null}
                   />
                 </div>
               </section>
 
               {nextTransition && (
-                <div className="route-timeline-transition">
+                <div
+                  className={`route-timeline-transition${
+                    activeTransitionIndex === index
+                      ? " route-timeline-transition-active"
+                      : ""
+                  }`}
+                >
                   <div className="route-transition-icon" aria-hidden="true">
                     {getConnectorIcon(nextTransition.connectorType)}
                   </div>

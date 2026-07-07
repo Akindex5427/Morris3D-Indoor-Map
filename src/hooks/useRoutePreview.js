@@ -46,7 +46,7 @@ function haversineMeters(lng1, lat1, lng2, lat2) {
  * Build cumulative haversine distances along the path.
  * Returns { cumulative: number[], total: number }.
  */
-function buildPathMetrics(renderPath) {
+export function buildPathMetrics(renderPath) {
   if (!Array.isArray(renderPath) || renderPath.length < 2) {
     return { cumulative: [0], total: 0 };
   }
@@ -67,7 +67,7 @@ function buildPathMetrics(renderPath) {
 /**
  * Interpolate a { coords, floor } position at exactly `targetMeters` from start.
  */
-function positionAtDistance(renderPath, cumulative, targetMeters) {
+export function positionAtDistance(renderPath, cumulative, targetMeters) {
   if (!renderPath || renderPath.length < 2) return null;
 
   const clamped = Math.max(0, Math.min(targetMeters, cumulative[cumulative.length - 1]));
@@ -98,7 +98,7 @@ function positionAtDistance(renderPath, cumulative, targetMeters) {
  * An interpolated split point is inserted at the junction so the two halves
  * share their boundary exactly with no gap or overlap.
  */
-function splitPath(renderPath, cumulative, targetMeters) {
+export function splitPath(renderPath, cumulative, targetMeters) {
   if (!renderPath || renderPath.length < 2) {
     return { traveled: [], remaining: renderPath || [] };
   }
@@ -137,21 +137,43 @@ function splitPath(renderPath, cumulative, targetMeters) {
 export function useRoutePreview({
   renderPath,
   speedMetersPerSecond = DEFAULT_SPEED_MS,
+  pauseStopsMeters = [],
+  pauseDurationMs = 900,
 }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progressMeters, setProgressMeters] = useState(0);
 
   const pathMetrics = useMemo(() => buildPathMetrics(renderPath), [renderPath]);
+  const pauseStops = useMemo(
+    () =>
+      (Array.isArray(pauseStopsMeters) ? pauseStopsMeters : [])
+        .filter((value) => Number.isFinite(value) && value > 0 && value < pathMetrics.total)
+        .sort((left, right) => left - right),
+    [pauseStopsMeters, pathMetrics.total],
+  );
 
   // Always-current progress ref — read inside RAF closures to avoid stale capture
   const progressRef = useRef(0);
   progressRef.current = progressMeters;
+  const visitedPauseStopsRef = useRef(new Set());
+  const pauseTimeoutRef = useRef(null);
+
+  const clearPauseTimeout = useCallback(() => {
+    if (pauseTimeoutRef.current !== null) {
+      window.clearTimeout(pauseTimeoutRef.current);
+      pauseTimeoutRef.current = null;
+    }
+  }, []);
 
   // Reset when the source route changes
   useEffect(() => {
+    clearPauseTimeout();
+    visitedPauseStopsRef.current = new Set();
     setIsPlaying(false);
     setProgressMeters(0);
-  }, [renderPath]);
+  }, [renderPath, clearPauseTimeout]);
+
+  useEffect(() => () => clearPauseTimeout(), [clearPauseTimeout]);
 
   // RAF animation loop.
   // capturedStart is read from progressRef.current once when the effect fires
@@ -167,6 +189,24 @@ export function useRoutePreview({
       if (startTs === null) startTs = ts;
       const elapsed = (ts - startTs) / 1000;
       const next = capturedStart + speedMetersPerSecond * elapsed;
+      const pauseStop = pauseStops.find(
+        (stop) =>
+          stop > capturedStart &&
+          stop <= next &&
+          !visitedPauseStopsRef.current.has(stop),
+      );
+
+      if (pauseStop !== undefined) {
+        visitedPauseStopsRef.current.add(pauseStop);
+        setProgressMeters(pauseStop);
+        setIsPlaying(false);
+        clearPauseTimeout();
+        pauseTimeoutRef.current = window.setTimeout(() => {
+          pauseTimeoutRef.current = null;
+          setIsPlaying(true);
+        }, pauseDurationMs);
+        return;
+      }
 
       if (next >= pathMetrics.total) {
         setProgressMeters(pathMetrics.total);
@@ -180,7 +220,14 @@ export function useRoutePreview({
 
     rafId = requestAnimationFrame(frame);
     return () => cancelAnimationFrame(rafId);
-  }, [isPlaying, speedMetersPerSecond, pathMetrics.total]);
+  }, [
+    clearPauseTimeout,
+    isPlaying,
+    pauseDurationMs,
+    pauseStops,
+    speedMetersPerSecond,
+    pathMetrics.total,
+  ]);
 
   // Derived path data — only recomputed when progress changes
   const cursorPosition = useMemo(
@@ -199,26 +246,33 @@ export function useRoutePreview({
   // ── Public API ──────────────────────────────────────────────────────────────
 
   const startPreview = useCallback(() => {
+    clearPauseTimeout();
+    visitedPauseStopsRef.current = new Set();
     setProgressMeters(0);
     setIsPlaying(true);
-  }, []);
+  }, [clearPauseTimeout]);
 
   const stopPreview = useCallback(() => {
+    clearPauseTimeout();
+    visitedPauseStopsRef.current = new Set();
     setIsPlaying(false);
     setProgressMeters(0);
-  }, []);
+  }, [clearPauseTimeout]);
 
   const togglePlayPause = useCallback(() => {
+    clearPauseTimeout();
     setIsPlaying((p) => !p);
-  }, []);
+  }, [clearPauseTimeout]);
 
   // Seeking always pauses so the RAF restarts cleanly from the new position.
   const seekTo = useCallback(
     (fraction) => {
+      clearPauseTimeout();
+      visitedPauseStopsRef.current = new Set();
       setIsPlaying(false);
       setProgressMeters(Math.max(0, Math.min(1, fraction)) * pathMetrics.total);
     },
-    [pathMetrics.total],
+    [clearPauseTimeout, pathMetrics.total],
   );
 
   return {

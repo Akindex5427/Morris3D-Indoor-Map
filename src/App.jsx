@@ -1088,6 +1088,66 @@ function App() {
     };
   };
 
+  const getRoutePointDistanceMeters = (left, right) => {
+    if (!left?.coords || !right?.coords) return 0;
+    const [lng1, lat1] = left.coords;
+    const [lng2, lat2] = right.coords;
+    if (
+      !Number.isFinite(lng1) ||
+      !Number.isFinite(lat1) ||
+      !Number.isFinite(lng2) ||
+      !Number.isFinite(lat2)
+    ) {
+      return 0;
+    }
+
+    const radiusMeters = 6_371_000;
+    const toRadians = (degrees) => (degrees * Math.PI) / 180;
+    const dLat = toRadians(lat2 - lat1);
+    const dLng = toRadians(lng2 - lng1);
+    const a =
+      Math.sin(dLat / 2) ** 2 +
+      Math.cos(toRadians(lat1)) *
+        Math.cos(toRadians(lat2)) *
+        Math.sin(dLng / 2) ** 2;
+    return radiusMeters * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  };
+
+  const getRoutePathLengthMeters = (path = []) => {
+    let total = 0;
+    for (let index = 1; index < path.length; index += 1) {
+      total += getRoutePointDistanceMeters(path[index - 1], path[index]);
+    }
+    return total;
+  };
+
+  const getNearestRouteProgressMeters = (path = [], coords = null) => {
+    if (!Array.isArray(path) || path.length === 0 || !Array.isArray(coords)) {
+      return null;
+    }
+
+    let best = null;
+    let cumulativeMeters = 0;
+    for (let index = 0; index < path.length; index += 1) {
+      if (index > 0) {
+        cumulativeMeters += getRoutePointDistanceMeters(path[index - 1], path[index]);
+      }
+
+      const candidateDistance = getRoutePointDistanceMeters(
+        { coords },
+        path[index],
+      );
+      if (!best || candidateDistance < best.distanceMeters) {
+        best = {
+          distanceMeters: candidateDistance,
+          progressMeters: cumulativeMeters,
+        };
+      }
+    }
+
+    return best?.progressMeters ?? null;
+  };
+
   const buildMultiFloorVisualizationModel = ({
     segments,
     routeSegments,
@@ -1168,9 +1228,28 @@ function App() {
       : null;
 
   // Route preview animation — always called (hook rules), inactive when no route
+  const routePreviewPauseStopsMeters = useMemo(() => {
+    const segments = visibleRouteContext?.route?.routeSegments;
+    if (visibleRouteContext?.type !== "multi-floor" || !Array.isArray(segments)) {
+      return [];
+    }
+
+    let cumulativeMeters = 0;
+    const stops = [];
+    segments.forEach((segment, index) => {
+      cumulativeMeters += getRoutePathLengthMeters(segment.path);
+      if (index < segments.length - 1 && cumulativeMeters > 0) {
+        stops.push(cumulativeMeters);
+      }
+    });
+    return stops;
+  }, [visibleRouteContext]);
+
   const {
     isPlaying: previewIsPlaying,
     progressFraction: previewProgressFraction,
+    progressMeters: previewProgressMeters,
+    totalMeters: previewTotalMeters,
     traveledPath: previewTraveledPath,
     remainingPath: previewRemainingPath,
     cursorPosition: previewCursorPosition,
@@ -1180,6 +1259,7 @@ function App() {
     seekTo: seekPreviewTo,
   } = useRoutePreview({
     renderPath: visibleRouteContext?.route?.renderPath ?? null,
+    pauseStopsMeters: routePreviewPauseStopsMeters,
   });
 
   // Auto-play the route preview a fixed delay after a new route is generated
@@ -1198,8 +1278,40 @@ function App() {
           traveledPath: previewTraveledPath,
           remainingPath: previewRemainingPath,
           cursorPosition: previewCursorPosition,
+          progressMeters: previewProgressMeters,
+          totalMeters: previewTotalMeters,
         }
       : null;
+
+  const activePreviewDirectionIndex = useMemo(() => {
+    const directions = visibleRouteContext?.route?.info?.directions;
+    const renderPath = visibleRouteContext?.route?.renderPath;
+    if (
+      !showPreview ||
+      !Array.isArray(directions) ||
+      !Array.isArray(renderPath) ||
+      !Number.isFinite(previewProgressMeters)
+    ) {
+      return null;
+    }
+
+    let activeIndex = null;
+    directions.forEach((direction, index) => {
+      const coords = direction.coords ?? (direction.coordinate
+        ? [direction.coordinate.lng, direction.coordinate.lat]
+        : null);
+      const stepProgress = getNearestRouteProgressMeters(renderPath, coords);
+      if (stepProgress !== null && stepProgress <= previewProgressMeters + 1.5) {
+        activeIndex = index;
+      }
+    });
+
+    return activeIndex;
+  }, [
+    previewProgressMeters,
+    showPreview,
+    visibleRouteContext,
+  ]);
 
   const handleSameFloorRouteCalculate = (
     startRoom,
@@ -2055,13 +2167,6 @@ function App() {
                     <button
                       className="btn-secondary route-preview-launch-btn"
                       onClick={() => {
-                        if (
-                          activeRouteInfo.routeType === "multi-floor" &&
-                          routeVisualizationMode === "timeline"
-                        ) {
-                          setRouteVisualizationMode("stacked");
-                          requestRouteCameraFit();
-                        }
                         setShowPreview(true);
                         startPreview();
                       }}
@@ -2129,6 +2234,7 @@ function App() {
                   onStepClick={handleStepClick}
                   cameraMode={cameraMode}
                   onRecenterRoute={handleRecenterRoute}
+                  activeStepIndex={activePreviewDirectionIndex}
                 />
               </div>
             )}
@@ -2196,6 +2302,7 @@ function App() {
                 basemapStyle={basemapStyle}
                 cinematicAnimationsEnabled={cinematicAnimationsEnabled}
                 layoutSignal={layoutSignal}
+                routePreview={activeRoutePreview}
               />
             ) : (
               <Map3D
