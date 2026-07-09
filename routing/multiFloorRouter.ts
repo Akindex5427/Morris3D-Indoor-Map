@@ -15,6 +15,7 @@ export interface VerticalConnector {
   type: VerticalConnectorType;
   floors: string[];
   accessPoints: Record<string, RouteCoordinate>;
+  accessPointOptions?: Record<string, RouteCoordinate[]>;
   featureKeysByFloor?: Record<string, string[]>;
   name?: string;
   debug?: {
@@ -68,8 +69,24 @@ export interface ComputeMultiFloorRouteOptions {
   destinationFloor: number | string;
   routers: Record<string, IndoorRouter>;
   roomsByFloor: Record<string, GeoJSONFeature[]>;
+  roomAnchorIndexesByFloor?: Record<string, CenterlineAnchorIndex | undefined>;
   verticalTransitionPenalty?: number;
   userPreference?: 'stairs' | 'elevator' | 'ramp' | 'accessible' | string;
+}
+
+interface CenterlineAnchor {
+  coordinates: RouteCoordinate;
+  featureId?: string | number | null;
+  role?: string;
+}
+
+type CenterlineAnchorIndex = Map<string, CenterlineAnchor[]>;
+
+interface AccessPointCandidate {
+  point: RouteCoordinate;
+  distanceMeters: number;
+  componentId: number | null;
+  source: 'centerline-anchor' | 'connector-geometry';
 }
 
 interface StairFeatureCandidate {
@@ -115,6 +132,7 @@ export function computeMultiFloorRoute(
     destinationFloor,
     routers,
     roomsByFloor,
+    roomAnchorIndexesByFloor = {},
     verticalTransitionPenalty = DEFAULT_VERTICAL_TRANSITION_PENALTY,
     userPreference,
   } = options;
@@ -148,7 +166,12 @@ export function computeMultiFloorRoute(
   console.log('[MultiFloorRoute] startFloor', startFloorKey);
   console.log('[MultiFloorRoute] destinationFloor', destinationFloorKey);
 
-  const connectors = buildVerticalConnectors({ roomsByFloor, routers, userPreference });
+  const connectors = buildVerticalConnectors({
+    roomsByFloor,
+    routers,
+    roomAnchorIndexesByFloor,
+    userPreference,
+  });
   const candidateConnectors = connectors.filter(
     (connector) =>
       connector.accessPoints[startFloorKey] &&
@@ -168,101 +191,130 @@ export function computeMultiFloorRoute(
   for (const connector of candidateConnectors) {
     const startRouter = routers[startFloorKey];
     const destinationRouter = routers[destinationFloorKey];
-    const startAccessPoint = connector.accessPoints[startFloorKey];
-    const destinationAccessPoint = connector.accessPoints[destinationFloorKey];
+    const startAccessOptions =
+      connector.accessPointOptions?.[startFloorKey] ??
+      [connector.accessPoints[startFloorKey]].filter(Boolean);
+    const destinationAccessOptions =
+      connector.accessPointOptions?.[destinationFloorKey] ??
+      [connector.accessPoints[destinationFloorKey]].filter(Boolean);
 
-    if (!startRouter || !destinationRouter || !startAccessPoint || !destinationAccessPoint) {
+    if (
+      !startRouter ||
+      !destinationRouter ||
+      startAccessOptions.length === 0 ||
+      destinationAccessOptions.length === 0
+    ) {
       continue;
     }
 
-    const startFloorRoute = computeConnectorBoundRoute(
-      startRouter,
-      start,
-      startAccessPoint,
-      'end',
-    );
-    if (!startFloorRoute.success) {
-      continue;
-    }
+    for (const startAccessPoint of startAccessOptions) {
+      const startFloorRoute = computeConnectorBoundRoute(
+        startRouter,
+        start,
+        startAccessPoint,
+        'end',
+      );
+      if (!startFloorRoute.success) {
+        continue;
+      }
 
-    const destinationFloorRoute = computeConnectorBoundRoute(
-      destinationRouter,
-      destinationAccessPoint,
-      destination,
-      'start',
-    );
-    if (!destinationFloorRoute.success) {
-      continue;
-    }
+      for (const destinationAccessPoint of destinationAccessOptions) {
+        const destinationFloorRoute = computeConnectorBoundRoute(
+          destinationRouter,
+          destinationAccessPoint,
+          destination,
+          'start',
+        );
+        if (!destinationFloorRoute.success) {
+          continue;
+        }
 
-    const floorDelta = Math.abs(Number(destinationFloorKey) - Number(startFloorKey));
-    const verticalCost =
-      verticalTransitionPenalty * Math.max(1, Number.isFinite(floorDelta) ? floorDelta : 1);
-    const totalDistance = startFloorRoute.distance + destinationFloorRoute.distance;
-    const preferenceCost = connectorPreferenceScore(connector, userPreference);
-    const totalCost = totalDistance + verticalCost + preferenceCost;
-    const result: MultiFloorRouteResult = {
-      success: true,
-      type: 'multi-floor',
-      connector,
-      totalDistance: Math.round(totalDistance * 100) / 100,
-      totalCost: Math.round(totalCost * 100) / 100,
-      instructions: [],
-      segments: [
-        toHorizontalSegment(startFloorKey, startFloorRoute),
-        {
-          type: 'vertical-transition',
-          connectorType: connector.type,
-          connectorId: connector.id,
-          connectorName: connector.name,
-          fromFloor: startFloorKey,
-          toFloor: destinationFloorKey,
-          fromAccessPoint: startAccessPoint,
-          toAccessPoint: destinationAccessPoint,
-          instruction: `Take the ${formatConnectorInstructionNoun(connector)} from ${formatFloorLabel(startFloorKey)} to ${formatFloorLabel(destinationFloorKey)}`,
-        },
-        toHorizontalSegment(destinationFloorKey, destinationFloorRoute),
-      ],
-      debug: {
-        connectorId: connector.id,
-        connectorType: connector.type,
-        originFloorElevatorNode: startFloorRoute.debug?.endSnap?.nodeId ?? null,
-        destinationFloorElevatorNode:
-          destinationFloorRoute.debug?.startSnap?.nodeId ?? null,
-        originFloorRouteEndNode: startFloorRoute.debug?.graphNodeIds?.at(-1) ?? null,
-        destinationFloorRouteStartNode:
-          destinationFloorRoute.debug?.graphNodeIds?.[0] ?? null,
-        routeNodeCountBeforeElevator:
-          startFloorRoute.debug?.graphNodeIds?.length ??
-          startFloorRoute.debug?.graphCoordinates?.length ??
-          startFloorRoute.coordinates.length,
-        routeNodeCountAfterElevator:
-          destinationFloorRoute.debug?.graphNodeIds?.length ??
-          destinationFloorRoute.debug?.graphCoordinates?.length ??
-          destinationFloorRoute.coordinates.length,
-        centerlineContinuity: {
-          originRouteEndsAtConnector: pointsWithinToleranceMeters(
-            getLastCoordinate(startFloorRoute),
-            startAccessPoint,
-            CONNECTOR_ENDPOINT_TOLERANCE_METERS,
-          ),
-          destinationRouteStartsAtConnector: pointsWithinToleranceMeters(
-            getFirstCoordinate(destinationFloorRoute),
-            destinationAccessPoint,
-            CONNECTOR_ENDPOINT_TOLERANCE_METERS,
-          ),
-        },
-        startFloorRouteDistance: startFloorRoute.distance,
-        destinationFloorRouteDistance: destinationFloorRoute.distance,
-        verticalTransitionFloors: [startFloorKey, destinationFloorKey],
-        totalCost,
-      },
-    };
-    successfulConnectorTypes.add(connector.type);
+        const selectedConnector: VerticalConnector = {
+          ...connector,
+          accessPoints: {
+            ...connector.accessPoints,
+            [startFloorKey]: startAccessPoint,
+            [destinationFloorKey]: destinationAccessPoint,
+          },
+        };
+        const floorDelta = Math.abs(Number(destinationFloorKey) - Number(startFloorKey));
+        const verticalCost =
+          verticalTransitionPenalty * Math.max(1, Number.isFinite(floorDelta) ? floorDelta : 1);
+        const totalDistance = startFloorRoute.distance + destinationFloorRoute.distance;
+        const preferenceCost = connectorPreferenceScore(connector, userPreference);
+        const totalCost = totalDistance + verticalCost + preferenceCost;
+        const result: MultiFloorRouteResult = {
+          success: true,
+          type: 'multi-floor',
+          connector: selectedConnector,
+          totalDistance: Math.round(totalDistance * 100) / 100,
+          totalCost: Math.round(totalCost * 100) / 100,
+          instructions: [],
+          segments: [
+            toHorizontalSegment(startFloorKey, startFloorRoute),
+            {
+              type: 'vertical-transition',
+              connectorType: connector.type,
+              connectorId: connector.id,
+              connectorName: connector.name,
+              fromFloor: startFloorKey,
+              toFloor: destinationFloorKey,
+              fromAccessPoint: startAccessPoint,
+              toAccessPoint: destinationAccessPoint,
+              instruction: `Take the ${formatConnectorInstructionNoun(connector)} from ${formatFloorLabel(startFloorKey)} to ${formatFloorLabel(destinationFloorKey)}`,
+            },
+            toHorizontalSegment(destinationFloorKey, destinationFloorRoute),
+          ],
+          debug: {
+            connectorId: connector.id,
+            connectorType: connector.type,
+            originFloorElevatorNode: startFloorRoute.debug?.endSnap?.nodeId ?? null,
+            destinationFloorElevatorNode:
+              destinationFloorRoute.debug?.startSnap?.nodeId ?? null,
+            originFloorRouteEndNode: startFloorRoute.debug?.graphNodeIds?.at(-1) ?? null,
+            destinationFloorRouteStartNode:
+              destinationFloorRoute.debug?.graphNodeIds?.[0] ?? null,
+            routeNodeCountBeforeElevator:
+              startFloorRoute.debug?.graphNodeIds?.length ??
+              startFloorRoute.debug?.graphCoordinates?.length ??
+              startFloorRoute.coordinates.length,
+            routeNodeCountAfterElevator:
+              destinationFloorRoute.debug?.graphNodeIds?.length ??
+              destinationFloorRoute.debug?.graphCoordinates?.length ??
+              destinationFloorRoute.coordinates.length,
+            centerlineContinuity: {
+              originRouteEndsAtConnector: pointsWithinToleranceMeters(
+                getLastCoordinate(startFloorRoute),
+                startAccessPoint,
+                CONNECTOR_ENDPOINT_TOLERANCE_METERS,
+              ),
+              destinationRouteStartsAtConnector: pointsWithinToleranceMeters(
+                getFirstCoordinate(destinationFloorRoute),
+                destinationAccessPoint,
+                CONNECTOR_ENDPOINT_TOLERANCE_METERS,
+              ),
+            },
+            selectedConnectorAccessPoints: {
+              [startFloorKey]: startAccessPoint,
+              [destinationFloorKey]: destinationAccessPoint,
+            },
+            connectorAccessOptionCounts: {
+              [startFloorKey]: startAccessOptions.length,
+              [destinationFloorKey]: destinationAccessOptions.length,
+            },
+            startFloorRouteDistance: startFloorRoute.distance,
+            destinationFloorRouteDistance: destinationFloorRoute.distance,
+            verticalTransitionFloors: [startFloorKey, destinationFloorKey],
+            totalCost,
+          },
+        };
+        successfulConnectorTypes.add(connector.type);
 
-    if (!bestCandidate || result.totalCost < bestCandidate.totalCost) {
-      bestCandidate = result;
-      bestDebug = result.debug ?? null;
+        if (!bestCandidate || result.totalCost < bestCandidate.totalCost) {
+          bestCandidate = result;
+          bestDebug = result.debug ?? null;
+        }
+      }
     }
   }
 
@@ -310,21 +362,25 @@ export function computeMultiFloorRoute(
 export function buildStairConnectors({
   roomsByFloor,
   routers,
+  roomAnchorIndexesByFloor,
 }: {
   roomsByFloor: Record<string, GeoJSONFeature[]>;
   routers: Record<string, IndoorRouter>;
+  roomAnchorIndexesByFloor?: Record<string, CenterlineAnchorIndex | undefined>;
 }): VerticalConnector[] {
-  return buildVerticalConnectors({ roomsByFloor, routers })
+  return buildVerticalConnectors({ roomsByFloor, routers, roomAnchorIndexesByFloor })
     .filter((connector) => connector.type === 'stairs');
 }
 
 export function buildVerticalConnectors({
   roomsByFloor,
   routers,
+  roomAnchorIndexesByFloor = {},
   userPreference,
 }: {
   roomsByFloor: Record<string, GeoJSONFeature[]>;
   routers: Record<string, IndoorRouter>;
+  roomAnchorIndexesByFloor?: Record<string, CenterlineAnchorIndex | undefined>;
   userPreference?: string;
 }): VerticalConnector[] {
   const candidates = extractVerticalCandidates(roomsByFloor);
@@ -341,7 +397,13 @@ export function buildVerticalConnectors({
 
   return clusters
     .map((cluster, index) =>
-      createConnectorFromCluster(cluster, index, projection, routers),
+      createConnectorFromCluster(
+        cluster,
+        index,
+        projection,
+        routers,
+        roomAnchorIndexesByFloor,
+      ),
     )
     .filter((connector): connector is VerticalConnector => connector !== null)
     .sort((left, right) =>
@@ -425,8 +487,10 @@ function createConnectorFromCluster(
   index: number,
   projection: LocalProjection,
   routers: Record<string, IndoorRouter>,
+  roomAnchorIndexesByFloor: Record<string, CenterlineAnchorIndex | undefined>,
 ): VerticalConnector | null {
   const accessPoints: Record<string, RouteCoordinate> = {};
+  const accessPointOptions: Record<string, RouteCoordinate[]> = {};
   const snapDistances: Record<string, number> = {};
   const featureKeysByFloor: Record<string, string[]> = {};
   const floors = Array.from(new Set(cluster.features.map((feature) => feature.floorKey)))
@@ -439,13 +503,19 @@ function createConnectorFromCluster(
     }
 
     const floorFeatures = cluster.features.filter((feature) => feature.floorKey === floorKey);
-    const access = findBestStairAccessPoint(floorFeatures, router, projection);
-    if (!access) {
+    const accessCandidates = findStairAccessPoints(
+      floorFeatures,
+      router,
+      projection,
+      roomAnchorIndexesByFloor[floorKey],
+    );
+    if (accessCandidates.length === 0) {
       continue;
     }
 
-    accessPoints[floorKey] = access.point;
-    snapDistances[floorKey] = Math.round(access.distanceMeters * 100) / 100;
+    accessPoints[floorKey] = accessCandidates[0].point;
+    accessPointOptions[floorKey] = accessCandidates.map((candidate) => candidate.point);
+    snapDistances[floorKey] = Math.round(accessCandidates[0].distanceMeters * 100) / 100;
     featureKeysByFloor[floorKey] = Array.from(
       new Set(floorFeatures.flatMap((feature) => getFeatureKeys(feature.feature))),
     );
@@ -461,6 +531,7 @@ function createConnectorFromCluster(
     type: cluster.connectorType,
     floors: accessFloors,
     accessPoints,
+    accessPointOptions,
     featureKeysByFloor,
     name: cluster.name,
     debug: {
@@ -619,36 +690,105 @@ function getFeatureKeys(feature: GeoJSONFeature): string[] {
     .map((value) => String(value));
 }
 
-function findBestStairAccessPoint(
+function findStairAccessPoints(
   candidates: StairFeatureCandidate[],
   router: IndoorRouter,
   projection: LocalProjection,
-): { point: RouteCoordinate; distanceMeters: number } | null {
-  let bestAccess: { point: RouteCoordinate; distanceMeters: number } | null = null;
+  roomAnchorIndex?: CenterlineAnchorIndex,
+): AccessPointCandidate[] {
+  const accessCandidates: AccessPointCandidate[] = [];
+
+  const addAccessCandidate = (
+    rawPoint: RouteCoordinate,
+    source: AccessPointCandidate['source'],
+  ) => {
+    const snapped = router.snapToGraph(rawPoint);
+    if (!snapped) {
+      return;
+    }
+
+    accessCandidates.push({
+      point: snapped.point,
+      distanceMeters: snapped.distanceMeters + (snapped.kind === 'edge' ? 0.05 : 0),
+      componentId: snapped.componentId ?? null,
+      source,
+    });
+  };
 
   for (const candidate of candidates) {
+    for (const anchor of getConnectorCenterlineAnchors(candidate, roomAnchorIndex)) {
+      addAccessCandidate(anchor.coordinates, 'centerline-anchor');
+    }
+
     const samplePoints = [
       candidate.centroid,
       ...sampleFeatureBoundary(candidate.feature, projection),
     ];
 
     for (const point of samplePoints) {
-      const snapped = router.snapToGraph(point);
-      if (!snapped) {
-        continue;
-      }
-
-      const score = snapped.distanceMeters + (snapped.kind === 'edge' ? 0.05 : 0);
-      if (!bestAccess || score < bestAccess.distanceMeters) {
-        bestAccess = {
-          point: snapped.point,
-          distanceMeters: score,
-        };
-      }
+      addAccessCandidate(point, 'connector-geometry');
     }
   }
 
-  return bestAccess;
+  return rankAccessCandidates(accessCandidates);
+}
+
+function getConnectorCenterlineAnchors(
+  candidate: StairFeatureCandidate,
+  roomAnchorIndex?: CenterlineAnchorIndex,
+): CenterlineAnchor[] {
+  if (!roomAnchorIndex) {
+    return [];
+  }
+
+  const anchorNames = new Set([
+    candidate.name,
+    candidate.connectorType,
+    getConnectorFallbackAnchorName(candidate.connectorType),
+  ].map(normalizeAnchorName));
+
+  return Array.from(anchorNames).flatMap(
+    (name) => roomAnchorIndex.get(name) ?? [],
+  );
+}
+
+function getConnectorFallbackAnchorName(type: VerticalConnectorType): string {
+  if (type === 'elevator') return 'elevator';
+  if (type === 'ramp') return 'ramp';
+  return 'stairs';
+}
+
+function rankAccessCandidates(candidates: AccessPointCandidate[]): AccessPointCandidate[] {
+  const unique = new Map<string, AccessPointCandidate>();
+
+  for (const candidate of candidates) {
+    const key = candidate.componentId === null
+      ? `unknown:${candidate.point.lng.toFixed(7)}:${candidate.point.lat.toFixed(7)}`
+      : `component:${candidate.componentId}`;
+    const existing = unique.get(key);
+    if (!existing || accessCandidateScore(candidate) < accessCandidateScore(existing)) {
+      unique.set(key, candidate);
+    }
+  }
+
+  return Array.from(unique.values())
+    .sort((left, right) => accessCandidateScore(left) - accessCandidateScore(right))
+    .slice(0, 12);
+}
+
+function accessCandidateScore(candidate: AccessPointCandidate): number {
+  const sourcePenalty = candidate.source === 'centerline-anchor' ? 0 : 5;
+  return sourcePenalty + candidate.distanceMeters;
+}
+
+function normalizeAnchorName(value: unknown): string {
+  return String(value ?? '')
+    .toLowerCase()
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[’']/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
 }
 
 function sampleFeatureBoundary(

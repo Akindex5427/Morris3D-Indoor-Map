@@ -2,6 +2,7 @@ import { aStarGraphPath } from './astarGraph';
 import {
   buildNavigationGraph,
   buildQueryGraph,
+  CenterlineGraphDiagnostics,
   GeoJSONInput,
   isSegmentNavigable,
   NavigationGraph,
@@ -41,6 +42,7 @@ export interface RouteDebugInfo {
   graphCoordinates?: RouteCoordinate[];
   renderedCoordinates?: RouteCoordinate[];
   validationFallbackUsed?: boolean;
+  graphDiagnostics?: CenterlineGraphDiagnostics;
   finalGraphStart?: RouteCoordinate;
   finalGraphEnd?: RouteCoordinate;
   renderedSegments?: RouteSegmentValidation[];
@@ -161,7 +163,24 @@ export class IndoorRouter {
       }
 
       if (startSnap.componentId !== endSnap.componentId) {
-        return this.failure('Start and end are in disconnected parts of the centerline graph.');
+        const nearestBridge = getNearestBridgeBetweenComponents(
+          this.graph,
+          startSnap.componentId,
+          endSnap.componentId,
+        );
+        const bridgeText = nearestBridge
+          ? ` Nearest component gap is ${nearestBridge.distanceMeters.toFixed(2)}m between ${nearestBridge.fromNodeId} and ${nearestBridge.toNodeId}.`
+          : '';
+
+        return this.failure(
+          `Start and end are in disconnected parts of the centerline graph. Start component: ${startSnap.componentId}; end component: ${endSnap.componentId}.${bridgeText}`,
+          {
+            startSnap: toRouteSnapDebug(this.graph, startSnap),
+            endSnap: toRouteSnapDebug(this.graph, endSnap),
+            validationFallbackUsed: this.graph.validationFallbackUsed,
+            graphDiagnostics: this.graph.diagnostics,
+          },
+        );
       }
 
       const query = buildQueryGraph(this.graph, startSnap, endSnap);
@@ -224,7 +243,7 @@ export class IndoorRouter {
     }
   }
 
-  private failure(error: string): RouteResult {
+  private failure(error: string, debug?: RouteDebugInfo): RouteResult {
     return {
       success: false,
       coordinates: [],
@@ -232,8 +251,39 @@ export class IndoorRouter {
       distance: 0,
       waypointCount: 0,
       error,
+      debug,
     };
   }
+}
+
+function getNearestBridgeBetweenComponents(
+  graph: NavigationGraph,
+  startComponentId: number,
+  endComponentId: number,
+): { distanceMeters: number; fromNodeId: string; toNodeId: string } | null {
+  let best: { distanceMeters: number; fromNodeId: string; toNodeId: string } | null = null;
+
+  const startNodes = Array.from(graph.nodes.values()).filter(
+    (node) => node.componentId === startComponentId,
+  );
+  const endNodes = Array.from(graph.nodes.values()).filter(
+    (node) => node.componentId === endComponentId,
+  );
+
+  for (const startNode of startNodes) {
+    for (const endNode of endNodes) {
+      const gap = distance(startNode.point, endNode.point);
+      if (!best || gap < best.distanceMeters) {
+        best = {
+          distanceMeters: gap,
+          fromNodeId: startNode.id,
+          toNodeId: endNode.id,
+        };
+      }
+    }
+  }
+
+  return best;
 }
 
 function toRouteSnapDebug(

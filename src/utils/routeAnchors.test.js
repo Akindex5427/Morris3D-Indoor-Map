@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
-import { IndoorRouter } from "../../routing";
+import { computeMultiFloorRoute, IndoorRouter } from "../../routing";
 import {
   buildRoomAnchorIndex,
   getRoomCentroid,
@@ -74,7 +74,7 @@ const level4CenterlineOnlyRouter = new IndoorRouter(
   null,
   {
     maxSnapDistanceMeters: 50,
-    nodeToleranceMeters: 0.05,
+    nodeToleranceMeters: 0.5,
     validationSampleStepMeters: 0.5,
     simplifyCollinearPoints: false,
   },
@@ -350,7 +350,7 @@ describe("room_level_4 centerline routing", () => {
 
   it("keeps level-4 routes on the dedicated centerline graph", () => {
     const startTarget = resolveRoomRoutingTarget({
-      room: getRoom(level4Rooms, "help desk"),
+      room: getRoom(level4Rooms, "library conference 0480a"),
       floorId: 4,
       router: level4CenterlineOnlyRouter,
       roomAnchorIndex: level4RoomAnchorIndex,
@@ -387,6 +387,51 @@ describe("room_level_4 centerline routing", () => {
       endTarget.coordinates,
       0.0001,
     );
+  });
+
+  it("routes from level 1 to F4 geospatial resources through the matching elevator component", () => {
+    const startTarget = resolveRoomRoutingTarget({
+      room: getRoom(rooms, "circulation desk"),
+      floorId: 1,
+      router,
+      roomAnchorIndex,
+      role: "start",
+    });
+    const endTarget = resolveRoomRoutingTarget({
+      room: getRoom(level4Rooms, "geospatial resources"),
+      floorId: 4,
+      router: level4CenterlineOnlyRouter,
+      roomAnchorIndex: level4RoomAnchorIndex,
+      role: "destination",
+    });
+
+    const result = computeMultiFloorRoute({
+      start: startTarget.coordinates,
+      startFloor: 1,
+      destination: endTarget.coordinates,
+      destinationFloor: 4,
+      routers: {
+        1: router,
+        4: level4CenterlineOnlyRouter,
+      },
+      roomsByFloor: {
+        1: rooms,
+        4: level4Rooms,
+      },
+      roomAnchorIndexesByFloor: {
+        1: roomAnchorIndex,
+        4: level4RoomAnchorIndex,
+      },
+    });
+
+    expect(result.success).toBe(true);
+    expect(result.connector?.type).toBe("elevator");
+    expect(result.debug?.connectorAccessOptionCounts).toMatchObject({
+      "4": 2,
+    });
+    expect(result.debug?.centerlineContinuity).toMatchObject({
+      destinationRouteStartsAtConnector: true,
+    });
   });
 });
 

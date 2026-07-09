@@ -134,6 +134,7 @@ const ROUTER_CONFIG = [
     obstacle: "/room_level_4_obstacle_buffered.geojson",
     label: "Level 4",
     useCenterlineOnlyRouting: true,
+    nodeToleranceMeters: 0.5,
     simplifyCollinearPoints: false,
   },
   {
@@ -262,7 +263,7 @@ function App() {
               config.useCenterlineOnlyRouting ? null : obstacles,
               {
                 maxSnapDistanceMeters: 50,
-                nodeToleranceMeters: 0.05,
+                nodeToleranceMeters: config.nodeToleranceMeters ?? 0.05,
                 validationSampleStepMeters: 0.5,
                 simplifyCollinearPoints:
                   config.simplifyCollinearPoints ??
@@ -277,6 +278,34 @@ function App() {
               console.warn(
                 `[Routing] Validation data rejected the graph for ${config.label} (floor ${config.floor}). Using centerline-only routing.`,
               );
+            }
+
+            if (ROUTE_DEBUG_ENABLED) {
+              const diagnostics = router.getGraph().diagnostics;
+              console.log(`[CenterlineDiagnostics] ${config.label}`, {
+                floor: config.floor,
+                nodeToleranceMeters: router.getGraph().nodeToleranceMeters,
+                featureCount: diagnostics.featureCount,
+                geometryTypes: diagnostics.geometryTypes,
+                totalSegments: diagnostics.totalSegments,
+                nodeCount: diagnostics.nodeCount,
+                edgeCount: diagnostics.edgeCount,
+                componentCount: diagnostics.componentCount,
+                componentSizes: diagnostics.componentSizes,
+                danglingEndpointCount: diagnostics.danglingEndpoints.length,
+                nearMissEndpoints: diagnostics.nearMissEndpoints.slice(0, 12),
+                zeroLengthSegments: diagnostics.zeroLengthSegments,
+                duplicateEdges: diagnostics.duplicateEdges,
+              });
+
+              if (diagnostics.componentCount > 1) {
+                console.warn(`[CenterlineDiagnostics] ${config.label} has disconnected centerline components.`, {
+                  floor: config.floor,
+                  componentSizes: diagnostics.componentSizes,
+                  nearestPossibleBridgeEndpoints:
+                    diagnostics.nearMissEndpoints.slice(0, 12),
+                });
+              }
             }
 
             // Store raw centerlines GeoJSON for blue-line overlay
@@ -1817,6 +1846,7 @@ function App() {
         destinationFloor: endFloor,
         routers,
         roomsByFloor: routeRoomsByFloor,
+        roomAnchorIndexesByFloor: roomAnchorIndexes,
         userPreference:
           routeOptions.accessibility === "wheelchair" ||
           routeOptions.accessibility === "stairs_avoid"

@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
-import { computeMultiFloorRoute, buildStairConnectors } from './multiFloorRouter';
-import { IndoorRouter, RouteCoordinate } from './router';
+import { computeMultiFloorRoute, buildStairConnectors, IndoorRouter } from './index';
+import type { RouteCoordinate } from './router';
 
 const makeRoom = (floor: number, name: string, center: RouteCoordinate) => ({
   type: 'Feature' as const,
@@ -269,5 +269,51 @@ describe('multi-floor routing orchestration', () => {
       connectorType: 'stairs',
       availableConnectorTypes: ['stairs'],
     });
+  });
+});
+
+describe('centerline graph endpoint snapping', () => {
+  it('merges visually connected endpoints within the configured node tolerance', () => {
+    const centerlines = {
+      type: 'FeatureCollection',
+      features: [
+        {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'LineString',
+            coordinates: [
+              [-89.22, 37.71],
+              [-89.219995, 37.71],
+            ],
+          },
+        },
+        {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'LineString',
+            coordinates: [
+              [-89.2199945, 37.71],
+              [-89.21999, 37.71],
+            ],
+          },
+        },
+      ],
+    };
+    const router = new IndoorRouter(centerlines as any, null, null, {
+      maxSnapDistanceMeters: 5,
+      nodeToleranceMeters: 0.1,
+      simplifyCollinearPoints: false,
+    });
+
+    const result = router.computeRoute(
+      { lng: -89.22, lat: 37.71 },
+      { lng: -89.21999, lat: 37.71 },
+    );
+
+    expect(result.success).toBe(true);
+    expect(router.getGraph().diagnostics.componentCount).toBe(1);
+    expect(router.getGraph().diagnostics.geometryTypes.LineString).toBe(2);
   });
 });

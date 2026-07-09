@@ -32,6 +32,7 @@ export {
 } from './graph';
 export type {
   BuildNavigationGraphOptions,
+  CenterlineGraphDiagnostics,
   GeoJSONFeature,
   GeoJSONFeatureCollection,
   GeoJSONInput,

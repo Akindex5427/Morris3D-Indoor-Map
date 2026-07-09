@@ -95,6 +95,7 @@ export interface NavigationGraph {
   validationSampleStepMeters: number;
   componentCount: number;
   validationFallbackUsed: boolean;
+  diagnostics: CenterlineGraphDiagnostics;
 }
 
 export interface BuildNavigationGraphOptions {
@@ -102,7 +103,44 @@ export interface BuildNavigationGraphOptions {
   walkableGeoJSON?: GeoJSONInput | null;
   obstaclesGeoJSON?: GeoJSONInput | null;
   nodeToleranceMeters?: number;
+  nearMissToleranceMeters?: number;
   validationSampleStepMeters?: number;
+}
+
+export interface CenterlineGraphDiagnostics {
+  featureCount: number;
+  geometryTypes: Record<string, number>;
+  lineStringCount: number;
+  totalSegments: number;
+  zeroLengthSegments: number;
+  duplicateEdges: number;
+  nodeCount: number;
+  edgeCount: number;
+  componentCount: number;
+  componentSizes: Array<{ componentId: number; nodeCount: number }>;
+  danglingEndpoints: Array<{
+    nodeId: string;
+    componentId: number;
+    degree: number;
+    coordinate: { lng: number; lat: number };
+  }>;
+  nearMissEndpoints: Array<{
+    distanceMeters: number;
+    fromNodeId: string;
+    fromComponentId: number;
+    fromCoordinate: { lng: number; lat: number };
+    toNodeId: string;
+    toComponentId: number;
+    toCoordinate: { lng: number; lat: number };
+  }>;
+}
+
+interface CenterlineInputStats {
+  featureCount: number;
+  geometryTypes: Record<string, number>;
+  lineStringCount: number;
+  totalSegments: number;
+  zeroLengthSegments: number;
 }
 
 export interface GraphSnap {
@@ -144,9 +182,11 @@ export function buildNavigationGraph(options: BuildNavigationGraphOptions): Navi
     walkableGeoJSON = null,
     obstaclesGeoJSON = null,
     nodeToleranceMeters = 0.05,
+    nearMissToleranceMeters = 0.75,
     validationSampleStepMeters = 0.5,
   } = options;
 
+  const centerlineStats = collectCenterlineInputStats(centerlinesGeoJSON);
   const lineStrings = extractLineStrings(centerlinesGeoJSON);
   if (lineStrings.length === 0) {
     throw new Error('IndoorRouter: centerlinesGeoJSON contains no valid LineString geometry.');
@@ -175,7 +215,9 @@ export function buildNavigationGraph(options: BuildNavigationGraphOptions): Navi
     walkablePolygons,
     obstaclePolygons,
     nodeToleranceMeters,
+    nearMissToleranceMeters,
     validationSampleStepMeters,
+    centerlineStats,
   });
 
   if (validatedGraph.nodes.size > 0 && validatedGraph.edges.size > 0) {
@@ -192,7 +234,9 @@ export function buildNavigationGraph(options: BuildNavigationGraphOptions): Navi
     walkablePolygons: [],
     obstaclePolygons: [],
     nodeToleranceMeters,
+    nearMissToleranceMeters,
     validationSampleStepMeters,
+    centerlineStats,
   });
 
   if (fallbackGraph.nodes.size === 0 || fallbackGraph.edges.size === 0) {
@@ -318,6 +362,7 @@ export function buildQueryGraph(
     validationSampleStepMeters: baseGraph.validationSampleStepMeters,
     componentCount: baseGraph.componentCount,
     validationFallbackUsed: baseGraph.validationFallbackUsed,
+    diagnostics: baseGraph.diagnostics,
   };
 
   const edgeIdsByPair = new Map<string, string>();
@@ -435,7 +480,9 @@ interface AssembleGraphOptions {
   walkablePolygons: MultiPolygon;
   obstaclePolygons: MultiPolygon;
   nodeToleranceMeters: number;
+  nearMissToleranceMeters: number;
   validationSampleStepMeters: number;
+  centerlineStats: CenterlineInputStats;
 }
 
 function assembleGraph(options: AssembleGraphOptions): NavigationGraph {
@@ -445,21 +492,31 @@ function assembleGraph(options: AssembleGraphOptions): NavigationGraph {
     walkablePolygons,
     obstaclePolygons,
     nodeToleranceMeters,
+    nearMissToleranceMeters,
     validationSampleStepMeters,
+    centerlineStats,
   } = options;
 
   const nodes = new Map<string, GraphNode>();
   const edges = new Map<string, GraphEdge>();
   const adjacency = new Map<string, GraphNeighbor[]>();
-  const nodeIdsByKey = new Map<string, string>();
+  const nodeIdsByBucket = new Map<string, string[]>();
   const edgeIdsByPair = new Map<string, string>();
+  let duplicateEdges = 0;
 
   const getOrCreateNodeId = (point: Point2D): string => {
-    const key = createPointKey(point, nodeToleranceMeters);
-    const existingNodeId = nodeIdsByKey.get(key);
+    const bucket = getPointBucket(point, nodeToleranceMeters);
 
-    if (existingNodeId) {
-      return existingNodeId;
+    for (let dx = -1; dx <= 1; dx += 1) {
+      for (let dy = -1; dy <= 1; dy += 1) {
+        const key = createBucketKey(bucket.x + dx, bucket.y + dy);
+        for (const existingNodeId of nodeIdsByBucket.get(key) ?? []) {
+          const existingNode = nodes.get(existingNodeId);
+          if (existingNode && distance(existingNode.point, point) <= nodeToleranceMeters) {
+            return existingNodeId;
+          }
+        }
+      }
     }
 
     const nodeId = `n${nodes.size}`;
@@ -469,7 +526,10 @@ function assembleGraph(options: AssembleGraphOptions): NavigationGraph {
       componentId: -1,
     });
     adjacency.set(nodeId, []);
-    nodeIdsByKey.set(key, nodeId);
+    const key = createBucketKey(bucket.x, bucket.y);
+    const bucketNodes = nodeIdsByBucket.get(key) ?? [];
+    bucketNodes.push(nodeId);
+    nodeIdsByBucket.set(key, bucketNodes);
     return nodeId;
   };
 
@@ -504,6 +564,7 @@ function assembleGraph(options: AssembleGraphOptions): NavigationGraph {
 
       const pairKey = createEdgePairKey(fromNodeId, toNodeId);
       if (edgeIdsByPair.has(pairKey)) {
+        duplicateEdges += 1;
         continue;
       }
 
@@ -523,6 +584,16 @@ function assembleGraph(options: AssembleGraphOptions): NavigationGraph {
   }
 
   const componentCount = assignConnectedComponents(nodes, adjacency);
+  const diagnostics = buildCenterlineGraphDiagnostics({
+    projection,
+    nodes,
+    edges,
+    adjacency,
+    componentCount,
+    nearMissToleranceMeters,
+    centerlineStats,
+    duplicateEdges,
+  });
 
   return {
     projection,
@@ -535,6 +606,7 @@ function assembleGraph(options: AssembleGraphOptions): NavigationGraph {
     validationSampleStepMeters,
     componentCount,
     validationFallbackUsed: false,
+    diagnostics,
   };
 }
 
@@ -546,6 +618,69 @@ function extractLineStrings(input: GeoJSONInput): [number, number][][] {
   const lineStrings: [number, number][][] = [];
   collectLineStrings(input, lineStrings);
   return lineStrings.filter((lineString) => lineString.length >= 2);
+}
+
+function collectCenterlineInputStats(input: GeoJSONInput): CenterlineInputStats {
+  const geometryTypes: Record<string, number> = {};
+  const lineStrings: [number, number][][] = [];
+  let featureCount = 0;
+
+  const visit = (value: GeoJSONInput | SupportedGeoJSONGeometry | null | undefined): void => {
+    if (!value) return;
+
+    if (value.type === 'FeatureCollection') {
+      featureCount += value.features.length;
+      for (const feature of value.features) {
+        visit(feature.geometry);
+      }
+      return;
+    }
+
+    if (value.type === 'Feature') {
+      featureCount += 1;
+      visit(value.geometry);
+      return;
+    }
+
+    geometryTypes[value.type] = (geometryTypes[value.type] ?? 0) + 1;
+    if (value.type === 'LineString') {
+      lineStrings.push(value.coordinates);
+      return;
+    }
+
+    if (value.type === 'MultiLineString') {
+      lineStrings.push(...value.coordinates);
+    }
+  };
+
+  visit(input);
+
+  let totalSegments = 0;
+  let zeroLengthSegments = 0;
+  const projection = lineStrings.length > 0
+    ? createProjectionFromLineStrings(lineStrings)
+    : null;
+
+  if (projection) {
+    for (const lineString of lineStrings) {
+      for (let index = 1; index < lineString.length; index += 1) {
+        totalSegments += 1;
+        const start = projection.project(lineString[index - 1][0], lineString[index - 1][1]);
+        const end = projection.project(lineString[index][0], lineString[index][1]);
+        if (distance(start, end) <= 1e-9) {
+          zeroLengthSegments += 1;
+        }
+      }
+    }
+  }
+
+  return {
+    featureCount,
+    geometryTypes,
+    lineStringCount: lineStrings.length,
+    totalSegments,
+    zeroLengthSegments,
+  };
 }
 
 function collectLineStrings(input: GeoJSONInput, lineStrings: [number, number][][]): void {
@@ -779,13 +914,105 @@ function assignConnectedComponents(
   return componentId;
 }
 
-function createPointKey(point: Point2D, toleranceMeters: number): string {
-  const scale = 1 / Math.max(toleranceMeters, 0.001);
-  return `${Math.round(point.x * scale)}:${Math.round(point.y * scale)}`;
+function getPointBucket(point: Point2D, toleranceMeters: number): { x: number; y: number } {
+  const bucketSize = Math.max(toleranceMeters, 0.001);
+  return {
+    x: Math.floor(point.x / bucketSize),
+    y: Math.floor(point.y / bucketSize),
+  };
+}
+
+function createBucketKey(x: number, y: number): string {
+  return `${x}:${y}`;
 }
 
 function createEdgePairKey(fromNodeId: string, toNodeId: string): string {
   return fromNodeId < toNodeId
     ? `${fromNodeId}|${toNodeId}`
     : `${toNodeId}|${fromNodeId}`;
+}
+
+function buildCenterlineGraphDiagnostics({
+  projection,
+  nodes,
+  edges,
+  adjacency,
+  componentCount,
+  nearMissToleranceMeters,
+  centerlineStats,
+  duplicateEdges,
+}: {
+  projection: LocalProjection;
+  nodes: Map<string, GraphNode>;
+  edges: Map<string, GraphEdge>;
+  adjacency: Map<string, GraphNeighbor[]>;
+  componentCount: number;
+  nearMissToleranceMeters: number;
+  centerlineStats: CenterlineInputStats;
+  duplicateEdges: number;
+}): CenterlineGraphDiagnostics {
+  const componentSizes = new Map<number, number>();
+  const danglingEndpoints: CenterlineGraphDiagnostics['danglingEndpoints'] = [];
+
+  for (const node of nodes.values()) {
+    componentSizes.set(node.componentId, (componentSizes.get(node.componentId) ?? 0) + 1);
+    const degree = adjacency.get(node.id)?.length ?? 0;
+    if (degree <= 1) {
+      const { lng, lat } = projection.unproject(node.point.x, node.point.y);
+      danglingEndpoints.push({
+        nodeId: node.id,
+        componentId: node.componentId,
+        degree,
+        coordinate: { lng, lat },
+      });
+    }
+  }
+
+  const nearMissEndpoints: CenterlineGraphDiagnostics['nearMissEndpoints'] = [];
+  for (let leftIndex = 0; leftIndex < danglingEndpoints.length; leftIndex += 1) {
+    const left = danglingEndpoints[leftIndex];
+    const leftNode = nodes.get(left.nodeId);
+    if (!leftNode) continue;
+
+    for (let rightIndex = leftIndex + 1; rightIndex < danglingEndpoints.length; rightIndex += 1) {
+      const right = danglingEndpoints[rightIndex];
+      if (left.componentId === right.componentId) continue;
+      const rightNode = nodes.get(right.nodeId);
+      if (!rightNode) continue;
+
+      const gap = distance(leftNode.point, rightNode.point);
+      if (gap <= 0 || gap > nearMissToleranceMeters) {
+        continue;
+      }
+
+      nearMissEndpoints.push({
+        distanceMeters: Math.round(gap * 1000) / 1000,
+        fromNodeId: left.nodeId,
+        fromComponentId: left.componentId,
+        fromCoordinate: left.coordinate,
+        toNodeId: right.nodeId,
+        toComponentId: right.componentId,
+        toCoordinate: right.coordinate,
+      });
+    }
+  }
+
+  nearMissEndpoints.sort((left, right) => left.distanceMeters - right.distanceMeters);
+
+  return {
+    featureCount: centerlineStats.featureCount,
+    geometryTypes: centerlineStats.geometryTypes,
+    lineStringCount: centerlineStats.lineStringCount,
+    totalSegments: centerlineStats.totalSegments,
+    zeroLengthSegments: centerlineStats.zeroLengthSegments,
+    duplicateEdges,
+    nodeCount: nodes.size,
+    edgeCount: edges.size,
+    componentCount,
+    componentSizes: Array.from(componentSizes.entries())
+      .map(([componentId, nodeCount]) => ({ componentId, nodeCount }))
+      .sort((left, right) => right.nodeCount - left.nodeCount),
+    danglingEndpoints,
+    nearMissEndpoints,
+  };
 }
