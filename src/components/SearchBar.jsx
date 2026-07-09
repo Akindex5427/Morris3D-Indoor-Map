@@ -37,7 +37,7 @@ const SearchBar = ({ rooms, onSearch, onRoomSelect }) => {
       room.properties?.name || room.properties?.roomname || roomId;
     setSearchTerm(roomName);
     setShowSuggestions(false);
-    onRoomSelect(room.properties, roomId);
+    onRoomSelect(room, roomId);
     onSearch([roomId]);
   };
 

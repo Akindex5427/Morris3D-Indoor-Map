@@ -147,6 +147,62 @@ describe('multi-floor routing orchestration', () => {
       connectorType: 'elevator',
       availableConnectorTypes: ['elevator', 'stairs'],
     });
+    expect(result.connector?.featureKeysByFloor?.['1']).toContain('elevator');
+    expect(result.connector?.featureKeysByFloor?.['7']).toContain('elevator');
+    expect(result.debug).toMatchObject({
+      connectorType: 'elevator',
+      routeNodeCountBeforeElevator: 2,
+      routeNodeCountAfterElevator: 2,
+      centerlineContinuity: {
+        originRouteEndsAtConnector: true,
+        destinationRouteStartsAtConnector: true,
+      },
+    });
+  });
+
+  it('recomputes and enforces connector-bound horizontal endpoints', () => {
+    const floor1Router = makeRouter();
+    const floor4Router = makeRouter();
+    const originalDestinationCompute = floor4Router.computeRoute.getMockImplementation();
+    let destinationRouteCalls = 0;
+    floor4Router.computeRoute.mockImplementation((start, end) => {
+      destinationRouteCalls += 1;
+      const route = originalDestinationCompute!(start, end);
+      if (destinationRouteCalls === 1) {
+        const wrongStart = { lng: start.lng + 0.0001, lat: start.lat };
+        return {
+          ...route,
+          coordinates: [wrongStart, end],
+          renderCoordinates: [wrongStart, end],
+        };
+      }
+      return route;
+    });
+
+    const roomsByFloor = {
+      1: [makeRoom(1, 'elevator', { lng: -89.225, lat: 37.715 })],
+      4: [makeRoom(4, 'elevator', { lng: -89.22501, lat: 37.71501 })],
+    };
+    const result = computeMultiFloorRoute({
+      start: { lng: -89.221, lat: 37.711 },
+      startFloor: 1,
+      destination: { lng: -89.219, lat: 37.709 },
+      destinationFloor: 4,
+      routers: { 1: floor1Router, 4: floor4Router },
+      roomsByFloor,
+    });
+
+    expect(result.success).toBe(true);
+    expect(floor4Router.computeRoute).toHaveBeenCalledTimes(2);
+    const transition = result.segments[1];
+    const destinationSegment = result.segments[2];
+    expect(transition.type).toBe('vertical-transition');
+    expect(destinationSegment.type).toBe('horizontal');
+    if (transition.type === 'vertical-transition' && destinationSegment.type === 'horizontal') {
+      expect(destinationSegment.renderCoordinates[0]).toEqual(
+        transition.toAccessPoint,
+      );
+    }
   });
 
   it('allows explicit stairs-first routing to override the default elevator preference', () => {

@@ -40,6 +40,10 @@ const ROUTE_CAMERA_PADDING_PX = 96;
 const ROUTE_CAMERA_TRANSITION_MS = 1200;
 const ROUTE_CAMERA_MIN_ZOOM = 16.5;
 const ROUTE_CAMERA_MAX_ZOOM = 20.5;
+const ROOM_SEARCH_CAMERA_PADDING_PX = 128;
+const ROOM_SEARCH_CAMERA_TRANSITION_MS = 1000;
+const ROOM_SEARCH_CAMERA_MIN_ZOOM = 18;
+const ROOM_SEARCH_CAMERA_MAX_ZOOM = 21;
 const ROUTE_LANDMARK_LABEL_LIMIT = 8;
 // Minimum real-world distance (meters) the "next point" must be from the
 // route start before its direction is trusted for the initial bearing —
@@ -387,6 +391,7 @@ const Map3D = ({
   routeFocus = null,
   routeFloorId = null,
   routeCameraKey = 0,
+  searchFocusRequest = null,
   roomsData = [],
   centerlinesData = {},
   activeFloor = "all",
@@ -419,6 +424,7 @@ const Map3D = ({
   const mapRef = useRef(null);
   const containerRef = useRef(null);
   const lastRouteCameraKeyRef = useRef(0);
+  const lastSearchFocusKeyRef = useRef(0);
   const isAllFloorsSelected =
     selectedFloor === "all" || selectedFloor === "F-ALL";
 
@@ -907,8 +913,19 @@ const Map3D = ({
   }, [roomsData, routeFocus, selectedFloor, selectedFloors, activeFloor]);
 
   const usedConnectorRoomMarkers = useMemo(() => {
+    const connectorKeysForFloor = (floor) => {
+      const floorKeys =
+        routeFocus?.connectorFeatureKeysByFloor?.[String(floor)] ??
+        routeFocus?.connectorRoomIds ??
+        [];
+      return new Set(floorKeys.map(normalizeRouteKey).filter(Boolean));
+    };
     const connectorKeys = new Set(
-      (routeFocus?.connectorRoomIds || []).map(normalizeRouteKey).filter(Boolean),
+      Object.values(routeFocus?.connectorFeatureKeysByFloor ?? {})
+        .flat()
+        .concat(routeFocus?.connectorRoomIds ?? [])
+        .map(normalizeRouteKey)
+        .filter(Boolean),
     );
     const connectorFloors = new Set(
       visibleTransitionMarkers.map((marker) => Number(marker.floor)),
@@ -941,6 +958,7 @@ const Map3D = ({
         id,
         type: "connector",
         connectorType: featureType,
+        connectorId: null,
         source,
         roomName: getRoomFeatureName(feature, getConnectorFallbackName(featureType)),
         floor,
@@ -955,17 +973,21 @@ const Map3D = ({
       const connectorType = getConnectorFeatureType(feature);
       if (!connectorType) continue;
       const props = feature.properties || {};
+      const floorConnectorKeys = connectorKeysForFloor(
+        getRoomFeatureFloor(feature),
+      );
       const featureKeys = [
         getRoomFeatureId(feature),
         props.name,
         props.id,
         props.room_id,
+        props.FID,
         props.OBJECTID,
       ]
         .map(normalizeRouteKey)
         .filter(Boolean);
 
-      if (featureKeys.some((key) => connectorKeys.has(key))) {
+      if (featureKeys.some((key) => floorConnectorKeys.has(key))) {
         addConnectorFeature(feature, connectorType, "feature");
       }
     }
@@ -979,10 +1001,28 @@ const Map3D = ({
             return false;
           }
           const featureType = getConnectorFeatureType(feature);
-          return (
-            featureType &&
-            (!transitionType || featureType === transitionType)
-          );
+          if (!featureType || (transitionType && featureType !== transitionType)) {
+            return false;
+          }
+
+          if (connectorKeys.size === 0) {
+            return true;
+          }
+
+          const props = feature.properties || {};
+          const floorConnectorKeys = connectorKeysForFloor(transition.floor);
+          const featureKeys = [
+            getRoomFeatureId(feature),
+            props.name,
+            props.id,
+            props.room_id,
+            props.roomname,
+            props.FID,
+            props.OBJECTID,
+          ]
+            .map(normalizeRouteKey)
+            .filter(Boolean);
+          return featureKeys.some((key) => floorConnectorKeys.has(key));
         })
         .map((feature) => {
           const coords = getLabelPosition(feature) ?? getFeatureCentroid(feature);
@@ -998,19 +1038,19 @@ const Map3D = ({
 
       if (matchingFeature) {
         addConnectorFeature(matchingFeature, transitionType, "feature");
-        continue;
       }
 
       if (!isValidLngLat(transitionCoords)) continue;
-      const fallbackKey = `${transitionType}-${transition.floor}-${transition.role}`;
+      const fallbackKey = `${transition.connectorId ?? transitionType}-${transition.floor}-${transition.role}`;
       if (seen.has(fallbackKey)) continue;
       seen.add(fallbackKey);
       markers.push({
         id: fallbackKey,
         type: "connector",
         connectorType: transitionType,
+        connectorId: transition.connectorId ?? null,
         source: "transition",
-        roomName: getConnectorFallbackName(transitionType),
+        roomName: transition.connectorName || getConnectorFallbackName(transitionType),
         floor: transition.floor,
         position: [
           transitionCoords[0],
@@ -1035,11 +1075,17 @@ const Map3D = ({
           markers.map((marker) => ({
             name: marker.roomName,
             type: marker.connectorType,
+            connectorId: marker.connectorId,
             source: marker.source,
             floor: marker.floor,
             labelLng: marker.position[0].toFixed(6),
             labelLat: marker.position[1].toFixed(6),
           })),
+        );
+        console.log(
+          "highlighted elevator ID",
+          markers.find((marker) => marker.connectorType === "elevator")?.connectorId ??
+            null,
         );
       } else {
         console.log("none");
@@ -1055,6 +1101,150 @@ const Map3D = ({
     selectedFloors,
     activeFloor,
     visibleTransitionMarkers,
+  ]);
+
+  useEffect(() => {
+    if (!searchFocusRequest?.key) {
+      return;
+    }
+
+    if (searchFocusRequest.key === lastSearchFocusKeyRef.current) {
+      return;
+    }
+
+    if (!onViewStateChange) {
+      if (import.meta.env?.DEV !== false) {
+        console.log("[RoomSearchCamera] focus skipped", {
+          reason: "missing view-state handler",
+          searchedRoomId: searchFocusRequest.roomId,
+        });
+      }
+      return;
+    }
+
+    if (
+      searchFocusRequest.floorId !== null &&
+      searchFocusRequest.floorId !== undefined &&
+      Number(selectedFloor) !== Number(searchFocusRequest.floorId)
+    ) {
+      if (import.meta.env?.DEV !== false) {
+        console.log("[RoomSearchCamera] focus waiting for floor switch", {
+          searchedRoomId: searchFocusRequest.roomId,
+          requestedFloor: searchFocusRequest.floorId,
+          activeFloor: selectedFloor,
+        });
+      }
+      return;
+    }
+
+    const map = mapRef.current?.getMap?.() ?? mapRef.current;
+    map?.resize?.();
+    deckRef.current?.deck?.redraw(true);
+    window.dispatchEvent(new Event("resize"));
+
+    const bounds = searchFocusRequest.bounds;
+    const target = searchFocusRequest.target;
+    if (!isValidLngLat(target)) {
+      if (import.meta.env?.DEV !== false) {
+        console.log("[RoomSearchCamera] focus skipped", {
+          reason: "invalid camera target",
+          searchedRoomId: searchFocusRequest.roomId,
+          target,
+        });
+      }
+      return;
+    }
+
+    const containerBounds = containerRef.current?.getBoundingClientRect();
+    const width = Math.max(320, containerBounds?.width || window.innerWidth);
+    const height = Math.max(320, containerBounds?.height || window.innerHeight);
+    const padding = Math.min(
+      ROOM_SEARCH_CAMERA_PADDING_PX,
+      Math.floor(Math.min(width, height) * 0.28),
+    );
+    const baseViewState = externalViewState || internalViewState;
+
+    let fittedViewState = {
+      longitude: target[0],
+      latitude: target[1],
+      zoom: ROOM_SEARCH_CAMERA_MAX_ZOOM,
+    };
+
+    const hasBounds =
+      bounds &&
+      Number.isFinite(bounds.minLng) &&
+      Number.isFinite(bounds.maxLng) &&
+      Number.isFinite(bounds.minLat) &&
+      Number.isFinite(bounds.maxLat);
+    const samePoint =
+      hasBounds && bounds.minLng === bounds.maxLng && bounds.minLat === bounds.maxLat;
+
+    if (hasBounds && !samePoint) {
+      try {
+        fittedViewState = new WebMercatorViewport({ width, height }).fitBounds(
+          [
+            [bounds.minLng, bounds.minLat],
+            [bounds.maxLng, bounds.maxLat],
+          ],
+          { padding },
+        );
+      } catch (error) {
+        console.warn("[RoomSearchCamera] Unable to fit room bounds.", error);
+      }
+    }
+
+    const finalViewState = {
+      ...baseViewState,
+      longitude: fittedViewState.longitude,
+      latitude: fittedViewState.latitude,
+      zoom: clamp(
+        fittedViewState.zoom,
+        ROOM_SEARCH_CAMERA_MIN_ZOOM,
+        ROOM_SEARCH_CAMERA_MAX_ZOOM,
+      ),
+      pitch: 0,
+      bearing: 0,
+      transitionDuration: ROOM_SEARCH_CAMERA_TRANSITION_MS,
+      transitionInterpolator: new FlyToInterpolator(),
+      onTransitionEnd: () => {
+        if (import.meta.env?.DEV !== false) {
+          console.log("[RoomSearchCamera] animation complete", {
+            searchedRoomId: searchFocusRequest.roomId,
+            searchedRoomName: searchFocusRequest.roomName,
+            detectedFloorId: searchFocusRequest.floorId,
+            activeFloor: selectedFloor,
+            cameraTarget: [finalViewState.longitude, finalViewState.latitude],
+            cameraZoomLevel: finalViewState.zoom,
+            highlightedRoomId,
+          });
+        }
+      },
+    };
+
+    if (import.meta.env?.DEV !== false) {
+      console.log("[RoomSearchCamera] focus triggered", {
+        searchedRoomId: searchFocusRequest.roomId,
+        searchedRoomName: searchFocusRequest.roomName,
+        detectedFloorId: searchFocusRequest.floorId,
+        previousActiveFloor: searchFocusRequest.previousFloor,
+        newActiveFloor: selectedFloor,
+        cameraTarget: [finalViewState.longitude, finalViewState.latitude],
+        cameraZoomLevel: finalViewState.zoom,
+        cameraBounds: bounds,
+        highlightedRoomId,
+        appliedPadding: padding,
+      });
+    }
+
+    lastSearchFocusKeyRef.current = searchFocusRequest.key;
+    onViewStateChange(finalViewState);
+  }, [
+    externalViewState,
+    highlightedRoomId,
+    internalViewState,
+    onViewStateChange,
+    searchFocusRequest,
+    selectedFloor,
   ]);
 
   useEffect(() => {

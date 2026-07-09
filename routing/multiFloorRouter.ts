@@ -15,6 +15,7 @@ export interface VerticalConnector {
   type: VerticalConnectorType;
   floors: string[];
   accessPoints: Record<string, RouteCoordinate>;
+  featureKeysByFloor?: Record<string, string[]>;
   name?: string;
   debug?: {
     featureCount: number;
@@ -97,6 +98,7 @@ const STAIR_BOUNDARY_SAMPLE_SPACING_METERS = 1.25;
 const MAX_STAIR_BOUNDARY_SAMPLES = 80;
 const DEFAULT_VERTICAL_TRANSITION_PENALTY = 30;
 const CONNECTOR_PREFERENCE_PENALTY = 1_000_000_000;
+const CONNECTOR_ENDPOINT_TOLERANCE_METERS = 0.1;
 const DEFAULT_CONNECTOR_PREFERENCE: VerticalConnectorType[] = [
   'elevator',
   'ramp',
@@ -173,14 +175,21 @@ export function computeMultiFloorRoute(
       continue;
     }
 
-    const startFloorRoute = startRouter.computeRoute(start, startAccessPoint);
+    const startFloorRoute = computeConnectorBoundRoute(
+      startRouter,
+      start,
+      startAccessPoint,
+      'end',
+    );
     if (!startFloorRoute.success) {
       continue;
     }
 
-    const destinationFloorRoute = destinationRouter.computeRoute(
+    const destinationFloorRoute = computeConnectorBoundRoute(
+      destinationRouter,
       destinationAccessPoint,
       destination,
+      'start',
     );
     if (!destinationFloorRoute.success) {
       continue;
@@ -216,6 +225,33 @@ export function computeMultiFloorRoute(
       ],
       debug: {
         connectorId: connector.id,
+        connectorType: connector.type,
+        originFloorElevatorNode: startFloorRoute.debug?.endSnap?.nodeId ?? null,
+        destinationFloorElevatorNode:
+          destinationFloorRoute.debug?.startSnap?.nodeId ?? null,
+        originFloorRouteEndNode: startFloorRoute.debug?.graphNodeIds?.at(-1) ?? null,
+        destinationFloorRouteStartNode:
+          destinationFloorRoute.debug?.graphNodeIds?.[0] ?? null,
+        routeNodeCountBeforeElevator:
+          startFloorRoute.debug?.graphNodeIds?.length ??
+          startFloorRoute.debug?.graphCoordinates?.length ??
+          startFloorRoute.coordinates.length,
+        routeNodeCountAfterElevator:
+          destinationFloorRoute.debug?.graphNodeIds?.length ??
+          destinationFloorRoute.debug?.graphCoordinates?.length ??
+          destinationFloorRoute.coordinates.length,
+        centerlineContinuity: {
+          originRouteEndsAtConnector: pointsWithinToleranceMeters(
+            getLastCoordinate(startFloorRoute),
+            startAccessPoint,
+            CONNECTOR_ENDPOINT_TOLERANCE_METERS,
+          ),
+          destinationRouteStartsAtConnector: pointsWithinToleranceMeters(
+            getFirstCoordinate(destinationFloorRoute),
+            destinationAccessPoint,
+            CONNECTOR_ENDPOINT_TOLERANCE_METERS,
+          ),
+        },
         startFloorRouteDistance: startFloorRoute.distance,
         destinationFloorRouteDistance: destinationFloorRoute.distance,
         verticalTransitionFloors: [startFloorKey, destinationFloorKey],
@@ -252,6 +288,11 @@ export function computeMultiFloorRoute(
   );
 
   console.log('[MultiFloorRoute] selected vertical connector', bestCandidate.connector);
+  console.log(
+    '[MultiFloorRoute] selected elevator ID',
+    bestCandidate.connector?.type === 'elevator' ? bestCandidate.connector.id : null,
+  );
+  console.log('[MultiFloorRoute] continuity diagnostics', bestDebug);
   console.log('[MultiFloorRoute] start floor route distance', bestDebug?.startFloorRouteDistance);
   console.log(
     '[MultiFloorRoute] destination floor route distance',
@@ -387,6 +428,7 @@ function createConnectorFromCluster(
 ): VerticalConnector | null {
   const accessPoints: Record<string, RouteCoordinate> = {};
   const snapDistances: Record<string, number> = {};
+  const featureKeysByFloor: Record<string, string[]> = {};
   const floors = Array.from(new Set(cluster.features.map((feature) => feature.floorKey)))
     .sort(compareFloorKeys);
 
@@ -404,6 +446,9 @@ function createConnectorFromCluster(
 
     accessPoints[floorKey] = access.point;
     snapDistances[floorKey] = Math.round(access.distanceMeters * 100) / 100;
+    featureKeysByFloor[floorKey] = Array.from(
+      new Set(floorFeatures.flatMap((feature) => getFeatureKeys(feature.feature))),
+    );
   }
 
   const accessFloors = Object.keys(accessPoints).sort(compareFloorKeys);
@@ -416,12 +461,162 @@ function createConnectorFromCluster(
     type: cluster.connectorType,
     floors: accessFloors,
     accessPoints,
+    featureKeysByFloor,
     name: cluster.name,
     debug: {
       featureCount: cluster.features.length,
       snapDistances,
     },
   };
+}
+
+function getFirstCoordinate(route: RouteResult): RouteCoordinate | null {
+  return (
+    route.renderCoordinates?.[0] ??
+    route.debug?.graphCoordinates?.[0] ??
+    route.coordinates?.[0] ??
+    null
+  );
+}
+
+function getLastCoordinate(route: RouteResult): RouteCoordinate | null {
+  return (
+    route.renderCoordinates?.at(-1) ??
+    route.debug?.graphCoordinates?.at(-1) ??
+    route.coordinates?.at(-1) ??
+    null
+  );
+}
+
+function computeConnectorBoundRoute(
+  router: IndoorRouter,
+  start: RouteCoordinate,
+  end: RouteCoordinate,
+  connectorSide: 'start' | 'end',
+): RouteResult {
+  const connectorPoint = connectorSide === 'start' ? start : end;
+  const connectorSnap = router.snapToGraph(connectorPoint);
+  if (!connectorSnap) {
+    return routeFailure('Unable to snap the selected connector to the centerline graph.');
+  }
+
+  const routeStart = connectorSide === 'start' ? connectorSnap.point : start;
+  const routeEnd = connectorSide === 'end' ? connectorSnap.point : end;
+  let route = router.computeRoute(routeStart, routeEnd);
+  if (!route.success) {
+    return route;
+  }
+
+  const routeConnectorCoordinate =
+    connectorSide === 'start' ? getFirstCoordinate(route) : getLastCoordinate(route);
+  if (
+    !pointsWithinToleranceMeters(
+      routeConnectorCoordinate,
+      connectorSnap.point,
+      CONNECTOR_ENDPOINT_TOLERANCE_METERS,
+    )
+  ) {
+    route = router.computeRoute(routeStart, routeEnd);
+  }
+
+  const finalConnectorCoordinate =
+    connectorSide === 'start' ? getFirstCoordinate(route) : getLastCoordinate(route);
+  if (
+    !route.success ||
+    !pointsWithinToleranceMeters(
+      finalConnectorCoordinate,
+      connectorSnap.point,
+      CONNECTOR_ENDPOINT_TOLERANCE_METERS,
+    )
+  ) {
+    return routeFailure(
+      `The ${connectorSide}-floor route does not connect to the selected connector node.`,
+    );
+  }
+
+  return forceRouteEndpoint(route, connectorSnap.point, connectorSide);
+}
+
+function forceRouteEndpoint(
+  route: RouteResult,
+  connectorPoint: RouteCoordinate,
+  side: 'start' | 'end',
+): RouteResult {
+  const replaceEndpoint = (coordinates: RouteCoordinate[] | undefined) => {
+    if (!coordinates?.length) return coordinates;
+    const next = coordinates.map((coordinate) => ({ ...coordinate }));
+    const index = side === 'start' ? 0 : next.length - 1;
+    next[index] = { ...connectorPoint };
+    return next;
+  };
+
+  const renderCoordinates = replaceEndpoint(route.renderCoordinates) ?? [];
+  const coordinates = replaceEndpoint(route.coordinates) ?? [];
+  const graphCoordinates = replaceEndpoint(route.debug?.graphCoordinates);
+
+  return {
+    ...route,
+    coordinates,
+    renderCoordinates,
+    waypointCount: coordinates.length,
+    debug: route.debug
+      ? {
+          ...route.debug,
+          graphCoordinates,
+          renderedCoordinates: replaceEndpoint(route.debug.renderedCoordinates),
+          finalGraphStart: graphCoordinates?.[0],
+          finalGraphEnd: graphCoordinates?.at(-1),
+        }
+      : route.debug,
+  };
+}
+
+function routeFailure(error: string): RouteResult {
+  return {
+    success: false,
+    coordinates: [],
+    renderCoordinates: [],
+    distance: 0,
+    waypointCount: 0,
+    error,
+  };
+}
+
+function pointsWithinToleranceMeters(
+  left: RouteCoordinate | null,
+  right: RouteCoordinate | null,
+  toleranceMeters = 0.75,
+): boolean {
+  if (!left || !right) return false;
+  const projection = createLocalProjection(
+    (left.lng + right.lng) / 2,
+    (left.lat + right.lat) / 2,
+  );
+  return distance(
+    projection.project(left.lng, left.lat),
+    projection.project(right.lng, right.lat),
+  ) <= toleranceMeters;
+}
+
+function getFeatureKeys(feature: GeoJSONFeature): string[] {
+  const props = feature.properties ?? {};
+  const identifiers = [
+    feature.id,
+    props.id,
+    props.room_id,
+    props.FID,
+    props.OBJECTID,
+  ]
+    .filter((value) => value !== undefined && value !== null && String(value).trim())
+    .map((value) => String(value));
+
+  if (identifiers.length > 0) {
+    return identifiers;
+  }
+
+  return [props.name, props.roomname]
+    .filter((value) => value !== undefined && value !== null && String(value).trim())
+    .map((value) => String(value));
 }
 
 function findBestStairAccessPoint(

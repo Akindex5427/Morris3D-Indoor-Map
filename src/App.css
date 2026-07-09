@@ -203,7 +203,12 @@
 
 .panel-section,
 .panel-info {
+  position: relative;
   margin: 0;
+}
+
+#panel-search {
+  z-index: 20;
 }
 
 .panel-card {
@@ -501,8 +506,8 @@
   top: calc(100% + 8px);
   left: 0;
   right: 0;
-  z-index: 50;
-  overflow: hidden;
+  z-index: 100;
+  overflow-y: auto;
   max-height: 320px;
   background: var(--bg-layer-2);
   border: 1px solid var(--border-subtle);

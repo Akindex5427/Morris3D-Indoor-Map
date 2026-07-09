@@ -743,17 +743,32 @@ export const useIndoorBuilding = ({
     // used connectors).  undefined means old data without the field (fall back
     // to blanket vertical-connector detection).
     const connectorNamesFromRoute = routeFocus.connectorRoomIds;
+    const connectorKeysByFloor = routeFocus.connectorFeatureKeysByFloor;
     const isUsedConnector = (roomId, floorNum, props) => {
-      if (Array.isArray(connectorNamesFromRoute)) {
-        if (connectorNamesFromRoute.length === 0) return false;
+      const floorConnectorKeys = connectorKeysByFloor?.[String(floorNum)];
+      const configuredConnectorKeys = Array.isArray(floorConnectorKeys)
+        ? floorConnectorKeys
+        : connectorNamesFromRoute;
+      if (Array.isArray(configuredConnectorKeys)) {
+        if (configuredConnectorKeys.length === 0) return false;
         if (focusFloors.size > 0 && !focusFloors.has(Number(floorNum))) {
           return false;
         }
-        const ridLower = (roomId || "").toLowerCase();
-        const nameLower = (props.name || "").toLowerCase();
-        return connectorNamesFromRoute.some((n) => {
+        const featureKeys = [
+          roomId,
+          props.id,
+          props.room_id,
+          props.FID,
+          props.OBJECTID,
+          props.name,
+          props.roomname,
+        ]
+          .filter((value) => value !== undefined && value !== null)
+          .map((value) => String(value).trim().toLowerCase())
+          .filter(Boolean);
+        return configuredConnectorKeys.some((n) => {
           const lower = (n || "").toLowerCase().trim();
-          return lower.length > 0 && (nameLower === lower || ridLower === lower);
+          return lower.length > 0 && featureKeys.includes(lower);
         });
       }
       // Backward compat: no explicit list → keep all vertical connectors on route floors visible
@@ -982,7 +997,11 @@ export const useIndoorBuilding = ({
             isDollhouseMode,
           );
           const roomId = getFeatureRoomId(props);
-          const focusLift = focusRoomIds.has(roomId) ? 0.45 : 0;
+          const floorNum = getFloorNumber(props);
+          const focusLift =
+            focusRoomIds.has(roomId) || isUsedConnector(roomId, floorNum, props)
+              ? 0.45
+              : 0;
           return baseElevation * reveal + focusLift;
         },
 

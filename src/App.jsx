@@ -60,6 +60,43 @@ const getRoomDisplayId = (room) =>
   room?.properties?.OBJECTID ||
   null;
 
+const isLngLatCoordinate = (coord) =>
+  Array.isArray(coord) &&
+  Number.isFinite(coord[0]) &&
+  Number.isFinite(coord[1]);
+
+const getFeatureGeometryCoordinates = (geometry) => {
+  if (!geometry) return [];
+  if (geometry.type === "Polygon") return geometry.coordinates.flat();
+  if (geometry.type === "MultiPolygon") {
+    return geometry.coordinates.flatMap((polygon) => polygon.flat());
+  }
+  if (geometry.type === "LineString") return geometry.coordinates;
+  if (geometry.type === "MultiLineString") return geometry.coordinates.flat();
+  return [];
+};
+
+const getFeatureGeometryBounds = (feature) => {
+  const coords = getFeatureGeometryCoordinates(feature?.geometry).filter(
+    isLngLatCoordinate,
+  );
+  if (coords.length === 0) return null;
+
+  const lngs = coords.map((coord) => coord[0]);
+  const lats = coords.map((coord) => coord[1]);
+  return {
+    minLng: Math.min(...lngs),
+    maxLng: Math.max(...lngs),
+    minLat: Math.min(...lats),
+    maxLat: Math.max(...lats),
+    center: [
+      (Math.min(...lngs) + Math.max(...lngs)) / 2,
+      (Math.min(...lats) + Math.max(...lats)) / 2,
+    ],
+    coordinateCount: coords.length,
+  };
+};
+
 const ROUTER_CONFIG = [
   {
     floor: 0,
@@ -147,6 +184,7 @@ function App() {
   const [showRoutePlanner, setShowRoutePlanner] = useState(false);
   const [routeContext, setRouteContext] = useState(null);
   const [routeCameraKey, setRouteCameraKey] = useState(0);
+  const [searchFocusRequest, setSearchFocusRequest] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
   const [hoveredRoomId, setHoveredRoomId] = useState(null);
@@ -175,6 +213,7 @@ function App() {
   const sidebarDragRef = useRef(null);
   const suppressSidebarClickRef = useRef(false);
   const previousLayoutModeRef = useRef("desktop");
+  const pendingSearchFocusRef = useRef(false);
 
   // Initialize IndoorRouter with graph-based routing for all floors
   useEffect(() => {
@@ -787,11 +826,15 @@ function App() {
             const centerLng = (Math.min(...lngs) + Math.max(...lngs)) / 2;
             const centerLat = (Math.min(...lats) + Math.max(...lats)) / 2;
 
-            setViewState((prev) => ({
-              ...prev,
-              longitude: centerLng,
-              latitude: centerLat,
-            }));
+            if (pendingSearchFocusRef.current) {
+              pendingSearchFocusRef.current = false;
+            } else {
+              setViewState((prev) => ({
+                ...prev,
+                longitude: centerLng,
+                latitude: centerLat,
+              }));
+            }
           }
         }
       } catch (error) {
@@ -824,9 +867,68 @@ function App() {
     setHighlightedRoomId(null);
   };
 
-  const handleRoomSelect = (roomProperties, roomId) => {
+  const findRoomFeatureById = (roomId) =>
+    allRooms.find((room) => {
+      const props = room.properties || {};
+      return (
+        props.id === roomId ||
+        props.name === roomId ||
+        props.room_id === roomId ||
+        props.OBJECTID === roomId
+      );
+    });
+
+  const handleRoomSelect = (roomOrProperties, roomId) => {
+    const selectedFeature =
+      roomOrProperties?.type === "Feature" || roomOrProperties?.geometry
+        ? roomOrProperties
+        : findRoomFeatureById(roomId);
+    const roomProperties =
+      selectedFeature?.properties || roomOrProperties || {};
+    const resolvedRoomId =
+      roomId ||
+      roomProperties.id ||
+      roomProperties.name ||
+      roomProperties.room_id ||
+      roomProperties.OBJECTID ||
+      null;
+    const roomName =
+      roomProperties.name ||
+      roomProperties.roomname ||
+      roomProperties.id ||
+      resolvedRoomId ||
+      "Unnamed Room";
+    const detectedFloor = getRoomFloor(
+      selectedFeature || { properties: roomProperties },
+    );
+    const previousFloor = selectedFloor;
+    const bounds = getFeatureGeometryBounds(selectedFeature);
+    const centroid = getRoomCentroid(selectedFeature);
+    const cameraTarget =
+      bounds?.center ||
+      (centroid ? [centroid.lng, centroid.lat] : null);
+
+    if (detectedFloor !== null) {
+      pendingSearchFocusRef.current = detectedFloor !== selectedFloor;
+      const routeFloors = routeContext?.route?.info?.floors ?? [];
+      const routeVisibleOnSearchFloor =
+        routeContext?.type === "multi-floor"
+          ? routeFloors.includes(Number(detectedFloor))
+          : routeContext?.floorId === detectedFloor;
+
+      if (routeContext && !routeVisibleOnSearchFloor) {
+        setRouteContext(null);
+        setShowDirections(false);
+        setHighlightedStep(null);
+      }
+
+      setSelectedFloor(detectedFloor);
+      setSelectedFloors([]);
+    }
+
     setSelectedRoom(roomProperties);
-    setHighlightedRoomId(roomId);
+    setHighlightedRoomId(resolvedRoomId);
+    setCameraMode("overview");
 
     // Position popup near click location
     setPopupPosition({
@@ -834,33 +936,36 @@ function App() {
       y: window.innerHeight / 2 - 150,
     });
 
-    // Smooth camera animation to room (if geometry available)
-    const feature = allRooms.find(
-      (r) => (r.properties?.id || r.properties?.name) === roomId,
-    );
-    if (feature?.geometry) {
-      try {
-        const coords =
-          feature.geometry.type === "Polygon"
-            ? feature.geometry.coordinates[0][0]
-            : feature.geometry.type === "MultiPolygon"
-              ? feature.geometry.coordinates[0][0][0]
-              : null;
+    if (cameraTarget) {
+      setSearchFocusRequest((previous) => ({
+        key: (previous?.key ?? 0) + 1,
+        roomId: resolvedRoomId,
+        roomName,
+        floorId: detectedFloor,
+        previousFloor,
+        target: cameraTarget,
+        bounds,
+      }));
+    } else if (import.meta.env?.DEV !== false) {
+      console.log("[RoomSearch] camera focus skipped", {
+        searchedRoomId: resolvedRoomId,
+        searchedRoomName: roomName,
+        detectedFloorId: detectedFloor,
+        reason: "selected room has no usable geometry",
+      });
+    }
 
-        if (coords) {
-          setViewState((prev) => ({
-            ...prev,
-            longitude: coords[0],
-            latitude: coords[1],
-            zoom: 19.5,
-            pitch: 50,
-            transitionDuration: 1200,
-            transitionInterpolator: new FlyToInterpolator(),
-          }));
-        }
-      } catch (e) {
-        console.log("Could not animate to room:", e);
-      }
+    if (import.meta.env?.DEV !== false) {
+      console.log("[RoomSearch] room selected", {
+        searchedRoomId: resolvedRoomId,
+        searchedRoomName: roomName,
+        detectedFloorId: detectedFloor,
+        previousActiveFloor: previousFloor,
+        newActiveFloor: detectedFloor ?? previousFloor,
+        cameraTarget,
+        cameraBounds: bounds,
+        highlightedRoomId: resolvedRoomId,
+      });
     }
   };
 
@@ -1634,23 +1739,69 @@ function App() {
       return { target, router, floorHasRoomAnchors };
     };
 
-    const toPath = (result, floorId, startName, endName, startFeature, endFeature) =>
-      result.coordinates.map((coord, idx) => ({
+    const toRouteCoordinates = (result) =>
+      result.renderCoordinates?.length
+        ? result.renderCoordinates
+        : result.debug?.graphCoordinates?.length
+          ? result.debug.graphCoordinates
+          : result.coordinates ?? [];
+
+    const toPath = (result, floorId, startName, endName, startFeature, endFeature) => {
+      const coordinates = toRouteCoordinates(result);
+      return coordinates.map((coord, idx) => ({
         coords: [coord.lng, coord.lat],
         name:
           idx === 0
             ? startName
-            : idx === result.coordinates.length - 1
+            : idx === coordinates.length - 1
               ? endName
               : `Route point ${idx}`,
         floor: floorId,
         features:
           idx === 0 && startFeature
             ? [startFeature]
-            : idx === result.coordinates.length - 1 && endFeature
+            : idx === coordinates.length - 1 && endFeature
               ? [endFeature]
               : [],
       }));
+    };
+
+    const buildMultiFloorPreviewPath = (segments) => {
+      const previewPath = [];
+
+      segments.forEach((segment) => {
+        if (segment.type === "horizontal") {
+          const floor = Number(segment.floorId);
+          toRouteCoordinates(segment.route).forEach((coord) => {
+            previewPath.push({
+              coords: [coord.lng, coord.lat],
+              floor,
+              type: "horizontal",
+            });
+          });
+          return;
+        }
+
+        if (segment.type === "vertical-transition") {
+          previewPath.push({
+            coords: [segment.fromAccessPoint.lng, segment.fromAccessPoint.lat],
+            floor: Number(segment.fromFloor),
+            type: "vertical-transition",
+            connectorId: segment.connectorId,
+            connectorType: segment.connectorType,
+          });
+          previewPath.push({
+            coords: [segment.toAccessPoint.lng, segment.toAccessPoint.lat],
+            floor: Number(segment.toFloor),
+            type: "vertical-transition",
+            connectorId: segment.connectorId,
+            connectorType: segment.connectorType,
+          });
+        }
+      });
+
+      return previewPath;
+    };
 
     try {
       const { target: startTarget } = resolveTarget(startRoom, startFloor, "start");
@@ -1700,6 +1851,8 @@ function App() {
           coords: [segment.fromAccessPoint.lng, segment.fromAccessPoint.lat],
           instruction: segment.instruction,
           connectorType: segment.connectorType,
+          connectorId: segment.connectorId,
+          connectorName: segment.connectorName,
           role: "from",
         },
         {
@@ -1707,6 +1860,8 @@ function App() {
           coords: [segment.toAccessPoint.lng, segment.toAccessPoint.lat],
           instruction: segment.instruction,
           connectorType: segment.connectorType,
+          connectorId: segment.connectorId,
+          connectorName: segment.connectorName,
           role: "to",
         },
       ]);
@@ -1734,7 +1889,7 @@ function App() {
         endRoom,
       );
       const path = [...startPath, ...destinationPath];
-      const renderPath = routeSegments.flatMap((segment) => segment.path);
+      const renderPath = buildMultiFloorPreviewPath(multiFloorResult.segments);
       const routeVisualization = buildMultiFloorVisualizationModel({
         segments: multiFloorResult.segments,
         routeSegments,
@@ -1790,9 +1945,110 @@ function App() {
       };
 
       if (ROUTE_DEBUG_ENABLED) {
+        const selectedTransition = transitionSegments[0] ?? null;
+        const originSegment = horizontalSegments[0] ?? null;
+        const destinationSegment =
+          horizontalSegments[horizontalSegments.length - 1] ?? null;
+        const originRouteEnd =
+          originSegment?.renderCoordinates?.at(-1) ??
+          originSegment?.coordinates?.at(-1) ??
+          null;
+        const destinationRouteStart =
+          destinationSegment?.renderCoordinates?.[0] ??
+          destinationSegment?.coordinates?.[0] ??
+          null;
         console.group("[MultiFloorRouteView] generated visualization model");
+        console.log(
+          "selected connector type",
+          selectedTransition?.connectorType ?? null,
+        );
+        console.log(
+          "selected connector ID",
+          selectedTransition?.connectorId ?? null,
+        );
         console.log("selected start floor", startFloor);
         console.log("selected destination floor", endFloor);
+        console.log(
+          "origin-floor elevator access coordinate/node",
+          selectedTransition
+            ? {
+                coordinate: selectedTransition.fromAccessPoint,
+                nodeId:
+                  multiFloorResult.debug?.originFloorElevatorNode ?? null,
+              }
+            : null,
+        );
+        console.log(
+          "destination-floor elevator access coordinate/node",
+          selectedTransition
+            ? {
+                coordinate: selectedTransition.toAccessPoint,
+                nodeId:
+                  multiFloorResult.debug?.destinationFloorElevatorNode ?? null,
+              }
+            : null,
+        );
+        console.log(
+          "selected elevator ID",
+          selectedTransition?.connectorType === "elevator"
+            ? selectedTransition.connectorId
+            : null,
+        );
+        console.log(
+          "origin-floor elevator node",
+          multiFloorResult.debug?.originFloorElevatorNode ?? null,
+        );
+        console.log(
+          "destination-floor elevator node",
+          multiFloorResult.debug?.destinationFloorElevatorNode ?? null,
+        );
+        console.log(
+          "route node count before elevator",
+          multiFloorResult.debug?.routeNodeCountBeforeElevator ?? null,
+        );
+        console.log(
+          "route node count after elevator",
+          multiFloorResult.debug?.routeNodeCountAfterElevator ?? null,
+        );
+        console.log(
+          "centerline continuity validation",
+          multiFloorResult.debug?.centerlineContinuity ?? null,
+        );
+        console.log(
+          "highlighted elevator ID",
+          selectedTransition?.connectorType === "elevator"
+            ? selectedTransition.connectorId
+            : null,
+        );
+        console.log("destination-floor route start node", {
+          nodeId: multiFloorResult.debug?.destinationFloorRouteStartNode ?? null,
+          coords: destinationRouteStart,
+        });
+        console.log("origin-floor route end node", {
+          nodeId: multiFloorResult.debug?.originFloorRouteEndNode ?? null,
+          coords: originRouteEnd,
+        });
+        console.log("origin-floor route first and last coordinate/node", {
+          first:
+            originSegment?.renderCoordinates?.[0] ??
+            originSegment?.coordinates?.[0] ??
+            null,
+          last: originRouteEnd,
+          firstNode: originSegment?.route?.debug?.graphNodeIds?.[0] ?? null,
+          lastNode:
+            originSegment?.route?.debug?.graphNodeIds?.at(-1) ?? null,
+        });
+        console.log("destination-floor route first and last coordinate/node", {
+          first: destinationRouteStart,
+          last:
+            destinationSegment?.renderCoordinates?.at(-1) ??
+            destinationSegment?.coordinates?.at(-1) ??
+            null,
+          firstNode:
+            destinationSegment?.route?.debug?.graphNodeIds?.[0] ?? null,
+          lastNode:
+            destinationSegment?.route?.debug?.graphNodeIds?.at(-1) ?? null,
+        });
         console.log("floors involved in computed route", floors);
         console.log("route segment count", multiFloorResult.segments.length);
         console.table(
@@ -1868,12 +2124,42 @@ function App() {
                 ...routeSegments.map((segment) => Number(segment.floorId)),
               ]),
             ).sort((a, b) => a - b),
+            connectorFeatureKeysByFloor:
+              multiFloorResult.connector?.featureKeysByFloor ?? {},
             connectorRoomIds: transitionSegments
-              .map((seg) => seg.connectorName)
+              .flatMap((seg) => {
+                const featureKeys = [
+                  ...(multiFloorResult.connector?.featureKeysByFloor?.[
+                    String(seg.fromFloor)
+                  ] ?? []),
+                  ...(multiFloorResult.connector?.featureKeysByFloor?.[
+                    String(seg.toFloor)
+                  ] ?? []),
+                ];
+                return featureKeys.length > 0
+                  ? featureKeys
+                  : [seg.connectorName];
+              })
               .filter(Boolean),
           },
         },
       });
+      if (ROUTE_DEBUG_ENABLED) {
+        const activeConnectorKeysByFloor =
+          multiFloorResult.connector?.featureKeysByFloor ?? {};
+        const activeConnectorFeatureIds = Object.values(
+          activeConnectorKeysByFloor,
+        ).flat();
+        console.log(
+          "[MultiFloorRouteView] emphasized active route feature IDs",
+          activeConnectorFeatureIds,
+        );
+        console.log(
+          "[MultiFloorRouteView] selected elevator included in active route features",
+          primaryTransition?.connectorType !== "elevator" ||
+            activeConnectorFeatureIds.length > 0,
+        );
+      }
       setCameraMode("overview");
       setShowRoutePlanner(false);
       setShowDirections(true);
@@ -2330,6 +2616,7 @@ function App() {
                 routeFocus={visibleRouteContext?.route?.focus || null}
                 routeFloorId={visibleRouteContext?.floorId ?? null}
                 routeCameraKey={routeCameraKey}
+                searchFocusRequest={searchFocusRequest}
                 roomsData={allRooms}
                 centerlinesData={centerlinesData}
                 activeFloor={selectedFloor}

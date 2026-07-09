@@ -57,7 +57,11 @@ export function buildPathMetrics(renderPath) {
   for (let i = 1; i < renderPath.length; i++) {
     const [lng0, lat0] = renderPath[i - 1].coords;
     const [lng1, lat1] = renderPath[i].coords;
-    total += haversineMeters(lng0, lat0, lng1, lat1);
+    const floorChanged =
+      renderPath[i - 1].floor !== undefined &&
+      renderPath[i].floor !== undefined &&
+      Number(renderPath[i - 1].floor) !== Number(renderPath[i].floor);
+    total += floorChanged ? 0 : haversineMeters(lng0, lat0, lng1, lat1);
     cumulative.push(total);
   }
 
