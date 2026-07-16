@@ -4,8 +4,12 @@ import { BASEMAP_STYLES } from "./Map3D";
 const VisualControls = ({
   lightingEnabled,
   setLightingEnabled,
-  translucency,
-  setTranslucency,
+  roomFillOpacity,
+  setRoomFillOpacity,
+  roomWallOpacity,
+  setRoomWallOpacity,
+  roomWallThicknessMeters,
+  setRoomWallThicknessMeters,
   basemapStyle,
   setBasemapStyle,
   cinematicAnimationsEnabled = true,
@@ -13,8 +17,14 @@ const VisualControls = ({
   onReplayInitialReveal,
 }) => {
   const [collapsed, setCollapsed] = useState(false);
-  const handleTranslucencyChange = (event) => {
-    setTranslucency(parseInt(event.target.value, 10));
+  const handleRoomFillOpacityChange = (event) => {
+    setRoomFillOpacity(parseInt(event.target.value, 10));
+  };
+  const handleRoomWallOpacityChange = (event) => {
+    setRoomWallOpacity(parseInt(event.target.value, 10));
+  };
+  const handleRoomWallThicknessChange = (event) => {
+    setRoomWallThicknessMeters(parseFloat(event.target.value));
   };
   const handleAnimationToggle = (event) => {
     setCinematicAnimationsEnabled?.(event.target.checked);
@@ -73,21 +83,62 @@ const VisualControls = ({
           </div>
 
           <div className="control-row">
-            <label className="control-label" htmlFor="translucency-range">
+            <label className="control-label" htmlFor="room-fill-opacity-range">
               <span className="control-label-row">
-                <span>Translucency</span>
-                <strong className="control-value">{translucency}%</strong>
+                <span>Room fill opacity</span>
+                <strong className="control-value">{roomFillOpacity}%</strong>
               </span>
             </label>
             <input
-              id="translucency-range"
+              id="room-fill-opacity-range"
               className="control-range"
               type="range"
-              min={10}
+              min={0}
               max={100}
-              value={translucency}
-              onInput={handleTranslucencyChange}
-              onChange={handleTranslucencyChange}
+              value={roomFillOpacity}
+              onInput={handleRoomFillOpacityChange}
+              onChange={handleRoomFillOpacityChange}
+            />
+          </div>
+
+          <div className="control-row">
+            <label className="control-label" htmlFor="room-wall-opacity-range">
+              <span className="control-label-row">
+                <span>Interior wall opacity</span>
+                <strong className="control-value">{roomWallOpacity}%</strong>
+              </span>
+            </label>
+            <input
+              id="room-wall-opacity-range"
+              className="control-range"
+              type="range"
+              min={0}
+              max={100}
+              value={roomWallOpacity}
+              onInput={handleRoomWallOpacityChange}
+              onChange={handleRoomWallOpacityChange}
+            />
+          </div>
+
+          <div className="control-row">
+            <label className="control-label" htmlFor="room-wall-thickness-range">
+              <span className="control-label-row">
+                <span>Interior wall thickness</span>
+                <strong className="control-value">
+                  {roomWallThicknessMeters.toFixed(2)} m
+                </strong>
+              </span>
+            </label>
+            <input
+              id="room-wall-thickness-range"
+              className="control-range"
+              type="range"
+              min={0.05}
+              max={0.3}
+              step={0.01}
+              value={roomWallThicknessMeters}
+              onInput={handleRoomWallThicknessChange}
+              onChange={handleRoomWallThicknessChange}
             />
           </div>
 

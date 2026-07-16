@@ -21,15 +21,15 @@ const MAPBOX_ACCESS_TOKEN =
 
 // Available basemap styles
 export const BASEMAP_STYLES = {
+  streets: {
+    url: "mapbox://styles/mapbox/streets-v12",
+    name: "Street map",
+    description: "OpenStreetMap-style streets",
+  },
   topographic: {
     url: "mapbox://styles/mapbox/outdoors-v12",
     name: "Topographic",
     description: "Topographic map with terrain",
-  },
-  streets: {
-    url: "mapbox://styles/mapbox/streets-v12",
-    name: "Streets",
-    description: "OpenStreetMap-style streets",
   },
 };
 
@@ -374,6 +374,8 @@ const Map3D = ({
   selectedFloors,
   lightingEnabled = true,
   translucency = 60,
+  roomWallOpacity = 95,
+  roomWallThicknessMeters = 0.12,
   heightExaggeration = 1,
   onRoomSelect,
   filteredRooms,
@@ -395,7 +397,7 @@ const Map3D = ({
   roomsData = [],
   centerlinesData = {},
   activeFloor = "all",
-  basemapStyle = "topographic",
+  basemapStyle = "streets",
   showPerimeterWall = true,
   perimeterWallUrl = "/wall.geojson",
   cinematicAnimationsEnabled = true,
@@ -674,6 +676,8 @@ const Map3D = ({
     data: displayData,
     selectedFloors: floorsToDisplay,
     translucency: translucency / 100, // Convert from 0-100 to 0-1
+    wallOpacity: roomWallOpacity / 100,
+    wallThicknessMeters: roomWallThicknessMeters,
     heightExaggeration,
     floorSpacing: BUILDING_FLOOR_SPACING, // 4.5m vertical spacing between floors (matches provided stack)
     highlightedRoomId,
@@ -2174,7 +2178,7 @@ const Map3D = ({
               mapboxAccessToken={MAPBOX_ACCESS_TOKEN}
               mapStyle={
                 BASEMAP_STYLES[basemapStyle]?.url ||
-                BASEMAP_STYLES.topographic.url
+                BASEMAP_STYLES.streets.url
               }
               dragPan={false}
               dragRotate={false}

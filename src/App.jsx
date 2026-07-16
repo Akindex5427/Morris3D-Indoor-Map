@@ -180,8 +180,10 @@ function App() {
     bearing: 0,
   });
   const [lightingEnabled, setLightingEnabled] = useState(true);
-  const [translucency, setTranslucency] = useState(60); // default translucency percentage for non-selected floors
-  const [basemapStyle, setBasemapStyle] = useState("topographic"); // topographic or streets
+  const [translucency, setTranslucency] = useState(60); // global room body opacity percentage
+  const [roomWallOpacity, setRoomWallOpacity] = useState(95);
+  const [roomWallThicknessMeters, setRoomWallThicknessMeters] = useState(0.05);
+  const [basemapStyle, setBasemapStyle] = useState("streets"); // streets or topographic
   const [showRoutePlanner, setShowRoutePlanner] = useState(false);
   const [routeContext, setRouteContext] = useState(null);
   const [routeCameraKey, setRouteCameraKey] = useState(0);
@@ -2559,8 +2561,12 @@ function App() {
               <VisualControls
                 lightingEnabled={lightingEnabled}
                 setLightingEnabled={setLightingEnabled}
-                translucency={translucency}
-                setTranslucency={setTranslucency}
+                roomFillOpacity={translucency}
+                setRoomFillOpacity={setTranslucency}
+                roomWallOpacity={roomWallOpacity}
+                setRoomWallOpacity={setRoomWallOpacity}
+                roomWallThicknessMeters={roomWallThicknessMeters}
+                setRoomWallThicknessMeters={setRoomWallThicknessMeters}
                 basemapStyle={basemapStyle}
                 setBasemapStyle={setBasemapStyle}
                 cinematicAnimationsEnabled={cinematicAnimationsEnabled}
@@ -2615,6 +2621,8 @@ function App() {
                 centerlinesData={centerlinesData}
                 lightingEnabled={lightingEnabled}
                 translucency={translucency}
+                roomWallOpacity={roomWallOpacity}
+                roomWallThicknessMeters={roomWallThicknessMeters}
                 basemapStyle={basemapStyle}
                 cinematicAnimationsEnabled={cinematicAnimationsEnabled}
                 layoutSignal={layoutSignal}
@@ -2635,6 +2643,8 @@ function App() {
                 onUserCameraInteraction={handleUserCameraInteraction}
                 lightingEnabled={lightingEnabled}
                 translucency={translucency}
+                roomWallOpacity={roomWallOpacity}
+                roomWallThicknessMeters={roomWallThicknessMeters}
                 heightExaggeration={1}
                 basemapStyle={basemapStyle}
                 routePath={visibleRouteContext?.route?.path || null}

@@ -34,6 +34,8 @@ const MultiFloorRoutePanelMap = ({
   centerlinesData,
   lightingEnabled,
   translucency,
+  roomWallOpacity,
+  roomWallThicknessMeters,
   basemapStyle,
   routeFocus,
   cinematicAnimationsEnabled,
@@ -81,6 +83,8 @@ const MultiFloorRoutePanelMap = ({
       }
       lightingEnabled={lightingEnabled}
       translucency={translucency}
+      roomWallOpacity={roomWallOpacity}
+      roomWallThicknessMeters={roomWallThicknessMeters}
       heightExaggeration={1}
       basemapStyle={basemapStyle}
       routePath={panel.path}
@@ -113,6 +117,8 @@ const MultiFloorRouteTimeline = ({
   centerlinesData,
   lightingEnabled,
   translucency,
+  roomWallOpacity,
+  roomWallThicknessMeters,
   basemapStyle,
   cinematicAnimationsEnabled,
   layoutSignal,
@@ -216,6 +222,8 @@ const MultiFloorRouteTimeline = ({
                     centerlinesData={centerlinesData}
                     lightingEnabled={lightingEnabled}
                     translucency={translucency}
+                    roomWallOpacity={roomWallOpacity}
+                    roomWallThicknessMeters={roomWallThicknessMeters}
                     basemapStyle={basemapStyle}
                     routeFocus={route.focus}
                     cinematicAnimationsEnabled={cinematicAnimationsEnabled}

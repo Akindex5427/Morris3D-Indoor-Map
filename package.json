@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@deck.gl/mesh-layers": "^8.9.35",
+    "@turf/buffer": "^7.2.0",
+    "@turf/difference": "^7.2.0",
+    "@turf/helpers": "^7.2.0",
     "deck.gl": "^8.9.35",
     "mapbox-gl": "^3.17.0",
     "react": "^18.3.1",

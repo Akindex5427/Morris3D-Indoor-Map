@@ -32,6 +32,7 @@ import {
   PointLight,
 } from "@deck.gl/core";
 import { parseFeatureColor } from "../utils/featureColors";
+import { buildRoomWallShells } from "../utils/roomWallGeometry";
 
 // ============================================================================
 // LIGHTING CONFIGURATION
@@ -118,6 +119,25 @@ function isVerticalConnectorFeature(props = {}) {
     searchableText.includes("staircase") ||
     searchableText.includes("elevator") ||
     searchableText.includes("lift")
+  );
+}
+
+function isInteriorWallCandidate(feature) {
+  const props = feature.properties || {};
+  const name = typeof props.name === "string" ? props.name.toLowerCase() : "";
+  // Floor slabs stay transparent, and the existing dedicated exterior wall
+  // layers remain responsible for the building envelope.
+  return (
+    !isFloorSurface(props) &&
+    !name.includes("exterior") &&
+    !name.includes("facade")
+  );
+}
+
+function getDarkerRoomColor(props = {}, multiplier = 0.42) {
+  const color = parseFeatureColor(props.color);
+  return color.slice(0, 3).map((channel) =>
+    Math.max(0, Math.min(255, Math.round(channel * multiplier))),
   );
 }
 
@@ -648,6 +668,8 @@ export const useIndoorBuilding = ({
   data,
   selectedFloors = [0, 1, 2, 3, 4, 5, 6, 7],
   translucency = 0.6,
+  wallOpacity = 0.95,
+  wallThicknessMeters = 0.12,
   heightExaggeration = 1.0,
   floorSpacing = 4.5,
   highlightedRoomId = null,
@@ -717,6 +739,18 @@ export const useIndoorBuilding = ({
       features: features,
     };
   }, [data, selectedFloors, floorSpacing, presentation]);
+
+  // Turf's offset/difference result is cached by room geometry and thickness.
+  // Opacity-only changes reuse those shell footprints without recalculating them.
+  const wallData = useMemo(
+    () =>
+      buildRoomWallShells({
+        features: filteredData.features,
+        thicknessMeters: wallThicknessMeters,
+        shouldInclude: isInteriorWallCandidate,
+      }),
+    [filteredData, wallThicknessMeters],
+  );
 
   // Create layers and lighting
   const { layers, lightingEffect } = useMemo(() => {
@@ -893,7 +927,7 @@ export const useIndoorBuilding = ({
             }
           } else if (isSingleFloorMode) {
             if (selectedFloors.includes(floorNum)) {
-              alpha = Math.round(255 * Math.max(0.85, translucency));
+              alpha = Math.round(255 * translucency);
             } else {
               alpha = 255;
             }
@@ -1023,8 +1057,65 @@ export const useIndoorBuilding = ({
         },
       });
 
+      const wallLayer = new GeoJsonLayer({
+        id: "procedural-interior-room-walls",
+        data: wallData,
+        pickable: false,
+        stroked: false,
+        filled: true,
+        extruded: true,
+        wireframe: false,
+        material: {
+          ambient: 0.45,
+          diffuse: 0.7,
+          shininess: 0,
+          specularColor: [0, 0, 0],
+        },
+        getFillColor: (feature) => {
+          const props = feature.properties || {};
+          const roomId = getFeatureRoomId(props);
+          const reveal = props.__presentationReveal ?? 1;
+          let color = getDarkerRoomColor(props);
+          let alpha = wallOpacity * 255;
+
+          if (routeFocus.startRoomId === roomId) {
+            color = [18, 112, 57];
+            alpha = Math.max(alpha, 245);
+          } else if (routeFocus.endRoomId === roomId) {
+            color = [159, 35, 35];
+            alpha = Math.max(alpha, 245);
+          } else if (highlightedRoomId === roomId) {
+            color = [142, 103, 0];
+            alpha = Math.max(alpha, 245);
+          } else if (
+            routeFocusActive &&
+            !focusRoomIds.has(roomId) &&
+            !landmarkRoomIds.has(roomId) &&
+            !isUsedConnector(roomId, getFloorNumber(props), props)
+          ) {
+            alpha = Math.min(alpha, 90);
+          }
+
+          return [...color, Math.round(alpha * reveal)];
+        },
+        getElevation: (feature) => {
+          const props = feature.properties || {};
+          const reveal = props.__presentationReveal ?? 1;
+          return (props.__roomWallHeight || 0) * heightExaggeration * reveal;
+        },
+        updateTriggers: {
+          getFillColor: [
+            wallOpacity,
+            highlightedRoomId,
+            presentation,
+            routeFocus,
+          ],
+          getElevation: [heightExaggeration, presentation],
+        },
+      });
+
       return {
-        layers: [layer],
+        layers: [layer, wallLayer],
         lightingEffect: createIndoorLighting(isDollhouseMode),
       };
     } catch (error) {
@@ -1033,8 +1124,11 @@ export const useIndoorBuilding = ({
     }
   }, [
     filteredData,
+    wallData,
     selectedFloors,
     translucency,
+    wallOpacity,
+    wallThicknessMeters,
     heightExaggeration,
     floorSpacing,
     highlightedRoomId,
