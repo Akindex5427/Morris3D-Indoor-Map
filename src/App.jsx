@@ -35,6 +35,10 @@ import {
   groupLandmarksByFloor,
 } from "./utils/routeLandmarks";
 
+// Fixed floor list — always display all building floors in the floor switcher,
+// regardless of which individual floor GeoJSON is currently loaded.
+const ALL_BUILDING_FLOORS = [0, 1, 2, 3, 4, 5, 6, 7];
+
 const centerlinesHaveRoomAnchors = (centerlinesGeoJson) =>
   Array.isArray(centerlinesGeoJson?.features) &&
   centerlinesGeoJson.features.some((feature) => {
@@ -163,7 +167,7 @@ const ROUTER_CONFIG = [
 ];
 
 function App() {
-  const [selectedFloor, setSelectedFloor] = useState("all");
+  const [selectedFloor, setSelectedFloor] = useState(1);
   const [allRooms, setAllRooms] = useState([]);
   const [filteredRooms, setFilteredRooms] = useState([]);
   const [selectedFloors, setSelectedFloors] = useState([]);
@@ -880,18 +884,10 @@ function App() {
   }, [selectedFloor]);
 
   const handleFloorChange = (floor) => {
-    const routeFloors = routeContext?.route?.info?.floors ?? [];
-    const routeVisibleOnFloor =
-      routeContext?.type === "multi-floor"
-        ? floor === "all" || routeFloors.includes(Number(floor))
-        : routeContext?.floorId === floor;
-
-    if (routeContext && !routeVisibleOnFloor) {
-      setRouteContext(null);
-      setShowDirections(false);
-      setHighlightedStep(null);
-    }
-
+    // Only update which floor is displayed — do NOT clear an active route.
+    // visibleRouteContext will naturally return null when the new floor is not
+    // part of the route, hiding the map overlay while preserving routeContext
+    // so the route reappears when the user returns to a route floor.
     setSelectedFloor(floor);
     setSelectedFloors([]);
     setSelectedRoom(null);
@@ -941,18 +937,8 @@ function App() {
 
     if (detectedFloor !== null) {
       pendingSearchFocusRef.current = detectedFloor !== selectedFloor;
-      const routeFloors = routeContext?.route?.info?.floors ?? [];
-      const routeVisibleOnSearchFloor =
-        routeContext?.type === "multi-floor"
-          ? routeFloors.includes(Number(detectedFloor))
-          : routeContext?.floorId === detectedFloor;
-
-      if (routeContext && !routeVisibleOnSearchFloor) {
-        setRouteContext(null);
-        setShowDirections(false);
-        setHighlightedStep(null);
-      }
-
+      // Switch the displayed floor to the room's floor, but preserve any
+      // active route — visibleRouteContext handles overlay visibility.
       setSelectedFloor(detectedFloor);
       setSelectedFloors([]);
     }
@@ -1420,8 +1406,10 @@ function App() {
       : null;
 
   const activePreviewDirectionIndex = useMemo(() => {
-    const directions = visibleRouteContext?.route?.info?.directions;
-    const renderPath = visibleRouteContext?.route?.renderPath;
+    // Use routeContext so the active step indicator persists while the user
+    // inspects any floor (including floors not directly on the route).
+    const directions = routeContext?.route?.info?.directions;
+    const renderPath = routeContext?.route?.renderPath;
     if (
       !showPreview ||
       !Array.isArray(directions) ||
@@ -2256,7 +2244,10 @@ function App() {
       : selectedFloor === -1 || selectedFloor === 0
         ? "F0 Basement"
         : `F${selectedFloor}`;
-  const activeRouteInfo = visibleRouteContext?.route?.info ?? null;
+  // Derive from routeContext (not visibleRouteContext) so the sidebar route
+  // status and directions panel remain visible when inspecting any floor,
+  // even one not covered by the current route.
+  const activeRouteInfo = routeContext?.route?.info ?? null;
   const isMultiFloorTimelineActive =
     visibleRouteContext?.type === "multi-floor" &&
     routeVisualizationMode === "timeline";
@@ -2382,7 +2373,7 @@ function App() {
               <FloorSwitcher
                 currentFloor={selectedFloor}
                 onFloorChange={handleFloorChange}
-                availableFloors={availableFloors}
+                availableFloors={ALL_BUILDING_FLOORS}
               />
             </div>
 
@@ -2543,11 +2534,11 @@ function App() {
               />
             )}
 
-            {showDirections && visibleRouteContext?.route?.path && (
+            {showDirections && routeContext?.route?.path && (
               <div className="panel-section panel-card" id="panel-directions">
                 <DirectionsPanel
-                  routePath={visibleRouteContext.route.path}
-                  routeInfo={visibleRouteContext.route.info}
+                  routePath={routeContext.route.path}
+                  routeInfo={routeContext.route.info}
                   onClose={clearRouteState}
                   onStepClick={handleStepClick}
                   cameraMode={cameraMode}
@@ -2679,7 +2670,7 @@ function App() {
             )}
 
             {/* Directions badge when sidebar is collapsed */}
-            {sidebarCollapsed && showDirections && visibleRouteContext?.route?.path && (
+            {sidebarCollapsed && showDirections && routeContext?.route?.path && (
               <button
                 className="directions-sidebar-badge"
                 onClick={() => setSidebarCollapsed(false)}
