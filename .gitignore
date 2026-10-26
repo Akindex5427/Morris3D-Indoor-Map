@@ -42,6 +42,8 @@ yarn-debug.log*
 yarn-error.log*
 vite*.log
 .vite*.log
+/dev-server.log
+/dev-server.err
 
 # media files (unused pictures/images)
 *.jpg

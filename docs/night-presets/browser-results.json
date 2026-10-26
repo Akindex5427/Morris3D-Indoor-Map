@@ -1,0 +1,356 @@
+[
+  {
+    "phase": "transition",
+    "samples": [
+      {
+        "elapsed": 10.599999994039536,
+        "strength": 1.4,
+        "stable": true
+      },
+      {
+        "elapsed": 25.099999994039536,
+        "strength": 1.3999398529634859,
+        "stable": true
+      },
+      {
+        "elapsed": 761.8000000119209,
+        "strength": 1.3993315441346355,
+        "stable": true
+      },
+      {
+        "elapsed": 770.0999999940395,
+        "strength": 0.5,
+        "stable": true
+      }
+    ]
+  },
+  {
+    "phase": "floor",
+    "preset": "architectural",
+    "floor": 0,
+    "lights": 19,
+    "fixtureLayers": 1,
+    "errors": [],
+    "glError": 0,
+    "atlasReferences": 2
+  },
+  {
+    "phase": "floor",
+    "preset": "gis",
+    "floor": 0,
+    "lights": 19,
+    "fixtureLayers": 1,
+    "errors": [],
+    "glError": 0,
+    "atlasReferences": 2
+  },
+  {
+    "phase": "floor",
+    "preset": "architectural",
+    "floor": 1,
+    "lights": 20,
+    "fixtureLayers": 1,
+    "errors": [],
+    "glError": 0,
+    "atlasReferences": 2
+  },
+  {
+    "phase": "floor",
+    "preset": "gis",
+    "floor": 1,
+    "lights": 20,
+    "fixtureLayers": 1,
+    "errors": [],
+    "glError": 0,
+    "atlasReferences": 2
+  },
+  {
+    "phase": "floor",
+    "preset": "architectural",
+    "floor": 2,
+    "lights": 23,
+    "fixtureLayers": 1,
+    "errors": [],
+    "glError": 0,
+    "atlasReferences": 2
+  },
+  {
+    "phase": "floor",
+    "preset": "gis",
+    "floor": 2,
+    "lights": 23,
+    "fixtureLayers": 1,
+    "errors": [],
+    "glError": 0,
+    "atlasReferences": 2
+  },
+  {
+    "phase": "floor",
+    "preset": "architectural",
+    "floor": 3,
+    "lights": 16,
+    "fixtureLayers": 1,
+    "errors": [],
+    "glError": 0,
+    "atlasReferences": 2
+  },
+  {
+    "phase": "floor",
+    "preset": "gis",
+    "floor": 3,
+    "lights": 16,
+    "fixtureLayers": 1,
+    "errors": [],
+    "glError": 0,
+    "atlasReferences": 2
+  },
+  {
+    "phase": "floor",
+    "preset": "architectural",
+    "floor": 4,
+    "lights": 23,
+    "fixtureLayers": 1,
+    "errors": [],
+    "glError": 0,
+    "atlasReferences": 2
+  },
+  {
+    "phase": "floor",
+    "preset": "gis",
+    "floor": 4,
+    "lights": 23,
+    "fixtureLayers": 1,
+    "errors": [],
+    "glError": 0,
+    "atlasReferences": 2
+  },
+  {
+    "phase": "floor",
+    "preset": "architectural",
+    "floor": 5,
+    "lights": 19,
+    "fixtureLayers": 1,
+    "errors": [],
+    "glError": 0,
+    "atlasReferences": 2
+  },
+  {
+    "phase": "floor",
+    "preset": "gis",
+    "floor": 5,
+    "lights": 19,
+    "fixtureLayers": 1,
+    "errors": [],
+    "glError": 0,
+    "atlasReferences": 2
+  },
+  {
+    "phase": "floor",
+    "preset": "architectural",
+    "floor": 6,
+    "lights": 18,
+    "fixtureLayers": 1,
+    "errors": [],
+    "glError": 0,
+    "atlasReferences": 2
+  },
+  {
+    "phase": "floor",
+    "preset": "gis",
+    "floor": 6,
+    "lights": 18,
+    "fixtureLayers": 1,
+    "errors": [],
+    "glError": 0,
+    "atlasReferences": 2
+  },
+  {
+    "phase": "floor",
+    "preset": "architectural",
+    "floor": 7,
+    "lights": 0,
+    "fixtureLayers": 0,
+    "errors": [],
+    "glError": 0,
+    "atlasReferences": 2
+  },
+  {
+    "phase": "floor",
+    "preset": "gis",
+    "floor": 7,
+    "lights": 0,
+    "fixtureLayers": 0,
+    "errors": [],
+    "glError": 0,
+    "atlasReferences": 2
+  },
+  {
+    "phase": "navigation",
+    "preset": "architectural",
+    "protectedRooms": 4,
+    "pickedRooms": 262,
+    "layerIds": [
+      "indoor-building-night-layer",
+      "indoor-building-night-layer-polygons-fill",
+      "procedural-interior-room-walls-night",
+      "procedural-interior-room-walls-night-polygons-fill",
+      "building-perimeter-wall-floor-1-2-0-night",
+      "interior-light-pools",
+      "interior-light-halos",
+      "interior-light-fixtures",
+      "route-focus-room-glow",
+      "route-focus-start-end-markers",
+      "route-focus-room-labels",
+      "route-focus-room-labels-background",
+      "route-focus-room-labels-characters",
+      "route-path-border",
+      "route-path-main"
+    ]
+  },
+  {
+    "phase": "navigation",
+    "preset": "gis",
+    "protectedRooms": 4,
+    "pickedRooms": 262,
+    "layerIds": [
+      "indoor-building-night-layer",
+      "indoor-building-night-layer-polygons-fill",
+      "procedural-interior-room-walls-night",
+      "procedural-interior-room-walls-night-polygons-fill",
+      "building-perimeter-wall-floor-1-2-0-night",
+      "interior-light-pools",
+      "interior-light-halos",
+      "interior-light-fixtures",
+      "route-focus-room-glow",
+      "route-focus-start-end-markers",
+      "route-focus-room-labels",
+      "route-focus-room-labels-background",
+      "route-focus-room-labels-characters",
+      "route-path-border",
+      "route-path-main"
+    ]
+  },
+  {
+    "phase": "rapid-switches",
+    "preset": "gis",
+    "floor": "all",
+    "lights": 138,
+    "fixtureLayers": 1,
+    "errors": [],
+    "glError": 0,
+    "atlasReferences": 2
+  },
+  {
+    "phase": "day-night-memory",
+    "preset": "gis",
+    "floor": "all",
+    "lights": 138,
+    "fixtureLayers": 1,
+    "errors": [],
+    "glError": 0,
+    "atlasReferences": 2
+  },
+  {
+    "phase": "reduced-motion",
+    "preset": "architectural",
+    "floor": "all",
+    "lights": 138,
+    "fixtureLayers": 1,
+    "errors": [],
+    "glError": 0,
+    "atlasReferences": 2
+  },
+  {
+    "phase": "cinematic-camera",
+    "preset": "architectural",
+    "floor": "all",
+    "lights": 0,
+    "fixtureLayers": 0,
+    "errors": [],
+    "glError": 0,
+    "atlasReferences": 2
+  },
+  {
+    "phase": "shared-data",
+    "initialLightRequests": 2,
+    "requests": [
+      "http://127.0.0.1:3001/interior_lights.geojson",
+      "http://127.0.0.1:3001/interior_lights.geojson"
+    ],
+    "extraRequests": 0
+  },
+  {
+    "phase": "responsive-controls",
+    "size": {
+      "width": 1440,
+      "height": 1000
+    },
+    "bounds": {
+      "x": 31,
+      "y": 504.65625,
+      "width": 311,
+      "height": 91.796875
+    },
+    "targets": [
+      {
+        "height": 44,
+        "width": 153.5
+      },
+      {
+        "height": 44,
+        "width": 153.5
+      }
+    ]
+  },
+  {
+    "phase": "responsive-controls",
+    "size": {
+      "width": 768,
+      "height": 1024
+    },
+    "bounds": {
+      "x": 44,
+      "y": 495.265625,
+      "width": 349,
+      "height": 91.796875
+    },
+    "targets": [
+      {
+        "height": 44,
+        "width": 172.5
+      },
+      {
+        "height": 44,
+        "width": 172.5
+      }
+    ]
+  },
+  {
+    "phase": "responsive-controls",
+    "size": {
+      "width": 390,
+      "height": 844
+    },
+    "bounds": {
+      "x": 44,
+      "y": 675.09375,
+      "width": 295,
+      "height": 91.796875
+    },
+    "targets": [
+      {
+        "height": 44,
+        "width": 145.5
+      },
+      {
+        "height": 44,
+        "width": 145.5
+      }
+    ]
+  },
+  {
+    "phase": "keyboard-and-session",
+    "passed": true,
+    "errors": []
+  }
+]

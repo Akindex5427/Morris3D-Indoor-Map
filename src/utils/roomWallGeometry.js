@@ -3,6 +3,8 @@ import difference from "@turf/difference";
 import { featureCollection } from "@turf/helpers";
 
 const shellCache = new Map();
+const MAX_CACHED_SHELLS = 4096;
+let coordinateKeys = new WeakMap();
 
 const isPolygonGeometry = (geometry) =>
   geometry?.type === "Polygon" || geometry?.type === "MultiPolygon";
@@ -68,9 +70,11 @@ const getFeatureKey = (feature) => {
     "room";
   // The coordinates are included to avoid incorrectly sharing geometry when
   // exported room names/ids are duplicated.
-  return `${properties.level ?? properties.floor ?? 0}:${identifier}:${JSON.stringify(
-    stripZ(feature.geometry.coordinates),
-  )}`;
+  const geometry = feature.geometry;
+  if (!coordinateKeys.has(geometry)) {
+    coordinateKeys.set(geometry, JSON.stringify(stripZ(geometry.coordinates)));
+  }
+  return `${properties.level ?? properties.floor ?? 0}:${identifier}:${coordinateKeys.get(geometry)}`;
 };
 
 /**
@@ -109,6 +113,10 @@ export const buildRoomWallShells = ({
     const key = getFeatureKey(feature);
     const cacheKey = `${thickness}:${key}`;
     let shellGeometry = shellCache.get(cacheKey);
+    if (shellGeometry) {
+      shellCache.delete(cacheKey);
+      shellCache.set(cacheKey, shellGeometry);
+    }
 
     if (!shellGeometry) {
       const sourceFeature = {
@@ -144,6 +152,7 @@ export const buildRoomWallShells = ({
 
         shellGeometry = shell.geometry;
         shellCache.set(cacheKey, shellGeometry);
+        while (shellCache.size > MAX_CACHED_SHELLS) shellCache.delete(shellCache.keys().next().value);
       } catch (error) {
         warning("Failed to generate a procedural wall shell.", {
           name: properties.name,
@@ -172,4 +181,7 @@ export const buildRoomWallShells = ({
   return { type: "FeatureCollection", features: wallFeatures };
 };
 
-export const clearRoomWallGeometryCache = () => shellCache.clear();
+export const clearRoomWallGeometryCache = () => {
+  shellCache.clear();
+  coordinateKeys = new WeakMap();
+};

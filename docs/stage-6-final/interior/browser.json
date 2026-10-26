@@ -1,0 +1,875 @@
+{
+  "results": [
+    {
+      "case": "normal activation, zero gain before endpoint, stable atlas/models/data, no React ramp loop",
+      "day": {
+        "progress": 0,
+        "gain": 0,
+        "status": "idle",
+        "fixtureCount": 0,
+        "camera": {
+          "width": 1280,
+          "height": 900,
+          "latitude": 37.71525,
+          "longitude": -89.22045,
+          "zoom": 19,
+          "bearing": 17,
+          "pitch": 45,
+          "altitude": 1.5,
+          "maxZoom": 22,
+          "minZoom": 14,
+          "maxPitch": 85,
+          "minPitch": 0,
+          "normalize": true,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        "uniform": 0,
+        "renders": 4
+      },
+      "sunset": {
+        "progress": 0.3769125000000465,
+        "gain": 0,
+        "status": "ready",
+        "fixtureCount": 20,
+        "camera": {
+          "width": 1280,
+          "height": 900,
+          "latitude": 37.71525,
+          "longitude": -89.22045,
+          "zoom": 19,
+          "bearing": 17,
+          "pitch": 45,
+          "altitude": 1.5,
+          "maxZoom": 22,
+          "minZoom": 14,
+          "maxPitch": 85,
+          "minPitch": 0,
+          "normalize": true,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        "uniform": 0,
+        "renders": 42
+      },
+      "ramp": {
+        "progress": 1,
+        "gain": 0.7798923936574303,
+        "status": "ready",
+        "fixtureCount": 20,
+        "camera": {
+          "width": 1280,
+          "height": 900,
+          "latitude": 37.71525,
+          "longitude": -89.22045,
+          "zoom": 19,
+          "bearing": 17,
+          "pitch": 45,
+          "altitude": 1.5,
+          "maxZoom": 22,
+          "minZoom": 14,
+          "maxPitch": 85,
+          "minPitch": 0,
+          "normalize": true,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        "uniform": 0.7798923936574303,
+        "renders": 130
+      },
+      "night": {
+        "progress": 1,
+        "gain": 1,
+        "status": "ready",
+        "fixtureCount": 20,
+        "camera": {
+          "width": 1280,
+          "height": 900,
+          "latitude": 37.71525,
+          "longitude": -89.22045,
+          "zoom": 19,
+          "bearing": 17,
+          "pitch": 45,
+          "altitude": 1.5,
+          "maxZoom": 22,
+          "minZoom": 14,
+          "maxPitch": 85,
+          "minPitch": 0,
+          "normalize": true,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        "uniform": 1,
+        "renders": 130
+      },
+      "activationFirstMs": 8264,
+      "activationLastMs": 9477,
+      "rampReactRenderCounts": [
+        130
+      ]
+    },
+    {
+      "case": "mid-ramp reversal and manual camera preservation",
+      "dim": {
+        "progress": 0.9595999999998603,
+        "gain": 0.8153165372488865,
+        "status": "ready",
+        "fixtureCount": 20,
+        "camera": {
+          "width": 1280,
+          "height": 900,
+          "latitude": 37.71525,
+          "longitude": -89.22045,
+          "zoom": 18.7,
+          "bearing": 43,
+          "pitch": 45,
+          "altitude": 1.5,
+          "maxZoom": 22,
+          "minZoom": 14,
+          "maxPitch": 85,
+          "minPitch": 0,
+          "normalize": true,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        "uniform": 0.8153165372488865,
+        "renders": 140
+      },
+      "restored": {
+        "progress": 1,
+        "gain": 1,
+        "status": "ready",
+        "fixtureCount": 20,
+        "camera": {
+          "width": 1280,
+          "height": 900,
+          "latitude": 37.71525,
+          "longitude": -89.22045,
+          "zoom": 18.7,
+          "bearing": 43,
+          "pitch": 45,
+          "altitude": 1.5,
+          "maxZoom": 22,
+          "minZoom": 14,
+          "maxPitch": 85,
+          "minPitch": 0,
+          "normalize": true,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        "uniform": 1,
+        "renders": 150
+      }
+    },
+    {
+      "case": "preset switch preserves full-night progress and gain",
+      "passed": true
+    },
+    {
+      "case": "floor and preset",
+      "floor": 0,
+      "preset": "architectural",
+      "progress": 1,
+      "gain": 1,
+      "status": "ready",
+      "fixtureCount": 19,
+      "camera": {
+        "width": 1280,
+        "height": 900,
+        "latitude": 37.71525,
+        "longitude": -89.22045,
+        "zoom": 18.7,
+        "bearing": 43,
+        "pitch": 45,
+        "altitude": 1.5,
+        "maxZoom": 22,
+        "minZoom": 14,
+        "maxPitch": 85,
+        "minPitch": 0,
+        "normalize": true,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      "uniform": 1,
+      "renders": 188
+    },
+    {
+      "case": "floor and preset",
+      "floor": 1,
+      "preset": "architectural",
+      "progress": 1,
+      "gain": 1,
+      "status": "ready",
+      "fixtureCount": 20,
+      "camera": {
+        "width": 1280,
+        "height": 900,
+        "latitude": 37.71525,
+        "longitude": -89.22045,
+        "zoom": 18.7,
+        "bearing": 43,
+        "pitch": 45,
+        "altitude": 1.5,
+        "maxZoom": 22,
+        "minZoom": 14,
+        "maxPitch": 85,
+        "minPitch": 0,
+        "normalize": true,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      "uniform": 1,
+      "renders": 190
+    },
+    {
+      "case": "floor and preset",
+      "floor": 2,
+      "preset": "architectural",
+      "progress": 1,
+      "gain": 1,
+      "status": "ready",
+      "fixtureCount": 23,
+      "camera": {
+        "width": 1280,
+        "height": 900,
+        "latitude": 37.71525,
+        "longitude": -89.22045,
+        "zoom": 18.7,
+        "bearing": 43,
+        "pitch": 45,
+        "altitude": 1.5,
+        "maxZoom": 22,
+        "minZoom": 14,
+        "maxPitch": 85,
+        "minPitch": 0,
+        "normalize": true,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      "uniform": 1,
+      "renders": 192
+    },
+    {
+      "case": "floor and preset",
+      "floor": 3,
+      "preset": "architectural",
+      "progress": 1,
+      "gain": 1,
+      "status": "ready",
+      "fixtureCount": 16,
+      "camera": {
+        "width": 1280,
+        "height": 900,
+        "latitude": 37.71525,
+        "longitude": -89.22045,
+        "zoom": 18.7,
+        "bearing": 43,
+        "pitch": 45,
+        "altitude": 1.5,
+        "maxZoom": 22,
+        "minZoom": 14,
+        "maxPitch": 85,
+        "minPitch": 0,
+        "normalize": true,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      "uniform": 1,
+      "renders": 194
+    },
+    {
+      "case": "floor and preset",
+      "floor": 4,
+      "preset": "architectural",
+      "progress": 1,
+      "gain": 1,
+      "status": "ready",
+      "fixtureCount": 23,
+      "camera": {
+        "width": 1280,
+        "height": 900,
+        "latitude": 37.71525,
+        "longitude": -89.22045,
+        "zoom": 18.7,
+        "bearing": 43,
+        "pitch": 45,
+        "altitude": 1.5,
+        "maxZoom": 22,
+        "minZoom": 14,
+        "maxPitch": 85,
+        "minPitch": 0,
+        "normalize": true,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      "uniform": 1,
+      "renders": 196
+    },
+    {
+      "case": "floor and preset",
+      "floor": 5,
+      "preset": "architectural",
+      "progress": 1,
+      "gain": 1,
+      "status": "ready",
+      "fixtureCount": 19,
+      "camera": {
+        "width": 1280,
+        "height": 900,
+        "latitude": 37.71525,
+        "longitude": -89.22045,
+        "zoom": 18.7,
+        "bearing": 43,
+        "pitch": 45,
+        "altitude": 1.5,
+        "maxZoom": 22,
+        "minZoom": 14,
+        "maxPitch": 85,
+        "minPitch": 0,
+        "normalize": true,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      "uniform": 1,
+      "renders": 198
+    },
+    {
+      "case": "floor and preset",
+      "floor": 6,
+      "preset": "architectural",
+      "progress": 1,
+      "gain": 1,
+      "status": "ready",
+      "fixtureCount": 18,
+      "camera": {
+        "width": 1280,
+        "height": 900,
+        "latitude": 37.71525,
+        "longitude": -89.22045,
+        "zoom": 18.7,
+        "bearing": 43,
+        "pitch": 45,
+        "altitude": 1.5,
+        "maxZoom": 22,
+        "minZoom": 14,
+        "maxPitch": 85,
+        "minPitch": 0,
+        "normalize": true,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      "uniform": 1,
+      "renders": 200
+    },
+    {
+      "case": "floor and preset",
+      "floor": 7,
+      "preset": "architectural",
+      "progress": 1,
+      "gain": 1,
+      "status": "ready",
+      "fixtureCount": 0,
+      "camera": {
+        "width": 1280,
+        "height": 900,
+        "latitude": 37.71525,
+        "longitude": -89.22045,
+        "zoom": 18.7,
+        "bearing": 43,
+        "pitch": 45,
+        "altitude": 1.5,
+        "maxZoom": 22,
+        "minZoom": 14,
+        "maxPitch": 85,
+        "minPitch": 0,
+        "normalize": true,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      "uniform": 1,
+      "renders": 202
+    },
+    {
+      "case": "floor and preset",
+      "floor": "all",
+      "preset": "architectural",
+      "progress": 1,
+      "gain": 1,
+      "status": "ready",
+      "fixtureCount": 138,
+      "camera": {
+        "width": 1280,
+        "height": 900,
+        "latitude": 37.71525,
+        "longitude": -89.22045,
+        "zoom": 18.7,
+        "bearing": 43,
+        "pitch": 45,
+        "altitude": 1.5,
+        "maxZoom": 22,
+        "minZoom": 14,
+        "maxPitch": 85,
+        "minPitch": 0,
+        "normalize": true,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      "uniform": 1,
+      "renders": 204
+    },
+    {
+      "case": "floor and preset",
+      "floor": 0,
+      "preset": "gis",
+      "progress": 1,
+      "gain": 1,
+      "status": "ready",
+      "fixtureCount": 19,
+      "camera": {
+        "width": 1280,
+        "height": 900,
+        "latitude": 37.71525,
+        "longitude": -89.22045,
+        "zoom": 18.7,
+        "bearing": 43,
+        "pitch": 45,
+        "altitude": 1.5,
+        "maxZoom": 22,
+        "minZoom": 14,
+        "maxPitch": 85,
+        "minPitch": 0,
+        "normalize": true,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      "uniform": 1,
+      "renders": 210
+    },
+    {
+      "case": "floor and preset",
+      "floor": 1,
+      "preset": "gis",
+      "progress": 1,
+      "gain": 1,
+      "status": "ready",
+      "fixtureCount": 20,
+      "camera": {
+        "width": 1280,
+        "height": 900,
+        "latitude": 37.71525,
+        "longitude": -89.22045,
+        "zoom": 18.7,
+        "bearing": 43,
+        "pitch": 45,
+        "altitude": 1.5,
+        "maxZoom": 22,
+        "minZoom": 14,
+        "maxPitch": 85,
+        "minPitch": 0,
+        "normalize": true,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      "uniform": 1,
+      "renders": 212
+    },
+    {
+      "case": "floor and preset",
+      "floor": 2,
+      "preset": "gis",
+      "progress": 1,
+      "gain": 1,
+      "status": "ready",
+      "fixtureCount": 23,
+      "camera": {
+        "width": 1280,
+        "height": 900,
+        "latitude": 37.71525,
+        "longitude": -89.22045,
+        "zoom": 18.7,
+        "bearing": 43,
+        "pitch": 45,
+        "altitude": 1.5,
+        "maxZoom": 22,
+        "minZoom": 14,
+        "maxPitch": 85,
+        "minPitch": 0,
+        "normalize": true,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      "uniform": 1,
+      "renders": 214
+    },
+    {
+      "case": "floor and preset",
+      "floor": 3,
+      "preset": "gis",
+      "progress": 1,
+      "gain": 1,
+      "status": "ready",
+      "fixtureCount": 16,
+      "camera": {
+        "width": 1280,
+        "height": 900,
+        "latitude": 37.71525,
+        "longitude": -89.22045,
+        "zoom": 18.7,
+        "bearing": 43,
+        "pitch": 45,
+        "altitude": 1.5,
+        "maxZoom": 22,
+        "minZoom": 14,
+        "maxPitch": 85,
+        "minPitch": 0,
+        "normalize": true,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      "uniform": 1,
+      "renders": 216
+    },
+    {
+      "case": "floor and preset",
+      "floor": 4,
+      "preset": "gis",
+      "progress": 1,
+      "gain": 1,
+      "status": "ready",
+      "fixtureCount": 23,
+      "camera": {
+        "width": 1280,
+        "height": 900,
+        "latitude": 37.71525,
+        "longitude": -89.22045,
+        "zoom": 18.7,
+        "bearing": 43,
+        "pitch": 45,
+        "altitude": 1.5,
+        "maxZoom": 22,
+        "minZoom": 14,
+        "maxPitch": 85,
+        "minPitch": 0,
+        "normalize": true,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      "uniform": 1,
+      "renders": 218
+    },
+    {
+      "case": "floor and preset",
+      "floor": 5,
+      "preset": "gis",
+      "progress": 1,
+      "gain": 1,
+      "status": "ready",
+      "fixtureCount": 19,
+      "camera": {
+        "width": 1280,
+        "height": 900,
+        "latitude": 37.71525,
+        "longitude": -89.22045,
+        "zoom": 18.7,
+        "bearing": 43,
+        "pitch": 45,
+        "altitude": 1.5,
+        "maxZoom": 22,
+        "minZoom": 14,
+        "maxPitch": 85,
+        "minPitch": 0,
+        "normalize": true,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      "uniform": 1,
+      "renders": 220
+    },
+    {
+      "case": "floor and preset",
+      "floor": 6,
+      "preset": "gis",
+      "progress": 1,
+      "gain": 1,
+      "status": "ready",
+      "fixtureCount": 18,
+      "camera": {
+        "width": 1280,
+        "height": 900,
+        "latitude": 37.71525,
+        "longitude": -89.22045,
+        "zoom": 18.7,
+        "bearing": 43,
+        "pitch": 45,
+        "altitude": 1.5,
+        "maxZoom": 22,
+        "minZoom": 14,
+        "maxPitch": 85,
+        "minPitch": 0,
+        "normalize": true,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      "uniform": 1,
+      "renders": 222
+    },
+    {
+      "case": "floor and preset",
+      "floor": 7,
+      "preset": "gis",
+      "progress": 1,
+      "gain": 1,
+      "status": "ready",
+      "fixtureCount": 0,
+      "camera": {
+        "width": 1280,
+        "height": 900,
+        "latitude": 37.71525,
+        "longitude": -89.22045,
+        "zoom": 18.7,
+        "bearing": 43,
+        "pitch": 45,
+        "altitude": 1.5,
+        "maxZoom": 22,
+        "minZoom": 14,
+        "maxPitch": 85,
+        "minPitch": 0,
+        "normalize": true,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      "uniform": 1,
+      "renders": 224
+    },
+    {
+      "case": "floor and preset",
+      "floor": "all",
+      "preset": "gis",
+      "progress": 1,
+      "gain": 1,
+      "status": "ready",
+      "fixtureCount": 138,
+      "camera": {
+        "width": 1280,
+        "height": 900,
+        "latitude": 37.71525,
+        "longitude": -89.22045,
+        "zoom": 18.7,
+        "bearing": 43,
+        "pitch": 45,
+        "altitude": 1.5,
+        "maxZoom": 22,
+        "minZoom": 14,
+        "maxPitch": 85,
+        "minPitch": 0,
+        "normalize": true,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      "uniform": 1,
+      "renders": 226
+    },
+    {
+      "case": "four reduced-motion cycles reuse one combined request",
+      "requests": 1
+    },
+    {
+      "case": "unmount during ramp disposes controller and canvases",
+      "passed": true
+    },
+    {
+      "case": "late data waits at ambient night, then ramps without blocking camera",
+      "pending": {
+        "progress": 1,
+        "gain": 0,
+        "status": "loading",
+        "fixtureCount": 0,
+        "camera": {
+          "width": 1280,
+          "height": 900,
+          "latitude": 37.71525,
+          "longitude": -89.22045,
+          "zoom": 19,
+          "bearing": 17,
+          "pitch": 45,
+          "altitude": 1.5,
+          "maxZoom": 22,
+          "minZoom": 14,
+          "maxPitch": 85,
+          "minPitch": 0,
+          "normalize": true,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        "uniform": 0,
+        "renders": 130
+      },
+      "loaded": {
+        "progress": 1,
+        "gain": 1,
+        "status": "ready",
+        "fixtureCount": 20,
+        "camera": {
+          "width": 1280,
+          "height": 900,
+          "latitude": 37.71525,
+          "longitude": -89.22045,
+          "zoom": 19,
+          "bearing": 61,
+          "pitch": 45,
+          "altitude": 1.5,
+          "maxZoom": 22,
+          "minZoom": 14,
+          "maxPitch": 85,
+          "minPitch": 0,
+          "normalize": true,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        "uniform": 1,
+        "renders": 132
+      },
+      "afterReleaseMs": 1589
+    },
+    {
+      "case": "failure leaves ambient night; explicit retry recovers with reduced motion",
+      "failure": {
+        "progress": 1,
+        "gain": 0,
+        "status": "error",
+        "fixtureCount": 0,
+        "camera": {
+          "width": 1280,
+          "height": 900,
+          "latitude": 37.71525,
+          "longitude": -89.22045,
+          "zoom": 19,
+          "bearing": 17,
+          "pitch": 45,
+          "altitude": 1.5,
+          "maxZoom": 22,
+          "minZoom": 14,
+          "maxPitch": 85,
+          "minPitch": 0,
+          "normalize": true,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        "uniform": 0,
+        "renders": 12
+      },
+      "recovered": {
+        "progress": 1,
+        "gain": 1,
+        "status": "ready",
+        "fixtureCount": 20,
+        "camera": {
+          "width": 1280,
+          "height": 900,
+          "latitude": 37.71525,
+          "longitude": -89.22045,
+          "zoom": 19,
+          "bearing": 17,
+          "pitch": 45,
+          "altitude": 1.5,
+          "maxZoom": 22,
+          "minZoom": 14,
+          "maxPitch": 85,
+          "minPitch": 0,
+          "normalize": true,
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        "uniform": 1,
+        "renders": 12
+      },
+      "attempts": 2
+    }
+  ],
+  "errors": [],
+  "requests": 4
+}

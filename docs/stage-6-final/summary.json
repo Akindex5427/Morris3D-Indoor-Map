@@ -1,0 +1,1414 @@
+{
+  "unit": {
+    "numTotalTests": 247,
+    "numPassedTests": 236,
+    "numFailedTests": 11,
+    "failures": [
+      "featureColors restores missing level-6 room colors from the all-floor dataset",
+      "featureColors restores missing level-2 display colors from the all-floor dataset",
+      "room_level_1 routing anchors uses the encoded centerline anchor for University honors",
+      "room_level_1 routing anchors routes University honors to its centerline anchor without crossing obstacles",
+      "room_level_1 routing anchors keeps Center for Teaching Excellence routes on the graph and stops at its anchor",
+      "room_level_3 routing anchors routes SIU Press to Lerner music studio on the level-3 centerline graph",
+      "room_level_4 centerline routing routes from level 1 to F4 geospatial resources through the matching elevator component",
+      "room_level_5 centerline routing normalizes level-5 room name variants to explicit centerline anchors",
+      "inline door anchor on room polygon properties inline anchor takes precedence over an explicit centerline anchor",
+      "geometry-derived anchor as universal fallback never returns the old room_centroid source when no anchor index is provided",
+      "geometry-derived anchor as universal fallback geometry-derived anchor routes without crossing obstacles"
+    ],
+    "newFailuresComparedWithHistorical": []
+  },
+  "browserSuites": [
+    {
+      "name": "basemaps",
+      "script": "environment-stage4-map.cjs",
+      "started": "2026-10-26T06:58:13.332Z",
+      "finished": "2026-10-26T06:58:39.748Z",
+      "exitCode": 0
+    },
+    {
+      "name": "colors",
+      "script": "color-check.cjs",
+      "started": "2026-10-26T06:23:28.543Z",
+      "finished": "2026-10-26T06:25:27.883Z",
+      "exitCode": 0
+    },
+    {
+      "name": "correspondence",
+      "script": "correspondence-check.cjs",
+      "started": "2026-10-26T06:27:14.069Z",
+      "finished": "2026-10-26T06:28:37.183Z",
+      "exitCode": 0
+    },
+    {
+      "name": "environment",
+      "script": "environment-stage4.cjs",
+      "started": "2026-10-26T07:05:50.518Z",
+      "finished": "2026-10-26T07:06:26.150Z",
+      "exitCode": 0
+    },
+    {
+      "name": "interior",
+      "script": "interior-stage5.cjs",
+      "started": "2026-10-26T06:09:56.741Z",
+      "finished": "2026-10-26T06:10:48.695Z",
+      "exitCode": 0
+    },
+    {
+      "name": "interior-app",
+      "script": "interior-stage5-app.cjs",
+      "started": "2026-10-26T06:10:48.698Z",
+      "finished": "2026-10-26T06:11:51.803Z",
+      "exitCode": 0
+    },
+    {
+      "name": "interior-resources",
+      "script": "interior-stage5-resources.cjs",
+      "started": "2026-10-26T06:11:51.806Z",
+      "finished": "2026-10-26T06:12:08.267Z",
+      "exitCode": 0
+    },
+    {
+      "name": "label-backgrounds",
+      "script": "route-label-refinement.cjs",
+      "started": "2026-10-26T06:06:09.148Z",
+      "finished": "2026-10-26T06:06:32.098Z",
+      "exitCode": 0
+    },
+    {
+      "name": "label-floors",
+      "script": "route-label-stage3-fixture.cjs",
+      "started": "2026-10-26T06:06:32.119Z",
+      "finished": "2026-10-26T06:06:49.557Z",
+      "exitCode": 0
+    },
+    {
+      "name": "label-routes",
+      "script": "route-label-stage3.cjs",
+      "started": "2026-10-26T06:06:49.575Z",
+      "finished": "2026-10-26T06:07:45.683Z",
+      "exitCode": 0
+    },
+    {
+      "name": "label-wheel",
+      "script": "route-label-wheel.cjs",
+      "started": "2026-10-26T06:07:45.699Z",
+      "finished": "2026-10-26T06:08:14.098Z",
+      "exitCode": 0
+    },
+    {
+      "name": "labels",
+      "script": "route-label-refinement.cjs",
+      "started": "2026-10-26T06:05:39.681Z",
+      "finished": "2026-10-26T06:06:09.145Z",
+      "exitCode": 0
+    },
+    {
+      "name": "navigation",
+      "script": "navigation-check.cjs",
+      "started": "2026-10-26T06:28:37.186Z",
+      "finished": "2026-10-26T06:29:44.595Z",
+      "exitCode": 0
+    },
+    {
+      "name": "search",
+      "script": "search-check.cjs",
+      "started": "2026-10-26T06:25:27.887Z",
+      "finished": "2026-10-26T06:27:14.063Z",
+      "exitCode": 0
+    }
+  ],
+  "changedApplicationOrDataFiles": [
+    "src/utils/mapEnvironment.js"
+  ],
+  "unchangedGeoJSONFiles": 51,
+  "cinematicConditions": {
+    "date": "2026-10-26T06:58:45.585Z",
+    "cpu": "AMD Ryzen 9 7940HS w/ Radeon 780M Graphics     ",
+    "logicalCPUs": 16,
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "browser": "155.0.8059.86"
+  },
+  "renderers": [
+    "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 Laptop GPU (0x000028E0) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  ],
+  "cinematic": [
+    {
+      "name": "route-recalculation-2",
+      "runs": 3,
+      "elapsedMs": {
+        "median": 1040.7999999970198,
+        "min": 1036.5,
+        "max": 1054.199999999255
+      },
+      "p50": {
+        "median": 14.200000000004366,
+        "min": 14.200000000004366,
+        "max": 14.200000000004366
+      },
+      "p95": {
+        "median": 14.900000000001455,
+        "min": 14.799999999995634,
+        "max": 15
+      },
+      "p99": {
+        "median": 71.29999999999563,
+        "min": 71.19999999999709,
+        "max": 85.89999999999418
+      },
+      "drawCalls": {
+        "median": 908,
+        "min": 223,
+        "max": 4539
+      },
+      "drawCallsPerDrawnFrame": {
+        "median": 44.6,
+        "min": 41.27272727272727,
+        "max": 65.78260869565217
+      },
+      "rootCommits": {
+        "median": 8,
+        "min": 5,
+        "max": 75
+      },
+      "rootCommitsPerSecond": {
+        "median": 7.718282682103232,
+        "min": 4.803996925455724,
+        "max": 71.14399544683457
+      },
+      "blendEnabledDrawCalls": {
+        "median": 620,
+        "min": 203,
+        "max": 3043
+      }
+    },
+    {
+      "name": "F1-night-idle",
+      "runs": 3,
+      "elapsedMs": {
+        "median": 1506.9000000022352,
+        "min": 1506.6000000014901,
+        "max": 1516.1000000014901
+      },
+      "p50": {
+        "median": 14.200000000000728,
+        "min": 14.200000000000728,
+        "max": 14.200000000000728
+      },
+      "p95": {
+        "median": 14.799999999999272,
+        "min": 14.799999999999272,
+        "max": 14.899999999999636
+      },
+      "p99": {
+        "median": 15,
+        "min": 14.899999999999636,
+        "max": 17.700000000000728
+      },
+      "drawCalls": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "drawCallsPerDrawnFrame": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "rootCommits": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "rootCommitsPerSecond": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      },
+      "blendEnabledDrawCalls": {
+        "median": 0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "name": "F-ALL-gis-preset",
+      "runs": 3,
+      "elapsedMs": {
+        "median": 921.4000000022352,
+        "min": 915.6999999992549,
+        "max": 924.1999999992549
+      },
+      "p50": {
+        "median": 14.200000000004366,
+        "min": 14.200000000004366,
+        "max": 14.200000000004366
+      },
+      "p95": {
+        "median": 14.700000000004366,
+        "min": 14.69999999999709,
+        "max": 14.799999999995634
+      },
+      "p99": {
+        "median": 14.900000000001455,
+        "min": 14.900000000001455,
+        "max": 28.5
+      },
+      "drawCalls": {
+        "median": 1148,
+        "min": 1092,
+        "max": 1148
+      },
+      "drawCallsPerDrawnFrame": {
+        "median": 28,
+        "min": 28,
+        "max": 28
+      },
+      "rootCommits": {
+        "median": 41,
+        "min": 40,
+        "max": 41
+      },
+      "rootCommitsPerSecond": {
+        "median": 44.497503798459455,
+        "min": 43.28067517856768,
+        "max": 44.7744894616505
+      },
+      "blendEnabledDrawCalls": {
+        "median": 1148,
+        "min": 1092,
+        "max": 1148
+      }
+    },
+    {
+      "name": "route-recalculation-1",
+      "runs": 3,
+      "elapsedMs": {
+        "median": 1052.5999999977648,
+        "min": 1048.2999999970198,
+        "max": 1054.3999999985099
+      },
+      "p50": {
+        "median": 14.200000000004366,
+        "min": 14.200000000004366,
+        "max": 14.299999999995634
+      },
+      "p95": {
+        "median": 14.89999999999418,
+        "min": 14.599999999998545,
+        "max": 28.30000000000291
+      },
+      "p99": {
+        "median": 99.80000000000291,
+        "min": 99.59999999999854,
+        "max": 227.79999999999563
+      },
+      "drawCalls": {
+        "median": 4284,
+        "min": 575,
+        "max": 4513
+      },
+      "drawCallsPerDrawnFrame": {
+        "median": 66.9375,
+        "min": 41.07142857142857,
+        "max": 67.35820895522389
+      },
+      "rootCommits": {
+        "median": 67,
+        "min": 6,
+        "max": 70
+      },
+      "rootCommitsPerSecond": {
+        "median": 63.543247344551105,
+        "min": 5.723552418217168,
+        "max": 66.501995059993
+      },
+      "blendEnabledDrawCalls": {
+        "median": 2750,
+        "min": 407,
+        "max": 2911
+      }
+    },
+    {
+      "name": "route-recalculation-3",
+      "runs": 3,
+      "elapsedMs": {
+        "median": 1053.8999999985099,
+        "min": 1048,
+        "max": 1123.5
+      },
+      "p50": {
+        "median": 14.299999999995634,
+        "min": 14.200000000004366,
+        "max": 14.299999999995634
+      },
+      "p95": {
+        "median": 14.80000000000291,
+        "min": 14.69999999999709,
+        "max": 14.900000000001455
+      },
+      "p99": {
+        "median": 85.40000000000146,
+        "min": 71.09999999999854,
+        "max": 85.5
+      },
+      "drawCalls": {
+        "median": 223,
+        "min": 204,
+        "max": 877
+      },
+      "drawCallsPerDrawnFrame": {
+        "median": 40.8,
+        "min": 36.541666666666664,
+        "max": 44.6
+      },
+      "rootCommits": {
+        "median": 5,
+        "min": 5,
+        "max": 9
+      },
+      "rootCommitsPerSecond": {
+        "median": 4.744283138824433,
+        "min": 4.450378282153983,
+        "max": 8.587786259541986
+      },
+      "blendEnabledDrawCalls": {
+        "median": 203,
+        "min": 184,
+        "max": 577
+      }
+    },
+    {
+      "name": "F1-sunset-with-wheel",
+      "runs": 3,
+      "elapsedMs": {
+        "median": 9278.099999997765,
+        "min": 9267.60000000149,
+        "max": 9280
+      },
+      "p50": {
+        "median": 14.200000000000728,
+        "min": 14.200000000000728,
+        "max": 14.299999999999272
+      },
+      "p95": {
+        "median": 14.899999999999636,
+        "min": 14.899999999999636,
+        "max": 15.399999999999636
+      },
+      "p99": {
+        "median": 28.5,
+        "min": 16.200000000000728,
+        "max": 28.600000000000364
+      },
+      "drawCalls": {
+        "median": 40318,
+        "min": 39799,
+        "max": 40625
+      },
+      "drawCallsPerDrawnFrame": {
+        "median": 64.60876623376623,
+        "min": 62.898595943837755,
+        "max": 65.20866773675762
+      },
+      "rootCommits": {
+        "median": 544,
+        "min": 536,
+        "max": 561
+      },
+      "rootCommitsPerSecond": {
+        "median": 58.62068965517241,
+        "min": 57.770448691017464,
+        "max": 60.53347144890908
+      },
+      "blendEnabledDrawCalls": {
+        "median": 29962,
+        "min": 29715,
+        "max": 30273
+      }
+    },
+    {
+      "name": "F-ALL-dawn-with-wheel",
+      "runs": 3,
+      "elapsedMs": {
+        "median": 8061.199999999255,
+        "min": 8061.099999997765,
+        "max": 8070.599999997765
+      },
+      "p50": {
+        "median": 14.299999999995634,
+        "min": 14.200000000004366,
+        "max": 14.299999999995634
+      },
+      "p95": {
+        "median": 15,
+        "min": 14.700000000004366,
+        "max": 28.39999999999418
+      },
+      "p99": {
+        "median": 28.60000000000582,
+        "min": 17.200000000004366,
+        "max": 28.799999999995634
+      },
+      "drawCalls": {
+        "median": 55372,
+        "min": 54445,
+        "max": 58095
+      },
+      "drawCallsPerDrawnFrame": {
+        "median": 102.34022556390977,
+        "min": 101.78676470588235,
+        "max": 103.55614973262033
+      },
+      "rootCommits": {
+        "median": 548,
+        "min": 534,
+        "max": 564
+      },
+      "rootCommitsPerSecond": {
+        "median": 67.9799533568266,
+        "min": 66.16608430601788,
+        "max": 69.9656374440407
+      },
+      "blendEnabledDrawCalls": {
+        "median": 45348,
+        "min": 44607,
+        "max": 47637
+      }
+    },
+    {
+      "name": "F-ALL-sunset-with-wheel",
+      "runs": 3,
+      "elapsedMs": {
+        "median": 9285,
+        "min": 9279.5,
+        "max": 9288.89999999851
+      },
+      "p50": {
+        "median": 14.200000000004366,
+        "min": 14.200000000004366,
+        "max": 14.200000000004366
+      },
+      "p95": {
+        "median": 14.900000000001455,
+        "min": 14.799999999995634,
+        "max": 28.5
+      },
+      "p99": {
+        "median": 28.599999999998545,
+        "min": 24.799999999995634,
+        "max": 42.79999999999927
+      },
+      "drawCalls": {
+        "median": 56697,
+        "min": 51674,
+        "max": 58942
+      },
+      "drawCallsPerDrawnFrame": {
+        "median": 90.7152,
+        "min": 88.18088737201366,
+        "max": 91.80996884735202
+      },
+      "rootCommits": {
+        "median": 544,
+        "min": 505,
+        "max": 561
+      },
+      "rootCommitsPerSecond": {
+        "median": 58.56452324818733,
+        "min": 54.42103561614311,
+        "max": 60.42003231017771
+      },
+      "blendEnabledDrawCalls": {
+        "median": 46257,
+        "min": 42264,
+        "max": 48224
+      }
+    },
+    {
+      "name": "route-calculation-first",
+      "runs": 3,
+      "elapsedMs": {
+        "median": 1256.5,
+        "min": 1245,
+        "max": 1261.699999999255
+      },
+      "p50": {
+        "median": 14.30000000000291,
+        "min": 14.299999999995634,
+        "max": 14.5
+      },
+      "p95": {
+        "median": 57,
+        "min": 42.700000000004366,
+        "max": 968
+      },
+      "p99": {
+        "median": 227.90000000000146,
+        "min": 213.60000000000582,
+        "max": 968
+      },
+      "drawCalls": {
+        "median": 5020,
+        "min": 178,
+        "max": 6086
+      },
+      "drawCallsPerDrawnFrame": {
+        "median": 110.65454545454546,
+        "min": 89,
+        "max": 114.0909090909091
+      },
+      "rootCommits": {
+        "median": 50,
+        "min": 6,
+        "max": 58
+      },
+      "rootCommitsPerSecond": {
+        "median": 39.79307600477517,
+        "min": 4.819277108433735,
+        "max": 45.969723389105376
+      },
+      "blendEnabledDrawCalls": {
+        "median": 3614,
+        "min": 137,
+        "max": 4391
+      }
+    },
+    {
+      "name": "F1-dawn-with-wheel",
+      "runs": 3,
+      "elapsedMs": {
+        "median": 8072.900000002235,
+        "min": 8070.599999997765,
+        "max": 8077.5
+      },
+      "p50": {
+        "median": 14.200000000000728,
+        "min": 14.200000000000728,
+        "max": 14.299999999999272
+      },
+      "p95": {
+        "median": 15.299999999999272,
+        "min": 14.900000000001455,
+        "max": 15.299999999999272
+      },
+      "p99": {
+        "median": 28.5,
+        "min": 28.5,
+        "max": 28.600000000000364
+      },
+      "drawCalls": {
+        "median": 39826,
+        "min": 38901,
+        "max": 40217
+      },
+      "drawCallsPerDrawnFrame": {
+        "median": 73.2095588235294,
+        "min": 72.30669144981412,
+        "max": 73.38868613138686
+      },
+      "rootCommits": {
+        "median": 545,
+        "min": 538,
+        "max": 549
+      },
+      "rootCommitsPerSecond": {
+        "median": 67.52905608011189,
+        "min": 66.6047663262148,
+        "max": 68.00530168834595
+      },
+      "blendEnabledDrawCalls": {
+        "median": 29724,
+        "min": 28897,
+        "max": 30007
+      }
+    },
+    {
+      "name": "route-preview-during-sunset",
+      "runs": 3,
+      "elapsedMs": {
+        "median": 9317.599999997765,
+        "min": 9291.800000000745,
+        "max": 10009.400000002235
+      },
+      "p50": {
+        "median": 14.200000000004366,
+        "min": 14.200000000004366,
+        "max": 14.200000000004366
+      },
+      "p95": {
+        "median": 14.89999999999418,
+        "min": 14.80000000000291,
+        "max": 15
+      },
+      "p99": {
+        "median": 16.80000000000291,
+        "min": 16,
+        "max": 17.10000000000582
+      },
+      "drawCalls": {
+        "median": 37343,
+        "min": 35156,
+        "max": 37534
+      },
+      "drawCallsPerDrawnFrame": {
+        "median": 57.45076923076923,
+        "min": 54.08615384615385,
+        "max": 57.744615384615386
+      },
+      "rootCommits": {
+        "median": 658,
+        "min": 657,
+        "max": 658
+      },
+      "rootCommitsPerSecond": {
+        "median": 70.5117197561773,
+        "min": 65.73820608626421,
+        "max": 70.81512731655302
+      },
+      "blendEnabledDrawCalls": {
+        "median": 26239,
+        "min": 25849,
+        "max": 26327
+      }
+    }
+  ],
+  "memory": [
+    {
+      "run": 1,
+      "cycles": 10,
+      "startHeapMiB": 42.73924255371094,
+      "endHeapMiB": 43.183815002441406,
+      "lastFiveGrowthMiB": -0.08678054809570312,
+      "lightRequests": 1,
+      "resourceLiveCounts": {
+        "Buffer": [
+          120
+        ],
+        "Texture": [
+          15
+        ],
+        "Program": [
+          48
+        ],
+        "Framebuffer": [
+          3
+        ],
+        "Renderbuffer": [
+          3
+        ],
+        "VertexArray": [
+          29
+        ]
+      },
+      "resourceCreationsDuringCycles": {
+        "Buffer": 1500,
+        "Texture": 120,
+        "Program": 0,
+        "Framebuffer": 0,
+        "Renderbuffer": 0,
+        "VertexArray": 360
+      }
+    },
+    {
+      "run": 2,
+      "cycles": 10,
+      "startHeapMiB": 42.72962188720703,
+      "endHeapMiB": 43.54580307006836,
+      "lastFiveGrowthMiB": 0.5135536193847656,
+      "lightRequests": 1,
+      "resourceLiveCounts": {
+        "Buffer": [
+          120
+        ],
+        "Texture": [
+          15
+        ],
+        "Program": [
+          48
+        ],
+        "Framebuffer": [
+          3
+        ],
+        "Renderbuffer": [
+          3
+        ],
+        "VertexArray": [
+          29
+        ]
+      },
+      "resourceCreationsDuringCycles": {
+        "Buffer": 1500,
+        "Texture": 120,
+        "Program": 0,
+        "Framebuffer": 0,
+        "Renderbuffer": 0,
+        "VertexArray": 360
+      }
+    },
+    {
+      "run": 3,
+      "cycles": 10,
+      "startHeapMiB": 41.77680587768555,
+      "endHeapMiB": 42.44340896606445,
+      "lastFiveGrowthMiB": 0.4795875549316406,
+      "lightRequests": 1,
+      "resourceLiveCounts": {
+        "Buffer": [
+          120
+        ],
+        "Texture": [
+          15
+        ],
+        "Program": [
+          48
+        ],
+        "Framebuffer": [
+          3
+        ],
+        "Renderbuffer": [
+          3
+        ],
+        "VertexArray": [
+          29
+        ]
+      },
+      "resourceCreationsDuringCycles": {
+        "Buffer": 1500,
+        "Texture": 120,
+        "Program": 0,
+        "Framebuffer": 0,
+        "Renderbuffer": 0,
+        "VertexArray": 360
+      }
+    }
+  ],
+  "allocationComparison": [
+    {
+      "name": "F1-sunset-with-wheel",
+      "beforeP95": 14.899999999999636,
+      "afterP95": 14.899999999999636,
+      "beforeCreated": {
+        "Buffer": 36213,
+        "Texture": 2392,
+        "Program": 2,
+        "Framebuffer": 2,
+        "Renderbuffer": 2,
+        "VertexArray": 8327
+      },
+      "afterCreated": {
+        "Buffer": 18746,
+        "Texture": 1240,
+        "Program": 2,
+        "Framebuffer": 2,
+        "Renderbuffer": 2,
+        "VertexArray": 4336
+      }
+    },
+    {
+      "name": "F1-night-idle",
+      "beforeP95": 14.799999999999272,
+      "afterP95": 14.799999999999272,
+      "beforeCreated": {
+        "Buffer": 0,
+        "Texture": 0,
+        "Program": 0,
+        "Framebuffer": 0,
+        "Renderbuffer": 0,
+        "VertexArray": 0
+      },
+      "afterCreated": {
+        "Buffer": 0,
+        "Texture": 0,
+        "Program": 0,
+        "Framebuffer": 0,
+        "Renderbuffer": 0,
+        "VertexArray": 0
+      }
+    },
+    {
+      "name": "F1-dawn-with-wheel",
+      "beforeP95": 14.899999999997817,
+      "afterP95": 15.299999999999272,
+      "beforeCreated": {
+        "Buffer": 36823,
+        "Texture": 2430,
+        "Program": 0,
+        "Framebuffer": 0,
+        "Renderbuffer": 0,
+        "VertexArray": 8483
+      },
+      "afterCreated": {
+        "Buffer": 18637,
+        "Texture": 1230,
+        "Program": 0,
+        "Framebuffer": 0,
+        "Renderbuffer": 0,
+        "VertexArray": 4329
+      }
+    },
+    {
+      "name": "F-ALL-sunset-with-wheel",
+      "beforeP95": 16.299999999999272,
+      "afterP95": 14.900000000001455,
+      "beforeCreated": {
+        "Buffer": 34157,
+        "Texture": 2253,
+        "Program": 0,
+        "Framebuffer": 0,
+        "Renderbuffer": 0,
+        "VertexArray": 7900
+      },
+      "afterCreated": {
+        "Buffer": 19012,
+        "Texture": 1254,
+        "Program": 0,
+        "Framebuffer": 0,
+        "Renderbuffer": 0,
+        "VertexArray": 4297
+      }
+    },
+    {
+      "name": "F-ALL-gis-preset",
+      "beforeP95": 14.80000000000291,
+      "afterP95": 14.700000000004366,
+      "beforeCreated": {
+        "Buffer": 0,
+        "Texture": 0,
+        "Program": 0,
+        "Framebuffer": 0,
+        "Renderbuffer": 0,
+        "VertexArray": 0
+      },
+      "afterCreated": {
+        "Buffer": 0,
+        "Texture": 0,
+        "Program": 0,
+        "Framebuffer": 0,
+        "Renderbuffer": 0,
+        "VertexArray": 0
+      }
+    },
+    {
+      "name": "F-ALL-dawn-with-wheel",
+      "beforeP95": 28.400000000001455,
+      "afterP95": 15,
+      "beforeCreated": {
+        "Buffer": 34233,
+        "Texture": 2259,
+        "Program": 0,
+        "Framebuffer": 0,
+        "Renderbuffer": 0,
+        "VertexArray": 7932
+      },
+      "afterCreated": {
+        "Buffer": 18791,
+        "Texture": 1239,
+        "Program": 0,
+        "Framebuffer": 0,
+        "Renderbuffer": 0,
+        "VertexArray": 4331
+      }
+    },
+    {
+      "name": "route-calculation-first",
+      "beforeP95": 28.19999999999709,
+      "afterP95": 57,
+      "beforeCreated": {
+        "Buffer": 248,
+        "Texture": 18,
+        "Program": 5,
+        "Framebuffer": 1,
+        "Renderbuffer": 1,
+        "VertexArray": 59
+      },
+      "afterCreated": {
+        "Buffer": 248,
+        "Texture": 18,
+        "Program": 5,
+        "Framebuffer": 1,
+        "Renderbuffer": 1,
+        "VertexArray": 59
+      }
+    },
+    {
+      "name": "route-preview-during-sunset",
+      "beforeP95": 14.80000000000291,
+      "afterP95": 14.89999999999418,
+      "beforeCreated": {
+        "Buffer": 14268,
+        "Texture": 1140,
+        "Program": 0,
+        "Framebuffer": 0,
+        "Renderbuffer": 0,
+        "VertexArray": 3386
+      },
+      "afterCreated": {
+        "Buffer": 7293,
+        "Texture": 582,
+        "Program": 0,
+        "Framebuffer": 0,
+        "Renderbuffer": 0,
+        "VertexArray": 1712
+      }
+    },
+    {
+      "name": "route-recalculation-1",
+      "beforeP95": 14.900000000001455,
+      "afterP95": 14.89999999999418,
+      "beforeCreated": {
+        "Buffer": 67,
+        "Texture": 4,
+        "Program": 5,
+        "Framebuffer": 0,
+        "Renderbuffer": 0,
+        "VertexArray": 13
+      },
+      "afterCreated": {
+        "Buffer": 67,
+        "Texture": 4,
+        "Program": 5,
+        "Framebuffer": 0,
+        "Renderbuffer": 0,
+        "VertexArray": 13
+      }
+    },
+    {
+      "name": "route-recalculation-2",
+      "beforeP95": 14.900000000001455,
+      "afterP95": 14.900000000001455,
+      "beforeCreated": {
+        "Buffer": 67,
+        "Texture": 4,
+        "Program": 5,
+        "Framebuffer": 0,
+        "Renderbuffer": 0,
+        "VertexArray": 13
+      },
+      "afterCreated": {
+        "Buffer": 67,
+        "Texture": 4,
+        "Program": 5,
+        "Framebuffer": 0,
+        "Renderbuffer": 0,
+        "VertexArray": 13
+      }
+    },
+    {
+      "name": "route-recalculation-3",
+      "beforeP95": 17.299999999995634,
+      "afterP95": 14.80000000000291,
+      "beforeCreated": {
+        "Buffer": 67,
+        "Texture": 4,
+        "Program": 5,
+        "Framebuffer": 0,
+        "Renderbuffer": 0,
+        "VertexArray": 13
+      },
+      "afterCreated": {
+        "Buffer": 67,
+        "Texture": 4,
+        "Program": 5,
+        "Framebuffer": 0,
+        "Renderbuffer": 0,
+        "VertexArray": 13
+      }
+    }
+  ],
+  "workloadFailures": [],
+  "workload": [
+    {
+      "name": "initial-F1",
+      "runs": 3,
+      "current": {
+        "elapsedMs": 6470.5,
+        "p50FrameMs": 14.299999999999272,
+        "p95FrameMs": 57,
+        "p99FrameMs": 412.9000000000001,
+        "drawCalls": 1809,
+        "deckDrawCalls": 32,
+        "wallMeshReplacements": 0,
+        "heapMB": 54.531131744384766
+      },
+      "historical": {
+        "elapsedMs": 5820.600000023842,
+        "p50FrameMs": 6.099999999999454,
+        "p95FrameMs": 24.100000000000136,
+        "p99FrameMs": 212.0999999999999,
+        "drawCalls": 588,
+        "deckDrawCalls": 98,
+        "wallMeshReplacements": 0,
+        "heapMB": 49.38046646118164
+      }
+    },
+    {
+      "name": "F1-camera",
+      "runs": 3,
+      "current": {
+        "elapsedMs": 2000.300000000745,
+        "p50FrameMs": 14.200000000000728,
+        "p95FrameMs": 14.899999999999636,
+        "p99FrameMs": 28.300000000000182,
+        "drawCalls": 9102,
+        "deckDrawCalls": 251,
+        "wallMeshReplacements": 0,
+        "heapMB": 51.27100372314453
+      },
+      "historical": {
+        "elapsedMs": 1878.800000011921,
+        "p50FrameMs": 6.099999999999454,
+        "p95FrameMs": 7,
+        "p99FrameMs": 18.199999999999818,
+        "drawCalls": 20911,
+        "deckDrawCalls": 366,
+        "wallMeshReplacements": 0,
+        "heapMB": 53.218994140625
+      }
+    },
+    {
+      "name": "F-ALL-load",
+      "runs": 3,
+      "current": {
+        "elapsedMs": 2633.89999999851,
+        "p50FrameMs": 14.200000000000728,
+        "p95FrameMs": 15,
+        "p99FrameMs": 57.600000000000364,
+        "drawCalls": 97,
+        "deckDrawCalls": 97,
+        "wallMeshReplacements": 0,
+        "heapMB": 52.441951751708984
+      },
+      "historical": {
+        "elapsedMs": 2481.100000023842,
+        "p50FrameMs": 6.099999999998545,
+        "p95FrameMs": 6.200000000000728,
+        "p99FrameMs": 18.199999999999818,
+        "drawCalls": 58,
+        "deckDrawCalls": 58,
+        "wallMeshReplacements": 0,
+        "heapMB": 75.95718383789062
+      }
+    },
+    {
+      "name": "F-ALL-camera",
+      "runs": 3,
+      "current": {
+        "elapsedMs": 2149.900000002235,
+        "p50FrameMs": 14.200000000000728,
+        "p95FrameMs": 15.100000000000364,
+        "p99FrameMs": 28.5,
+        "drawCalls": 22877,
+        "deckDrawCalls": 1131,
+        "wallMeshReplacements": 0,
+        "heapMB": 66.54574584960938
+      },
+      "historical": {
+        "elapsedMs": 1960.5,
+        "p50FrameMs": 6.099999999998545,
+        "p95FrameMs": 9.800000000001091,
+        "p99FrameMs": 12.100000000000364,
+        "drawCalls": 53456,
+        "deckDrawCalls": 1556,
+        "wallMeshReplacements": 0,
+        "heapMB": 91.19392776489258
+      }
+    },
+    {
+      "name": "floor-switch-all-eight",
+      "runs": 3,
+      "current": {
+        "elapsedMs": 2493.89999999851,
+        "p50FrameMs": 14.299999999999272,
+        "p95FrameMs": 85.39999999999964,
+        "p99FrameMs": 157.20000000000073,
+        "drawCalls": 244,
+        "deckDrawCalls": 244,
+        "wallMeshReplacements": 0,
+        "heapMB": 97.72017288208008
+      },
+      "historical": {
+        "elapsedMs": 2425.5,
+        "p50FrameMs": 6.100000000000364,
+        "p95FrameMs": 16.899999999999636,
+        "p99FrameMs": 121.10000000000036,
+        "drawCalls": 52,
+        "deckDrawCalls": 52,
+        "wallMeshReplacements": 0,
+        "heapMB": 49.41823959350586
+      }
+    },
+    {
+      "name": "search",
+      "runs": 3,
+      "current": {
+        "elapsedMs": 100,
+        "p50FrameMs": 14.299999999999272,
+        "p95FrameMs": 14.399999999999636,
+        "p99FrameMs": 14.399999999999636,
+        "drawCalls": 0,
+        "deckDrawCalls": 0,
+        "wallMeshReplacements": 0,
+        "heapMB": 101.82172775268555
+      },
+      "historical": {
+        "elapsedMs": 112.39999997615814,
+        "p50FrameMs": 6.100000000000364,
+        "p95FrameMs": 18.200000000000728,
+        "p99FrameMs": 18.200000000000728,
+        "drawCalls": 0,
+        "deckDrawCalls": 0,
+        "wallMeshReplacements": 0,
+        "heapMB": 53.53007888793945
+      }
+    },
+    {
+      "name": "above-below-first",
+      "runs": 3,
+      "current": {
+        "elapsedMs": 680.7000000029802,
+        "p50FrameMs": 14.200000000000728,
+        "p95FrameMs": 18.19999999999891,
+        "p99FrameMs": 327.59999999999854,
+        "drawCalls": 471,
+        "deckDrawCalls": 17,
+        "wallMeshReplacements": 0,
+        "heapMB": 86.55329895019531
+      },
+      "historical": {
+        "elapsedMs": 569.5,
+        "p50FrameMs": 6.099999999998545,
+        "p95FrameMs": 10,
+        "p99FrameMs": 254.59999999999854,
+        "drawCalls": 494,
+        "deckDrawCalls": 17,
+        "wallMeshReplacements": 0,
+        "heapMB": 74.7296142578125
+      }
+    },
+    {
+      "name": "above-below-cached",
+      "runs": 3,
+      "current": {
+        "elapsedMs": 85.40000000223517,
+        "p50FrameMs": 14.200000000000728,
+        "p95FrameMs": 14.299999999999272,
+        "p99FrameMs": 14.299999999999272,
+        "drawCalls": 17,
+        "deckDrawCalls": 17,
+        "wallMeshReplacements": 0,
+        "heapMB": 88.58840560913086
+      },
+      "historical": {
+        "elapsedMs": 51,
+        "p50FrameMs": 6.099999999998545,
+        "p95FrameMs": 14,
+        "p99FrameMs": 14,
+        "drawCalls": 12,
+        "deckDrawCalls": 12,
+        "wallMeshReplacements": 0,
+        "heapMB": 76.74933242797852
+      }
+    },
+    {
+      "name": "night-architectural-load",
+      "runs": 3,
+      "current": {
+        "elapsedMs": 1809.699999999255,
+        "p50FrameMs": 14.200000000000728,
+        "p95FrameMs": 14.5,
+        "p99FrameMs": 99.59999999999854,
+        "drawCalls": 1935,
+        "deckDrawCalls": 256,
+        "wallMeshReplacements": 0,
+        "heapMB": 122.3963394165039
+      },
+      "historical": {
+        "elapsedMs": 2628.600000023842,
+        "p50FrameMs": 6.099999999998545,
+        "p95FrameMs": 9.099999999998545,
+        "p99FrameMs": 30.399999999997817,
+        "drawCalls": 3063,
+        "deckDrawCalls": 53,
+        "wallMeshReplacements": 0,
+        "heapMB": 102.65428161621094
+      }
+    },
+    {
+      "name": "night-architectural-camera",
+      "runs": 3,
+      "current": {
+        "elapsedMs": 1933.4000000022352,
+        "p50FrameMs": 14.200000000000728,
+        "p95FrameMs": 14.799999999999272,
+        "p99FrameMs": 15,
+        "drawCalls": 12079,
+        "deckDrawCalls": 1378,
+        "wallMeshReplacements": 0,
+        "heapMB": 114.60527038574219
+      },
+      "historical": {
+        "elapsedMs": 1757.300000011921,
+        "p50FrameMs": 6.099999999998545,
+        "p95FrameMs": 6.200000000000728,
+        "p99FrameMs": 11.200000000000728,
+        "drawCalls": 15017,
+        "deckDrawCalls": 2134,
+        "wallMeshReplacements": 0,
+        "heapMB": 102.54488754272461
+      }
+    },
+    {
+      "name": "night-gis-load",
+      "runs": 3,
+      "current": {
+        "elapsedMs": 1431,
+        "p50FrameMs": 14.200000000000728,
+        "p95FrameMs": 14.80000000000291,
+        "p99FrameMs": 15,
+        "drawCalls": 56,
+        "deckDrawCalls": 56,
+        "wallMeshReplacements": 0,
+        "heapMB": 117.57843399047852
+      },
+      "historical": {
+        "elapsedMs": 1421.5999999642372,
+        "p50FrameMs": 6.099999999998545,
+        "p95FrameMs": 6.200000000000728,
+        "p99FrameMs": 10.099999999998545,
+        "drawCalls": 2576,
+        "deckDrawCalls": 2576,
+        "wallMeshReplacements": 0,
+        "heapMB": 115.5564193725586
+      }
+    },
+    {
+      "name": "night-gis-camera",
+      "runs": 3,
+      "current": {
+        "elapsedMs": 2079.60000000149,
+        "p50FrameMs": 14.200000000000728,
+        "p95FrameMs": 14.899999999997817,
+        "p99FrameMs": 15.900000000001455,
+        "drawCalls": 25027,
+        "deckDrawCalls": 1350,
+        "wallMeshReplacements": 0,
+        "heapMB": 129.14951705932617
+      },
+      "historical": {
+        "elapsedMs": 1797.6000000238419,
+        "p50FrameMs": 6.099999999998545,
+        "p95FrameMs": 6.200000000000728,
+        "p99FrameMs": 9.799999999999272,
+        "drawCalls": 24843,
+        "deckDrawCalls": 1966,
+        "wallMeshReplacements": 0,
+        "heapMB": 121.85295486450195
+      }
+    },
+    {
+      "name": "route-plan",
+      "runs": 3,
+      "current": {
+        "elapsedMs": 2155.5,
+        "p50FrameMs": 14.200000000000728,
+        "p95FrameMs": 28.600000000002183,
+        "p99FrameMs": 626.5,
+        "drawCalls": 3511,
+        "deckDrawCalls": 1073,
+        "wallMeshReplacements": 0,
+        "heapMB": 79.97595596313477
+      },
+      "historical": {
+        "elapsedMs": 2674.199999988079,
+        "p50FrameMs": 6.099999999998545,
+        "p95FrameMs": 7.700000000000728,
+        "p99FrameMs": 54.5,
+        "drawCalls": 3417,
+        "deckDrawCalls": 431,
+        "wallMeshReplacements": 0,
+        "heapMB": 79.51728820800781
+      }
+    },
+    {
+      "name": "route-label-camera",
+      "runs": 3,
+      "current": {
+        "elapsedMs": 2019.5,
+        "p50FrameMs": 14.200000000000728,
+        "p95FrameMs": 14.899999999997817,
+        "p99FrameMs": 15.099999999998545,
+        "drawCalls": 5512,
+        "deckDrawCalls": 1919,
+        "wallMeshReplacements": 0,
+        "heapMB": 77.42554473876953
+      },
+      "historical": {
+        "elapsedMs": 1784.800000011921,
+        "p50FrameMs": 6.099999999998545,
+        "p95FrameMs": 6.200000000004366,
+        "p99FrameMs": 12.099999999998545,
+        "drawCalls": 10598,
+        "deckDrawCalls": 4297,
+        "wallMeshReplacements": 0,
+        "heapMB": 108.44412231445312
+      }
+    },
+    {
+      "name": "route-animated-preview",
+      "runs": 3,
+      "current": {
+        "elapsedMs": 4020.7999999970198,
+        "p50FrameMs": 14.200000000004366,
+        "p95FrameMs": 14.700000000004366,
+        "p99FrameMs": 28.5,
+        "drawCalls": 6809,
+        "deckDrawCalls": 6809,
+        "wallMeshReplacements": 0,
+        "heapMB": 103.79556274414062
+      },
+      "historical": {
+        "elapsedMs": 4010.699999988079,
+        "p50FrameMs": 6.099999999998545,
+        "p95FrameMs": 8.5,
+        "p99FrameMs": 18.19999999999709,
+        "drawCalls": 13508,
+        "deckDrawCalls": 13508,
+        "wallMeshReplacements": 0,
+        "heapMB": 118.8034896850586
+      }
+    }
+  ],
+  "workloadConditions": [
+    {
+      "chrome": "155.0.8059.86",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "rendering": "Headless Chrome, ANGLE d3d11, deviceScaleFactor 1",
+      "cpu": "AMD Ryzen 9 7940HS w/ Radeon 780M Graphics     "
+    },
+    {
+      "chrome": "155.0.8059.86",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "rendering": "Headless Chrome, ANGLE d3d11, deviceScaleFactor 1",
+      "cpu": "AMD Ryzen 9 7940HS w/ Radeon 780M Graphics     "
+    },
+    {
+      "chrome": "155.0.8059.86",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "rendering": "Headless Chrome, ANGLE d3d11, deviceScaleFactor 1",
+      "cpu": "AMD Ryzen 9 7940HS w/ Radeon 780M Graphics     "
+    }
+  ]
+}

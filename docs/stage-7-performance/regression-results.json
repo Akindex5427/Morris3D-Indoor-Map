@@ -1,0 +1,26 @@
+[
+  {
+    "script": "color-check.cjs",
+    "exitCode": 0,
+    "scenarios": 33,
+    "pageErrors": 0
+  },
+  {
+    "script": "correspondence-check.cjs",
+    "exitCode": 0,
+    "scenarios": 9,
+    "pageErrors": 0
+  },
+  {
+    "script": "navigation-check.cjs",
+    "exitCode": 0,
+    "scenarios": 18,
+    "pageErrors": 0
+  },
+  {
+    "script": "search-check.cjs",
+    "exitCode": 0,
+    "scenarios": 25,
+    "pageErrors": 0
+  }
+]

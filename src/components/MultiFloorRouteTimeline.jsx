@@ -7,6 +7,8 @@ import {
 } from "../hooks/useRoutePreview";
 
 const formatFloorLabel = (floor) => `F${floor}`;
+const PANEL_CAMERA_ORIENTATION = { pitch: 0, bearing: 0 };
+const EMPTY_SELECTION = [];
 
 const getConnectorLabel = (type) => {
   if (type === "elevator") return "elevator";
@@ -29,10 +31,16 @@ const floorRoleLabel = (panel) => {
 };
 
 const MultiFloorRoutePanelMap = ({
+  authoritativeFeatures,
   panel,
   roomsData,
   centerlinesData,
   lightingEnabled,
+  nightMode = false,
+  environment,
+  interiorLightActivation,
+  roomColorMode = "original",
+  nightTuning,
   translucency,
   roomWallOpacity,
   roomWallThicknessMeters,
@@ -63,17 +71,19 @@ const MultiFloorRoutePanelMap = ({
 
   useEffect(() => {
     setCameraKey((key) => key + 1);
-  }, [panel.id, layoutSignal]);
+  }, [panel.id, panel.path]);
 
   return (
     <Map3D
+      authoritativeFeatures={authoritativeFeatures}
       selectedFloor={panel.floorId}
-      selectedFloors={[]}
-      filteredRooms={[]}
+      selectedFloors={EMPTY_SELECTION}
+      filteredRooms={EMPTY_SELECTION}
       highlightedRoomId={null}
       hoveredRoomId={null}
-      colorScheme="default"
+      roomColorMode={roomColorMode}
       viewState={viewState}
+      buildingFitOrientation={PANEL_CAMERA_ORIENTATION}
       onViewStateChange={(nextViewState) =>
         setViewState({
           ...nextViewState,
@@ -82,6 +92,10 @@ const MultiFloorRoutePanelMap = ({
         })
       }
       lightingEnabled={lightingEnabled}
+      nightMode={nightMode}
+      environment={environment}
+      interiorLightActivation={interiorLightActivation}
+      nightTuning={nightTuning}
       translucency={translucency}
       roomWallOpacity={roomWallOpacity}
       roomWallThicknessMeters={roomWallThicknessMeters}
@@ -112,10 +126,16 @@ const MultiFloorRoutePanelMap = ({
 };
 
 const MultiFloorRouteTimeline = ({
+  authoritativeFeatures,
   route,
   roomsData,
   centerlinesData,
   lightingEnabled,
+  nightMode = false,
+  environment,
+  interiorLightActivation,
+  roomColorMode = "original",
+  nightTuning,
   translucency,
   roomWallOpacity,
   roomWallThicknessMeters,
@@ -126,13 +146,17 @@ const MultiFloorRouteTimeline = ({
 }) => {
   const panels = route?.visualizationPanels || [];
   const transitions = route?.visualizationTransitions || [];
-  const playbackModels = useMemo(() => {
+  const panelMetrics = useMemo(() => {
     let cumulativeMeters = 0;
-    return panels.map((panel) => {
+    return panels.map(panel => {
       const metrics = buildPathMetrics(panel.path);
       const startMeters = cumulativeMeters;
       const endMeters = cumulativeMeters + metrics.total;
       cumulativeMeters = endMeters;
+      return {panel, metrics, startMeters, endMeters};
+    });
+  }, [panels]);
+  const playbackModels = useMemo(() => panelMetrics.map(({panel, metrics, startMeters, endMeters}) => {
       const localProgress = Math.max(
         0,
         Math.min(
@@ -160,14 +184,16 @@ const MultiFloorRouteTimeline = ({
         routePreview:
           routePreview && cursorPosition
             ? {
+                isPlaying: routePreview.isPlaying,
+                isActive: routePreview.progressMeters >= startMeters && routePreview.progressMeters <= endMeters,
+                progressMeters: localProgress,
                 traveledPath: split.traveled,
                 remainingPath: split.remaining,
                 cursorPosition,
               }
             : null,
       };
-    });
-  }, [panels, routePreview]);
+    }), [panelMetrics, routePreview]);
   const playbackByPanelId = useMemo(
     () =>
       new Map(
@@ -217,10 +243,16 @@ const MultiFloorRouteTimeline = ({
                 </div>
                 <div className="route-timeline-map">
                   <MultiFloorRoutePanelMap
+                    authoritativeFeatures={authoritativeFeatures}
                     panel={panel}
                     roomsData={roomsData}
                     centerlinesData={centerlinesData}
                     lightingEnabled={lightingEnabled}
+                    nightMode={nightMode}
+                    environment={environment}
+                    interiorLightActivation={interiorLightActivation}
+                    roomColorMode={roomColorMode}
+                    nightTuning={nightTuning}
                     translucency={translucency}
                     roomWallOpacity={roomWallOpacity}
                     roomWallThicknessMeters={roomWallThicknessMeters}

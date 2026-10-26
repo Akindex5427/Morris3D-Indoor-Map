@@ -1,111 +1,62 @@
-import React, { useState } from "react";
+import React, { useEffect, useId, useMemo, useRef, useState } from "react";
+import { searchRooms } from "../utils/roomCatalog";
 
-const SearchBar = ({ rooms, onSearch, onRoomSelect }) => {
+const SearchBar = ({ catalog, onClear, onRoomSelect, onRetry }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
-
-  const handleInputChange = (e) => {
-    const value = e.target.value.toLowerCase();
-    setSearchTerm(value);
-
-    if (value.length > 0) {
-      const filtered = rooms.filter((room) => {
-        const name = room.properties?.name || room.properties?.roomname || "";
-        const type = room.properties?.tipo || room.properties?.type || "";
-        const number = room.properties?.number || "";
-
-        return (
-          name.toLowerCase().includes(value) ||
-          type.toLowerCase().includes(value) ||
-          number.toLowerCase().includes(value)
-        );
-      });
-
-      setSuggestions(filtered.slice(0, 8)); // Limit to 8 suggestions
-      setShowSuggestions(true);
-    } else {
-      setSuggestions([]);
-      setShowSuggestions(false);
-      onSearch([]);
-    }
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(0);
+  const listId = useId();
+  const rootRef = useRef(null);
+  const suggestions = useMemo(() => searchRooms(catalog.entries, searchTerm), [catalog.entries, searchTerm]);
+  useEffect(() => { setActive(0); }, [suggestions]);
+  useEffect(() => {
+    rootRef.current?.querySelector('[aria-selected="true"]')?.scrollIntoView({ block: "nearest" });
+  }, [active]);
+  const select = entry => {
+    setSearchTerm(entry.label);
+    setOpen(false);
+    onRoomSelect(entry.feature, entry.key);
   };
-
-  const handleSuggestionClick = (room) => {
-    const roomId = room.properties?.id || room.properties?.name || "";
-    const roomName =
-      room.properties?.name || room.properties?.roomname || roomId;
-    setSearchTerm(roomName);
-    setShowSuggestions(false);
-    onRoomSelect(room, roomId);
-    onSearch([roomId]);
-  };
-
-  const handleSearch = (e) => {
-    if (e.key === "Enter") {
-      const matchedRoomIds = suggestions.map(
-        (r) => r.properties?.id || r.properties?.name || ""
-      );
-      onSearch(matchedRoomIds);
-      setShowSuggestions(false);
-    }
-  };
-
-  const clearSearch = () => {
-    setSearchTerm("");
-    setSuggestions([]);
-    setShowSuggestions(false);
-    onSearch([]);
-  };
-
+  const clear = () => { setSearchTerm(""); setOpen(false); onClear(); };
+  const loading = catalog.loadedFloors.length < 8 && catalog.errors.length === 0;
   return (
-    <div className="search-bar-container">
+    <div className="search-bar-container" ref={rootRef} onBlur={event => {
+      if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
+    }}>
       <div className="search-input-wrapper">
-        <input
-          type="text"
-          placeholder="Search rooms by name, type, or number..."
-          value={searchTerm}
-          onChange={handleInputChange}
-          onKeyPress={handleSearch}
-          className="search-input"
-        />
-        {searchTerm && (
-          <button
-            className="clear-btn"
-            onClick={clearSearch}
-            aria-label="Clear search"
-          >
-            &times;
-          </button>
-        )}
+        <input type="text" role="combobox" aria-label="Search rooms on all floors"
+          aria-autocomplete="list" aria-expanded={open && suggestions.length > 0}
+          aria-controls={listId} aria-describedby={`${listId}-status`}
+          aria-activedescendant={open && suggestions[active] ? `${listId}-${active}` : undefined}
+          placeholder="Search all floors by room name or ID..." value={searchTerm}
+          onChange={event => { setSearchTerm(event.target.value); setOpen(true); if (!event.target.value) onClear(); }}
+          onFocus={() => setOpen(true)} className="search-input"
+          onKeyDown={event => {
+            if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+              event.preventDefault(); setOpen(true);
+              setActive(index => Math.max(0, Math.min(suggestions.length - 1, index + (event.key === "ArrowDown" ? 1 : -1))));
+            } else if (event.key === "Enter" && suggestions.length) {
+              event.preventDefault(); select(suggestions[open ? active : 0] || suggestions[0]);
+            } else if (event.key === "Escape") { event.preventDefault(); setOpen(false); }
+          }} />
+        {searchTerm && <button className="clear-btn" onClick={clear} aria-label="Clear search">&times;</button>}
       </div>
-
-      {showSuggestions && suggestions.length > 0 && (
-        <div className="suggestions-list">
-          {suggestions.map((room, idx) => {
-            const roomName =
-              room.properties?.name || room.properties?.roomname || "Unnamed";
-            const roomType =
-              room.properties?.tipo || room.properties?.type || "Room";
-            const roomNumber = room.properties?.number || "";
-
-            return (
-              <div
-                key={idx}
-                className="suggestion-item"
-                onClick={() => handleSuggestionClick(room)}
-              >
-                <div className="suggestion-name">{roomName}</div>
-                <div className="suggestion-meta">
-                  {roomType} {roomNumber}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
+      <div className="room-search-status" id={`${listId}-status`} role="status">
+        {catalog.errors.length > 0 ? <>Search incomplete: {catalog.errors.map(error => `F${error.floor}`).join(", ")} unavailable. <button onClick={onRetry}>Retry</button></>
+          : loading ? `Loading rooms (${catalog.loadedFloors.length}/8 floors)…`
+          : searchTerm.trim() ? `${suggestions.length} results across F0–F7` : "Search F0–F7"}
+      </div>
+      {open && suggestions.length > 0 && <div className="suggestions-list" role="listbox" id={listId} aria-label="Room search results">
+        {suggestions.map((entry, index) => <div key={entry.key} id={`${listId}-${index}`}
+          role="option" aria-selected={index === active} className="suggestion-item"
+          onMouseDown={event => event.preventDefault()} onClick={() => select(entry)}>
+          <div className="suggestion-name">{entry.label}</div>
+          <div className="suggestion-meta">F{entry.floor}{entry.floor === 0 ? " · Basement" : ""}
+            {entry.identifiers.length > 0 && ` · ${entry.identifiers[0].field} ${entry.identifiers[0].value}`}
+          </div>
+        </div>)}
+      </div>}
     </div>
   );
 };
-
 export default SearchBar;

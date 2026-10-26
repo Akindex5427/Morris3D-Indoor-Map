@@ -1,0 +1,779 @@
+{
+  "results": [
+    {
+      "case": "exact endpoint raster",
+      "floor": 0,
+      "preset": "architectural",
+      "progress": 0,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 0,
+      "preset": "architectural",
+      "progress": 1,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 0,
+      "preset": "gis",
+      "progress": 0,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 0,
+      "preset": "gis",
+      "progress": 1,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 1,
+      "preset": "architectural",
+      "progress": 0,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 1,
+      "preset": "architectural",
+      "progress": 1,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 1,
+      "preset": "gis",
+      "progress": 0,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 1,
+      "preset": "gis",
+      "progress": 1,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 2,
+      "preset": "architectural",
+      "progress": 0,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 2,
+      "preset": "architectural",
+      "progress": 1,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 2,
+      "preset": "gis",
+      "progress": 0,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 2,
+      "preset": "gis",
+      "progress": 1,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 3,
+      "preset": "architectural",
+      "progress": 0,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 3,
+      "preset": "architectural",
+      "progress": 1,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 3,
+      "preset": "gis",
+      "progress": 0,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 3,
+      "preset": "gis",
+      "progress": 1,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 4,
+      "preset": "architectural",
+      "progress": 0,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 4,
+      "preset": "architectural",
+      "progress": 1,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 4,
+      "preset": "gis",
+      "progress": 0,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 4,
+      "preset": "gis",
+      "progress": 1,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 5,
+      "preset": "architectural",
+      "progress": 0,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 5,
+      "preset": "architectural",
+      "progress": 1,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 5,
+      "preset": "gis",
+      "progress": 0,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 5,
+      "preset": "gis",
+      "progress": 1,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 6,
+      "preset": "architectural",
+      "progress": 0,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 6,
+      "preset": "architectural",
+      "progress": 1,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 6,
+      "preset": "gis",
+      "progress": 0,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 6,
+      "preset": "gis",
+      "progress": 1,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 7,
+      "preset": "architectural",
+      "progress": 0,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 7,
+      "preset": "architectural",
+      "progress": 1,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 7,
+      "preset": "gis",
+      "progress": 0,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": 7,
+      "preset": "gis",
+      "progress": 1,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": "all",
+      "preset": "architectural",
+      "progress": 0,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": "all",
+      "preset": "architectural",
+      "progress": 1,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": "all",
+      "preset": "gis",
+      "progress": 0,
+      "identical": true
+    },
+    {
+      "case": "exact endpoint raster",
+      "floor": "all",
+      "preset": "gis",
+      "progress": 1,
+      "identical": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "architectural",
+      "progress": 0,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "architectural",
+      "progress": 0.1,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "architectural",
+      "progress": 0.2,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "architectural",
+      "progress": 0.28,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "architectural",
+      "progress": 0.32,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "architectural",
+      "progress": 0.36,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "architectural",
+      "progress": 0.4,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "architectural",
+      "progress": 0.6,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "architectural",
+      "progress": 0.8,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "architectural",
+      "progress": 1,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "architectural",
+      "progress": 0.8,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "architectural",
+      "progress": 0.6,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "architectural",
+      "progress": 0.4,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "architectural",
+      "progress": 0.32,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "architectural",
+      "progress": 0.28,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "architectural",
+      "progress": 0.2,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "architectural",
+      "progress": 0.1,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "architectural",
+      "progress": 0,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "gis",
+      "progress": 0,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "gis",
+      "progress": 0.1,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "gis",
+      "progress": 0.2,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "gis",
+      "progress": 0.28,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "gis",
+      "progress": 0.32,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "gis",
+      "progress": 0.36,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "gis",
+      "progress": 0.4,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "gis",
+      "progress": 0.6,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "gis",
+      "progress": 0.8,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "gis",
+      "progress": 1,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "gis",
+      "progress": 0.8,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "gis",
+      "progress": 0.6,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "gis",
+      "progress": 0.4,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "gis",
+      "progress": 0.32,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "gis",
+      "progress": 0.28,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "gis",
+      "progress": 0.2,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "gis",
+      "progress": 0.1,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": 1,
+      "preset": "gis",
+      "progress": 0,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "architectural",
+      "progress": 0,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "architectural",
+      "progress": 0.1,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "architectural",
+      "progress": 0.2,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "architectural",
+      "progress": 0.28,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "architectural",
+      "progress": 0.32,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "architectural",
+      "progress": 0.36,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "architectural",
+      "progress": 0.4,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "architectural",
+      "progress": 0.6,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "architectural",
+      "progress": 0.8,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "architectural",
+      "progress": 1,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "architectural",
+      "progress": 0.8,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "architectural",
+      "progress": 0.6,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "architectural",
+      "progress": 0.4,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "architectural",
+      "progress": 0.32,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "architectural",
+      "progress": 0.28,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "architectural",
+      "progress": 0.2,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "architectural",
+      "progress": 0.1,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "architectural",
+      "progress": 0,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "gis",
+      "progress": 0,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "gis",
+      "progress": 0.1,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "gis",
+      "progress": 0.2,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "gis",
+      "progress": 0.28,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "gis",
+      "progress": 0.32,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "gis",
+      "progress": 0.36,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "gis",
+      "progress": 0.4,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "gis",
+      "progress": 0.6,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "gis",
+      "progress": 0.8,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "gis",
+      "progress": 1,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "gis",
+      "progress": 0.8,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "gis",
+      "progress": 0.6,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "gis",
+      "progress": 0.4,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "gis",
+      "progress": 0.32,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "gis",
+      "progress": 0.28,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "gis",
+      "progress": 0.2,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "gis",
+      "progress": 0.1,
+      "stable": true
+    },
+    {
+      "case": "forward/reverse complete surfaces",
+      "floor": "all",
+      "preset": "gis",
+      "progress": 0,
+      "stable": true
+    },
+    {
+      "case": "camera",
+      "zoom": 18.3,
+      "pitch": 0,
+      "bearing": 0
+    },
+    {
+      "case": "camera",
+      "zoom": 19,
+      "pitch": 45,
+      "bearing": 75
+    },
+    {
+      "case": "camera",
+      "zoom": 20,
+      "pitch": 65,
+      "bearing": 180
+    }
+  ],
+  "errors": []
+}

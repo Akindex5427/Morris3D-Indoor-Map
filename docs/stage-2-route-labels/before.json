@@ -1,0 +1,248 @@
+{
+  "method": "Chrome headless, SwiftShader, 1440x1000, DPR 1. Real route TextLayer cloned to an isolated Deck canvas using the same viewport dimensions; alpha>16 raster bounds, collision disabled only during measurement.",
+  "errors": [],
+  "route": [
+    {
+      "id": "route-focus-room-labels",
+      "names": [
+        "Classroom 0174",
+        "University Honors (0181)"
+      ],
+      "size": 12,
+      "units": "pixels",
+      "billboard": true
+    },
+    {
+      "id": "route-landmark-room-labels",
+      "names": [
+        "Browsing Room",
+        "Rest Room Female",
+        "Rest Room Male",
+        "Elevator",
+        "Center for Teaching Excellence (0110)"
+      ],
+      "size": 10.5,
+      "units": "pixels",
+      "billboard": true
+    }
+  ],
+  "measurements": [
+    {
+      "layer": "route-focus-room-labels",
+      "text": "Classroom 0174",
+      "zoom": 17,
+      "pitch": 0,
+      "bearing": 0,
+      "width": 92,
+      "height": 10,
+      "buildingWidth": 215.2208421677351,
+      "anchorDisplacement": 2.0037527925020957e-9,
+      "oneMeterRadiusPixels": 2.1192583857644136
+    },
+    {
+      "layer": "route-focus-room-labels",
+      "text": "Classroom 0174",
+      "zoom": 17,
+      "pitch": 45,
+      "bearing": 35,
+      "width": 92,
+      "height": 10,
+      "buildingWidth": 214.852983235227,
+      "anchorDisplacement": 2.4774734197293924,
+      "oneMeterRadiusPixels": 2.1192583857644136
+    },
+    {
+      "layer": "route-focus-room-labels",
+      "text": "Classroom 0174",
+      "zoom": 17,
+      "pitch": 65,
+      "bearing": 120,
+      "width": 92,
+      "height": 10,
+      "buildingWidth": 225.56073186398118,
+      "anchorDisplacement": 3.1728903124306385,
+      "oneMeterRadiusPixels": 2.1192583857644136
+    },
+    {
+      "layer": "route-focus-room-labels",
+      "text": "Classroom 0174",
+      "zoom": 19,
+      "pitch": 0,
+      "bearing": 0,
+      "width": 94,
+      "height": 10,
+      "buildingWidth": 860.8833686709403,
+      "anchorDisplacement": 8.09947200864138e-9,
+      "oneMeterRadiusPixels": 8.477033543057654
+    },
+    {
+      "layer": "route-focus-room-labels",
+      "text": "Classroom 0174",
+      "zoom": 19,
+      "pitch": 45,
+      "bearing": 35,
+      "width": 94,
+      "height": 10,
+      "buildingWidth": 791.2422758209548,
+      "anchorDisplacement": 9.968908507823642,
+      "oneMeterRadiusPixels": 8.477033543057654
+    },
+    {
+      "layer": "route-focus-room-labels",
+      "text": "Classroom 0174",
+      "zoom": 19,
+      "pitch": 65,
+      "bearing": 120,
+      "width": 92,
+      "height": 10,
+      "buildingWidth": 822.0398111315454,
+      "anchorDisplacement": 12.736589523384225,
+      "oneMeterRadiusPixels": 8.477033543057654
+    },
+    {
+      "layer": "route-focus-room-labels",
+      "text": "Classroom 0174",
+      "zoom": 21,
+      "pitch": 0,
+      "bearing": 0,
+      "width": 96,
+      "height": 11,
+      "buildingWidth": 3443.5334746837616,
+      "anchorDisplacement": 3.384199867324692e-8,
+      "oneMeterRadiusPixels": 33.90813417223062
+    },
+    {
+      "layer": "route-focus-room-labels",
+      "text": "Classroom 0174",
+      "zoom": 21,
+      "pitch": 45,
+      "bearing": 35,
+      "width": 96,
+      "height": 11,
+      "buildingWidth": 2435.9651638800256,
+      "anchorDisplacement": 40.84867269680706,
+      "oneMeterRadiusPixels": 33.90813417223062
+    },
+    {
+      "layer": "route-focus-room-labels",
+      "text": "Classroom 0174",
+      "zoom": 21,
+      "pitch": 65,
+      "bearing": 120,
+      "width": 94,
+      "height": 10,
+      "buildingWidth": 18751.90857280702,
+      "anchorDisplacement": 51.67977488937265,
+      "oneMeterRadiusPixels": 33.90813417223062
+    },
+    {
+      "layer": "route-landmark-room-labels",
+      "text": "Browsing Room",
+      "zoom": 17,
+      "pitch": 0,
+      "bearing": 0,
+      "width": 75,
+      "height": 11,
+      "buildingWidth": 215.2208421677351,
+      "anchorDisplacement": 8.768580708487731e-10,
+      "oneMeterRadiusPixels": 2.119071001711423
+    },
+    {
+      "layer": "route-landmark-room-labels",
+      "text": "Browsing Room",
+      "zoom": 17,
+      "pitch": 45,
+      "bearing": 35,
+      "width": 75,
+      "height": 11,
+      "buildingWidth": 853.8897339139639,
+      "anchorDisplacement": 1.289956145877568,
+      "oneMeterRadiusPixels": 2.119071001711423
+    },
+    {
+      "layer": "route-landmark-room-labels",
+      "text": "Browsing Room",
+      "zoom": 17,
+      "pitch": 65,
+      "bearing": 120,
+      "width": 75,
+      "height": 11,
+      "buildingWidth": 163.9112925078889,
+      "anchorDisplacement": 1.652670095116605,
+      "oneMeterRadiusPixels": 2.119071001711423
+    },
+    {
+      "layer": "route-landmark-room-labels",
+      "text": "Browsing Room",
+      "zoom": 19,
+      "pitch": 0,
+      "bearing": 0,
+      "width": 76,
+      "height": 12,
+      "buildingWidth": 860.8833686709404,
+      "anchorDisplacement": 3.518507314408542e-9,
+      "oneMeterRadiusPixels": 8.476284006845692
+    },
+    {
+      "layer": "route-landmark-room-labels",
+      "text": "Browsing Room",
+      "zoom": 19,
+      "pitch": 45,
+      "bearing": 35,
+      "width": 76,
+      "height": 12,
+      "buildingWidth": 4118132603.5388384,
+      "anchorDisplacement": 5.175778052345493,
+      "oneMeterRadiusPixels": 8.476284006845692
+    },
+    {
+      "layer": "route-landmark-room-labels",
+      "text": "Browsing Room",
+      "zoom": 19,
+      "pitch": 65,
+      "bearing": 120,
+      "width": 76,
+      "height": 11,
+      "buildingWidth": 107.49014995908465,
+      "anchorDisplacement": 6.622876169103563,
+      "oneMeterRadiusPixels": 8.476284006845692
+    },
+    {
+      "layer": "route-landmark-room-labels",
+      "text": "Browsing Room",
+      "zoom": 21,
+      "pitch": 0,
+      "bearing": 0,
+      "width": 77,
+      "height": 12,
+      "buildingWidth": 3443.5334746837616,
+      "anchorDisplacement": 1.4343474950623113e-8,
+      "oneMeterRadiusPixels": 33.90513602738277
+    },
+    {
+      "layer": "route-landmark-room-labels",
+      "text": "Browsing Room",
+      "zoom": 21,
+      "pitch": 45,
+      "bearing": 35,
+      "width": 76,
+      "height": 12,
+      "buildingWidth": 23436.01536578853,
+      "anchorDisplacement": 20.962363199496508,
+      "oneMeterRadiusPixels": 33.90513602738277
+    },
+    {
+      "layer": "route-landmark-room-labels",
+      "text": "Browsing Room",
+      "zoom": 21,
+      "pitch": 65,
+      "bearing": 120,
+      "width": 76,
+      "height": 11,
+      "buildingWidth": 98.97371933430912,
+      "anchorDisplacement": 26.688450639199175,
+      "oneMeterRadiusPixels": 33.90513602738277
+    }
+  ],
+  "browser": "155.0.8059.85"
+}

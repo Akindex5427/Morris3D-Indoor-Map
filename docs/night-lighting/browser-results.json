@@ -1,0 +1,1039 @@
+[
+  {
+    "phase": "before",
+    "floor": "all",
+    "night": true,
+    "view": {
+      "width": 1440,
+      "height": 1000,
+      "latitude": 37.715316085155145,
+      "longitude": -89.22048248041514,
+      "zoom": 18.3,
+      "bearing": 0,
+      "pitch": 55,
+      "altitude": 1.5,
+      "maxZoom": 22,
+      "minZoom": 14,
+      "maxPitch": 85,
+      "minPitch": 0,
+      "normalize": true,
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    "errors": [],
+    "glError": 0,
+    "lights": 138,
+    "fixtureLayers": 1,
+    "surfaces": [],
+    "layerIds": [
+      "indoor-building-layer",
+      "indoor-building-layer-polygons-fill",
+      "procedural-interior-room-walls",
+      "procedural-interior-room-walls-polygons-fill",
+      "building-perimeter-shell-wall-5-0",
+      "building-perimeter-shell-wall-6-1",
+      "building-perimeter-shell-wall-7-2",
+      "building-perimeter-shell-wall-9-3",
+      "building-perimeter-shell-wall-19-4",
+      "building-perimeter-shell-wall-28-5",
+      "building-perimeter-shell-wall-31-6",
+      "building-perimeter-shell-wall-32-7",
+      "building-perimeter-shell-wall-37-8",
+      "building-perimeter-shell-wall-38-9",
+      "building-perimeter-shell-wall-39-10",
+      "building-perimeter-shell-wall-41-11",
+      "building-perimeter-shell-wall-42-12",
+      "building-perimeter-shell-wall-43-13",
+      "building-perimeter-shell-wall-44-14",
+      "building-perimeter-shell-wall-46-15",
+      "building-perimeter-shell-wall-47-16",
+      "building-perimeter-shell-wall-48-17",
+      "building-perimeter-shell-wall-52-18",
+      "building-perimeter-shell-wall-53-19",
+      "building-perimeter-shell-wall-54-20",
+      "interior-light-pools",
+      "interior-light-halos",
+      "interior-light-fixtures"
+    ]
+  },
+  {
+    "phase": "before-day",
+    "floor": "all",
+    "night": false,
+    "view": {
+      "width": 1440,
+      "height": 1000,
+      "latitude": 37.715316085155145,
+      "longitude": -89.22048248041514,
+      "zoom": 18.3,
+      "bearing": 0,
+      "pitch": 55,
+      "altitude": 1.5,
+      "maxZoom": 22,
+      "minZoom": 14,
+      "maxPitch": 85,
+      "minPitch": 0,
+      "normalize": true,
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    "errors": [],
+    "glError": 0,
+    "lights": 0,
+    "fixtureLayers": 0,
+    "surfaces": [],
+    "layerIds": [
+      "indoor-building-layer",
+      "indoor-building-layer-polygons-fill",
+      "procedural-interior-room-walls",
+      "procedural-interior-room-walls-polygons-fill",
+      "building-perimeter-shell-wall-5-0",
+      "building-perimeter-shell-wall-6-1",
+      "building-perimeter-shell-wall-7-2",
+      "building-perimeter-shell-wall-9-3",
+      "building-perimeter-shell-wall-19-4",
+      "building-perimeter-shell-wall-28-5",
+      "building-perimeter-shell-wall-31-6",
+      "building-perimeter-shell-wall-32-7",
+      "building-perimeter-shell-wall-37-8",
+      "building-perimeter-shell-wall-38-9",
+      "building-perimeter-shell-wall-39-10",
+      "building-perimeter-shell-wall-41-11",
+      "building-perimeter-shell-wall-42-12",
+      "building-perimeter-shell-wall-43-13",
+      "building-perimeter-shell-wall-44-14",
+      "building-perimeter-shell-wall-46-15",
+      "building-perimeter-shell-wall-47-16",
+      "building-perimeter-shell-wall-48-17",
+      "building-perimeter-shell-wall-52-18",
+      "building-perimeter-shell-wall-53-19",
+      "building-perimeter-shell-wall-54-20"
+    ]
+  },
+  {
+    "phase": "after",
+    "floor": "all",
+    "night": true,
+    "view": {
+      "width": 1440,
+      "height": 1000,
+      "latitude": 37.715316085155145,
+      "longitude": -89.22048248041514,
+      "zoom": 18.3,
+      "bearing": 0,
+      "pitch": 55,
+      "altitude": 1.5,
+      "maxZoom": 22,
+      "minZoom": 14,
+      "maxPitch": 85,
+      "minPitch": 0,
+      "normalize": true,
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    "errors": [],
+    "glError": 0,
+    "lights": 138,
+    "fixtureLayers": 1,
+    "surfaces": [
+      {
+        "id": "indoor-building-night-layer-polygons-fill",
+        "fieldHeight": 1608,
+        "contributions": 1712,
+        "truncated": 0,
+        "textureReferences": 2
+      },
+      {
+        "id": "procedural-interior-room-walls-night-polygons-fill",
+        "fieldHeight": 1608,
+        "contributions": 1712,
+        "truncated": 0,
+        "textureReferences": 2
+      }
+    ],
+    "layerIds": [
+      "indoor-building-night-layer",
+      "indoor-building-night-layer-polygons-fill",
+      "procedural-interior-room-walls-night",
+      "procedural-interior-room-walls-night-polygons-fill",
+      "building-perimeter-shell-wall-5-0-night",
+      "building-perimeter-shell-wall-6-1-night",
+      "building-perimeter-shell-wall-7-2-night",
+      "building-perimeter-shell-wall-9-3-night",
+      "building-perimeter-shell-wall-19-4-night",
+      "building-perimeter-shell-wall-28-5-night",
+      "building-perimeter-shell-wall-31-6-night",
+      "building-perimeter-shell-wall-32-7-night",
+      "building-perimeter-shell-wall-37-8-night",
+      "building-perimeter-shell-wall-38-9-night",
+      "building-perimeter-shell-wall-39-10-night",
+      "building-perimeter-shell-wall-41-11-night",
+      "building-perimeter-shell-wall-42-12-night",
+      "building-perimeter-shell-wall-43-13-night",
+      "building-perimeter-shell-wall-44-14-night",
+      "building-perimeter-shell-wall-46-15-night",
+      "building-perimeter-shell-wall-47-16-night",
+      "building-perimeter-shell-wall-48-17-night",
+      "building-perimeter-shell-wall-52-18-night",
+      "building-perimeter-shell-wall-53-19-night",
+      "building-perimeter-shell-wall-54-20-night",
+      "interior-light-pools",
+      "interior-light-halos",
+      "interior-light-fixtures"
+    ]
+  },
+  {
+    "phase": "after-day",
+    "floor": "all",
+    "night": false,
+    "view": {
+      "width": 1440,
+      "height": 1000,
+      "latitude": 37.715316085155145,
+      "longitude": -89.22048248041514,
+      "zoom": 18.3,
+      "bearing": 0,
+      "pitch": 55,
+      "altitude": 1.5,
+      "maxZoom": 22,
+      "minZoom": 14,
+      "maxPitch": 85,
+      "minPitch": 0,
+      "normalize": true,
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    "errors": [],
+    "glError": 0,
+    "lights": 0,
+    "fixtureLayers": 0,
+    "surfaces": [],
+    "layerIds": [
+      "indoor-building-layer",
+      "indoor-building-layer-polygons-fill",
+      "procedural-interior-room-walls",
+      "procedural-interior-room-walls-polygons-fill",
+      "building-perimeter-shell-wall-5-0",
+      "building-perimeter-shell-wall-6-1",
+      "building-perimeter-shell-wall-7-2",
+      "building-perimeter-shell-wall-9-3",
+      "building-perimeter-shell-wall-19-4",
+      "building-perimeter-shell-wall-28-5",
+      "building-perimeter-shell-wall-31-6",
+      "building-perimeter-shell-wall-32-7",
+      "building-perimeter-shell-wall-37-8",
+      "building-perimeter-shell-wall-38-9",
+      "building-perimeter-shell-wall-39-10",
+      "building-perimeter-shell-wall-41-11",
+      "building-perimeter-shell-wall-42-12",
+      "building-perimeter-shell-wall-43-13",
+      "building-perimeter-shell-wall-44-14",
+      "building-perimeter-shell-wall-46-15",
+      "building-perimeter-shell-wall-47-16",
+      "building-perimeter-shell-wall-48-17",
+      "building-perimeter-shell-wall-52-18",
+      "building-perimeter-shell-wall-53-19",
+      "building-perimeter-shell-wall-54-20"
+    ]
+  },
+  {
+    "phase": "floor",
+    "floor": 0,
+    "night": true,
+    "view": {
+      "width": 1440,
+      "height": 1000,
+      "latitude": 37.715316085155145,
+      "longitude": -89.22048248041514,
+      "zoom": 18.3,
+      "bearing": 0,
+      "pitch": 55,
+      "altitude": 1.5,
+      "maxZoom": 22,
+      "minZoom": 14,
+      "maxPitch": 85,
+      "minPitch": 0,
+      "normalize": true,
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    "errors": [],
+    "glError": 0,
+    "lights": 19,
+    "fixtureLayers": 1,
+    "surfaces": [
+      {
+        "id": "indoor-building-night-layer-polygons-fill",
+        "fieldHeight": 143,
+        "contributions": 194,
+        "truncated": 0,
+        "textureReferences": 2
+      },
+      {
+        "id": "procedural-interior-room-walls-night-polygons-fill",
+        "fieldHeight": 143,
+        "contributions": 194,
+        "truncated": 0,
+        "textureReferences": 2
+      }
+    ],
+    "layerIds": [
+      "indoor-building-night-layer",
+      "indoor-building-night-layer-polygons-fill",
+      "procedural-interior-room-walls-night",
+      "procedural-interior-room-walls-night-polygons-fill",
+      "building-perimeter-wall-floor-0-4-0-night",
+      "interior-light-pools",
+      "interior-light-halos",
+      "interior-light-fixtures"
+    ]
+  },
+  {
+    "phase": "floor",
+    "floor": 1,
+    "night": true,
+    "view": {
+      "width": 1440,
+      "height": 1000,
+      "latitude": 37.715316085155145,
+      "longitude": -89.22048248041514,
+      "zoom": 18.3,
+      "bearing": 0,
+      "pitch": 55,
+      "altitude": 1.5,
+      "maxZoom": 22,
+      "minZoom": 14,
+      "maxPitch": 85,
+      "minPitch": 0,
+      "normalize": true,
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    "errors": [],
+    "glError": 0,
+    "lights": 20,
+    "fixtureLayers": 1,
+    "surfaces": [
+      {
+        "id": "indoor-building-night-layer-polygons-fill",
+        "fieldHeight": 355,
+        "contributions": 417,
+        "truncated": 0,
+        "textureReferences": 2
+      },
+      {
+        "id": "procedural-interior-room-walls-night-polygons-fill",
+        "fieldHeight": 355,
+        "contributions": 417,
+        "truncated": 0,
+        "textureReferences": 2
+      }
+    ],
+    "layerIds": [
+      "indoor-building-night-layer",
+      "indoor-building-night-layer-polygons-fill",
+      "procedural-interior-room-walls-night",
+      "procedural-interior-room-walls-night-polygons-fill",
+      "building-perimeter-wall-floor-1-2-0-night",
+      "interior-light-pools",
+      "interior-light-halos",
+      "interior-light-fixtures"
+    ]
+  },
+  {
+    "phase": "picking",
+    "pickedRooms": 262
+  },
+  {
+    "phase": "floor",
+    "floor": 2,
+    "night": true,
+    "view": {
+      "width": 1440,
+      "height": 1000,
+      "latitude": 37.715316085155145,
+      "longitude": -89.22048248041514,
+      "zoom": 18.3,
+      "bearing": 0,
+      "pitch": 55,
+      "altitude": 1.5,
+      "maxZoom": 22,
+      "minZoom": 14,
+      "maxPitch": 85,
+      "minPitch": 0,
+      "normalize": true,
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    "errors": [],
+    "glError": 0,
+    "lights": 23,
+    "fixtureLayers": 1,
+    "surfaces": [
+      {
+        "id": "indoor-building-night-layer-polygons-fill",
+        "fieldHeight": 243,
+        "contributions": 244,
+        "truncated": 0,
+        "textureReferences": 2
+      },
+      {
+        "id": "procedural-interior-room-walls-night-polygons-fill",
+        "fieldHeight": 243,
+        "contributions": 244,
+        "truncated": 0,
+        "textureReferences": 2
+      }
+    ],
+    "layerIds": [
+      "indoor-building-night-layer",
+      "indoor-building-night-layer-polygons-fill",
+      "procedural-interior-room-walls-night",
+      "procedural-interior-room-walls-night-polygons-fill",
+      "building-perimeter-wall-floor-2-2-0-night",
+      "interior-light-pools",
+      "interior-light-halos",
+      "interior-light-fixtures"
+    ]
+  },
+  {
+    "phase": "floor",
+    "floor": 3,
+    "night": true,
+    "view": {
+      "width": 1440,
+      "height": 1000,
+      "latitude": 37.715316085155145,
+      "longitude": -89.22048248041514,
+      "zoom": 18.3,
+      "bearing": 0,
+      "pitch": 55,
+      "altitude": 1.5,
+      "maxZoom": 22,
+      "minZoom": 14,
+      "maxPitch": 85,
+      "minPitch": 0,
+      "normalize": true,
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    "errors": [],
+    "glError": 0,
+    "lights": 16,
+    "fixtureLayers": 1,
+    "surfaces": [
+      {
+        "id": "indoor-building-night-layer-polygons-fill",
+        "fieldHeight": 288,
+        "contributions": 263,
+        "truncated": 0,
+        "textureReferences": 2
+      },
+      {
+        "id": "procedural-interior-room-walls-night-polygons-fill",
+        "fieldHeight": 288,
+        "contributions": 263,
+        "truncated": 0,
+        "textureReferences": 2
+      }
+    ],
+    "layerIds": [
+      "indoor-building-night-layer",
+      "indoor-building-night-layer-polygons-fill",
+      "procedural-interior-room-walls-night",
+      "procedural-interior-room-walls-night-polygons-fill",
+      "building-perimeter-wall-floor-3-2-0-night",
+      "interior-light-pools",
+      "interior-light-halos",
+      "interior-light-fixtures"
+    ]
+  },
+  {
+    "phase": "floor",
+    "floor": 4,
+    "night": true,
+    "view": {
+      "width": 1440,
+      "height": 1000,
+      "latitude": 37.715316085155145,
+      "longitude": -89.22048248041514,
+      "zoom": 18.3,
+      "bearing": 0,
+      "pitch": 55,
+      "altitude": 1.5,
+      "maxZoom": 22,
+      "minZoom": 14,
+      "maxPitch": 85,
+      "minPitch": 0,
+      "normalize": true,
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    "errors": [],
+    "glError": 0,
+    "lights": 23,
+    "fixtureLayers": 1,
+    "surfaces": [
+      {
+        "id": "indoor-building-night-layer-polygons-fill",
+        "fieldHeight": 199,
+        "contributions": 185,
+        "truncated": 0,
+        "textureReferences": 2
+      },
+      {
+        "id": "procedural-interior-room-walls-night-polygons-fill",
+        "fieldHeight": 199,
+        "contributions": 185,
+        "truncated": 0,
+        "textureReferences": 2
+      }
+    ],
+    "layerIds": [
+      "indoor-building-night-layer",
+      "indoor-building-night-layer-polygons-fill",
+      "procedural-interior-room-walls-night",
+      "procedural-interior-room-walls-night-polygons-fill",
+      "building-perimeter-wall-floor-4-2-0-night",
+      "interior-light-pools",
+      "interior-light-halos",
+      "interior-light-fixtures"
+    ]
+  },
+  {
+    "phase": "floor",
+    "floor": 5,
+    "night": true,
+    "view": {
+      "width": 1440,
+      "height": 1000,
+      "latitude": 37.715316085155145,
+      "longitude": -89.22048248041514,
+      "zoom": 18.3,
+      "bearing": 0,
+      "pitch": 55,
+      "altitude": 1.5,
+      "maxZoom": 22,
+      "minZoom": 14,
+      "maxPitch": 85,
+      "minPitch": 0,
+      "normalize": true,
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    "errors": [],
+    "glError": 0,
+    "lights": 19,
+    "fixtureLayers": 1,
+    "surfaces": [
+      {
+        "id": "indoor-building-night-layer-polygons-fill",
+        "fieldHeight": 149,
+        "contributions": 121,
+        "truncated": 0,
+        "textureReferences": 2
+      },
+      {
+        "id": "procedural-interior-room-walls-night-polygons-fill",
+        "fieldHeight": 149,
+        "contributions": 121,
+        "truncated": 0,
+        "textureReferences": 2
+      }
+    ],
+    "layerIds": [
+      "indoor-building-night-layer",
+      "indoor-building-night-layer-polygons-fill",
+      "procedural-interior-room-walls-night",
+      "procedural-interior-room-walls-night-polygons-fill",
+      "building-perimeter-wall-floor-5-2-0-night",
+      "interior-light-pools",
+      "interior-light-halos",
+      "interior-light-fixtures"
+    ]
+  },
+  {
+    "phase": "floor",
+    "floor": 6,
+    "night": true,
+    "view": {
+      "width": 1440,
+      "height": 1000,
+      "latitude": 37.715316085155145,
+      "longitude": -89.22048248041514,
+      "zoom": 18.3,
+      "bearing": 0,
+      "pitch": 55,
+      "altitude": 1.5,
+      "maxZoom": 22,
+      "minZoom": 14,
+      "maxPitch": 85,
+      "minPitch": 0,
+      "normalize": true,
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    "errors": [],
+    "glError": 0,
+    "lights": 18,
+    "fixtureLayers": 1,
+    "surfaces": [
+      {
+        "id": "indoor-building-night-layer-polygons-fill",
+        "fieldHeight": 138,
+        "contributions": 147,
+        "truncated": 0,
+        "textureReferences": 2
+      },
+      {
+        "id": "procedural-interior-room-walls-night-polygons-fill",
+        "fieldHeight": 138,
+        "contributions": 147,
+        "truncated": 0,
+        "textureReferences": 2
+      }
+    ],
+    "layerIds": [
+      "indoor-building-night-layer",
+      "indoor-building-night-layer-polygons-fill",
+      "procedural-interior-room-walls-night",
+      "procedural-interior-room-walls-night-polygons-fill",
+      "building-perimeter-wall-floor-6-2-0-night",
+      "interior-light-pools",
+      "interior-light-halos",
+      "interior-light-fixtures"
+    ]
+  },
+  {
+    "phase": "floor",
+    "floor": 7,
+    "night": true,
+    "view": {
+      "width": 1440,
+      "height": 1000,
+      "latitude": 37.715316085155145,
+      "longitude": -89.22048248041514,
+      "zoom": 18.3,
+      "bearing": 0,
+      "pitch": 55,
+      "altitude": 1.5,
+      "maxZoom": 22,
+      "minZoom": 14,
+      "maxPitch": 85,
+      "minPitch": 0,
+      "normalize": true,
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    "errors": [],
+    "glError": 0,
+    "lights": 0,
+    "fixtureLayers": 0,
+    "surfaces": [
+      {
+        "id": "indoor-building-night-layer-polygons-fill",
+        "fieldHeight": 90,
+        "contributions": 0,
+        "truncated": 0,
+        "textureReferences": 2
+      },
+      {
+        "id": "procedural-interior-room-walls-night-polygons-fill",
+        "fieldHeight": 90,
+        "contributions": 0,
+        "truncated": 0,
+        "textureReferences": 2
+      }
+    ],
+    "layerIds": [
+      "indoor-building-night-layer",
+      "indoor-building-night-layer-polygons-fill",
+      "procedural-interior-room-walls-night",
+      "procedural-interior-room-walls-night-polygons-fill",
+      "building-perimeter-wall-floor-7-2-0-night"
+    ]
+  },
+  {
+    "phase": "route",
+    "floor": 1,
+    "night": true,
+    "view": {
+      "width": 1440,
+      "height": 1000,
+      "latitude": 37.715316085155145,
+      "longitude": -89.22048248041514,
+      "zoom": 18.3,
+      "bearing": 0,
+      "pitch": 55,
+      "altitude": 1.5,
+      "maxZoom": 22,
+      "minZoom": 14,
+      "maxPitch": 85,
+      "minPitch": 0,
+      "normalize": true,
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    "errors": [],
+    "glError": 0,
+    "lights": 20,
+    "fixtureLayers": 1,
+    "surfaces": [
+      {
+        "id": "indoor-building-night-layer-polygons-fill",
+        "fieldHeight": 355,
+        "contributions": 417,
+        "truncated": 0,
+        "textureReferences": 2
+      },
+      {
+        "id": "procedural-interior-room-walls-night-polygons-fill",
+        "fieldHeight": 355,
+        "contributions": 417,
+        "truncated": 0,
+        "textureReferences": 2
+      }
+    ],
+    "layerIds": [
+      "indoor-building-night-layer",
+      "indoor-building-night-layer-polygons-fill",
+      "procedural-interior-room-walls-night",
+      "procedural-interior-room-walls-night-polygons-fill",
+      "building-perimeter-wall-floor-1-2-0-night",
+      "interior-light-pools",
+      "interior-light-halos",
+      "interior-light-fixtures",
+      "route-path-border",
+      "route-path-main"
+    ]
+  },
+  {
+    "phase": "camera",
+    "resourcesStable": true,
+    "floor": "all",
+    "night": true,
+    "view": {
+      "width": 1440,
+      "height": 1000,
+      "latitude": 37.715316085155145,
+      "longitude": -89.22048248041514,
+      "zoom": 18.6,
+      "bearing": 35,
+      "pitch": 65,
+      "altitude": 1.5,
+      "maxZoom": 22,
+      "minZoom": 14,
+      "maxPitch": 85,
+      "minPitch": 0,
+      "normalize": true,
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    "errors": [],
+    "glError": 0,
+    "lights": 138,
+    "fixtureLayers": 1,
+    "surfaces": [
+      {
+        "id": "indoor-building-night-layer-polygons-fill",
+        "fieldHeight": 1608,
+        "contributions": 1712,
+        "truncated": 0,
+        "textureReferences": 2
+      },
+      {
+        "id": "procedural-interior-room-walls-night-polygons-fill",
+        "fieldHeight": 1608,
+        "contributions": 1712,
+        "truncated": 0,
+        "textureReferences": 2
+      }
+    ],
+    "layerIds": [
+      "indoor-building-night-layer",
+      "indoor-building-night-layer-polygons-fill",
+      "procedural-interior-room-walls-night",
+      "procedural-interior-room-walls-night-polygons-fill",
+      "building-perimeter-shell-wall-5-0-night",
+      "building-perimeter-shell-wall-6-1-night",
+      "building-perimeter-shell-wall-7-2-night",
+      "building-perimeter-shell-wall-9-3-night",
+      "building-perimeter-shell-wall-19-4-night",
+      "building-perimeter-shell-wall-28-5-night",
+      "building-perimeter-shell-wall-31-6-night",
+      "building-perimeter-shell-wall-32-7-night",
+      "building-perimeter-shell-wall-37-8-night",
+      "building-perimeter-shell-wall-38-9-night",
+      "building-perimeter-shell-wall-39-10-night",
+      "building-perimeter-shell-wall-41-11-night",
+      "building-perimeter-shell-wall-42-12-night",
+      "building-perimeter-shell-wall-43-13-night",
+      "building-perimeter-shell-wall-44-14-night",
+      "building-perimeter-shell-wall-46-15-night",
+      "building-perimeter-shell-wall-47-16-night",
+      "building-perimeter-shell-wall-48-17-night",
+      "building-perimeter-shell-wall-52-18-night",
+      "building-perimeter-shell-wall-53-19-night",
+      "building-perimeter-shell-wall-54-20-night",
+      "interior-light-pools",
+      "interior-light-halos",
+      "interior-light-fixtures"
+    ]
+  },
+  {
+    "phase": "resource-disposal",
+    "textureDeleted": true,
+    "floor": "all",
+    "night": false,
+    "view": {
+      "width": 1440,
+      "height": 1000,
+      "latitude": 37.715316085155145,
+      "longitude": -89.22048248041514,
+      "zoom": 18.6,
+      "bearing": 35,
+      "pitch": 65,
+      "altitude": 1.5,
+      "maxZoom": 22,
+      "minZoom": 14,
+      "maxPitch": 85,
+      "minPitch": 0,
+      "normalize": true,
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    "errors": [],
+    "glError": 0,
+    "lights": 0,
+    "fixtureLayers": 0,
+    "surfaces": [],
+    "layerIds": [
+      "indoor-building-layer",
+      "indoor-building-layer-polygons-fill",
+      "procedural-interior-room-walls",
+      "procedural-interior-room-walls-polygons-fill",
+      "building-perimeter-shell-wall-5-0",
+      "building-perimeter-shell-wall-6-1",
+      "building-perimeter-shell-wall-7-2",
+      "building-perimeter-shell-wall-9-3",
+      "building-perimeter-shell-wall-19-4",
+      "building-perimeter-shell-wall-28-5",
+      "building-perimeter-shell-wall-31-6",
+      "building-perimeter-shell-wall-32-7",
+      "building-perimeter-shell-wall-37-8",
+      "building-perimeter-shell-wall-38-9",
+      "building-perimeter-shell-wall-39-10",
+      "building-perimeter-shell-wall-41-11",
+      "building-perimeter-shell-wall-42-12",
+      "building-perimeter-shell-wall-43-13",
+      "building-perimeter-shell-wall-44-14",
+      "building-perimeter-shell-wall-46-15",
+      "building-perimeter-shell-wall-47-16",
+      "building-perimeter-shell-wall-48-17",
+      "building-perimeter-shell-wall-52-18",
+      "building-perimeter-shell-wall-53-19",
+      "building-perimeter-shell-wall-54-20"
+    ]
+  },
+  {
+    "phase": "repeated-toggles",
+    "floor": "all",
+    "night": true,
+    "view": {
+      "width": 1440,
+      "height": 1000,
+      "latitude": 37.715316085155145,
+      "longitude": -89.22048248041514,
+      "zoom": 18.6,
+      "bearing": 35,
+      "pitch": 65,
+      "altitude": 1.5,
+      "maxZoom": 22,
+      "minZoom": 14,
+      "maxPitch": 85,
+      "minPitch": 0,
+      "normalize": true,
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    "errors": [],
+    "glError": 0,
+    "lights": 138,
+    "fixtureLayers": 1,
+    "surfaces": [
+      {
+        "id": "indoor-building-night-layer-polygons-fill",
+        "fieldHeight": 1608,
+        "contributions": 1712,
+        "truncated": 0,
+        "textureReferences": 2
+      },
+      {
+        "id": "procedural-interior-room-walls-night-polygons-fill",
+        "fieldHeight": 1608,
+        "contributions": 1712,
+        "truncated": 0,
+        "textureReferences": 2
+      }
+    ],
+    "layerIds": [
+      "indoor-building-night-layer",
+      "indoor-building-night-layer-polygons-fill",
+      "procedural-interior-room-walls-night",
+      "procedural-interior-room-walls-night-polygons-fill",
+      "building-perimeter-shell-wall-5-0-night",
+      "building-perimeter-shell-wall-6-1-night",
+      "building-perimeter-shell-wall-7-2-night",
+      "building-perimeter-shell-wall-9-3-night",
+      "building-perimeter-shell-wall-19-4-night",
+      "building-perimeter-shell-wall-28-5-night",
+      "building-perimeter-shell-wall-31-6-night",
+      "building-perimeter-shell-wall-32-7-night",
+      "building-perimeter-shell-wall-37-8-night",
+      "building-perimeter-shell-wall-38-9-night",
+      "building-perimeter-shell-wall-39-10-night",
+      "building-perimeter-shell-wall-41-11-night",
+      "building-perimeter-shell-wall-42-12-night",
+      "building-perimeter-shell-wall-43-13-night",
+      "building-perimeter-shell-wall-44-14-night",
+      "building-perimeter-shell-wall-46-15-night",
+      "building-perimeter-shell-wall-47-16-night",
+      "building-perimeter-shell-wall-48-17-night",
+      "building-perimeter-shell-wall-52-18-night",
+      "building-perimeter-shell-wall-53-19-night",
+      "building-perimeter-shell-wall-54-20-night",
+      "interior-light-pools",
+      "interior-light-halos",
+      "interior-light-fixtures"
+    ]
+  },
+  {
+    "phase": "cinematic",
+    "floor": "all",
+    "night": true,
+    "view": {
+      "width": 1440,
+      "height": 1000,
+      "latitude": 37.715316085155145,
+      "longitude": -89.22048248041514,
+      "zoom": 18.6,
+      "bearing": 35,
+      "pitch": 65,
+      "altitude": 1.5,
+      "maxZoom": 22,
+      "minZoom": 14,
+      "maxPitch": 85,
+      "minPitch": 0,
+      "normalize": true,
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    "errors": [],
+    "glError": 0,
+    "lights": 138,
+    "fixtureLayers": 1,
+    "surfaces": [
+      {
+        "id": "indoor-building-night-layer-polygons-fill",
+        "fieldHeight": 1608,
+        "contributions": 1712,
+        "truncated": 0,
+        "textureReferences": 2
+      },
+      {
+        "id": "procedural-interior-room-walls-night-polygons-fill",
+        "fieldHeight": 1608,
+        "contributions": 1712,
+        "truncated": 0,
+        "textureReferences": 2
+      }
+    ],
+    "layerIds": [
+      "indoor-building-night-layer",
+      "indoor-building-night-layer-polygons-fill",
+      "procedural-interior-room-walls-night",
+      "procedural-interior-room-walls-night-polygons-fill",
+      "building-perimeter-shell-wall-5-0-night",
+      "building-perimeter-shell-wall-6-1-night",
+      "building-perimeter-shell-wall-7-2-night",
+      "building-perimeter-shell-wall-9-3-night",
+      "building-perimeter-shell-wall-19-4-night",
+      "building-perimeter-shell-wall-28-5-night",
+      "building-perimeter-shell-wall-31-6-night",
+      "building-perimeter-shell-wall-32-7-night",
+      "building-perimeter-shell-wall-37-8-night",
+      "building-perimeter-shell-wall-38-9-night",
+      "building-perimeter-shell-wall-39-10-night",
+      "building-perimeter-shell-wall-41-11-night",
+      "building-perimeter-shell-wall-42-12-night",
+      "building-perimeter-shell-wall-43-13-night",
+      "building-perimeter-shell-wall-44-14-night",
+      "building-perimeter-shell-wall-46-15-night",
+      "building-perimeter-shell-wall-47-16-night",
+      "building-perimeter-shell-wall-48-17-night",
+      "building-perimeter-shell-wall-52-18-night",
+      "building-perimeter-shell-wall-53-19-night",
+      "building-perimeter-shell-wall-54-20-night",
+      "interior-light-pools",
+      "interior-light-halos",
+      "interior-light-fixtures"
+    ]
+  },
+  {
+    "phase": "gpu-atlas-readback",
+    "framebufferComplete": true,
+    "glError": 0,
+    "matchesSource": true
+  }
+]

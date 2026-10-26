@@ -1,0 +1,3924 @@
+{
+  "conditions": {
+    "cpu": "AMD Ryzen 9 7940HS w/ Radeon 780M Graphics     ",
+    "chrome": "155.0.8059.85",
+    "rendering": "Headless Chrome, ANGLE d3d11, deviceScaleFactor 1",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "renderers": [
+      "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 Laptop GPU (0x000028E0) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    ]
+  },
+  "beforeRuns": 3,
+  "afterRuns": 3,
+  "scenarios": [
+    {
+      "name": "initial-F1",
+      "before": {
+        "elapsedMs": {
+          "median": 6650.899999976158,
+          "min": 6521.100000023842,
+          "max": 6697.300000011921
+        },
+        "rafFPS": {
+          "median": 66.3998405174613,
+          "min": 63.149348208739504,
+          "max": 66.59400056727429
+        },
+        "drawnFPS": {
+          "median": 6.593979543304472,
+          "min": 6.420497812539898,
+          "max": 6.61564600282033
+        },
+        "p50FrameMs": {
+          "median": 6.099999999999454,
+          "min": 6.099999999999454,
+          "max": 6.099999999999909
+        },
+        "p95FrameMs": {
+          "median": 17.100000000000364,
+          "min": 12.099999999999909,
+          "max": 24.09999999999991
+        },
+        "p99FrameMs": {
+          "median": 230.29999999999998,
+          "min": 224.29999999999973,
+          "max": 266.79999999999995
+        },
+        "slowFrames": {
+          "median": 12,
+          "min": 11,
+          "max": 14
+        },
+        "scriptMs": {
+          "median": 1676.973,
+          "min": 1591.437,
+          "max": 1795.547
+        },
+        "taskMs": {
+          "median": 4438.8550000000005,
+          "min": 4273.537,
+          "max": 4472.933999999999
+        },
+        "wallMeshReplacements": {
+          "median": 3,
+          "min": 3,
+          "max": 9
+        },
+        "bufferUploads": {
+          "median": 342,
+          "min": 321,
+          "max": 451
+        },
+        "bufferBytes": {
+          "median": 8691412,
+          "min": 7782879,
+          "max": 14392421
+        },
+        "drawCalls": {
+          "median": 728,
+          "min": 694,
+          "max": 757
+        },
+        "deckDrawCalls": {
+          "median": 28,
+          "min": 20,
+          "max": 50
+        },
+        "heapMB": {
+          "median": 46.97835159301758,
+          "min": 41.73115158081055,
+          "max": 52.62013626098633
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 16.930232558139537,
+          "min": 16.13953488372093,
+          "max": 17.204545454545453
+        }
+      },
+      "after": {
+        "elapsedMs": {
+          "median": 5820.600000023842,
+          "min": 5791.099999964237,
+          "max": 5983.699999988079
+        },
+        "rafFPS": {
+          "median": 66.99936108898069,
+          "min": 65.84554706967009,
+          "max": 69.23684843458565
+        },
+        "drawnFPS": {
+          "median": 4.489647908024479,
+          "min": 3.5095342346778478,
+          "max": 5.497715012175536
+        },
+        "p50FrameMs": {
+          "median": 6.099999999999454,
+          "min": 6.099999999999454,
+          "max": 6.099999999999454
+        },
+        "p95FrameMs": {
+          "median": 24.100000000000136,
+          "min": 18.199999999999818,
+          "max": 24.200000000000273
+        },
+        "p99FrameMs": {
+          "median": 212.0999999999999,
+          "min": 187.79999999999995,
+          "max": 268.4999999880791
+        },
+        "slowFrames": {
+          "median": 11,
+          "min": 10,
+          "max": 12
+        },
+        "scriptMs": {
+          "median": 1474.8319999999999,
+          "min": 1412.05,
+          "max": 1608.828
+        },
+        "taskMs": {
+          "median": 3758.398,
+          "min": 3720.631,
+          "max": 3850.8579999999997
+        },
+        "wallMeshReplacements": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "bufferUploads": {
+          "median": 490,
+          "min": 468,
+          "max": 545
+        },
+        "bufferBytes": {
+          "median": 22448480,
+          "min": 20649334,
+          "max": 26946345
+        },
+        "drawCalls": {
+          "median": 588,
+          "min": 478,
+          "max": 723
+        },
+        "deckDrawCalls": {
+          "median": 98,
+          "min": 88,
+          "max": 129
+        },
+        "heapMB": {
+          "median": 49.38046646118164,
+          "min": 48.96031188964844,
+          "max": 49.6565055847168
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 22.615384615384617,
+          "min": 22.59375,
+          "max": 22.761904761904763
+        }
+      }
+    },
+    {
+      "name": "F1-camera",
+      "before": {
+        "elapsedMs": {
+          "median": 2247.399999976158,
+          "min": 2074.800000011921,
+          "max": 2264.5
+        },
+        "rafFPS": {
+          "median": 123.86736070875429,
+          "min": 121.47370294691473,
+          "max": 128.06359019651137
+        },
+        "drawnFPS": {
+          "median": 75.18796992438004,
+          "min": 67.63371006568146,
+          "max": 91.41090748509605
+        },
+        "p50FrameMs": {
+          "median": 6.100000000000364,
+          "min": 6.100000000000364,
+          "max": 6.100000000000364
+        },
+        "p95FrameMs": {
+          "median": 18.300000000000182,
+          "min": 18.100000000000364,
+          "max": 18.300000000000182
+        },
+        "p99FrameMs": {
+          "median": 24.399999999999636,
+          "min": 24.300000000000182,
+          "max": 30.300000000000182
+        },
+        "slowFrames": {
+          "median": 1,
+          "min": 1,
+          "max": 1
+        },
+        "scriptMs": {
+          "median": 1319.513,
+          "min": 1147.9060000000002,
+          "max": 1422.2379999999998
+        },
+        "taskMs": {
+          "median": 1437.9099999999996,
+          "min": 1248.9049999999997,
+          "max": 1549.1659999999997
+        },
+        "wallMeshReplacements": {
+          "median": 40,
+          "min": 39,
+          "max": 42
+        },
+        "bufferUploads": {
+          "median": 1426,
+          "min": 1414,
+          "max": 1684
+        },
+        "bufferBytes": {
+          "median": 14847088,
+          "min": 14486960,
+          "max": 15728836
+        },
+        "drawCalls": {
+          "median": 13048,
+          "min": 12901,
+          "max": 16893
+        },
+        "deckDrawCalls": {
+          "median": 206,
+          "min": 201,
+          "max": 216
+        },
+        "heapMB": {
+          "median": 50.19767379760742,
+          "min": 47.36494445800781,
+          "max": 57.44719696044922
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 83.64102564102564,
+          "min": 81.6086956521739,
+          "max": 84.875
+        }
+      },
+      "after": {
+        "elapsedMs": {
+          "median": 1878.800000011921,
+          "min": 1838.5,
+          "max": 1901.5
+        },
+        "rafFPS": {
+          "median": 148.49061735110143,
+          "min": 145.67446752563765,
+          "max": 149.56355120194647
+        },
+        "drawnFPS": {
+          "median": 112.83798168972476,
+          "min": 107.80962398106759,
+          "max": 116.94316018493336
+        },
+        "p50FrameMs": {
+          "median": 6.099999999999454,
+          "min": 6.099999999999454,
+          "max": 6.099999999999454
+        },
+        "p95FrameMs": {
+          "median": 7,
+          "min": 6.899999999999636,
+          "max": 7
+        },
+        "p99FrameMs": {
+          "median": 18.199999999999818,
+          "min": 15.399999999999636,
+          "max": 18.200000000000728
+        },
+        "slowFrames": {
+          "median": 1,
+          "min": 1,
+          "max": 1
+        },
+        "scriptMs": {
+          "median": 1070.0620000000001,
+          "min": 971.809,
+          "max": 1099.115
+        },
+        "taskMs": {
+          "median": 1170.6120000000008,
+          "min": 1073.2780000000002,
+          "max": 1202.4429999999998
+        },
+        "wallMeshReplacements": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "bufferUploads": {
+          "median": 1643,
+          "min": 1382,
+          "max": 1914
+        },
+        "bufferBytes": {
+          "median": 7284874,
+          "min": 7170320,
+          "max": 7847822
+        },
+        "drawCalls": {
+          "median": 20911,
+          "min": 18992,
+          "max": 24581
+        },
+        "deckDrawCalls": {
+          "median": 366,
+          "min": 351,
+          "max": 371
+        },
+        "heapMB": {
+          "median": 53.218994140625,
+          "min": 52.09251403808594,
+          "max": 57.6523551940918
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 102.00487804878048,
+          "min": 89.58490566037736,
+          "max": 114.33023255813953
+        }
+      }
+    },
+    {
+      "name": "F-ALL-load",
+      "before": {
+        "elapsedMs": {
+          "median": 2432.800000011921,
+          "min": 2362.599999964237,
+          "max": 2453.199999988079
+        },
+        "rafFPS": {
+          "median": 111.80532719445378,
+          "min": 111.6908527642799,
+          "max": 115.97392703129923
+        },
+        "drawnFPS": {
+          "median": 1.6441959881537322,
+          "min": 1.6305233980186846,
+          "max": 1.6930500296540032
+        },
+        "p50FrameMs": {
+          "median": 6.100000000000364,
+          "min": 6.099999999998545,
+          "max": 6.100000000000364
+        },
+        "p95FrameMs": {
+          "median": 6.5,
+          "min": 6.399999999999636,
+          "max": 6.5
+        },
+        "p99FrameMs": {
+          "median": 19.599999999998545,
+          "min": 18.100000000000364,
+          "max": 36.599999999998545
+        },
+        "slowFrames": {
+          "median": 1,
+          "min": 1,
+          "max": 2
+        },
+        "scriptMs": {
+          "median": 824.6669999999998,
+          "min": 749.9320000000002,
+          "max": 834.2800000000001
+        },
+        "taskMs": {
+          "median": 903.7389999999998,
+          "min": 815.5800000000006,
+          "max": 911.9099999999997
+        },
+        "wallMeshReplacements": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "bufferUploads": {
+          "median": 329,
+          "min": 329,
+          "max": 329
+        },
+        "bufferBytes": {
+          "median": 9220635,
+          "min": 9220635,
+          "max": 9220635
+        },
+        "drawCalls": {
+          "median": 58,
+          "min": 58,
+          "max": 58
+        },
+        "deckDrawCalls": {
+          "median": 58,
+          "min": 58,
+          "max": 58
+        },
+        "heapMB": {
+          "median": 74.9170913696289,
+          "min": 72.17147445678711,
+          "max": 78.49744415283203
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 14.5,
+          "min": 14.5,
+          "max": 14.5
+        }
+      },
+      "after": {
+        "elapsedMs": {
+          "median": 2481.100000023842,
+          "min": 2430.800000011921,
+          "max": 2494.899999976158
+        },
+        "rafFPS": {
+          "median": 110.625676380872,
+          "min": 108.41965257241347,
+          "max": 111.8973177549227
+        },
+        "drawnFPS": {
+          "median": 1.612188142340721,
+          "min": 1.6032706721865506,
+          "max": 1.645548790513569
+        },
+        "p50FrameMs": {
+          "median": 6.099999999998545,
+          "min": 6.099999999998545,
+          "max": 6.099999999998545
+        },
+        "p95FrameMs": {
+          "median": 6.200000000000728,
+          "min": 6.200000000000728,
+          "max": 7.100000000000364
+        },
+        "p99FrameMs": {
+          "median": 18.199999999999818,
+          "min": 18.099999999999454,
+          "max": 18.299999999999272
+        },
+        "slowFrames": {
+          "median": 1,
+          "min": 1,
+          "max": 1
+        },
+        "scriptMs": {
+          "median": 863.1580000000004,
+          "min": 816.1220000000001,
+          "max": 876.2280000000002
+        },
+        "taskMs": {
+          "median": 926.0399999999995,
+          "min": 878.3799999999999,
+          "max": 940.5770000000002
+        },
+        "wallMeshReplacements": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "bufferUploads": {
+          "median": 327,
+          "min": 327,
+          "max": 327
+        },
+        "bufferBytes": {
+          "median": 9151579,
+          "min": 9151579,
+          "max": 9151579
+        },
+        "drawCalls": {
+          "median": 58,
+          "min": 58,
+          "max": 58
+        },
+        "deckDrawCalls": {
+          "median": 58,
+          "min": 58,
+          "max": 58
+        },
+        "heapMB": {
+          "median": 75.95718383789062,
+          "min": 71.64651107788086,
+          "max": 78.90024185180664
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 14.5,
+          "min": 14.5,
+          "max": 14.5
+        }
+      }
+    },
+    {
+      "name": "F-ALL-camera",
+      "before": {
+        "elapsedMs": {
+          "median": 1973.3999999761581,
+          "min": 1970,
+          "max": 2016.8999999761581
+        },
+        "rafFPS": {
+          "median": 139.59390862944161,
+          "min": 137.835291786051,
+          "max": 147.46123441953773
+        },
+        "drawnFPS": {
+          "median": 112.49619945408034,
+          "min": 107.10659898477157,
+          "max": 129.40651495021336
+        },
+        "p50FrameMs": {
+          "median": 6.100000000000364,
+          "min": 6.100000000000364,
+          "max": 6.100000000000364
+        },
+        "p95FrameMs": {
+          "median": 12.200000000000728,
+          "min": 12.200000000000728,
+          "max": 12.300000000001091
+        },
+        "p99FrameMs": {
+          "median": 24.299999999999272,
+          "min": 18.400000000001455,
+          "max": 24.299999999999272
+        },
+        "slowFrames": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "scriptMs": {
+          "median": 1384.0500000000002,
+          "min": 1310.441,
+          "max": 1642.5340000000003
+        },
+        "taskMs": {
+          "median": 1507.0860000000002,
+          "min": 1436.7029999999995,
+          "max": 1767.265000000001
+        },
+        "wallMeshReplacements": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "bufferUploads": {
+          "median": 3848,
+          "min": 3780,
+          "max": 4195
+        },
+        "bufferBytes": {
+          "median": 20335784,
+          "min": 20275572,
+          "max": 21020160
+        },
+        "drawCalls": {
+          "median": 42070,
+          "min": 41004,
+          "max": 46608
+        },
+        "deckDrawCalls": {
+          "median": 1231,
+          "min": 1106,
+          "max": 1306
+        },
+        "heapMB": {
+          "median": 77.21924209594727,
+          "min": 52.17313766479492,
+          "max": 84.08633422851562
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 189.5045045045045,
+          "min": 178.57471264367817,
+          "max": 194.33175355450237
+        }
+      },
+      "after": {
+        "elapsedMs": {
+          "median": 1960.5,
+          "min": 1889.300000011921,
+          "max": 1983.4000000357628
+        },
+        "rafFPS": {
+          "median": 157.73037632886238,
+          "min": 151.7596047164327,
+          "max": 158.63300178525884
+        },
+        "drawnFPS": {
+          "median": 125.47819433817902,
+          "min": 118.4834123201385,
+          "max": 129.14836182631686
+        },
+        "p50FrameMs": {
+          "median": 6.099999999998545,
+          "min": 6.099999999998545,
+          "max": 6.100000000000364
+        },
+        "p95FrameMs": {
+          "median": 9.800000000001091,
+          "min": 6.899999999999636,
+          "max": 12.100000000000364
+        },
+        "p99FrameMs": {
+          "median": 12.100000000000364,
+          "min": 12.100000000000364,
+          "max": 12.899999999999636
+        },
+        "slowFrames": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "scriptMs": {
+          "median": 1222.2190000000003,
+          "min": 1204.2109999999996,
+          "max": 1280.0370000000005
+        },
+        "taskMs": {
+          "median": 1325.3700000000003,
+          "min": 1311.795,
+          "max": 1386.4279999999997
+        },
+        "wallMeshReplacements": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "bufferUploads": {
+          "median": 4895,
+          "min": 4313,
+          "max": 4918
+        },
+        "bufferBytes": {
+          "median": 19349120,
+          "min": 16310976,
+          "max": 19756032
+        },
+        "drawCalls": {
+          "median": 53456,
+          "min": 48602,
+          "max": 55518
+        },
+        "deckDrawCalls": {
+          "median": 1556,
+          "min": 1456,
+          "max": 1581
+        },
+        "heapMB": {
+          "median": 91.19392776489258,
+          "min": 83.10248947143555,
+          "max": 102.34021759033203
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 225.6829268292683,
+          "min": 199.18852459016392,
+          "max": 227.4723404255319
+        }
+      }
+    },
+    {
+      "name": "floor-switch-all-eight",
+      "before": {
+        "elapsedMs": {
+          "median": 2717.599999964237,
+          "min": 2617.199999988079,
+          "max": 3287.900000035763
+        },
+        "rafFPS": {
+          "median": 90.15307624493087,
+          "min": 68.12859271801561,
+          "max": 90.93687910785728
+        },
+        "drawnFPS": {
+          "median": 5.887547836403648,
+          "min": 4.866328051286829,
+          "max": 6.113403637503009
+        },
+        "p50FrameMs": {
+          "median": 6.100000000000364,
+          "min": 6.099999999998545,
+          "max": 6.100000000000364
+        },
+        "p95FrameMs": {
+          "median": 12,
+          "min": 11.899999999999636,
+          "max": 18.100000000000364
+        },
+        "p99FrameMs": {
+          "median": 151.60000000000036,
+          "min": 139.5,
+          "max": 290.8000000000011
+        },
+        "slowFrames": {
+          "median": 9,
+          "min": 9,
+          "max": 10
+        },
+        "scriptMs": {
+          "median": 1201.6660000000004,
+          "min": 1128.5239999999997,
+          "max": 1606.7650000000003
+        },
+        "taskMs": {
+          "median": 1401.2360000000008,
+          "min": 1313.9470000000006,
+          "max": 1783.7490000000003
+        },
+        "wallMeshReplacements": {
+          "median": 8,
+          "min": 8,
+          "max": 8
+        },
+        "bufferUploads": {
+          "median": 473,
+          "min": 473,
+          "max": 473
+        },
+        "bufferBytes": {
+          "median": 13121232,
+          "min": 13121232,
+          "max": 13121232
+        },
+        "drawCalls": {
+          "median": 52,
+          "min": 52,
+          "max": 52
+        },
+        "deckDrawCalls": {
+          "median": 52,
+          "min": 52,
+          "max": 52
+        },
+        "heapMB": {
+          "median": 91.0190544128418,
+          "min": 90.44958114624023,
+          "max": 99.04843521118164
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 3.25,
+          "min": 3.25,
+          "max": 3.25
+        }
+      },
+      "after": {
+        "elapsedMs": {
+          "median": 2425.5,
+          "min": 2395.100000023842,
+          "max": 2450.899999976158
+        },
+        "rafFPS": {
+          "median": 98.3312252651452,
+          "min": 97.28195064827382,
+          "max": 100.59781488352917
+        },
+        "drawnFPS": {
+          "median": 6.596578025149453,
+          "min": 6.528214125486819,
+          "max": 6.680305623915799
+        },
+        "p50FrameMs": {
+          "median": 6.100000000000364,
+          "min": 6.099999999998545,
+          "max": 6.100000000000364
+        },
+        "p95FrameMs": {
+          "median": 16.899999999999636,
+          "min": 12,
+          "max": 18.100000000000364
+        },
+        "p99FrameMs": {
+          "median": 121.10000000000036,
+          "min": 109.20000000000073,
+          "max": 127.19999999999891
+        },
+        "slowFrames": {
+          "median": 8,
+          "min": 8,
+          "max": 8
+        },
+        "scriptMs": {
+          "median": 952.6079999999997,
+          "min": 940.0559999999994,
+          "max": 973.9449999999996
+        },
+        "taskMs": {
+          "median": 1142.2490000000005,
+          "min": 1134.7309999999995,
+          "max": 1175.3840000000012
+        },
+        "wallMeshReplacements": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "bufferUploads": {
+          "median": 401,
+          "min": 401,
+          "max": 401
+        },
+        "bufferBytes": {
+          "median": 12640624,
+          "min": 12640624,
+          "max": 12640624
+        },
+        "drawCalls": {
+          "median": 52,
+          "min": 52,
+          "max": 52
+        },
+        "deckDrawCalls": {
+          "median": 52,
+          "min": 52,
+          "max": 52
+        },
+        "heapMB": {
+          "median": 49.41823959350586,
+          "min": 46.837745666503906,
+          "max": 124.69011688232422
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 3.25,
+          "min": 3.25,
+          "max": 3.25
+        }
+      }
+    },
+    {
+      "name": "search",
+      "before": {
+        "elapsedMs": {
+          "median": 109.19999998807907,
+          "min": 107.39999997615814,
+          "max": 134.9000000357628
+        },
+        "rafFPS": {
+          "median": 148.9757914669633,
+          "min": 126.01927350254411,
+          "max": 155.67765569465038
+        },
+        "drawnFPS": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p50FrameMs": {
+          "median": 6.100000000000364,
+          "min": 6.099999999998545,
+          "max": 6.100000000000364
+        },
+        "p95FrameMs": {
+          "median": 18.19999999999891,
+          "min": 17.899999999999636,
+          "max": 24.399999999997817
+        },
+        "p99FrameMs": {
+          "median": 18.19999999999891,
+          "min": 17.899999999999636,
+          "max": 24.399999999997817
+        },
+        "slowFrames": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "scriptMs": {
+          "median": 16.318000000000055,
+          "min": 16.129999999999534,
+          "max": 24.924999999999642
+        },
+        "taskMs": {
+          "median": 72.14999999999883,
+          "min": 70.26200000000138,
+          "max": 91.67900000000095
+        },
+        "wallMeshReplacements": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "bufferUploads": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "bufferBytes": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "drawCalls": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "deckDrawCalls": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "heapMB": {
+          "median": 95.11924743652344,
+          "min": 69.62871932983398,
+          "max": 103.16511535644531
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "queries": [
+          [
+            {
+              "q": "staff",
+              "ms": 49,
+              "count": 12
+            },
+            {
+              "q": "0362",
+              "ms": 22,
+              "count": 6
+            },
+            {
+              "q": "room",
+              "ms": 30,
+              "count": 47
+            },
+            {
+              "q": "library",
+              "ms": 22,
+              "count": 8
+            }
+          ],
+          [
+            {
+              "q": "staff",
+              "ms": 24,
+              "count": 12
+            },
+            {
+              "q": "0362",
+              "ms": 15,
+              "count": 6
+            },
+            {
+              "q": "room",
+              "ms": 29,
+              "count": 47
+            },
+            {
+              "q": "library",
+              "ms": 27,
+              "count": 8
+            }
+          ],
+          [
+            {
+              "q": "staff",
+              "ms": 23,
+              "count": 12
+            },
+            {
+              "q": "0362",
+              "ms": 13,
+              "count": 6
+            },
+            {
+              "q": "room",
+              "ms": 27,
+              "count": 47
+            },
+            {
+              "q": "library",
+              "ms": 35,
+              "count": 8
+            }
+          ]
+        ]
+      },
+      "after": {
+        "elapsedMs": {
+          "median": 112.39999997615814,
+          "min": 78.19999998807907,
+          "max": 116.19999998807907
+        },
+        "rafFPS": {
+          "median": 137.69363168366124,
+          "min": 115.65836301385684,
+          "max": 153.45268544538746
+        },
+        "drawnFPS": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "p50FrameMs": {
+          "median": 6.100000000000364,
+          "min": 6.099999999998545,
+          "max": 6.100000000000364
+        },
+        "p95FrameMs": {
+          "median": 18.200000000000728,
+          "min": 18,
+          "max": 24.30000000000109
+        },
+        "p99FrameMs": {
+          "median": 18.200000000000728,
+          "min": 18,
+          "max": 24.30000000000109
+        },
+        "slowFrames": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "scriptMs": {
+          "median": 19.261999999999446,
+          "min": 18.175999999999526,
+          "max": 19.756000000000107
+        },
+        "taskMs": {
+          "median": 71.81300000000057,
+          "min": 56.423000000000556,
+          "max": 76.34000000000007
+        },
+        "wallMeshReplacements": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "bufferUploads": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "bufferBytes": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "drawCalls": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "deckDrawCalls": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "heapMB": {
+          "median": 53.53007888793945,
+          "min": 50.95716857910156,
+          "max": 103.7303581237793
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "queries": [
+          [
+            {
+              "q": "staff",
+              "ms": 24,
+              "count": 12
+            },
+            {
+              "q": "0362",
+              "ms": 13,
+              "count": 6
+            },
+            {
+              "q": "room",
+              "ms": 18,
+              "count": 47
+            },
+            {
+              "q": "library",
+              "ms": 14,
+              "count": 8
+            }
+          ],
+          [
+            {
+              "q": "staff",
+              "ms": 28,
+              "count": 12
+            },
+            {
+              "q": "0362",
+              "ms": 20,
+              "count": 6
+            },
+            {
+              "q": "room",
+              "ms": 34,
+              "count": 47
+            },
+            {
+              "q": "library",
+              "ms": 21,
+              "count": 8
+            }
+          ],
+          [
+            {
+              "q": "staff",
+              "ms": 28,
+              "count": 12
+            },
+            {
+              "q": "0362",
+              "ms": 17,
+              "count": 6
+            },
+            {
+              "q": "room",
+              "ms": 33,
+              "count": 47
+            },
+            {
+              "q": "library",
+              "ms": 21,
+              "count": 8
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "name": "above-below-first",
+      "before": {
+        "elapsedMs": {
+          "median": 852,
+          "min": 753.6999999880791,
+          "max": 1557.300000011921
+        },
+        "rafFPS": {
+          "median": 63.38028169014084,
+          "min": 55.86592178728185,
+          "max": 79.6072707986586
+        },
+        "drawnFPS": {
+          "median": 10.56338028169014,
+          "min": 7.705644384452668,
+          "max": 11.941090619798793
+        },
+        "p50FrameMs": {
+          "median": 6.099999999998545,
+          "min": 6.099999999998545,
+          "max": 6.099999999998545
+        },
+        "p95FrameMs": {
+          "median": 18.200000000000728,
+          "min": 9.899999999997817,
+          "max": 18.299999999999272
+        },
+        "p99FrameMs": {
+          "median": 430.2999999999993,
+          "min": 321.2999999999993,
+          "max": 897.1000000000022
+        },
+        "slowFrames": {
+          "median": 1,
+          "min": 1,
+          "max": 1
+        },
+        "scriptMs": {
+          "median": 501.2400000000001,
+          "min": 383.43799999999993,
+          "max": 959.8499999999995
+        },
+        "taskMs": {
+          "median": 585.0200000000001,
+          "min": 451.8159999999991,
+          "max": 1100.1059999999984
+        },
+        "wallMeshReplacements": {
+          "median": 3,
+          "min": 3,
+          "max": 3
+        },
+        "bufferUploads": {
+          "median": 84,
+          "min": 83,
+          "max": 84
+        },
+        "bufferBytes": {
+          "median": 327728,
+          "min": 327728,
+          "max": 328688
+        },
+        "drawCalls": {
+          "median": 224,
+          "min": 224,
+          "max": 314
+        },
+        "deckDrawCalls": {
+          "median": 17,
+          "min": 17,
+          "max": 17
+        },
+        "heapMB": {
+          "median": 98.34721374511719,
+          "min": 63.60252380371094,
+          "max": 106.45289611816406
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 24.88888888888889,
+          "min": 24.88888888888889,
+          "max": 26.166666666666668
+        },
+        "workerTimes": [
+          {
+            "status": "ready",
+            "analysisMs": 343.7000000476837,
+            "preparationMs": 145.5,
+            "counts": [
+              {
+                "floor": 2,
+                "count": 5
+              },
+              {
+                "floor": 4,
+                "count": 4
+              },
+              {
+                "floor": 1,
+                "count": 12
+              },
+              {
+                "floor": 5,
+                "count": 4
+              },
+              {
+                "floor": 0,
+                "count": 8
+              },
+              {
+                "floor": 6,
+                "count": 7
+              },
+              {
+                "floor": 7,
+                "count": 7
+              }
+            ]
+          },
+          {
+            "status": "ready",
+            "analysisMs": 166.39999997615814,
+            "preparationMs": 163.89999997615814,
+            "counts": [
+              {
+                "floor": 2,
+                "count": 5
+              },
+              {
+                "floor": 4,
+                "count": 4
+              },
+              {
+                "floor": 1,
+                "count": 12
+              },
+              {
+                "floor": 5,
+                "count": 4
+              },
+              {
+                "floor": 0,
+                "count": 8
+              },
+              {
+                "floor": 6,
+                "count": 7
+              },
+              {
+                "floor": 7,
+                "count": 7
+              }
+            ]
+          },
+          {
+            "status": "ready",
+            "analysisMs": 143.60000002384186,
+            "preparationMs": 113.60000002384186,
+            "counts": [
+              {
+                "floor": 2,
+                "count": 5
+              },
+              {
+                "floor": 4,
+                "count": 4
+              },
+              {
+                "floor": 1,
+                "count": 12
+              },
+              {
+                "floor": 5,
+                "count": 4
+              },
+              {
+                "floor": 0,
+                "count": 8
+              },
+              {
+                "floor": 6,
+                "count": 7
+              },
+              {
+                "floor": 7,
+                "count": 7
+              }
+            ]
+          }
+        ]
+      },
+      "after": {
+        "elapsedMs": {
+          "median": 569.5,
+          "min": 550.6999999880791,
+          "max": 598.3000000119209
+        },
+        "rafFPS": {
+          "median": 85.3459233721035,
+          "min": 78.5559084055884,
+          "max": 86.04038630377524
+        },
+        "drawnFPS": {
+          "median": 30.085241517033854,
+          "min": 29.850746268656717,
+          "max": 32.6856727808056
+        },
+        "p50FrameMs": {
+          "median": 6.099999999998545,
+          "min": 6.099999999998545,
+          "max": 6.099999999998545
+        },
+        "p95FrameMs": {
+          "median": 10,
+          "min": 8.5,
+          "max": 13.099999999998545
+        },
+        "p99FrameMs": {
+          "median": 254.59999999999854,
+          "min": 230.3000000000029,
+          "max": 266.7000000000007
+        },
+        "slowFrames": {
+          "median": 1,
+          "min": 1,
+          "max": 1
+        },
+        "scriptMs": {
+          "median": 290.04100000000045,
+          "min": 264.54300000000063,
+          "max": 299.7330000000007
+        },
+        "taskMs": {
+          "median": 335.1279999999992,
+          "min": 324.57000000000136,
+          "max": 359.769
+        },
+        "wallMeshReplacements": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "bufferUploads": {
+          "median": 59,
+          "min": 58,
+          "max": 59
+        },
+        "bufferBytes": {
+          "median": 44972,
+          "min": 44460,
+          "max": 44972
+        },
+        "drawCalls": {
+          "median": 494,
+          "min": 464,
+          "max": 494
+        },
+        "deckDrawCalls": {
+          "median": 17,
+          "min": 17,
+          "max": 17
+        },
+        "heapMB": {
+          "median": 74.7296142578125,
+          "min": 73.73826599121094,
+          "max": 74.77228927612305
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 27.444444444444443,
+          "min": 27.294117647058822,
+          "max": 27.444444444444443
+        },
+        "workerTimes": [
+          {
+            "status": "ready",
+            "analysisMs": 135.30000001192093,
+            "preparationMs": 96.80000001192093,
+            "counts": [
+              {
+                "floor": 2,
+                "count": 5
+              },
+              {
+                "floor": 4,
+                "count": 4
+              },
+              {
+                "floor": 1,
+                "count": 12
+              },
+              {
+                "floor": 5,
+                "count": 4
+              },
+              {
+                "floor": 0,
+                "count": 8
+              },
+              {
+                "floor": 6,
+                "count": 7
+              },
+              {
+                "floor": 7,
+                "count": 7
+              }
+            ]
+          },
+          {
+            "status": "ready",
+            "analysisMs": 147.39999997615814,
+            "preparationMs": 111.79999995231628,
+            "counts": [
+              {
+                "floor": 2,
+                "count": 5
+              },
+              {
+                "floor": 4,
+                "count": 4
+              },
+              {
+                "floor": 1,
+                "count": 12
+              },
+              {
+                "floor": 5,
+                "count": 4
+              },
+              {
+                "floor": 0,
+                "count": 8
+              },
+              {
+                "floor": 6,
+                "count": 7
+              },
+              {
+                "floor": 7,
+                "count": 7
+              }
+            ]
+          },
+          {
+            "status": "ready",
+            "analysisMs": 141.0999999642372,
+            "preparationMs": 106.89999997615814,
+            "counts": [
+              {
+                "floor": 2,
+                "count": 5
+              },
+              {
+                "floor": 4,
+                "count": 4
+              },
+              {
+                "floor": 1,
+                "count": 12
+              },
+              {
+                "floor": 5,
+                "count": 4
+              },
+              {
+                "floor": 0,
+                "count": 8
+              },
+              {
+                "floor": 6,
+                "count": 7
+              },
+              {
+                "floor": 7,
+                "count": 7
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "above-below-cached",
+      "before": {
+        "elapsedMs": {
+          "median": 172.19999998807907,
+          "min": 98.80000001192093,
+          "max": 196.4000000357628
+        },
+        "rafFPS": {
+          "median": 98.7224158024208,
+          "min": 76.37474540360807,
+          "max": 121.4574898638878
+        },
+        "drawnFPS": {
+          "median": 17.421602788662494,
+          "min": 15.274949080721616,
+          "max": 20.242914977314634
+        },
+        "p50FrameMs": {
+          "median": 6.099999999998545,
+          "min": 6.099999999998545,
+          "max": 6.200000000000728
+        },
+        "p95FrameMs": {
+          "median": 48.5,
+          "min": 30.099999999998545,
+          "max": 48.70000000000073
+        },
+        "p99FrameMs": {
+          "median": 48.5,
+          "min": 30.099999999998545,
+          "max": 48.70000000000073
+        },
+        "slowFrames": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "scriptMs": {
+          "median": 100.06899999999952,
+          "min": 48.97899999999922,
+          "max": 124.9910000000014
+        },
+        "taskMs": {
+          "median": 137.5799999999998,
+          "min": 71.03699999999868,
+          "max": 162.45699999999985
+        },
+        "wallMeshReplacements": {
+          "median": 3,
+          "min": 2,
+          "max": 3
+        },
+        "bufferUploads": {
+          "median": 55,
+          "min": 45,
+          "max": 55
+        },
+        "bufferBytes": {
+          "median": 306160,
+          "min": 210564,
+          "max": 306160
+        },
+        "drawCalls": {
+          "median": 17,
+          "min": 12,
+          "max": 17
+        },
+        "deckDrawCalls": {
+          "median": 17,
+          "min": 12,
+          "max": 17
+        },
+        "heapMB": {
+          "median": 77.48271179199219,
+          "min": 68.02102279663086,
+          "max": 111.19961547851562
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 5.666666666666667,
+          "min": 5.666666666666667,
+          "max": 6
+        }
+      },
+      "after": {
+        "elapsedMs": {
+          "median": 51,
+          "min": 43.19999998807907,
+          "max": 59.19999998807907
+        },
+        "rafFPS": {
+          "median": 162.03703708175075,
+          "min": 135.1351351623469,
+          "max": 176.47058823529412
+        },
+        "drawnFPS": {
+          "median": 50.67567568588009,
+          "min": 39.21568627450981,
+          "max": 69.44444446360747
+        },
+        "p50FrameMs": {
+          "median": 6.099999999998545,
+          "min": 6,
+          "max": 6.099999999998545
+        },
+        "p95FrameMs": {
+          "median": 14,
+          "min": 12.100000000002183,
+          "max": 18.19999999999709
+        },
+        "p99FrameMs": {
+          "median": 14,
+          "min": 12.100000000002183,
+          "max": 18.19999999999709
+        },
+        "slowFrames": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "scriptMs": {
+          "median": 17.078999999999844,
+          "min": 16.08499999999946,
+          "max": 21.784000000000248
+        },
+        "taskMs": {
+          "median": 30.951999999999202,
+          "min": 28.682999999999126,
+          "max": 38.45199999999949
+        },
+        "wallMeshReplacements": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "bufferUploads": {
+          "median": 25,
+          "min": 25,
+          "max": 25
+        },
+        "bufferBytes": {
+          "median": 19372,
+          "min": 19372,
+          "max": 19372
+        },
+        "drawCalls": {
+          "median": 12,
+          "min": 12,
+          "max": 12
+        },
+        "deckDrawCalls": {
+          "median": 12,
+          "min": 12,
+          "max": 12
+        },
+        "heapMB": {
+          "median": 76.74933242797852,
+          "min": 75.75356674194336,
+          "max": 76.79516220092773
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 4,
+          "min": 4,
+          "max": 6
+        }
+      }
+    },
+    {
+      "name": "night-architectural-load",
+      "before": {
+        "elapsedMs": {
+          "median": 2313,
+          "min": 1448.1000000238419,
+          "max": 2407.300000011921
+        },
+        "rafFPS": {
+          "median": 99.69675570091452,
+          "min": 75.27104481610759,
+          "max": 104.62602680501513
+        },
+        "drawnFPS": {
+          "median": 43.23389537397319,
+          "min": 41.54031487538105,
+          "max": 69.74656446263181
+        },
+        "p50FrameMs": {
+          "median": 6.099999999998545,
+          "min": 6.099999999998545,
+          "max": 6.099999999998545
+        },
+        "p95FrameMs": {
+          "median": 6.5,
+          "min": 6.30000000000291,
+          "max": 12.100000000002183
+        },
+        "p99FrameMs": {
+          "median": 175.79999999999927,
+          "min": 139.40000000000146,
+          "max": 242.20000000000073
+        },
+        "slowFrames": {
+          "median": 3,
+          "min": 3,
+          "max": 3
+        },
+        "scriptMs": {
+          "median": 693.5650000000013,
+          "min": 638.5509999999997,
+          "max": 800.5060000000004
+        },
+        "taskMs": {
+          "median": 1211.6439999999998,
+          "min": 1073.3619999999994,
+          "max": 1370.7140000000013
+        },
+        "wallMeshReplacements": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "bufferUploads": {
+          "median": 463,
+          "min": 463,
+          "max": 465
+        },
+        "bufferBytes": {
+          "median": 15473030,
+          "min": 15473030,
+          "max": 15476102
+        },
+        "drawCalls": {
+          "median": 3215,
+          "min": 3161,
+          "max": 3355
+        },
+        "deckDrawCalls": {
+          "median": 53,
+          "min": 53,
+          "max": 53
+        },
+        "heapMB": {
+          "median": 122.58154678344727,
+          "min": 99.6089096069336,
+          "max": 141.75714492797852
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 32.15,
+          "min": 31.61,
+          "max": 33.21782178217822
+        }
+      },
+      "after": {
+        "elapsedMs": {
+          "median": 2628.600000023842,
+          "min": 2205.100000023842,
+          "max": 2630.399999976158
+        },
+        "rafFPS": {
+          "median": 90.54249410250372,
+          "min": 90.10036496432032,
+          "max": 107.024624732415
+        },
+        "drawnFPS": {
+          "median": 37.2566909979046,
+          "min": 36.5213421589931,
+          "max": 46.70989977728282
+        },
+        "p50FrameMs": {
+          "median": 6.099999999998545,
+          "min": 6.099999999998545,
+          "max": 6.099999999998545
+        },
+        "p95FrameMs": {
+          "median": 9.099999999998545,
+          "min": 6.799999999999272,
+          "max": 11.899999999997817
+        },
+        "p99FrameMs": {
+          "median": 30.399999999997817,
+          "min": 22.299999999999272,
+          "max": 188
+        },
+        "slowFrames": {
+          "median": 2,
+          "min": 2,
+          "max": 3
+        },
+        "scriptMs": {
+          "median": 1056.4329999999993,
+          "min": 879.6789999999994,
+          "max": 1341.2570000000005
+        },
+        "taskMs": {
+          "median": 1546.6069999999997,
+          "min": 1246.5720000000006,
+          "max": 1547.5820000000003
+        },
+        "wallMeshReplacements": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "bufferUploads": {
+          "median": 463,
+          "min": 463,
+          "max": 463
+        },
+        "bufferBytes": {
+          "median": 15473030,
+          "min": 15473030,
+          "max": 15473030
+        },
+        "drawCalls": {
+          "median": 3063,
+          "min": 3059,
+          "max": 3465
+        },
+        "deckDrawCalls": {
+          "median": 53,
+          "min": 53,
+          "max": 53
+        },
+        "heapMB": {
+          "median": 102.65428161621094,
+          "min": 85.05633163452148,
+          "max": 106.33732604980469
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 31.864583333333332,
+          "min": 31.255102040816325,
+          "max": 33.640776699029125
+        }
+      }
+    },
+    {
+      "name": "night-architectural-camera",
+      "before": {
+        "elapsedMs": {
+          "median": 1785.199999988079,
+          "min": 1781.7000000476837,
+          "max": 1857.5
+        },
+        "rafFPS": {
+          "median": 161.32646202213934,
+          "min": 153.97039030955585,
+          "max": 164.4496828827291
+        },
+        "drawnFPS": {
+          "median": 109.79161998728927,
+          "min": 107.13324360699865,
+          "max": 112.8136049809848
+        },
+        "p50FrameMs": {
+          "median": 6.099999999998545,
+          "min": 6.099999999998545,
+          "max": 6.099999999998545
+        },
+        "p95FrameMs": {
+          "median": 6.399999999997817,
+          "min": 6.299999999999272,
+          "max": 12.100000000002183
+        },
+        "p99FrameMs": {
+          "median": 12.19999999999709,
+          "min": 8.700000000000728,
+          "max": 12.69999999999709
+        },
+        "slowFrames": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "scriptMs": {
+          "median": 724.1520000000002,
+          "min": 639.6479999999993,
+          "max": 793.17
+        },
+        "taskMs": {
+          "median": 858.1059999999993,
+          "min": 765.8170000000002,
+          "max": 933.387999999999
+        },
+        "wallMeshReplacements": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "bufferUploads": {
+          "median": 867,
+          "min": 775,
+          "max": 887
+        },
+        "bufferBytes": {
+          "median": 13537136,
+          "min": 11259152,
+          "max": 14549396
+        },
+        "drawCalls": {
+          "median": 13894,
+          "min": 12998,
+          "max": 14412
+        },
+        "deckDrawCalls": {
+          "median": 1798,
+          "min": 1574,
+          "max": 1994
+        },
+        "heapMB": {
+          "median": 110.06932830810547,
+          "min": 101.86478042602539,
+          "max": 135.96136474609375
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 70.88775510204081,
+          "min": 65.31658291457286,
+          "max": 71.70149253731343
+        }
+      },
+      "after": {
+        "elapsedMs": {
+          "median": 1757.300000011921,
+          "min": 1750.199999988079,
+          "max": 2247.5
+        },
+        "rafFPS": {
+          "median": 164.4568371923061,
+          "min": 136.15127919911012,
+          "max": 164.5526225585428
+        },
+        "drawnFPS": {
+          "median": 114.84401782731634,
+          "min": 106.78531701890991,
+          "max": 115.51812439459563
+        },
+        "p50FrameMs": {
+          "median": 6.099999999998545,
+          "min": 6.099999999998545,
+          "max": 6.099999999998545
+        },
+        "p95FrameMs": {
+          "median": 6.200000000000728,
+          "min": 6.200000000000728,
+          "max": 16.5
+        },
+        "p99FrameMs": {
+          "median": 11.200000000000728,
+          "min": 10.200000000000728,
+          "max": 24.299999999999272
+        },
+        "slowFrames": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "scriptMs": {
+          "median": 628.4220000000005,
+          "min": 591.5119999999998,
+          "max": 1459.3600000000001
+        },
+        "taskMs": {
+          "median": 745.4290000000015,
+          "min": 701.3439999999989,
+          "max": 1741.8910000000008
+        },
+        "wallMeshReplacements": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "bufferUploads": {
+          "median": 810,
+          "min": 725,
+          "max": 824
+        },
+        "bufferBytes": {
+          "median": 4920240,
+          "min": 3901474,
+          "max": 5046512
+        },
+        "drawCalls": {
+          "median": 15017,
+          "min": 13629,
+          "max": 15160
+        },
+        "deckDrawCalls": {
+          "median": 2134,
+          "min": 1322,
+          "max": 2190
+        },
+        "heapMB": {
+          "median": 102.54488754272461,
+          "min": 87.95256423950195,
+          "max": 116.71849822998047
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 74.67980295566502,
+          "min": 56.7875,
+          "max": 74.71144278606965
+        }
+      }
+    },
+    {
+      "name": "night-gis-load",
+      "before": {
+        "elapsedMs": {
+          "median": 1426.800000011921,
+          "min": 1422.699999988079,
+          "max": 1438.5
+        },
+        "rafFPS": {
+          "median": 161.97427876259994,
+          "min": 157.44710761360577,
+          "max": 163.30249509255208
+        },
+        "drawnFPS": {
+          "median": 59.08932916232186,
+          "min": 54.12244324217698,
+          "max": 63.078216988539424
+        },
+        "p50FrameMs": {
+          "median": 6.099999999998545,
+          "min": 6.099999999998545,
+          "max": 6.099999999998545
+        },
+        "p95FrameMs": {
+          "median": 6.30000000000291,
+          "min": 6.299999999999272,
+          "max": 8.900000000001455
+        },
+        "p99FrameMs": {
+          "median": 12.100000000002183,
+          "min": 12.099999999998545,
+          "max": 12.200000000000728
+        },
+        "slowFrames": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "scriptMs": {
+          "median": 519.153000000001,
+          "min": 472.5850000000005,
+          "max": 527.552
+        },
+        "taskMs": {
+          "median": 610.7259999999997,
+          "min": 560.5039999999999,
+          "max": 613.2760000000026
+        },
+        "wallMeshReplacements": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "bufferUploads": {
+          "median": 2269,
+          "min": 2053,
+          "max": 2404
+        },
+        "bufferBytes": {
+          "median": 11613596,
+          "min": 10520284,
+          "max": 12296916
+        },
+        "drawCalls": {
+          "median": 2380,
+          "min": 2156,
+          "max": 2520
+        },
+        "deckDrawCalls": {
+          "median": 2380,
+          "min": 2156,
+          "max": 2520
+        },
+        "heapMB": {
+          "median": 124.05674362182617,
+          "min": 107.3132095336914,
+          "max": 141.30503845214844
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 28,
+          "min": 28,
+          "max": 28
+        }
+      },
+      "after": {
+        "elapsedMs": {
+          "median": 1421.5999999642372,
+          "min": 1420.0999999642372,
+          "max": 1466.300000011921
+        },
+        "rafFPS": {
+          "median": 164.60326393210937,
+          "min": 160.2673395608603,
+          "max": 164.7771283753911
+        },
+        "drawnFPS": {
+          "median": 64.71581316988916,
+          "min": 55.24108299757312,
+          "max": 64.78417013049564
+        },
+        "p50FrameMs": {
+          "median": 6.099999999998545,
+          "min": 6.099999999998545,
+          "max": 6.099999999998545
+        },
+        "p95FrameMs": {
+          "median": 6.200000000000728,
+          "min": 6.200000000000728,
+          "max": 8
+        },
+        "p99FrameMs": {
+          "median": 10.099999999998545,
+          "min": 7.299999999999272,
+          "max": 12.19999999999709
+        },
+        "slowFrames": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "scriptMs": {
+          "median": 439.35800000000035,
+          "min": 413.8529999999996,
+          "max": 506.95600000000064
+        },
+        "taskMs": {
+          "median": 506.7149999999998,
+          "min": 482.93499999999943,
+          "max": 589.7179999999995
+        },
+        "wallMeshReplacements": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "bufferUploads": {
+          "median": 2457,
+          "min": 2160,
+          "max": 2457
+        },
+        "bufferBytes": {
+          "median": 12436424,
+          "min": 10933120,
+          "max": 12436424
+        },
+        "drawCalls": {
+          "median": 2576,
+          "min": 2268,
+          "max": 2576
+        },
+        "deckDrawCalls": {
+          "median": 2576,
+          "min": 2268,
+          "max": 2576
+        },
+        "heapMB": {
+          "median": 115.5564193725586,
+          "min": 77.66911697387695,
+          "max": 120.28754806518555
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 28,
+          "min": 28,
+          "max": 28
+        }
+      }
+    },
+    {
+      "name": "night-gis-camera",
+      "before": {
+        "elapsedMs": {
+          "median": 1850.9000000357628,
+          "min": 1839.7999999523163,
+          "max": 1955.699999988079
+        },
+        "rafFPS": {
+          "median": 152.88643452565452,
+          "min": 152.19045548823624,
+          "max": 153.43886757497032
+        },
+        "drawnFPS": {
+          "median": 125.34442703307435,
+          "min": 117.09362376714009,
+          "max": 127.18773780088313
+        },
+        "p50FrameMs": {
+          "median": 6.099999999998545,
+          "min": 6.099999999998545,
+          "max": 6.099999999998545
+        },
+        "p95FrameMs": {
+          "median": 6.700000000000728,
+          "min": 6.399999999997817,
+          "max": 9.100000000002183
+        },
+        "p99FrameMs": {
+          "median": 14.100000000002183,
+          "min": 12.200000000000728,
+          "max": 18.200000000000728
+        },
+        "slowFrames": {
+          "median": 1,
+          "min": 1,
+          "max": 1
+        },
+        "scriptMs": {
+          "median": 1045.7969999999984,
+          "min": 951.0290000000001,
+          "max": 1138.5700000000015
+        },
+        "taskMs": {
+          "median": 1213.9510000000016,
+          "min": 1087.4379999999987,
+          "max": 1291.8279999999988
+        },
+        "wallMeshReplacements": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "bufferUploads": {
+          "median": 1833,
+          "min": 1784,
+          "max": 1835
+        },
+        "bufferBytes": {
+          "median": 18148072,
+          "min": 17649784,
+          "max": 18212362
+        },
+        "drawCalls": {
+          "median": 27577,
+          "min": 27390,
+          "max": 29299
+        },
+        "deckDrawCalls": {
+          "median": 1490,
+          "min": 1378,
+          "max": 1518
+        },
+        "heapMB": {
+          "median": 112.12564849853516,
+          "min": 61.2891960144043,
+          "max": 130.48224639892578
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 120.4235807860262,
+          "min": 117.05128205128206,
+          "max": 126.28879310344827
+        }
+      },
+      "after": {
+        "elapsedMs": {
+          "median": 1797.6000000238419,
+          "min": 1768.6000000238419,
+          "max": 1801.7999999523163
+        },
+        "rafFPS": {
+          "median": 159.84015984438992,
+          "min": 157.4321317291091,
+          "max": 161.14440800416037
+        },
+        "drawnFPS": {
+          "median": 107.6701076729571,
+          "min": 105.14018691449336,
+          "max": 110.82211918882608
+        },
+        "p50FrameMs": {
+          "median": 6.099999999998545,
+          "min": 6.099999999998545,
+          "max": 6.099999999998545
+        },
+        "p95FrameMs": {
+          "median": 6.200000000000728,
+          "min": 6.200000000000728,
+          "max": 6.200000000000728
+        },
+        "p99FrameMs": {
+          "median": 9.799999999999272,
+          "min": 7.700000000000728,
+          "max": 12.799999999999272
+        },
+        "slowFrames": {
+          "median": 1,
+          "min": 0,
+          "max": 1
+        },
+        "scriptMs": {
+          "median": 734.4689999999989,
+          "min": 730.9890000000009,
+          "max": 778.5019999999996
+        },
+        "taskMs": {
+          "median": 839.2719999999994,
+          "min": 832.3140000000002,
+          "max": 896.7869999999998
+        },
+        "wallMeshReplacements": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "bufferUploads": {
+          "median": 1555,
+          "min": 1477,
+          "max": 1596
+        },
+        "bufferBytes": {
+          "median": 9618684,
+          "min": 8444130,
+          "max": 9897468
+        },
+        "drawCalls": {
+          "median": 24843,
+          "min": 24401,
+          "max": 25914
+        },
+        "deckDrawCalls": {
+          "median": 1966,
+          "min": 1826,
+          "max": 2022
+        },
+        "heapMB": {
+          "median": 121.85295486450195,
+          "min": 85.55631637573242,
+          "max": 124.23990631103516
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 131.44444444444446,
+          "min": 125.77835051546391,
+          "max": 132.21428571428572
+        }
+      }
+    },
+    {
+      "name": "route-plan",
+      "before": {
+        "elapsedMs": {
+          "median": 2742.400000035763,
+          "min": 2725.699999988079,
+          "max": 2907
+        },
+        "rafFPS": {
+          "median": 75.67939456484348,
+          "min": 63.448074678285785,
+          "max": 81.44696775175953
+        },
+        "drawnFPS": {
+          "median": 33.367733058135535,
+          "min": 32.817969661182296,
+          "max": 34.48655391290718
+        },
+        "p50FrameMs": {
+          "median": 6.099999999998545,
+          "min": 6.099999999998545,
+          "max": 6.099999999998545
+        },
+        "p95FrameMs": {
+          "median": 6.399999999994179,
+          "min": 6.30000000000291,
+          "max": 12.100000000002183
+        },
+        "p99FrameMs": {
+          "median": 72.59999999999854,
+          "min": 72.5,
+          "max": 593.7000000000007
+        },
+        "slowFrames": {
+          "median": 3,
+          "min": 3,
+          "max": 3
+        },
+        "scriptMs": {
+          "median": 1689.6189999999986,
+          "min": 1542.648999999999,
+          "max": 1955.513
+        },
+        "taskMs": {
+          "median": 1846.069,
+          "min": 1677.2750000000017,
+          "max": 2126.476
+        },
+        "wallMeshReplacements": {
+          "median": 5,
+          "min": 5,
+          "max": 5
+        },
+        "bufferUploads": {
+          "median": 379,
+          "min": 374,
+          "max": 382
+        },
+        "bufferBytes": {
+          "median": 3981671,
+          "min": 3979111,
+          "max": 3983207
+        },
+        "drawCalls": {
+          "median": 2792,
+          "min": 2655,
+          "max": 2866
+        },
+        "deckDrawCalls": {
+          "median": 118,
+          "min": 118,
+          "max": 127
+        },
+        "heapMB": {
+          "median": 92.9857406616211,
+          "min": 87.18942642211914,
+          "max": 94.63766479492188
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 29.54639175257732,
+          "min": 29.5,
+          "max": 29.70212765957447
+        }
+      },
+      "after": {
+        "elapsedMs": {
+          "median": 2674.199999988079,
+          "min": 2673.5,
+          "max": 2693.899999976158
+        },
+        "rafFPS": {
+          "median": 90.12040984259754,
+          "min": 89.4613757014488,
+          "max": 93.51037965214138
+        },
+        "drawnFPS": {
+          "median": 36.64647371192763,
+          "min": 36.28202730503086,
+          "max": 36.749693752877306
+        },
+        "p50FrameMs": {
+          "median": 6.099999999998545,
+          "min": 6.099999999998545,
+          "max": 6.099999999998545
+        },
+        "p95FrameMs": {
+          "median": 7.700000000000728,
+          "min": 6.200000000000728,
+          "max": 8.200000000000728
+        },
+        "p99FrameMs": {
+          "median": 54.5,
+          "min": 49,
+          "max": 60.5
+        },
+        "slowFrames": {
+          "median": 3,
+          "min": 2,
+          "max": 3
+        },
+        "scriptMs": {
+          "median": 844.1500000000009,
+          "min": 840.852,
+          "max": 876.7949999999995
+        },
+        "taskMs": {
+          "median": 984.2310000000011,
+          "min": 969.6159999999985,
+          "max": 1003.069
+        },
+        "wallMeshReplacements": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "bufferUploads": {
+          "median": 444,
+          "min": 399,
+          "max": 495
+        },
+        "bufferBytes": {
+          "median": 2986327,
+          "min": 2969223,
+          "max": 3005655
+        },
+        "drawCalls": {
+          "median": 3417,
+          "min": 3197,
+          "max": 3657
+        },
+        "deckDrawCalls": {
+          "median": 431,
+          "min": 291,
+          "max": 591
+        },
+        "heapMB": {
+          "median": 79.51728820800781,
+          "min": 73.61120986938477,
+          "max": 135.68059158325195
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 34.86734693877551,
+          "min": 32.292929292929294,
+          "max": 37.70103092783505
+        }
+      }
+    },
+    {
+      "name": "route-label-camera",
+      "before": {
+        "elapsedMs": {
+          "median": 1914.300000011921,
+          "min": 1904.199999988079,
+          "max": 2554.800000011921
+        },
+        "rafFPS": {
+          "median": 103.43206393917724,
+          "min": 65.36715202725097,
+          "max": 112.90830795155233
+        },
+        "drawnFPS": {
+          "median": 91.93961239037978,
+          "min": 55.58165022676429,
+          "max": 100.82974477533976
+        },
+        "p50FrameMs": {
+          "median": 6.200000000004366,
+          "min": 6.100000000005821,
+          "max": 12
+        },
+        "p95FrameMs": {
+          "median": 18.200000000004366,
+          "min": 18.19999999999709,
+          "max": 42.30000000000291
+        },
+        "p99FrameMs": {
+          "median": 24.19999999999709,
+          "min": 18.39999999999418,
+          "max": 42.5
+        },
+        "slowFrames": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "scriptMs": {
+          "median": 1476.0030000000022,
+          "min": 1442.056000000001,
+          "max": 2187.4379999999983
+        },
+        "taskMs": {
+          "median": 1609.594999999999,
+          "min": 1568.0310000000013,
+          "max": 2401.061000000002
+        },
+        "wallMeshReplacements": {
+          "median": 96,
+          "min": 73,
+          "max": 112
+        },
+        "bufferUploads": {
+          "median": 1974,
+          "min": 1598,
+          "max": 2265
+        },
+        "bufferBytes": {
+          "median": 19645264,
+          "min": 14986944,
+          "max": 22899816
+        },
+        "drawCalls": {
+          "median": 6447,
+          "min": 5201,
+          "max": 6962
+        },
+        "deckDrawCalls": {
+          "median": 2063,
+          "min": 1593,
+          "max": 2405
+        },
+        "heapMB": {
+          "median": 99.9911994934082,
+          "min": 73.74594116210938,
+          "max": 105.15354537963867
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 36.62676056338028,
+          "min": 36.260416666666664,
+          "max": 36.63068181818182
+        }
+      },
+      "after": {
+        "elapsedMs": {
+          "median": 1784.800000011921,
+          "min": 1766.9000000357628,
+          "max": 1787.699999988079
+        },
+        "rafFPS": {
+          "median": 161.86541399864805,
+          "min": 161.66023382107016,
+          "max": 164.16405199352477
+        },
+        "drawnFPS": {
+          "median": 151.11211726447212,
+          "min": 150.47267438708607,
+          "max": 152.95831465608282
+        },
+        "p50FrameMs": {
+          "median": 6.099999999998545,
+          "min": 6.099999999998545,
+          "max": 6.099999999998545
+        },
+        "p95FrameMs": {
+          "median": 6.200000000004366,
+          "min": 6.200000000004366,
+          "max": 6.299999999999272
+        },
+        "p99FrameMs": {
+          "median": 12.099999999998545,
+          "min": 10,
+          "max": 12.200000000004366
+        },
+        "slowFrames": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "scriptMs": {
+          "median": 1009.1619999999999,
+          "min": 1005.0849999999994,
+          "max": 1020.3300000000013
+        },
+        "taskMs": {
+          "median": 1189.202999999999,
+          "min": 1181.3000000000002,
+          "max": 1200.1729999999995
+        },
+        "wallMeshReplacements": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "bufferUploads": {
+          "median": 2082,
+          "min": 2044,
+          "max": 2101
+        },
+        "bufferBytes": {
+          "median": 700170,
+          "min": 688860,
+          "max": 706092
+        },
+        "drawCalls": {
+          "median": 10598,
+          "min": 10417,
+          "max": 10684
+        },
+        "deckDrawCalls": {
+          "median": 4297,
+          "min": 4231,
+          "max": 4361
+        },
+        "heapMB": {
+          "median": 108.44412231445312,
+          "min": 99.91217422485352,
+          "max": 137.94482421875
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 39.13553113553114,
+          "min": 39.01498127340824,
+          "max": 39.39776951672862
+        }
+      }
+    },
+    {
+      "name": "route-animated-preview",
+      "before": {
+        "elapsedMs": {
+          "median": 4023.699999988079,
+          "min": 4020.5,
+          "max": 4030.2000000476837
+        },
+        "rafFPS": {
+          "median": 84.56659619450318,
+          "min": 77.04351716105039,
+          "max": 85.10743883577533
+        },
+        "drawnFPS": {
+          "median": 84.56659619450318,
+          "min": 77.04351716105039,
+          "max": 85.10743883577533
+        },
+        "p50FrameMs": {
+          "median": 12.099999999998545,
+          "min": 12.099999999998545,
+          "max": 12.10000000000582
+        },
+        "p95FrameMs": {
+          "median": 18.30000000000291,
+          "min": 18.299999999995634,
+          "max": 18.30000000000291
+        },
+        "p99FrameMs": {
+          "median": 30.299999999995634,
+          "min": 30.200000000004366,
+          "max": 30.30000000000291
+        },
+        "slowFrames": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "scriptMs": {
+          "median": 3731.5150000000017,
+          "min": 3709.4850000000006,
+          "max": 3745.2230000000027
+        },
+        "taskMs": {
+          "median": 4037.312,
+          "min": 4031.4879999999994,
+          "max": 4051.097000000002
+        },
+        "wallMeshReplacements": {
+          "median": 339,
+          "min": 309,
+          "max": 342
+        },
+        "bufferUploads": {
+          "median": 6562,
+          "min": 6003,
+          "max": 6597
+        },
+        "bufferBytes": {
+          "median": 96709692,
+          "min": 95003865,
+          "max": 100013739
+        },
+        "drawCalls": {
+          "median": 7458,
+          "min": 6798,
+          "max": 7524
+        },
+        "deckDrawCalls": {
+          "median": 7458,
+          "min": 6798,
+          "max": 7524
+        },
+        "heapMB": {
+          "median": 102.27681350708008,
+          "min": 78.08794784545898,
+          "max": 187.17637252807617
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 21.935294117647057,
+          "min": 21.929032258064517,
+          "max": 21.93586005830904
+        }
+      },
+      "after": {
+        "elapsedMs": {
+          "median": 4010.699999988079,
+          "min": 4010.699999988079,
+          "max": 4013.800000011921
+        },
+        "rafFPS": {
+          "median": 153.2213862170944,
+          "min": 152.8411499244077,
+          "max": 153.58914902681101
+        },
+        "drawnFPS": {
+          "median": 153.2213862170944,
+          "min": 152.8411499244077,
+          "max": 153.58914902681101
+        },
+        "p50FrameMs": {
+          "median": 6.099999999998545,
+          "min": 6.099999999998545,
+          "max": 6.099999999998545
+        },
+        "p95FrameMs": {
+          "median": 8.5,
+          "min": 7.5,
+          "max": 11.80000000000291
+        },
+        "p99FrameMs": {
+          "median": 18.19999999999709,
+          "min": 18.19999999999709,
+          "max": 18.200000000004366
+        },
+        "slowFrames": {
+          "median": 1,
+          "min": 0,
+          "max": 1
+        },
+        "scriptMs": {
+          "median": 2255.3029999999994,
+          "min": 2229.2229999999977,
+          "max": 2275.7119999999986
+        },
+        "taskMs": {
+          "median": 2825.667999999997,
+          "min": 2775.4510000000005,
+          "max": 2827.581000000002
+        },
+        "wallMeshReplacements": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "bufferUploads": {
+          "median": 6404,
+          "min": 6348,
+          "max": 6406
+        },
+        "bufferBytes": {
+          "median": 69482352,
+          "min": 52621614,
+          "max": 75097098
+        },
+        "drawCalls": {
+          "median": 13508,
+          "min": 13464,
+          "max": 13530
+        },
+        "deckDrawCalls": {
+          "median": 13508,
+          "min": 13464,
+          "max": 13530
+        },
+        "heapMB": {
+          "median": 118.8034896850586,
+          "min": 112.56259155273438,
+          "max": 203.5467643737793
+        },
+        "drawCallsPerDrawnFrame": {
+          "median": 21.964227642276423,
+          "min": 21.96411092985318,
+          "max": 21.964285714285715
+        }
+      }
+    }
+  ],
+  "memory": {
+    "before": [
+      [
+        {
+          "cycle": 0,
+          "heapMB": 50.928977966308594,
+          "resources": {
+            "Buffer": {
+              "created": 5834,
+              "deleted": 4509,
+              "live": 1325
+            },
+            "Texture": {
+              "created": 351,
+              "deleted": 244,
+              "live": 107
+            },
+            "Program": {
+              "created": 870,
+              "deleted": 817,
+              "live": 53
+            },
+            "Shader": {
+              "created": 1741,
+              "deleted": 100,
+              "live": 1641
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 2153,
+              "deleted": 1779,
+              "live": 374
+            }
+          }
+        },
+        {
+          "cycle": 1,
+          "heapMB": 52.038761138916016,
+          "resources": {
+            "Buffer": {
+              "created": 6289,
+              "deleted": 6185,
+              "live": 104
+            },
+            "Texture": {
+              "created": 410,
+              "deleted": 396,
+              "live": 14
+            },
+            "Program": {
+              "created": 890,
+              "deleted": 837,
+              "live": 53
+            },
+            "Shader": {
+              "created": 1781,
+              "deleted": 100,
+              "live": 1681
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 2250,
+              "deleted": 2224,
+              "live": 26
+            }
+          }
+        },
+        {
+          "cycle": 2,
+          "heapMB": 55.57419967651367,
+          "resources": {
+            "Buffer": {
+              "created": 6747,
+              "deleted": 6643,
+              "live": 104
+            },
+            "Texture": {
+              "created": 469,
+              "deleted": 455,
+              "live": 14
+            },
+            "Program": {
+              "created": 911,
+              "deleted": 858,
+              "live": 53
+            },
+            "Shader": {
+              "created": 1823,
+              "deleted": 100,
+              "live": 1723
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 2348,
+              "deleted": 2322,
+              "live": 26
+            }
+          }
+        },
+        {
+          "cycle": 3,
+          "heapMB": 55.98035430908203,
+          "resources": {
+            "Buffer": {
+              "created": 7202,
+              "deleted": 7098,
+              "live": 104
+            },
+            "Texture": {
+              "created": 528,
+              "deleted": 514,
+              "live": 14
+            },
+            "Program": {
+              "created": 931,
+              "deleted": 878,
+              "live": 53
+            },
+            "Shader": {
+              "created": 1863,
+              "deleted": 100,
+              "live": 1763
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 2445,
+              "deleted": 2419,
+              "live": 26
+            }
+          }
+        }
+      ],
+      [
+        {
+          "cycle": 0,
+          "heapMB": 51.58289337158203,
+          "resources": {
+            "Buffer": {
+              "created": 5764,
+              "deleted": 4365,
+              "live": 1399
+            },
+            "Texture": {
+              "created": 363,
+              "deleted": 250,
+              "live": 113
+            },
+            "Program": {
+              "created": 806,
+              "deleted": 753,
+              "live": 53
+            },
+            "Shader": {
+              "created": 1613,
+              "deleted": 100,
+              "live": 1513
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 2028,
+              "deleted": 1645,
+              "live": 383
+            }
+          }
+        },
+        {
+          "cycle": 1,
+          "heapMB": 53.3700065612793,
+          "resources": {
+            "Buffer": {
+              "created": 6225,
+              "deleted": 6121,
+              "live": 104
+            },
+            "Texture": {
+              "created": 422,
+              "deleted": 408,
+              "live": 14
+            },
+            "Program": {
+              "created": 828,
+              "deleted": 775,
+              "live": 53
+            },
+            "Shader": {
+              "created": 1657,
+              "deleted": 100,
+              "live": 1557
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 2127,
+              "deleted": 2101,
+              "live": 26
+            }
+          }
+        },
+        {
+          "cycle": 2,
+          "heapMB": 56.99070739746094,
+          "resources": {
+            "Buffer": {
+              "created": 6680,
+              "deleted": 6576,
+              "live": 104
+            },
+            "Texture": {
+              "created": 481,
+              "deleted": 467,
+              "live": 14
+            },
+            "Program": {
+              "created": 848,
+              "deleted": 795,
+              "live": 53
+            },
+            "Shader": {
+              "created": 1697,
+              "deleted": 100,
+              "live": 1597
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 2224,
+              "deleted": 2198,
+              "live": 26
+            }
+          }
+        },
+        {
+          "cycle": 3,
+          "heapMB": 57.216835021972656,
+          "resources": {
+            "Buffer": {
+              "created": 7129,
+              "deleted": 7025,
+              "live": 104
+            },
+            "Texture": {
+              "created": 540,
+              "deleted": 526,
+              "live": 14
+            },
+            "Program": {
+              "created": 866,
+              "deleted": 813,
+              "live": 53
+            },
+            "Shader": {
+              "created": 1733,
+              "deleted": 100,
+              "live": 1633
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 2319,
+              "deleted": 2293,
+              "live": 26
+            }
+          }
+        }
+      ],
+      [
+        {
+          "cycle": 0,
+          "heapMB": 51.89685821533203,
+          "resources": {
+            "Buffer": {
+              "created": 5917,
+              "deleted": 4518,
+              "live": 1399
+            },
+            "Texture": {
+              "created": 363,
+              "deleted": 250,
+              "live": 113
+            },
+            "Program": {
+              "created": 857,
+              "deleted": 804,
+              "live": 53
+            },
+            "Shader": {
+              "created": 1715,
+              "deleted": 100,
+              "live": 1615
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 2036,
+              "deleted": 1640,
+              "live": 396
+            }
+          }
+        },
+        {
+          "cycle": 1,
+          "heapMB": 53.55604553222656,
+          "resources": {
+            "Buffer": {
+              "created": 6375,
+              "deleted": 6271,
+              "live": 104
+            },
+            "Texture": {
+              "created": 422,
+              "deleted": 408,
+              "live": 14
+            },
+            "Program": {
+              "created": 878,
+              "deleted": 825,
+              "live": 53
+            },
+            "Shader": {
+              "created": 1757,
+              "deleted": 100,
+              "live": 1657
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 2134,
+              "deleted": 2108,
+              "live": 26
+            }
+          }
+        },
+        {
+          "cycle": 2,
+          "heapMB": 57.158180236816406,
+          "resources": {
+            "Buffer": {
+              "created": 6836,
+              "deleted": 6732,
+              "live": 104
+            },
+            "Texture": {
+              "created": 481,
+              "deleted": 467,
+              "live": 14
+            },
+            "Program": {
+              "created": 900,
+              "deleted": 847,
+              "live": 53
+            },
+            "Shader": {
+              "created": 1801,
+              "deleted": 100,
+              "live": 1701
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 2233,
+              "deleted": 2207,
+              "live": 26
+            }
+          }
+        },
+        {
+          "cycle": 3,
+          "heapMB": 58.152530670166016,
+          "resources": {
+            "Buffer": {
+              "created": 7294,
+              "deleted": 7190,
+              "live": 104
+            },
+            "Texture": {
+              "created": 540,
+              "deleted": 526,
+              "live": 14
+            },
+            "Program": {
+              "created": 921,
+              "deleted": 868,
+              "live": 53
+            },
+            "Shader": {
+              "created": 1843,
+              "deleted": 100,
+              "live": 1743
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 2331,
+              "deleted": 2305,
+              "live": 26
+            }
+          }
+        }
+      ]
+    ],
+    "after": [
+      [
+        {
+          "cycle": 0,
+          "heapMB": 53.00202941894531,
+          "resources": {
+            "Buffer": {
+              "created": 3986,
+              "deleted": 2440,
+              "live": 1546
+            },
+            "Texture": {
+              "created": 387,
+              "deleted": 265,
+              "live": 122
+            },
+            "Program": {
+              "created": 82,
+              "deleted": 29,
+              "live": 53
+            },
+            "Shader": {
+              "created": 165,
+              "deleted": 100,
+              "live": 65
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 1386,
+              "deleted": 934,
+              "live": 452
+            }
+          }
+        },
+        {
+          "cycle": 1,
+          "heapMB": 54.09336853027344,
+          "resources": {
+            "Buffer": {
+              "created": 4403,
+              "deleted": 4299,
+              "live": 104
+            },
+            "Texture": {
+              "created": 446,
+              "deleted": 432,
+              "live": 14
+            },
+            "Program": {
+              "created": 87,
+              "deleted": 34,
+              "live": 53
+            },
+            "Shader": {
+              "created": 175,
+              "deleted": 100,
+              "live": 75
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 1469,
+              "deleted": 1443,
+              "live": 26
+            }
+          }
+        },
+        {
+          "cycle": 2,
+          "heapMB": 58.44721603393555,
+          "resources": {
+            "Buffer": {
+              "created": 4820,
+              "deleted": 4716,
+              "live": 104
+            },
+            "Texture": {
+              "created": 505,
+              "deleted": 491,
+              "live": 14
+            },
+            "Program": {
+              "created": 92,
+              "deleted": 39,
+              "live": 53
+            },
+            "Shader": {
+              "created": 185,
+              "deleted": 100,
+              "live": 85
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 1552,
+              "deleted": 1526,
+              "live": 26
+            }
+          }
+        },
+        {
+          "cycle": 3,
+          "heapMB": 58.9406852722168,
+          "resources": {
+            "Buffer": {
+              "created": 5237,
+              "deleted": 5133,
+              "live": 104
+            },
+            "Texture": {
+              "created": 564,
+              "deleted": 550,
+              "live": 14
+            },
+            "Program": {
+              "created": 97,
+              "deleted": 44,
+              "live": 53
+            },
+            "Shader": {
+              "created": 195,
+              "deleted": 100,
+              "live": 95
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 1635,
+              "deleted": 1609,
+              "live": 26
+            }
+          }
+        }
+      ],
+      [
+        {
+          "cycle": 0,
+          "heapMB": 52.36310958862305,
+          "resources": {
+            "Buffer": {
+              "created": 3600,
+              "deleted": 2226,
+              "live": 1374
+            },
+            "Texture": {
+              "created": 354,
+              "deleted": 244,
+              "live": 110
+            },
+            "Program": {
+              "created": 82,
+              "deleted": 29,
+              "live": 53
+            },
+            "Shader": {
+              "created": 165,
+              "deleted": 100,
+              "live": 65
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 1172,
+              "deleted": 777,
+              "live": 395
+            }
+          }
+        },
+        {
+          "cycle": 1,
+          "heapMB": 54.02533721923828,
+          "resources": {
+            "Buffer": {
+              "created": 4017,
+              "deleted": 3913,
+              "live": 104
+            },
+            "Texture": {
+              "created": 413,
+              "deleted": 399,
+              "live": 14
+            },
+            "Program": {
+              "created": 87,
+              "deleted": 34,
+              "live": 53
+            },
+            "Shader": {
+              "created": 175,
+              "deleted": 100,
+              "live": 75
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 1255,
+              "deleted": 1229,
+              "live": 26
+            }
+          }
+        },
+        {
+          "cycle": 2,
+          "heapMB": 58.37507629394531,
+          "resources": {
+            "Buffer": {
+              "created": 4430,
+              "deleted": 4326,
+              "live": 104
+            },
+            "Texture": {
+              "created": 472,
+              "deleted": 458,
+              "live": 14
+            },
+            "Program": {
+              "created": 92,
+              "deleted": 39,
+              "live": 53
+            },
+            "Shader": {
+              "created": 185,
+              "deleted": 100,
+              "live": 85
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 1338,
+              "deleted": 1312,
+              "live": 26
+            }
+          }
+        },
+        {
+          "cycle": 3,
+          "heapMB": 58.59970474243164,
+          "resources": {
+            "Buffer": {
+              "created": 4847,
+              "deleted": 4743,
+              "live": 104
+            },
+            "Texture": {
+              "created": 531,
+              "deleted": 517,
+              "live": 14
+            },
+            "Program": {
+              "created": 97,
+              "deleted": 44,
+              "live": 53
+            },
+            "Shader": {
+              "created": 195,
+              "deleted": 100,
+              "live": 95
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 1421,
+              "deleted": 1395,
+              "live": 26
+            }
+          }
+        }
+      ],
+      [
+        {
+          "cycle": 0,
+          "heapMB": 52.53273010253906,
+          "resources": {
+            "Buffer": {
+              "created": 3953,
+              "deleted": 2407,
+              "live": 1546
+            },
+            "Texture": {
+              "created": 384,
+              "deleted": 262,
+              "live": 122
+            },
+            "Program": {
+              "created": 82,
+              "deleted": 29,
+              "live": 53
+            },
+            "Shader": {
+              "created": 165,
+              "deleted": 100,
+              "live": 65
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 1342,
+              "deleted": 890,
+              "live": 452
+            }
+          }
+        },
+        {
+          "cycle": 1,
+          "heapMB": 53.75777816772461,
+          "resources": {
+            "Buffer": {
+              "created": 4370,
+              "deleted": 4266,
+              "live": 104
+            },
+            "Texture": {
+              "created": 443,
+              "deleted": 429,
+              "live": 14
+            },
+            "Program": {
+              "created": 87,
+              "deleted": 34,
+              "live": 53
+            },
+            "Shader": {
+              "created": 175,
+              "deleted": 100,
+              "live": 75
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 1425,
+              "deleted": 1399,
+              "live": 26
+            }
+          }
+        },
+        {
+          "cycle": 2,
+          "heapMB": 57.9613151550293,
+          "resources": {
+            "Buffer": {
+              "created": 4783,
+              "deleted": 4679,
+              "live": 104
+            },
+            "Texture": {
+              "created": 502,
+              "deleted": 488,
+              "live": 14
+            },
+            "Program": {
+              "created": 92,
+              "deleted": 39,
+              "live": 53
+            },
+            "Shader": {
+              "created": 185,
+              "deleted": 100,
+              "live": 85
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 1508,
+              "deleted": 1482,
+              "live": 26
+            }
+          }
+        },
+        {
+          "cycle": 3,
+          "heapMB": 58.21354293823242,
+          "resources": {
+            "Buffer": {
+              "created": 5200,
+              "deleted": 5096,
+              "live": 104
+            },
+            "Texture": {
+              "created": 561,
+              "deleted": 547,
+              "live": 14
+            },
+            "Program": {
+              "created": 97,
+              "deleted": 44,
+              "live": 53
+            },
+            "Shader": {
+              "created": 195,
+              "deleted": 100,
+              "live": 95
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 1591,
+              "deleted": 1565,
+              "live": 26
+            }
+          }
+        }
+      ]
+    ]
+  },
+  "network": {
+    "before": [
+      {
+        "wallFetches": 21,
+        "perimeterFetches": 5,
+        "roomFetches": 14,
+        "jsonCalls": 50,
+        "jsonBodyAndDecodeMs": 15872.799999952316
+      },
+      {
+        "wallFetches": 21,
+        "perimeterFetches": 5,
+        "roomFetches": 14,
+        "jsonCalls": 50,
+        "jsonBodyAndDecodeMs": 12977.200000405312
+      },
+      {
+        "wallFetches": 21,
+        "perimeterFetches": 5,
+        "roomFetches": 14,
+        "jsonCalls": 50,
+        "jsonBodyAndDecodeMs": 15940.900000035763
+      }
+    ],
+    "after": [
+      {
+        "wallFetches": 17,
+        "perimeterFetches": 1,
+        "roomFetches": 14,
+        "jsonCalls": 46,
+        "jsonBodyAndDecodeMs": 5384.999999523163
+      },
+      {
+        "wallFetches": 17,
+        "perimeterFetches": 1,
+        "roomFetches": 14,
+        "jsonCalls": 46,
+        "jsonBodyAndDecodeMs": 9967.899999797344
+      },
+      {
+        "wallFetches": 17,
+        "perimeterFetches": 1,
+        "roomFetches": 14,
+        "jsonCalls": 46,
+        "jsonBodyAndDecodeMs": 5322.699999988079
+      }
+    ]
+  },
+  "conditionsMatch": true
+}

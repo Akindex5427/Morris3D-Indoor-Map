@@ -1,0 +1,54 @@
+{
+  "total": 170,
+  "passed": 159,
+  "failed": 11,
+  "newTests": 12,
+  "failuresMatchStage5": true,
+  "unchangedGeoJSONFiles": 51,
+  "failures": [
+    {
+      "file": "C:/Users/ChristDNA/Downloads/Morris3D-IndoorMap/src/utils/featureColors.test.js",
+      "test": "featureColors restores missing level-6 room colors from the all-floor dataset"
+    },
+    {
+      "file": "C:/Users/ChristDNA/Downloads/Morris3D-IndoorMap/src/utils/featureColors.test.js",
+      "test": "featureColors restores missing level-2 display colors from the all-floor dataset"
+    },
+    {
+      "file": "C:/Users/ChristDNA/Downloads/Morris3D-IndoorMap/src/utils/routeAnchors.test.js",
+      "test": "room_level_1 routing anchors uses the encoded centerline anchor for University honors"
+    },
+    {
+      "file": "C:/Users/ChristDNA/Downloads/Morris3D-IndoorMap/src/utils/routeAnchors.test.js",
+      "test": "room_level_1 routing anchors routes University honors to its centerline anchor without crossing obstacles"
+    },
+    {
+      "file": "C:/Users/ChristDNA/Downloads/Morris3D-IndoorMap/src/utils/routeAnchors.test.js",
+      "test": "room_level_1 routing anchors keeps Center for Teaching Excellence routes on the graph and stops at its anchor"
+    },
+    {
+      "file": "C:/Users/ChristDNA/Downloads/Morris3D-IndoorMap/src/utils/routeAnchors.test.js",
+      "test": "room_level_3 routing anchors routes SIU Press to Lerner music studio on the level-3 centerline graph"
+    },
+    {
+      "file": "C:/Users/ChristDNA/Downloads/Morris3D-IndoorMap/src/utils/routeAnchors.test.js",
+      "test": "room_level_4 centerline routing routes from level 1 to F4 geospatial resources through the matching elevator component"
+    },
+    {
+      "file": "C:/Users/ChristDNA/Downloads/Morris3D-IndoorMap/src/utils/routeAnchors.test.js",
+      "test": "room_level_5 centerline routing normalizes level-5 room name variants to explicit centerline anchors"
+    },
+    {
+      "file": "C:/Users/ChristDNA/Downloads/Morris3D-IndoorMap/src/utils/routeAnchors.test.js",
+      "test": "inline door anchor on room polygon properties inline anchor takes precedence over an explicit centerline anchor"
+    },
+    {
+      "file": "C:/Users/ChristDNA/Downloads/Morris3D-IndoorMap/src/utils/routeAnchors.test.js",
+      "test": "geometry-derived anchor as universal fallback never returns the old room_centroid source when no anchor index is provided"
+    },
+    {
+      "file": "C:/Users/ChristDNA/Downloads/Morris3D-IndoorMap/src/utils/routeAnchors.test.js",
+      "test": "geometry-derived anchor as universal fallback geometry-derived anchor routes without crossing obstacles"
+    }
+  ]
+}

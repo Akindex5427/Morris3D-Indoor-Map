@@ -1,0 +1,966 @@
+{
+  "browser": "155.0.8059.86",
+  "viewport": {
+    "width": 1228,
+    "height": 920
+  },
+  "runs": [
+    {
+      "run": 1,
+      "renderer": "ANGLE (AMD, AMD Radeon 780M Graphics (0x000015BF) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "rows": [
+        {
+          "floor": 1,
+          "variant": "original",
+          "p50": 6.099999999999909,
+          "p95": 6.199999999999818,
+          "p99": 6.299999999999727,
+          "elapsedMs": 722.7999999970198,
+          "frames": 120,
+          "drawCalls": 1180,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 23,
+              "deleted": 0,
+              "live": 23
+            },
+            "Texture": {
+              "created": 3,
+              "deleted": 1,
+              "live": 2
+            },
+            "Program": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Framebuffer": {
+              "created": 0,
+              "deleted": 0,
+              "live": 0
+            },
+            "Renderbuffer": {
+              "created": 0,
+              "deleted": 0,
+              "live": 0
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 23,
+              "deleted": 0,
+              "live": 23
+            },
+            "Texture": {
+              "created": 3,
+              "deleted": 1,
+              "live": 2
+            },
+            "Program": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Framebuffer": {
+              "created": 0,
+              "deleted": 0,
+              "live": 0
+            },
+            "Renderbuffer": {
+              "created": 0,
+              "deleted": 0,
+              "live": 0
+            }
+          }
+        },
+        {
+          "floor": 1,
+          "variant": "fixed",
+          "p50": 6.099999999999454,
+          "p95": 6.199999999999818,
+          "p99": 6.200000000000728,
+          "elapsedMs": 722.5000000029804,
+          "frames": 120,
+          "drawCalls": 1298,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 31,
+              "deleted": 5,
+              "live": 26
+            },
+            "Texture": {
+              "created": 5,
+              "deleted": 1,
+              "live": 4
+            },
+            "Program": {
+              "created": 7,
+              "deleted": 3,
+              "live": 4
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 31,
+              "deleted": 5,
+              "live": 26
+            },
+            "Texture": {
+              "created": 5,
+              "deleted": 1,
+              "live": 4
+            },
+            "Program": {
+              "created": 7,
+              "deleted": 3,
+              "live": 4
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            }
+          }
+        },
+        {
+          "floor": "all",
+          "variant": "original",
+          "p50": 12.199999999999818,
+          "p95": 48.69999999999982,
+          "p99": 53.400000000000546,
+          "elapsedMs": 2687.800000001491,
+          "frames": 120,
+          "drawCalls": 5900,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 159,
+              "deleted": 16,
+              "live": 143
+            },
+            "Texture": {
+              "created": 27,
+              "deleted": 3,
+              "live": 24
+            },
+            "Program": {
+              "created": 10,
+              "deleted": 7,
+              "live": 3
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 159,
+              "deleted": 16,
+              "live": 143
+            },
+            "Texture": {
+              "created": 27,
+              "deleted": 3,
+              "live": 24
+            },
+            "Program": {
+              "created": 10,
+              "deleted": 7,
+              "live": 3
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            }
+          }
+        },
+        {
+          "floor": "all",
+          "variant": "fixed",
+          "p50": 6.100000000000364,
+          "p95": 6.200000000000728,
+          "p99": 6.200000000000728,
+          "elapsedMs": 733.8000000014908,
+          "frames": 120,
+          "drawCalls": 6018,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 227,
+              "deleted": 81,
+              "live": 146
+            },
+            "Texture": {
+              "created": 27,
+              "deleted": 3,
+              "live": 24
+            },
+            "Program": {
+              "created": 14,
+              "deleted": 10,
+              "live": 4
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 227,
+              "deleted": 81,
+              "live": 146
+            },
+            "Texture": {
+              "created": 27,
+              "deleted": 3,
+              "live": 24
+            },
+            "Program": {
+              "created": 14,
+              "deleted": 10,
+              "live": 4
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            }
+          }
+        }
+      ],
+      "repeatedTransitions": {
+        "cycles": 5,
+        "initial": {
+          "Buffer": {
+            "created": 233,
+            "deleted": 207,
+            "live": 26
+          },
+          "Texture": {
+            "created": 29,
+            "deleted": 25,
+            "live": 4
+          },
+          "Program": {
+            "created": 14,
+            "deleted": 10,
+            "live": 4
+          },
+          "Framebuffer": {
+            "created": 2,
+            "deleted": 0,
+            "live": 2
+          },
+          "Renderbuffer": {
+            "created": 2,
+            "deleted": 0,
+            "live": 2
+          }
+        },
+        "settled": {
+          "Buffer": {
+            "created": 233,
+            "deleted": 207,
+            "live": 26
+          },
+          "Texture": {
+            "created": 29,
+            "deleted": 25,
+            "live": 4
+          },
+          "Program": {
+            "created": 14,
+            "deleted": 10,
+            "live": 4
+          },
+          "Framebuffer": {
+            "created": 2,
+            "deleted": 0,
+            "live": 2
+          },
+          "Renderbuffer": {
+            "created": 2,
+            "deleted": 0,
+            "live": 2
+          }
+        }
+      }
+    },
+    {
+      "run": 2,
+      "renderer": "ANGLE (AMD, AMD Radeon 780M Graphics (0x000015BF) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "rows": [
+        {
+          "floor": 1,
+          "variant": "fixed",
+          "p50": 6.099999999999909,
+          "p95": 6.2000000000000455,
+          "p99": 6.200000000000273,
+          "elapsedMs": 727.8999999940397,
+          "frames": 120,
+          "drawCalls": 1298,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 31,
+              "deleted": 5,
+              "live": 26
+            },
+            "Texture": {
+              "created": 5,
+              "deleted": 1,
+              "live": 4
+            },
+            "Program": {
+              "created": 7,
+              "deleted": 3,
+              "live": 4
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 31,
+              "deleted": 5,
+              "live": 26
+            },
+            "Texture": {
+              "created": 5,
+              "deleted": 1,
+              "live": 4
+            },
+            "Program": {
+              "created": 7,
+              "deleted": 3,
+              "live": 4
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            }
+          }
+        },
+        {
+          "floor": 1,
+          "variant": "original",
+          "p50": 6.099999999999909,
+          "p95": 6.200000000000273,
+          "p99": 6.200000000000273,
+          "elapsedMs": 723.59999999702,
+          "frames": 120,
+          "drawCalls": 1180,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 36,
+              "deleted": 13,
+              "live": 23
+            },
+            "Texture": {
+              "created": 5,
+              "deleted": 1,
+              "live": 4
+            },
+            "Program": {
+              "created": 10,
+              "deleted": 7,
+              "live": 3
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 36,
+              "deleted": 13,
+              "live": 23
+            },
+            "Texture": {
+              "created": 5,
+              "deleted": 1,
+              "live": 4
+            },
+            "Program": {
+              "created": 10,
+              "deleted": 7,
+              "live": 3
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            }
+          }
+        },
+        {
+          "floor": "all",
+          "variant": "fixed",
+          "p50": 6.100000000000364,
+          "p95": 12.099999999999454,
+          "p99": 17.800000000000182,
+          "elapsedMs": 855.2999999970198,
+          "frames": 120,
+          "drawCalls": 6018,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 167,
+              "deleted": 21,
+              "live": 146
+            },
+            "Texture": {
+              "created": 27,
+              "deleted": 3,
+              "live": 24
+            },
+            "Program": {
+              "created": 14,
+              "deleted": 10,
+              "live": 4
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 167,
+              "deleted": 21,
+              "live": 146
+            },
+            "Texture": {
+              "created": 27,
+              "deleted": 3,
+              "live": 24
+            },
+            "Program": {
+              "created": 14,
+              "deleted": 10,
+              "live": 4
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            }
+          }
+        },
+        {
+          "floor": "all",
+          "variant": "original",
+          "p50": 19,
+          "p95": 72.39999999999964,
+          "p99": 91.10000000000036,
+          "elapsedMs": 3446.2999999940403,
+          "frames": 120,
+          "drawCalls": 5900,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 232,
+              "deleted": 89,
+              "live": 143
+            },
+            "Texture": {
+              "created": 27,
+              "deleted": 3,
+              "live": 24
+            },
+            "Program": {
+              "created": 17,
+              "deleted": 14,
+              "live": 3
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 232,
+              "deleted": 89,
+              "live": 143
+            },
+            "Texture": {
+              "created": 27,
+              "deleted": 3,
+              "live": 24
+            },
+            "Program": {
+              "created": 17,
+              "deleted": 14,
+              "live": 3
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            }
+          }
+        }
+      ],
+      "repeatedTransitions": {
+        "cycles": 5,
+        "initial": {
+          "Buffer": {
+            "created": 243,
+            "deleted": 217,
+            "live": 26
+          },
+          "Texture": {
+            "created": 29,
+            "deleted": 25,
+            "live": 4
+          },
+          "Program": {
+            "created": 21,
+            "deleted": 17,
+            "live": 4
+          },
+          "Framebuffer": {
+            "created": 2,
+            "deleted": 0,
+            "live": 2
+          },
+          "Renderbuffer": {
+            "created": 2,
+            "deleted": 0,
+            "live": 2
+          }
+        },
+        "settled": {
+          "Buffer": {
+            "created": 243,
+            "deleted": 217,
+            "live": 26
+          },
+          "Texture": {
+            "created": 29,
+            "deleted": 25,
+            "live": 4
+          },
+          "Program": {
+            "created": 21,
+            "deleted": 17,
+            "live": 4
+          },
+          "Framebuffer": {
+            "created": 2,
+            "deleted": 0,
+            "live": 2
+          },
+          "Renderbuffer": {
+            "created": 2,
+            "deleted": 0,
+            "live": 2
+          }
+        }
+      }
+    },
+    {
+      "run": 3,
+      "renderer": "ANGLE (AMD, AMD Radeon 780M Graphics (0x000015BF) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "rows": [
+        {
+          "floor": 1,
+          "variant": "original",
+          "p50": 6.099999999999909,
+          "p95": 6.2000000000000455,
+          "p99": 6.200000000000273,
+          "elapsedMs": 726.1999999970199,
+          "frames": 120,
+          "drawCalls": 1180,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 23,
+              "deleted": 0,
+              "live": 23
+            },
+            "Texture": {
+              "created": 3,
+              "deleted": 1,
+              "live": 2
+            },
+            "Program": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Framebuffer": {
+              "created": 0,
+              "deleted": 0,
+              "live": 0
+            },
+            "Renderbuffer": {
+              "created": 0,
+              "deleted": 0,
+              "live": 0
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 23,
+              "deleted": 0,
+              "live": 23
+            },
+            "Texture": {
+              "created": 3,
+              "deleted": 1,
+              "live": 2
+            },
+            "Program": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Framebuffer": {
+              "created": 0,
+              "deleted": 0,
+              "live": 0
+            },
+            "Renderbuffer": {
+              "created": 0,
+              "deleted": 0,
+              "live": 0
+            }
+          }
+        },
+        {
+          "floor": 1,
+          "variant": "fixed",
+          "p50": 6.099999999999909,
+          "p95": 6.199999999999818,
+          "p99": 6.200000000000273,
+          "elapsedMs": 726,
+          "frames": 120,
+          "drawCalls": 1298,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 31,
+              "deleted": 5,
+              "live": 26
+            },
+            "Texture": {
+              "created": 5,
+              "deleted": 1,
+              "live": 4
+            },
+            "Program": {
+              "created": 7,
+              "deleted": 3,
+              "live": 4
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 31,
+              "deleted": 5,
+              "live": 26
+            },
+            "Texture": {
+              "created": 5,
+              "deleted": 1,
+              "live": 4
+            },
+            "Program": {
+              "created": 7,
+              "deleted": 3,
+              "live": 4
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            }
+          }
+        },
+        {
+          "floor": "all",
+          "variant": "original",
+          "p50": 19.199999999999818,
+          "p95": 54.899999999999636,
+          "p99": 60.899999999999636,
+          "elapsedMs": 3211.39999999851,
+          "frames": 120,
+          "drawCalls": 5900,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 159,
+              "deleted": 16,
+              "live": 143
+            },
+            "Texture": {
+              "created": 27,
+              "deleted": 3,
+              "live": 24
+            },
+            "Program": {
+              "created": 10,
+              "deleted": 7,
+              "live": 3
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 159,
+              "deleted": 16,
+              "live": 143
+            },
+            "Texture": {
+              "created": 27,
+              "deleted": 3,
+              "live": 24
+            },
+            "Program": {
+              "created": 10,
+              "deleted": 7,
+              "live": 3
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            }
+          }
+        },
+        {
+          "floor": "all",
+          "variant": "fixed",
+          "p50": 6.299999999999272,
+          "p95": 18.200000000000728,
+          "p99": 24.099999999998545,
+          "elapsedMs": 1071.4000000014894,
+          "frames": 120,
+          "drawCalls": 6018,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 227,
+              "deleted": 81,
+              "live": 146
+            },
+            "Texture": {
+              "created": 27,
+              "deleted": 3,
+              "live": 24
+            },
+            "Program": {
+              "created": 14,
+              "deleted": 10,
+              "live": 4
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 227,
+              "deleted": 81,
+              "live": 146
+            },
+            "Texture": {
+              "created": 27,
+              "deleted": 3,
+              "live": 24
+            },
+            "Program": {
+              "created": 14,
+              "deleted": 10,
+              "live": 4
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            }
+          }
+        }
+      ],
+      "repeatedTransitions": {
+        "cycles": 5,
+        "initial": {
+          "Buffer": {
+            "created": 233,
+            "deleted": 207,
+            "live": 26
+          },
+          "Texture": {
+            "created": 29,
+            "deleted": 25,
+            "live": 4
+          },
+          "Program": {
+            "created": 14,
+            "deleted": 10,
+            "live": 4
+          },
+          "Framebuffer": {
+            "created": 2,
+            "deleted": 0,
+            "live": 2
+          },
+          "Renderbuffer": {
+            "created": 2,
+            "deleted": 0,
+            "live": 2
+          }
+        },
+        "settled": {
+          "Buffer": {
+            "created": 233,
+            "deleted": 207,
+            "live": 26
+          },
+          "Texture": {
+            "created": 29,
+            "deleted": 25,
+            "live": 4
+          },
+          "Program": {
+            "created": 14,
+            "deleted": 10,
+            "live": 4
+          },
+          "Framebuffer": {
+            "created": 2,
+            "deleted": 0,
+            "live": 2
+          },
+          "Renderbuffer": {
+            "created": 2,
+            "deleted": 0,
+            "live": 2
+          }
+        }
+      }
+    }
+  ]
+}

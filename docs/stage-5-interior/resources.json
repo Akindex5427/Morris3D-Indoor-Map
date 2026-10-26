@@ -1,0 +1,8 @@
+{
+  "cycles": 10,
+  "requests": 1,
+  "modelDataAndAtlasIdentityPreserved": true,
+  "atlasTexturesDeletedOnUnmount": true,
+  "floorSwitchDoesNotRetryFailure": true,
+  "newNightRequestRetriesOnce": true
+}

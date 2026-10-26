@@ -1,0 +1,92 @@
+{
+  "results": [
+    {
+      "phase": "real-press-all-floors",
+      "passed": true,
+      "reference": {
+        "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:239",
+        "floor": 3,
+        "label": "Southern Illinois University Press (0362)",
+        "area": 227.83056961684971
+      },
+      "counts": [
+        {
+          "floor": 2,
+          "matches": 5
+        },
+        {
+          "floor": 4,
+          "matches": 4
+        },
+        {
+          "floor": 1,
+          "matches": 12
+        },
+        {
+          "floor": 5,
+          "matches": 4
+        },
+        {
+          "floor": 0,
+          "matches": 8
+        },
+        {
+          "floor": 6,
+          "matches": 7
+        },
+        {
+          "floor": 7,
+          "matches": 7
+        }
+      ],
+      "preparationMs": 260.9000000022352,
+      "analysisMs": 168.5
+    },
+    {
+      "phase": "candidate-floor-and-f-all-pair-camera-preserved",
+      "passed": true,
+      "candidate": {
+        "key": "/rooms-level-04-WGS.geojson#F4:OBJECTID:20",
+        "floor": 4,
+        "label": "Staff",
+        "area": 288.1594243221411,
+        "intersectionArea": 158.68307603046367,
+        "referencePercent": 69.64959807515133,
+        "candidatePercent": 55.0678071361871
+      },
+      "paths": 2
+    },
+    {
+      "phase": "night-colors-navigation-no-analysis-or-refetch",
+      "passed": true
+    },
+    {
+      "phase": "f-all-pick-authoritative-resolution-and-cache",
+      "passed": true,
+      "resolution": "choose-reference"
+    },
+    {
+      "phase": "edge-floor",
+      "floor": 0,
+      "passed": true
+    },
+    {
+      "phase": "edge-floor",
+      "floor": 7,
+      "passed": true
+    },
+    {
+      "phase": "routing-preserved",
+      "passed": true
+    },
+    {
+      "phase": "mobile-sidebar-results",
+      "passed": true
+    },
+    {
+      "phase": "missing-floor-retry-and-cache-invalidation",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

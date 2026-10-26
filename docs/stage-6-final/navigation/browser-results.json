@@ -1,0 +1,435 @@
+{
+  "results": [
+    {
+      "phase": "initial-desktop",
+      "bounds": {
+        "left": 80.30346606035022,
+        "right": 853.7942843101831,
+        "top": 221.38949480013852,
+        "bottom": 615.604496753075
+      },
+      "width": 1000,
+      "height": 836.9375,
+      "right": 988,
+      "occupancy": 0.8499899101646516,
+      "fitRegion": "beside-controls",
+      "zoom": 18.733407974243164,
+      "pitch": 45,
+      "bearing": 0,
+      "floor": "F1",
+      "controls": {
+        "x": 1359,
+        "y": 135.0625,
+        "width": 56,
+        "height": 276
+      },
+      "overlapsControls": false,
+      "targets": [
+        {
+          "width": 44,
+          "height": 44
+        },
+        {
+          "width": 44,
+          "height": 44
+        },
+        {
+          "width": 44,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "phase": "reset-after-zoom-out",
+      "bounds": {
+        "left": 80.30346606035022,
+        "right": 853.7942843101831,
+        "top": 221.38949480013852,
+        "bottom": 615.604496753075
+      },
+      "width": 1000,
+      "height": 836.9375,
+      "right": 988,
+      "occupancy": 0.8499899101646516,
+      "fitRegion": "beside-controls",
+      "zoom": 18.733407974243164,
+      "pitch": 45,
+      "bearing": 0,
+      "floor": "F1",
+      "controls": {
+        "x": 1359,
+        "y": 135.0625,
+        "width": 56,
+        "height": 276
+      },
+      "overlapsControls": false,
+      "targets": [
+        {
+          "width": 44,
+          "height": 44
+        },
+        {
+          "width": 44,
+          "height": 44
+        },
+        {
+          "width": 44,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "phase": "wheel-and-slider",
+      "passed": true
+    },
+    {
+      "phase": "sidebar-collapsed-reset",
+      "bounds": {
+        "left": 107.19085632383782,
+        "right": 1186.6742438386866,
+        "top": 157.49628476534565,
+        "bottom": 679.4972666630124
+      },
+      "width": 1360,
+      "height": 836.9375,
+      "right": 1348,
+      "occupancy": 0.8499869193030305,
+      "fitRegion": "beside-controls",
+      "zoom": 19.154061317443848,
+      "pitch": 45,
+      "bearing": 0,
+      "floor": "F1",
+      "controls": {
+        "x": 1359,
+        "y": 135.0625,
+        "width": 56,
+        "height": 276
+      },
+      "overlapsControls": false,
+      "targets": [
+        {
+          "width": 44,
+          "height": 44
+        },
+        {
+          "width": 44,
+          "height": 44
+        },
+        {
+          "width": 44,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "phase": "sidebar-resize-preserves-camera",
+      "passed": true
+    },
+    {
+      "phase": "F0-reset",
+      "bounds": {
+        "left": 80.20988441927221,
+        "right": 853.7016774393542,
+        "top": 211.5577493421729,
+        "bottom": 625.435009674302
+      },
+      "width": 1000,
+      "height": 836.9375,
+      "right": 988,
+      "occupancy": 0.8499909813407495,
+      "fitRegion": "beside-controls",
+      "zoom": 18.72081184387207,
+      "pitch": 45,
+      "bearing": 0,
+      "floor": "F0",
+      "controls": {
+        "x": 1359,
+        "y": 135.0625,
+        "width": 56,
+        "height": 276
+      },
+      "overlapsControls": false,
+      "targets": [
+        {
+          "width": 44,
+          "height": 44
+        },
+        {
+          "width": 44,
+          "height": 44
+        },
+        {
+          "width": 44,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "phase": "F2-reset",
+      "bounds": {
+        "left": 80.19292359024091,
+        "right": 853.6848550930473,
+        "top": 253.51660279141362,
+        "bottom": 583.4800873649493
+      },
+      "width": 1000,
+      "height": 836.9375,
+      "right": 988,
+      "occupancy": 0.8499911335195676,
+      "fitRegion": "beside-controls",
+      "zoom": 18.737233638763428,
+      "pitch": 45,
+      "bearing": 0,
+      "floor": "F2",
+      "controls": {
+        "x": 1359,
+        "y": 135.0625,
+        "width": 56,
+        "height": 276
+      },
+      "overlapsControls": false,
+      "targets": [
+        {
+          "width": 44,
+          "height": 44
+        },
+        {
+          "width": 44,
+          "height": 44
+        },
+        {
+          "width": 44,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "phase": "F7-reset",
+      "bounds": {
+        "left": 80.30086232562839,
+        "right": 853.7981138104027,
+        "top": 251.13325944996905,
+        "bottom": 585.8809975323693
+      },
+      "width": 1000,
+      "height": 836.9375,
+      "right": 988,
+      "occupancy": 0.8499969796535981,
+      "fitRegion": "beside-controls",
+      "zoom": 18.685855388641357,
+      "pitch": 45,
+      "bearing": 0,
+      "floor": "F7",
+      "controls": {
+        "x": 1359,
+        "y": 135.0625,
+        "width": 56,
+        "height": 276
+      },
+      "overlapsControls": false,
+      "targets": [
+        {
+          "width": 44,
+          "height": 44
+        },
+        {
+          "width": 44,
+          "height": 44
+        },
+        {
+          "width": 44,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "phase": "F-All-reset",
+      "bounds": {
+        "left": 80.21154615452826,
+        "right": 853.6815161734156,
+        "top": 115.55932442439229,
+        "bottom": 721.440629961156
+      },
+      "width": 1000,
+      "height": 836.9375,
+      "right": 988,
+      "occupancy": 0.8499670000207553,
+      "fitRegion": "beside-controls",
+      "zoom": 18.280603885650635,
+      "pitch": 45,
+      "bearing": 0,
+      "floor": "F-All",
+      "controls": {
+        "x": 1359,
+        "y": 135.0625,
+        "width": 56,
+        "height": 276
+      },
+      "overlapsControls": false,
+      "targets": [
+        {
+          "width": 44,
+          "height": 44
+        },
+        {
+          "width": 44,
+          "height": 44
+        },
+        {
+          "width": 44,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "phase": "reset-preserves-search",
+      "passed": true
+    },
+    {
+      "phase": "route-reset",
+      "bounds": {
+        "left": 80.30346606035022,
+        "right": 853.7942843101831,
+        "top": 221.38949480013852,
+        "bottom": 615.604496753075
+      },
+      "width": 1000,
+      "height": 836.9375,
+      "right": 988,
+      "occupancy": 0.8499899101646516,
+      "fitRegion": "beside-controls",
+      "zoom": 18.733407974243164,
+      "pitch": 45,
+      "bearing": 0,
+      "floor": "F1",
+      "controls": {
+        "x": 1359,
+        "y": 135.0625,
+        "width": 56,
+        "height": 276
+      },
+      "overlapsControls": false,
+      "targets": [
+        {
+          "width": 44,
+          "height": 44
+        },
+        {
+          "width": 44,
+          "height": 44
+        },
+        {
+          "width": 44,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "phase": "route-preserved-during-navigation",
+      "passed": true
+    },
+    {
+      "phase": "night-presets-preserved",
+      "passed": true,
+      "nightView": {
+        "longitude": -89.22043177101597,
+        "latitude": 37.7152839522057,
+        "zoom": 18.72,
+        "pitch": 45,
+        "bearing": 0
+      }
+    },
+    {
+      "phase": "multi-floor-route-panel-controls",
+      "passed": true,
+      "panels": 2
+    },
+    {
+      "phase": "initial-mobile",
+      "bounds": {
+        "left": 37.497854879288816,
+        "right": 326.4978303817689,
+        "top": 414.5251237953803,
+        "bottom": 587.5473568925709
+      },
+      "width": 364,
+      "height": 716,
+      "right": 352,
+      "occupancy": 0.8499999279484708,
+      "fitRegion": "below-controls",
+      "zoom": 17.19424295425415,
+      "pitch": 45,
+      "bearing": 0,
+      "floor": "F1",
+      "controls": {
+        "x": 309,
+        "y": 89,
+        "width": 56,
+        "height": 276
+      },
+      "overlapsControls": false,
+      "targets": [
+        {
+          "width": 44,
+          "height": 44
+        },
+        {
+          "width": 44,
+          "height": 44
+        },
+        {
+          "width": 44,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "phase": "mobile-reset",
+      "bounds": {
+        "left": 37.497854879288816,
+        "right": 326.4978303817689,
+        "top": 414.5251237953803,
+        "bottom": 587.5473568925709
+      },
+      "width": 364,
+      "height": 716,
+      "right": 352,
+      "occupancy": 0.8499999279484708,
+      "fitRegion": "below-controls",
+      "zoom": 17.19424295425415,
+      "pitch": 45,
+      "bearing": 0,
+      "floor": "F1",
+      "controls": {
+        "x": 309,
+        "y": 89,
+        "width": 56,
+        "height": 276
+      },
+      "overlapsControls": false,
+      "targets": [
+        {
+          "width": 44,
+          "height": 44
+        },
+        {
+          "width": 44,
+          "height": 44
+        },
+        {
+          "width": 44,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "phase": "touch-pinch-slider-synchronization",
+      "passed": true
+    },
+    {
+      "phase": "mobile-drawer-preserves-camera",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

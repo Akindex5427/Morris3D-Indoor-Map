@@ -2,17 +2,28 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import { FlyToInterpolator } from "@deck.gl/core";
 import "./App.css";
 import Map3D from "./components/Map3D";
+import { clampMapZoom } from "./utils/buildingCamera";
 import FloorSwitcher from "./components/FloorSwitcher";
 import SearchBar from "./components/SearchBar";
 import RoomInfoPopup from "./components/RoomInfoPopup";
+import RoomCorrespondencePanel from "./components/RoomCorrespondencePanel";
+import { useRoomCorrespondence } from "./hooks/useRoomCorrespondence";
+import { exactAuthoritativeMatches } from "./utils/roomCorrespondenceIdentity";
+import { routeFeatureKey, linkRouteFeatureIdentities } from "./utils/routeLabelIdentity";
+import { useRoomCatalog } from "./hooks/useRoomCatalog";
+import { FLOOR_POLYGON_MAP, roomCatalogStore, isHighlightedRoom } from "./utils/roomCatalog";
 import FilterPanel from "./components/FilterPanel";
 import VisualControls from "./components/VisualControls";
+import { summarizeRoomFunctions } from "./utils/roomColors";
 import RoutePlanner from "./components/RoutePlanner";
 import LoadingSpinner from "./components/LoadingSpinner";
 import HelpOverlay from "./components/HelpOverlay";
 import DirectionsPanel from "./components/DirectionsPanel";
 import MultiFloorRouteTimeline from "./components/MultiFloorRouteTimeline";
 import { useRoutePreview } from "./hooks/useRoutePreview";
+import { useInteriorLightActivation } from "./hooks/useInteriorLightActivation";
+import { useEnvironmentController } from "./hooks/useEnvironmentController";
+import { useNightPreset } from "./hooks/useNightPreset";
 import { computeMultiFloorRoute, IndoorRouter } from "../routing";
 import {
   buildRoomAnchorIndex,
@@ -57,12 +68,7 @@ const ROUTE_DEBUG_ENABLED = import.meta.env?.DEV !== false;
 // user-movement tracking yet to justify an immediate start).
 const ROUTE_PREVIEW_START_DELAY_MS = 3000;
 
-const getRoomDisplayId = (room) =>
-  room?.properties?.id ||
-  room?.properties?.name ||
-  room?.properties?.room_id ||
-  room?.properties?.OBJECTID ||
-  null;
+const getRoomDisplayId = routeFeatureKey;
 
 const isLngLatCoordinate = (coord) =>
   Array.isArray(coord) &&
@@ -167,13 +173,33 @@ const ROUTER_CONFIG = [
 ];
 
 function App() {
+  const roomCatalog = useRoomCatalog();
+  const correspondence = useRoomCorrespondence(roomCatalog);
+  const [selectedFeatureDetails, setSelectedFeatureDetails] = useState(null);
+  const authoritativeFeatures = useMemo(() => Object.values(roomCatalog.datasets).flatMap(data => data.features), [roomCatalog.datasets]);
+  const correspondenceFeatures = useMemo(() => {
+    if (correspondence.result?.status !== "ready") return [];
+    const referenceKey = correspondence.result.reference.key;
+    return authoritativeFeatures.filter(feature => [referenceKey, correspondence.candidateKey].includes(feature.properties.__roomSearchKey))
+      .map(feature => ({ ...feature, properties: { ...feature.properties, __correspondenceRole: feature.properties.__roomSearchKey === referenceKey ? "reference" : "candidate" } }));
+  }, [authoritativeFeatures, correspondence.result, correspondence.candidateKey]);
+  const [displayLoadError, setDisplayLoadError] = useState(null);
+  const [displayRetry, setDisplayRetry] = useState(0);
   const [selectedFloor, setSelectedFloor] = useState(1);
   const [allRooms, setAllRooms] = useState([]);
+  const routeDisplayRooms = useMemo(() => linkRouteFeatureIdentities(allRooms, authoritativeFeatures),
+    [allRooms, authoritativeFeatures]);
+  const [roomColorMode, setRoomColorMode] = useState("original");
+  const roomFunctionAvailable = useMemo(() => summarizeRoomFunctions([
+    ...roomCatalog.entries.map(entry => entry.feature), ...allRooms,
+  ]).classified > 0, [roomCatalog.entries, allRooms]);
   const [filteredRooms, setFilteredRooms] = useState([]);
   const [selectedFloors, setSelectedFloors] = useState([]);
   const [highlightedRoomId, setHighlightedRoomId] = useState(null);
-  const [selectedRoom, setSelectedRoom] = useState(null);
-  const [popupPosition, setPopupPosition] = useState(null);
+  const selectedRoom = useMemo(() => (
+    selectedFeatureDetails || roomCatalog.entries.find(entry => entry.key === highlightedRoomId)?.feature ||
+    allRooms.find(feature => isHighlightedRoom(feature.properties || {}, highlightedRoomId))
+  )?.properties ?? null, [selectedFeatureDetails, highlightedRoomId, roomCatalog.entries, allRooms]);
   const [showFilterPanel, setShowFilterPanel] = useState(false);
   const [availableFloors, setAvailableFloors] = useState([]);
   const [viewState, setViewState] = useState({
@@ -183,6 +209,7 @@ function App() {
     pitch: 45,
     bearing: 0,
   });
+  const [buildingFitRequest, setBuildingFitRequest] = useState({ kind: "initial" });
   const [lightingEnabled, setLightingEnabled] = useState(true);
   const [translucency, setTranslucency] = useState(60); // global room body opacity percentage
   const [roomWallOpacity, setRoomWallOpacity] = useState(95);
@@ -192,8 +219,13 @@ function App() {
   const [routeContext, setRouteContext] = useState(null);
   const [routeCameraKey, setRouteCameraKey] = useState(0);
   const [searchFocusRequest, setSearchFocusRequest] = useState(null);
+  const searchFocusSequence = useRef(0);
   const [isLoading, setIsLoading] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
+  const { preset: nightPreset, selectPreset: setNightPreset, nightTuning,
+    targetTuning: nightTuningTarget, setTargetTuning: setNightTuning } = useNightPreset(darkMode);
+  const environment = useEnvironmentController(darkMode);
+  const interiorLightActivation = useInteriorLightActivation(darkMode, environment.fullNight);
   const [hoveredRoomId, setHoveredRoomId] = useState(null);
   const [showHelp, setShowHelp] = useState(false);
   const [showDirections, setShowDirections] = useState(true);
@@ -220,7 +252,6 @@ function App() {
   const sidebarDragRef = useRef(null);
   const suppressSidebarClickRef = useRef(false);
   const previousLayoutModeRef = useRef("desktop");
-  const pendingSearchFocusRef = useRef(false);
 
   // Initialize IndoorRouter with graph-based routing for all floors
   useEffect(() => {
@@ -361,8 +392,15 @@ function App() {
   useEffect(() => {
     const handleKeyPress = (e) => {
       // Don't trigger shortcuts when typing in inputs
-      if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA")
+      if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey ||
+        e.target.closest?.("input, textarea, select, button, [contenteditable='true'], [role='dialog']"))
         return;
+
+      if (["r", "+", "=", "-", "_", "arrowup", "arrowdown", "arrowleft", "arrowright"].includes(e.key.toLowerCase())) {
+        e.preventDefault();
+        setBuildingFitRequest(null);
+        setCameraMode("manual");
+      }
 
       switch (e.key.toLowerCase()) {
         case "0":
@@ -401,7 +439,6 @@ function App() {
           setShowHelp(false);
           setShowFilterPanel(false);
           setShowRoutePlanner(false);
-          setSelectedRoom(null);
           setShowDirections(false);
           break;
         case "arrowup":
@@ -426,14 +463,16 @@ function App() {
         case "=":
           setViewState((prev) => ({
             ...prev,
-            zoom: Math.min(22, prev.zoom + 0.5),
+            zoom: clampMapZoom(prev.zoom + 0.5),
+            transitionDuration: 0,
           }));
           break;
         case "-":
         case "_":
           setViewState((prev) => ({
             ...prev,
-            zoom: Math.max(14, prev.zoom - 0.5),
+            zoom: clampMapZoom(prev.zoom - 0.5),
+            transitionDuration: 0,
           }));
           break;
         default:
@@ -446,19 +485,6 @@ function App() {
   }, []);
 
   // Polygon extrusion sources (primary) and optional line overlays (outlines)
-  const FLOOR_POLYGON_MAP = {
-    "-1": "/rooms-basement-WGS.geojson",
-    0: "/rooms-basement-WGS.geojson",
-    1: "/rooms-level-01-WGS.geojson",
-    2: "/rooms-level-02-WGS.geojson",
-    3: "/rooms-level-03-WGS.geojson",
-    4: "/rooms-level-04-WGS.geojson",
-    5: "/rooms-level-5-WGS.geojson",
-    6: "/rooms-level-6-WGS.geojson",
-    7: "/rooms-level-7-WGS.geojson",
-    all: "/rooms-all-WGS-v6.geojson",
-  };
-
   const ROUTE_ROOM_FLOOR_MAP = {
     0: FLOOR_POLYGON_MAP[0],
     1: FLOOR_POLYGON_MAP[1],
@@ -523,7 +549,7 @@ function App() {
           Object.entries(ROUTE_ROOM_FLOOR_MAP).map(
             async ([floorKey, url]) => {
               const floor = Number(floorKey);
-              const floorData = await fetchGeoJson(url);
+              const floorData = await roomCatalogStore.loadFloor(floor);
 
               return {
                 floor,
@@ -556,7 +582,7 @@ function App() {
           const floor = Number(floorKey);
 
           try {
-            const floorData = await fetchGeoJson(url);
+            const floorData = await roomCatalogStore.loadFloor(floor);
             const features = (floorData.features || []).map((feature) =>
               normalizeRouteRoomFeature(feature, floor),
             );
@@ -769,15 +795,16 @@ function App() {
 
   // Load GeoJSON data based on selected floor
   useEffect(() => {
+    let cancelled = false;
     const loadGeojson = async () => {
       try {
         const key = selectedFloor.toString();
         const polygonUrl = FLOOR_POLYGON_MAP[key] || FLOOR_POLYGON_MAP.all;
 
         // Load polygon data only (no line overlays needed with polygon files)
-        const response = await fetch(polygonUrl);
-        if (!response.ok) throw new Error(`Failed to load ${polygonUrl}`);
-        const data = await response.json();
+        const data = selectedFloor === "all"
+          ? await fetchGeoJson(polygonUrl)
+          : await roomCatalogStore.loadFloor(selectedFloor);
 
         let polygons = data.features || [];
 
@@ -805,7 +832,7 @@ function App() {
         // In F-ALL mode, keep level metadata as-is for stacking
         const features =
           selectedFloor === "all"
-            ? polygons
+            ? polygons.map((feature, index) => ({ ...feature, properties: { ...feature.properties, __displayFeatureKey: `combined:${index}` } }))
             : polygons.map((feature) => ({
                 ...feature,
                 properties: {
@@ -821,8 +848,9 @@ function App() {
         // Use polygons directly (no line overlays)
         const combinedFeatures = features;
 
+        if (cancelled) return;
+        setAllRooms(combinedFeatures);
         if (combinedFeatures.length > 0) {
-          setAllRooms(combinedFeatures);
 
           // Extract unique floors (supporting floor, nivel, and level properties)
           const floors = [
@@ -843,45 +871,22 @@ function App() {
 
           setAvailableFloors(resolvedFloors);
 
-          // Calculate initial view bounds
-          const coords = polygons.flatMap((f) => {
-            if (f.geometry?.type === "Polygon") {
-              return f.geometry.coordinates[0];
-            } else if (f.geometry?.type === "MultiPolygon") {
-              return f.geometry.coordinates.flatMap((p) => p[0]);
-            } else if (f.geometry?.type === "LineString") {
-              return f.geometry.coordinates;
-            }
-            return [];
-          });
-
-          if (coords.length > 0) {
-            const lngs = coords.map((c) => c[0]);
-            const lats = coords.map((c) => c[1]);
-            const centerLng = (Math.min(...lngs) + Math.max(...lngs)) / 2;
-            const centerLat = (Math.min(...lats) + Math.max(...lats)) / 2;
-
-            if (pendingSearchFocusRef.current) {
-              pendingSearchFocusRef.current = false;
-            } else {
-              setViewState((prev) => ({
-                ...prev,
-                longitude: centerLng,
-                latitude: centerLat,
-              }));
-            }
-          }
+          // Camera fitting is requested once and measured inside Map3D.
+          // Floor changes retain the current camera; Reset fits explicitly.
         }
       } catch (error) {
+        if (!cancelled) setDisplayLoadError(error.message);
         console.error("Error loading GeoJSON:", error);
       } finally {
-        setIsLoading(false);
+        if (!cancelled) setIsLoading(false);
       }
     };
 
     setIsLoading(true);
+    setDisplayLoadError(null);
     loadGeojson();
-  }, [selectedFloor]);
+    return () => { cancelled = true; };
+  }, [selectedFloor, displayRetry, roomCatalog.datasets[selectedFloor]]);
 
   const handleFloorChange = (floor) => {
     // Only update which floor is displayed — do NOT clear an active route.
@@ -890,14 +895,17 @@ function App() {
     // so the route reappears when the user returns to a route floor.
     setSelectedFloor(floor);
     setSelectedFloors([]);
-    setSelectedRoom(null);
     setHighlightedRoomId(null);
+    setSelectedFeatureDetails(null);
+    setSearchFocusRequest(null);
+    setFilteredRooms([]);
   };
 
   const findRoomFeatureById = (roomId) =>
     allRooms.find((room) => {
       const props = room.properties || {};
       return (
+        props.__roomSearchKey === roomId ||
         props.id === roomId ||
         props.name === roomId ||
         props.room_id === roomId ||
@@ -905,14 +913,22 @@ function App() {
       );
     });
 
-  const handleRoomSelect = (roomOrProperties, roomId) => {
-    const selectedFeature =
+  const handleRoomSelect = (roomOrProperties, roomId, options = {}) => {
+    if (!options.preserveCorrespondence) correspondence.close();
+    let selectedFeature =
       roomOrProperties?.type === "Feature" || roomOrProperties?.geometry
         ? roomOrProperties
         : findRoomFeatureById(roomId);
+    if (selectedFeature && !selectedFeature.properties?.__roomSearchKey) {
+      const exact = exactAuthoritativeMatches(selectedFeature, authoritativeFeatures);
+      if (exact.length === 1) selectedFeature = exact[0];
+    }
+    setSelectedFeatureDetails(selectedFeature || null);
     const roomProperties =
       selectedFeature?.properties || roomOrProperties || {};
     const resolvedRoomId =
+      roomProperties.__roomSearchKey ||
+      roomProperties.__displayFeatureKey ||
       roomId ||
       roomProperties.id ||
       roomProperties.name ||
@@ -935,34 +951,33 @@ function App() {
       bounds?.center ||
       (centroid ? [centroid.lng, centroid.lat] : null);
 
-    if (detectedFloor !== null) {
-      pendingSearchFocusRef.current = detectedFloor !== selectedFloor;
+    const unresolvedCombined = selectedFloor === "all" && !roomProperties.__roomSearchKey;
+    if (detectedFloor !== null && !unresolvedCombined) {
       // Switch the displayed floor to the room's floor, but preserve any
       // active route — visibleRouteContext handles overlay visibility.
       setSelectedFloor(detectedFloor);
       setSelectedFloors([]);
     }
 
-    setSelectedRoom(roomProperties);
+    setFilteredRooms([]);
+    setBuildingFitRequest(null);
+    // Inspect the result on one floor even when a multi-floor route timeline is open.
+    if (routeContext?.type === "multi-floor") setRouteVisualizationMode("stacked");
+    if (layoutMode !== "desktop" && !options.preserveCorrespondence) setSidebarCollapsed(true);
     setHighlightedRoomId(resolvedRoomId);
     setCameraMode("overview");
 
-    // Position popup near click location
-    setPopupPosition({
-      x: window.innerWidth / 2 - 150,
-      y: window.innerHeight / 2 - 150,
-    });
-
-    if (cameraTarget) {
-      setSearchFocusRequest((previous) => ({
-        key: (previous?.key ?? 0) + 1,
+    setSearchFocusRequest(null);
+    if (cameraTarget && options.focus !== false && !unresolvedCombined) {
+      setSearchFocusRequest({
+        key: ++searchFocusSequence.current,
         roomId: resolvedRoomId,
         roomName,
         floorId: detectedFloor,
         previousFloor,
         target: cameraTarget,
         bounds,
-      }));
+      });
     } else if (import.meta.env?.DEV !== false) {
       console.log("[RoomSearch] camera focus skipped", {
         searchedRoomId: resolvedRoomId,
@@ -986,11 +1001,32 @@ function App() {
     }
   };
 
-  const handleSearch = (roomIds) => {
-    setFilteredRooms(roomIds);
-    if (roomIds.length > 0) {
-      setHighlightedRoomId(roomIds[0]);
-    }
+  const handleClearSearch = () => {
+    correspondence.close();
+    setFilteredRooms([]);
+    setHighlightedRoomId(null);
+    setSelectedFeatureDetails(null);
+    setSearchFocusRequest(null);
+  };
+
+  const openCorrespondence = (feature = selectedFeatureDetails) => {
+    if (!feature) return;
+    correspondence.start(feature);
+    setSidebarCollapsed(false);
+    window.setTimeout(() => document.getElementById("panel-correspondence")?.scrollIntoView({ block: "nearest" }), 100);
+  };
+  const selectCorrespondence = (key, isReference = false) => {
+    const feature = authoritativeFeatures.find(f => f.properties.__roomSearchKey === key);
+    if (!feature) return;
+    if (!isReference) correspondence.setCandidateKey(key);
+    handleRoomSelect(feature, key, { preserveCorrespondence: true, focus: false });
+  };
+  const inspectCorrespondenceAll = () => {
+    setSelectedFloor("all"); setSelectedFloors([]); setFilteredRooms([]);
+    setRouteVisualizationMode("stacked"); setSearchFocusRequest(null); setBuildingFitRequest(null);
+    // Explicitly retain XY, bearing, pitch, and zoom. Fit Building remains available.
+    setCameraMode("manual");
+    if (layoutMode !== "desktop") setSidebarCollapsed(true);
   };
 
   const handleFilter = (roomIds) => {
@@ -1012,32 +1048,10 @@ function App() {
     }
   };
 
-  const handleClosePopup = () => {
-    setSelectedRoom(null);
-    setHighlightedRoomId(null);
-  };
-
   const handleViewReset = () => {
-    setViewState((prev) => ({
-      ...prev,
-      zoom: 17,
-      pitch: 45,
-      bearing: 0,
-    }));
-  };
-
-  const handleZoomIn = () => {
-    setViewState((prev) => ({
-      ...prev,
-      zoom: prev.zoom + 1,
-    }));
-  };
-
-  const handleZoomOut = () => {
-    setViewState((prev) => ({
-      ...prev,
-      zoom: prev.zoom - 1,
-    }));
+    setSearchFocusRequest(null);
+    setCameraMode("manual");
+    setBuildingFitRequest({ kind: "reset" });
   };
 
   const handleRotate = (direction) => {
@@ -1083,6 +1097,7 @@ function App() {
   };
 
   const requestRouteCameraFit = () => {
+    setSearchFocusRequest(null);
     window.dispatchEvent(new Event("resize"));
     setRouteCameraKey((key) => key + 1);
   };
@@ -1400,6 +1415,7 @@ function App() {
           traveledPath: previewTraveledPath,
           remainingPath: previewRemainingPath,
           cursorPosition: previewCursorPosition,
+          isPlaying: previewIsPlaying,
           progressMeters: previewProgressMeters,
           totalMeters: previewTotalMeters,
         }
@@ -2225,6 +2241,8 @@ function App() {
     }
   };
   const handleUserCameraInteraction = () => {
+    setSearchFocusRequest(null);
+    setBuildingFitRequest(null);
     setCameraMode("manual");
   };
 
@@ -2234,7 +2252,7 @@ function App() {
   };
 
   // Show loading screen while data is loading
-  if (isLoading) {
+  if (isLoading && allRooms.length === 0) {
     return <LoadingSpinner message="Loading 3D building model..." />;
   }
 
@@ -2359,15 +2377,29 @@ function App() {
                 <span className="panel-kicker">Explore</span>
                 <h2 className="panel-title">Search rooms</h2>
                 <p className="panel-description">
-                  Find rooms by name, type, or room number.
+                  Find rooms on F0–F7 by name or source identifier.
                 </p>
               </div>
               <SearchBar
-                rooms={allRooms}
-                onSearch={handleSearch}
+                catalog={roomCatalog}
+                onClear={handleClearSearch}
+                onRetry={() => roomCatalogStore.loadAll()}
                 onRoomSelect={handleRoomSelect}
               />
+              {selectedRoom && layoutMode === "desktop" && !sidebarCollapsed && (
+                <RoomInfoPopup room={selectedRoom} onClose={handleClearSearch} onCorrespondence={() => openCorrespondence()} inline />
+              )}
+
             </div>
+
+            {correspondence.request && <div className="panel-section panel-card">
+              <RoomCorrespondencePanel analysis={correspondence} onClose={correspondence.close}
+                onRetry={() => openCorrespondence(correspondence.request.feature)}
+                onChooseReference={key => openCorrespondence(authoritativeFeatures.find(f => f.properties.__roomSearchKey === key))}
+                onSelect={selectCorrespondence}
+                onReference={() => selectCorrespondence(correspondence.result.reference.key, true)}
+                onInspectAll={inspectCorrespondenceAll} />
+            </div>}
 
             <div className="panel-section panel-card" id="panel-floors">
               <FloorSwitcher
@@ -2452,7 +2484,11 @@ function App() {
                         className={
                           routeVisualizationMode === "timeline" ? "active" : ""
                         }
-                        onClick={() => setRouteVisualizationMode("timeline")}
+                        onClick={() => {
+                          handleClearSearch();
+                          setSelectedFloor("all");
+                          setRouteVisualizationMode("timeline");
+                        }}
                       >
                         Timeline view
                       </button>
@@ -2550,8 +2586,17 @@ function App() {
 
             <div className="panel-section panel-card" id="panel-settings">
               <VisualControls
+                roomColorMode={roomColorMode}
+                setRoomColorMode={setRoomColorMode}
+                roomFunctionAvailable={roomFunctionAvailable}
                 lightingEnabled={lightingEnabled}
+                nightMode={darkMode}
                 setLightingEnabled={setLightingEnabled}
+                setNightMode={setDarkMode}
+                nightPreset={nightPreset}
+                setNightPreset={setNightPreset}
+                nightTuning={nightTuningTarget}
+                setNightTuning={setNightTuning}
                 roomFillOpacity={translucency}
                 setRoomFillOpacity={setTranslucency}
                 roomWallOpacity={roomWallOpacity}
@@ -2607,11 +2652,17 @@ function App() {
           <div className="map-container">
             {isMultiFloorTimelineActive ? (
               <MultiFloorRouteTimeline
+                authoritativeFeatures={authoritativeFeatures}
+                roomColorMode={roomColorMode}
                 route={visibleRouteContext.route}
-                roomsData={allRooms}
+                roomsData={routeDisplayRooms}
                 centerlinesData={centerlinesData}
                 lightingEnabled={lightingEnabled}
+                nightMode={darkMode}
+                environment={environment}
+                interiorLightActivation={interiorLightActivation}
                 translucency={translucency}
+                nightTuning={nightTuning}
                 roomWallOpacity={roomWallOpacity}
                 roomWallThicknessMeters={roomWallThicknessMeters}
                 basemapStyle={basemapStyle}
@@ -2621,6 +2672,8 @@ function App() {
               />
             ) : (
               <Map3D
+                correspondenceFeatures={correspondenceFeatures}
+                authoritativeFeatures={authoritativeFeatures}
                 selectedFloor={selectedFloor}
                 selectedFloors={selectedFloors}
                 onRoomSelect={handleRoomSelect}
@@ -2628,12 +2681,18 @@ function App() {
                 highlightedRoomId={highlightedRoomId}
                 hoveredRoomId={hoveredRoomId}
                 onRoomHover={setHoveredRoomId}
-                colorScheme="default"
+                roomColorMode={roomColorMode}
                 viewState={viewState}
                 onViewStateChange={setViewState}
                 onUserCameraInteraction={handleUserCameraInteraction}
+                buildingFitRequest={buildingFitRequest}
+                onBuildingFitComplete={(request) => setBuildingFitRequest(current => current === request ? null : current)}
                 lightingEnabled={lightingEnabled}
+                nightMode={darkMode}
+                environment={environment}
+                interiorLightActivation={interiorLightActivation}
                 translucency={translucency}
+                nightTuning={nightTuning}
                 roomWallOpacity={roomWallOpacity}
                 roomWallThicknessMeters={roomWallThicknessMeters}
                 heightExaggeration={1}
@@ -2648,7 +2707,7 @@ function App() {
                 routeFloorId={visibleRouteContext?.floorId ?? null}
                 routeCameraKey={routeCameraKey}
                 searchFocusRequest={searchFocusRequest}
-                roomsData={allRooms}
+                roomsData={routeDisplayRooms}
                 centerlinesData={centerlinesData}
                 activeFloor={selectedFloor}
                 cinematicAnimationsEnabled={cinematicAnimationsEnabled}
@@ -2660,15 +2719,13 @@ function App() {
               />
             )}
 
-            {/* Room Info Popup */}
-            {selectedRoom && (
-              <RoomInfoPopup
-                room={selectedRoom}
-                onClose={handleClosePopup}
-                position={popupPosition}
-              />
+            {(isLoading || displayLoadError) && <div className="room-load-status" role="status">
+              {displayLoadError ? <>Unable to load this floor. <button onClick={() => setDisplayRetry(value => value + 1)}>Retry</button></>
+                : "Loading floor geometry…"}
+            </div>}
+            {selectedRoom && (layoutMode !== "desktop" || sidebarCollapsed) && (
+              <RoomInfoPopup room={selectedRoom} onClose={handleClearSearch} onCorrespondence={() => openCorrespondence()} />
             )}
-
             {/* Directions badge when sidebar is collapsed */}
             {sidebarCollapsed && showDirections && routeContext?.route?.path && (
               <button

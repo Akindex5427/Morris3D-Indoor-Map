@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { SimpleMeshLayer } from "@deck.gl/mesh-layers";
-import { buildWallMeshes } from "../utils/wallGeometry";
+import { getCachedWallMeshes, revealWallMesh } from "../utils/wallGeometry";
+import { loadWallData } from "../utils/wallDataCache";
 
 export const stackedWallConfig = {
   F0: "wall_room_basement_stack.geojson",
@@ -103,19 +104,14 @@ export function useStackedWallLayer({
       return undefined;
     }
 
-    const controller = new AbortController();
+    let cancelled = false;
 
     const loadStackedWalls = async () => {
       const wallEntries = await Promise.all(
         Object.entries(wallStackConfig).map(async ([floorKey, fileName]) => {
           const url = toWallStackUrl(fileName);
           try {
-            const response = await fetch(url, { signal: controller.signal });
-            if (!response.ok) {
-              throw new Error(`Failed to load ${url}`);
-            }
-
-            return [floorKey, await response.json()];
+            return [floorKey, await loadWallData(url)];
           } catch (error) {
             if (error.name !== "AbortError") {
               console.warn(
@@ -129,7 +125,7 @@ export function useStackedWallLayer({
         }),
       );
 
-      if (!controller.signal.aborted) {
+      if (!cancelled) {
         const nextWallDataByFloor = {};
         for (const entry of wallEntries) {
           if (entry) {
@@ -144,9 +140,10 @@ export function useStackedWallLayer({
 
     loadStackedWalls();
 
-    return () => controller.abort();
+    return () => { cancelled = true; };
   }, [enabled, wallStackConfig]);
 
+  const { revealProgress, initialRevealActive } = presentation;
   return useMemo(() => {
     if (!enabled) {
       return [];
@@ -168,16 +165,14 @@ export function useStackedWallLayer({
       const wallRevealProgress = getStackedWallRevealProgress({
         floorKey,
         visibleFloorKeys,
-        revealProgress: presentation.revealProgress,
-        initialRevealActive: presentation.initialRevealActive,
+        revealProgress,
+        initialRevealActive,
       });
 
-      return buildWallMeshes(wallData, {
-        getRevealProgress: () => wallRevealProgress,
-      }).map((wall, index) => (
+      return getCachedWallMeshes(wallData).map((wall, index) => (
         new SimpleMeshLayer({
           id: `building-stacked-wall-${floorKey}-${wall.id}-${index}`,
-          data: [{ ...wall, floorKey }],
+          data: [{ ...revealWallMesh(wall, wallRevealProgress), floorKey }],
           mesh: wall.mesh,
           getPosition: (d) => d.origin,
           getColor: (d) => [
@@ -186,9 +181,9 @@ export function useStackedWallLayer({
             d.color[2],
             Math.round((d.color[3] ?? 255) * d.revealProgress),
           ],
-          getScale: [1, 1, 1],
+          getScale: [1, 1, wallRevealProgress],
           getOrientation: [0, 0, 0],
-          getTranslation: [0, 0, 0],
+          getTranslation: [0, 0, wall.bottom * (1 - wallRevealProgress)],
           sizeScale: 1,
           pickable: false,
           wireframe: false,
@@ -204,7 +199,8 @@ export function useStackedWallLayer({
   }, [
     activeFloor,
     enabled,
-    presentation,
+    revealProgress,
+    initialRevealActive,
     selectedFloor,
     selectedFloors,
     wallDataByFloor,

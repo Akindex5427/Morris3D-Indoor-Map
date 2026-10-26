@@ -1,0 +1,499 @@
+{
+  "results": [
+    {
+      "phase": "all-duplicate-results-visible",
+      "count": 432,
+      "passed": true
+    },
+    {
+      "phase": "select-room",
+      "query": "JOURNALS 1995 older a",
+      "key": "/rooms-basement-WGS.geojson#F0:FID:131",
+      "name": "journals 1995 & older a to f",
+      "floor": 0,
+      "featureCount": 148,
+      "zoom": 20.999999582767487,
+      "pitch": 0,
+      "bearing": 0,
+      "bounds": {
+        "left": 186.71408629232184,
+        "right": 755.2465361456743,
+        "top": 171.26013790125558,
+        "bottom": 665.7398617102917
+      },
+      "buildingBounds": {
+        "left": -1914.3369372941243,
+        "right": 1474.9405222613145,
+        "top": -1306.0849491614235,
+        "bottom": 1389.929965206988
+      },
+      "viewport": {
+        "width": 1000,
+        "height": 837
+      },
+      "label": {
+        "text": "journals 1995 & older a to f",
+        "presentation": "fixed-panel"
+      }
+    },
+    {
+      "phase": "select-room",
+      "query": "CLASSROOM-0174",
+      "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+      "name": "Classroom 0174",
+      "floor": 1,
+      "featureCount": 355,
+      "zoom": 20.999999582767487,
+      "pitch": 0,
+      "bearing": 0,
+      "bounds": {
+        "left": 323.8919680500464,
+        "right": 618.068653795587,
+        "top": 164.42387121487468,
+        "bottom": 672.5761284352842
+      },
+      "buildingBounds": {
+        "left": -485.91844344064157,
+        "right": 3418.868380085036,
+        "top": -1667.2514859689254,
+        "bottom": 1139.818102683294
+      },
+      "viewport": {
+        "width": 1000,
+        "height": 837
+      },
+      "label": {
+        "text": "Classroom 0174",
+        "presentation": "fixed-panel"
+      }
+    },
+    {
+      "phase": "select-room",
+      "query": "026",
+      "key": "/rooms-level-02-WGS.geojson#F2:OBJECTID:92",
+      "name": "Classroom 0261",
+      "floor": 2,
+      "featureCount": 243,
+      "zoom": 20.999999582767487,
+      "pitch": 0,
+      "bearing": 0,
+      "bounds": {
+        "left": 233.50907413036342,
+        "right": 708.3378995793386,
+        "top": 242.0660028161425,
+        "bottom": 594.9339981009239
+      },
+      "buildingBounds": {
+        "left": -860.4413593631,
+        "right": 2519.151313225707,
+        "top": -467.5696523905117,
+        "bottom": 1701.2791071834156
+      },
+      "viewport": {
+        "width": 1000,
+        "height": 837
+      },
+      "label": {
+        "text": "Classroom 0261",
+        "presentation": "fixed-panel"
+      }
+    },
+    {
+      "phase": "select-room",
+      "query": "lactation",
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:262",
+      "name": "Lactation Room 0323",
+      "floor": 3,
+      "featureCount": 288,
+      "zoom": 20.999999582767487,
+      "pitch": 0,
+      "bearing": 0,
+      "bounds": {
+        "left": 391.18084916458747,
+        "right": 550.7974404812121,
+        "top": 337.0409741129738,
+        "bottom": 499.9590260079164
+      },
+      "buildingBounds": {
+        "left": -1866.4845619704304,
+        "right": 1518.1197236850314,
+        "top": -1273.156198693866,
+        "bottom": 1333.9666392257693
+      },
+      "viewport": {
+        "width": 1000,
+        "height": 837
+      },
+      "label": {
+        "text": "Lactation Room 0323",
+        "presentation": "fixed-panel"
+      }
+    },
+    {
+      "phase": "select-room",
+      "query": "conference 048",
+      "key": "/rooms-level-04-WGS.geojson#F4:OBJECTID:60",
+      "name": "Library Conference 0480A",
+      "floor": 4,
+      "featureCount": 199,
+      "zoom": 20.999999582767487,
+      "pitch": 0,
+      "bearing": 0,
+      "bounds": {
+        "left": 222.52769549772353,
+        "right": 719.6616811712668,
+        "top": 237.44553579700928,
+        "bottom": 599.5544635365662
+      },
+      "buildingBounds": {
+        "left": 209.50241700500325,
+        "right": 3468.6024143860036,
+        "top": -1508.4833285095974,
+        "bottom": 610.990503536541
+      },
+      "viewport": {
+        "width": 1000,
+        "height": 837
+      },
+      "label": {
+        "text": "Library Conference 0480A",
+        "presentation": "fixed-panel"
+      }
+    },
+    {
+      "phase": "select-room",
+      "query": "group study 0550a",
+      "key": "/rooms-level-5-WGS.geojson#F5:OBJECTID:142",
+      "name": "Group  Study 0550A",
+      "floor": 5,
+      "featureCount": 149,
+      "zoom": 20.999999582767487,
+      "pitch": 0,
+      "bearing": 0,
+      "bounds": {
+        "left": 283.3525365334232,
+        "right": 658.6080843087942,
+        "top": 315.4569193161714,
+        "bottom": 521.5430802338631
+      },
+      "buildingBounds": {
+        "left": 19.13016038813892,
+        "right": 3632.270470627548,
+        "top": 292.34018491410933,
+        "bottom": 2494.015411112293
+      },
+      "viewport": {
+        "width": 1000,
+        "height": 837
+      },
+      "label": {
+        "text": "Group  Study 0550A",
+        "presentation": "fixed-panel"
+      }
+    },
+    {
+      "phase": "select-room",
+      "query": "math class",
+      "key": "/rooms-level-6-WGS.geojson#F6:OBJECTID:6",
+      "name": "Math Classroom 0654",
+      "floor": 6,
+      "featureCount": 138,
+      "zoom": 20.973730623722076,
+      "pitch": 0,
+      "bearing": 0,
+      "bounds": {
+        "left": 243.86705570487862,
+        "right": 698.0958510443609,
+        "top": 90.00376095903992,
+        "bottom": 746.9962402236602
+      },
+      "buildingBounds": {
+        "left": -431.75834248427526,
+        "right": 3073.2243144725726,
+        "top": 77.66689167012497,
+        "bottom": 2210.317559490539
+      },
+      "viewport": {
+        "width": 1000,
+        "height": 837
+      },
+      "label": {
+        "text": "Math Classroom 0654",
+        "presentation": "fixed-panel"
+      }
+    },
+    {
+      "phase": "select-room",
+      "query": "classroom0754",
+      "key": "/rooms-level-7-WGS.geojson#F7:OBJECTID:3",
+      "name": "Classroom 0754",
+      "floor": 7,
+      "featureCount": 90,
+      "zoom": 20.983992874622345,
+      "pitch": 0,
+      "bearing": 0,
+      "bounds": {
+        "left": 241.77715876415826,
+        "right": 700.1848714981684,
+        "top": 90.00380268939911,
+        "bottom": 746.9962008860831
+      },
+      "buildingBounds": {
+        "left": -459.9020801583023,
+        "right": 3190.389820311224,
+        "top": 89.45937210634541,
+        "bottom": 2224.7748381076954
+      },
+      "viewport": {
+        "width": 1000,
+        "height": 837
+      },
+      "label": {
+        "text": "Classroom 0754",
+        "presentation": "fixed-panel"
+      }
+    },
+    {
+      "phase": "select-room",
+      "query": "structure",
+      "key": "/rooms-level-04-WGS.geojson#F4:OBJECTID:2",
+      "name": "Structure",
+      "floor": 4,
+      "featureCount": 199,
+      "zoom": 20.999999582767487,
+      "pitch": 0,
+      "bearing": 0,
+      "bounds": {
+        "left": 348.6135441589454,
+        "right": 593.4312705774075,
+        "top": 366.19346278442526,
+        "bottom": 470.80653729729
+      },
+      "buildingBounds": {
+        "left": -2645.726422673392,
+        "right": 604.9169367854286,
+        "top": 345.5875231698328,
+        "bottom": 2477.43029126586
+      },
+      "viewport": {
+        "width": 1000,
+        "height": 837
+      },
+      "label": {
+        "text": "Structure",
+        "presentation": "fixed-panel"
+      }
+    },
+    {
+      "phase": "select-room",
+      "query": "structure",
+      "key": "/rooms-level-04-WGS.geojson#F4:OBJECTID:8",
+      "name": "Structure",
+      "floor": 4,
+      "featureCount": 199,
+      "zoom": 20.999999582767487,
+      "pitch": 0,
+      "bearing": 0,
+      "bounds": {
+        "left": 467.2618915430693,
+        "right": 474.7506214777628,
+        "top": 380.60632990807005,
+        "bottom": 456.3936696112841
+      },
+      "buildingBounds": {
+        "left": 457.973660833259,
+        "right": 3743.810382728723,
+        "top": 362.7843812081385,
+        "bottom": 2495.1181113695493
+      },
+      "viewport": {
+        "width": 1000,
+        "height": 837
+      },
+      "label": {
+        "text": "Structure",
+        "presentation": "fixed-panel"
+      }
+    },
+    {
+      "phase": "same-floor-duplicate-identity",
+      "passed": true
+    },
+    {
+      "phase": "selection-panel-size-independent-of-zoom",
+      "passed": true
+    },
+    {
+      "phase": "manual-camera-and-night-preserved",
+      "passed": true
+    },
+    {
+      "phase": "select-room",
+      "query": "classroom 0754",
+      "key": "/rooms-level-7-WGS.geojson#F7:OBJECTID:3",
+      "name": "Classroom 0754",
+      "floor": 7,
+      "featureCount": 90,
+      "zoom": 20.983992874622345,
+      "pitch": 0,
+      "bearing": 0,
+      "bounds": {
+        "left": 241.77715876415826,
+        "right": 700.1848714981684,
+        "top": 90.00380268939911,
+        "bottom": 746.9962008860831
+      },
+      "buildingBounds": {
+        "left": -459.9020801583023,
+        "right": 3190.389820311224,
+        "top": 89.45937210634541,
+        "bottom": 2224.7748381076954
+      },
+      "viewport": {
+        "width": 1000,
+        "height": 837
+      },
+      "label": {
+        "text": "Classroom 0754",
+        "presentation": "fixed-panel"
+      }
+    },
+    {
+      "phase": "select-room",
+      "query": "classroom 0174",
+      "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+      "name": "Classroom 0174",
+      "floor": 1,
+      "featureCount": 355,
+      "zoom": 20.999999582767487,
+      "pitch": 0,
+      "bearing": 0,
+      "bounds": {
+        "left": 321.53172814910477,
+        "right": 619.6510347654491,
+        "top": 161.01868368902828,
+        "bottom": 675.981309635011
+      },
+      "buildingBounds": {
+        "left": -485.91844344064157,
+        "right": 3418.868380085036,
+        "top": -1667.2514859689254,
+        "bottom": 1139.818102683294
+      },
+      "viewport": {
+        "width": 1000,
+        "height": 837
+      },
+      "label": {
+        "text": "Classroom 0174",
+        "presentation": "fixed-panel"
+      }
+    },
+    {
+      "phase": "route-preserved-through-cross-floor-search",
+      "passed": true
+    },
+    {
+      "phase": "select-room",
+      "query": "0261",
+      "key": "/rooms-level-02-WGS.geojson#F2:OBJECTID:92",
+      "name": "Classroom 0261",
+      "floor": 2,
+      "featureCount": 243,
+      "zoom": 20.999999582767487,
+      "pitch": 0,
+      "bearing": 0,
+      "bounds": {
+        "left": 229.77047540935934,
+        "right": 711.2606696053483,
+        "top": 239.5908118892282,
+        "bottom": 597.4091858568279
+      },
+      "buildingBounds": {
+        "left": -860.4413593631,
+        "right": 2519.151313225707,
+        "top": -467.5696523905117,
+        "bottom": 1701.2791071834156
+      },
+      "viewport": {
+        "width": 1000,
+        "height": 837
+      },
+      "label": {
+        "text": "Classroom 0261",
+        "presentation": "fixed-panel"
+      }
+    },
+    {
+      "phase": "multi-floor-route-search-and-timeline-return",
+      "passed": true
+    },
+    {
+      "phase": "combined-f-all-preserved",
+      "count": 1608,
+      "passed": true
+    },
+    {
+      "phase": "select-room",
+      "query": "0754",
+      "key": "/rooms-level-7-WGS.geojson#F7:OBJECTID:3",
+      "name": "Classroom 0754",
+      "floor": 7,
+      "featureCount": 90,
+      "zoom": 19.88393932580948,
+      "pitch": 0,
+      "bearing": 0,
+      "bounds": {
+        "left": 50.21056993887054,
+        "right": 255.91053085067074,
+        "top": 210.59485685574236,
+        "bottom": 505.40514268530785
+      },
+      "buildingBounds": {
+        "left": -270.27023148655854,
+        "right": 1352.9116044305003,
+        "top": 209.0606438651201,
+        "bottom": 1162.887055739398
+      },
+      "viewport": {
+        "width": 364,
+        "height": 716
+      },
+      "label": {
+        "text": "Classroom 0754",
+        "presentation": "fixed-panel"
+      }
+    },
+    {
+      "phase": "mobile-panel-and-map-layout",
+      "passed": true,
+      "scrollTop": 0,
+      "mainY": 76,
+      "mapY": 76,
+      "mapHeight": 718,
+      "panel": {
+        "x": 25,
+        "y": 689.609375,
+        "width": 320,
+        "height": 87.390625,
+        "top": 689.609375,
+        "right": 345,
+        "bottom": 777,
+        "left": 25
+      }
+    },
+    {
+      "phase": "mobile-cross-floor-selection",
+      "passed": true
+    },
+    {
+      "phase": "query-updates-after-delayed-floor",
+      "passed": true
+    },
+    {
+      "phase": "failed-floor-visible-and-retry-restores-results",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

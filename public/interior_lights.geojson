@@ -1,0 +1,3317 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": 1,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22048384001533,
+          37.71515432045751
+        ]
+      },
+      "properties": {
+        "OBJECTID": 1,
+        "light_id": "F0-light-01",
+        "floor_id": "F0",
+        "intensity": 0.85,
+        "radius_m": 10.7,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 2,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22048617024518,
+          37.71526687663905
+        ]
+      },
+      "properties": {
+        "OBJECTID": 2,
+        "light_id": "F0-light-02",
+        "floor_id": "F0",
+        "intensity": 0.85,
+        "radius_m": 10.0,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 3,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2204933594624,
+          37.71537292620612
+        ]
+      },
+      "properties": {
+        "OBJECTID": 3,
+        "light_id": "F0-light-03",
+        "floor_id": "F0",
+        "intensity": 0.85,
+        "radius_m": 10.0,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 4,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2205058846724,
+          37.71548617775227
+        ]
+      },
+      "properties": {
+        "OBJECTID": 4,
+        "light_id": "F0-light-04",
+        "floor_id": "F0",
+        "intensity": 0.85,
+        "radius_m": 10.8,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22034622619863,
+          37.71548612587705
+        ]
+      },
+      "properties": {
+        "OBJECTID": 5,
+        "light_id": "F0-light-05",
+        "floor_id": "F0",
+        "intensity": 0.85,
+        "radius_m": 11.3,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22018836076218,
+          37.71551732847036
+        ]
+      },
+      "properties": {
+        "OBJECTID": 7,
+        "light_id": "F0-light-06",
+        "floor_id": "F0",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2202195529638,
+          37.71555093081118
+        ]
+      },
+      "properties": {
+        "OBJECTID": 8,
+        "light_id": "F0-light-07",
+        "floor_id": "F0",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22019997148723,
+          37.71559214457372
+        ]
+      },
+      "properties": {
+        "OBJECTID": 9,
+        "light_id": "F0-light-08",
+        "floor_id": "F0",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 10,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22012815657015,
+          37.715578043766065
+        ]
+      },
+      "properties": {
+        "OBJECTID": 10,
+        "light_id": "F0-light-10",
+        "floor_id": "F0",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 11,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.220129857081,
+          37.715525217055784
+        ]
+      },
+      "properties": {
+        "OBJECTID": 11,
+        "light_id": "F0-light-11",
+        "floor_id": "F0",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 12,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22067899541754,
+          37.71526747071891
+        ]
+      },
+      "properties": {
+        "OBJECTID": 12,
+        "light_id": "F0-light-12",
+        "floor_id": "F0",
+        "intensity": 0.85,
+        "radius_m": 14,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 13,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22032188993929,
+          37.71526646874217
+        ]
+      },
+      "properties": {
+        "OBJECTID": 13,
+        "light_id": "F0-light-13",
+        "floor_id": "F0",
+        "intensity": 0.85,
+        "radius_m": 12.3,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 14,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22074873971789,
+          37.71546336898867
+        ]
+      },
+      "properties": {
+        "OBJECTID": 14,
+        "light_id": "F0-light-14",
+        "floor_id": "F0",
+        "intensity": 0.85,
+        "radius_m": 14,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 15,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22027600489288,
+          37.71512256911021
+        ]
+      },
+      "properties": {
+        "OBJECTID": 15,
+        "light_id": "F0-light-15",
+        "floor_id": "F0",
+        "intensity": 0.85,
+        "radius_m": 14,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 16,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22003817232816,
+          37.71512479407135
+        ]
+      },
+      "properties": {
+        "OBJECTID": 16,
+        "light_id": "F0-light-16",
+        "floor_id": "F0",
+        "intensity": 0.85,
+        "radius_m": 14,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 17,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22080680322459,
+          37.71512855682085
+        ]
+      },
+      "properties": {
+        "OBJECTID": 17,
+        "light_id": "F0-light-17",
+        "floor_id": "F0",
+        "intensity": 0.85,
+        "radius_m": 7.7,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 18,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22090934681258,
+          37.71512530927311
+        ]
+      },
+      "properties": {
+        "OBJECTID": 18,
+        "light_id": "F0-light-18",
+        "floor_id": "F0",
+        "intensity": 0.85,
+        "radius_m": 7.7,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 19,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22050444018143,
+          37.715613942798214
+        ]
+      },
+      "properties": {
+        "OBJECTID": 19,
+        "light_id": "F0-light-19",
+        "floor_id": "F0",
+        "intensity": 0.85,
+        "radius_m": 12.1,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 20,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22034341537011,
+          37.7156155871693
+        ]
+      },
+      "properties": {
+        "OBJECTID": 20,
+        "light_id": "F0-light-20",
+        "floor_id": "F0",
+        "intensity": 0.85,
+        "radius_m": 11.0,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 2,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22041645379261,
+          37.71555617233723
+        ]
+      },
+      "properties": {
+        "OBJECTID": 2,
+        "light_id": "F1-light-02",
+        "floor_id": "F1",
+        "intensity": 0.85,
+        "radius_m": 8.9,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 3,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22029777556381,
+          37.71555664134577
+        ]
+      },
+      "properties": {
+        "OBJECTID": 3,
+        "light_id": "F1-light-03",
+        "floor_id": "F1",
+        "intensity": 0.85,
+        "radius_m": 8.9,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 4,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22086323718737,
+          37.715498863023264
+        ]
+      },
+      "properties": {
+        "OBJECTID": 4,
+        "light_id": "F1-light-04",
+        "floor_id": "F1",
+        "intensity": 0.85,
+        "radius_m": 14,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22065478582064,
+          37.715496291291004
+        ]
+      },
+      "properties": {
+        "OBJECTID": 5,
+        "light_id": "F1-light-05",
+        "floor_id": "F1",
+        "intensity": 0.85,
+        "radius_m": 9.4,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 6,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22064997713892,
+          37.71539724861937
+        ]
+      },
+      "properties": {
+        "OBJECTID": 6,
+        "light_id": "F1-light-06",
+        "floor_id": "F1",
+        "intensity": 0.85,
+        "radius_m": 9.4,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22065645309381,
+          37.71526081219244
+        ]
+      },
+      "properties": {
+        "OBJECTID": 7,
+        "light_id": "F1-light-07",
+        "floor_id": "F1",
+        "intensity": 0.85,
+        "radius_m": 12.2,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22017153082534,
+          37.71555087751475
+        ]
+      },
+      "properties": {
+        "OBJECTID": 8,
+        "light_id": "F1-light-08",
+        "floor_id": "F1",
+        "intensity": 0.85,
+        "radius_m": 9.5,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22049787529332,
+          37.71523181739413
+        ]
+      },
+      "properties": {
+        "OBJECTID": 9,
+        "light_id": "F1-light-09",
+        "floor_id": "F1",
+        "intensity": 0.85,
+        "radius_m": 12.2,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 10,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22049723209958,
+          37.715065433563694
+        ]
+      },
+      "properties": {
+        "OBJECTID": 10,
+        "light_id": "F1-light-10",
+        "floor_id": "F1",
+        "intensity": 0.85,
+        "radius_m": 7.8,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 11,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22049826965373,
+          37.71539896192546
+        ]
+      },
+      "properties": {
+        "OBJECTID": 11,
+        "light_id": "F1-light-11",
+        "floor_id": "F1",
+        "intensity": 0.85,
+        "radius_m": 11.4,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 12,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22017303909671,
+          37.715379262100704
+        ]
+      },
+      "properties": {
+        "OBJECTID": 12,
+        "light_id": "F1-light-12",
+        "floor_id": "F1",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 13,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22016887091378,
+          37.715201220841486
+        ]
+      },
+      "properties": {
+        "OBJECTID": 13,
+        "light_id": "F1-light-13",
+        "floor_id": "F1",
+        "intensity": 0.85,
+        "radius_m": 14,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 14,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22089285015072,
+          37.71503372481577
+        ]
+      },
+      "properties": {
+        "OBJECTID": 14,
+        "light_id": "F1-light-14",
+        "floor_id": "F1",
+        "intensity": 0.85,
+        "radius_m": 11.2,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 15,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22060177982898,
+          37.71503513824694
+        ]
+      },
+      "properties": {
+        "OBJECTID": 15,
+        "light_id": "F1-light-15",
+        "floor_id": "F1",
+        "intensity": 0.85,
+        "radius_m": 8.3,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 16,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22089427757369,
+          37.71515229091857
+        ]
+      },
+      "properties": {
+        "OBJECTID": 16,
+        "light_id": "F1-light-16",
+        "floor_id": "F1",
+        "intensity": 0.85,
+        "radius_m": 11.2,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 17,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22040577102726,
+          37.71501658314099
+        ]
+      },
+      "properties": {
+        "OBJECTID": 17,
+        "light_id": "F1-light-17",
+        "floor_id": "F1",
+        "intensity": 0.85,
+        "radius_m": 8.3,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 18,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22040752274205,
+          37.7151070739703
+        ]
+      },
+      "properties": {
+        "OBJECTID": 18,
+        "light_id": "F1-light-18",
+        "floor_id": "F1",
+        "intensity": 0.85,
+        "radius_m": 7.8,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 19,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22024398444458,
+          37.715016948401804
+        ]
+      },
+      "properties": {
+        "OBJECTID": 19,
+        "light_id": "F1-light-19",
+        "floor_id": "F1",
+        "intensity": 0.85,
+        "radius_m": 12.1,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 20,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22010050912066,
+          37.71535739985121
+        ]
+      },
+      "properties": {
+        "OBJECTID": 20,
+        "light_id": "F1-light-20",
+        "floor_id": "F1",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 21,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22000370217407,
+          37.71529917510305
+        ]
+      },
+      "properties": {
+        "OBJECTID": 21,
+        "light_id": "F1-light-21",
+        "floor_id": "F1",
+        "intensity": 0.85,
+        "radius_m": 9.1,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 1,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22060113034702,
+          37.71502309387957
+        ]
+      },
+      "properties": {
+        "OBJECTID": 1,
+        "light_id": "F2-light-01",
+        "floor_id": "F2",
+        "intensity": 0.85,
+        "radius_m": 6.5,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 2,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22060290541803,
+          37.71509222549445
+        ]
+      },
+      "properties": {
+        "OBJECTID": 2,
+        "light_id": "F2-light-02",
+        "floor_id": "F2",
+        "intensity": 0.85,
+        "radius_m": 6.5,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 3,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22037453390986,
+          37.715094641614165
+        ]
+      },
+      "properties": {
+        "OBJECTID": 3,
+        "light_id": "F2-light-03",
+        "floor_id": "F2",
+        "intensity": 0.85,
+        "radius_m": 6.9,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 4,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22037166828412,
+          37.715022234024325
+        ]
+      },
+      "properties": {
+        "OBJECTID": 4,
+        "light_id": "F2-light-04",
+        "floor_id": "F2",
+        "intensity": 0.85,
+        "radius_m": 6.9,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22063383351494,
+          37.71529366707574
+        ]
+      },
+      "properties": {
+        "OBJECTID": 5,
+        "light_id": "F2-light-05",
+        "floor_id": "F2",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 6,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22053707058582,
+          37.71529476001167
+        ]
+      },
+      "properties": {
+        "OBJECTID": 6,
+        "light_id": "F2-light-06",
+        "floor_id": "F2",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22056220993903,
+          37.71535036754625
+        ]
+      },
+      "properties": {
+        "OBJECTID": 7,
+        "light_id": "F2-light-08",
+        "floor_id": "F2",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22065807545121,
+          37.715348625814194
+        ]
+      },
+      "properties": {
+        "OBJECTID": 8,
+        "light_id": "F2-light-09",
+        "floor_id": "F2",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22076266719806,
+          37.7153489541211
+        ]
+      },
+      "properties": {
+        "OBJECTID": 9,
+        "light_id": "F2-light-10",
+        "floor_id": "F2",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 10,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2207835117059,
+          37.715397226590134
+        ]
+      },
+      "properties": {
+        "OBJECTID": 10,
+        "light_id": "F2-light-11",
+        "floor_id": "F2",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 11,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22041455205915,
+          37.71541694843934
+        ]
+      },
+      "properties": {
+        "OBJECTID": 11,
+        "light_id": "F2-light-12",
+        "floor_id": "F2",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 12,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22041359894662,
+          37.715355365343505
+        ]
+      },
+      "properties": {
+        "OBJECTID": 12,
+        "light_id": "F2-light-13",
+        "floor_id": "F2",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 13,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22048807197862,
+          37.71532579711079
+        ]
+      },
+      "properties": {
+        "OBJECTID": 13,
+        "light_id": "F2-light-14",
+        "floor_id": "F2",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 14,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22048741351354,
+          37.715224373626974
+        ]
+      },
+      "properties": {
+        "OBJECTID": 14,
+        "light_id": "F2-light-15",
+        "floor_id": "F2",
+        "intensity": 0.85,
+        "radius_m": 7.6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 15,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22048267579872,
+          37.71513433134409
+        ]
+      },
+      "properties": {
+        "OBJECTID": 15,
+        "light_id": "F2-light-16",
+        "floor_id": "F2",
+        "intensity": 0.85,
+        "radius_m": 8.5,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 16,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22093109861889,
+          37.71503235117951
+        ]
+      },
+      "properties": {
+        "OBJECTID": 16,
+        "light_id": "F2-light-17",
+        "floor_id": "F2",
+        "intensity": 0.85,
+        "radius_m": 14,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 17,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22071005916007,
+          37.715023801661154
+        ]
+      },
+      "properties": {
+        "OBJECTID": 17,
+        "light_id": "F2-light-18",
+        "floor_id": "F2",
+        "intensity": 0.85,
+        "radius_m": 8.2,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 19,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22070004474128,
+          37.71520075680502
+        ]
+      },
+      "properties": {
+        "OBJECTID": 19,
+        "light_id": "F2-light-19",
+        "floor_id": "F2",
+        "intensity": 0.85,
+        "radius_m": 10.1,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 20,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22086730296235,
+          37.7153500676642
+        ]
+      },
+      "properties": {
+        "OBJECTID": 20,
+        "light_id": "F2-light-20",
+        "floor_id": "F2",
+        "intensity": 0.85,
+        "radius_m": 7.7,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 21,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22021435531155,
+          37.71505650173354
+        ]
+      },
+      "properties": {
+        "OBJECTID": 21,
+        "light_id": "F2-light-21",
+        "floor_id": "F2",
+        "intensity": 0.85,
+        "radius_m": 12.2,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 22,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22003016025413,
+          37.71505726778605
+        ]
+      },
+      "properties": {
+        "OBJECTID": 22,
+        "light_id": "F2-light-22",
+        "floor_id": "F2",
+        "intensity": 0.85,
+        "radius_m": 13.8,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 23,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22003689043224,
+          37.715244791931745
+        ]
+      },
+      "properties": {
+        "OBJECTID": 23,
+        "light_id": "F2-light-23",
+        "floor_id": "F2",
+        "intensity": 0.85,
+        "radius_m": 14,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 24,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22020692444752,
+          37.71540730034622
+        ]
+      },
+      "properties": {
+        "OBJECTID": 24,
+        "light_id": "F2-light-24",
+        "floor_id": "F2",
+        "intensity": 0.85,
+        "radius_m": 14,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 1,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22048442931015,
+          37.71517988582147
+        ]
+      },
+      "properties": {
+        "OBJECTID": 1,
+        "light_id": "F3-light-01",
+        "floor_id": "F3",
+        "intensity": 0.85,
+        "radius_m": 7.9,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 2,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22048777822953,
+          37.71533567971955
+        ]
+      },
+      "properties": {
+        "OBJECTID": 2,
+        "light_id": "F3-light-02",
+        "floor_id": "F3",
+        "intensity": 0.85,
+        "radius_m": 10.1,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 3,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22030317174371,
+          37.71533584316238
+        ]
+      },
+      "properties": {
+        "OBJECTID": 3,
+        "light_id": "F3-light-03",
+        "floor_id": "F3",
+        "intensity": 0.85,
+        "radius_m": 7.5,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 4,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22016291688007,
+          37.71533645571783
+        ]
+      },
+      "properties": {
+        "OBJECTID": 4,
+        "light_id": "F3-light-04",
+        "floor_id": "F3",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22062820916295,
+          37.71533812425618
+        ]
+      },
+      "properties": {
+        "OBJECTID": 5,
+        "light_id": "F3-light-05",
+        "floor_id": "F3",
+        "intensity": 0.85,
+        "radius_m": 10.5,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 6,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22049023152857,
+          37.715453378382726
+        ]
+      },
+      "properties": {
+        "OBJECTID": 6,
+        "light_id": "F3-light-06",
+        "floor_id": "F3",
+        "intensity": 0.85,
+        "radius_m": 11.1,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22037348827088,
+          37.71527884919406
+        ]
+      },
+      "properties": {
+        "OBJECTID": 7,
+        "light_id": "F3-light-07",
+        "floor_id": "F3",
+        "intensity": 0.85,
+        "radius_m": 7.5,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22086985148282,
+          37.71539446511866
+        ]
+      },
+      "properties": {
+        "OBJECTID": 9,
+        "light_id": "F3-light-08",
+        "floor_id": "F3",
+        "intensity": 0.85,
+        "radius_m": 10.2,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 10,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22086798388533,
+          37.715286958097536
+        ]
+      },
+      "properties": {
+        "OBJECTID": 10,
+        "light_id": "F3-light-09",
+        "floor_id": "F3",
+        "intensity": 0.85,
+        "radius_m": 10.2,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 12,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22006036071566,
+          37.7152441402914
+        ]
+      },
+      "properties": {
+        "OBJECTID": 12,
+        "light_id": "F3-light-10",
+        "floor_id": "F3",
+        "intensity": 0.85,
+        "radius_m": 7.5,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 13,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22006492415731,
+          37.715323635401035
+        ]
+      },
+      "properties": {
+        "OBJECTID": 13,
+        "light_id": "F3-light-11",
+        "floor_id": "F3",
+        "intensity": 0.85,
+        "radius_m": 7.4,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 14,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22017374607083,
+          37.7154201512052
+        ]
+      },
+      "properties": {
+        "OBJECTID": 14,
+        "light_id": "F3-light-12",
+        "floor_id": "F3",
+        "intensity": 0.85,
+        "radius_m": 8.0,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 15,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2201847648061,
+          37.71525226696421
+        ]
+      },
+      "properties": {
+        "OBJECTID": 15,
+        "light_id": "F3-light-13",
+        "floor_id": "F3",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 16,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22018314334701,
+          37.715276495615
+        ]
+      },
+      "properties": {
+        "OBJECTID": 16,
+        "light_id": "F3-light-14",
+        "floor_id": "F3",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 17,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22018300500646,
+          37.715304074837974
+        ]
+      },
+      "properties": {
+        "OBJECTID": 17,
+        "light_id": "F3-light-15",
+        "floor_id": "F3",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 18,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22038622368666,
+          37.71514834909328
+        ]
+      },
+      "properties": {
+        "OBJECTID": 18,
+        "light_id": "F3-light-16",
+        "floor_id": "F3",
+        "intensity": 0.85,
+        "radius_m": 7.9,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 1,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22089938988597,
+          37.71535848923308
+        ]
+      },
+      "properties": {
+        "OBJECTID": 1,
+        "light_id": "F4-light-01",
+        "floor_id": "F4",
+        "intensity": 0.85,
+        "radius_m": 11.1,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 2,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22075075913065,
+          37.71535797758605
+        ]
+      },
+      "properties": {
+        "OBJECTID": 2,
+        "light_id": "F4-light-02",
+        "floor_id": "F4",
+        "intensity": 0.85,
+        "radius_m": 11.0,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 3,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22090142636672,
+          37.71547596898914
+        ]
+      },
+      "properties": {
+        "OBJECTID": 3,
+        "light_id": "F4-light-03",
+        "floor_id": "F4",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 4,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22075001981717,
+          37.71547396077759
+        ]
+      },
+      "properties": {
+        "OBJECTID": 4,
+        "light_id": "F4-light-04",
+        "floor_id": "F4",
+        "intensity": 0.85,
+        "radius_m": 10.1,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22061572437714,
+          37.715477189123305
+        ]
+      },
+      "properties": {
+        "OBJECTID": 5,
+        "light_id": "F4-light-05",
+        "floor_id": "F4",
+        "intensity": 0.85,
+        "radius_m": 9.9,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 6,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22041597409225,
+          37.71547638612297
+        ]
+      },
+      "properties": {
+        "OBJECTID": 6,
+        "light_id": "F4-light-06",
+        "floor_id": "F4",
+        "intensity": 0.85,
+        "radius_m": 7.9,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22023574330017,
+          37.71547594553871
+        ]
+      },
+      "properties": {
+        "OBJECTID": 7,
+        "light_id": "F4-light-07",
+        "floor_id": "F4",
+        "intensity": 0.85,
+        "radius_m": 8.0,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22004676022227,
+          37.715475287504766
+        ]
+      },
+      "properties": {
+        "OBJECTID": 8,
+        "light_id": "F4-light-08",
+        "floor_id": "F4",
+        "intensity": 0.85,
+        "radius_m": 14,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22023019710161,
+          37.71539103850618
+        ]
+      },
+      "properties": {
+        "OBJECTID": 9,
+        "light_id": "F4-light-09",
+        "floor_id": "F4",
+        "intensity": 0.85,
+        "radius_m": 7.1,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 10,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22041118966504,
+          37.7153930474306
+        ]
+      },
+      "properties": {
+        "OBJECTID": 10,
+        "light_id": "F4-light-10",
+        "floor_id": "F4",
+        "intensity": 0.85,
+        "radius_m": 7.9,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 11,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22053886721638,
+          37.71539165248239
+        ]
+      },
+      "properties": {
+        "OBJECTID": 11,
+        "light_id": "F4-light-11",
+        "floor_id": "F4",
+        "intensity": 0.85,
+        "radius_m": 8.6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 12,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2205417085876,
+          37.71530059350354
+        ]
+      },
+      "properties": {
+        "OBJECTID": 12,
+        "light_id": "F4-light-12",
+        "floor_id": "F4",
+        "intensity": 0.85,
+        "radius_m": 8.6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 13,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22039829345081,
+          37.715297234395784
+        ]
+      },
+      "properties": {
+        "OBJECTID": 13,
+        "light_id": "F4-light-13",
+        "floor_id": "F4",
+        "intensity": 0.85,
+        "radius_m": 9.1,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 14,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22022721289822,
+          37.71531561461857
+        ]
+      },
+      "properties": {
+        "OBJECTID": 14,
+        "light_id": "F4-light-14",
+        "floor_id": "F4",
+        "intensity": 0.85,
+        "radius_m": 7.1,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 15,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22092121625244,
+          37.71503589719337
+        ]
+      },
+      "properties": {
+        "OBJECTID": 15,
+        "light_id": "F4-light-15",
+        "floor_id": "F4",
+        "intensity": 0.85,
+        "radius_m": 14,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 16,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22030429823107,
+          37.71514742030911
+        ]
+      },
+      "properties": {
+        "OBJECTID": 16,
+        "light_id": "F4-light-16",
+        "floor_id": "F4",
+        "intensity": 0.85,
+        "radius_m": 7.0,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 17,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22022593908714,
+          37.7151880004208
+        ]
+      },
+      "properties": {
+        "OBJECTID": 17,
+        "light_id": "F4-light-17",
+        "floor_id": "F4",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 18,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22014706341194,
+          37.715184450861095
+        ]
+      },
+      "properties": {
+        "OBJECTID": 18,
+        "light_id": "F4-light-18",
+        "floor_id": "F4",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 19,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22006098953636,
+          37.7151843513739
+        ]
+      },
+      "properties": {
+        "OBJECTID": 19,
+        "light_id": "F4-light-19",
+        "floor_id": "F4",
+        "intensity": 0.85,
+        "radius_m": 6.4,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 20,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22047406275179,
+          37.71521153410397
+        ]
+      },
+      "properties": {
+        "OBJECTID": 20,
+        "light_id": "F4-light-20",
+        "floor_id": "F4",
+        "intensity": 0.85,
+        "radius_m": 6.6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 21,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22047614055504,
+          37.715142310930034
+        ]
+      },
+      "properties": {
+        "OBJECTID": 21,
+        "light_id": "F4-light-21",
+        "floor_id": "F4",
+        "intensity": 0.85,
+        "radius_m": 6.6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 22,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22047840251291,
+          37.71505286831394
+        ]
+      },
+      "properties": {
+        "OBJECTID": 22,
+        "light_id": "F4-light-22",
+        "floor_id": "F4",
+        "intensity": 0.85,
+        "radius_m": 8.5,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 23,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22096905064302,
+          37.71548826342106
+        ]
+      },
+      "properties": {
+        "OBJECTID": 23,
+        "light_id": "F4-light-23",
+        "floor_id": "F4",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 1,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22073644178164,
+          37.715026577358955
+        ]
+      },
+      "properties": {
+        "OBJECTID": 1,
+        "light_id": "F5-light-01",
+        "floor_id": "F5",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 2,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22080293418067,
+          37.7150252527556
+        ]
+      },
+      "properties": {
+        "OBJECTID": 2,
+        "light_id": "F5-light-02",
+        "floor_id": "F5",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 3,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22088086392988,
+          37.715024048958355
+        ]
+      },
+      "properties": {
+        "OBJECTID": 3,
+        "light_id": "F5-light-03",
+        "floor_id": "F5",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 4,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22095870294925,
+          37.71502125265239
+        ]
+      },
+      "properties": {
+        "OBJECTID": 4,
+        "light_id": "F5-light-04",
+        "floor_id": "F5",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22023406075563,
+          37.71502494292349
+        ]
+      },
+      "properties": {
+        "OBJECTID": 5,
+        "light_id": "F5-light-05",
+        "floor_id": "F5",
+        "intensity": 0.85,
+        "radius_m": 6.1,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 6,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22015201402746,
+          37.71502469917942
+        ]
+      },
+      "properties": {
+        "OBJECTID": 6,
+        "light_id": "F5-light-06",
+        "floor_id": "F5",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22009814924641,
+          37.71502344208536
+        ]
+      },
+      "properties": {
+        "OBJECTID": 7,
+        "light_id": "F5-light-07",
+        "floor_id": "F5",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.21999591018728,
+          37.71502285937361
+        ]
+      },
+      "properties": {
+        "OBJECTID": 8,
+        "light_id": "F5-light-08",
+        "floor_id": "F5",
+        "intensity": 0.85,
+        "radius_m": 7.7,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22094501352262,
+          37.71545046697253
+        ]
+      },
+      "properties": {
+        "OBJECTID": 9,
+        "light_id": "F5-light-09",
+        "floor_id": "F5",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 10,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22094952486198,
+          37.71550562385748
+        ]
+      },
+      "properties": {
+        "OBJECTID": 10,
+        "light_id": "F5-light-10",
+        "floor_id": "F5",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 11,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22050460726807,
+          37.71550937237528
+        ]
+      },
+      "properties": {
+        "OBJECTID": 11,
+        "light_id": "F5-light-11",
+        "floor_id": "F5",
+        "intensity": 0.85,
+        "radius_m": 14,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 12,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22002101540454,
+          37.71550706286196
+        ]
+      },
+      "properties": {
+        "OBJECTID": 12,
+        "light_id": "F5-light-12",
+        "floor_id": "F5",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 13,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22002196402548,
+          37.71545330589948
+        ]
+      },
+      "properties": {
+        "OBJECTID": 13,
+        "light_id": "F5-light-13",
+        "floor_id": "F5",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 14,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22059952326099,
+          37.71503096404135
+        ]
+      },
+      "properties": {
+        "OBJECTID": 14,
+        "light_id": "F5-light-14",
+        "floor_id": "F5",
+        "intensity": 0.85,
+        "radius_m": 10.3,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 15,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22037775077692,
+          37.71503307956914
+        ]
+      },
+      "properties": {
+        "OBJECTID": 15,
+        "light_id": "F5-light-15",
+        "floor_id": "F5",
+        "intensity": 0.85,
+        "radius_m": 10.8,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 16,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22047220503578,
+          37.715155750230714
+        ]
+      },
+      "properties": {
+        "OBJECTID": 16,
+        "light_id": "F5-light-16",
+        "floor_id": "F5",
+        "intensity": 0.85,
+        "radius_m": 13.6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 17,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22047737933181,
+          37.71535130840843
+        ]
+      },
+      "properties": {
+        "OBJECTID": 17,
+        "light_id": "F5-light-17",
+        "floor_id": "F5",
+        "intensity": 0.85,
+        "radius_m": 14,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 18,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22021219486331,
+          37.715510833408835
+        ]
+      },
+      "properties": {
+        "OBJECTID": 18,
+        "light_id": "F5-light-18",
+        "floor_id": "F5",
+        "intensity": 0.85,
+        "radius_m": 14,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 19,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22077216149229,
+          37.71550827162572
+        ]
+      },
+      "properties": {
+        "OBJECTID": 19,
+        "light_id": "F5-light-19",
+        "floor_id": "F5",
+        "intensity": 0.85,
+        "radius_m": 13.3,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 1,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22034221701753,
+          37.71503488739666
+        ]
+      },
+      "properties": {
+        "OBJECTID": 1,
+        "light_id": "F6-light-01",
+        "floor_id": "F6",
+        "intensity": 0.85,
+        "radius_m": 11.2,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 2,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22076395268722,
+          37.71504899328203
+        ]
+      },
+      "properties": {
+        "OBJECTID": 2,
+        "light_id": "F6-light-02",
+        "floor_id": "F6",
+        "intensity": 0.85,
+        "radius_m": 11.8,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 3,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22092868843897,
+          37.715048927194005
+        ]
+      },
+      "properties": {
+        "OBJECTID": 3,
+        "light_id": "F6-light-03",
+        "floor_id": "F6",
+        "intensity": 0.85,
+        "radius_m": 9.4,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 4,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2209196810316,
+          37.71520829295548
+        ]
+      },
+      "properties": {
+        "OBJECTID": 4,
+        "light_id": "F6-light-04",
+        "floor_id": "F6",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 5,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22078268615415,
+          37.715480766383195
+        ]
+      },
+      "properties": {
+        "OBJECTID": 5,
+        "light_id": "F6-light-05",
+        "floor_id": "F6",
+        "intensity": 0.85,
+        "radius_m": 7.0,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 6,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22078519155549,
+          37.715407272632035
+        ]
+      },
+      "properties": {
+        "OBJECTID": 6,
+        "light_id": "F6-light-06",
+        "floor_id": "F6",
+        "intensity": 0.85,
+        "radius_m": 7.0,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 7,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2206390266756,
+          37.71548486310587
+        ]
+      },
+      "properties": {
+        "OBJECTID": 7,
+        "light_id": "F6-light-07",
+        "floor_id": "F6",
+        "intensity": 0.85,
+        "radius_m": 7.6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 8,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22063778071231,
+          37.71540458861856
+        ]
+      },
+      "properties": {
+        "OBJECTID": 8,
+        "light_id": "F6-light-08",
+        "floor_id": "F6",
+        "intensity": 0.85,
+        "radius_m": 7.6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22005722110376,
+          37.715481826627844
+        ]
+      },
+      "properties": {
+        "OBJECTID": 9,
+        "light_id": "F6-light-09",
+        "floor_id": "F6",
+        "intensity": 0.85,
+        "radius_m": 14,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 10,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22048758868502,
+          37.715494026546324
+        ]
+      },
+      "properties": {
+        "OBJECTID": 10,
+        "light_id": "F6-light-10",
+        "floor_id": "F6",
+        "intensity": 0.85,
+        "radius_m": 11.4,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 11,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22026169922198,
+          37.71549469381815
+        ]
+      },
+      "properties": {
+        "OBJECTID": 11,
+        "light_id": "F6-light-11",
+        "floor_id": "F6",
+        "intensity": 0.85,
+        "radius_m": 14,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 12,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22048400081377,
+          37.71530266638631
+        ]
+      },
+      "properties": {
+        "OBJECTID": 12,
+        "light_id": "F6-light-12",
+        "floor_id": "F6",
+        "intensity": 0.85,
+        "radius_m": 14,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 13,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22048309800691,
+          37.7150761035781
+        ]
+      },
+      "properties": {
+        "OBJECTID": 13,
+        "light_id": "F6-light-13",
+        "floor_id": "F6",
+        "intensity": 0.85,
+        "radius_m": 9.6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 14,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22013607971097,
+          37.71523910055993
+        ]
+      },
+      "properties": {
+        "OBJECTID": 14,
+        "light_id": "F6-light-14",
+        "floor_id": "F6",
+        "intensity": 0.85,
+        "radius_m": 14,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 15,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22013114885837,
+          37.71505949061726
+        ]
+      },
+      "properties": {
+        "OBJECTID": 15,
+        "light_id": "F6-light-15",
+        "floor_id": "F6",
+        "intensity": 0.85,
+        "radius_m": 14,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 17,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22091889141248,
+          37.7151476832396
+        ]
+      },
+      "properties": {
+        "OBJECTID": 17,
+        "light_id": "F6-light-16",
+        "floor_id": "F6",
+        "intensity": 0.85,
+        "radius_m": 6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 18,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22092083626508,
+          37.715286974441845
+        ]
+      },
+      "properties": {
+        "OBJECTID": 18,
+        "light_id": "F6-light-17",
+        "floor_id": "F6",
+        "intensity": 0.85,
+        "radius_m": 7.4,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 19,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.22060650676401,
+          37.71504720250985
+        ]
+      },
+      "properties": {
+        "OBJECTID": 19,
+        "light_id": "F6-light-19",
+        "floor_id": "F6",
+        "intensity": 0.85,
+        "radius_m": 9.6,
+        "color": "#FFD08A",
+        "light_type": "interior-light",
+        "enabled": 1,
+        "z_height": 4.3,
+        "base_height": 4.3,
+        "height": 4.4
+      }
+    }
+  ]
+}

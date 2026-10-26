@@ -1,0 +1,157 @@
+[
+  {
+    "name": "0110 to 0130, fitted and paused",
+    "zoom": 19.895498720872748,
+    "budget": 5,
+    "labels": [
+      {
+        "id": "route-focus-room-labels",
+        "size": 12,
+        "units": "pixels",
+        "names": [
+          "Access Services (0130) & Offices",
+          "Center for Teaching Excellence (0110)"
+        ]
+      },
+      {
+        "id": "route-landmark-room-labels",
+        "size": 10.5,
+        "units": "pixels",
+        "names": [
+          "Back Entrance/Emergency Exit",
+          "Emergency Exit",
+          "Elevator"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "native wheel closer",
+    "zoom": 20.743895536562302,
+    "budget": 6,
+    "labels": [
+      {
+        "id": "route-focus-room-labels",
+        "size": 12,
+        "units": "pixels",
+        "names": []
+      },
+      {
+        "id": "route-landmark-room-labels",
+        "size": 10.5,
+        "units": "pixels",
+        "names": []
+      }
+    ]
+  },
+  {
+    "name": "native wheel farther",
+    "zoom": 19.753583736525393,
+    "budget": 5,
+    "labels": [
+      {
+        "id": "route-focus-room-labels",
+        "size": 12,
+        "units": "pixels",
+        "names": [
+          "Access Services (0130) & Offices",
+          "Center for Teaching Excellence (0110)"
+        ]
+      },
+      {
+        "id": "route-landmark-room-labels",
+        "size": 10.5,
+        "units": "pixels",
+        "names": [
+          "Back Entrance/Emergency Exit",
+          "Emergency Exit",
+          "Elevator"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "reset after wheel",
+    "zoom": 18.733407974243164,
+    "budget": 3,
+    "labels": [
+      {
+        "id": "route-focus-room-labels",
+        "size": 12,
+        "units": "pixels",
+        "names": [
+          "Access Services (0130) & Offices",
+          "Center for Teaching Excellence (0110)"
+        ]
+      },
+      {
+        "id": "route-landmark-room-labels",
+        "size": 10.5,
+        "units": "pixels",
+        "names": [
+          "Back Entrance/Emergency Exit"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "zoom out control",
+    "zoom": 18.233407974243164,
+    "budget": 3,
+    "labels": [
+      {
+        "id": "route-focus-room-labels",
+        "size": 12,
+        "units": "pixels",
+        "names": [
+          "Access Services (0130) & Offices",
+          "Center for Teaching Excellence (0110)"
+        ]
+      },
+      {
+        "id": "route-landmark-room-labels",
+        "size": 10.5,
+        "units": "pixels",
+        "names": []
+      }
+    ]
+  },
+  {
+    "name": "mobile drawer open",
+    "zoom": 18.233407974243164,
+    "budget": 0,
+    "labels": [
+      {
+        "id": "route-focus-room-labels",
+        "size": 12,
+        "units": "pixels",
+        "names": []
+      },
+      {
+        "id": "route-landmark-room-labels",
+        "size": 10.5,
+        "units": "pixels",
+        "names": []
+      }
+    ]
+  },
+  {
+    "name": "mobile drawer closed",
+    "zoom": 17.19424295425415,
+    "budget": 2,
+    "labels": [
+      {
+        "id": "route-focus-room-labels",
+        "size": 12,
+        "units": "pixels",
+        "names": []
+      },
+      {
+        "id": "route-landmark-room-labels",
+        "size": 10.5,
+        "units": "pixels",
+        "names": []
+      }
+    ]
+  }
+]

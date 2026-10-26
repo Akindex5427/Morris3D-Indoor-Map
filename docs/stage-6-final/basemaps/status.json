@@ -1,0 +1,7 @@
+{
+  "name": "basemaps",
+  "script": "environment-stage4-map.cjs",
+  "started": "2026-10-26T06:58:13.332Z",
+  "finished": "2026-10-26T06:58:39.748Z",
+  "exitCode": 0
+}

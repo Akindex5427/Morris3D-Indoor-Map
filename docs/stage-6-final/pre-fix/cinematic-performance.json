@@ -1,0 +1,3969 @@
+{
+  "date": "2026-10-26T06:30:59.919Z",
+  "cpu": "AMD Ryzen 9 7940HS w/ Radeon 780M Graphics     ",
+  "logicalCPUs": 16,
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "runs": [
+    {
+      "run": 1,
+      "scenarios": [
+        {
+          "name": "F1-sunset-with-wheel",
+          "elapsedMs": 9268.10000000149,
+          "p50": 14.200000000000728,
+          "p95": 14.899999999999636,
+          "p99": 28.400000000000546,
+          "slowFrames": 2,
+          "drawnFrames": 629,
+          "drawCalls": 40859,
+          "blendEnabledDrawCalls": 30471,
+          "drawCallsPerDrawnFrame": 64.95866454689984,
+          "rootCommits": 551,
+          "rootCommitsPerSecond": 59.451235959895925,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 214,
+              "deleted": 0,
+              "live": 214
+            },
+            "Texture": {
+              "created": 17,
+              "deleted": 1,
+              "live": 16
+            },
+            "Program": {
+              "created": 46,
+              "deleted": 0,
+              "live": 46
+            },
+            "Framebuffer": {
+              "created": 0,
+              "deleted": 0,
+              "live": 0
+            },
+            "Renderbuffer": {
+              "created": 0,
+              "deleted": 0,
+              "live": 0
+            },
+            "VertexArray": {
+              "created": 53,
+              "deleted": 0,
+              "live": 53
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 36431,
+              "deleted": 36205,
+              "live": 226
+            },
+            "Texture": {
+              "created": 2409,
+              "deleted": 2390,
+              "live": 19
+            },
+            "Program": {
+              "created": 48,
+              "deleted": 0,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 8446,
+              "deleted": 8390,
+              "live": 56
+            }
+          }
+        },
+        {
+          "name": "F1-night-idle",
+          "elapsedMs": 1506.2000000029802,
+          "p50": 14.200000000000728,
+          "p95": 14.799999999999272,
+          "p99": 15.199999999998909,
+          "slowFrames": 0,
+          "drawnFrames": 0,
+          "drawCalls": 0,
+          "blendEnabledDrawCalls": 0,
+          "drawCallsPerDrawnFrame": 0,
+          "rootCommits": 0,
+          "rootCommitsPerSecond": 0,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 36431,
+              "deleted": 36205,
+              "live": 226
+            },
+            "Texture": {
+              "created": 2409,
+              "deleted": 2390,
+              "live": 19
+            },
+            "Program": {
+              "created": 48,
+              "deleted": 0,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 8446,
+              "deleted": 8390,
+              "live": 56
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 36431,
+              "deleted": 36205,
+              "live": 226
+            },
+            "Texture": {
+              "created": 2409,
+              "deleted": 2390,
+              "live": 19
+            },
+            "Program": {
+              "created": 48,
+              "deleted": 0,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 8446,
+              "deleted": 8390,
+              "live": 56
+            }
+          }
+        },
+        {
+          "name": "F1-dawn-with-wheel",
+          "elapsedMs": 8066.800000000745,
+          "p50": 14.200000000000728,
+          "p95": 14.900000000001455,
+          "p99": 28.600000000000364,
+          "slowFrames": 1,
+          "drawnFrames": 543,
+          "drawCalls": 39807,
+          "blendEnabledDrawCalls": 29695,
+          "drawCallsPerDrawnFrame": 73.30939226519337,
+          "rootCommits": 541,
+          "rootCommitsPerSecond": 67.0650071899576,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 36431,
+              "deleted": 36205,
+              "live": 226
+            },
+            "Texture": {
+              "created": 2409,
+              "deleted": 2390,
+              "live": 19
+            },
+            "Program": {
+              "created": 48,
+              "deleted": 0,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 8446,
+              "deleted": 8390,
+              "live": 56
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 71689,
+              "deleted": 71463,
+              "live": 226
+            },
+            "Texture": {
+              "created": 4737,
+              "deleted": 4718,
+              "live": 19
+            },
+            "Program": {
+              "created": 48,
+              "deleted": 0,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 16598,
+              "deleted": 16542,
+              "live": 56
+            }
+          }
+        },
+        {
+          "name": "F-ALL-sunset-with-wheel",
+          "elapsedMs": 9286.70000000298,
+          "p50": 14.299999999999272,
+          "p95": 28.5,
+          "p99": 42.900000000001455,
+          "slowFrames": 3,
+          "drawnFrames": 577,
+          "drawCalls": 51271,
+          "blendEnabledDrawCalls": 41827,
+          "drawCallsPerDrawnFrame": 88.8578856152513,
+          "rootCommits": 494,
+          "rootCommitsPerSecond": 53.194353214795505,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 72053,
+              "deleted": 71707,
+              "live": 346
+            },
+            "Texture": {
+              "created": 4775,
+              "deleted": 4736,
+              "live": 39
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 16671,
+              "deleted": 16595,
+              "live": 76
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 104079,
+              "deleted": 103733,
+              "live": 346
+            },
+            "Texture": {
+              "created": 6890,
+              "deleted": 6851,
+              "live": 39
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 24150,
+              "deleted": 24074,
+              "live": 76
+            }
+          }
+        },
+        {
+          "name": "F-ALL-gis-preset",
+          "elapsedMs": 928.6000000014901,
+          "p50": 14.200000000004366,
+          "p95": 14.80000000000291,
+          "p99": 17.69999999999709,
+          "slowFrames": 0,
+          "drawnFrames": 40,
+          "drawCalls": 1120,
+          "blendEnabledDrawCalls": 1120,
+          "drawCallsPerDrawnFrame": 28,
+          "rootCommits": 41,
+          "rootCommitsPerSecond": 44.15248761569482,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 104079,
+              "deleted": 103733,
+              "live": 346
+            },
+            "Texture": {
+              "created": 6890,
+              "deleted": 6851,
+              "live": 39
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 24150,
+              "deleted": 24074,
+              "live": 76
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 104079,
+              "deleted": 103733,
+              "live": 346
+            },
+            "Texture": {
+              "created": 6890,
+              "deleted": 6851,
+              "live": 39
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 24150,
+              "deleted": 24074,
+              "live": 76
+            }
+          }
+        },
+        {
+          "name": "F-ALL-dawn-with-wheel",
+          "elapsedMs": 8070.5,
+          "p50": 14.299999999995634,
+          "p95": 28.400000000001455,
+          "p99": 42.799999999995634,
+          "slowFrames": 3,
+          "drawnFrames": 521,
+          "drawCalls": 53300,
+          "blendEnabledDrawCalls": 43656,
+          "drawCallsPerDrawnFrame": 102.30326295585412,
+          "rootCommits": 524,
+          "rootCommitsPerSecond": 64.92782355492224,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 104079,
+              "deleted": 103733,
+              "live": 346
+            },
+            "Texture": {
+              "created": 6890,
+              "deleted": 6851,
+              "live": 39
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 24150,
+              "deleted": 24074,
+              "live": 76
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 138312,
+              "deleted": 137966,
+              "live": 346
+            },
+            "Texture": {
+              "created": 9149,
+              "deleted": 9110,
+              "live": 39
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 32082,
+              "deleted": 32006,
+              "live": 76
+            }
+          }
+        },
+        {
+          "name": "route-calculation-first",
+          "elapsedMs": 1417.3999999985099,
+          "p50": 14.299999999995634,
+          "p95": 982.3999999999942,
+          "p99": 982.3999999999942,
+          "slowFrames": 2,
+          "drawnFrames": 3,
+          "drawCalls": 235,
+          "blendEnabledDrawCalls": 191,
+          "drawCallsPerDrawnFrame": 78.33333333333333,
+          "rootCommits": 8,
+          "rootCommitsPerSecond": 5.64413715253874,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 138499,
+              "deleted": 138273,
+              "live": 226
+            },
+            "Texture": {
+              "created": 9164,
+              "deleted": 9145,
+              "live": 19
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 32128,
+              "deleted": 32072,
+              "live": 56
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 138566,
+              "deleted": 138282,
+              "live": 284
+            },
+            "Texture": {
+              "created": 9170,
+              "deleted": 9146,
+              "live": 24
+            },
+            "Program": {
+              "created": 54,
+              "deleted": 1,
+              "live": 53
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 32141,
+              "deleted": 32074,
+              "live": 67
+            }
+          }
+        },
+        {
+          "name": "route-preview-during-sunset",
+          "elapsedMs": 10025.800000000745,
+          "p50": 14.200000000004366,
+          "p95": 14.80000000000291,
+          "p99": 17.5,
+          "slowFrames": 1,
+          "drawnFrames": 646,
+          "drawCalls": 37150,
+          "blendEnabledDrawCalls": 26124,
+          "drawCallsPerDrawnFrame": 57.5077399380805,
+          "rootCommits": 652,
+          "rootCommitsPerSecond": 65.03221688044361,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 138566,
+              "deleted": 138282,
+              "live": 284
+            },
+            "Texture": {
+              "created": 9170,
+              "deleted": 9146,
+              "live": 24
+            },
+            "Program": {
+              "created": 54,
+              "deleted": 1,
+              "live": 53
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 32141,
+              "deleted": 32074,
+              "live": 67
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 152930,
+              "deleted": 152744,
+              "live": 186
+            },
+            "Texture": {
+              "created": 10313,
+              "deleted": 10295,
+              "live": 18
+            },
+            "Program": {
+              "created": 54,
+              "deleted": 1,
+              "live": 53
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35528,
+              "deleted": 35486,
+              "live": 42
+            }
+          }
+        },
+        {
+          "name": "route-recalculation-1",
+          "elapsedMs": 1041.9000000022352,
+          "p50": 14.200000000004366,
+          "p95": 42.799999999995634,
+          "p99": 242.09999999999854,
+          "slowFrames": 2,
+          "drawnFrames": 49,
+          "drawCalls": 3328,
+          "blendEnabledDrawCalls": 2174,
+          "drawCallsPerDrawnFrame": 67.91836734693878,
+          "rootCommits": 53,
+          "rootCommitsPerSecond": 50.868605432274016,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 153005,
+              "deleted": 152885,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10319,
+              "deleted": 10304,
+              "live": 15
+            },
+            "Program": {
+              "created": 54,
+              "deleted": 6,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35546,
+              "deleted": 35517,
+              "live": 29
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 153072,
+              "deleted": 152894,
+              "live": 178
+            },
+            "Texture": {
+              "created": 10323,
+              "deleted": 10305,
+              "live": 18
+            },
+            "Program": {
+              "created": 59,
+              "deleted": 6,
+              "live": 53
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35559,
+              "deleted": 35519,
+              "live": 40
+            }
+          }
+        },
+        {
+          "name": "route-recalculation-2",
+          "elapsedMs": 1044.8999999985099,
+          "p50": 14.200000000004366,
+          "p95": 14.900000000001455,
+          "p99": 85.40000000000146,
+          "slowFrames": 1,
+          "drawnFrames": 28,
+          "drawCalls": 1111,
+          "blendEnabledDrawCalls": 739,
+          "drawCallsPerDrawnFrame": 39.67857142857143,
+          "rootCommits": 8,
+          "rootCommitsPerSecond": 7.656235046426843,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 153072,
+              "deleted": 152952,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10323,
+              "deleted": 10308,
+              "live": 15
+            },
+            "Program": {
+              "created": 59,
+              "deleted": 11,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35559,
+              "deleted": 35530,
+              "live": 29
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 153139,
+              "deleted": 152961,
+              "live": 178
+            },
+            "Texture": {
+              "created": 10327,
+              "deleted": 10309,
+              "live": 18
+            },
+            "Program": {
+              "created": 64,
+              "deleted": 11,
+              "live": 53
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35572,
+              "deleted": 35532,
+              "live": 40
+            }
+          }
+        },
+        {
+          "name": "route-recalculation-3",
+          "elapsedMs": 1046.699999999255,
+          "p50": 14.299999999995634,
+          "p95": 17.299999999995634,
+          "p99": 56.900000000001455,
+          "slowFrames": 1,
+          "drawnFrames": 7,
+          "drawCalls": 214,
+          "blendEnabledDrawCalls": 194,
+          "drawCallsPerDrawnFrame": 30.571428571428573,
+          "rootCommits": 5,
+          "rootCommitsPerSecond": 4.776917932553319,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 153139,
+              "deleted": 153019,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10327,
+              "deleted": 10312,
+              "live": 15
+            },
+            "Program": {
+              "created": 64,
+              "deleted": 16,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35572,
+              "deleted": 35543,
+              "live": 29
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 153206,
+              "deleted": 153028,
+              "live": 178
+            },
+            "Texture": {
+              "created": 10331,
+              "deleted": 10313,
+              "live": 18
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 16,
+              "live": 53
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35585,
+              "deleted": 35545,
+              "live": 40
+            }
+          }
+        }
+      ],
+      "cycles": [
+        {
+          "cycle": 0,
+          "heapBytes": 46264888,
+          "resources": {
+            "Buffer": {
+              "created": 153281,
+              "deleted": 153161,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10337,
+              "deleted": 10322,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35603,
+              "deleted": 35574,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 1,
+          "heapBytes": 46288256,
+          "resources": {
+            "Buffer": {
+              "created": 153431,
+              "deleted": 153311,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10349,
+              "deleted": 10334,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35639,
+              "deleted": 35610,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 2,
+          "heapBytes": 46347372,
+          "resources": {
+            "Buffer": {
+              "created": 153581,
+              "deleted": 153461,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10361,
+              "deleted": 10346,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35675,
+              "deleted": 35646,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 3,
+          "heapBytes": 46673300,
+          "resources": {
+            "Buffer": {
+              "created": 153731,
+              "deleted": 153611,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10373,
+              "deleted": 10358,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35711,
+              "deleted": 35682,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 4,
+          "heapBytes": 46393072,
+          "resources": {
+            "Buffer": {
+              "created": 153881,
+              "deleted": 153761,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10385,
+              "deleted": 10370,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35747,
+              "deleted": 35718,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 5,
+          "heapBytes": 46750280,
+          "resources": {
+            "Buffer": {
+              "created": 154031,
+              "deleted": 153911,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10397,
+              "deleted": 10382,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35783,
+              "deleted": 35754,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 6,
+          "heapBytes": 47308676,
+          "resources": {
+            "Buffer": {
+              "created": 154181,
+              "deleted": 154061,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10409,
+              "deleted": 10394,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35819,
+              "deleted": 35790,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 7,
+          "heapBytes": 46548164,
+          "resources": {
+            "Buffer": {
+              "created": 154331,
+              "deleted": 154211,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10421,
+              "deleted": 10406,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35855,
+              "deleted": 35826,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 8,
+          "heapBytes": 46914976,
+          "resources": {
+            "Buffer": {
+              "created": 154481,
+              "deleted": 154361,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10433,
+              "deleted": 10418,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35891,
+              "deleted": 35862,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 9,
+          "heapBytes": 46618692,
+          "resources": {
+            "Buffer": {
+              "created": 154631,
+              "deleted": 154511,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10445,
+              "deleted": 10430,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35927,
+              "deleted": 35898,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 10,
+          "heapBytes": 46632700,
+          "resources": {
+            "Buffer": {
+              "created": 154781,
+              "deleted": 154661,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10457,
+              "deleted": 10442,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35963,
+              "deleted": 35934,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        }
+      ],
+      "errors": [],
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 Laptop GPU (0x000028E0) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "lightRequests": 1
+    },
+    {
+      "run": 2,
+      "scenarios": [
+        {
+          "name": "F1-sunset-with-wheel",
+          "elapsedMs": 9276.199999999255,
+          "p50": 14.200000000000728,
+          "p95": 14.800000000001091,
+          "p99": 37.100000000000364,
+          "slowFrames": 3,
+          "drawnFrames": 615,
+          "drawCalls": 39863,
+          "blendEnabledDrawCalls": 29737,
+          "drawCallsPerDrawnFrame": 64.81788617886178,
+          "rootCommits": 535,
+          "rootCommitsPerSecond": 57.67447877364039,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 214,
+              "deleted": 0,
+              "live": 214
+            },
+            "Texture": {
+              "created": 17,
+              "deleted": 1,
+              "live": 16
+            },
+            "Program": {
+              "created": 46,
+              "deleted": 0,
+              "live": 46
+            },
+            "Framebuffer": {
+              "created": 0,
+              "deleted": 0,
+              "live": 0
+            },
+            "Renderbuffer": {
+              "created": 0,
+              "deleted": 0,
+              "live": 0
+            },
+            "VertexArray": {
+              "created": 53,
+              "deleted": 0,
+              "live": 53
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 35306,
+              "deleted": 35080,
+              "live": 226
+            },
+            "Texture": {
+              "created": 2337,
+              "deleted": 2318,
+              "live": 19
+            },
+            "Program": {
+              "created": 48,
+              "deleted": 0,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 8161,
+              "deleted": 8105,
+              "live": 56
+            }
+          }
+        },
+        {
+          "name": "F1-night-idle",
+          "elapsedMs": 1505.3999999985099,
+          "p50": 14.200000000000728,
+          "p95": 14.700000000000728,
+          "p99": 16.5,
+          "slowFrames": 0,
+          "drawnFrames": 0,
+          "drawCalls": 0,
+          "blendEnabledDrawCalls": 0,
+          "drawCallsPerDrawnFrame": 0,
+          "rootCommits": 0,
+          "rootCommitsPerSecond": 0,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 35306,
+              "deleted": 35080,
+              "live": 226
+            },
+            "Texture": {
+              "created": 2337,
+              "deleted": 2318,
+              "live": 19
+            },
+            "Program": {
+              "created": 48,
+              "deleted": 0,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 8161,
+              "deleted": 8105,
+              "live": 56
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 35306,
+              "deleted": 35080,
+              "live": 226
+            },
+            "Texture": {
+              "created": 2337,
+              "deleted": 2318,
+              "live": 19
+            },
+            "Program": {
+              "created": 48,
+              "deleted": 0,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 8161,
+              "deleted": 8105,
+              "live": 56
+            }
+          }
+        },
+        {
+          "name": "F1-dawn-with-wheel",
+          "elapsedMs": 8075.79999999702,
+          "p50": 14.200000000000728,
+          "p95": 14.700000000000728,
+          "p99": 18.100000000002183,
+          "slowFrames": 0,
+          "drawnFrames": 560,
+          "drawCalls": 41205,
+          "blendEnabledDrawCalls": 30737,
+          "drawCallsPerDrawnFrame": 73.58035714285714,
+          "rootCommits": 561,
+          "rootCommitsPerSecond": 69.46680205059648,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 35306,
+              "deleted": 35080,
+              "live": 226
+            },
+            "Texture": {
+              "created": 2337,
+              "deleted": 2318,
+              "live": 19
+            },
+            "Program": {
+              "created": 48,
+              "deleted": 0,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 8161,
+              "deleted": 8105,
+              "live": 56
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 72129,
+              "deleted": 72000,
+              "live": 129
+            },
+            "Texture": {
+              "created": 4767,
+              "deleted": 4754,
+              "live": 13
+            },
+            "Program": {
+              "created": 48,
+              "deleted": 0,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 16659,
+              "deleted": 16614,
+              "live": 45
+            }
+          }
+        },
+        {
+          "name": "F-ALL-sunset-with-wheel",
+          "elapsedMs": 9270.5,
+          "p50": 14.299999999999272,
+          "p95": 16.299999999999272,
+          "p99": 41.5,
+          "slowFrames": 1,
+          "drawnFrames": 608,
+          "drawCalls": 54259,
+          "blendEnabledDrawCalls": 44395,
+          "drawCallsPerDrawnFrame": 89.24177631578948,
+          "rootCommits": 524,
+          "rootCommitsPerSecond": 56.52338061593226,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 72533,
+              "deleted": 72187,
+              "live": 346
+            },
+            "Texture": {
+              "created": 4808,
+              "deleted": 4769,
+              "live": 39
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 16736,
+              "deleted": 16660,
+              "live": 76
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 106690,
+              "deleted": 106344,
+              "live": 346
+            },
+            "Texture": {
+              "created": 7061,
+              "deleted": 7022,
+              "live": 39
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 24636,
+              "deleted": 24560,
+              "live": 76
+            }
+          }
+        },
+        {
+          "name": "F-ALL-gis-preset",
+          "elapsedMs": 937.8000000007451,
+          "p50": 14.200000000004366,
+          "p95": 14.900000000001455,
+          "p99": 17.30000000000291,
+          "slowFrames": 0,
+          "drawnFrames": 38,
+          "drawCalls": 1064,
+          "blendEnabledDrawCalls": 1064,
+          "drawCallsPerDrawnFrame": 28,
+          "rootCommits": 39,
+          "rootCommitsPerSecond": 41.586692258444245,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 106690,
+              "deleted": 106344,
+              "live": 346
+            },
+            "Texture": {
+              "created": 7061,
+              "deleted": 7022,
+              "live": 39
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 24636,
+              "deleted": 24560,
+              "live": 76
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 106690,
+              "deleted": 106344,
+              "live": 346
+            },
+            "Texture": {
+              "created": 7061,
+              "deleted": 7022,
+              "live": 39
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 24636,
+              "deleted": 24560,
+              "live": 76
+            }
+          }
+        },
+        {
+          "name": "F-ALL-dawn-with-wheel",
+          "elapsedMs": 8073.800000000745,
+          "p50": 14.299999999995634,
+          "p95": 28.400000000001455,
+          "p99": 42.700000000004366,
+          "slowFrames": 2,
+          "drawnFrames": 517,
+          "drawCalls": 53056,
+          "blendEnabledDrawCalls": 43424,
+          "drawCallsPerDrawnFrame": 102.62282398452611,
+          "rootCommits": 517,
+          "rootCommitsPerSecond": 64.03428373256116,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 106690,
+              "deleted": 106344,
+              "live": 346
+            },
+            "Texture": {
+              "created": 7061,
+              "deleted": 7022,
+              "live": 39
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 24636,
+              "deleted": 24560,
+              "live": 76
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 140463,
+              "deleted": 140117,
+              "live": 346
+            },
+            "Texture": {
+              "created": 9290,
+              "deleted": 9251,
+              "live": 39
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 32444,
+              "deleted": 32368,
+              "live": 76
+            }
+          }
+        },
+        {
+          "name": "route-calculation-first",
+          "elapsedMs": 1247,
+          "p50": 14.299999999995634,
+          "p95": 28.19999999999709,
+          "p99": 171.20000000000437,
+          "slowFrames": 2,
+          "drawnFrames": 63,
+          "drawCalls": 6935,
+          "blendEnabledDrawCalls": 4995,
+          "drawCallsPerDrawnFrame": 110.07936507936508,
+          "rootCommits": 69,
+          "rootCommitsPerSecond": 55.33279871692061,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 140650,
+              "deleted": 140424,
+              "live": 226
+            },
+            "Texture": {
+              "created": 9305,
+              "deleted": 9286,
+              "live": 19
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 32490,
+              "deleted": 32434,
+              "live": 56
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 140898,
+              "deleted": 140433,
+              "live": 465
+            },
+            "Texture": {
+              "created": 9323,
+              "deleted": 9287,
+              "live": 36
+            },
+            "Program": {
+              "created": 54,
+              "deleted": 1,
+              "live": 53
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 32549,
+              "deleted": 32436,
+              "live": 113
+            }
+          }
+        },
+        {
+          "name": "route-preview-during-sunset",
+          "elapsedMs": 9292.800000000745,
+          "p50": 14.200000000004366,
+          "p95": 14.89999999999418,
+          "p99": 15.89999999999418,
+          "slowFrames": 0,
+          "drawnFrames": 651,
+          "drawCalls": 37313,
+          "blendEnabledDrawCalls": 26207,
+          "drawCallsPerDrawnFrame": 57.31643625192012,
+          "rootCommits": 658,
+          "rootCommitsPerSecond": 70.80750688704667,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 140898,
+              "deleted": 140433,
+              "live": 465
+            },
+            "Texture": {
+              "created": 9323,
+              "deleted": 9287,
+              "live": 36
+            },
+            "Program": {
+              "created": 54,
+              "deleted": 1,
+              "live": 53
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 32549,
+              "deleted": 32436,
+              "live": 113
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 155166,
+              "deleted": 154980,
+              "live": 186
+            },
+            "Texture": {
+              "created": 10463,
+              "deleted": 10445,
+              "live": 18
+            },
+            "Program": {
+              "created": 54,
+              "deleted": 1,
+              "live": 53
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35935,
+              "deleted": 35893,
+              "live": 42
+            }
+          }
+        },
+        {
+          "name": "route-recalculation-1",
+          "elapsedMs": 1169.2999999970198,
+          "p50": 14.200000000004366,
+          "p95": 14.900000000001455,
+          "p99": 156.6999999999971,
+          "slowFrames": 2,
+          "drawnFrames": 67,
+          "drawCalls": 4406,
+          "blendEnabledDrawCalls": 2841,
+          "drawCallsPerDrawnFrame": 65.76119402985074,
+          "rootCommits": 69,
+          "rootCommitsPerSecond": 59.00966390162992,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 155241,
+              "deleted": 155121,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10469,
+              "deleted": 10454,
+              "live": 15
+            },
+            "Program": {
+              "created": 54,
+              "deleted": 6,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35953,
+              "deleted": 35924,
+              "live": 29
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 155308,
+              "deleted": 155130,
+              "live": 178
+            },
+            "Texture": {
+              "created": 10473,
+              "deleted": 10455,
+              "live": 18
+            },
+            "Program": {
+              "created": 59,
+              "deleted": 6,
+              "live": 53
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35966,
+              "deleted": 35926,
+              "live": 40
+            }
+          }
+        },
+        {
+          "name": "route-recalculation-2",
+          "elapsedMs": 1051.2999999970198,
+          "p50": 14.200000000004366,
+          "p95": 15.099999999998545,
+          "p99": 56.900000000001455,
+          "slowFrames": 1,
+          "drawnFrames": 31,
+          "drawCalls": 1189,
+          "blendEnabledDrawCalls": 781,
+          "drawCallsPerDrawnFrame": 38.354838709677416,
+          "rootCommits": 8,
+          "rootCommitsPerSecond": 7.60962617713562,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 155308,
+              "deleted": 155188,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10473,
+              "deleted": 10458,
+              "live": 15
+            },
+            "Program": {
+              "created": 59,
+              "deleted": 11,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35966,
+              "deleted": 35937,
+              "live": 29
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 155375,
+              "deleted": 155197,
+              "live": 178
+            },
+            "Texture": {
+              "created": 10477,
+              "deleted": 10459,
+              "live": 18
+            },
+            "Program": {
+              "created": 64,
+              "deleted": 11,
+              "live": 53
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35979,
+              "deleted": 35939,
+              "live": 40
+            }
+          }
+        },
+        {
+          "name": "route-recalculation-3",
+          "elapsedMs": 1050.800000000745,
+          "p50": 14.299999999995634,
+          "p95": 23.900000000001455,
+          "p99": 87.90000000000146,
+          "slowFrames": 1,
+          "drawnFrames": 5,
+          "drawCalls": 223,
+          "blendEnabledDrawCalls": 203,
+          "drawCallsPerDrawnFrame": 44.6,
+          "rootCommits": 5,
+          "rootCommitsPerSecond": 4.758279406163356,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 155375,
+              "deleted": 155255,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10477,
+              "deleted": 10462,
+              "live": 15
+            },
+            "Program": {
+              "created": 64,
+              "deleted": 16,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35979,
+              "deleted": 35950,
+              "live": 29
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 155442,
+              "deleted": 155264,
+              "live": 178
+            },
+            "Texture": {
+              "created": 10481,
+              "deleted": 10463,
+              "live": 18
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 16,
+              "live": 53
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 35992,
+              "deleted": 35952,
+              "live": 40
+            }
+          }
+        }
+      ],
+      "cycles": [
+        {
+          "cycle": 0,
+          "heapBytes": 45889952,
+          "resources": {
+            "Buffer": {
+              "created": 155517,
+              "deleted": 155397,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10487,
+              "deleted": 10472,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 36010,
+              "deleted": 35981,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 1,
+          "heapBytes": 47038504,
+          "resources": {
+            "Buffer": {
+              "created": 155667,
+              "deleted": 155547,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10499,
+              "deleted": 10484,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 36046,
+              "deleted": 36017,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 2,
+          "heapBytes": 45922064,
+          "resources": {
+            "Buffer": {
+              "created": 155817,
+              "deleted": 155697,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10511,
+              "deleted": 10496,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 36082,
+              "deleted": 36053,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 3,
+          "heapBytes": 46267404,
+          "resources": {
+            "Buffer": {
+              "created": 155967,
+              "deleted": 155847,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10523,
+              "deleted": 10508,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 36118,
+              "deleted": 36089,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 4,
+          "heapBytes": 45975488,
+          "resources": {
+            "Buffer": {
+              "created": 156117,
+              "deleted": 155997,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10535,
+              "deleted": 10520,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 36154,
+              "deleted": 36125,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 5,
+          "heapBytes": 46350760,
+          "resources": {
+            "Buffer": {
+              "created": 156267,
+              "deleted": 156147,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10547,
+              "deleted": 10532,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 36190,
+              "deleted": 36161,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 6,
+          "heapBytes": 47217708,
+          "resources": {
+            "Buffer": {
+              "created": 156417,
+              "deleted": 156297,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10559,
+              "deleted": 10544,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 36226,
+              "deleted": 36197,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 7,
+          "heapBytes": 46126140,
+          "resources": {
+            "Buffer": {
+              "created": 156567,
+              "deleted": 156447,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10571,
+              "deleted": 10556,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 36262,
+              "deleted": 36233,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 8,
+          "heapBytes": 46145864,
+          "resources": {
+            "Buffer": {
+              "created": 156717,
+              "deleted": 156597,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10583,
+              "deleted": 10568,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 36298,
+              "deleted": 36269,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 9,
+          "heapBytes": 47303788,
+          "resources": {
+            "Buffer": {
+              "created": 156867,
+              "deleted": 156747,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10595,
+              "deleted": 10580,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 36334,
+              "deleted": 36305,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 10,
+          "heapBytes": 46166312,
+          "resources": {
+            "Buffer": {
+              "created": 157017,
+              "deleted": 156897,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10607,
+              "deleted": 10592,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 36370,
+              "deleted": 36341,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        }
+      ],
+      "errors": [],
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 Laptop GPU (0x000028E0) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "lightRequests": 1
+    },
+    {
+      "run": 3,
+      "scenarios": [
+        {
+          "name": "F1-sunset-with-wheel",
+          "elapsedMs": 9266.800000000745,
+          "p50": 14.200000000000728,
+          "p95": 14.899999999999636,
+          "p99": 28.5,
+          "slowFrames": 2,
+          "drawnFrames": 629,
+          "drawCalls": 40530,
+          "blendEnabledDrawCalls": 30238,
+          "drawCallsPerDrawnFrame": 64.4356120826709,
+          "rootCommits": 549,
+          "rootCommitsPerSecond": 59.24375188845727,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 214,
+              "deleted": 0,
+              "live": 214
+            },
+            "Texture": {
+              "created": 17,
+              "deleted": 1,
+              "live": 16
+            },
+            "Program": {
+              "created": 46,
+              "deleted": 0,
+              "live": 46
+            },
+            "Framebuffer": {
+              "created": 0,
+              "deleted": 0,
+              "live": 0
+            },
+            "Renderbuffer": {
+              "created": 0,
+              "deleted": 0,
+              "live": 0
+            },
+            "VertexArray": {
+              "created": 53,
+              "deleted": 0,
+              "live": 53
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 36427,
+              "deleted": 36201,
+              "live": 226
+            },
+            "Texture": {
+              "created": 2409,
+              "deleted": 2390,
+              "live": 19
+            },
+            "Program": {
+              "created": 48,
+              "deleted": 0,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 8380,
+              "deleted": 8324,
+              "live": 56
+            }
+          }
+        },
+        {
+          "name": "F1-night-idle",
+          "elapsedMs": 1514.5999999977648,
+          "p50": 14.200000000000728,
+          "p95": 14.800000000001091,
+          "p99": 14.899999999999636,
+          "slowFrames": 0,
+          "drawnFrames": 0,
+          "drawCalls": 0,
+          "blendEnabledDrawCalls": 0,
+          "drawCallsPerDrawnFrame": 0,
+          "rootCommits": 0,
+          "rootCommitsPerSecond": 0,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 36427,
+              "deleted": 36201,
+              "live": 226
+            },
+            "Texture": {
+              "created": 2409,
+              "deleted": 2390,
+              "live": 19
+            },
+            "Program": {
+              "created": 48,
+              "deleted": 0,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 8380,
+              "deleted": 8324,
+              "live": 56
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 36427,
+              "deleted": 36201,
+              "live": 226
+            },
+            "Texture": {
+              "created": 2409,
+              "deleted": 2390,
+              "live": 19
+            },
+            "Program": {
+              "created": 48,
+              "deleted": 0,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 8380,
+              "deleted": 8324,
+              "live": 56
+            }
+          }
+        },
+        {
+          "name": "F1-dawn-with-wheel",
+          "elapsedMs": 8061.39999999851,
+          "p50": 14.200000000000728,
+          "p95": 14.899999999997817,
+          "p99": 15.400000000001455,
+          "slowFrames": 0,
+          "drawnFrames": 559,
+          "drawCalls": 41223,
+          "blendEnabledDrawCalls": 30755,
+          "drawCallsPerDrawnFrame": 73.74418604651163,
+          "rootCommits": 563,
+          "rootCommitsPerSecond": 69.83898578411988,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 36427,
+              "deleted": 36201,
+              "live": 226
+            },
+            "Texture": {
+              "created": 2409,
+              "deleted": 2390,
+              "live": 19
+            },
+            "Program": {
+              "created": 48,
+              "deleted": 0,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 8380,
+              "deleted": 8324,
+              "live": 56
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 73409,
+              "deleted": 73183,
+              "live": 226
+            },
+            "Texture": {
+              "created": 4848,
+              "deleted": 4829,
+              "live": 19
+            },
+            "Program": {
+              "created": 48,
+              "deleted": 0,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 16863,
+              "deleted": 16807,
+              "live": 56
+            }
+          }
+        },
+        {
+          "name": "F-ALL-sunset-with-wheel",
+          "elapsedMs": 9285.10000000149,
+          "p50": 14.200000000004366,
+          "p95": 15.19999999999709,
+          "p99": 42.599999999998545,
+          "slowFrames": 1,
+          "drawnFrames": 618,
+          "drawCalls": 56264,
+          "blendEnabledDrawCalls": 45912,
+          "drawCallsPerDrawnFrame": 91.042071197411,
+          "rootCommits": 533,
+          "rootCommitsPerSecond": 57.40379748197805,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 73773,
+              "deleted": 73427,
+              "live": 346
+            },
+            "Texture": {
+              "created": 4886,
+              "deleted": 4847,
+              "live": 39
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 16936,
+              "deleted": 16860,
+              "live": 76
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 108893,
+              "deleted": 108547,
+              "live": 346
+            },
+            "Texture": {
+              "created": 7205,
+              "deleted": 7166,
+              "live": 39
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 25045,
+              "deleted": 24969,
+              "live": 76
+            }
+          }
+        },
+        {
+          "name": "F-ALL-gis-preset",
+          "elapsedMs": 924.2999999970198,
+          "p50": 14.299999999995634,
+          "p95": 14.80000000000291,
+          "p99": 15,
+          "slowFrames": 0,
+          "drawnFrames": 40,
+          "drawCalls": 1120,
+          "blendEnabledDrawCalls": 1120,
+          "drawCallsPerDrawnFrame": 28,
+          "rootCommits": 41,
+          "rootCommitsPerSecond": 44.35789245930131,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 108893,
+              "deleted": 108547,
+              "live": 346
+            },
+            "Texture": {
+              "created": 7205,
+              "deleted": 7166,
+              "live": 39
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 25045,
+              "deleted": 24969,
+              "live": 76
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 108893,
+              "deleted": 108547,
+              "live": 346
+            },
+            "Texture": {
+              "created": 7205,
+              "deleted": 7166,
+              "live": 39
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 25045,
+              "deleted": 24969,
+              "live": 76
+            }
+          }
+        },
+        {
+          "name": "F-ALL-dawn-with-wheel",
+          "elapsedMs": 8069.800000000745,
+          "p50": 14.200000000004366,
+          "p95": 17.30000000000291,
+          "p99": 30.30000000000291,
+          "slowFrames": 1,
+          "drawnFrames": 533,
+          "drawCalls": 54769,
+          "blendEnabledDrawCalls": 44871,
+          "drawCallsPerDrawnFrame": 102.7560975609756,
+          "rootCommits": 533,
+          "rootCommitsPerSecond": 66.0487248754555,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 108893,
+              "deleted": 108547,
+              "live": 346
+            },
+            "Texture": {
+              "created": 7205,
+              "deleted": 7166,
+              "live": 39
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 25045,
+              "deleted": 24969,
+              "live": 76
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 144260,
+              "deleted": 143914,
+              "live": 346
+            },
+            "Texture": {
+              "created": 9539,
+              "deleted": 9500,
+              "live": 39
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 33252,
+              "deleted": 33176,
+              "live": 76
+            }
+          }
+        },
+        {
+          "name": "route-calculation-first",
+          "elapsedMs": 1250.1000000014901,
+          "p50": 14.299999999995634,
+          "p95": 15.099999999998545,
+          "p99": 170.79999999999563,
+          "slowFrames": 2,
+          "drawnFrames": 65,
+          "drawCalls": 7097,
+          "blendEnabledDrawCalls": 5103,
+          "drawCallsPerDrawnFrame": 109.18461538461538,
+          "rootCommits": 70,
+          "rootCommitsPerSecond": 55.99552035830458,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 144447,
+              "deleted": 144221,
+              "live": 226
+            },
+            "Texture": {
+              "created": 9554,
+              "deleted": 9535,
+              "live": 19
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 33298,
+              "deleted": 33242,
+              "live": 56
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 144730,
+              "deleted": 144230,
+              "live": 500
+            },
+            "Texture": {
+              "created": 9575,
+              "deleted": 9536,
+              "live": 39
+            },
+            "Program": {
+              "created": 54,
+              "deleted": 1,
+              "live": 53
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 33370,
+              "deleted": 33244,
+              "live": 126
+            }
+          }
+        },
+        {
+          "name": "route-preview-during-sunset",
+          "elapsedMs": 9278.199999999255,
+          "p50": 14.200000000004366,
+          "p95": 14.80000000000291,
+          "p99": 15.19999999999709,
+          "slowFrames": 0,
+          "drawnFrames": 651,
+          "drawCalls": 37297,
+          "blendEnabledDrawCalls": 26185,
+          "drawCallsPerDrawnFrame": 57.29185867895546,
+          "rootCommits": 658,
+          "rootCommitsPerSecond": 70.91892824039715,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 144730,
+              "deleted": 144230,
+              "live": 500
+            },
+            "Texture": {
+              "created": 9575,
+              "deleted": 9536,
+              "live": 39
+            },
+            "Program": {
+              "created": 54,
+              "deleted": 1,
+              "live": 53
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 33370,
+              "deleted": 33244,
+              "live": 126
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 158963,
+              "deleted": 158777,
+              "live": 186
+            },
+            "Texture": {
+              "created": 10712,
+              "deleted": 10694,
+              "live": 18
+            },
+            "Program": {
+              "created": 54,
+              "deleted": 1,
+              "live": 53
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 36743,
+              "deleted": 36701,
+              "live": 42
+            }
+          }
+        },
+        {
+          "name": "route-recalculation-1",
+          "elapsedMs": 1158,
+          "p50": 14.299999999995634,
+          "p95": 14.900000000001455,
+          "p99": 142.40000000000146,
+          "slowFrames": 2,
+          "drawnFrames": 68,
+          "drawCalls": 4622,
+          "blendEnabledDrawCalls": 2981,
+          "drawCallsPerDrawnFrame": 67.97058823529412,
+          "rootCommits": 72,
+          "rootCommitsPerSecond": 62.17616580310881,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 159038,
+              "deleted": 158918,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10718,
+              "deleted": 10703,
+              "live": 15
+            },
+            "Program": {
+              "created": 54,
+              "deleted": 6,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 36761,
+              "deleted": 36732,
+              "live": 29
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 159105,
+              "deleted": 158927,
+              "live": 178
+            },
+            "Texture": {
+              "created": 10722,
+              "deleted": 10704,
+              "live": 18
+            },
+            "Program": {
+              "created": 59,
+              "deleted": 6,
+              "live": 53
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 36774,
+              "deleted": 36734,
+              "live": 40
+            }
+          }
+        },
+        {
+          "name": "route-recalculation-2",
+          "elapsedMs": 1054.9000000022352,
+          "p50": 14.200000000004366,
+          "p95": 14.900000000001455,
+          "p99": 71.19999999999709,
+          "slowFrames": 1,
+          "drawnFrames": 17,
+          "drawCalls": 742,
+          "blendEnabledDrawCalls": 526,
+          "drawCallsPerDrawnFrame": 43.64705882352941,
+          "rootCommits": 9,
+          "rootCommitsPerSecond": 8.531614371012353,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 159105,
+              "deleted": 158985,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10722,
+              "deleted": 10707,
+              "live": 15
+            },
+            "Program": {
+              "created": 59,
+              "deleted": 11,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 36774,
+              "deleted": 36745,
+              "live": 29
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 159172,
+              "deleted": 158994,
+              "live": 178
+            },
+            "Texture": {
+              "created": 10726,
+              "deleted": 10708,
+              "live": 18
+            },
+            "Program": {
+              "created": 64,
+              "deleted": 11,
+              "live": 53
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 36787,
+              "deleted": 36747,
+              "live": 40
+            }
+          }
+        },
+        {
+          "name": "route-recalculation-3",
+          "elapsedMs": 1054.800000000745,
+          "p50": 14.299999999995634,
+          "p95": 14.80000000000291,
+          "p99": 85.19999999999709,
+          "slowFrames": 2,
+          "drawnFrames": 5,
+          "drawCalls": 223,
+          "blendEnabledDrawCalls": 203,
+          "drawCallsPerDrawnFrame": 44.6,
+          "rootCommits": 5,
+          "rootCommitsPerSecond": 4.740235115658389,
+          "resourcesBefore": {
+            "Buffer": {
+              "created": 159172,
+              "deleted": 159052,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10726,
+              "deleted": 10711,
+              "live": 15
+            },
+            "Program": {
+              "created": 64,
+              "deleted": 16,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 36787,
+              "deleted": 36758,
+              "live": 29
+            }
+          },
+          "resourcesAfter": {
+            "Buffer": {
+              "created": 159239,
+              "deleted": 159061,
+              "live": 178
+            },
+            "Texture": {
+              "created": 10730,
+              "deleted": 10712,
+              "live": 18
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 16,
+              "live": 53
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 36800,
+              "deleted": 36760,
+              "live": 40
+            }
+          }
+        }
+      ],
+      "cycles": [
+        {
+          "cycle": 0,
+          "heapBytes": 45010984,
+          "resources": {
+            "Buffer": {
+              "created": 159314,
+              "deleted": 159194,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10736,
+              "deleted": 10721,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 36818,
+              "deleted": 36789,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 1,
+          "heapBytes": 45491708,
+          "resources": {
+            "Buffer": {
+              "created": 159464,
+              "deleted": 159344,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10748,
+              "deleted": 10733,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 36854,
+              "deleted": 36825,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 2,
+          "heapBytes": 45097036,
+          "resources": {
+            "Buffer": {
+              "created": 159614,
+              "deleted": 159494,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10760,
+              "deleted": 10745,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 36890,
+              "deleted": 36861,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 3,
+          "heapBytes": 45443196,
+          "resources": {
+            "Buffer": {
+              "created": 159764,
+              "deleted": 159644,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10772,
+              "deleted": 10757,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 36926,
+              "deleted": 36897,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 4,
+          "heapBytes": 46284384,
+          "resources": {
+            "Buffer": {
+              "created": 159914,
+              "deleted": 159794,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10784,
+              "deleted": 10769,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 36962,
+              "deleted": 36933,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 5,
+          "heapBytes": 45205232,
+          "resources": {
+            "Buffer": {
+              "created": 160064,
+              "deleted": 159944,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10796,
+              "deleted": 10781,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 36998,
+              "deleted": 36969,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 6,
+          "heapBytes": 45591368,
+          "resources": {
+            "Buffer": {
+              "created": 160214,
+              "deleted": 160094,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10808,
+              "deleted": 10793,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 37034,
+              "deleted": 37005,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 7,
+          "heapBytes": 46446092,
+          "resources": {
+            "Buffer": {
+              "created": 160364,
+              "deleted": 160244,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10820,
+              "deleted": 10805,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 37070,
+              "deleted": 37041,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 8,
+          "heapBytes": 45345512,
+          "resources": {
+            "Buffer": {
+              "created": 160514,
+              "deleted": 160394,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10832,
+              "deleted": 10817,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 37106,
+              "deleted": 37077,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 9,
+          "heapBytes": 45355132,
+          "resources": {
+            "Buffer": {
+              "created": 160664,
+              "deleted": 160544,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10844,
+              "deleted": 10829,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 37142,
+              "deleted": 37113,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        },
+        {
+          "cycle": 10,
+          "heapBytes": 46502400,
+          "resources": {
+            "Buffer": {
+              "created": 160814,
+              "deleted": 160694,
+              "live": 120
+            },
+            "Texture": {
+              "created": 10856,
+              "deleted": 10841,
+              "live": 15
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 21,
+              "live": 48
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 37178,
+              "deleted": 37149,
+              "live": 29
+            }
+          },
+          "stable": {
+            "atlas": true,
+            "data": true,
+            "models": true
+          }
+        }
+      ],
+      "errors": [],
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 Laptop GPU (0x000028E0) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "lightRequests": 1
+    }
+  ],
+  "browser": "155.0.8059.86"
+}

@@ -1,0 +1,130 @@
+{
+  "results": [
+    {
+      "case": "main app F1 day/night",
+      "day": [
+        {
+          "camera": [
+            -89.22043177101597,
+            37.7152839522057,
+            18.733407974243164,
+            45,
+            0
+          ],
+          "environment": 0
+        }
+      ],
+      "night": [
+        {
+          "camera": [
+            -89.22043177101597,
+            37.7152839522057,
+            18.733407974243164,
+            45,
+            0
+          ],
+          "environment": 1
+        }
+      ]
+    },
+    {
+      "case": "search highlight, selection and camera survive four night/day cycles and both presets",
+      "selected": [
+        {
+          "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+          "name": "Classroom 0174"
+        }
+      ]
+    },
+    {
+      "case": "GPU polygon picking",
+      "name": "Classroom 0174",
+      "xy": [
+        472.11095217863715,
+        418.45783050855,
+        0.9985865724381626
+      ]
+    },
+    {
+      "case": "shared sunset across paused route panels",
+      "baseline": [
+        {
+          "camera": [
+            -89.22055213657151,
+            37.71519129520808,
+            19.148967942792968,
+            0,
+            0
+          ],
+          "environment": 0
+        },
+        {
+          "camera": [
+            -89.22054839691862,
+            37.7152483583112,
+            19.432465981420002,
+            0,
+            0
+          ],
+          "environment": 0
+        }
+      ],
+      "sunset": [
+        {
+          "camera": [
+            -89.22055213657151,
+            37.71519129520808,
+            19.148967942792968,
+            0,
+            0
+          ],
+          "environment": 0.3421125000000002
+        },
+        {
+          "camera": [
+            -89.22054839691862,
+            37.7152483583112,
+            19.432465981420002,
+            0,
+            0
+          ],
+          "environment": 0.3421125000000002
+        }
+      ],
+      "previewProgress": "0.005"
+    },
+    {
+      "case": "preview continues through sunset",
+      "before": 0.005,
+      "after": 0.025
+    },
+    {
+      "case": "F-ALL route camera preserved",
+      "stack": [
+        {
+          "camera": [
+            -89.22046683849997,
+            37.715291484826075,
+            18.79475315547551,
+            0,
+            84.71865094585996
+          ],
+          "environment": 1
+        }
+      ],
+      "stackDay": [
+        {
+          "camera": [
+            -89.22046683849997,
+            37.715291484826075,
+            18.79475315547551,
+            0,
+            84.71865094585996
+          ],
+          "environment": 0
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

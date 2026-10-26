@@ -1,0 +1,2398 @@
+{
+  "results": [
+    {
+      "name": "F1 route near",
+      "data": [
+        {
+          "view": {
+            "zoom": 19,
+            "pitch": 0,
+            "bearing": 0
+          },
+          "labels": [
+            {
+              "id": "route-focus-room-labels",
+              "size": 12,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:98",
+                  "key": "focus:end:/rooms-level-01-WGS.geojson#F1:OBJECTID:98",
+                  "floor": 1,
+                  "position": [
+                    -89.22034939748788,
+                    37.71504893679483,
+                    1.1
+                  ],
+                  "offset": [
+                    128.92000000000002,
+                    0
+                  ],
+                  "text": "University Honors (0181)",
+                  "progress": 38.79466563587826,
+                  "box": {
+                    "left": 686.3753371733948,
+                    "right": 894.2153371733947,
+                    "top": 488.19832370523716,
+                    "bottom": 512.5983237052371
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "key": "focus:start:/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "floor": 1,
+                  "position": [
+                    -89.22071201306052,
+                    37.715155146020194,
+                    1.1
+                  ],
+                  "offset": [
+                    -88.12,
+                    0
+                  ],
+                  "text": "Classroom 0174",
+                  "progress": 0,
+                  "box": {
+                    "left": 236.7033572597573,
+                    "right": 362.9433572597573,
+                    "top": 386.95779653526824,
+                    "bottom": 411.3577965352682
+                  }
+                }
+              ]
+            },
+            {
+              "id": "route-landmark-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:6",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:6",
+                  "floor": 1,
+                  "position": [
+                    -89.22059696932368,
+                    37.71528269969086,
+                    0.86
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Browsing Room",
+                  "progress": 13.43546951815738,
+                  "box": {
+                    "left": 422.4184075980231,
+                    "right": 527.2384075980232,
+                    "top": 231.72727581104772,
+                    "bottom": 254.32727581104774
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:173",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:173",
+                  "floor": 1,
+                  "position": [
+                    -89.22056674421702,
+                    37.71519879347998,
+                    0.86
+                  ],
+                  "offset": [
+                    88.12,
+                    0
+                  ],
+                  "text": "Rest Room Female",
+                  "progress": 18.73736679457196,
+                  "box": {
+                    "left": 522.4975124176927,
+                    "right": 648.7375124176928,
+                    "top": 346.5792120325792,
+                    "bottom": 369.17921203257924
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:168",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:168",
+                  "floor": 1,
+                  "position": [
+                    -89.22040395055846,
+                    37.715190437870326,
+                    0.86
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Rest Room Male",
+                  "progress": 20.573347749115833,
+                  "box": {
+                    "left": 563.6142355833017,
+                    "right": 675.5742355833017,
+                    "top": 319.20120615212477,
+                    "bottom": 341.8012061521248
+                  }
+                }
+              ]
+            }
+          ],
+          "budget": 5
+        }
+      ]
+    },
+    {
+      "name": "F1 route far",
+      "data": [
+        {
+          "view": {
+            "zoom": 16.5,
+            "pitch": 0,
+            "bearing": 0
+          },
+          "labels": [
+            {
+              "id": "route-focus-room-labels",
+              "size": 12,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:98",
+                  "key": "focus:end:/rooms-level-01-WGS.geojson#F1:OBJECTID:98",
+                  "floor": 1,
+                  "position": [
+                    -89.22034939748788,
+                    37.71504893679483,
+                    1.1
+                  ],
+                  "offset": [
+                    128.92000000000002,
+                    0
+                  ],
+                  "text": "University Honors (0181)",
+                  "progress": 38.79466563587826,
+                  "box": {
+                    "left": 553.265250848718,
+                    "right": 761.1052508487179,
+                    "top": 420.64467437322685,
+                    "bottom": 445.0446743732268
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "key": "focus:start:/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "floor": 1,
+                  "position": [
+                    -89.22071201306052,
+                    37.715155146020194,
+                    1.1
+                  ],
+                  "offset": [
+                    -88.12,
+                    0
+                  ],
+                  "text": "Classroom 0174",
+                  "progress": 0,
+                  "box": {
+                    "left": 329.1330289318384,
+                    "right": 455.3730289318384,
+                    "top": 402.9121698994459,
+                    "bottom": 427.3121698994459
+                  }
+                }
+              ]
+            },
+            {
+              "id": "route-landmark-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": []
+            }
+          ],
+          "budget": 2
+        }
+      ]
+    },
+    {
+      "name": "preview playing",
+      "data": [
+        {
+          "view": {
+            "zoom": 19.5,
+            "pitch": 0,
+            "bearing": 0
+          },
+          "labels": [
+            {
+              "id": "route-focus-room-labels",
+              "size": 12,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:98",
+                  "key": "focus:end:/rooms-level-01-WGS.geojson#F1:OBJECTID:98",
+                  "floor": 1,
+                  "position": [
+                    -89.22034939748788,
+                    37.71504893679483,
+                    1.1
+                  ],
+                  "offset": [
+                    128.92000000000002,
+                    0
+                  ],
+                  "text": "University Honors (0181)",
+                  "progress": 38.79466563587826,
+                  "box": {
+                    "left": 754.2891907156205,
+                    "right": 962.1291907156204,
+                    "top": 522.6647475028675,
+                    "bottom": 547.0647475028676
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "key": "focus:start:/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "floor": 1,
+                  "position": [
+                    -89.22071201306052,
+                    37.715155146020194,
+                    1.1
+                  ],
+                  "offset": [
+                    -88.12,
+                    0
+                  ],
+                  "text": "Classroom 0174",
+                  "progress": 0,
+                  "box": {
+                    "left": 189.54498269698666,
+                    "right": 315.7849826969867,
+                    "top": 378.8177447805803,
+                    "bottom": 403.2177447805803
+                  }
+                }
+              ]
+            },
+            {
+              "id": "route-landmark-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:6",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:6",
+                  "floor": 1,
+                  "position": [
+                    -89.22059696932368,
+                    37.71528269969086,
+                    0.86
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Browsing Room",
+                  "progress": 13.43546951815738,
+                  "box": {
+                    "left": 411.9056634901783,
+                    "right": 516.7256634901784,
+                    "top": 173.18509233341604,
+                    "bottom": 195.78509233341606
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:173",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:173",
+                  "floor": 1,
+                  "position": [
+                    -89.22056674421702,
+                    37.71519879347998,
+                    0.86
+                  ],
+                  "offset": [
+                    88.12,
+                    0
+                  ],
+                  "text": "Rest Room Female",
+                  "progress": 18.73736679457196,
+                  "box": {
+                    "left": 521.4523655386446,
+                    "right": 647.6923655386446,
+                    "top": 321.26135312827597,
+                    "bottom": 343.861353128276
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:168",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:168",
+                  "floor": 1,
+                  "position": [
+                    -89.22040395055846,
+                    37.715190437870326,
+                    0.86
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Rest Room Male",
+                  "progress": 20.573347749115833,
+                  "box": {
+                    "left": 613.5619529582499,
+                    "right": 725.5219529582499,
+                    "top": 297.1919140788785,
+                    "bottom": 319.7919140788785
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:375",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:375",
+                  "floor": 1,
+                  "position": [
+                    -89.22042909358916,
+                    37.71515715832987,
+                    0.86
+                  ],
+                  "offset": [
+                    59.56,
+                    0
+                  ],
+                  "text": "Elevator",
+                  "progress": 26.71321009414684,
+                  "box": {
+                    "left": 667.8087439725277,
+                    "right": 736.9287439725276,
+                    "top": 377.2220794664398,
+                    "bottom": 399.82207946643985
+                  }
+                }
+              ]
+            }
+          ],
+          "budget": 7
+        }
+      ]
+    },
+    {
+      "name": "preview paused",
+      "data": [
+        {
+          "view": {
+            "zoom": 19.5,
+            "pitch": 0,
+            "bearing": 0
+          },
+          "labels": [
+            {
+              "id": "route-focus-room-labels",
+              "size": 12,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:98",
+                  "key": "focus:end:/rooms-level-01-WGS.geojson#F1:OBJECTID:98",
+                  "floor": 1,
+                  "position": [
+                    -89.22034939748788,
+                    37.71504893679483,
+                    1.1
+                  ],
+                  "offset": [
+                    128.92000000000002,
+                    0
+                  ],
+                  "text": "University Honors (0181)",
+                  "progress": 38.79466563587826,
+                  "box": {
+                    "left": 754.2891907156205,
+                    "right": 962.1291907156204,
+                    "top": 522.6647475028675,
+                    "bottom": 547.0647475028676
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "key": "focus:start:/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "floor": 1,
+                  "position": [
+                    -89.22071201306052,
+                    37.715155146020194,
+                    1.1
+                  ],
+                  "offset": [
+                    -88.12,
+                    0
+                  ],
+                  "text": "Classroom 0174",
+                  "progress": 0,
+                  "box": {
+                    "left": 189.54498269698666,
+                    "right": 315.7849826969867,
+                    "top": 378.8177447805803,
+                    "bottom": 403.2177447805803
+                  }
+                }
+              ]
+            },
+            {
+              "id": "route-landmark-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:6",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:6",
+                  "floor": 1,
+                  "position": [
+                    -89.22059696932368,
+                    37.71528269969086,
+                    0.86
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Browsing Room",
+                  "progress": 13.43546951815738,
+                  "box": {
+                    "left": 411.9056634901783,
+                    "right": 516.7256634901784,
+                    "top": 173.18509233341604,
+                    "bottom": 195.78509233341606
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:173",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:173",
+                  "floor": 1,
+                  "position": [
+                    -89.22056674421702,
+                    37.71519879347998,
+                    0.86
+                  ],
+                  "offset": [
+                    88.12,
+                    0
+                  ],
+                  "text": "Rest Room Female",
+                  "progress": 18.73736679457196,
+                  "box": {
+                    "left": 521.4523655386446,
+                    "right": 647.6923655386446,
+                    "top": 321.26135312827597,
+                    "bottom": 343.861353128276
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:168",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:168",
+                  "floor": 1,
+                  "position": [
+                    -89.22040395055846,
+                    37.715190437870326,
+                    0.86
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Rest Room Male",
+                  "progress": 20.573347749115833,
+                  "box": {
+                    "left": 613.5619529582499,
+                    "right": 725.5219529582499,
+                    "top": 297.1919140788785,
+                    "bottom": 319.7919140788785
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:375",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:375",
+                  "floor": 1,
+                  "position": [
+                    -89.22042909358916,
+                    37.71515715832987,
+                    0.86
+                  ],
+                  "offset": [
+                    59.56,
+                    0
+                  ],
+                  "text": "Elevator",
+                  "progress": 26.71321009414684,
+                  "box": {
+                    "left": 667.8087439725277,
+                    "right": 736.9287439725276,
+                    "top": 377.2220794664398,
+                    "bottom": 399.82207946643985
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:164",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:164",
+                  "floor": 1,
+                  "position": [
+                    -89.22077694866755,
+                    37.71507629549417,
+                    0.86
+                  ],
+                  "offset": [
+                    0,
+                    -41.6
+                  ],
+                  "text": "Center for Teaching\nExcellence (0110)",
+                  "progress": 31.221661275885644,
+                  "box": {
+                    "left": 199.12348072473486,
+                    "right": 346.78348072473483,
+                    "top": 438.0076300596397,
+                    "bottom": 473.20763005963977
+                  }
+                }
+              ]
+            }
+          ],
+          "budget": 7
+        }
+      ]
+    },
+    {
+      "name": "pitch 60 bearing 75",
+      "data": [
+        {
+          "view": {
+            "zoom": 19.5,
+            "pitch": 60,
+            "bearing": 75
+          },
+          "labels": [
+            {
+              "id": "route-focus-room-labels",
+              "size": 12,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:98",
+                  "key": "focus:end:/rooms-level-01-WGS.geojson#F1:OBJECTID:98",
+                  "floor": 1,
+                  "position": [
+                    -89.22034939748788,
+                    37.71504893679483,
+                    1.1
+                  ],
+                  "offset": [
+                    128.92000000000002,
+                    0
+                  ],
+                  "text": "University Honors (0181)",
+                  "progress": 38.79466563587826,
+                  "box": {
+                    "left": 675.6527001459898,
+                    "right": 883.4927001459897,
+                    "top": 307.10327433655533,
+                    "bottom": 331.5032743365553
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "key": "focus:start:/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "floor": 1,
+                  "position": [
+                    -89.22071201306052,
+                    37.715155146020194,
+                    1.1
+                  ],
+                  "offset": [
+                    88.12,
+                    0
+                  ],
+                  "text": "Classroom 0174",
+                  "progress": 0,
+                  "box": {
+                    "left": 450.2849612862316,
+                    "right": 576.5249612862316,
+                    "top": 467.98051836955307,
+                    "bottom": 492.38051836955304
+                  }
+                }
+              ]
+            },
+            {
+              "id": "route-landmark-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:6",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:6",
+                  "floor": 1,
+                  "position": [
+                    -89.22059696932368,
+                    37.71528269969086,
+                    0.86
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Browsing Room",
+                  "progress": 13.43546951815738,
+                  "box": {
+                    "left": 249.5474654715495,
+                    "right": 354.3674654715495,
+                    "top": 354.6886099245841,
+                    "bottom": 377.28860992458414
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:173",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:173",
+                  "floor": 1,
+                  "position": [
+                    -89.22056674421702,
+                    37.71519879347998,
+                    0.86
+                  ],
+                  "offset": [
+                    88.12,
+                    0
+                  ],
+                  "text": "Rest Room Female",
+                  "progress": 18.73736679457196,
+                  "box": {
+                    "left": 442.4840195256342,
+                    "right": 568.7240195256343,
+                    "top": 389.09932978047556,
+                    "bottom": 411.6993297804756
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:168",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:168",
+                  "floor": 1,
+                  "position": [
+                    -89.22040395055846,
+                    37.715190437870326,
+                    0.86
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Rest Room Male",
+                  "progress": 20.573347749115833,
+                  "box": {
+                    "left": 419.00161867951067,
+                    "right": 530.9616186795107,
+                    "top": 282.94965746306417,
+                    "bottom": 305.5496574630642
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:375",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:375",
+                  "floor": 1,
+                  "position": [
+                    -89.22042909358916,
+                    37.71515715832987,
+                    0.86
+                  ],
+                  "offset": [
+                    59.56,
+                    0
+                  ],
+                  "text": "Elevator",
+                  "progress": 26.71321009414684,
+                  "box": {
+                    "left": 532.2468457259954,
+                    "right": 601.3668457259953,
+                    "top": 333.10058251658825,
+                    "bottom": 355.70058251658827
+                  }
+                }
+              ]
+            }
+          ],
+          "budget": 6
+        }
+      ]
+    },
+    {
+      "name": "sidebar collapsed",
+      "data": [
+        {
+          "view": {
+            "zoom": 19.5,
+            "pitch": 60,
+            "bearing": 75
+          },
+          "labels": [
+            {
+              "id": "route-focus-room-labels",
+              "size": 12,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:98",
+                  "key": "focus:end:/rooms-level-01-WGS.geojson#F1:OBJECTID:98",
+                  "floor": 1,
+                  "position": [
+                    -89.22034939748788,
+                    37.71504893679483,
+                    1.1
+                  ],
+                  "offset": [
+                    128.92000000000002,
+                    0
+                  ],
+                  "text": "University Honors (0181)",
+                  "progress": 38.79466563587826,
+                  "box": {
+                    "left": 855.6527001769083,
+                    "right": 1063.4927001769083,
+                    "top": 307.10327433655533,
+                    "bottom": 331.5032743365553
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "key": "focus:start:/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "floor": 1,
+                  "position": [
+                    -89.22071201306052,
+                    37.715155146020194,
+                    1.1
+                  ],
+                  "offset": [
+                    88.12,
+                    0
+                  ],
+                  "text": "Classroom 0174",
+                  "progress": 0,
+                  "box": {
+                    "left": 630.2849613311,
+                    "right": 756.5249613311,
+                    "top": 467.98051836955307,
+                    "bottom": 492.38051836955304
+                  }
+                }
+              ]
+            },
+            {
+              "id": "route-landmark-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:6",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:6",
+                  "floor": 1,
+                  "position": [
+                    -89.22059696932368,
+                    37.71528269969086,
+                    0.86
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Browsing Room",
+                  "progress": 13.43546951815738,
+                  "box": {
+                    "left": 429.54746549350375,
+                    "right": 534.3674654935038,
+                    "top": 354.6886099245841,
+                    "bottom": 377.28860992458414
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:173",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:173",
+                  "floor": 1,
+                  "position": [
+                    -89.22056674421702,
+                    37.71519879347998,
+                    0.86
+                  ],
+                  "offset": [
+                    88.12,
+                    0
+                  ],
+                  "text": "Rest Room Female",
+                  "progress": 18.73736679457196,
+                  "box": {
+                    "left": 622.4840195885677,
+                    "right": 748.7240195885677,
+                    "top": 389.09932978047556,
+                    "bottom": 411.6993297804756
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:168",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:168",
+                  "floor": 1,
+                  "position": [
+                    -89.22040395055846,
+                    37.715190437870326,
+                    0.86
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Rest Room Male",
+                  "progress": 20.573347749115833,
+                  "box": {
+                    "left": 599.0016187023543,
+                    "right": 710.9616187023544,
+                    "top": 282.94965746306417,
+                    "bottom": 305.5496574630642
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:375",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:375",
+                  "floor": 1,
+                  "position": [
+                    -89.22042909358916,
+                    37.71515715832987,
+                    0.86
+                  ],
+                  "offset": [
+                    59.56,
+                    0
+                  ],
+                  "text": "Elevator",
+                  "progress": 26.71321009414684,
+                  "box": {
+                    "left": 712.246845737684,
+                    "right": 781.3668457376839,
+                    "top": 333.10058251658825,
+                    "bottom": 355.70058251658827
+                  }
+                }
+              ]
+            }
+          ],
+          "budget": 6
+        }
+      ]
+    },
+    {
+      "name": "sidebar expanded",
+      "data": [
+        {
+          "view": {
+            "zoom": 19.5,
+            "pitch": 60,
+            "bearing": 75
+          },
+          "labels": [
+            {
+              "id": "route-focus-room-labels",
+              "size": 12,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:98",
+                  "key": "focus:end:/rooms-level-01-WGS.geojson#F1:OBJECTID:98",
+                  "floor": 1,
+                  "position": [
+                    -89.22034939748788,
+                    37.71504893679483,
+                    1.1
+                  ],
+                  "offset": [
+                    -128.92000000000002,
+                    0
+                  ],
+                  "text": "University Honors (0181)",
+                  "progress": 38.79466563587826,
+                  "box": {
+                    "left": 417.8127001459896,
+                    "right": 625.6527001459896,
+                    "top": 307.10327433655533,
+                    "bottom": 331.5032743365553
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "key": "focus:start:/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "floor": 1,
+                  "position": [
+                    -89.22071201306052,
+                    37.715155146020194,
+                    1.1
+                  ],
+                  "offset": [
+                    88.12,
+                    0
+                  ],
+                  "text": "Classroom 0174",
+                  "progress": 0,
+                  "box": {
+                    "left": 450.2849612862316,
+                    "right": 576.5249612862316,
+                    "top": 467.98051836955307,
+                    "bottom": 492.38051836955304
+                  }
+                }
+              ]
+            },
+            {
+              "id": "route-landmark-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:6",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:6",
+                  "floor": 1,
+                  "position": [
+                    -89.22059696932368,
+                    37.71528269969086,
+                    0.86
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Browsing Room",
+                  "progress": 13.43546951815738,
+                  "box": {
+                    "left": 249.5474654715495,
+                    "right": 354.3674654715495,
+                    "top": 354.6886099245841,
+                    "bottom": 377.28860992458414
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:173",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:173",
+                  "floor": 1,
+                  "position": [
+                    -89.22056674421702,
+                    37.71519879347998,
+                    0.86
+                  ],
+                  "offset": [
+                    88.12,
+                    0
+                  ],
+                  "text": "Rest Room Female",
+                  "progress": 18.73736679457196,
+                  "box": {
+                    "left": 442.4840195256342,
+                    "right": 568.7240195256343,
+                    "top": 389.09932978047556,
+                    "bottom": 411.6993297804756
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:168",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:168",
+                  "floor": 1,
+                  "position": [
+                    -89.22040395055846,
+                    37.715190437870326,
+                    0.86
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Rest Room Male",
+                  "progress": 20.573347749115833,
+                  "box": {
+                    "left": 419.00161867951067,
+                    "right": 530.9616186795107,
+                    "top": 282.94965746306417,
+                    "bottom": 305.5496574630642
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:375",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:375",
+                  "floor": 1,
+                  "position": [
+                    -89.22042909358916,
+                    37.71515715832987,
+                    0.86
+                  ],
+                  "offset": [
+                    59.56,
+                    0
+                  ],
+                  "text": "Elevator",
+                  "progress": 26.71321009414684,
+                  "box": {
+                    "left": 532.2468457259954,
+                    "right": 601.3668457259953,
+                    "top": 333.10058251658825,
+                    "bottom": 355.70058251658827
+                  }
+                }
+              ]
+            }
+          ],
+          "budget": 6
+        }
+      ]
+    },
+    {
+      "name": "route cleared",
+      "data": [
+        {
+          "view": {
+            "zoom": 19.5,
+            "pitch": 60,
+            "bearing": 75
+          },
+          "labels": [],
+          "budget": 0
+        }
+      ]
+    },
+    {
+      "name": "F1 F3 timeline paused",
+      "data": [
+        {
+          "view": {
+            "zoom": 19.135930696760415,
+            "pitch": 0,
+            "bearing": 0
+          },
+          "labels": [
+            {
+              "id": "route-transition-labels",
+              "size": 10,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": []
+            },
+            {
+              "id": "route-used-connector-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:375",
+                  "key": "connector:/rooms-level-01-WGS.geojson#F1:OBJECTID:375",
+                  "floor": 1,
+                  "position": [
+                    -89.22042909358916,
+                    37.71515715832987,
+                    0.98
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Elevator",
+                  "progress": 28.347138435286247,
+                  "box": {
+                    "left": 246.09975122763086,
+                    "right": 315.21975122763087,
+                    "top": 354.0537916398926,
+                    "bottom": 376.65379163989263
+                  }
+                }
+              ]
+            },
+            {
+              "id": "route-focus-room-labels",
+              "size": 12,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "key": "focus:start:/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "floor": 1,
+                  "position": [
+                    -89.22071201306052,
+                    37.715155146020194,
+                    1.1
+                  ],
+                  "offset": [
+                    88.12,
+                    0
+                  ],
+                  "text": "Classroom 0174",
+                  "progress": 0,
+                  "box": {
+                    "left": 71.14436152837769,
+                    "right": 197.3843615283777,
+                    "top": 390.77376453642154,
+                    "bottom": 415.1737645364215
+                  }
+                }
+              ]
+            },
+            {
+              "id": "route-landmark-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:6",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:6",
+                  "floor": 1,
+                  "position": [
+                    -89.22059696932368,
+                    37.71528269969086,
+                    0.86
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Browsing Room",
+                  "progress": 13.43546951815738,
+                  "box": {
+                    "left": 89.58667203617844,
+                    "right": 194.40667203617843,
+                    "top": 223.03193453235912,
+                    "bottom": 245.63193453235914
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:98",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:98",
+                  "floor": 1,
+                  "position": [
+                    -89.22034939748788,
+                    37.71504893679483,
+                    0.86
+                  ],
+                  "offset": [
+                    -116.68,
+                    0
+                  ],
+                  "text": "University Honors (0181)",
+                  "progress": 28.347138435286247,
+                  "box": {
+                    "left": 137.97348421418747,
+                    "right": 321.3334842141875,
+                    "top": 502.23127923264434,
+                    "bottom": 524.8312792326443
+                  }
+                }
+              ]
+            }
+          ],
+          "budget": 5
+        },
+        {
+          "view": {
+            "zoom": 19.432969672378928,
+            "pitch": 0,
+            "bearing": 0
+          },
+          "labels": [
+            {
+              "id": "route-transition-labels",
+              "size": 10,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": []
+            },
+            {
+              "id": "route-used-connector-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": []
+            },
+            {
+              "id": "route-focus-room-labels",
+              "size": 12,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": []
+            },
+            {
+              "id": "route-landmark-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-03-WGS.geojson#F3:OBJECTID:223",
+                  "key": "landmark:/rooms-level-03-WGS.geojson#F3:OBJECTID:223",
+                  "floor": 3,
+                  "position": [
+                    -89.2205691745039,
+                    37.71519893173735,
+                    0.86
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Rest Room Female",
+                  "progress": 7.838567698879341,
+                  "box": {
+                    "left": 94.77475405738764,
+                    "right": 221.01475405738765,
+                    "top": 381.8666923960038,
+                    "bottom": 404.46669239600385
+                  }
+                },
+                {
+                  "id": "/rooms-level-03-WGS.geojson#F3:OBJECTID:270",
+                  "key": "landmark:/rooms-level-03-WGS.geojson#F3:OBJECTID:270",
+                  "floor": 3,
+                  "position": [
+                    -89.22037446673724,
+                    37.71527986930593,
+                    0.86
+                  ],
+                  "offset": [
+                    -98.83,
+                    0
+                  ],
+                  "text": "Lerner Music Studio",
+                  "progress": 14.837092411528706,
+                  "box": {
+                    "left": 183.01304651591585,
+                    "right": 330.6730465159158,
+                    "top": 313.2379657437581,
+                    "bottom": 335.8379657437581
+                  }
+                },
+                {
+                  "id": "/rooms-level-03-WGS.geojson#F3:OBJECTID:315",
+                  "key": "landmark:/rooms-level-03-WGS.geojson#F3:OBJECTID:315",
+                  "floor": 3,
+                  "position": [
+                    -89.22065837371099,
+                    37.715340554224944,
+                    0.86
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Landmark",
+                  "progress": 37.62150969332594,
+                  "box": {
+                    "left": 32.728881539094004,
+                    "right": 101.84888153909401,
+                    "top": 200.01478850244393,
+                    "bottom": 222.61478850244396
+                  }
+                }
+              ]
+            }
+          ],
+          "budget": 7
+        }
+      ]
+    },
+    {
+      "name": "timeline playing",
+      "data": [
+        {
+          "view": {
+            "zoom": 19.135930696760415,
+            "pitch": 0,
+            "bearing": 0
+          },
+          "labels": [
+            {
+              "id": "route-transition-labels",
+              "size": 10,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": []
+            },
+            {
+              "id": "route-used-connector-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:375",
+                  "key": "connector:/rooms-level-01-WGS.geojson#F1:OBJECTID:375",
+                  "floor": 1,
+                  "position": [
+                    -89.22042909358916,
+                    37.71515715832987,
+                    0.98
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Elevator",
+                  "progress": 28.347138435286247,
+                  "box": {
+                    "left": 246.09975122763086,
+                    "right": 315.21975122763087,
+                    "top": 354.0537916398926,
+                    "bottom": 376.65379163989263
+                  }
+                }
+              ]
+            },
+            {
+              "id": "route-focus-room-labels",
+              "size": 12,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "key": "focus:start:/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "floor": 1,
+                  "position": [
+                    -89.22071201306052,
+                    37.715155146020194,
+                    1.1
+                  ],
+                  "offset": [
+                    88.12,
+                    0
+                  ],
+                  "text": "Classroom 0174",
+                  "progress": 0,
+                  "box": {
+                    "left": 71.14436152837769,
+                    "right": 197.3843615283777,
+                    "top": 390.77376453642154,
+                    "bottom": 415.1737645364215
+                  }
+                }
+              ]
+            },
+            {
+              "id": "route-landmark-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:6",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:6",
+                  "floor": 1,
+                  "position": [
+                    -89.22059696932368,
+                    37.71528269969086,
+                    0.86
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Browsing Room",
+                  "progress": 13.43546951815738,
+                  "box": {
+                    "left": 89.58667203617844,
+                    "right": 194.40667203617843,
+                    "top": 223.03193453235912,
+                    "bottom": 245.63193453235914
+                  }
+                }
+              ]
+            }
+          ],
+          "budget": 5
+        },
+        {
+          "view": {
+            "zoom": 19.432969672378928,
+            "pitch": 0,
+            "bearing": 0
+          },
+          "labels": [
+            {
+              "id": "route-transition-labels",
+              "size": 10,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": []
+            },
+            {
+              "id": "route-used-connector-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": []
+            },
+            {
+              "id": "route-focus-room-labels",
+              "size": 12,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": []
+            },
+            {
+              "id": "route-landmark-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": []
+            }
+          ],
+          "budget": 7
+        }
+      ]
+    },
+    {
+      "name": "F-ALL paused",
+      "data": [
+        {
+          "view": {
+            "zoom": 18.79475315547551,
+            "pitch": 0,
+            "bearing": 84.71865094585996
+          },
+          "labels": [
+            {
+              "id": "route-transition-labels",
+              "size": 10,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": []
+            },
+            {
+              "id": "route-used-connector-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:375",
+                  "key": "connector:/rooms-level-01-WGS.geojson#F1:OBJECTID:375",
+                  "floor": 1,
+                  "position": [
+                    -89.22042909358916,
+                    37.71515715832987,
+                    5.48
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Elevator",
+                  "progress": 28.347138435286247,
+                  "box": {
+                    "left": 580.7470962585835,
+                    "right": 649.8670962585834,
+                    "top": 357.2294698482089,
+                    "bottom": 379.82946984820893
+                  }
+                },
+                {
+                  "id": "/rooms-level-03-WGS.geojson#F3:OBJECTID:384",
+                  "key": "connector:/rooms-level-03-WGS.geojson#F3:OBJECTID:384",
+                  "floor": 3,
+                  "position": [
+                    -89.22042726733126,
+                    37.715155001814935,
+                    14.48
+                  ],
+                  "offset": [
+                    59.56,
+                    0
+                  ],
+                  "text": "Elevator",
+                  "progress": 28.347138435286247,
+                  "box": {
+                    "left": 648.9851399251336,
+                    "right": 718.1051399251335,
+                    "top": 390.5767381933954,
+                    "bottom": 413.1767381933954
+                  }
+                }
+              ]
+            },
+            {
+              "id": "route-focus-room-labels",
+              "size": 12,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-03-WGS.geojson#F3:OBJECTID:239",
+                  "key": "focus:end:/rooms-level-03-WGS.geojson#F3:OBJECTID:239",
+                  "floor": 3,
+                  "position": [
+                    -89.22084870050875,
+                    37.715335079204465,
+                    14.6
+                  ],
+                  "offset": [
+                    124.84,
+                    0
+                  ],
+                  "text": "Southern Illinois\nUniversity Press (0362)",
+                  "progress": 65.96864812861219,
+                  "box": {
+                    "left": 461.10583370261224,
+                    "right": 660.7858337026123,
+                    "top": 665.374479973576,
+                    "bottom": 704.1744799735759
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "key": "focus:start:/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "floor": 1,
+                  "position": [
+                    -89.22071201306052,
+                    37.715155146020194,
+                    5.6
+                  ],
+                  "offset": [
+                    88.12,
+                    0
+                  ],
+                  "text": "Classroom 0174",
+                  "progress": 0,
+                  "box": {
+                    "left": 625.0035384225447,
+                    "right": 751.2435384225447,
+                    "top": 580.7426502335207,
+                    "bottom": 605.1426502335208
+                  }
+                }
+              ]
+            },
+            {
+              "id": "route-landmark-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:6",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:6",
+                  "floor": 1,
+                  "position": [
+                    -89.22059696932368,
+                    37.71528269969086,
+                    5.36
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Browsing Room",
+                  "progress": 13.43546951815738,
+                  "box": {
+                    "left": 446.9758793575629,
+                    "right": 551.795879357563,
+                    "top": 459.10646403018444,
+                    "bottom": 481.70646403018446
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:173",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:173",
+                  "floor": 1,
+                  "position": [
+                    -89.22056674421702,
+                    37.71519879347998,
+                    5.36
+                  ],
+                  "offset": [
+                    88.12,
+                    0
+                  ],
+                  "text": "Rest Room Female",
+                  "progress": 18.73736679457196,
+                  "box": {
+                    "left": 596.768099926184,
+                    "right": 723.0080999261841,
+                    "top": 480.82901681769414,
+                    "bottom": 503.42901681769416
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:168",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:168",
+                  "floor": 1,
+                  "position": [
+                    -89.22040395055846,
+                    37.715190437870326,
+                    5.36
+                  ],
+                  "offset": [
+                    -80.98,
+                    0
+                  ],
+                  "text": "Rest Room Male",
+                  "progress": 20.573347749115833,
+                  "box": {
+                    "left": 451.8368309024015,
+                    "right": 563.7968309024016,
+                    "top": 373.2368350835758,
+                    "bottom": 395.8368350835758
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:98",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:98",
+                  "floor": 1,
+                  "position": [
+                    -89.22034939748788,
+                    37.71504893679483,
+                    5.36
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "University Honors (0181)",
+                  "progress": 28.347138435286247,
+                  "box": {
+                    "left": 619.4035045993055,
+                    "right": 802.7635045993054,
+                    "top": 312.6586429619023,
+                    "bottom": 335.2586429619023
+                  }
+                }
+              ]
+            }
+          ],
+          "budget": 8
+        }
+      ]
+    },
+    {
+      "name": "F-ALL playing",
+      "data": [
+        {
+          "view": {
+            "zoom": 18.79475315547551,
+            "pitch": 0,
+            "bearing": 84.71865094585996
+          },
+          "labels": [
+            {
+              "id": "route-transition-labels",
+              "size": 10,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": []
+            },
+            {
+              "id": "route-used-connector-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:375",
+                  "key": "connector:/rooms-level-01-WGS.geojson#F1:OBJECTID:375",
+                  "floor": 1,
+                  "position": [
+                    -89.22042909358916,
+                    37.71515715832987,
+                    5.48
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Elevator",
+                  "progress": 28.347138435286247,
+                  "box": {
+                    "left": 580.7470962585835,
+                    "right": 649.8670962585834,
+                    "top": 357.2294698482089,
+                    "bottom": 379.82946984820893
+                  }
+                }
+              ]
+            },
+            {
+              "id": "route-focus-room-labels",
+              "size": 12,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-03-WGS.geojson#F3:OBJECTID:239",
+                  "key": "focus:end:/rooms-level-03-WGS.geojson#F3:OBJECTID:239",
+                  "floor": 3,
+                  "position": [
+                    -89.22084870050875,
+                    37.715335079204465,
+                    14.6
+                  ],
+                  "offset": [
+                    124.84,
+                    0
+                  ],
+                  "text": "Southern Illinois\nUniversity Press (0362)",
+                  "progress": 65.96864812861219,
+                  "box": {
+                    "left": 461.10583370261224,
+                    "right": 660.7858337026123,
+                    "top": 665.374479973576,
+                    "bottom": 704.1744799735759
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "key": "focus:start:/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "floor": 1,
+                  "position": [
+                    -89.22071201306052,
+                    37.715155146020194,
+                    5.6
+                  ],
+                  "offset": [
+                    88.12,
+                    0
+                  ],
+                  "text": "Classroom 0174",
+                  "progress": 0,
+                  "box": {
+                    "left": 625.0035384225447,
+                    "right": 751.2435384225447,
+                    "top": 580.7426502335207,
+                    "bottom": 605.1426502335208
+                  }
+                }
+              ]
+            },
+            {
+              "id": "route-landmark-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:6",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:6",
+                  "floor": 1,
+                  "position": [
+                    -89.22059696932368,
+                    37.71528269969086,
+                    5.36
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Browsing Room",
+                  "progress": 13.43546951815738,
+                  "box": {
+                    "left": 446.9758793575629,
+                    "right": 551.795879357563,
+                    "top": 459.10646403018444,
+                    "bottom": 481.70646403018446
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:173",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:173",
+                  "floor": 1,
+                  "position": [
+                    -89.22056674421702,
+                    37.71519879347998,
+                    5.36
+                  ],
+                  "offset": [
+                    88.12,
+                    0
+                  ],
+                  "text": "Rest Room Female",
+                  "progress": 18.73736679457196,
+                  "box": {
+                    "left": 596.768099926184,
+                    "right": 723.0080999261841,
+                    "top": 480.82901681769414,
+                    "bottom": 503.42901681769416
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:168",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:168",
+                  "floor": 1,
+                  "position": [
+                    -89.22040395055846,
+                    37.715190437870326,
+                    5.36
+                  ],
+                  "offset": [
+                    -80.98,
+                    0
+                  ],
+                  "text": "Rest Room Male",
+                  "progress": 20.573347749115833,
+                  "box": {
+                    "left": 451.8368309024015,
+                    "right": 563.7968309024016,
+                    "top": 373.2368350835758,
+                    "bottom": 395.8368350835758
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:98",
+                  "key": "landmark:/rooms-level-01-WGS.geojson#F1:OBJECTID:98",
+                  "floor": 1,
+                  "position": [
+                    -89.22034939748788,
+                    37.71504893679483,
+                    5.36
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "University Honors (0181)",
+                  "progress": 28.347138435286247,
+                  "box": {
+                    "left": 619.4035045993055,
+                    "right": 802.7635045993054,
+                    "top": 312.6586429619023,
+                    "bottom": 335.2586429619023
+                  }
+                }
+              ]
+            }
+          ],
+          "budget": 8
+        }
+      ]
+    },
+    {
+      "name": "F-ALL seek paused",
+      "data": [
+        {
+          "view": {
+            "zoom": 18.79475315547551,
+            "pitch": 0,
+            "bearing": 84.71865094585996
+          },
+          "labels": [
+            {
+              "id": "route-transition-labels",
+              "size": 10,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": []
+            },
+            {
+              "id": "route-used-connector-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-03-WGS.geojson#F3:OBJECTID:384",
+                  "key": "connector:/rooms-level-03-WGS.geojson#F3:OBJECTID:384",
+                  "floor": 3,
+                  "position": [
+                    -89.22042726733126,
+                    37.715155001814935,
+                    14.48
+                  ],
+                  "offset": [
+                    59.56,
+                    0
+                  ],
+                  "text": "Elevator",
+                  "progress": 28.347138435286247,
+                  "box": {
+                    "left": 648.9851399251336,
+                    "right": 718.1051399251335,
+                    "top": 390.5767381933954,
+                    "bottom": 413.1767381933954
+                  }
+                }
+              ]
+            },
+            {
+              "id": "route-focus-room-labels",
+              "size": 12,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-03-WGS.geojson#F3:OBJECTID:239",
+                  "key": "focus:end:/rooms-level-03-WGS.geojson#F3:OBJECTID:239",
+                  "floor": 3,
+                  "position": [
+                    -89.22084870050875,
+                    37.715335079204465,
+                    14.6
+                  ],
+                  "offset": [
+                    124.84,
+                    0
+                  ],
+                  "text": "Southern Illinois\nUniversity Press (0362)",
+                  "progress": 65.96864812861219,
+                  "box": {
+                    "left": 461.10583370261224,
+                    "right": 660.7858337026123,
+                    "top": 665.374479973576,
+                    "bottom": 704.1744799735759
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "key": "focus:start:/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "floor": 1,
+                  "position": [
+                    -89.22071201306052,
+                    37.715155146020194,
+                    5.6
+                  ],
+                  "offset": [
+                    88.12,
+                    0
+                  ],
+                  "text": "Classroom 0174",
+                  "progress": 0,
+                  "box": {
+                    "left": 625.0035384225447,
+                    "right": 751.2435384225447,
+                    "top": 580.7426502335207,
+                    "bottom": 605.1426502335208
+                  }
+                }
+              ]
+            },
+            {
+              "id": "route-landmark-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-03-WGS.geojson#F3:OBJECTID:259",
+                  "key": "landmark:/rooms-level-03-WGS.geojson#F3:OBJECTID:259",
+                  "floor": 3,
+                  "position": [
+                    -89.22038499989775,
+                    37.71514292935367,
+                    14.36
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Family Study 0320D",
+                  "progress": 28.347138435286247,
+                  "box": {
+                    "left": 567.1084056881191,
+                    "right": 707.6284056881191,
+                    "top": 326.5605474847132,
+                    "bottom": 349.1605474847132
+                  }
+                },
+                {
+                  "id": "/rooms-level-03-WGS.geojson#F3:OBJECTID:223",
+                  "key": "landmark:/rooms-level-03-WGS.geojson#F3:OBJECTID:223",
+                  "floor": 3,
+                  "position": [
+                    -89.2205691745039,
+                    37.71519893173735,
+                    14.36
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Rest Room Female",
+                  "progress": 36.18570613416559,
+                  "box": {
+                    "left": 512.4974070518458,
+                    "right": 638.7374070518458,
+                    "top": 451.46380892924975,
+                    "bottom": 474.0638089292498
+                  }
+                },
+                {
+                  "id": "/rooms-level-03-WGS.geojson#F3:OBJECTID:270",
+                  "key": "landmark:/rooms-level-03-WGS.geojson#F3:OBJECTID:270",
+                  "floor": 3,
+                  "position": [
+                    -89.22037446673724,
+                    37.71527986930593,
+                    14.36
+                  ],
+                  "offset": [
+                    -98.83,
+                    0
+                  ],
+                  "text": "Lerner Music Studio",
+                  "progress": 43.184230846814955,
+                  "box": {
+                    "left": 343.66902028276047,
+                    "right": 491.32902028276044,
+                    "top": 343.2019696089302,
+                    "bottom": 365.8019696089302
+                  }
+                },
+                {
+                  "id": "/rooms-level-03-WGS.geojson#F3:OBJECTID:300",
+                  "key": "landmark:/rooms-level-03-WGS.geojson#F3:OBJECTID:300",
+                  "floor": 3,
+                  "position": [
+                    -89.22037396123453,
+                    37.71540274474698,
+                    14.36
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Journals J To N",
+                  "progress": 50.876241537095304,
+                  "box": {
+                    "left": 347.58936427598337,
+                    "right": 466.6893642759834,
+                    "top": 297.45010135130764,
+                    "bottom": 320.05010135130766
+                  }
+                },
+                {
+                  "id": "/rooms-level-03-WGS.geojson#F3:OBJECTID:315",
+                  "key": "landmark:/rooms-level-03-WGS.geojson#F3:OBJECTID:315",
+                  "floor": 3,
+                  "position": [
+                    -89.22065837371099,
+                    37.715340554224944,
+                    14.36
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Landmark",
+                  "progress": 65.96864812861219,
+                  "box": {
+                    "left": 409.3730917689048,
+                    "right": 478.49309176890483,
+                    "top": 502.54865454904854,
+                    "bottom": 525.1486545490485
+                  }
+                }
+              ]
+            }
+          ],
+          "budget": 8
+        }
+      ]
+    },
+    {
+      "name": "F-ALL destination playback",
+      "data": [
+        {
+          "view": {
+            "zoom": 18.79475315547551,
+            "pitch": 0,
+            "bearing": 84.71865094585996
+          },
+          "labels": [
+            {
+              "id": "route-transition-labels",
+              "size": 10,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": []
+            },
+            {
+              "id": "route-used-connector-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-03-WGS.geojson#F3:OBJECTID:384",
+                  "key": "connector:/rooms-level-03-WGS.geojson#F3:OBJECTID:384",
+                  "floor": 3,
+                  "position": [
+                    -89.22042726733126,
+                    37.715155001814935,
+                    14.48
+                  ],
+                  "offset": [
+                    59.56,
+                    0
+                  ],
+                  "text": "Elevator",
+                  "progress": 28.347138435286247,
+                  "box": {
+                    "left": 648.9851399251336,
+                    "right": 718.1051399251335,
+                    "top": 390.5767381933954,
+                    "bottom": 413.1767381933954
+                  }
+                }
+              ]
+            },
+            {
+              "id": "route-focus-room-labels",
+              "size": 12,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-03-WGS.geojson#F3:OBJECTID:239",
+                  "key": "focus:end:/rooms-level-03-WGS.geojson#F3:OBJECTID:239",
+                  "floor": 3,
+                  "position": [
+                    -89.22084870050875,
+                    37.715335079204465,
+                    14.6
+                  ],
+                  "offset": [
+                    124.84,
+                    0
+                  ],
+                  "text": "Southern Illinois\nUniversity Press (0362)",
+                  "progress": 65.96864812861219,
+                  "box": {
+                    "left": 461.10583370261224,
+                    "right": 660.7858337026123,
+                    "top": 665.374479973576,
+                    "bottom": 704.1744799735759
+                  }
+                },
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "key": "focus:start:/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "floor": 1,
+                  "position": [
+                    -89.22071201306052,
+                    37.715155146020194,
+                    5.6
+                  ],
+                  "offset": [
+                    88.12,
+                    0
+                  ],
+                  "text": "Classroom 0174",
+                  "progress": 0,
+                  "box": {
+                    "left": 625.0035384225447,
+                    "right": 751.2435384225447,
+                    "top": 580.7426502335207,
+                    "bottom": 605.1426502335208
+                  }
+                }
+              ]
+            },
+            {
+              "id": "route-landmark-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-03-WGS.geojson#F3:OBJECTID:300",
+                  "key": "landmark:/rooms-level-03-WGS.geojson#F3:OBJECTID:300",
+                  "floor": 3,
+                  "position": [
+                    -89.22037396123453,
+                    37.71540274474698,
+                    14.36
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Journals J To N",
+                  "progress": 50.876241537095304,
+                  "box": {
+                    "left": 347.58936427598337,
+                    "right": 466.6893642759834,
+                    "top": 297.45010135130764,
+                    "bottom": 320.05010135130766
+                  }
+                },
+                {
+                  "id": "/rooms-level-03-WGS.geojson#F3:OBJECTID:315",
+                  "key": "landmark:/rooms-level-03-WGS.geojson#F3:OBJECTID:315",
+                  "floor": 3,
+                  "position": [
+                    -89.22065837371099,
+                    37.715340554224944,
+                    14.36
+                  ],
+                  "offset": [
+                    0,
+                    -35.3
+                  ],
+                  "text": "Landmark",
+                  "progress": 65.96864812861219,
+                  "box": {
+                    "left": 409.3730917689048,
+                    "right": 478.49309176890483,
+                    "top": 502.54865454904854,
+                    "bottom": 525.1486545490485
+                  }
+                }
+              ]
+            }
+          ],
+          "budget": 8
+        }
+      ]
+    },
+    {
+      "name": "mobile drawer open",
+      "data": [
+        {
+          "view": {
+            "zoom": 18.79475315547551,
+            "pitch": 0,
+            "bearing": 84.71865094585996
+          },
+          "labels": [
+            {
+              "id": "route-transition-labels",
+              "size": 10,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": []
+            },
+            {
+              "id": "route-used-connector-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": []
+            },
+            {
+              "id": "route-focus-room-labels",
+              "size": 12,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": []
+            },
+            {
+              "id": "route-landmark-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": []
+            }
+          ],
+          "budget": 0
+        }
+      ]
+    },
+    {
+      "name": "mobile drawer closed, building fitted",
+      "data": [
+        {
+          "view": {
+            "zoom": 16.97060537338257,
+            "pitch": 45,
+            "bearing": 0
+          },
+          "labels": [
+            {
+              "id": "route-transition-labels",
+              "size": 10,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": []
+            },
+            {
+              "id": "route-used-connector-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:375",
+                  "key": "connector:/rooms-level-01-WGS.geojson#F1:OBJECTID:375",
+                  "floor": 1,
+                  "position": [
+                    -89.22042909358916,
+                    37.71515715832987,
+                    5.48
+                  ],
+                  "offset": [
+                    59.56,
+                    0
+                  ],
+                  "text": "Elevator",
+                  "progress": 28.347138435286247,
+                  "box": {
+                    "left": 223.09262361142902,
+                    "right": 292.212623611429,
+                    "top": 553.4524458026021,
+                    "bottom": 576.052445802602
+                  }
+                }
+              ]
+            },
+            {
+              "id": "route-focus-room-labels",
+              "size": 12,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": [
+                {
+                  "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "key": "focus:start:/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+                  "floor": 1,
+                  "position": [
+                    -89.22071201306052,
+                    37.715155146020194,
+                    5.6
+                  ],
+                  "offset": [
+                    0,
+                    36.2
+                  ],
+                  "text": "Classroom 0174",
+                  "progress": 0,
+                  "box": {
+                    "left": 72.34199000565161,
+                    "right": 198.58199000565162,
+                    "top": 588.2643234362458,
+                    "bottom": 612.6643234362459
+                  }
+                }
+              ]
+            },
+            {
+              "id": "route-landmark-room-labels",
+              "size": 10.5,
+              "units": "pixels",
+              "collision": "route-room-labels",
+              "items": []
+            }
+          ],
+          "budget": 2
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "networkFailures": [
+    "Mapbox style fetch failed",
+    "Mapbox style fetch failed",
+    "Mapbox style fetch failed",
+    "Mapbox style fetch failed"
+  ]
+}

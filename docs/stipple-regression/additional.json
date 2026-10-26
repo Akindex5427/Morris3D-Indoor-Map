@@ -1,0 +1,114 @@
+{
+  "results": [
+    {
+      "dpr": 2,
+      "group": "all",
+      "variant": "original"
+    },
+    {
+      "dpr": 2,
+      "group": "all",
+      "variant": "fixed"
+    },
+    {
+      "dpr": 2,
+      "group": "rooms",
+      "variant": "original"
+    },
+    {
+      "dpr": 2,
+      "group": "rooms",
+      "variant": "fixed"
+    },
+    {
+      "dpr": 2,
+      "group": "walls",
+      "variant": "original"
+    },
+    {
+      "dpr": 2,
+      "group": "walls",
+      "variant": "fixed"
+    },
+    {
+      "dpr": 2,
+      "group": "envelope",
+      "variant": "original"
+    },
+    {
+      "dpr": 2,
+      "group": "envelope",
+      "variant": "fixed"
+    },
+    {
+      "case": "DPR2 reversal/endpoint",
+      "p": 0
+    },
+    {
+      "case": "DPR2 reversal/endpoint",
+      "p": 0.0001
+    },
+    {
+      "case": "DPR2 reversal/endpoint",
+      "p": 0.1
+    },
+    {
+      "case": "DPR2 reversal/endpoint",
+      "p": 0.2
+    },
+    {
+      "case": "DPR2 reversal/endpoint",
+      "p": 0.19
+    },
+    {
+      "case": "DPR2 reversal/endpoint",
+      "p": 0.25
+    },
+    {
+      "case": "DPR2 reversal/endpoint",
+      "p": 0.12
+    },
+    {
+      "case": "DPR2 reversal/endpoint",
+      "p": 0.3
+    },
+    {
+      "case": "DPR2 reversal/endpoint",
+      "p": 0.2
+    },
+    {
+      "case": "DPR2 reversal/endpoint",
+      "p": 0.3599
+    },
+    {
+      "case": "DPR2 reversal/endpoint",
+      "p": 0.36
+    },
+    {
+      "case": "DPR2 reversal/endpoint",
+      "p": 1
+    },
+    {
+      "case": "DPR2 reversal/endpoint",
+      "p": 0
+    },
+    {
+      "case": "postprocess cleanup",
+      "canvases": 0,
+      "modelDisposed": true,
+      "buffers": [
+        {
+          "framebuffer": true,
+          "color": true,
+          "depth": true
+        },
+        {
+          "framebuffer": true,
+          "color": true,
+          "depth": true
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

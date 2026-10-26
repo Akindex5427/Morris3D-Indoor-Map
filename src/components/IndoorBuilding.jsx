@@ -1,3 +1,6 @@
+import { resolveRoomColor, summarizeRoomFunctions } from "../utils/roomColors";
+import { ROOM_FUNCTION_CONFIG } from "../utils/roomColorConfig";
+import { isHighlightedRoom } from "../utils/roomCatalog";
 /**
  * IndoorBuilding.jsx - ArcGIS Indoors-Style 3D Dollhouse Visualization
  *
@@ -33,6 +36,24 @@ import {
 } from "@deck.gl/core";
 import { parseFeatureColor } from "../utils/featureColors";
 import { buildRoomWallShells } from "../utils/roomWallGeometry";
+import { getLightFloorPlacement, lightFloor } from "../utils/interiorLighting";
+import { NIGHT_LIGHTING_DEFAULTS } from "../utils/nightLightingConfig";
+import { buildSurfaceLightField } from "../utils/surfaceLighting";
+import { DAY_ENVIRONMENT, NIGHT_ENVIRONMENT } from "../utils/environment";
+import { NightSurfaceLayer } from "../layers/nightSurfaceLayer";
+import { ENVIRONMENT_DEPTH_EXTENSIONS } from "../layers/environmentDepthExtension";
+
+// Uniform-only light updates retain the effect and its GPU resources.
+export function applyEnvironmentLighting(effect, environment, stacked = false) {
+  effect.ambientLight.color = environment.ambientColor;
+  effect.ambientLight.intensity = (stacked ? .5 : .3) * environment.ambient;
+  effect.directionalLights[0].color = environment.sunColor;
+  effect.directionalLights[0].intensity = (stacked ? .4 : .5) * environment.sun;
+  effect.directionalLights[0].direction = environment.direction;
+  effect.directionalLights[1].color = environment.ambientColor;
+  effect.directionalLights[1].intensity = .2 * environment.ambient;
+  effect.pointLights[0].intensity = (stacked ? .3 : .2) * environment.ambient;
+}
 
 // ============================================================================
 // LIGHTING CONFIGURATION
@@ -188,7 +209,7 @@ function getFloorNumber(props = {}) {
 }
 
 function getFeatureRoomId(props = {}) {
-  return props.id || props.name || props.room_id || props.OBJECTID || null;
+  return props.__roomSearchKey || props.__routeFeatureKey || null;
 }
 
 function parseNumericValue(value) {
@@ -261,7 +282,7 @@ function applyBaseToGeometry(geometry, baseZ = 0) {
   return geometry;
 }
 
-function buildFilteredIndoorFeatureCollection(
+export function buildFilteredIndoorFeatureCollection(
   data,
   selectedFloors,
   floorSpacing,
@@ -420,7 +441,7 @@ const IndoorBuilding = ({
   // LAYER CREATION
   // ============================================================================
 
-  const { layers, lightingEffect } = useMemo(() => {
+  const { layers } = useMemo(() => {
     if (!filteredData.features || filteredData.features.length === 0) {
       return { layers: [], lightingEffect: createIndoorLighting(false) };
     }
@@ -455,7 +476,7 @@ const IndoorBuilding = ({
         const floorNum = props.level ?? props.floor ?? props.nivel ?? 0;
 
         // Highlight selected room
-        if (highlightedRoomId === roomId) {
+        if (isHighlightedRoom(props, highlightedRoomId)) {
           return [255, 200, 0, 255]; // Gold highlight
         }
 
@@ -666,6 +687,14 @@ const IndoorBuilding = ({
  */
 export const useIndoorBuilding = ({
   data,
+  roomColorMode = "original",
+  roomFunctionConfig = ROOM_FUNCTION_CONFIG,
+  nightMode = false,
+  environment = nightMode ? NIGHT_ENVIRONMENT : DAY_ENVIRONMENT,
+  nightTuning = NIGHT_LIGHTING_DEFAULTS,
+  lightSampler = null,
+  getFixtureGain = null,
+  onLightResourcesReady = null,
   selectedFloors = [0, 1, 2, 3, 4, 5, 6, 7],
   translucency = 0.6,
   wallOpacity = 0.95,
@@ -676,69 +705,30 @@ export const useIndoorBuilding = ({
   presentation = {},
   onRoomClick = null,
 }) => {
+  const isStacked = selectedFloors.length > 1;
+  const stableLighting = useMemo(() => createIndoorLighting(isStacked), [isStacked]);
+  const nightField = useMemo(() => buildSurfaceLightField(data, lightSampler, isFloorSurface),
+    [data, lightSampler]);
+  applyEnvironmentLighting(stableLighting, environment, isStacked);
+  const lightPlacement = useMemo(() => getLightFloorPlacement(data, selectedFloors), [data, selectedFloors]);
+  const illuminatedData = useMemo(() => ({
+    ...data,
+    features: (data?.features || []).map((feature, row) => ({
+      ...feature,
+      properties: { ...feature.properties, __nightSurface: { row } },
+    })),
+  }), [data]);
   // Filter data by selected floors
+  const { revealProgress, initialRevealActive } = presentation;
   const filteredData = useMemo(() => {
     return buildFilteredIndoorFeatureCollection(
-      data,
+      illuminatedData,
       selectedFloors,
       floorSpacing,
-      presentation,
+      { revealProgress, initialRevealActive },
     );
 
-    if (!data || !data.features) {
-      return { type: "FeatureCollection", features: [] };
-    }
-
-    const isDollhouseMode = selectedFloors.length > 1;
-
-    const features = data.features
-      .filter((feature) => {
-        const floor =
-          feature.properties?.level ||
-          feature.properties?.floor ||
-          feature.properties?.nivel ||
-          0;
-        return selectedFloors.includes(floor);
-      })
-      .filter((feature) => {
-        const geomType = feature.geometry?.type;
-        return geomType === "Polygon" || geomType === "MultiPolygon";
-      })
-      .map((feature, index) => {
-        const props = feature.properties || {};
-        const floorNum =
-          props.level ?? props.floor ?? props.nivel ?? props.floorNumber ?? 0;
-        const featureBase = getBaseHeight(props);
-        // Single floor: no floor-level offset (display at ground level)
-        // Multi-floor: apply floor-level stacking offset
-        const baseZ = isDollhouseMode
-          ? featureBase + floorNum * floorSpacing
-          : 0;
-
-        // DEBUG LOGGING (only log first 3 features to avoid console spam)
-        if (index < 3) {
-          console.log(`🐛 Floor Elevation Debug [Feature ${index}]:`, {
-            selectedFloors,
-            isDollhouseMode,
-            floorNum,
-            featureBase,
-            floorSpacing,
-            baseZ,
-            featureName: props.name || props.type || "unknown",
-          });
-        }
-
-        return {
-          ...feature,
-          geometry: applyBaseToGeometry(feature.geometry, baseZ),
-        };
-      });
-
-    return {
-      type: "FeatureCollection",
-      features: features,
-    };
-  }, [data, selectedFloors, floorSpacing, presentation]);
+  }, [illuminatedData, selectedFloors, floorSpacing, revealProgress, initialRevealActive]);
 
   // Turf's offset/difference result is cached by room geometry and thickness.
   // Opacity-only changes reuse those shell footprints without recalculating them.
@@ -753,9 +743,9 @@ export const useIndoorBuilding = ({
   );
 
   // Create layers and lighting
-  const { layers, lightingEffect } = useMemo(() => {
+  const { layers } = useMemo(() => {
     if (!filteredData.features || filteredData.features.length === 0) {
-      return { layers: [], lightingEffect: createIndoorLighting(false) };
+      return { layers: [], lightingEffect: stableLighting };
     }
 
     const isDollhouseMode = selectedFloors.length > 1;
@@ -809,46 +799,13 @@ export const useIndoorBuilding = ({
       return isFocusFloor(floorNum) && isVerticalConnectorFeature(props);
     };
 
-    try {
-      // Create GeoJSON layer
-      const layer = new GeoJsonLayer({
-        id: "indoor-building-layer",
-        data: filteredData,
-        pickable: true,
-        stroked: true,
-        filled: true,
-        extruded: true,
-        wireframe: false,
-        lineWidthMinPixels: isSingleFloorMode ? 2 : isDollhouseMode ? 1.5 : 1,
-        lineWidthMaxPixels: isSingleFloorMode ? 3 : isDollhouseMode ? 2.5 : 2,
-
-        material: (feature) => {
-          const props = feature?.properties || {};
-          // Floor surfaces need high ambient/diffuse to appear bright white/transparent
-          if (isFloorSurface(props)) {
-            return {
-              ambient: 0.95,
-              diffuse: 0.95,
-              shininess: 0,
-              specularColor: [0, 0, 0],
-            };
-          }
-          // Regular compartments use standard material
-          return {
-            ambient: 0.4,
-            diffuse: 0.8,
-            shininess: 0,
-            specularColor: [0, 0, 0],
-          };
-        },
-
-        getFillColor: (feature) => {
+    const roomColor = (feature, nightMode = false) => {
           const props = feature.properties || {};
           const roomId = getFeatureRoomId(props);
           const floorNum = props.level ?? props.floor ?? props.nivel ?? 0;
           const reveal = props.__presentationReveal ?? 1;
-          const isStartRoom = routeFocus.startRoomId === roomId;
-          const isEndRoom = routeFocus.endRoomId === roomId;
+          const isStartRoom = roomId != null && routeFocus.startRoomId === roomId;
+          const isEndRoom = roomId != null && routeFocus.endRoomId === roomId;
           const isFocusedRoom = isStartRoom || isEndRoom || focusRoomIds.has(roomId);
           const isRouteLandmark = landmarkRoomIds.has(roomId);
           const isConnectorUsed = isUsedConnector(roomId, floorNum, props);
@@ -859,12 +816,13 @@ export const useIndoorBuilding = ({
             !shouldKeepVisibleForRoute &&
             !isFloorSurface(props);
 
-          if (highlightedRoomId === roomId) {
+          if (isHighlightedRoom(props, highlightedRoomId)) {
             return [255, 200, 0, Math.round(255 * reveal)];
           }
 
           if (isFloorSurface(props)) {
             const floorColor = getFloorSurfaceColor(floorNum, isDollhouseMode);
+            if (nightMode) return [...nightTuning.floorColor, Math.round(255 * nightTuning.floorOpacity * reveal)];
             return [
               floorColor[0],
               floorColor[1],
@@ -873,7 +831,7 @@ export const useIndoorBuilding = ({
             ];
           }
 
-          const baseColor = parseFeatureColor(props.color);
+          const baseColor = resolveRoomColor(props, roomColorMode, roomFunctionConfig);
 
           const nameLower =
             typeof props.name === "string" ? props.name.toLowerCase() : "";
@@ -885,8 +843,8 @@ export const useIndoorBuilding = ({
             nameLower.includes("shaft");
 
           let shadedColor;
-          if (isSpecialCompartment) {
-            // Preserve EXACT color from GeoJSON - NO modifications
+          if (isSpecialCompartment || roomColorMode !== "original") {
+            // Keep the chosen palette consistent across floors; retain legacy special-compartment colors.
             shadedColor = [baseColor[0], baseColor[1], baseColor[2]];
           } else {
             // Apply very subtle floor-based shading for regular rooms only
@@ -935,6 +893,11 @@ export const useIndoorBuilding = ({
             alpha = 255;
           }
 
+          if (nightMode) {
+            // The polygon shader now evaluates lighting per surface fragment.
+            shadedColor = baseColor;
+          }
+
           if (shouldKeepVisibleForRoute) {
             // Three-tier emphasis:
             //  focus rooms (start/end) — strongest
@@ -965,7 +928,83 @@ export const useIndoorBuilding = ({
 
           alpha = Math.round(alpha * reveal);
           return [...shadedColor, alpha];
+        };
+    const wallColor = (feature, nightMode = false) => {
+          const props = feature.properties || {};
+          const roomId = getFeatureRoomId(props);
+          const reveal = props.__presentationReveal ?? 1;
+          const baseColor = resolveRoomColor(props, roomColorMode, roomFunctionConfig);
+          let color = nightMode ? baseColor : baseColor.map(channel => Math.max(0, Math.min(255, Math.round(channel * 0.42))));
+          let alpha = wallOpacity * 255;
+          if (nightMode && isDollhouseMode) alpha *= nightTuning.stackedWallOpacityScale;
+
+          if (roomId != null && routeFocus.startRoomId === roomId) {
+            color = [18, 112, 57];
+            alpha = Math.max(alpha, 245);
+          } else if (roomId != null && routeFocus.endRoomId === roomId) {
+            color = [159, 35, 35];
+            alpha = Math.max(alpha, 245);
+          } else if (isHighlightedRoom(props, highlightedRoomId)) {
+            color = [142, 103, 0];
+            alpha = Math.max(alpha, 245);
+          } else if (
+            routeFocusActive &&
+            !focusRoomIds.has(roomId) &&
+            !landmarkRoomIds.has(roomId) &&
+            !isUsedConnector(roomId, getFloorNumber(props), props)
+          ) {
+            alpha = Math.min(alpha, 90);
+          }
+
+          return [...color, Math.round(alpha * reveal)];
+        };
+
+    const surfaceProps = (wall = false) => ({
+      "polygons-fill": {
+        type: NightSurfaceLayer, nightField, nightTuning, getFixtureGain, onLightResourcesReady,
+        environment,
+        getNightColor: feature => (wall ? wallColor : roomColor)(feature.__source?.object || feature, true),
+        getNightSurface: (feature) => {
+          // GeoJsonLayer splits MultiPolygons into wrapped sublayer rows.
+          const props = (feature.__source?.object || feature).properties || {};
+          const floor = lightFloor(getFloorNumber(props));
+          const roomId = getFeatureRoomId(props);
+          const protectedColor = isHighlightedRoom(props, highlightedRoomId) || focusRoomIds.has(roomId) ||
+            landmarkRoomIds.has(roomId) || isUsedConnector(roomId, floor, props);
+          const datum = (lightPlacement.floorBases[floor] || 0) +
+            (isDollhouseMode ? floor * floorSpacing : -lightPlacement.floorBase);
+          return [props.__nightSurface?.row || 0, datum,
+            (props.__presentationReveal ?? 1) < 1 ? 0 : nightField?.rows.get(data?.features?.[props.__nightSurface?.row])?.count || 0,
+            protectedColor ? -1 : wall ? 1 : isFloorSurface(props) ? 2 : 0];
         },
+        updateTriggers: {
+          getNightColor: [roomColorMode, roomFunctionConfig, nightTuning, translucency, wallOpacity, selectedFloors, highlightedRoomId, presentation],
+          getNightSurface: [nightField, lightPlacement, selectedFloors, floorSpacing, highlightedRoomId, presentation] },
+      },
+    });
+
+    try {
+      // Create GeoJSON layer
+      const layer = new GeoJsonLayer({
+        id: "indoor-building-layer",
+        data: filteredData,
+        _subLayerProps: surfaceProps(),
+        pickable: true,
+        stroked: true,
+        filled: true,
+        extruded: true,
+        wireframe: false,
+        lineWidthMinPixels: isSingleFloorMode ? 2 : isDollhouseMode ? 1.5 : 1,
+        lineWidthMaxPixels: isSingleFloorMode ? 3 : isDollhouseMode ? 2.5 : 2,
+
+        parameters: { depthMask: true },
+        extensions: ENVIRONMENT_DEPTH_EXTENSIONS,
+        environmentDepthProgress: environment.surfaceNight,
+        // The former material accessor was ignored by deck (material is a uniform).
+        // Keep its effective daylight defaults on the now permanent shader path.
+        material: { ambient: 0.35, diffuse: 0.6, shininess: 32, specularColor: [30,30,30] },
+
+        getFillColor: feature => roomColor(feature),
 
         getLineColor: (feature) => {
           const props = feature.properties || {};
@@ -1041,12 +1080,14 @@ export const useIndoorBuilding = ({
 
         onClick: (info) => {
           if (info.object && onRoomClick) {
-            onRoomClick(info.object.properties);
+            onRoomClick(info.object);
           }
         },
 
         updateTriggers: {
           getFillColor: [
+            roomColorMode,
+            roomFunctionConfig,
             highlightedRoomId,
             translucency,
             selectedFloors,
@@ -1060,44 +1101,22 @@ export const useIndoorBuilding = ({
       const wallLayer = new GeoJsonLayer({
         id: "procedural-interior-room-walls",
         data: wallData,
+        _subLayerProps: surfaceProps(true),
         pickable: false,
         stroked: false,
         filled: true,
         extruded: true,
         wireframe: false,
+        parameters: { depthMask: true },
+        extensions: ENVIRONMENT_DEPTH_EXTENSIONS,
+        environmentDepthProgress: environment.surfaceNight,
         material: {
           ambient: 0.45,
           diffuse: 0.7,
           shininess: 0,
           specularColor: [0, 0, 0],
         },
-        getFillColor: (feature) => {
-          const props = feature.properties || {};
-          const roomId = getFeatureRoomId(props);
-          const reveal = props.__presentationReveal ?? 1;
-          let color = getDarkerRoomColor(props);
-          let alpha = wallOpacity * 255;
-
-          if (routeFocus.startRoomId === roomId) {
-            color = [18, 112, 57];
-            alpha = Math.max(alpha, 245);
-          } else if (routeFocus.endRoomId === roomId) {
-            color = [159, 35, 35];
-            alpha = Math.max(alpha, 245);
-          } else if (highlightedRoomId === roomId) {
-            color = [142, 103, 0];
-            alpha = Math.max(alpha, 245);
-          } else if (
-            routeFocusActive &&
-            !focusRoomIds.has(roomId) &&
-            !landmarkRoomIds.has(roomId) &&
-            !isUsedConnector(roomId, getFloorNumber(props), props)
-          ) {
-            alpha = Math.min(alpha, 90);
-          }
-
-          return [...color, Math.round(alpha * reveal)];
-        },
+        getFillColor: feature => wallColor(feature),
         getElevation: (feature) => {
           const props = feature.properties || {};
           const reveal = props.__presentationReveal ?? 1;
@@ -1105,6 +1124,8 @@ export const useIndoorBuilding = ({
         },
         updateTriggers: {
           getFillColor: [
+            roomColorMode,
+            roomFunctionConfig,
             wallOpacity,
             highlightedRoomId,
             presentation,
@@ -1116,13 +1137,22 @@ export const useIndoorBuilding = ({
 
       return {
         layers: [layer, wallLayer],
-        lightingEffect: createIndoorLighting(isDollhouseMode),
+        lightingEffect: stableLighting,
       };
     } catch (error) {
       console.error("Error creating indoor building layers:", error);
-      return { layers: [], lightingEffect: createIndoorLighting(false) };
+      return { layers: [], lightingEffect: stableLighting };
     }
   }, [
+    roomColorMode,
+    roomFunctionConfig,
+    environment,
+    nightTuning,
+    nightField,
+    lightPlacement,
+    lightSampler,
+    getFixtureGain,
+    onLightResourcesReady,
     filteredData,
     wallData,
     selectedFloors,
@@ -1136,7 +1166,10 @@ export const useIndoorBuilding = ({
     onRoomClick,
   ]);
 
-  return { layers, lightingEffect };
+  const colorSummary = useMemo(() => summarizeRoomFunctions(
+    filteredData.features.filter(feature => !isFloorSurface(feature.properties || {})), roomFunctionConfig,
+  ), [filteredData, roomFunctionConfig]);
+  return { layers, lightingEffect: stableLighting, colorSummary };
 };
 
 export default IndoorBuilding;

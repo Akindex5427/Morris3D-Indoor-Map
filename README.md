@@ -176,6 +176,43 @@ npm run build
 
 ## Notes
 
+### Night lighting
+
+Enable **Night mode** in Visual settings (or use the existing dark-mode keyboard
+shortcut). Day mode restores the selected daytime basemap, room materials, and
+opaque exterior walls. Night mode uses a dark basemap, a dark 35%-opacity envelope,
+and warm room illumination derived from nearby lights on the same floor.
+
+`public/interior_lights.geojson` is the runtime light source. It combines the 138
+supplied F0–F6 points; the original per-floor files are preserved. Radii in this
+combined file are tuned to 6–14 m using 85% of the nearest same-floor light spacing,
+clamped to that range. The duplicate F5 identifier on an F6 source point is corrected
+to `F6-light-19`. No F7 points were supplied; F7 supports the same schema and shows
+no fixtures until its light features are added.
+
+Each Point uses `light_id`, `floor_id` (numeric or `F` prefix), `enabled`, `intensity`,
+`radius_m`, `color`, `light_type`, `base_height`, and `height`. Heights are local
+floor elevations. Placement derives each floor's datum from the most common room
+base elevation, then applies the existing stacking offset or single-floor base
+subtraction. This also supports the absolute heights in the F-ALL room export.
+Disabled or invalid points do not render. `radius_m` is used directly,
+with smooth falloff reaching zero outside the radius (a 100 m defensive maximum).
+
+Room illumination uses distance to the polygon footprint and its center, with
+hole-aware boundaries, same-floor spatial indexing, cached geometry results, and
+bounded accumulation from overlapping lights. It retains the original room hue
+and adds a modest warm contribution using unlit night materials. This is an
+art-directed emissive approximation rather than shadow-casting or global illumination.
+Three instanced draw calls render light pools, soft additive halos, and bright
+fixtures; there are no additional dynamic PointLights. The sprite budget is 256,
+distributed across visible floors. Room influence is independent of that sprite cap.
+Camera movement and route animation reuse cached distances. Lighting appears after
+the initial building reveal, and does not participate in picking, routing, or search.
+
+If lights cannot load, the map shows a retry message. Toggle Night mode off/on to
+retry. Edit the combined light asset and reload the page to update light positions,
+radii, intensities, colors, or enabled flags.
+
 - The app is currently a frontend-only static application.
 - The indoor map data is loaded from local GeoJSON files.
 - The Mapbox token is only used for the map background.

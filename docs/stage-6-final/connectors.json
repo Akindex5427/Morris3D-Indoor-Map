@@ -1,0 +1,27 @@
+{
+  "results": [
+    {
+      "preference": "stairs_first",
+      "types": [
+        "stairs"
+      ],
+      "panels": 2,
+      "points": [
+        7,
+        18
+      ]
+    },
+    {
+      "preference": "elevator_first",
+      "types": [
+        "elevator"
+      ],
+      "panels": 2,
+      "points": [
+        19,
+        24
+      ]
+    }
+  ],
+  "errors": []
+}

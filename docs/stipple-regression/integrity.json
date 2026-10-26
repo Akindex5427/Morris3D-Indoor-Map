@@ -1,0 +1,9 @@
+{
+  "changedExistingFiles": [
+    "src/components/Map3D.jsx",
+    "src/layers/environmentDepthExtension.js",
+    "src/layers/environmentDepthExtension.test.js"
+  ],
+  "unchangedGeoJSON": 51,
+  "baselineCopyExact": true
+}

@@ -1,0 +1,46 @@
+[
+  {
+    "changed": [
+      {
+        "id": "interior-light-pools",
+        "dataSame": false,
+        "meshSame": true
+      },
+      {
+        "id": "interior-light-halos",
+        "dataSame": false,
+        "meshSame": true
+      },
+      {
+        "id": "interior-light-fixtures",
+        "dataSame": false,
+        "meshSame": true
+      }
+    ],
+    "textureCreations": 13,
+    "stacks": [
+      " / deckgl-overlay\nError\n    at gl.createTexture (eval at evaluate (:291:30), <anonymous>:6:124)\n    at mr._createHandle (http://127.0.0.1:3005/assets/index-D4Q5TAhJ.js:46:26551)\n    at new $o (http://127.0.0.1:3005/assets/index-D4Q5TAhJ.js:46:5870)\n    at new Ml (http://127.0.0.1:3005/assets/index-D4Q5TAhJ.js:46:19416)\n    at new mr (http://127.0.0.1:3005/assets/index-D4Q5TAhJ.js:46:28298)\n    at _Y (http://127.0.0.1:3005/assets/index-D4Q5TAhJ.js:1774:7327)\n    at Q1.updateState (http://127.0.0.1:3005/assets/index-D4Q5TAhJ.js:1857:244)\n    at Q1._update (http://127.0.0.1:3005/assets/index-D4Q5TAhJ.js:953:30109)\n    at p4._updateLayer (http://127.0.0.1:3005/assets/index-D4Q5TAhJ.js:896:3510)\n    at p4._updateSublayersRecursively (http://127.0.0.1:3005/assets/index-D4Q5TAhJ.js:896:3010)",
+      "mapboxgl-canvas / \nError\n    at gl.createTexture (eval at evaluate (:291:30), <anonymous>:6:124)\n    at new r_ (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:14:65689)\n    at ia.upload (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:15:69625)\n    at wn.prepare (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:15:90996)\n    at yu.render (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2979:169696)\n    at Map._render (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2986:12229)\n    at o._render (http://127.0.0.1:3005/assets/index-D4Q5TAhJ.js:953:58624)\n    at http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2986:19690",
+      "mapboxgl-canvas / \nError\n    at gl.createTexture (eval at evaluate (:291:30), <anonymous>:6:124)\n    at new r_ (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:14:65689)\n    at ia.upload (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:15:69765)\n    at wn.prepare (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:15:90996)\n    at yu.render (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2979:169696)\n    at Map._render (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2986:12229)\n    at o._render (http://127.0.0.1:3005/assets/index-D4Q5TAhJ.js:953:58624)\n    at http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2986:19690",
+      "mapboxgl-canvas / \nError\n    at gl.createTexture (eval at evaluate (:291:30), <anonymous>:6:124)\n    at new r_ (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:14:65689)\n    at ia.upload (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:15:69894)\n    at wn.prepare (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:15:90996)\n    at yu.render (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2979:169696)\n    at Map._render (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2986:12229)\n    at o._render (http://127.0.0.1:3005/assets/index-D4Q5TAhJ.js:953:58624)\n    at http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2986:19690"
+    ]
+  },
+  {
+    "changed": [],
+    "textureCreations": 12,
+    "stacks": [
+      "mapboxgl-canvas / \nError\n    at gl.createTexture (eval at evaluate (:291:30), <anonymous>:6:124)\n    at r_ (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:14:65689)\n    at ia.upload (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:15:69625)\n    at wn.prepare (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:15:90996)\n    at yu.render (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2979:169696)\n    at Map._render (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2986:12229)\n    at o._render (http://127.0.0.1:3005/assets/index-D4Q5TAhJ.js:953:58624)\n    at http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2986:19690",
+      "mapboxgl-canvas / \nError\n    at gl.createTexture (eval at evaluate (:291:30), <anonymous>:6:124)\n    at r_ (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:14:65689)\n    at ia.upload (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:15:69765)\n    at wn.prepare (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:15:90996)\n    at yu.render (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2979:169696)\n    at Map._render (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2986:12229)\n    at o._render (http://127.0.0.1:3005/assets/index-D4Q5TAhJ.js:953:58624)\n    at http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2986:19690",
+      "mapboxgl-canvas / \nError\n    at gl.createTexture (eval at evaluate (:291:30), <anonymous>:6:124)\n    at r_ (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:14:65689)\n    at ia.upload (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:15:69894)\n    at wn.prepare (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:15:90996)\n    at yu.render (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2979:169696)\n    at Map._render (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2986:12229)\n    at o._render (http://127.0.0.1:3005/assets/index-D4Q5TAhJ.js:953:58624)\n    at http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2986:19690"
+    ]
+  },
+  {
+    "changed": [],
+    "textureCreations": 12,
+    "stacks": [
+      "mapboxgl-canvas / \nError\n    at gl.createTexture (eval at evaluate (:291:30), <anonymous>:6:124)\n    at r_ (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:14:65689)\n    at ia.upload (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:15:69625)\n    at wn.prepare (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:15:90996)\n    at yu.render (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2979:169696)\n    at Map._render (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2986:12229)\n    at o._render (http://127.0.0.1:3005/assets/index-D4Q5TAhJ.js:953:58624)\n    at http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2986:19690",
+      "mapboxgl-canvas / \nError\n    at gl.createTexture (eval at evaluate (:291:30), <anonymous>:6:124)\n    at r_ (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:14:65689)\n    at ia.upload (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:15:69765)\n    at wn.prepare (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:15:90996)\n    at yu.render (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2979:169696)\n    at Map._render (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2986:12229)\n    at o._render (http://127.0.0.1:3005/assets/index-D4Q5TAhJ.js:953:58624)\n    at http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2986:19690",
+      "mapboxgl-canvas / \nError\n    at gl.createTexture (eval at evaluate (:291:30), <anonymous>:6:124)\n    at r_ (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:14:65689)\n    at ia.upload (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:15:69894)\n    at wn.prepare (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:15:90996)\n    at yu.render (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2979:169696)\n    at Map._render (http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2986:12229)\n    at o._render (http://127.0.0.1:3005/assets/index-D4Q5TAhJ.js:953:58624)\n    at http://127.0.0.1:3005/assets/mapbox-gl-t62lOAku.js:2986:19690"
+    ]
+  }
+]

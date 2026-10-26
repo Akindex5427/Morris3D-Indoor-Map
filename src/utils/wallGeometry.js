@@ -4,6 +4,22 @@ export const DEFAULT_WALL_COLOR = [235, 238, 242, 190];
 const DEFAULT_WALL_HEIGHT = 3;
 const MIN_VISIBLE_ALPHA = 1;
 const DEG_TO_RAD = Math.PI / 180;
+const meshCache = new WeakMap();
+
+// Source objects are immutable. Replacing a dataset naturally invalidates this
+// cache; releasing it also releases the cached typed arrays. Never cache GL
+// objects here: deck.gl owns their lifetime in each rendering context.
+export function getCachedWallMeshes(geojson) {
+  if (!geojson) return [];
+  if (!meshCache.has(geojson)) meshCache.set(geojson, buildWallMeshes(geojson));
+  return meshCache.get(geojson);
+}
+
+export function revealWallMesh(wall, progress) {
+  const revealProgress = Math.max(0, Math.min(1, progress));
+  return { ...wall, revealProgress,
+    animatedTop: wall.bottom + (wall.top - wall.bottom) * revealProgress };
+}
 
 function parseNumericValue(value) {
   const parsed = parseFloat(value);

@@ -1,0 +1,15 @@
+1 initial-F1 6496ms 57.0ms p95 meshes=0
+1 F1-camera 2000ms 14.9ms p95 meshes=0
+1 F-ALL-load 2634ms 14.9ms p95 meshes=0
+1 F-ALL-camera 1984ms 14.7ms p95 meshes=0
+1 floor-switch-all-eight 2575ms 85.4ms p95 meshes=0
+1 search 100ms 28.2ms p95 meshes=0
+1 above-below-first 673ms 28.2ms p95 meshes=0
+1 above-below-cached 87ms 14.3ms p95 meshes=0
+1 night-architectural-load 1807ms 14.4ms p95 meshes=0
+1 night-architectural-camera 1933ms 14.9ms p95 meshes=0
+1 night-gis-load 1426ms 14.8ms p95 meshes=0
+1 night-gis-camera 2080ms 14.9ms p95 meshes=0
+1 route-plan 2050ms 99.5ms p95 meshes=0
+1 route-label-camera 1940ms 14.9ms p95 meshes=0
+1 route-animated-preview 4011ms 14.7ms p95 meshes=0

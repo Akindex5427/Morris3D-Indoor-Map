@@ -1,0 +1,18 @@
+{
+  "existingFilesChanged": [
+    "src/components/Map3D.jsx",
+    "src/layers/environmentDepthExtension.js",
+    "src/layers/environmentDepthExtension.test.js"
+  ],
+  "newProductionFiles": [
+    "src/layers/environmentDepthEffect.js"
+  ],
+  "unitPassed": 238,
+  "unitFailed": 11,
+  "newUnitFailures": 0,
+  "renderChecks": 111,
+  "additionalChecks": 22,
+  "exactEndpoints": 36,
+  "geojsonUnchanged": 51,
+  "performanceRuns": 3
+}

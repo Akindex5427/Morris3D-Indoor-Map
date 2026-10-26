@@ -1,0 +1,307 @@
+{
+  "floors": [
+    {
+      "floor": 0,
+      "source": "/rooms-basement-WGS.geojson",
+      "total": 148,
+      "searchable": 148,
+      "unnamed": 0,
+      "identifierOnly": 0,
+      "excludedCount": 0,
+      "excluded": []
+    },
+    {
+      "floor": 1,
+      "source": "/rooms-level-01-WGS.geojson",
+      "total": 355,
+      "searchable": 355,
+      "unnamed": 7,
+      "identifierOnly": 7,
+      "excludedCount": 0,
+      "excluded": []
+    },
+    {
+      "floor": 2,
+      "source": "/rooms-level-02-WGS.geojson",
+      "total": 243,
+      "searchable": 243,
+      "unnamed": 0,
+      "identifierOnly": 0,
+      "excludedCount": 0,
+      "excluded": []
+    },
+    {
+      "floor": 3,
+      "source": "/rooms-level-03-WGS.geojson",
+      "total": 288,
+      "searchable": 288,
+      "unnamed": 2,
+      "identifierOnly": 2,
+      "excludedCount": 0,
+      "excluded": []
+    },
+    {
+      "floor": 4,
+      "source": "/rooms-level-04-WGS.geojson",
+      "total": 199,
+      "searchable": 199,
+      "unnamed": 0,
+      "identifierOnly": 0,
+      "excludedCount": 0,
+      "excluded": []
+    },
+    {
+      "floor": 5,
+      "source": "/rooms-level-5-WGS.geojson",
+      "total": 149,
+      "searchable": 149,
+      "unnamed": 0,
+      "identifierOnly": 0,
+      "excludedCount": 0,
+      "excluded": []
+    },
+    {
+      "floor": 6,
+      "source": "/rooms-level-6-WGS.geojson",
+      "total": 138,
+      "searchable": 138,
+      "unnamed": 0,
+      "identifierOnly": 0,
+      "excludedCount": 0,
+      "excluded": []
+    },
+    {
+      "floor": 7,
+      "source": "/rooms-level-7-WGS.geojson",
+      "total": 90,
+      "searchable": 90,
+      "unnamed": 0,
+      "identifierOnly": 0,
+      "excludedCount": 0,
+      "excluded": []
+    }
+  ],
+  "unnamed": [
+    {
+      "floor": 1,
+      "source": "/rooms-level-01-WGS.geojson",
+      "index": 8,
+      "identifiers": [
+        {
+          "field": "OBJECTID",
+          "value": "10"
+        },
+        {
+          "field": "feature.id",
+          "value": "10"
+        }
+      ]
+    },
+    {
+      "floor": 1,
+      "source": "/rooms-level-01-WGS.geojson",
+      "index": 9,
+      "identifiers": [
+        {
+          "field": "OBJECTID",
+          "value": "11"
+        },
+        {
+          "field": "feature.id",
+          "value": "11"
+        }
+      ]
+    },
+    {
+      "floor": 1,
+      "source": "/rooms-level-01-WGS.geojson",
+      "index": 10,
+      "identifiers": [
+        {
+          "field": "OBJECTID",
+          "value": "12"
+        },
+        {
+          "field": "feature.id",
+          "value": "12"
+        }
+      ]
+    },
+    {
+      "floor": 1,
+      "source": "/rooms-level-01-WGS.geojson",
+      "index": 11,
+      "identifiers": [
+        {
+          "field": "OBJECTID",
+          "value": "13"
+        },
+        {
+          "field": "feature.id",
+          "value": "13"
+        }
+      ]
+    },
+    {
+      "floor": 1,
+      "source": "/rooms-level-01-WGS.geojson",
+      "index": 12,
+      "identifiers": [
+        {
+          "field": "OBJECTID",
+          "value": "14"
+        },
+        {
+          "field": "feature.id",
+          "value": "14"
+        }
+      ]
+    },
+    {
+      "floor": 1,
+      "source": "/rooms-level-01-WGS.geojson",
+      "index": 13,
+      "identifiers": [
+        {
+          "field": "OBJECTID",
+          "value": "15"
+        },
+        {
+          "field": "feature.id",
+          "value": "15"
+        }
+      ]
+    },
+    {
+      "floor": 1,
+      "source": "/rooms-level-01-WGS.geojson",
+      "index": 14,
+      "identifiers": [
+        {
+          "field": "OBJECTID",
+          "value": "16"
+        },
+        {
+          "field": "feature.id",
+          "value": "16"
+        }
+      ]
+    },
+    {
+      "floor": 3,
+      "source": "/rooms-level-03-WGS.geojson",
+      "index": 168,
+      "identifiers": [
+        {
+          "field": "OBJECTID",
+          "value": "249"
+        },
+        {
+          "field": "feature.id",
+          "value": "249"
+        }
+      ]
+    },
+    {
+      "floor": 3,
+      "source": "/rooms-level-03-WGS.geojson",
+      "index": 229,
+      "identifiers": [
+        {
+          "field": "OBJECTID",
+          "value": "315"
+        },
+        {
+          "field": "feature.id",
+          "value": "315"
+        }
+      ]
+    }
+  ],
+  "queries": [
+    {
+      "query": "class",
+      "count": 9,
+      "byFloor": {
+        "0": 0,
+        "1": 1,
+        "2": 1,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 3,
+        "7": 4
+      }
+    },
+    {
+      "query": "GROUP   STUDY",
+      "count": 23,
+      "byFloor": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 3,
+        "4": 9,
+        "5": 7,
+        "6": 4,
+        "7": 0
+      }
+    },
+    {
+      "query": "classroom-0754",
+      "count": 1,
+      "byFloor": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 1
+      }
+    },
+    {
+      "query": "dewey",
+      "count": 7,
+      "byFloor": {
+        "0": 7,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0
+      }
+    },
+    {
+      "query": "structure",
+      "count": 432,
+      "byFloor": {
+        "0": 31,
+        "1": 116,
+        "2": 64,
+        "3": 78,
+        "4": 65,
+        "5": 29,
+        "6": 19,
+        "7": 30
+      }
+    },
+    {
+      "query": "staircase",
+      "count": 855,
+      "byFloor": {
+        "0": 86,
+        "1": 152,
+        "2": 154,
+        "3": 169,
+        "4": 94,
+        "5": 60,
+        "6": 96,
+        "7": 44
+      }
+    }
+  ]
+}

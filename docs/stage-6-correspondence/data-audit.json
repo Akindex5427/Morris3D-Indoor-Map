@@ -1,0 +1,571 @@
+{
+  "origin": [
+    -89.22046717581765,
+    37.71529136028342
+  ],
+  "extent": [
+    -89.22109137872683,
+    37.71494162788463,
+    -89.21984297290848,
+    37.71564109268222
+  ],
+  "preparationMs": 384.4457000000002,
+  "floors": [
+    {
+      "floor": 0,
+      "total": 148,
+      "valid": 148,
+      "invalid": 0
+    },
+    {
+      "floor": 1,
+      "total": 355,
+      "valid": 355,
+      "invalid": 0
+    },
+    {
+      "floor": 2,
+      "total": 243,
+      "valid": 243,
+      "invalid": 0
+    },
+    {
+      "floor": 3,
+      "total": 288,
+      "valid": 288,
+      "invalid": 0
+    },
+    {
+      "floor": 4,
+      "total": 199,
+      "valid": 199,
+      "invalid": 0
+    },
+    {
+      "floor": 5,
+      "total": 149,
+      "valid": 149,
+      "invalid": 0
+    },
+    {
+      "floor": 6,
+      "total": 138,
+      "valid": 138,
+      "invalid": 0
+    },
+    {
+      "floor": 7,
+      "total": 90,
+      "valid": 90,
+      "invalid": 0
+    }
+  ],
+  "example": {
+    "status": "ready",
+    "reference": {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:239",
+      "floor": 3,
+      "label": "Southern Illinois University Press (0362)",
+      "area": 227.83056961653352
+    },
+    "groups": [
+      {
+        "floor": 2,
+        "direction": "below",
+        "matches": [
+          {
+            "key": "/rooms-level-02-WGS.geojson#F2:OBJECTID:1",
+            "floor": 2,
+            "label": "Floor",
+            "area": 4332.960267158571,
+            "intersectionArea": 227.83056961653352,
+            "referencePercent": 100,
+            "candidatePercent": 5.258081209360782
+          },
+          {
+            "key": "/rooms-level-02-WGS.geojson#F2:OBJECTID:2",
+            "floor": 2,
+            "label": "Information Resources Management",
+            "area": 1075.9489371073014,
+            "intersectionArea": 220.6065187578106,
+            "referencePercent": 96.82920036987052,
+            "candidatePercent": 20.5034375842141
+          },
+          {
+            "key": "/rooms-level-02-WGS.geojson#F2:OBJECTID:90",
+            "floor": 2,
+            "label": "Faulty And Staff Offices",
+            "area": 91.91228926279845,
+            "intersectionArea": 4.101115817193786,
+            "referencePercent": 1.8000726698337544,
+            "candidatePercent": 4.46198854373842
+          },
+          {
+            "key": "/rooms-level-02-WGS.geojson#F2:OBJECTID:252",
+            "floor": 2,
+            "label": "Structure",
+            "area": 0.3667981524755676,
+            "intersectionArea": 0.30500927429076097,
+            "referencePercent": 0.1338754824710874,
+            "candidatePercent": 83.1545285144471
+          },
+          {
+            "key": "/rooms-level-02-WGS.geojson#F2:OBJECTID:7",
+            "floor": 2,
+            "label": "Structure",
+            "area": 2.409967118462692,
+            "intersectionArea": 0.14919119914541462,
+            "referencePercent": 0.06548339820969658,
+            "candidatePercent": 6.190590651733998
+          }
+        ],
+        "available": true,
+        "skipped": 0,
+        "failures": 0
+      },
+      {
+        "floor": 4,
+        "direction": "above",
+        "matches": [
+          {
+            "key": "/rooms-level-04-WGS.geojson#F4:OBJECTID:20",
+            "floor": 4,
+            "label": "Staff",
+            "area": 288.15942432159585,
+            "intersectionArea": 158.68307603042166,
+            "referencePercent": 69.64959807522955,
+            "candidatePercent": 55.06780713627671
+          },
+          {
+            "key": "/rooms-level-04-WGS.geojson#F4:OBJECTID:15",
+            "floor": 4,
+            "label": "Staff",
+            "area": 258.5948055930151,
+            "intersectionArea": 14.123081624979648,
+            "referencePercent": 6.19894057621438,
+            "candidatePercent": 5.461471506588191
+          },
+          {
+            "key": "/rooms-level-04-WGS.geojson#F4:OBJECTID:206",
+            "floor": 4,
+            "label": "Lc Books TX To Z",
+            "area": 158.21798926973048,
+            "intersectionArea": 14.100623717996873,
+            "referencePercent": 6.189083291908514,
+            "candidatePercent": 8.912149486338174
+          },
+          {
+            "key": "/rooms-level-04-WGS.geojson#F4:OBJECTID:22",
+            "floor": 4,
+            "label": "Staff",
+            "area": 1.1655275306733845,
+            "intersectionArea": 1.1655275306733845,
+            "referencePercent": 0.5115764458804228,
+            "candidatePercent": 100
+          }
+        ],
+        "available": true,
+        "skipped": 0,
+        "failures": 0
+      },
+      {
+        "floor": 1,
+        "direction": "below",
+        "matches": [
+          {
+            "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:26",
+            "floor": 1,
+            "label": "Private Room",
+            "area": 97.27120475263712,
+            "intersectionArea": 93.37189628351364,
+            "referencePercent": 40.983041231328116,
+            "candidatePercent": 95.9913023807616
+          },
+          {
+            "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:10",
+            "floor": 1,
+            "label": "OBJECTID 10",
+            "area": 80.63782542363523,
+            "intersectionArea": 62.68611027025795,
+            "referencePercent": 27.514354362439718,
+            "candidatePercent": 77.73784813880215
+          },
+          {
+            "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:79",
+            "floor": 1,
+            "label": "Structure",
+            "area": 29.307769825634033,
+            "intersectionArea": 18.051630931090617,
+            "referencePercent": 7.923269893708163,
+            "candidatePercent": 61.593328453472985
+          },
+          {
+            "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:25",
+            "floor": 1,
+            "label": "Private Room",
+            "area": 12.402117774873119,
+            "intersectionArea": 12.402117774873119,
+            "referencePercent": 5.443570542683269,
+            "candidatePercent": 99.99999999999999
+          },
+          {
+            "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:362",
+            "floor": 1,
+            "label": "Structure",
+            "area": 12.376807987626968,
+            "intersectionArea": 11.692795259129802,
+            "referencePercent": 5.132232816171331,
+            "candidatePercent": 94.47343184784826
+          },
+          {
+            "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:24",
+            "floor": 1,
+            "label": "Private Room",
+            "area": 10.355315564457884,
+            "intersectionArea": 9.787347997881323,
+            "referencePercent": 4.295888832808791,
+            "candidatePercent": 94.515207546876
+          },
+          {
+            "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:239",
+            "floor": 1,
+            "label": "Floor",
+            "area": 1929.2134611029758,
+            "intersectionArea": 8.168692220519603,
+            "referencePercent": 3.5854241308655386,
+            "candidatePercent": 0.42342085959992076
+          },
+          {
+            "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:360",
+            "floor": 1,
+            "label": "Structure",
+            "area": 3.0713860465723855,
+            "intersectionArea": 1.1025757225617916,
+            "referencePercent": 0.4839454707142945,
+            "candidatePercent": 35.898311245903045
+          },
+          {
+            "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:14",
+            "floor": 1,
+            "label": "OBJECTID 14",
+            "area": 0.17222791189871622,
+            "intersectionArea": 0.17222791189871622,
+            "referencePercent": 0.07559473348488602,
+            "candidatePercent": 100
+          },
+          {
+            "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:81",
+            "floor": 1,
+            "label": "Structure",
+            "area": 0.212143237576124,
+            "intersectionArea": 0.13652334621653062,
+            "referencePercent": 0.05992319048594574,
+            "candidatePercent": 64.35432388814257
+          },
+          {
+            "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:82",
+            "floor": 1,
+            "label": "Structure",
+            "area": 0.44432574539013736,
+            "intersectionArea": 0.08442198508861261,
+            "referencePercent": 0.03705472238896872,
+            "candidatePercent": 19.000021035127375
+          },
+          {
+            "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:80",
+            "floor": 1,
+            "label": "Structure",
+            "area": 7.919895252167971,
+            "intersectionArea": 0.05598278016137903,
+            "referencePercent": 0.02457211086975942,
+            "candidatePercent": 0.7068626336447373
+          }
+        ],
+        "available": true,
+        "skipped": 0,
+        "failures": 0
+      },
+      {
+        "floor": 5,
+        "direction": "above",
+        "matches": [
+          {
+            "key": "/rooms-level-5-WGS.geojson#F5:OBJECTID:171",
+            "floor": 5,
+            "label": "Floor",
+            "area": 5693.897909903435,
+            "intersectionArea": 227.83056961653352,
+            "referencePercent": 100,
+            "candidatePercent": 4.00131110921863
+          },
+          {
+            "key": "/rooms-level-5-WGS.geojson#F5:OBJECTID:146",
+            "floor": 5,
+            "label": "Lc Books HV To PG",
+            "area": 670.9213056503388,
+            "intersectionArea": 157.86032747155707,
+            "referencePercent": 69.28847508798101,
+            "candidatePercent": 23.528888729884585
+          },
+          {
+            "key": "/rooms-level-5-WGS.geojson#F5:OBJECTID:147",
+            "floor": 5,
+            "label": "Lc Books HJ To JC",
+            "area": 300.25602460084457,
+            "intersectionArea": 17.459719489832327,
+            "referencePercent": 7.663466548505388,
+            "candidatePercent": 5.814943934278419
+          },
+          {
+            "key": "/rooms-level-5-WGS.geojson#F5:OBJECTID:141",
+            "floor": 5,
+            "label": "Group Study 0550B",
+            "area": 53.97712034365899,
+            "intersectionArea": 4.304135727972502,
+            "referencePercent": 1.8891827094216922,
+            "candidatePercent": 7.974000281173086
+          }
+        ],
+        "available": true,
+        "skipped": 0,
+        "failures": 0
+      },
+      {
+        "floor": 0,
+        "direction": "below",
+        "matches": [
+          {
+            "key": "/rooms-basement-WGS.geojson#F0:FID:123",
+            "floor": 0,
+            "label": "floor",
+            "area": 5627.097546196362,
+            "intersectionArea": 227.83056961653352,
+            "referencePercent": 100,
+            "candidatePercent": 4.048811447573637
+          },
+          {
+            "key": "/rooms-basement-WGS.geojson#F0:FID:127",
+            "floor": 0,
+            "label": "dewey books 330 to 551",
+            "area": 274.2967076761371,
+            "intersectionArea": 67.79056526457622,
+            "referencePercent": 29.75481533434076,
+            "candidatePercent": 24.714319701064998
+          },
+          {
+            "key": "/rooms-basement-WGS.geojson#F0:FID:144",
+            "floor": 0,
+            "label": "Structure",
+            "area": 52.96533161278133,
+            "intersectionArea": 39.40317811760189,
+            "referencePercent": 17.294947813158792,
+            "candidatePercent": 74.39428191570751
+          },
+          {
+            "key": "/rooms-basement-WGS.geojson#F0:FID:146",
+            "floor": 0,
+            "label": "Structure",
+            "area": 27.191225563998753,
+            "intersectionArea": 25.580978078017527,
+            "referencePercent": 11.228070983219423,
+            "candidatePercent": 94.07806212268271
+          },
+          {
+            "key": "/rooms-basement-WGS.geojson#F0:FID:142",
+            "floor": 0,
+            "label": "Structure",
+            "area": 21.964634816292502,
+            "intersectionArea": 20.298928346502365,
+            "referencePercent": 8.90965965658951,
+            "candidatePercent": 92.41641628134613
+          },
+          {
+            "key": "/rooms-basement-WGS.geojson#F0:FID:145",
+            "floor": 0,
+            "label": "Structure",
+            "area": 23.506901768863063,
+            "intersectionArea": 12.620596251382722,
+            "referencePercent": 5.539465697085652,
+            "candidatePercent": 53.68889688431761
+          },
+          {
+            "key": "/rooms-basement-WGS.geojson#F0:FID:143",
+            "floor": 0,
+            "label": "Structure",
+            "area": 12.854122664779592,
+            "intersectionArea": 11.852386688926885,
+            "referencePercent": 5.202281111299458,
+            "candidatePercent": 92.20688955616184
+          },
+          {
+            "key": "/rooms-basement-WGS.geojson#F0:FID:147",
+            "floor": 0,
+            "label": "Structure",
+            "area": 3.0830108631877717,
+            "intersectionArea": 0.3658131269565696,
+            "referencePercent": 0.16056367131604748,
+            "candidatePercent": 11.865450470009897
+          }
+        ],
+        "available": true,
+        "skipped": 0,
+        "failures": 0
+      },
+      {
+        "floor": 6,
+        "direction": "above",
+        "matches": [
+          {
+            "key": "/rooms-level-6-WGS.geojson#F6:OBJECTID:8",
+            "floor": 6,
+            "label": "Math Lab 0677",
+            "area": 321.6558242569042,
+            "intersectionArea": 65.11054931480142,
+            "referencePercent": 28.578495600651998,
+            "candidatePercent": 20.242303855439623
+          },
+          {
+            "key": "/rooms-level-6-WGS.geojson#F6:OBJECTID:2",
+            "floor": 6,
+            "label": "Structure",
+            "area": 257.62297123321497,
+            "intersectionArea": 44.66234153258862,
+            "referencePercent": 19.603313816824823,
+            "candidatePercent": 17.336319552093716
+          },
+          {
+            "key": "/rooms-level-6-WGS.geojson#F6:OBJECTID:6",
+            "floor": 6,
+            "label": "Math Classroom 0654",
+            "area": 215.39606828090655,
+            "intersectionArea": 20.62840104184376,
+            "referencePercent": 9.054272688938916,
+            "candidatePercent": 9.576962665326576
+          },
+          {
+            "key": "/rooms-level-6-WGS.geojson#F6:OBJECTID:4",
+            "floor": 6,
+            "label": "Structure",
+            "area": 44.5427709803284,
+            "intersectionArea": 10.786026570396412,
+            "referencePercent": 4.734231489896462,
+            "candidatePercent": 24.214987826329637
+          },
+          {
+            "key": "/rooms-level-6-WGS.geojson#F6:OBJECTID:120",
+            "floor": 6,
+            "label": "Structure",
+            "area": 39.454237701713524,
+            "intersectionArea": 9.431719612889887,
+            "referencePercent": 4.1397954755433455,
+            "candidatePercent": 23.905466591945487
+          },
+          {
+            "key": "/rooms-level-6-WGS.geojson#F6:OBJECTID:137",
+            "floor": 6,
+            "label": "Group Study Space",
+            "area": 38.04001258368288,
+            "intersectionArea": 9.407736570416636,
+            "referencePercent": 4.129268774708766,
+            "candidatePercent": 24.731160510846017
+          },
+          {
+            "key": "/rooms-level-6-WGS.geojson#F6:OBJECTID:138",
+            "floor": 6,
+            "label": "Group Study Space",
+            "area": 38.12236737515445,
+            "intersectionArea": 2.407404628766717,
+            "referencePercent": 1.056664447101489,
+            "candidatePercent": 6.314940006416545
+          }
+        ],
+        "available": true,
+        "skipped": 0,
+        "failures": 0
+      },
+      {
+        "floor": 7,
+        "direction": "above",
+        "matches": [
+          {
+            "key": "/rooms-level-7-WGS.geojson#F7:OBJECTID:12",
+            "floor": 7,
+            "label": "Testing Services",
+            "area": 318.2074352630735,
+            "intersectionArea": 62.47090465175965,
+            "referencePercent": 27.419895739586554,
+            "candidatePercent": 19.632132291350366
+          },
+          {
+            "key": "/rooms-level-7-WGS.geojson#F7:OBJECTID:2",
+            "floor": 7,
+            "label": "Structure",
+            "area": 258.8641386281938,
+            "intersectionArea": 46.414461904405776,
+            "referencePercent": 20.372359153790008,
+            "candidatePercent": 17.930047070394252
+          },
+          {
+            "key": "/rooms-level-7-WGS.geojson#F7:OBJECTID:3",
+            "floor": 7,
+            "label": "Classroom 0754",
+            "area": 214.65571326448128,
+            "intersectionArea": 20.392651016548843,
+            "referencePercent": 8.950796660374483,
+            "candidatePercent": 9.500166898154106
+          },
+          {
+            "key": "/rooms-level-7-WGS.geojson#F7:OBJECTID:6",
+            "floor": 7,
+            "label": "Structure",
+            "area": 44.447811716918025,
+            "intersectionArea": 11.286548551980996,
+            "referencePercent": 4.953921930221052,
+            "candidatePercent": 25.39281039044951
+          },
+          {
+            "key": "/rooms-level-7-WGS.geojson#F7:OBJECTID:67",
+            "floor": 7,
+            "label": "Structure",
+            "area": 43.52483525587303,
+            "intersectionArea": 8.966904799030642,
+            "referencePercent": 3.935777720313402,
+            "candidatePercent": 20.601812152340525
+          },
+          {
+            "key": "/rooms-level-7-WGS.geojson#F7:OBJECTID:29",
+            "floor": 7,
+            "label": "Structure",
+            "area": 38.299717511817356,
+            "intersectionArea": 8.296064939136821,
+            "referencePercent": 3.6413309035306827,
+            "candidatePercent": 21.66090373010473
+          },
+          {
+            "key": "/rooms-level-7-WGS.geojson#F7:OBJECTID:30",
+            "floor": 7,
+            "label": "Structure",
+            "area": 37.65356436990562,
+            "intersectionArea": 1.8552989527818915,
+            "referencePercent": 0.8143327543378329,
+            "candidatePercent": 4.927286390620506
+          }
+        ],
+        "available": true,
+        "skipped": 0,
+        "failures": 0
+      }
+    ],
+    "errors": [],
+    "issues": [],
+    "candidatesTested": 79,
+    "analysisMs": 264.77570000000014,
+    "preparationMs": 384.4457000000002,
+    "origin": [
+      -89.22046717581765,
+      37.71529136028342
+    ],
+    "cacheHit": false
+  },
+  "issues": []
+}

@@ -1,0 +1,629 @@
+{
+  "results": [
+    {
+      "name": "F1-golden-before",
+      "floor": 1,
+      "variant": "before",
+      "progress": 0.36,
+      "modelCount": 5,
+      "geometryHash": "a0a13e933c27386a972a9ec4e8d897df0f4df0e6c8103559ef30d937fab31d01",
+      "colorHash": "73dc7f1b7d1236b582ed96b97f8387d1c17e6f606cd6d2ef8e032f4fa2734a3a",
+      "featureCount": 355,
+      "wallCount": 159,
+      "sourceColors": [
+        {
+          "source": "yellow",
+          "color": [
+            255,
+            255,
+            0,
+            153
+          ]
+        },
+        {
+          "source": "lightblue",
+          "color": [
+            173,
+            216,
+            230,
+            153
+          ]
+        },
+        {
+          "source": "orange",
+          "color": [
+            255,
+            165,
+            0,
+            153
+          ]
+        },
+        {
+          "source": "purple",
+          "color": [
+            128,
+            0,
+            128,
+            153
+          ]
+        },
+        {
+          "source": "grey",
+          "color": [
+            100,
+            100,
+            100,
+            153
+          ]
+        },
+        {
+          "source": "blue",
+          "color": [
+            0,
+            0,
+            255,
+            153
+          ]
+        },
+        {
+          "source": "brown",
+          "color": [
+            165,
+            42,
+            42,
+            153
+          ]
+        },
+        {
+          "source": "green",
+          "color": [
+            0,
+            128,
+            0,
+            153
+          ]
+        },
+        {
+          "source": "cyan",
+          "color": [
+            0,
+            255,
+            255,
+            153
+          ]
+        },
+        {
+          "source": "lime",
+          "color": [
+            0,
+            255,
+            0,
+            153
+          ]
+        },
+        {
+          "color": [
+            100,
+            150,
+            200,
+            153
+          ]
+        },
+        {
+          "source": "lightpink",
+          "color": [
+            255,
+            182,
+            193,
+            153
+          ]
+        },
+        {
+          "source": "pink",
+          "color": [
+            255,
+            192,
+            203,
+            153
+          ]
+        },
+        {
+          "source": "gold",
+          "color": [
+            255,
+            215,
+            0,
+            153
+          ]
+        },
+        {
+          "source": "lightgrey",
+          "color": [
+            255,
+            255,
+            255,
+            0
+          ]
+        },
+        {
+          "source": "red",
+          "color": [
+            255,
+            0,
+            0,
+            153
+          ]
+        }
+      ]
+    },
+    {
+      "name": "F1-golden-current",
+      "floor": 1,
+      "variant": "current",
+      "progress": 0.36,
+      "modelCount": 5,
+      "geometryHash": "a0a13e933c27386a972a9ec4e8d897df0f4df0e6c8103559ef30d937fab31d01",
+      "colorHash": "73dc7f1b7d1236b582ed96b97f8387d1c17e6f606cd6d2ef8e032f4fa2734a3a",
+      "featureCount": 355,
+      "wallCount": 159,
+      "sourceColors": [
+        {
+          "source": "yellow",
+          "color": [
+            255,
+            255,
+            0,
+            153
+          ]
+        },
+        {
+          "source": "lightblue",
+          "color": [
+            173,
+            216,
+            230,
+            153
+          ]
+        },
+        {
+          "source": "orange",
+          "color": [
+            255,
+            165,
+            0,
+            153
+          ]
+        },
+        {
+          "source": "purple",
+          "color": [
+            128,
+            0,
+            128,
+            153
+          ]
+        },
+        {
+          "source": "grey",
+          "color": [
+            100,
+            100,
+            100,
+            153
+          ]
+        },
+        {
+          "source": "blue",
+          "color": [
+            0,
+            0,
+            255,
+            153
+          ]
+        },
+        {
+          "source": "brown",
+          "color": [
+            165,
+            42,
+            42,
+            153
+          ]
+        },
+        {
+          "source": "green",
+          "color": [
+            0,
+            128,
+            0,
+            153
+          ]
+        },
+        {
+          "source": "cyan",
+          "color": [
+            0,
+            255,
+            255,
+            153
+          ]
+        },
+        {
+          "source": "lime",
+          "color": [
+            0,
+            255,
+            0,
+            153
+          ]
+        },
+        {
+          "color": [
+            100,
+            150,
+            200,
+            153
+          ]
+        },
+        {
+          "source": "lightpink",
+          "color": [
+            255,
+            182,
+            193,
+            153
+          ]
+        },
+        {
+          "source": "pink",
+          "color": [
+            255,
+            192,
+            203,
+            153
+          ]
+        },
+        {
+          "source": "gold",
+          "color": [
+            255,
+            215,
+            0,
+            153
+          ]
+        },
+        {
+          "source": "lightgrey",
+          "color": [
+            255,
+            255,
+            255,
+            0
+          ]
+        },
+        {
+          "source": "red",
+          "color": [
+            255,
+            0,
+            0,
+            153
+          ]
+        }
+      ]
+    },
+    {
+      "name": "F1-twilight-before",
+      "floor": 1,
+      "variant": "before",
+      "progress": 0.7,
+      "modelCount": 5,
+      "geometryHash": "a0a13e933c27386a972a9ec4e8d897df0f4df0e6c8103559ef30d937fab31d01",
+      "colorHash": "73dc7f1b7d1236b582ed96b97f8387d1c17e6f606cd6d2ef8e032f4fa2734a3a",
+      "featureCount": 355,
+      "wallCount": 159,
+      "sourceColors": [
+        {
+          "source": "yellow",
+          "color": [
+            255,
+            255,
+            0,
+            153
+          ]
+        },
+        {
+          "source": "lightblue",
+          "color": [
+            173,
+            216,
+            230,
+            153
+          ]
+        },
+        {
+          "source": "orange",
+          "color": [
+            255,
+            165,
+            0,
+            153
+          ]
+        },
+        {
+          "source": "purple",
+          "color": [
+            128,
+            0,
+            128,
+            153
+          ]
+        },
+        {
+          "source": "grey",
+          "color": [
+            100,
+            100,
+            100,
+            153
+          ]
+        },
+        {
+          "source": "blue",
+          "color": [
+            0,
+            0,
+            255,
+            153
+          ]
+        },
+        {
+          "source": "brown",
+          "color": [
+            165,
+            42,
+            42,
+            153
+          ]
+        },
+        {
+          "source": "green",
+          "color": [
+            0,
+            128,
+            0,
+            153
+          ]
+        },
+        {
+          "source": "cyan",
+          "color": [
+            0,
+            255,
+            255,
+            153
+          ]
+        },
+        {
+          "source": "lime",
+          "color": [
+            0,
+            255,
+            0,
+            153
+          ]
+        },
+        {
+          "color": [
+            100,
+            150,
+            200,
+            153
+          ]
+        },
+        {
+          "source": "lightpink",
+          "color": [
+            255,
+            182,
+            193,
+            153
+          ]
+        },
+        {
+          "source": "pink",
+          "color": [
+            255,
+            192,
+            203,
+            153
+          ]
+        },
+        {
+          "source": "gold",
+          "color": [
+            255,
+            215,
+            0,
+            153
+          ]
+        },
+        {
+          "source": "lightgrey",
+          "color": [
+            255,
+            255,
+            255,
+            0
+          ]
+        },
+        {
+          "source": "red",
+          "color": [
+            255,
+            0,
+            0,
+            153
+          ]
+        }
+      ]
+    },
+    {
+      "name": "F1-twilight-current",
+      "floor": 1,
+      "variant": "current",
+      "progress": 0.7,
+      "modelCount": 5,
+      "geometryHash": "a0a13e933c27386a972a9ec4e8d897df0f4df0e6c8103559ef30d937fab31d01",
+      "colorHash": "73dc7f1b7d1236b582ed96b97f8387d1c17e6f606cd6d2ef8e032f4fa2734a3a",
+      "featureCount": 355,
+      "wallCount": 159,
+      "sourceColors": [
+        {
+          "source": "yellow",
+          "color": [
+            255,
+            255,
+            0,
+            153
+          ]
+        },
+        {
+          "source": "lightblue",
+          "color": [
+            173,
+            216,
+            230,
+            153
+          ]
+        },
+        {
+          "source": "orange",
+          "color": [
+            255,
+            165,
+            0,
+            153
+          ]
+        },
+        {
+          "source": "purple",
+          "color": [
+            128,
+            0,
+            128,
+            153
+          ]
+        },
+        {
+          "source": "grey",
+          "color": [
+            100,
+            100,
+            100,
+            153
+          ]
+        },
+        {
+          "source": "blue",
+          "color": [
+            0,
+            0,
+            255,
+            153
+          ]
+        },
+        {
+          "source": "brown",
+          "color": [
+            165,
+            42,
+            42,
+            153
+          ]
+        },
+        {
+          "source": "green",
+          "color": [
+            0,
+            128,
+            0,
+            153
+          ]
+        },
+        {
+          "source": "cyan",
+          "color": [
+            0,
+            255,
+            255,
+            153
+          ]
+        },
+        {
+          "source": "lime",
+          "color": [
+            0,
+            255,
+            0,
+            153
+          ]
+        },
+        {
+          "color": [
+            100,
+            150,
+            200,
+            153
+          ]
+        },
+        {
+          "source": "lightpink",
+          "color": [
+            255,
+            182,
+            193,
+            153
+          ]
+        },
+        {
+          "source": "pink",
+          "color": [
+            255,
+            192,
+            203,
+            153
+          ]
+        },
+        {
+          "source": "gold",
+          "color": [
+            255,
+            215,
+            0,
+            153
+          ]
+        },
+        {
+          "source": "lightgrey",
+          "color": [
+            255,
+            255,
+            255,
+            0
+          ]
+        },
+        {
+          "source": "red",
+          "color": [
+            255,
+            0,
+            0,
+            153
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

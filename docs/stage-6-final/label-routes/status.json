@@ -1,0 +1,7 @@
+{
+  "name": "label-routes",
+  "script": "route-label-stage3.cjs",
+  "started": "2026-10-26T06:06:49.575Z",
+  "finished": "2026-10-26T06:07:45.683Z",
+  "exitCode": 0
+}

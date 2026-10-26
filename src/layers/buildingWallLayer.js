@@ -1,6 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { SimpleMeshLayer } from "@deck.gl/mesh-layers";
-import { buildWallMeshes } from "../utils/wallGeometry";
+import { getCachedWallMeshes } from "../utils/wallGeometry";
+import { loadWallData } from "../utils/wallDataCache";
+
+const EMPTY_FLOORS = Object.freeze([]);
+const EMPTY_OFFSETS = Object.freeze({});
 
 export const singleFloorWallConfig = {
   F0: "wall_room_basement.geojson",
@@ -51,8 +55,8 @@ export function getVisibleWallFloorSet(visibleFloorIds = []) {
 }
 
 export function useBuildingWallLayers({
-  visibleFloorIds = [],
-  floorBaseOffsets = {},
+  visibleFloorIds = EMPTY_FLOORS,
+  floorBaseOffsets = EMPTY_OFFSETS,
   wallConfig = WALL_LAYER_CONFIG,
   enabled = true,
 } = {}) {
@@ -64,18 +68,13 @@ export function useBuildingWallLayers({
       return undefined;
     }
 
-    const controller = new AbortController();
+    let cancelled = false;
 
     const loadWallDataByFloor = async () => {
       const wallEntries = await Promise.all(
         wallConfig.map(async ({ floorId, url }) => {
           try {
-            const response = await fetch(url, { signal: controller.signal });
-            if (!response.ok) {
-              throw new Error(`Failed to load ${url}`);
-            }
-
-            return [floorId, await response.json()];
+            return [floorId, await loadWallData(url)];
           } catch (error) {
             if (error.name !== "AbortError") {
               console.warn(
@@ -89,7 +88,7 @@ export function useBuildingWallLayers({
         }),
       );
 
-      if (!controller.signal.aborted) {
+      if (!cancelled) {
         const nextWallDataByFloor = {};
         for (const entry of wallEntries) {
           if (entry) {
@@ -104,7 +103,7 @@ export function useBuildingWallLayers({
 
     loadWallDataByFloor();
 
-    return () => controller.abort();
+    return () => { cancelled = true; };
   }, [enabled, wallConfig]);
 
   return useMemo(() => {
@@ -122,7 +121,7 @@ export function useBuildingWallLayers({
         return [];
       }
 
-      return buildWallMeshes(wallDataByFloor[floorId]).map((wall, index) => {
+      return getCachedWallMeshes(wallDataByFloor[floorId]).map((wall, index) => {
         const wallData = {
           ...wall,
           floorId,

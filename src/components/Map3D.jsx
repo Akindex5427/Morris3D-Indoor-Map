@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import { DAY_ENVIRONMENT, NIGHT_ENVIRONMENT } from "../utils/environment";
+import { useMapEnvironment } from "../hooks/useMapEnvironment";
+import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import DeckGL from "@deck.gl/react";
 import Map from "react-map-gl";
 import {
@@ -8,11 +10,25 @@ import {
   ScatterplotLayer,
 } from "@deck.gl/layers";
 import { FlyToInterpolator, WebMercatorViewport } from "@deck.gl/core";
-import { CollisionFilterExtension } from "@deck.gl/extensions";
-import { useIndoorBuilding } from "./IndoorBuilding";
+import { RouteLabelCollisionExtension, RouteAnnotationPixelsExtension } from "../layers/routeLabelCollisionExtension";
+import { EnvironmentDepthEffect } from "../layers/environmentDepthEffect";
+import { useIndoorBuilding, buildFilteredIndoorFeatureCollection, computeElevation } from "./IndoorBuilding";
+import MapCameraControls from "./MapCameraControls";
+import RoomColorLegend from "./RoomColorLegend";
+import { createCorrespondenceLayers } from "../layers/roomCorrespondenceLayers";
+import { useMapCameraNavigation } from "../hooks/useMapCameraNavigation";
+import { DEFAULT_BUILDING_ORIENTATION, MIN_MAP_ZOOM, MAX_MAP_ZOOM, fitBuildingCamera, getBuildingFitPoints, getWallFitPoints } from "../utils/buildingCamera";
 import { useBuildingWallLayers } from "../layers/buildingWallLayer";
 import { usePerimeterWallLayer } from "../layers/perimeterWallLayer";
 import { useStackedWallLayer } from "../layers/stackedWallLayer";
+import { useInteriorLighting } from "../hooks/useInteriorLighting";
+import { useInteriorLightActivation } from "../hooks/useInteriorLightActivation";
+import { createInteriorLightLayers } from "../layers/interiorLightLayer";
+import { getLightFloorPlacement, nightEnvelopeLayers } from "../utils/interiorLighting";
+import { NIGHT_LIGHTING_DEFAULTS } from "../utils/nightLightingConfig";
+import { routeFeatureKey } from "../utils/routeLabelIdentity";
+import { getRoomLabelAnchor as getLabelPosition } from "../utils/roomLabelAnchor";
+import { useRouteLabelLayout } from "../hooks/useRouteLabelLayout";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 // Mapbox API token - Get yours free at https://account.mapbox.com/access-tokens/
@@ -40,16 +56,13 @@ const ROUTE_CAMERA_PADDING_PX = 96;
 const ROUTE_CAMERA_TRANSITION_MS = 1200;
 const ROUTE_CAMERA_MIN_ZOOM = 16.5;
 const ROUTE_CAMERA_MAX_ZOOM = 20.5;
-const ROOM_SEARCH_CAMERA_PADDING_PX = 128;
-const ROOM_SEARCH_CAMERA_TRANSITION_MS = 1000;
-const ROOM_SEARCH_CAMERA_MIN_ZOOM = 18;
-const ROOM_SEARCH_CAMERA_MAX_ZOOM = 21;
-const ROUTE_LANDMARK_LABEL_LIMIT = 8;
+const EMPTY_FEATURES = Object.freeze([]);
 // Minimum real-world distance (meters) the "next point" must be from the
 // route start before its direction is trusted for the initial bearing —
 // closer points are noisy due to door/snap jitter.
 const ROUTE_INITIAL_BEARING_MIN_METERS = 3;
-const routeLabelCollisionExtension = new CollisionFilterExtension();
+const routeLabelCollisionExtension = new RouteLabelCollisionExtension();
+const routeAnnotationPixelsExtension = new RouteAnnotationPixelsExtension();
 
 const clamp01 = (value) => Math.max(0, Math.min(1, value));
 
@@ -98,10 +111,7 @@ const computeInitialRouteBearing = (orderedPoints, minMeters) => {
 
 const easeOutCubic = (value) => 1 - Math.pow(1 - clamp01(value), 3);
 
-const getRoomFeatureId = (featureOrRoom) => {
-  const props = featureOrRoom?.properties || featureOrRoom || {};
-  return props.id || props.name || props.room_id || props.OBJECTID || null;
-};
+const getRoomFeatureId = routeFeatureKey;
 
 const getRoomFeatureName = (featureOrRoom, fallback = "Room") => {
   const props = featureOrRoom?.properties || featureOrRoom || {};
@@ -167,18 +177,6 @@ const getGeometryCoordinates = (geometry) => {
   return [];
 };
 
-const getFeatureCentroid = (feature) => {
-  const coords = getGeometryCoordinates(feature?.geometry).filter(
-    (coord) => Number.isFinite(coord?.[0]) && Number.isFinite(coord?.[1]),
-  );
-  if (coords.length === 0) return null;
-  const sum = coords.reduce(
-    (acc, coord) => [acc[0] + coord[0], acc[1] + coord[1]],
-    [0, 0],
-  );
-  return [sum[0] / coords.length, sum[1] / coords.length];
-};
-
 const isValidLngLat = (coords) =>
   Array.isArray(coords) &&
   Number.isFinite(coords[0]) &&
@@ -221,149 +219,6 @@ const getBoundsSizeMeters = (bounds) => {
 
 // ── Label geometry helpers ────────────────────────────────────────────────────
 
-// Area-weighted centroid of a closed ring via the Shoelace theorem.
-// Returns [lng, lat] or null for degenerate input.
-const polygonRingCentroid = (ring) => {
-  if (!Array.isArray(ring) || ring.length < 3) return null;
-  let area = 0;
-  let cx = 0;
-  let cy = 0;
-  for (let i = 0; i < ring.length - 1; i++) {
-    const [x0, y0] = ring[i];
-    const [x1, y1] = ring[i + 1];
-    const cross = x0 * y1 - x1 * y0;
-    area += cross;
-    cx += (x0 + x1) * cross;
-    cy += (y0 + y1) * cross;
-  }
-  area /= 2;
-  if (Math.abs(area) < 1e-14) {
-    // Degenerate polygon — vertex average of exterior ring (skip closing vertex)
-    const pts = ring.slice(0, -1);
-    if (!pts.length) return null;
-    const sum = pts.reduce((a, [x, y]) => [a[0] + x, a[1] + y], [0, 0]);
-    return [sum[0] / pts.length, sum[1] / pts.length];
-  }
-  return [cx / (6 * area), cy / (6 * area)];
-};
-
-// Ray-casting point-in-polygon (2-D; accurate enough for indoor WGS-84 scales).
-const pointInPolygonRing = ([px, py], ring) => {
-  let inside = false;
-  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
-    const [xi, yi] = ring[i];
-    const [xj, yj] = ring[j];
-    if (
-      (yi > py) !== (yj > py) &&
-      px < ((xj - xi) * (py - yi)) / (yj - yi) + xi
-    ) {
-      inside = !inside;
-    }
-  }
-  return inside;
-};
-
-const pointInPolygonRings = (point, rings) => {
-  const [exterior, ...holes] = rings;
-  if (!exterior || !pointInPolygonRing(point, exterior)) return false;
-  return !holes.some((hole) => pointInPolygonRing(point, hole));
-};
-
-const distanceToSegment = (point, start, end) => {
-  const dx = end[0] - start[0];
-  const dy = end[1] - start[1];
-  const lengthSquared = dx * dx + dy * dy;
-  if (lengthSquared <= 0) return Math.hypot(point[0] - start[0], point[1] - start[1]);
-  const t = Math.max(
-    0,
-    Math.min(1, ((point[0] - start[0]) * dx + (point[1] - start[1]) * dy) / lengthSquared),
-  );
-  return Math.hypot(point[0] - (start[0] + dx * t), point[1] - (start[1] + dy * t));
-};
-
-const distanceToPolygonEdges = (point, rings) => {
-  let best = Infinity;
-  for (const ring of rings) {
-    for (let index = 0; index < ring.length - 1; index += 1) {
-      best = Math.min(best, distanceToSegment(point, ring[index], ring[index + 1]));
-    }
-  }
-  return best;
-};
-
-const pointOnSurface = (rings) => {
-  const exterior = rings[0];
-  if (!exterior?.length) return null;
-
-  const lngs = exterior.map((coord) => coord[0]);
-  const lats = exterior.map((coord) => coord[1]);
-  const minLng = Math.min(...lngs);
-  const maxLng = Math.max(...lngs);
-  const minLat = Math.min(...lats);
-  const maxLat = Math.max(...lats);
-  const candidates = [];
-
-  const steps = 8;
-  for (let xIndex = 1; xIndex < steps; xIndex += 1) {
-    for (let yIndex = 1; yIndex < steps; yIndex += 1) {
-      candidates.push([
-        minLng + ((maxLng - minLng) * xIndex) / steps,
-        minLat + ((maxLat - minLat) * yIndex) / steps,
-      ]);
-    }
-  }
-
-  return candidates
-    .filter((point) => pointInPolygonRings(point, rings))
-    .sort(
-      (left, right) =>
-        distanceToPolygonEdges(right, rings) - distanceToPolygonEdges(left, rings),
-    )[0] ?? null;
-};
-
-// Returns the best label anchor position [lng, lat] for a GeoJSON feature:
-//   1. Area-weighted centroid of the exterior ring — if it lies inside the polygon
-//   2. Midpoint of the longest edge whose midpoint is inside the polygon
-//   3. Vertex-average centroid as last resort
-// Using area-weighted centroid instead of vertex-average prevents the label from
-// drifting toward clusters of closely-spaced vertices (e.g. one busy corner of
-// an L-shaped room), and the interior check guarantees the anchor is actually
-// inside the room rather than in the adjacent corridor.
-const getLabelPosition = (feature) => {
-  let polygons = [];
-  if (feature?.geometry?.type === "Polygon") {
-    polygons = [feature.geometry.coordinates].filter(Boolean);
-  } else if (feature?.geometry?.type === "MultiPolygon") {
-    polygons = feature.geometry.coordinates.filter(Boolean);
-  }
-  if (polygons.length === 0) return null;
-
-  // For multi-polygon, select the ring with the largest bounding-box area.
-  const bestRings = polygons.reduce((best, rings) => {
-    const exterior = rings?.[0];
-    if (!exterior || exterior.length < 3) return best;
-    const lngs = exterior.map((c) => c[0]);
-    const lats = exterior.map((c) => c[1]);
-    const area =
-      (Math.max(...lngs) - Math.min(...lngs)) *
-      (Math.max(...lats) - Math.min(...lats));
-    return !best || area > best.area ? { rings, area } : best;
-  }, null)?.rings;
-
-  if (!bestRings?.length) return null;
-  const bestRing = bestRings[0];
-
-  const centroid = polygonRingCentroid(bestRing);
-  if (!centroid || !Number.isFinite(centroid[0])) return null;
-
-  // If centroid is inside the polygon we are done.
-  if (pointInPolygonRings(centroid, bestRings)) return centroid;
-
-  // Centroid falls outside (concave/L-shaped room) — use the midpoint of the
-  // longest edge that itself lies inside the polygon.
-  return pointOnSurface(bestRings) ?? centroid;
-};
-
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
 // Marker elevation offset (in meters) - to ensure markers appear above floor surface
@@ -373,6 +228,10 @@ const Map3D = ({
   selectedFloor,
   selectedFloors,
   lightingEnabled = true,
+  nightMode = false,
+  environment = nightMode ? NIGHT_ENVIRONMENT : DAY_ENVIRONMENT,
+  interiorLightActivation = null,
+  nightTuning = NIGHT_LIGHTING_DEFAULTS,
   translucency = 60,
   roomWallOpacity = 95,
   roomWallThicknessMeters = 0.12,
@@ -382,10 +241,15 @@ const Map3D = ({
   highlightedRoomId,
   hoveredRoomId,
   onRoomHover,
-  colorScheme,
+  roomColorMode = "original",
+  correspondenceFeatures,
+  authoritativeFeatures = EMPTY_FEATURES,
   viewState: externalViewState,
   onViewStateChange,
   onUserCameraInteraction,
+  buildingFitRequest = null,
+  onBuildingFitComplete,
+  buildingFitOrientation = DEFAULT_BUILDING_ORIENTATION,
   routePath = null,
   routeRenderPath = null,
   routeSegments = null,
@@ -417,16 +281,27 @@ const Map3D = ({
   });
   const [internalViewState, setInternalViewState] = useState(initialViewState);
   const [isMounted, setIsMounted] = useState(false);
+  const [isDeckReady, setIsDeckReady] = useState(false);
   const [webglError, setWebglError] = useState(null);
   const [revealProgress, setRevealProgress] = useState(
     cinematicAnimationsEnabled ? 0 : 1,
   );
   const [routeAnimationPhase, setRouteAnimationPhase] = useState(0);
   const deckRef = useRef(null);
+  const environmentDepthEffect = useMemo(() => new EnvironmentDepthEffect(), []);
+  environmentDepthEffect.setProps({surfaceNight:environment.surfaceNight});
   const mapRef = useRef(null);
+  const onEnvironmentMapLoad = useMapEnvironment(mapRef, environment);
   const containerRef = useRef(null);
   const lastRouteCameraKeyRef = useRef(0);
   const lastSearchFocusKeyRef = useRef(0);
+  const roomSelectRef = useRef(onRoomSelect);
+  roomSelectRef.current = onRoomSelect;
+  const onRoomClick = useCallback((feature) => {
+    const props = feature.properties;
+    const roomId = props?.__roomSearchKey || props?.__displayFeatureKey || props?.id || props?.name || "";
+    roomSelectRef.current?.(feature, roomId);
+  }, []);
   const isAllFloorsSelected =
     selectedFloor === "all" || selectedFloor === "F-ALL";
 
@@ -493,7 +368,8 @@ const Map3D = ({
       }
 
       frameId = requestAnimationFrame(() => {
-        window.dispatchEvent(new Event("resize"));
+        const map = mapRef.current?.getMap?.() ?? mapRef.current;
+        map?.resize?.();
         deckRef.current?.deck?.redraw(true);
       });
     });
@@ -513,7 +389,6 @@ const Map3D = ({
         const map = mapRef.current?.getMap?.() ?? mapRef.current;
         map?.resize?.();
         deckRef.current?.deck?.redraw(true);
-        window.dispatchEvent(new Event("resize"));
       }, delay),
     );
 
@@ -664,16 +539,39 @@ const Map3D = ({
   );
 
   // Use the new IndoorBuilding hook for ArcGIS Indoors-style visualization
-  const displayData = getDisplayData();
-  console.log("[Map3D] Display data:", {
-    featureCount: displayData.features?.length || 0,
-    floorsToDisplay,
-    selectedFloors,
-    selectedFloor,
-  });
+  const displayData = useMemo(getDisplayData,
+    [geojsonData, selectedFloor, selectedFloors, filteredRooms, isAllFloorsSelected]);
+  const localLightActivation = useInteriorLightActivation(nightMode, environment.fullNight, !interiorLightActivation);
+  const fixtureController = interiorLightActivation || localLightActivation;
+  const { sampler: lightSampler, visibleLights, status: lightStatus, error: lightError, retry: retryLights } = useInteriorLighting(nightMode, floorsToDisplay);
+  const lightingResource = useMemo(() => ({ ready: lightStatus === 'ready' && visibleLights.length === 0 }),
+    [lightSampler, lightStatus, visibleLights, displayData]);
+  useEffect(() => fixtureController.register(lightingResource), [fixtureController, lightingResource]);
+  useEffect(() => fixtureController.subscribe(() => deckRef.current?.deck?.redraw(true)), [fixtureController]);
+  const onLightResourcesReady = useCallback(() => {
+    if (lightStatus === 'ready' && indoorPresentation.revealProgress >= 1 && !lightingResource.ready) {
+      lightingResource.ready = true;
+      // Readiness is observed after Deck finishes this draw, not re-entrantly.
+      queueMicrotask(() => fixtureController.resourceChanged());
+    }
+  }, [lightStatus, indoorPresentation.revealProgress, lightingResource, fixtureController]);
+  const lightPlacement = useMemo(() => getLightFloorPlacement(displayData, floorsToDisplay),
+    [displayData, floorsToDisplay]);
+  const interiorLightLayers = useMemo(() => createInteriorLightLayers({
+    lights: visibleLights, floors: floorsToDisplay, floorSpacing: BUILDING_FLOOR_SPACING,
+    ...lightPlacement, heightExaggeration, reveal: indoorPresentation.revealProgress, tuning: nightTuning,
+    getFixtureGain: fixtureController.getGain,
+  }), [visibleLights, floorsToDisplay, lightPlacement, heightExaggeration, indoorPresentation.revealProgress, nightTuning, fixtureController]);
 
   const indoorBuildingResult = useIndoorBuilding({
     data: displayData,
+    roomColorMode,
+    nightMode,
+    environment,
+    nightTuning,
+    lightSampler,
+    getFixtureGain: fixtureController.getGain,
+    onLightResourcesReady,
     selectedFloors: floorsToDisplay,
     translucency: translucency / 100, // Convert from 0-100 to 0-1
     wallOpacity: roomWallOpacity / 100,
@@ -682,10 +580,7 @@ const Map3D = ({
     floorSpacing: BUILDING_FLOOR_SPACING, // 4.5m vertical spacing between floors (matches provided stack)
     highlightedRoomId,
     presentation: indoorPresentation,
-    onRoomClick: (roomProps) => {
-      const roomId = roomProps?.id || roomProps?.name || "";
-      onRoomSelect(roomProps, roomId);
-    },
+    onRoomClick,
   });
 
   const { layers: indoorLayers, lightingEffect } = indoorBuildingResult || {
@@ -725,13 +620,47 @@ const Map3D = ({
     presentation: indoorPresentation,
   });
 
-  console.log("[Map3D] Indoor layers:", indoorLayers?.length || 0);
+  // Fit the entire selected floor, even when search hides other rooms. Reuse
+  // the renderer's exact elevation transform at its final reveal state.
+  const buildingFitPoints = useMemo(() => {
+    const fullData = buildFilteredIndoorFeatureCollection(
+      { type: "FeatureCollection", features: roomsData }, floorsToDisplay, BUILDING_FLOOR_SPACING,
+    );
+    return getBuildingFitPoints(fullData.features,
+      feature => computeElevation(feature, BUILDING_FLOOR_SPACING, heightExaggeration));
+  }, [roomsData, floorsToDisplay, heightExaggeration]);
+
+  const cameraNavigation = useMapCameraNavigation({
+    containerRef,
+    viewState: externalViewState || internalViewState,
+    onViewStateChange: next => {
+      setInternalViewState(next);
+      onViewStateChange?.(next);
+    },
+    onUserCameraInteraction,
+    fitRequest: buildingFitRequest,
+    onFitComplete: onBuildingFitComplete,
+    points: buildingFitPoints,
+    getWallPoints: () => getWallFitPoints([...singleFloorWallLayers, ...perimeterWallLayers, ...stackedWallLayers]),
+    ready: isDeckReady && geojsonData?.features === roomsData,
+    competingFocus: Boolean(routeCameraKey || searchFocusRequest?.key),
+    orientation: buildingFitOrientation,
+  });
+
+
+  const correspondenceLayers = useMemo(() => createCorrespondenceLayers({
+    features: correspondenceFeatures, authoritativeFeatures, floors: floorsToDisplay,
+    spacing: BUILDING_FLOOR_SPACING, heightExaggeration,
+  }), [correspondenceFeatures, authoritativeFeatures, floorsToDisplay, heightExaggeration]);
 
   const layers = [
     ...indoorLayers,
-    ...singleFloorWallLayers,
-    ...perimeterWallLayers,
-    ...stackedWallLayers,
+    ...nightEnvelopeLayers(singleFloorWallLayers, environment.surfaceNight, nightTuning, floorsToDisplay.length),
+    ...nightEnvelopeLayers(perimeterWallLayers, environment.surfaceNight, nightTuning, floorsToDisplay.length),
+    ...nightEnvelopeLayers(stackedWallLayers, environment.surfaceNight, nightTuning, floorsToDisplay.length),
+    // Low-opacity fixture halos accompany the illuminated room surfaces.
+    ...interiorLightLayers,
+    ...correspondenceLayers,
   ];
   const activeRenderPath =
     routeRenderPath && routeRenderPath.length > 1 ? routeRenderPath : routePath;
@@ -750,6 +679,17 @@ const Map3D = ({
   };
   const shouldShowRouteFloor = (floor) =>
     activeFloor === "all" || Number(activeFloor) === Number(floor);
+
+  // Labels use authoritative provenance even where the older combined export
+  // has a different footprint. Never attach such a label to a namesake polygon.
+  const routeLabelFeatures = useMemo(() => {
+    const features = new globalThis.Map();
+    for (const feature of [...authoritativeFeatures, ...roomsData]) {
+      const key = getRoomFeatureId(feature);
+      if (key && !features.has(key)) features.set(key, feature);
+    }
+    return [...features.values()];
+  }, [authoritativeFeatures, roomsData]);
 
   // Convert preview path points to 3-D deck.gl coordinates
   const previewLayerData = useMemo(() => {
@@ -775,17 +715,17 @@ const Map3D = ({
       ],
     };
   }, [routePreview, selectedFloor, selectedFloors]);
-  const visibleRouteSegments = Array.isArray(routeSegments)
+  const visibleRouteSegments = useMemo(() => Array.isArray(routeSegments)
     ? routeSegments.filter(
         (segment) =>
           segment?.type === "horizontal" &&
           segment.path?.length > 1 &&
           shouldShowRouteFloor(segment.floorId),
       )
-    : [];
-  const visibleTransitionMarkers = Array.isArray(routeTransitionMarkers)
+    : [], [routeSegments, activeFloor]);
+  const visibleTransitionMarkers = useMemo(() => Array.isArray(routeTransitionMarkers)
     ? routeTransitionMarkers.filter((marker) => shouldShowRouteFloor(marker.floor))
-    : [];
+    : [], [routeTransitionMarkers, activeFloor]);
   const routePinIcons = useMemo(() => {
     const createPinSVG = (color) => {
       const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 48 48">
@@ -814,11 +754,12 @@ const Map3D = ({
     ];
 
     const focusMarkers = markers
+      .filter(marker => marker.id != null)
       .map((marker) => {
-        const feature = roomsData.find(
+        const feature = routeLabelFeatures.find(
           (room) => getRoomFeatureId(room) === marker.id,
         );
-        const coords = getLabelPosition(feature) ?? getFeatureCentroid(feature);
+        const coords = getLabelPosition(feature);
         if (!feature || !coords) return null;
         const floor = getRoomFeatureFloor(feature);
         if (!shouldShowRouteFloor(floor)) return null;
@@ -847,7 +788,7 @@ const Map3D = ({
     }
 
     return focusMarkers;
-  }, [roomsData, routeFocus, selectedFloor, selectedFloors, activeFloor]);
+  }, [routeLabelFeatures, routeFocus, selectedFloor, selectedFloors, activeFloor]);
   const routeLandmarkMarkers = useMemo(() => {
     const landmarkItems = Array.isArray(routeFocus?.landmarks)
       ? routeFocus.landmarks
@@ -861,21 +802,11 @@ const Map3D = ({
       if (!id || seen.has(id)) continue;
       seen.add(id);
 
-      const feature = roomsData.find((room) => getRoomFeatureId(room) === id);
+      const feature = routeLabelFeatures.find((room) => getRoomFeatureId(room) === id);
       // Route-closest point: glow dot sits on the route line to connect the label
       // visually to the path.
       const routeCoords = Array.isArray(landmark.coords) ? landmark.coords : null;
-      const landmarkLabelCoords = Array.isArray(landmark.labelCoords)
-        ? landmark.labelCoords
-        : null;
-      // Label anchor: polygon interior point computed from the feature geometry.
-      // Priority: area-weighted centroid (inside polygon) → routing-system roomCoords
-      // → route access point (last resort, may be on centerline).
-      const labelCoords =
-        getLabelPosition(feature) ??
-        landmarkLabelCoords ??
-        (Array.isArray(landmark.roomCoords) ? landmark.roomCoords : null) ??
-        getFeatureCentroid(feature);
+      const labelCoords = getLabelPosition(feature);
       if (!feature || !labelCoords) continue;
 
       const floor = getRoomFeatureFloor(feature);
@@ -894,7 +825,6 @@ const Map3D = ({
         collisionPriority: 40 - markers.length,
       });
 
-      if (markers.length >= ROUTE_LANDMARK_LABEL_LIMIT) break;
     }
 
     if (import.meta.env?.DEV !== false && markers.length > 0) {
@@ -914,7 +844,7 @@ const Map3D = ({
     }
 
     return markers;
-  }, [roomsData, routeFocus, selectedFloor, selectedFloors, activeFloor]);
+  }, [routeLabelFeatures, routeFocus, selectedFloor, selectedFloors, activeFloor]);
 
   const usedConnectorRoomMarkers = useMemo(() => {
     const connectorKeysForFloor = (floor) => {
@@ -950,11 +880,12 @@ const Map3D = ({
       const featureType = connectorType ?? getConnectorFeatureType(feature);
       if (!featureType) return false;
 
-      const id = getRoomFeatureId(feature) ?? `${featureType}-${floor}-${markers.length}`;
+      const id = getRoomFeatureId(feature);
+      if (!id) return false;
       const markerKey = `${id}-${floor}`;
       if (seen.has(markerKey)) return false;
 
-      const coords = getLabelPosition(feature) ?? getFeatureCentroid(feature);
+      const coords = getLabelPosition(feature);
       if (!coords) return false;
 
       seen.add(markerKey);
@@ -973,25 +904,13 @@ const Map3D = ({
       return true;
     };
 
-    for (const feature of roomsData) {
+    for (const feature of routeLabelFeatures) {
       const connectorType = getConnectorFeatureType(feature);
       if (!connectorType) continue;
-      const props = feature.properties || {};
-      const floorConnectorKeys = connectorKeysForFloor(
-        getRoomFeatureFloor(feature),
-      );
-      const featureKeys = [
-        getRoomFeatureId(feature),
-        props.name,
-        props.id,
-        props.room_id,
-        props.FID,
-        props.OBJECTID,
-      ]
-        .map(normalizeRouteKey)
-        .filter(Boolean);
-
-      if (featureKeys.some((key) => floorConnectorKeys.has(key))) {
+      const floorConnectorKeys = connectorKeysForFloor(getRoomFeatureFloor(feature));
+      // A graph name is a compatibility hint, never a unique room identity.
+      // Legacy graph identifiers are resolved spatially at each transition below.
+      if (floorConnectorKeys.has(normalizeRouteKey(getRoomFeatureId(feature)))) {
         addConnectorFeature(feature, connectorType, "feature");
       }
     }
@@ -999,7 +918,7 @@ const Map3D = ({
     for (const transition of visibleTransitionMarkers) {
       const transitionCoords = transition.coords;
       const transitionType = transition.connectorType;
-      const matchingFeature = roomsData
+      const matchingFeature = routeLabelFeatures
         .filter((feature) => {
           if (Number(getRoomFeatureFloor(feature)) !== Number(transition.floor)) {
             return false;
@@ -1029,7 +948,7 @@ const Map3D = ({
           return featureKeys.some((key) => floorConnectorKeys.has(key));
         })
         .map((feature) => {
-          const coords = getLabelPosition(feature) ?? getFeatureCentroid(feature);
+          const coords = getLabelPosition(feature);
           return {
             feature,
             coords,
@@ -1042,10 +961,11 @@ const Map3D = ({
 
       if (matchingFeature) {
         addConnectorFeature(matchingFeature, transitionType, "feature");
+        continue; // This transition already has an authoritative connector label.
       }
 
       if (!isValidLngLat(transitionCoords)) continue;
-      const fallbackKey = `${transition.connectorId ?? transitionType}-${transition.floor}-${transition.role}`;
+      const fallbackKey = `transition:${transition.floor}:${transition.connectorId ?? `${transitionType}:${transitionCoords.join(",")}`}`;
       if (seen.has(fallbackKey)) continue;
       seen.add(fallbackKey);
       markers.push({
@@ -1099,7 +1019,7 @@ const Map3D = ({
 
     return markers;
   }, [
-    roomsData,
+    routeLabelFeatures,
     routeFocus,
     selectedFloor,
     selectedFloors,
@@ -1107,152 +1027,66 @@ const Map3D = ({
     visibleTransitionMarkers,
   ]);
 
+  const transitionMarkerData = useMemo(() => visibleTransitionMarkers.map(marker => ({
+    ...marker, position: [marker.coords[0], marker.coords[1], routeElevation(marker.floor, 0.35)],
+  })), [visibleTransitionMarkers, isRouteDollhouse]);
+  const labelCandidates = useMemo(() => {
+    const focus = routeFocusMarkers.map(d => ({...d, key:`focus:${d.type}:${d.id}`, group:'focus',
+      fontSize:12, priority:d.type==='end'?110:100, textPosition:[d.position[0],d.position[1],d.position[2]+0.55]}));
+    const connectors = usedConnectorRoomMarkers.filter(d => !focus.some(f => f.id === d.id)).map(d => ({...d,key:`connector:${d.id}`, fontSize:d.source==='transition'?10:10.5,
+      group:d.source==='transition'?'transitions':'connectors',priority:d.collisionPriority}));
+    const reserved = new Set([...focus,...connectors].map(d=>d.id));
+    return [...focus,...connectors,...routeLandmarkMarkers.filter(d=>!reserved.has(d.id)).map(d=>({...d,
+      key:`landmark:${d.id}`,group:'landmarks',fontSize:10.5,priority:d.collisionPriority}))];
+  }, [routeFocusMarkers, usedConnectorRoomMarkers, routeLandmarkMarkers]);
+  const labelMarkerExclusions = useMemo(() => [
+    ...routeFocusMarkers.map(d=>({position:d.position,radius:20,offsetY:-14})),
+    ...transitionMarkerData.map(d=>({position:d.position,radius:19})),
+  ], [routeFocusMarkers, transitionMarkerData]);
+  const routeLabels = useRouteLabelLayout({containerRef,deckRef,viewState:externalViewState || internalViewState,
+    candidates:labelCandidates,path:activeRenderPath,buildingPoints:buildingFitPoints,markers:labelMarkerExclusions,
+    preview:routePreview ? {...routePreview,position:previewLayerData?.cursor,floor:routePreview.cursorPosition?.floor}:null,
+    layoutSignal});
+
   useEffect(() => {
-    if (!searchFocusRequest?.key) {
-      return;
-    }
-
-    if (searchFocusRequest.key === lastSearchFocusKeyRef.current) {
-      return;
-    }
-
-    if (!onViewStateChange) {
-      if (import.meta.env?.DEV !== false) {
-        console.log("[RoomSearchCamera] focus skipped", {
-          reason: "missing view-state handler",
-          searchedRoomId: searchFocusRequest.roomId,
-        });
-      }
-      return;
-    }
-
-    if (
-      searchFocusRequest.floorId !== null &&
-      searchFocusRequest.floorId !== undefined &&
-      Number(selectedFloor) !== Number(searchFocusRequest.floorId)
-    ) {
-      if (import.meta.env?.DEV !== false) {
-        console.log("[RoomSearchCamera] focus waiting for floor switch", {
-          searchedRoomId: searchFocusRequest.roomId,
-          requestedFloor: searchFocusRequest.floorId,
-          activeFloor: selectedFloor,
-        });
-      }
-      return;
-    }
-
-    const map = mapRef.current?.getMap?.() ?? mapRef.current;
-    map?.resize?.();
-    deckRef.current?.deck?.redraw(true);
-    window.dispatchEvent(new Event("resize"));
-
-    const bounds = searchFocusRequest.bounds;
-    const target = searchFocusRequest.target;
-    if (!isValidLngLat(target)) {
-      if (import.meta.env?.DEV !== false) {
-        console.log("[RoomSearchCamera] focus skipped", {
-          reason: "invalid camera target",
-          searchedRoomId: searchFocusRequest.roomId,
-          target,
-        });
-      }
-      return;
-    }
-
-    const containerBounds = containerRef.current?.getBoundingClientRect();
-    const width = Math.max(320, containerBounds?.width || window.innerWidth);
-    const height = Math.max(320, containerBounds?.height || window.innerHeight);
-    const padding = Math.min(
-      ROOM_SEARCH_CAMERA_PADDING_PX,
-      Math.floor(Math.min(width, height) * 0.28),
-    );
-    const baseViewState = externalViewState || internalViewState;
-
-    let fittedViewState = {
-      longitude: target[0],
-      latitude: target[1],
-      zoom: ROOM_SEARCH_CAMERA_MAX_ZOOM,
-    };
-
-    const hasBounds =
-      bounds &&
-      Number.isFinite(bounds.minLng) &&
-      Number.isFinite(bounds.maxLng) &&
-      Number.isFinite(bounds.minLat) &&
-      Number.isFinite(bounds.maxLat);
-    const samePoint =
-      hasBounds && bounds.minLng === bounds.maxLng && bounds.minLat === bounds.maxLat;
-
-    if (hasBounds && !samePoint) {
-      try {
-        fittedViewState = new WebMercatorViewport({ width, height }).fitBounds(
-          [
-            [bounds.minLng, bounds.minLat],
-            [bounds.maxLng, bounds.maxLat],
-          ],
-          { padding },
-        );
-      } catch (error) {
-        console.warn("[RoomSearchCamera] Unable to fit room bounds.", error);
-      }
-    }
-
-    const finalViewState = {
-      ...baseViewState,
-      longitude: fittedViewState.longitude,
-      latitude: fittedViewState.latitude,
-      zoom: clamp(
-        fittedViewState.zoom,
-        ROOM_SEARCH_CAMERA_MIN_ZOOM,
-        ROOM_SEARCH_CAMERA_MAX_ZOOM,
-      ),
-      pitch: 0,
-      bearing: 0,
-      transitionDuration: ROOM_SEARCH_CAMERA_TRANSITION_MS,
-      transitionInterpolator: new FlyToInterpolator(),
-      onTransitionEnd: () => {
-        if (import.meta.env?.DEV !== false) {
-          console.log("[RoomSearchCamera] animation complete", {
-            searchedRoomId: searchFocusRequest.roomId,
-            searchedRoomName: searchFocusRequest.roomName,
-            detectedFloorId: searchFocusRequest.floorId,
-            activeFloor: selectedFloor,
-            cameraTarget: [finalViewState.longitude, finalViewState.latitude],
-            cameraZoomLevel: finalViewState.zoom,
-            highlightedRoomId,
-          });
-        }
-      },
-    };
-
-    if (import.meta.env?.DEV !== false) {
-      console.log("[RoomSearchCamera] focus triggered", {
-        searchedRoomId: searchFocusRequest.roomId,
-        searchedRoomName: searchFocusRequest.roomName,
-        detectedFloorId: searchFocusRequest.floorId,
-        previousActiveFloor: searchFocusRequest.previousFloor,
-        newActiveFloor: selectedFloor,
-        cameraTarget: [finalViewState.longitude, finalViewState.latitude],
-        cameraZoomLevel: finalViewState.zoom,
-        cameraBounds: bounds,
-        highlightedRoomId,
-        appliedPadding: padding,
-      });
-    }
-
-    lastSearchFocusKeyRef.current = searchFocusRequest.key;
-    onViewStateChange(finalViewState);
-  }, [
-    externalViewState,
-    highlightedRoomId,
-    internalViewState,
-    onViewStateChange,
-    searchFocusRequest,
-    selectedFloor,
-  ]);
+    if (!searchFocusRequest?.key || searchFocusRequest.key === lastSearchFocusKeyRef.current ||
+        !isDeckReady || !onViewStateChange || geojsonData?.features !== roomsData ||
+        Number(selectedFloor) !== Number(searchFocusRequest.floorId)) return;
+    const rendered = buildFilteredIndoorFeatureCollection(geojsonData, [Number(selectedFloor)], BUILDING_FLOOR_SPACING);
+    const feature = rendered.features.find(feature =>
+      feature.properties?.__roomSearchKey === searchFocusRequest.roomId ||
+      (!feature.properties?.__roomSearchKey &&
+       (feature.properties?.id || feature.properties?.name) === searchFocusRequest.roomId));
+    if (!feature) return; // The requested source polygon must actually be loaded.
+    const timer = window.setTimeout(() => {
+      const rect = containerRef.current?.getBoundingClientRect();
+      if (!rect || rect.width < 100 || rect.height < 100) return;
+      const base = externalViewState || internalViewState;
+      const orientation = { pitch: 0, bearing: 0 };
+      const insets = { left: 32, right: 90, top: 32, bottom: 32 };
+      const options = { width: rect.width, height: rect.height, insets, orientation };
+      const points = getBuildingFitPoints([feature], item => computeElevation(item, BUILDING_FLOOR_SPACING, heightExaggeration));
+      // Focus on the selected polygon itself, like the route camera. Keep a
+      // zoom ceiling for tiny structural features and padding for the controls.
+      const fitted = fitBuildingCamera({ ...options, points, maxZoom: 21 });
+      if (!fitted) return;
+      lastSearchFocusKeyRef.current = searchFocusRequest.key;
+      onViewStateChange({ ...base, ...fitted,
+        transitionDuration: window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ? 0 : ROUTE_CAMERA_TRANSITION_MS,
+        transitionInterpolator: new FlyToInterpolator() });
+    }, 180); // Allow a mobile drawer/layout transition to settle before measuring.
+    return () => window.clearTimeout(timer);
+  }, [searchFocusRequest, selectedFloor, isDeckReady, geojsonData, roomsData,
+    externalViewState, internalViewState, onViewStateChange, buildingFitPoints, heightExaggeration, layoutSignal]);
 
   useEffect(() => {
     if (!routeCameraKey) {
+      return;
+    }
+
+    if (searchFocusRequest?.key) {
+      // A mounted route view must not override an explicit room inspection.
+      lastRouteCameraKeyRef.current = routeCameraKey;
       return;
     }
 
@@ -1281,7 +1115,6 @@ const Map3D = ({
       const map = mapRef.current?.getMap?.() ?? mapRef.current;
       map?.resize?.();
       deckRef.current?.deck?.redraw(true);
-      window.dispatchEvent(new Event("resize"));
       mapResizeCalled = true;
     };
 
@@ -1439,6 +1272,7 @@ const Map3D = ({
     layoutDiagnostics,
     onViewStateChange,
     routeCameraKey,
+    searchFocusRequest,
     routeFloorId,
     routeFocus,
     routeFocusMarkers,
@@ -1655,18 +1489,12 @@ const Map3D = ({
       height: 36,
       anchorY: 18,
     };
-    const markerData = visibleTransitionMarkers.map((marker) => ({
-      ...marker,
-      position: [
-        marker.coords[0],
-        marker.coords[1],
-        routeElevation(marker.floor, 0.35),
-      ],
-    }));
+    const markerData = transitionMarkerData;
 
     layers.push(
       new IconLayer({
         id: "route-transition-markers",
+        extensions: [routeAnnotationPixelsExtension],
         data: markerData,
         getPosition: (d) => d.position,
         getIcon: (d) =>
@@ -1687,21 +1515,23 @@ const Map3D = ({
     layers.push(
       new TextLayer({
         id: "route-transition-labels",
-        data: markerData.filter(
-          (marker) =>
-            !usedConnectorRoomMarkers.some(
-              (connector) =>
-                connector.source === "feature" &&
-                Number(connector.floor) === Number(marker.floor) &&
-                connector.connectorType === marker.connectorType,
-            ),
-        ),
-        getPosition: (d) => [d.position[0], d.position[1], d.position[2] + 0.1],
-        getText: (d) => getConnectorFallbackName(d.connectorType),
+        data: routeLabels.transitions,
+        getPosition: d => d.position,
+        getText: d => d.labelText,
+        getPixelOffset: d => d.pixelOffset,
+        extensions: [routeLabelCollisionExtension],
+        collisionEnabled: true,
+        collisionGroup: "route-room-labels",
+        getCollisionPriority: d => d.priority,
+        background: true,
+        getBackgroundColor: [255, 248, 220, 232],
+        backgroundPadding: [4, 3],
+        parameters: { depthTest: false, depthMask: false },
         getSize: 10,
+        maxWidth: 18, wordBreak: "break-word",
         getColor: [32, 33, 36, 255],
         getTextAnchor: "middle",
-        getAlignmentBaseline: "bottom",
+        getAlignmentBaseline: "center",
         sizeUnits: "pixels",
         pickable: false,
         billboard: true,
@@ -1713,12 +1543,16 @@ const Map3D = ({
     layers.push(
       new ScatterplotLayer({
         id: "route-used-connector-room-glow",
+        extensions: [routeAnnotationPixelsExtension],
         data: usedConnectorRoomMarkers,
         getPosition: (d) => d.glowPosition,
-        getRadius: 1.25,
-        radiusUnits: "meters",
+        getRadius: 9,
+        radiusUnits: "pixels",
+        billboard: true,
         getFillColor: [251, 188, 4, 78],
         getLineColor: [138, 95, 0, 190],
+        lineWidthUnits: "pixels",
+        getLineWidth: 1,
         lineWidthMinPixels: 1,
         stroked: true,
         filled: true,
@@ -1730,10 +1564,12 @@ const Map3D = ({
     layers.push(
       new TextLayer({
         id: "route-used-connector-room-labels",
-        data: usedConnectorRoomMarkers,
+        data: routeLabels.connectors,
         getPosition: (d) => d.position,
-        getText: (d) => d.roomName,
+        getText: (d) => d.labelText,
+        getPixelOffset: d => d.pixelOffset,
         getSize: 10.5,
+        maxWidth: 18, wordBreak: "break-word",
         getColor: [73, 48, 0, 245],
         getBackgroundColor: [255, 248, 220, 232],
         background: true,
@@ -1760,14 +1596,18 @@ const Map3D = ({
     layers.push(
       new ScatterplotLayer({
         id: "route-focus-room-glow",
+        extensions: [routeAnnotationPixelsExtension],
         data: routeFocusMarkers,
         getPosition: (d) => d.glowPosition,
-        getRadius: (d) => (d.type === "start" ? 1.55 : 1.7) * pulse,
-        radiusUnits: "meters",
+        getRadius: (d) => (d.type === "start" ? 14 : 16) * pulse,
+        radiusUnits: "pixels",
+        billboard: true,
         getFillColor: (d) =>
           d.type === "start" ? [22, 163, 74, 95] : [220, 38, 38, 95],
         getLineColor: (d) =>
           d.type === "start" ? [20, 83, 45, 210] : [127, 29, 29, 210],
+        lineWidthUnits: "pixels",
+        getLineWidth: 2,
         lineWidthMinPixels: 2,
         stroked: true,
         filled: true,
@@ -1779,6 +1619,7 @@ const Map3D = ({
     layers.push(
       new IconLayer({
         id: "route-focus-start-end-markers",
+        extensions: [routeAnnotationPixelsExtension],
         data: routeFocusMarkers,
         getPosition: (d) => d.position,
         getIcon: (d) => routePinIcons[d.type],
@@ -1796,20 +1637,22 @@ const Map3D = ({
     layers.push(
       new TextLayer({
         id: "route-focus-room-labels",
-        data: routeFocusMarkers,
+        data: routeLabels.focus,
         getPosition: (d) => [
           d.position[0],
           d.position[1],
           d.position[2] + 0.55,
         ],
-        getText: (d) => d.roomName,
+        getText: (d) => d.labelText,
+        getPixelOffset: d => d.pixelOffset,
         getSize: 12,
+        maxWidth: 18, wordBreak: "break-word",
         getColor: [8, 37, 82, 255],
         getBackgroundColor: [255, 255, 255, 230],
         background: true,
         backgroundPadding: [4, 3],
         getTextAnchor: "middle",
-        getAlignmentBaseline: "bottom",
+        getAlignmentBaseline: "center",
         sizeUnits: "pixels",
         billboard: true,
         extensions: [routeLabelCollisionExtension],
@@ -1826,12 +1669,16 @@ const Map3D = ({
     layers.push(
       new ScatterplotLayer({
         id: "route-landmark-room-glow",
-        data: routeLandmarkMarkers,
+        extensions: [routeAnnotationPixelsExtension],
+        data: routeLabels.landmarks,
         getPosition: (d) => d.glowPosition,
-        getRadius: 1.15,
-        radiusUnits: "meters",
+        getRadius: 6,
+        radiusUnits: "pixels",
+        billboard: true,
         getFillColor: [26, 115, 232, 62],
         getLineColor: [26, 115, 232, 170],
+        lineWidthUnits: "pixels",
+        getLineWidth: 1,
         lineWidthMinPixels: 1,
         stroked: true,
         filled: true,
@@ -1843,10 +1690,11 @@ const Map3D = ({
     layers.push(
       new TextLayer({
         id: "route-landmark-room-labels",
-        data: routeLandmarkMarkers,
+        data: routeLabels.landmarks,
         getPosition: (d) => d.position,
-        getText: (d) => d.roomName,
+        getText: (d) => d.labelText,
         getSize: 10.5,
+        maxWidth: 18, wordBreak: "break-word",
         getColor: [8, 37, 82, 235],
         getBackgroundColor: [239, 246, 255, 220],
         background: true,
@@ -2007,10 +1855,12 @@ const Map3D = ({
     layers.push(
       new ScatterplotLayer({
         id: "route-preview-cursor-halo",
+        extensions: [routeAnnotationPixelsExtension],
         data: [{ position: previewLayerData.cursor }],
         getPosition: (d) => d.position,
-        getRadius: 3.5,
-        radiusUnits: "meters",
+        getRadius: 18,
+        radiusUnits: "pixels",
+        billboard: true,
         getFillColor: [255, 255, 255, 60],
         stroked: false, filled: true, pickable: false,
         parameters: { depthTest: false, depthMask: false },
@@ -2019,12 +1869,16 @@ const Map3D = ({
     layers.push(
       new ScatterplotLayer({
         id: "route-preview-cursor-dot",
+        extensions: [routeAnnotationPixelsExtension],
         data: [{ position: previewLayerData.cursor }],
         getPosition: (d) => d.position,
-        getRadius: 2.0,
-        radiusUnits: "meters",
+        getRadius: 10,
+        radiusUnits: "pixels",
+        billboard: true,
         getFillColor: [255, 255, 255, 255],
         getLineColor: [26, 115, 232, 255],
+        lineWidthUnits: "pixels",
+        getLineWidth: 2.5,
         lineWidthMinPixels: 2.5,
         stroked: true, filled: true, pickable: false,
         parameters: { depthTest: false, depthMask: false },
@@ -2108,9 +1962,42 @@ const Map3D = ({
   }
 
   return (
-    <div ref={containerRef} className="map-3d-container">
+    <div ref={containerRef} className="map-3d-container" data-route-label-budget={routeLabels.budget} data-route-label-count={routeLabels.items.length} tabIndex={0} role="region"
+      aria-label={`Interactive map, ${isAllFloorsSelected ? "all floors" : `floor ${selectedFloor}`}`}
+      onPointerDown={event => {
+        if (!event.target.closest(".map-camera-controls, .room-color-legend")) event.currentTarget.focus({ preventScroll: true });
+      }}
+      onKeyDown={event => {
+        if (event.target.closest(".room-color-legend")) return;
+        if (event.ctrlKey || event.metaKey || event.altKey) return;
+        const key = event.key.toLowerCase();
+        const view = externalViewState || internalViewState;
+        if (!["+", "=", "-", "_", "r", "arrowup", "arrowdown", "arrowleft", "arrowright"].includes(key)) return;
+        event.preventDefault();
+        event.stopPropagation();
+        if (key === "r") cameraNavigation.fit();
+        else if (key === "+" || key === "=") cameraNavigation.zoomTo(view.zoom + 0.5);
+        else if (key === "-" || key === "_") cameraNavigation.zoomTo(view.zoom - 0.5);
+        else {
+          cameraNavigation.manualInteraction();
+          const next = { ...view, transitionDuration: 0,
+            pitch: clamp(view.pitch + (key === "arrowup" ? 5 : key === "arrowdown" ? -5 : 0), 0, 85),
+            bearing: view.bearing + (key === "arrowleft" ? -15 : key === "arrowright" ? 15 : 0) };
+          setInternalViewState(next);
+          onViewStateChange?.(next);
+        }
+      }} style={{ background: `rgb(${environment.sky.join(",")})` }}>
+      <MapCameraControls zoom={(externalViewState || internalViewState).zoom}
+        onZoom={cameraNavigation.zoomTo} onFit={cameraNavigation.fit} />
+      {nightMode && (lightStatus === 'loading' || lightError) && <div className="interior-light-status" role="status">
+        {lightError ? <>{lightError} Ambient night lighting remains available. <button type="button" onClick={retryLights}>Retry interior lights</button></>
+          : 'Preparing interior lights… You can continue using the map.'}
+      </div>}
+      <RoomColorLegend mode={roomColorMode} summary={indoorBuildingResult?.colorSummary} />
       <DeckGL
         ref={deckRef}
+        onLoad={() => setIsDeckReady(true)}
+        onAfterRender={routeLabels.onAfterRender}
         width="100%"
         height="100%"
         viewState={externalViewState || internalViewState}
@@ -2120,14 +2007,13 @@ const Map3D = ({
             onViewStateChange(newViewState);
           }
           if (
-            onUserCameraInteraction &&
             interactionState &&
             (interactionState.isDragging ||
               interactionState.isPanning ||
               interactionState.isRotating ||
               interactionState.isZooming)
           ) {
-            onUserCameraInteraction();
+            cameraNavigation.manualInteraction();
           }
         }}
         controller={{
@@ -2137,15 +2023,15 @@ const Map3D = ({
           touchZoom: true,
           touchRotate: true,
           doubleClickZoom: true,
-          keyboard: true,
+          keyboard: false, // App owns camera shortcuts; avoid applying a key twice.
           inertia: true,
-          minZoom: 14,
-          maxZoom: 22,
+          minZoom: MIN_MAP_ZOOM,
+          maxZoom: MAX_MAP_ZOOM,
           minPitch: 0,
           maxPitch: 85,
         }}
         layers={layers}
-        effects={lightingEnabled && lightingEffect ? [lightingEffect] : []}
+        effects={[...(lightingEnabled && lightingEffect ? [lightingEffect] : []), environmentDepthEffect]}
         parameters={{
           depthTest: true,
           blend: true,
@@ -2175,10 +2061,10 @@ const Map3D = ({
           MAPBOX_ACCESS_TOKEN !== "YOUR_MAPBOX_TOKEN_HERE" && (
             <Map
               ref={mapRef}
+              onLoad={onEnvironmentMapLoad}
               mapboxAccessToken={MAPBOX_ACCESS_TOKEN}
               mapStyle={
-                BASEMAP_STYLES[basemapStyle]?.url ||
-                BASEMAP_STYLES.streets.url
+                BASEMAP_STYLES[basemapStyle]?.url || BASEMAP_STYLES.streets.url
               }
               dragPan={false}
               dragRotate={false}

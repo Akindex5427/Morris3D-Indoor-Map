@@ -1,0 +1,41 @@
+{
+  "geometryAndColorHashesIdentical": true,
+  "results": [
+    {
+      "image": "F1-architectural.png",
+      "differentPixels": 0,
+      "maxChannelDifference": 0,
+      "pixels": 837000
+    },
+    {
+      "image": "F1-day.png",
+      "differentPixels": 0,
+      "maxChannelDifference": 0,
+      "pixels": 837000
+    },
+    {
+      "image": "F1-gis.png",
+      "differentPixels": 0,
+      "maxChannelDifference": 0,
+      "pixels": 837000
+    },
+    {
+      "image": "Fall-architectural.png",
+      "differentPixels": 0,
+      "maxChannelDifference": 0,
+      "pixels": 837000
+    },
+    {
+      "image": "Fall-day.png",
+      "differentPixels": 0,
+      "maxChannelDifference": 0,
+      "pixels": 837000
+    },
+    {
+      "image": "Fall-gis.png",
+      "differentPixels": 0,
+      "maxChannelDifference": 0,
+      "pixels": 837000
+    }
+  ]
+}

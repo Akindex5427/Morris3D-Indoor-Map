@@ -1,0 +1,13 @@
+{
+  "assets": {
+    "/assets/index-B4IVhVe8.js": "49c34a87d8394f4a78f5ec0a71bc16421d76f0f2e787c1503218ea3023a6500a",
+    "/assets/index-C9DxRMHS.css": "73a494321b9eaa11be331ed5ef139c1c0c8e2c78b559d926cb767c5065ac29c3"
+  },
+  "applicationChanges": [
+    "src/utils/mapEnvironment.js"
+  ],
+  "unitPass": 236,
+  "unitFail": 11,
+  "browserSuitesPassed": 14,
+  "geojsonUnchanged": 51
+}

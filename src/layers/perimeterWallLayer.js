@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { SimpleMeshLayer } from "@deck.gl/mesh-layers";
-import { buildWallMeshes } from "../utils/wallGeometry";
+import { getCachedWallMeshes, revealWallMesh } from "../utils/wallGeometry";
+import { loadWallData } from "../utils/wallDataCache";
 
 export const DEFAULT_PERIMETER_WALL_URL = "/wall.geojson";
 
@@ -26,9 +27,7 @@ export function createPerimeterWallMeshLayers({
       : 1;
   const initialRevealActive = Boolean(presentation.initialRevealActive);
 
-  const wallMeshes = buildWallMeshes(wallData, {
-    getRevealProgress: () => revealProgress,
-  });
+  const wallMeshes = getCachedWallMeshes(wallData).map(wall => revealWallMesh(wall, revealProgress));
 
   if (import.meta.env.DEV) {
     console.log("[PerimeterWallLayer] wall.geojson registered with cinematic reveal", {
@@ -49,9 +48,9 @@ export function createPerimeterWallMeshLayers({
         mesh: wall.mesh,
         getPosition: (d) => d.origin,
         getColor: (d) => d.color,
-        getScale: [1, 1, 1],
+        getScale: [1, 1, revealProgress],
         getOrientation: [0, 0, 0],
-        getTranslation: [0, 0, 0],
+        getTranslation: [0, 0, wall.bottom * (1 - revealProgress)],
         sizeScale: 1,
         pickable: false,
         wireframe: false,
@@ -78,17 +77,12 @@ export function usePerimeterWallLayer({
       return undefined;
     }
 
-    const controller = new AbortController();
+    let cancelled = false;
 
     const loadPerimeterWall = async () => {
       try {
-        const response = await fetch(url, { signal: controller.signal });
-        if (!response.ok) {
-          throw new Error(`Failed to load ${url}`);
-        }
-
-        const data = await response.json();
-        if (!controller.signal.aborted) {
+        const data = await loadWallData(url);
+        if (!cancelled) {
           if (import.meta.env.DEV) {
             console.log("[PerimeterWallLayer] wall.geojson loaded", {
               url,
@@ -102,7 +96,7 @@ export function usePerimeterWallLayer({
           console.warn("[PerimeterWallLayer] Wall layer unavailable.", error);
         }
 
-        if (!controller.signal.aborted) {
+        if (!cancelled) {
           setWallData(null);
         }
       }
@@ -110,26 +104,27 @@ export function usePerimeterWallLayer({
 
     loadPerimeterWall();
 
-    return () => controller.abort();
+    return () => { cancelled = true; };
   }, [enabled, url]);
 
+  const { revealProgress, initialRevealActive } = presentation;
   return useMemo(() => {
     if (!enabled) {
       return [];
     }
 
-    const layers = createPerimeterWallMeshLayers({ wallData, presentation });
+    const layers = createPerimeterWallMeshLayers({ wallData, presentation: { revealProgress, initialRevealActive } });
 
     if (import.meta.env.DEV && layers.length > 0) {
       const firstWall = layers[0].props.data?.[0];
       console.log("[PerimeterWallLayer] wall mesh created", {
         layerCount: layers.length,
-        revealProgress: presentation.revealProgress ?? 1,
+        revealProgress: revealProgress ?? 1,
         currentAnimatedTop: firstWall?.animatedTop ?? null,
         finalWallTop: firstWall?.top ?? null,
       });
     }
 
     return layers;
-  }, [enabled, presentation, wallData]);
+  }, [enabled, revealProgress, initialRevealActive, wallData]);
 }

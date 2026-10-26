@@ -1,0 +1,2333 @@
+{
+  "date": "2026-10-24T14:37:16.553Z",
+  "url": "http://127.0.0.1:3002",
+  "cpu": "AMD Ryzen 9 7940HS w/ Radeon 780M Graphics     ",
+  "logicalCPUs": 16,
+  "memoryGB": 15.214046478271484,
+  "repeats": 3,
+  "runs": [
+    {
+      "run": 1,
+      "scenarios": [
+        {
+          "name": "initial-F1",
+          "elapsedMs": 8431.600000023842,
+          "rafFPS": 41.51050808850162,
+          "drawnFPS": 2.134826130265798,
+          "rafFrames": 350,
+          "drawnFrames": 18,
+          "p50FrameMs": 6.099999999999454,
+          "p95FrameMs": 57.30000000000018,
+          "p99FrameMs": 758.2999999999997,
+          "slowFrames": 19,
+          "longTasks": [
+            {
+              "start": 736.1000000238419,
+              "ms": 198
+            },
+            {
+              "start": 1009.9000000357628,
+              "ms": 797
+            },
+            {
+              "start": 1865.800000011921,
+              "ms": 330
+            },
+            {
+              "start": 2285.5,
+              "ms": 415
+            },
+            {
+              "start": 2701,
+              "ms": 59
+            },
+            {
+              "start": 2764.900000035763,
+              "ms": 127
+            },
+            {
+              "start": 2918.5,
+              "ms": 698
+            },
+            {
+              "start": 3617,
+              "ms": 58
+            },
+            {
+              "start": 3680,
+              "ms": 1654
+            },
+            {
+              "start": 5337.400000035763,
+              "ms": 68
+            },
+            {
+              "start": 5454.400000035763,
+              "ms": 56
+            },
+            {
+              "start": 5511,
+              "ms": 56
+            },
+            {
+              "start": 5611.900000035763,
+              "ms": 128
+            },
+            {
+              "start": 6088.300000011921,
+              "ms": 111
+            },
+            {
+              "start": 6203.5,
+              "ms": 152
+            },
+            {
+              "start": 6434.600000023842,
+              "ms": 58
+            }
+          ],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 355
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 345
+            },
+            {
+              "id": "building-perimeter-wall-floor-1-2-0",
+              "count": 1
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 210,
+              "deleted": 0,
+              "live": 210
+            },
+            "Texture": {
+              "created": 16,
+              "deleted": 1,
+              "live": 15
+            },
+            "Program": {
+              "created": 46,
+              "deleted": 0,
+              "live": 46
+            },
+            "Shader": {
+              "created": 93,
+              "deleted": 86,
+              "live": 7
+            },
+            "Framebuffer": {
+              "created": 0,
+              "deleted": 0,
+              "live": 0
+            },
+            "Renderbuffer": {
+              "created": 0,
+              "deleted": 0,
+              "live": 0
+            },
+            "VertexArray": {
+              "created": 53,
+              "deleted": 0,
+              "live": 53
+            }
+          },
+          "drawCalls": 284,
+          "deckDrawCalls": 23,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 304,
+          "bufferBytes": 8046352,
+          "taskMs": 5743.99,
+          "scriptMs": 1388.801,
+          "heapMB": 57.2863655090332,
+          "features": 355
+        },
+        {
+          "name": "F1-camera",
+          "elapsedMs": 7605.199999988079,
+          "rafFPS": 5.785515173837501,
+          "drawnFPS": 4.996581286496024,
+          "rafFrames": 44,
+          "drawnFrames": 38,
+          "p50FrameMs": 54.79999999999927,
+          "p95FrameMs": 507.5,
+          "p99FrameMs": 606.5,
+          "slowFrames": 22,
+          "longTasks": [
+            {
+              "start": 8572.300000011921,
+              "ms": 60
+            },
+            {
+              "start": 8844.100000023842,
+              "ms": 53
+            },
+            {
+              "start": 9227.400000035763,
+              "ms": 588
+            },
+            {
+              "start": 12395.200000047684,
+              "ms": 422
+            }
+          ],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 355
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 345
+            },
+            {
+              "id": "building-perimeter-wall-floor-1-2-0",
+              "count": 1
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 210,
+              "deleted": 0,
+              "live": 210
+            },
+            "Texture": {
+              "created": 19,
+              "deleted": 1,
+              "live": 18
+            },
+            "Program": {
+              "created": 48,
+              "deleted": 0,
+              "live": 48
+            },
+            "Shader": {
+              "created": 97,
+              "deleted": 90,
+              "live": 7
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 60,
+              "deleted": 0,
+              "live": 60
+            }
+          },
+          "drawCalls": 3690,
+          "deckDrawCalls": 156,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 614,
+          "bufferBytes": 1744064,
+          "taskMs": 2193.56,
+          "scriptMs": 1661.4750000000004,
+          "heapMB": 50.28642654418945
+        },
+        {
+          "name": "F-ALL-load",
+          "elapsedMs": 3737.7000000476837,
+          "rafFPS": 18.728094817429696,
+          "drawnFPS": 1.0701768467102681,
+          "rafFrames": 70,
+          "drawnFrames": 4,
+          "p50FrameMs": 6.099999999998545,
+          "p95FrameMs": 206.09999999999854,
+          "p99FrameMs": 1789.7000000000007,
+          "slowFrames": 4,
+          "longTasks": [
+            {
+              "start": 16338.200000047684,
+              "ms": 1849
+            },
+            {
+              "start": 18187.30000001192,
+              "ms": 96
+            }
+          ],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 1608
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 1548
+            },
+            {
+              "id": "building-perimeter-shell-wall-5-0",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-6-1",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-7-2",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-9-3",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-19-4",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-28-5",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-31-6",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-32-7",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-37-8",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-38-9",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-39-10",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-41-11",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-42-12",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-43-13",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-44-14",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-46-15",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-47-16",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-48-17",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-52-18",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-53-19",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-54-20",
+              "count": 1
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 336,
+              "deleted": 6,
+              "live": 330
+            },
+            "Texture": {
+              "created": 40,
+              "deleted": 2,
+              "live": 38
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Shader": {
+              "created": 99,
+              "deleted": 90,
+              "live": 9
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 81,
+              "deleted": 1,
+              "live": 80
+            }
+          },
+          "drawCalls": 33,
+          "deckDrawCalls": 33,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 327,
+          "bufferBytes": 9151579,
+          "taskMs": 2145.645000000001,
+          "scriptMs": 2034.0669999999998,
+          "heapMB": 39.436729431152344
+        },
+        {
+          "name": "F-ALL-camera",
+          "elapsedMs": 18988.100000023842,
+          "rafFPS": 2.053917980206078,
+          "drawnFPS": 1.7379305986359124,
+          "rafFrames": 39,
+          "drawnFrames": 33,
+          "p50FrameMs": 46.29999999999927,
+          "p95FrameMs": 1479.1000000000022,
+          "p99FrameMs": 1544.4000000000015,
+          "slowFrames": 16,
+          "longTasks": [
+            {
+              "start": 19920.100000023842,
+              "ms": 139
+            },
+            {
+              "start": 20541.700000047684,
+              "ms": 1769
+            },
+            {
+              "start": 27671.100000023842,
+              "ms": 2856
+            }
+          ],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 1608
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 1548
+            },
+            {
+              "id": "building-perimeter-shell-wall-5-0",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-6-1",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-7-2",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-9-3",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-19-4",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-28-5",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-31-6",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-32-7",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-37-8",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-38-9",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-39-10",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-41-11",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-42-12",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-43-13",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-44-14",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-46-15",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-47-16",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-48-17",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-52-18",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-53-19",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-54-20",
+              "count": 1
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 746,
+              "deleted": 6,
+              "live": 740
+            },
+            "Texture": {
+              "created": 70,
+              "deleted": 2,
+              "live": 68
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Shader": {
+              "created": 99,
+              "deleted": 90,
+              "live": 9
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 200,
+              "deleted": 1,
+              "live": 199
+            }
+          },
+          "drawCalls": 6877,
+          "deckDrawCalls": 681,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 1415,
+          "bufferBytes": 2943620,
+          "taskMs": 5674.41,
+          "scriptMs": 5559.686,
+          "heapMB": 52.139137268066406
+        },
+        {
+          "name": "floor-switch-all-eight",
+          "elapsedMs": 9875.399999976158,
+          "rafFPS": 3.03785163133366,
+          "drawnFPS": 1.7214492577557408,
+          "rafFrames": 30,
+          "drawnFrames": 17,
+          "p50FrameMs": 258.40000000000146,
+          "p95FrameMs": 1396.2000000000044,
+          "p99FrameMs": 1406.9000000000015,
+          "slowFrames": 19,
+          "longTasks": [
+            {
+              "start": 39385.10000002384,
+              "ms": 262
+            },
+            {
+              "start": 39961.40000003576,
+              "ms": 52
+            },
+            {
+              "start": 42758.30000001192,
+              "ms": 439
+            },
+            {
+              "start": 43241.5,
+              "ms": 311
+            },
+            {
+              "start": 44366.200000047684,
+              "ms": 335
+            },
+            {
+              "start": 44725.60000002384,
+              "ms": 257
+            },
+            {
+              "start": 45400.10000002384,
+              "ms": 337
+            },
+            {
+              "start": 45765.5,
+              "ms": 148
+            },
+            {
+              "start": 46392.10000002384,
+              "ms": 308
+            },
+            {
+              "start": 46736.90000003576,
+              "ms": 99
+            },
+            {
+              "start": 47325.30000001192,
+              "ms": 241
+            },
+            {
+              "start": 47648.30000001192,
+              "ms": 112
+            },
+            {
+              "start": 48387,
+              "ms": 112
+            }
+          ],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 90
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 90
+            },
+            {
+              "id": "building-perimeter-wall-floor-7-2-0",
+              "count": 1
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 859,
+              "deleted": 239,
+              "live": 620
+            },
+            "Texture": {
+              "created": 78,
+              "deleted": 30,
+              "live": 48
+            },
+            "Program": {
+              "created": 59,
+              "deleted": 11,
+              "live": 48
+            },
+            "Shader": {
+              "created": 119,
+              "deleted": 90,
+              "live": 29
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 228,
+              "deleted": 49,
+              "live": 179
+            }
+          },
+          "drawCalls": 875,
+          "deckDrawCalls": 95,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 500,
+          "bufferBytes": 9593991,
+          "taskMs": 3419.0210000000006,
+          "scriptMs": 3210.529000000001,
+          "heapMB": 69.35150146484375
+        },
+        {
+          "name": "search",
+          "elapsedMs": 265.7999999523163,
+          "rafFPS": 22.573363435200836,
+          "drawnFPS": 0,
+          "rafFrames": 6,
+          "drawnFrames": 0,
+          "p50FrameMs": 36.69999999999709,
+          "p95FrameMs": 83.09999999999854,
+          "p99FrameMs": 83.09999999999854,
+          "slowFrames": 1,
+          "longTasks": [],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 90
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 90
+            },
+            {
+              "id": "building-perimeter-wall-floor-7-2-0",
+              "count": 1
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 859,
+              "deleted": 239,
+              "live": 620
+            },
+            "Texture": {
+              "created": 78,
+              "deleted": 30,
+              "live": 48
+            },
+            "Program": {
+              "created": 59,
+              "deleted": 11,
+              "live": 48
+            },
+            "Shader": {
+              "created": 119,
+              "deleted": 90,
+              "live": 29
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 228,
+              "deleted": 49,
+              "live": 179
+            }
+          },
+          "drawCalls": 0,
+          "deckDrawCalls": 0,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 0,
+          "bufferBytes": 0,
+          "taskMs": 147.07599999999843,
+          "scriptMs": 35.49299999999889,
+          "heapMB": 73.45695495605469,
+          "latencies": [
+            {
+              "q": "staff",
+              "ms": 94,
+              "count": 12
+            },
+            {
+              "q": "0362",
+              "ms": 32,
+              "count": 6
+            },
+            {
+              "q": "room",
+              "ms": 38,
+              "count": 47
+            },
+            {
+              "q": "library",
+              "ms": 82,
+              "count": 8
+            }
+          ]
+        },
+        {
+          "name": "above-below-first",
+          "elapsedMs": 1307.300000011921,
+          "rafFPS": 50.48573395502039,
+          "drawnFPS": 3.8246768147742722,
+          "rafFrames": 66,
+          "drawnFrames": 5,
+          "p50FrameMs": 6.099999999998545,
+          "p95FrameMs": 157.5,
+          "p99FrameMs": 270.90000000000146,
+          "slowFrames": 5,
+          "longTasks": [
+            {
+              "start": 52927.40000003576,
+              "ms": 59
+            }
+          ],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 288
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 270
+            },
+            {
+              "id": "building-perimeter-wall-floor-3-2-0",
+              "count": 1
+            },
+            {
+              "id": "room-correspondence-fill",
+              "count": 1
+            },
+            {
+              "id": "room-correspondence-outline",
+              "count": 1
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 1037,
+              "deleted": 258,
+              "live": 779
+            },
+            "Texture": {
+              "created": 91,
+              "deleted": 31,
+              "live": 60
+            },
+            "Program": {
+              "created": 62,
+              "deleted": 13,
+              "live": 49
+            },
+            "Shader": {
+              "created": 125,
+              "deleted": 90,
+              "live": 35
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 272,
+              "deleted": 54,
+              "live": 218
+            }
+          },
+          "drawCalls": 99,
+          "deckDrawCalls": 12,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 132,
+          "bufferBytes": 320364,
+          "taskMs": 175.77400000000054,
+          "scriptMs": 82.46100000000034,
+          "heapMB": 84.05836868286133,
+          "analysis": {
+            "status": "ready",
+            "analysisMs": 254,
+            "preparationMs": 311.10000002384186,
+            "counts": [
+              {
+                "floor": 2,
+                "count": 5
+              },
+              {
+                "floor": 4,
+                "count": 4
+              },
+              {
+                "floor": 1,
+                "count": 12
+              },
+              {
+                "floor": 5,
+                "count": 4
+              },
+              {
+                "floor": 0,
+                "count": 8
+              },
+              {
+                "floor": 6,
+                "count": 7
+              },
+              {
+                "floor": 7,
+                "count": 7
+              }
+            ]
+          }
+        },
+        {
+          "name": "above-below-cached",
+          "elapsedMs": 328.80000001192093,
+          "rafFPS": 21.289537712123508,
+          "drawnFPS": 6.082725060606716,
+          "rafFrames": 7,
+          "drawnFrames": 2,
+          "p50FrameMs": 6.099999999998545,
+          "p95FrameMs": 163.59999999999854,
+          "p99FrameMs": 163.59999999999854,
+          "slowFrames": 2,
+          "longTasks": [
+            {
+              "start": 54282.30000001192,
+              "ms": 133
+            }
+          ],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 288
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 270
+            },
+            {
+              "id": "building-perimeter-wall-floor-3-2-0",
+              "count": 1
+            },
+            {
+              "id": "room-correspondence-fill",
+              "count": 1
+            },
+            {
+              "id": "room-correspondence-outline",
+              "count": 1
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 1046,
+              "deleted": 267,
+              "live": 779
+            },
+            "Texture": {
+              "created": 91,
+              "deleted": 31,
+              "live": 60
+            },
+            "Program": {
+              "created": 63,
+              "deleted": 14,
+              "live": 49
+            },
+            "Shader": {
+              "created": 127,
+              "deleted": 90,
+              "live": 37
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 274,
+              "deleted": 56,
+              "live": 218
+            }
+          },
+          "drawCalls": 12,
+          "deckDrawCalls": 12,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 25,
+          "bufferBytes": 19372,
+          "taskMs": 162.14100000000187,
+          "scriptMs": 140.07599999999877,
+          "heapMB": 86.11458587646484,
+          "cacheHit": true
+        },
+        {
+          "name": "night-architectural-load",
+          "elapsedMs": 3902.099999964237,
+          "rafFPS": 2.818994900207789,
+          "drawnFPS": 0.5125445273105071,
+          "rafFrames": 11,
+          "drawnFrames": 2,
+          "p50FrameMs": 6.100000000005821,
+          "p95FrameMs": 2011.9000000000015,
+          "p99FrameMs": 2011.9000000000015,
+          "slowFrames": 3,
+          "longTasks": [
+            {
+              "start": 58968.80000001192,
+              "ms": 57
+            },
+            {
+              "start": 59026.60000002384,
+              "ms": 139
+            },
+            {
+              "start": 59202.80000001192,
+              "ms": 53
+            },
+            {
+              "start": 59257.5,
+              "ms": 1927
+            },
+            {
+              "start": 61185.200000047684,
+              "ms": 180
+            }
+          ],
+          "topLayers": [
+            {
+              "id": "indoor-building-night-layer",
+              "count": 1608
+            },
+            {
+              "id": "procedural-interior-room-walls-night",
+              "count": 1548
+            },
+            {
+              "id": "building-perimeter-shell-wall-5-0-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-6-1-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-7-2-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-9-3-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-19-4-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-28-5-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-31-6-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-32-7-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-37-8-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-38-9-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-39-10-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-41-11-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-42-12-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-43-13-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-44-14-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-46-15-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-47-16-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-48-17-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-52-18-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-53-19-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-54-20-night",
+              "count": 1
+            },
+            {
+              "id": "interior-light-pools",
+              "count": 138
+            },
+            {
+              "id": "interior-light-halos",
+              "count": 138
+            },
+            {
+              "id": "interior-light-fixtures",
+              "count": 138
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 1325,
+              "deleted": 1162,
+              "live": 163
+            },
+            "Texture": {
+              "created": 135,
+              "deleted": 108,
+              "live": 27
+            },
+            "Program": {
+              "created": 66,
+              "deleted": 17,
+              "live": 49
+            },
+            "Shader": {
+              "created": 133,
+              "deleted": 90,
+              "live": 43
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 323,
+              "deleted": 292,
+              "live": 31
+            }
+          },
+          "drawCalls": 63,
+          "deckDrawCalls": 53,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 383,
+          "bufferBytes": 15109660,
+          "taskMs": 2484.209,
+          "scriptMs": 420.52099999999723,
+          "heapMB": 67.16999816894531
+        },
+        {
+          "name": "night-architectural-camera",
+          "elapsedMs": 23418.600000023842,
+          "rafFPS": 1.7507451342077773,
+          "drawnFPS": 1.7080440333734415,
+          "rafFrames": 41,
+          "drawnFrames": 40,
+          "p50FrameMs": 242.90000000000146,
+          "p95FrameMs": 1787.800000000003,
+          "p99FrameMs": 2327,
+          "slowFrames": 25,
+          "longTasks": [
+            {
+              "start": 63162.60000002384,
+              "ms": 237
+            },
+            {
+              "start": 63931.700000047684,
+              "ms": 1540
+            },
+            {
+              "start": 74692.20000004768,
+              "ms": 1824
+            }
+          ],
+          "topLayers": [
+            {
+              "id": "indoor-building-night-layer",
+              "count": 1608
+            },
+            {
+              "id": "procedural-interior-room-walls-night",
+              "count": 1548
+            },
+            {
+              "id": "building-perimeter-shell-wall-5-0-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-6-1-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-7-2-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-9-3-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-19-4-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-28-5-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-31-6-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-32-7-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-37-8-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-38-9-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-39-10-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-41-11-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-42-12-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-43-13-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-44-14-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-46-15-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-47-16-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-48-17-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-52-18-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-53-19-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-54-20-night",
+              "count": 1
+            },
+            {
+              "id": "interior-light-pools",
+              "count": 138
+            },
+            {
+              "id": "interior-light-halos",
+              "count": 138
+            },
+            {
+              "id": "interior-light-fixtures",
+              "count": 138
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 1469,
+              "deleted": 1162,
+              "live": 307
+            },
+            "Texture": {
+              "created": 159,
+              "deleted": 108,
+              "live": 51
+            },
+            "Program": {
+              "created": 70,
+              "deleted": 17,
+              "live": 53
+            },
+            "Shader": {
+              "created": 141,
+              "deleted": 98,
+              "live": 43
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 369,
+              "deleted": 292,
+              "live": 77
+            }
+          },
+          "drawCalls": 2515,
+          "deckDrawCalls": 790,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 293,
+          "bufferBytes": 1107232,
+          "taskMs": 4448.796000000001,
+          "scriptMs": 4080.6620000000003,
+          "heapMB": 51.06660842895508
+        },
+        {
+          "name": "night-gis-load",
+          "elapsedMs": 1478.8999999761581,
+          "rafFPS": 1.3523564811902378,
+          "drawnFPS": 1.3523564811902378,
+          "rafFrames": 2,
+          "drawnFrames": 2,
+          "p50FrameMs": 898.1000000000058,
+          "p95FrameMs": 898.1000000000058,
+          "p99FrameMs": 898.1000000000058,
+          "slowFrames": 2,
+          "longTasks": [],
+          "topLayers": [
+            {
+              "id": "indoor-building-night-layer",
+              "count": 1608
+            },
+            {
+              "id": "procedural-interior-room-walls-night",
+              "count": 1548
+            },
+            {
+              "id": "building-perimeter-shell-wall-5-0-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-6-1-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-7-2-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-9-3-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-19-4-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-28-5-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-31-6-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-32-7-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-37-8-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-38-9-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-39-10-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-41-11-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-42-12-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-43-13-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-44-14-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-46-15-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-47-16-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-48-17-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-52-18-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-53-19-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-54-20-night",
+              "count": 1
+            },
+            {
+              "id": "interior-light-pools",
+              "count": 138
+            },
+            {
+              "id": "interior-light-halos",
+              "count": 138
+            },
+            {
+              "id": "interior-light-fixtures",
+              "count": 138
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 1469,
+              "deleted": 1162,
+              "live": 307
+            },
+            "Texture": {
+              "created": 160,
+              "deleted": 109,
+              "live": 51
+            },
+            "Program": {
+              "created": 70,
+              "deleted": 17,
+              "live": 53
+            },
+            "Shader": {
+              "created": 141,
+              "deleted": 98,
+              "live": 43
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 369,
+              "deleted": 292,
+              "live": 77
+            }
+          },
+          "drawCalls": 127,
+          "deckDrawCalls": 56,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 38,
+          "bufferBytes": 163480,
+          "taskMs": 109.42800000000119,
+          "scriptMs": 88.57300000000023,
+          "heapMB": 52.102149963378906
+        },
+        {
+          "name": "night-gis-camera",
+          "elapsedMs": 21967.900000035763,
+          "rafFPS": 1.4566708697667008,
+          "drawnFPS": 1.365628940406282,
+          "rafFrames": 32,
+          "drawnFrames": 30,
+          "p50FrameMs": 727.3000000000029,
+          "p95FrameMs": 1619.9000000000087,
+          "p99FrameMs": 1844.800000000003,
+          "slowFrames": 18,
+          "longTasks": [
+            {
+              "start": 88422.10000002384,
+              "ms": 1826
+            },
+            {
+              "start": 90698.30000001192,
+              "ms": 1273
+            },
+            {
+              "start": 98108.90000003576,
+              "ms": 2989
+            }
+          ],
+          "topLayers": [
+            {
+              "id": "indoor-building-night-layer",
+              "count": 1608
+            },
+            {
+              "id": "procedural-interior-room-walls-night",
+              "count": 1548
+            },
+            {
+              "id": "building-perimeter-shell-wall-5-0-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-6-1-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-7-2-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-9-3-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-19-4-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-28-5-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-31-6-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-32-7-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-37-8-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-38-9-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-39-10-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-41-11-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-42-12-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-43-13-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-44-14-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-46-15-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-47-16-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-48-17-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-52-18-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-53-19-night",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-54-20-night",
+              "count": 1
+            },
+            {
+              "id": "interior-light-pools",
+              "count": 138
+            },
+            {
+              "id": "interior-light-halos",
+              "count": 138
+            },
+            {
+              "id": "interior-light-fixtures",
+              "count": 138
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 1687,
+              "deleted": 1162,
+              "live": 525
+            },
+            "Texture": {
+              "created": 197,
+              "deleted": 110,
+              "live": 87
+            },
+            "Program": {
+              "created": 70,
+              "deleted": 17,
+              "live": 53
+            },
+            "Shader": {
+              "created": 141,
+              "deleted": 98,
+              "live": 43
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 440,
+              "deleted": 292,
+              "live": 148
+            }
+          },
+          "drawCalls": 4649,
+          "deckDrawCalls": 790,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 597,
+          "bufferBytes": 2390426,
+          "taskMs": 6869.418,
+          "scriptMs": 6637.866000000003,
+          "heapMB": 49.518341064453125
+        },
+        {
+          "name": "route-plan",
+          "elapsedMs": 2128.699999988079,
+          "rafFPS": 3.2883919763419933,
+          "drawnFPS": 1.4093108470037112,
+          "rafFrames": 7,
+          "drawnFrames": 3,
+          "p50FrameMs": 58.09999999999127,
+          "p95FrameMs": 600.6999999999971,
+          "p99FrameMs": 600.6999999999971,
+          "slowFrames": 4,
+          "longTasks": [
+            {
+              "start": 118364.40000003576,
+              "ms": 187
+            },
+            {
+              "start": 118595,
+              "ms": 94
+            },
+            {
+              "start": 118689.30000001192,
+              "ms": 471
+            }
+          ],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 355
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 345
+            },
+            {
+              "id": "building-perimeter-wall-floor-1-2-0",
+              "count": 1
+            },
+            {
+              "id": "route-focus-room-glow",
+              "count": 2
+            },
+            {
+              "id": "route-focus-start-end-markers",
+              "count": 2
+            },
+            {
+              "id": "route-focus-room-labels",
+              "count": 2
+            },
+            {
+              "id": "route-landmark-room-glow",
+              "count": 5
+            },
+            {
+              "id": "route-landmark-room-labels",
+              "count": 5
+            },
+            {
+              "id": "route-preview-remaining-border",
+              "count": 1
+            },
+            {
+              "id": "route-preview-remaining-main",
+              "count": 1
+            },
+            {
+              "id": "route-preview-cursor-halo",
+              "count": 1
+            },
+            {
+              "id": "route-preview-cursor-dot",
+              "count": 1
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 2860,
+              "deleted": 1812,
+              "live": 1048
+            },
+            "Texture": {
+              "created": 296,
+              "deleted": 213,
+              "live": 83
+            },
+            "Program": {
+              "created": 77,
+              "deleted": 20,
+              "live": 57
+            },
+            "Shader": {
+              "created": 155,
+              "deleted": 98,
+              "live": 57
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 752,
+              "deleted": 460,
+              "live": 292
+            }
+          },
+          "drawCalls": 168,
+          "deckDrawCalls": 90,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 201,
+          "bufferBytes": 2866311,
+          "taskMs": 924.6290000000031,
+          "scriptMs": 740.0639999999967,
+          "heapMB": 83.99947738647461
+        },
+        {
+          "name": "route-label-camera",
+          "elapsedMs": 17869,
+          "rafFPS": 2.126587945604119,
+          "drawnFPS": 2.126587945604119,
+          "rafFrames": 38,
+          "drawnFrames": 38,
+          "p50FrameMs": 363.5,
+          "p95FrameMs": 3667.0999999999913,
+          "p99FrameMs": 4563.100000000006,
+          "slowFrames": 22,
+          "longTasks": [
+            {
+              "start": 123738.90000003576,
+              "ms": 3594
+            },
+            {
+              "start": 128243.90000003576,
+              "ms": 3498
+            },
+            {
+              "start": 134156.90000003576,
+              "ms": 750
+            }
+          ],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 355
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 345
+            },
+            {
+              "id": "building-perimeter-wall-floor-1-2-0",
+              "count": 1
+            },
+            {
+              "id": "route-focus-room-glow",
+              "count": 2
+            },
+            {
+              "id": "route-focus-start-end-markers",
+              "count": 2
+            },
+            {
+              "id": "route-focus-room-labels",
+              "count": 2
+            },
+            {
+              "id": "route-landmark-room-glow",
+              "count": 5
+            },
+            {
+              "id": "route-landmark-room-labels",
+              "count": 5
+            },
+            {
+              "id": "route-preview-remaining-border",
+              "count": 1
+            },
+            {
+              "id": "route-preview-remaining-main",
+              "count": 1
+            },
+            {
+              "id": "route-preview-traveled-border",
+              "count": 1
+            },
+            {
+              "id": "route-preview-traveled-main",
+              "count": 1
+            },
+            {
+              "id": "route-preview-cursor-halo",
+              "count": 1
+            },
+            {
+              "id": "route-preview-cursor-dot",
+              "count": 1
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 2943,
+              "deleted": 1812,
+              "live": 1131
+            },
+            "Texture": {
+              "created": 302,
+              "deleted": 213,
+              "live": 89
+            },
+            "Program": {
+              "created": 77,
+              "deleted": 20,
+              "live": 57
+            },
+            "Shader": {
+              "created": 155,
+              "deleted": 98,
+              "live": 57
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 772,
+              "deleted": 460,
+              "live": 312
+            }
+          },
+          "drawCalls": 2212,
+          "deckDrawCalls": 853,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 713,
+          "bufferBytes": 528832,
+          "taskMs": 8659.861999999997,
+          "scriptMs": 8430.853,
+          "heapMB": 54.26058578491211
+        },
+        {
+          "name": "route-animated-preview",
+          "elapsedMs": 4023.100000023842,
+          "rafFPS": 5.219855335406912,
+          "drawnFPS": 5.219855335406912,
+          "rafFrames": 21,
+          "drawnFrames": 21,
+          "p50FrameMs": 199.40000000002328,
+          "p95FrameMs": 219.69999999998254,
+          "p99FrameMs": 224.20000000001164,
+          "slowFrames": 19,
+          "longTasks": [],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 355
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 345
+            },
+            {
+              "id": "building-perimeter-wall-floor-1-2-0",
+              "count": 1
+            },
+            {
+              "id": "route-focus-room-glow",
+              "count": 2
+            },
+            {
+              "id": "route-focus-start-end-markers",
+              "count": 2
+            },
+            {
+              "id": "route-focus-room-labels",
+              "count": 2
+            },
+            {
+              "id": "route-landmark-room-glow",
+              "count": 5
+            },
+            {
+              "id": "route-landmark-room-labels",
+              "count": 5
+            },
+            {
+              "id": "route-preview-remaining-border",
+              "count": 1
+            },
+            {
+              "id": "route-preview-remaining-main",
+              "count": 1
+            },
+            {
+              "id": "route-preview-traveled-border",
+              "count": 1
+            },
+            {
+              "id": "route-preview-traveled-main",
+              "count": 1
+            },
+            {
+              "id": "route-preview-cursor-halo",
+              "count": 1
+            },
+            {
+              "id": "route-preview-cursor-dot",
+              "count": 1
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 2951,
+              "deleted": 1820,
+              "live": 1131
+            },
+            "Texture": {
+              "created": 302,
+              "deleted": 213,
+              "live": 89
+            },
+            "Program": {
+              "created": 77,
+              "deleted": 20,
+              "live": 57
+            },
+            "Shader": {
+              "created": 155,
+              "deleted": 98,
+              "live": 57
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 774,
+              "deleted": 462,
+              "live": 312
+            }
+          },
+          "drawCalls": 460,
+          "deckDrawCalls": 460,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 244,
+          "bufferBytes": 5697382,
+          "taskMs": 290.3949999999966,
+          "scriptMs": 208.12000000000097,
+          "heapMB": 66.98405456542969,
+          "previewLayers": [
+            "route-preview-remaining-border",
+            "route-preview-remaining-main",
+            "route-preview-traveled-border",
+            "route-preview-traveled-main",
+            "route-preview-cursor-halo",
+            "route-preview-cursor-dot"
+          ]
+        }
+      ],
+      "errors": [],
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "memoryCycles": [
+        {
+          "cycle": 0,
+          "Timestamp": 338552.043375,
+          "AudioHandlers": 0,
+          "AudioWorkletProcessors": 0,
+          "Documents": 4,
+          "Frames": 4,
+          "JSEventListeners": 251,
+          "LayoutObjects": 256,
+          "MediaKeySessions": 0,
+          "MediaKeys": 0,
+          "Nodes": 395,
+          "Resources": 4,
+          "ContextLifecycleStateObservers": 15,
+          "V8PerContextDatas": 2,
+          "WorkerGlobalScopes": 4,
+          "UACSSResources": 0,
+          "RTCPeerConnections": 0,
+          "ResourceFetchers": 4,
+          "AdSubframes": 0,
+          "DetachedScriptStates": 0,
+          "ArrayBufferContents": 2829,
+          "LayoutCount": 209,
+          "RecalcStyleCount": 291,
+          "LayoutDuration": 0.261297,
+          "RecalcStyleDuration": 0.096313,
+          "DevToolsCommandDuration": 0.368363,
+          "ScriptDuration": 39.646264,
+          "V8CompileDuration": 0,
+          "TaskDuration": 50.13187,
+          "TaskOtherDuration": 9.759633,
+          "ThreadTime": 15.87393,
+          "ProcessTime": 31.419631,
+          "JSHeapUsedSize": 51483292,
+          "JSHeapTotalSize": 54497280,
+          "FirstMeaningfulPaint": 338407.786337,
+          "DomContentLoaded": 338405.783648,
+          "NavigationStart": 338405.119857,
+          "time": 146932.5,
+          "frame": 904,
+          "draws": 25257,
+          "deckDraws": 4736,
+          "meshes": 0,
+          "uploads": 8519,
+          "bytes": 121263098,
+          "resources": {
+            "Buffer": {
+              "created": 2951,
+              "deleted": 1880,
+              "live": 1071
+            },
+            "Texture": {
+              "created": 302,
+              "deleted": 216,
+              "live": 86
+            },
+            "Program": {
+              "created": 77,
+              "deleted": 25,
+              "live": 52
+            },
+            "Shader": {
+              "created": 155,
+              "deleted": 98,
+              "live": 57
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 774,
+              "deleted": 475,
+              "live": 299
+            }
+          }
+        },
+        {
+          "cycle": 1,
+          "Timestamp": 338565.925357,
+          "AudioHandlers": 0,
+          "AudioWorkletProcessors": 0,
+          "Documents": 4,
+          "Frames": 4,
+          "JSEventListeners": 255,
+          "LayoutObjects": 256,
+          "MediaKeySessions": 0,
+          "MediaKeys": 0,
+          "Nodes": 395,
+          "Resources": 4,
+          "ContextLifecycleStateObservers": 16,
+          "V8PerContextDatas": 2,
+          "WorkerGlobalScopes": 4,
+          "UACSSResources": 0,
+          "RTCPeerConnections": 0,
+          "ResourceFetchers": 7,
+          "AdSubframes": 0,
+          "DetachedScriptStates": 0,
+          "ArrayBufferContents": 331,
+          "LayoutCount": 224,
+          "RecalcStyleCount": 319,
+          "LayoutDuration": 0.26638,
+          "RecalcStyleDuration": 0.111119,
+          "DevToolsCommandDuration": 1.943106,
+          "ScriptDuration": 41.281952,
+          "V8CompileDuration": 0,
+          "TaskDuration": 57.052556,
+          "TaskOtherDuration": 13.449999,
+          "ThreadTime": 17.106512,
+          "ProcessTime": 35.522698,
+          "JSHeapUsedSize": 58476332,
+          "JSHeapTotalSize": 60788736,
+          "FirstMeaningfulPaint": 338407.786337,
+          "DomContentLoaded": 338405.783648,
+          "NavigationStart": 338405.119857,
+          "time": 160810.40000003576,
+          "frame": 924,
+          "draws": 25621,
+          "deckDraws": 5015,
+          "meshes": 0,
+          "uploads": 9415,
+          "bytes": 143149196,
+          "resources": {
+            "Buffer": {
+              "created": 3270,
+              "deleted": 3227,
+              "live": 43
+            },
+            "Texture": {
+              "created": 358,
+              "deleted": 349,
+              "live": 9
+            },
+            "Program": {
+              "created": 80,
+              "deleted": 27,
+              "live": 53
+            },
+            "Shader": {
+              "created": 161,
+              "deleted": 98,
+              "live": 63
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 834,
+              "deleted": 823,
+              "live": 11
+            }
+          }
+        },
+        {
+          "cycle": 2,
+          "Timestamp": 338579.610543,
+          "AudioHandlers": 0,
+          "AudioWorkletProcessors": 0,
+          "Documents": 4,
+          "Frames": 4,
+          "JSEventListeners": 252,
+          "LayoutObjects": 256,
+          "MediaKeySessions": 0,
+          "MediaKeys": 0,
+          "Nodes": 395,
+          "Resources": 5,
+          "ContextLifecycleStateObservers": 16,
+          "V8PerContextDatas": 2,
+          "WorkerGlobalScopes": 4,
+          "UACSSResources": 0,
+          "RTCPeerConnections": 0,
+          "ResourceFetchers": 7,
+          "AdSubframes": 0,
+          "DetachedScriptStates": 0,
+          "ArrayBufferContents": 507,
+          "LayoutCount": 241,
+          "RecalcStyleCount": 355,
+          "LayoutDuration": 0.27223,
+          "RecalcStyleDuration": 0.127728,
+          "DevToolsCommandDuration": 4.555348,
+          "ScriptDuration": 42.763855,
+          "V8CompileDuration": 0,
+          "TaskDuration": 62.241754,
+          "TaskOtherDuration": 14.522593,
+          "ThreadTime": 18.145197,
+          "ProcessTime": 39.219483,
+          "JSHeapUsedSize": 61615396,
+          "JSHeapTotalSize": 64196608,
+          "FirstMeaningfulPaint": 338407.786337,
+          "DomContentLoaded": 338405.783648,
+          "NavigationStart": 338405.119857,
+          "time": 174495.80000001192,
+          "frame": 944,
+          "draws": 26010,
+          "deckDraws": 5223,
+          "meshes": 0,
+          "uploads": 10404,
+          "bytes": 174337273,
+          "resources": {
+            "Buffer": {
+              "created": 3687,
+              "deleted": 3610,
+              "live": 77
+            },
+            "Texture": {
+              "created": 419,
+              "deleted": 404,
+              "live": 15
+            },
+            "Program": {
+              "created": 85,
+              "deleted": 32,
+              "live": 53
+            },
+            "Shader": {
+              "created": 171,
+              "deleted": 98,
+              "live": 73
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 917,
+              "deleted": 896,
+              "live": 21
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "chrome": "155.0.8059.85",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "rendering": "Headless Chrome, ANGLE SwiftShader (software), deviceScaleFactor 1",
+  "failure": {
+    "message": "locator.click: Timeout 60000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'F-All', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"floor-btn \">F-All</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n",
+    "stack": "locator.click: Timeout 60000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'F-All', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"floor-btn \">F-All</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\n    at floor (C:\\Users\\ChristDNA\\Downloads\\Morris3D-IndoorMap\\review\\performance-check.cjs:43:100)\n    at C:\\Users\\ChristDNA\\Downloads\\Morris3D-IndoorMap\\review\\performance-check.cjs:62:266"
+  }
+}

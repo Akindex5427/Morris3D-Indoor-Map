@@ -1,0 +1,251 @@
+{
+  "results": [
+    {
+      "floor": 0,
+      "style": "day",
+      "features": 148,
+      "roomsChecked": 147,
+      "wallsChecked": 141,
+      "passed": true
+    },
+    {
+      "floor": 0,
+      "style": "architectural",
+      "features": 148,
+      "roomsChecked": 147,
+      "wallsChecked": 141,
+      "passed": true
+    },
+    {
+      "floor": 0,
+      "style": "gis",
+      "features": 148,
+      "roomsChecked": 147,
+      "wallsChecked": 141,
+      "passed": true
+    },
+    {
+      "floor": 1,
+      "style": "day",
+      "features": 355,
+      "roomsChecked": 354,
+      "wallsChecked": 345,
+      "passed": true
+    },
+    {
+      "floor": 1,
+      "style": "architectural",
+      "features": 355,
+      "roomsChecked": 354,
+      "wallsChecked": 345,
+      "passed": true
+    },
+    {
+      "floor": 1,
+      "style": "gis",
+      "features": 355,
+      "roomsChecked": 354,
+      "wallsChecked": 345,
+      "passed": true
+    },
+    {
+      "floor": 2,
+      "style": "day",
+      "features": 243,
+      "roomsChecked": 241,
+      "wallsChecked": 239,
+      "passed": true
+    },
+    {
+      "floor": 2,
+      "style": "architectural",
+      "features": 243,
+      "roomsChecked": 241,
+      "wallsChecked": 239,
+      "passed": true
+    },
+    {
+      "floor": 2,
+      "style": "gis",
+      "features": 243,
+      "roomsChecked": 241,
+      "wallsChecked": 239,
+      "passed": true
+    },
+    {
+      "floor": 3,
+      "style": "day",
+      "features": 288,
+      "roomsChecked": 287,
+      "wallsChecked": 270,
+      "passed": true
+    },
+    {
+      "floor": 3,
+      "style": "architectural",
+      "features": 288,
+      "roomsChecked": 287,
+      "wallsChecked": 270,
+      "passed": true
+    },
+    {
+      "floor": 3,
+      "style": "gis",
+      "features": 288,
+      "roomsChecked": 287,
+      "wallsChecked": 270,
+      "passed": true
+    },
+    {
+      "floor": 4,
+      "style": "day",
+      "features": 199,
+      "roomsChecked": 199,
+      "wallsChecked": 194,
+      "passed": true
+    },
+    {
+      "floor": 4,
+      "style": "architectural",
+      "features": 199,
+      "roomsChecked": 199,
+      "wallsChecked": 194,
+      "passed": true
+    },
+    {
+      "floor": 4,
+      "style": "gis",
+      "features": 199,
+      "roomsChecked": 199,
+      "wallsChecked": 194,
+      "passed": true
+    },
+    {
+      "floor": 5,
+      "style": "day",
+      "features": 149,
+      "roomsChecked": 148,
+      "wallsChecked": 148,
+      "passed": true
+    },
+    {
+      "floor": 5,
+      "style": "architectural",
+      "features": 149,
+      "roomsChecked": 148,
+      "wallsChecked": 148,
+      "passed": true
+    },
+    {
+      "floor": 5,
+      "style": "gis",
+      "features": 149,
+      "roomsChecked": 148,
+      "wallsChecked": 148,
+      "passed": true
+    },
+    {
+      "floor": 6,
+      "style": "day",
+      "features": 138,
+      "roomsChecked": 138,
+      "wallsChecked": 138,
+      "passed": true
+    },
+    {
+      "floor": 6,
+      "style": "architectural",
+      "features": 138,
+      "roomsChecked": 138,
+      "wallsChecked": 138,
+      "passed": true
+    },
+    {
+      "floor": 6,
+      "style": "gis",
+      "features": 138,
+      "roomsChecked": 138,
+      "wallsChecked": 138,
+      "passed": true
+    },
+    {
+      "floor": 7,
+      "style": "day",
+      "features": 90,
+      "roomsChecked": 90,
+      "wallsChecked": 90,
+      "passed": true
+    },
+    {
+      "floor": 7,
+      "style": "architectural",
+      "features": 90,
+      "roomsChecked": 90,
+      "wallsChecked": 90,
+      "passed": true
+    },
+    {
+      "floor": 7,
+      "style": "gis",
+      "features": 90,
+      "roomsChecked": 90,
+      "wallsChecked": 90,
+      "passed": true
+    },
+    {
+      "floor": "all",
+      "style": "day",
+      "features": 1608,
+      "roomsChecked": 1592,
+      "wallsChecked": 1548,
+      "passed": true
+    },
+    {
+      "floor": "all",
+      "style": "architectural",
+      "features": 1608,
+      "roomsChecked": 1592,
+      "wallsChecked": 1548,
+      "passed": true
+    },
+    {
+      "floor": "all",
+      "style": "gis",
+      "features": 1608,
+      "roomsChecked": 1592,
+      "wallsChecked": 1548,
+      "passed": true
+    },
+    {
+      "phase": "selection-priority",
+      "passed": true
+    },
+    {
+      "phase": "route-colors-and-geometry",
+      "passed": true
+    },
+    {
+      "phase": "timeline-colors-and-routes",
+      "style": "day",
+      "panels": 2,
+      "passed": true
+    },
+    {
+      "phase": "timeline-colors-and-routes",
+      "style": "architectural",
+      "panels": 2,
+      "passed": true
+    },
+    {
+      "phase": "timeline-colors-and-routes",
+      "style": "gis",
+      "panels": 2,
+      "passed": true
+    },
+    {
+      "phase": "mobile-selector",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

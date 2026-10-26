@@ -1,0 +1,35 @@
+{
+  "results": [
+    {
+      "floor": 1,
+      "style": "day",
+      "hash": "11cbb3648cb5b921c59fcfcd21fbc0f036ad6416aa3f329aefecd0a50de826a7"
+    },
+    {
+      "floor": 1,
+      "style": "architectural",
+      "hash": "7fdf465ce21ee326992ea9397b5178064aee8e19c70b13b3106e6766dce06edf"
+    },
+    {
+      "floor": 1,
+      "style": "gis",
+      "hash": "7fdf465ce21ee326992ea9397b5178064aee8e19c70b13b3106e6766dce06edf"
+    },
+    {
+      "floor": "all",
+      "style": "day",
+      "hash": "14c0733362e87b3fcc6064e147d0563d169edcafa39aff389aa04c48910a2690"
+    },
+    {
+      "floor": "all",
+      "style": "architectural",
+      "hash": "a654beb19eec296ec407c9adad49d10a75380172ee25c1cb6e53c25b398ba5c4"
+    },
+    {
+      "floor": "all",
+      "style": "gis",
+      "hash": "a654beb19eec296ec407c9adad49d10a75380172ee25c1cb6e53c25b398ba5c4"
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,3035 @@
+{
+  "date": "2026-10-26T06:35:02.679Z",
+  "url": "http://127.0.0.1:3005",
+  "cpu": "AMD Ryzen 9 7940HS w/ Radeon 780M Graphics     ",
+  "logicalCPUs": 16,
+  "memoryGB": 15.214046478271484,
+  "repeats": 1,
+  "runs": [
+    {
+      "run": 1,
+      "scenarios": [
+        {
+          "name": "initial-F1",
+          "elapsedMs": 6339.10000000149,
+          "rafFPS": 32.654477764974736,
+          "drawnFPS": 7.25655061443883,
+          "rafFrames": 207,
+          "drawnFrames": 46,
+          "p50FrameMs": 14.200000000000728,
+          "p95FrameMs": 56.899999999999636,
+          "p99FrameMs": 412.9000000000001,
+          "slowFrames": 11,
+          "longTasks": [
+            {
+              "start": 158.10000000149012,
+              "ms": 135
+            },
+            {
+              "start": 400.9000000022352,
+              "ms": 548
+            },
+            {
+              "start": 996.4000000022352,
+              "ms": 258
+            },
+            {
+              "start": 1323,
+              "ms": 251
+            },
+            {
+              "start": 1592.800000000745,
+              "ms": 315
+            },
+            {
+              "start": 1908.2000000029802,
+              "ms": 102
+            },
+            {
+              "start": 2011.1000000014901,
+              "ms": 1305
+            },
+            {
+              "start": 3418.10000000149,
+              "ms": 53
+            },
+            {
+              "start": 3600.60000000149,
+              "ms": 75
+            },
+            {
+              "start": 3724.5,
+              "ms": 149
+            }
+          ],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 355
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 345
+            },
+            {
+              "id": "building-perimeter-wall-floor-1-2-0",
+              "count": 1
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 214,
+              "deleted": 0,
+              "live": 214
+            },
+            "Texture": {
+              "created": 17,
+              "deleted": 1,
+              "live": 16
+            },
+            "Program": {
+              "created": 46,
+              "deleted": 0,
+              "live": 46
+            },
+            "Shader": {
+              "created": 93,
+              "deleted": 86,
+              "live": 7
+            },
+            "Framebuffer": {
+              "created": 0,
+              "deleted": 0,
+              "live": 0
+            },
+            "Renderbuffer": {
+              "created": 0,
+              "deleted": 0,
+              "live": 0
+            },
+            "VertexArray": {
+              "created": 53,
+              "deleted": 0,
+              "live": 53
+            }
+          },
+          "drawCalls": 1849,
+          "deckDrawCalls": 32,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 611,
+          "bufferBytes": 6862353,
+          "taskMs": 3962.348,
+          "scriptMs": 1335.7730000000001,
+          "heapMB": 54.531131744384766,
+          "features": 355
+        },
+        {
+          "name": "F1-camera",
+          "elapsedMs": 2031.5999999977648,
+          "rafFPS": 65.46564284315137,
+          "drawnFPS": 49.222287851993514,
+          "rafFrames": 133,
+          "drawnFrames": 100,
+          "p50FrameMs": 14.200000000000728,
+          "p95FrameMs": 14.900000000000546,
+          "p99FrameMs": 28.5,
+          "slowFrames": 1,
+          "longTasks": [
+            {
+              "start": 6468.60000000149,
+              "ms": 116
+            }
+          ],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 355
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 345
+            },
+            {
+              "id": "building-perimeter-wall-floor-1-2-0",
+              "count": 1
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 214,
+              "deleted": 0,
+              "live": 214
+            },
+            "Texture": {
+              "created": 20,
+              "deleted": 1,
+              "live": 19
+            },
+            "Program": {
+              "created": 48,
+              "deleted": 0,
+              "live": 48
+            },
+            "Shader": {
+              "created": 97,
+              "deleted": 90,
+              "live": 7
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 60,
+              "deleted": 0,
+              "live": 60
+            }
+          },
+          "drawCalls": 9174,
+          "deckDrawCalls": 256,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 747,
+          "bufferBytes": 3545232,
+          "taskMs": 1015.225,
+          "scriptMs": 908.6489999999998,
+          "heapMB": 51.701690673828125
+        },
+        {
+          "name": "F-ALL-load",
+          "elapsedMs": 2806.300000000745,
+          "rafFPS": 43.11727185260588,
+          "drawnFPS": 2.138046538145746,
+          "rafFrames": 121,
+          "drawnFrames": 6,
+          "p50FrameMs": 14.200000000000728,
+          "p95FrameMs": 15,
+          "p99FrameMs": 71.19999999999891,
+          "slowFrames": 2,
+          "longTasks": [
+            {
+              "start": 8617.60000000149,
+              "ms": 928
+            },
+            {
+              "start": 9546.5,
+              "ms": 68
+            }
+          ],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 1608
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 1548
+            },
+            {
+              "id": "building-perimeter-shell-wall-5-0",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-6-1",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-7-2",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-9-3",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-19-4",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-28-5",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-31-6",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-32-7",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-37-8",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-38-9",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-39-10",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-41-11",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-42-12",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-43-13",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-44-14",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-46-15",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-47-16",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-48-17",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-52-18",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-53-19",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-54-20",
+              "count": 1
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 340,
+              "deleted": 6,
+              "live": 334
+            },
+            "Texture": {
+              "created": 41,
+              "deleted": 2,
+              "live": 39
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Shader": {
+              "created": 99,
+              "deleted": 90,
+              "live": 9
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 81,
+              "deleted": 1,
+              "live": 80
+            }
+          },
+          "drawCalls": 122,
+          "deckDrawCalls": 122,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 360,
+          "bufferBytes": 14480623,
+          "taskMs": 1247.497,
+          "scriptMs": 1158.507,
+          "heapMB": 62.50007247924805
+        },
+        {
+          "name": "F-ALL-camera",
+          "elapsedMs": 2168.10000000149,
+          "rafFPS": 66.41760066413036,
+          "drawnFPS": 52.11936718782452,
+          "rafFrames": 144,
+          "drawnFrames": 113,
+          "p50FrameMs": 14.299999999999272,
+          "p95FrameMs": 28.399999999999636,
+          "p99FrameMs": 28.5,
+          "slowFrames": 0,
+          "longTasks": [],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 1608
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 1548
+            },
+            {
+              "id": "building-perimeter-shell-wall-5-0",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-6-1",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-7-2",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-9-3",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-19-4",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-28-5",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-31-6",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-32-7",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-37-8",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-38-9",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-39-10",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-41-11",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-42-12",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-43-13",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-44-14",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-46-15",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-47-16",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-48-17",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-52-18",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-53-19",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-54-20",
+              "count": 1
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 848,
+              "deleted": 6,
+              "live": 842
+            },
+            "Texture": {
+              "created": 77,
+              "deleted": 2,
+              "live": 75
+            },
+            "Program": {
+              "created": 49,
+              "deleted": 1,
+              "live": 48
+            },
+            "Shader": {
+              "created": 99,
+              "deleted": 90,
+              "live": 9
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 233,
+              "deleted": 1,
+              "live": 232
+            }
+          },
+          "drawCalls": 22610,
+          "deckDrawCalls": 1081,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 2487,
+          "bufferBytes": 8032876,
+          "taskMs": 1433.8350000000003,
+          "scriptMs": 1323.4809999999998,
+          "heapMB": 65.87138366699219
+        },
+        {
+          "name": "floor-switch-all-eight",
+          "elapsedMs": 2493.89999999851,
+          "rafFPS": 48.51838485908509,
+          "drawnFPS": 9.623481294363984,
+          "rafFrames": 121,
+          "drawnFrames": 24,
+          "p50FrameMs": 14.299999999999272,
+          "p95FrameMs": 71.39999999999964,
+          "p99FrameMs": 157.20000000000073,
+          "slowFrames": 8,
+          "longTasks": [
+            {
+              "start": 13475.900000002235,
+              "ms": 66
+            },
+            {
+              "start": 13993.400000002235,
+              "ms": 124
+            },
+            {
+              "start": 14364.10000000149,
+              "ms": 156
+            },
+            {
+              "start": 14776.20000000298,
+              "ms": 74
+            },
+            {
+              "start": 15075.300000000745,
+              "ms": 54
+            },
+            {
+              "start": 15359.800000000745,
+              "ms": 67
+            },
+            {
+              "start": 15659.20000000298,
+              "ms": 67
+            }
+          ],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 90
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 90
+            },
+            {
+              "id": "building-perimeter-wall-floor-7-2-0",
+              "count": 1
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 1015,
+              "deleted": 293,
+              "live": 722
+            },
+            "Texture": {
+              "created": 92,
+              "deleted": 37,
+              "live": 55
+            },
+            "Program": {
+              "created": 63,
+              "deleted": 15,
+              "live": 48
+            },
+            "Shader": {
+              "created": 127,
+              "deleted": 90,
+              "live": 37
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 269,
+              "deleted": 57,
+              "live": 212
+            }
+          },
+          "drawCalls": 244,
+          "deckDrawCalls": 244,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 493,
+          "bufferBytes": 17420240,
+          "taskMs": 1077.6919999999998,
+          "scriptMs": 934.1680000000006,
+          "heapMB": 97.72017288208008
+        },
+        {
+          "name": "search",
+          "elapsedMs": 90.5,
+          "rafFPS": 66.29834254143645,
+          "drawnFPS": 0,
+          "rafFrames": 6,
+          "drawnFrames": 0,
+          "p50FrameMs": 14.299999999999272,
+          "p95FrameMs": 14.300000000001091,
+          "p99FrameMs": 14.300000000001091,
+          "slowFrames": 0,
+          "longTasks": [],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 90
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 90
+            },
+            {
+              "id": "building-perimeter-wall-floor-7-2-0",
+              "count": 1
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 1015,
+              "deleted": 293,
+              "live": 722
+            },
+            "Texture": {
+              "created": 92,
+              "deleted": 37,
+              "live": 55
+            },
+            "Program": {
+              "created": 63,
+              "deleted": 15,
+              "live": 48
+            },
+            "Shader": {
+              "created": 127,
+              "deleted": 90,
+              "live": 37
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 269,
+              "deleted": 57,
+              "live": 212
+            }
+          },
+          "drawCalls": 0,
+          "deckDrawCalls": 0,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 0,
+          "bufferBytes": 0,
+          "taskMs": 54.83000000000082,
+          "scriptMs": 15.386000000000344,
+          "heapMB": 101.82172775268555,
+          "latencies": [
+            {
+              "q": "staff",
+              "ms": 22,
+              "count": 12
+            },
+            {
+              "q": "0362",
+              "ms": 16,
+              "count": 6
+            },
+            {
+              "q": "room",
+              "ms": 25,
+              "count": 47
+            },
+            {
+              "q": "library",
+              "ms": 18,
+              "count": 8
+            }
+          ]
+        },
+        {
+          "name": "above-below-first",
+          "elapsedMs": 680.7000000029802,
+          "rafFPS": 38.19597473172641,
+          "drawnFPS": 13.22168356098222,
+          "rafFrames": 26,
+          "drawnFrames": 9,
+          "p50FrameMs": 14.200000000000728,
+          "p95FrameMs": 15.299999999999272,
+          "p99FrameMs": 327.5,
+          "slowFrames": 1,
+          "longTasks": [
+            {
+              "start": 16823.800000000745,
+              "ms": 340
+            }
+          ],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 288
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 270
+            },
+            {
+              "id": "building-perimeter-wall-floor-3-2-0",
+              "count": 1
+            },
+            {
+              "id": "room-correspondence-fill",
+              "count": 1
+            },
+            {
+              "id": "room-correspondence-outline",
+              "count": 1
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 1122,
+              "deleted": 316,
+              "live": 806
+            },
+            "Texture": {
+              "created": 100,
+              "deleted": 39,
+              "live": 61
+            },
+            "Program": {
+              "created": 67,
+              "deleted": 17,
+              "live": 50
+            },
+            "Shader": {
+              "created": 135,
+              "deleted": 90,
+              "live": 45
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 295,
+              "deleted": 62,
+              "live": 233
+            }
+          },
+          "drawCalls": 410,
+          "deckDrawCalls": 17,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 165,
+          "bufferBytes": 645036,
+          "taskMs": 415.85500000000053,
+          "scriptMs": 361.85700000000054,
+          "heapMB": 109.12835693359375,
+          "analysis": {
+            "status": "ready",
+            "analysisMs": 137.79999999701977,
+            "preparationMs": 108.59999999776483,
+            "counts": [
+              {
+                "floor": 2,
+                "count": 5
+              },
+              {
+                "floor": 4,
+                "count": 4
+              },
+              {
+                "floor": 1,
+                "count": 12
+              },
+              {
+                "floor": 5,
+                "count": 4
+              },
+              {
+                "floor": 0,
+                "count": 8
+              },
+              {
+                "floor": 6,
+                "count": 7
+              },
+              {
+                "floor": 7,
+                "count": 7
+              }
+            ]
+          }
+        },
+        {
+          "name": "above-below-cached",
+          "elapsedMs": 85.40000000223517,
+          "rafFPS": 81.96721311260876,
+          "drawnFPS": 35.12880561968947,
+          "rafFrames": 7,
+          "drawnFrames": 3,
+          "p50FrameMs": 14.200000000000728,
+          "p95FrameMs": 14.299999999999272,
+          "p99FrameMs": 14.299999999999272,
+          "slowFrames": 0,
+          "longTasks": [],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 288
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 270
+            },
+            {
+              "id": "building-perimeter-wall-floor-3-2-0",
+              "count": 1
+            },
+            {
+              "id": "room-correspondence-fill",
+              "count": 1
+            },
+            {
+              "id": "room-correspondence-outline",
+              "count": 1
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 1131,
+              "deleted": 325,
+              "live": 806
+            },
+            "Texture": {
+              "created": 100,
+              "deleted": 39,
+              "live": 61
+            },
+            "Program": {
+              "created": 69,
+              "deleted": 19,
+              "live": 50
+            },
+            "Shader": {
+              "created": 139,
+              "deleted": 90,
+              "live": 49
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 297,
+              "deleted": 64,
+              "live": 233
+            }
+          },
+          "drawCalls": 17,
+          "deckDrawCalls": 17,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 25,
+          "bufferBytes": 19372,
+          "taskMs": 43.42999999999897,
+          "scriptMs": 26.93700000000021,
+          "heapMB": 88.58840560913086,
+          "cacheHit": true
+        },
+        {
+          "name": "night-architectural-load",
+          "elapsedMs": 1866,
+          "rafFPS": 57.87781350482315,
+          "drawnFPS": 13.933547695605574,
+          "rafFrames": 108,
+          "drawnFrames": 26,
+          "p50FrameMs": 14.200000000000728,
+          "p95FrameMs": 14.700000000000728,
+          "p99FrameMs": 99.59999999999854,
+          "slowFrames": 2,
+          "longTasks": [
+            {
+              "start": 20274,
+              "ms": 218
+            }
+          ],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 1608
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 1548
+            },
+            {
+              "id": "building-perimeter-shell-wall-5-0",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-6-1",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-7-2",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-9-3",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-19-4",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-28-5",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-31-6",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-32-7",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-37-8",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-38-9",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-39-10",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-41-11",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-42-12",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-43-13",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-44-14",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-46-15",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-47-16",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-48-17",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-52-18",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-53-19",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-54-20",
+              "count": 1
+            },
+            {
+              "id": "interior-light-pools",
+              "count": 138
+            },
+            {
+              "id": "interior-light-halos",
+              "count": 138
+            },
+            {
+              "id": "interior-light-fixtures",
+              "count": 138
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 1450,
+              "deleted": 1104,
+              "live": 346
+            },
+            "Texture": {
+              "created": 134,
+              "deleted": 95,
+              "live": 39
+            },
+            "Program": {
+              "created": 70,
+              "deleted": 21,
+              "live": 49
+            },
+            "Shader": {
+              "created": 141,
+              "deleted": 90,
+              "live": 51
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 373,
+              "deleted": 290,
+              "live": 83
+            }
+          },
+          "drawCalls": 1935,
+          "deckDrawCalls": 256,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 443,
+          "bufferBytes": 2475930,
+          "taskMs": 590.3650000000002,
+          "scriptMs": 483.492,
+          "heapMB": 122.3963394165039
+        },
+        {
+          "name": "night-architectural-camera",
+          "elapsedMs": 1929.5,
+          "rafFPS": 70.48458149779736,
+          "drawnFPS": 58.04612593936253,
+          "rafFrames": 136,
+          "drawnFrames": 112,
+          "p50FrameMs": 14.200000000000728,
+          "p95FrameMs": 14.400000000001455,
+          "p99FrameMs": 14.400000000001455,
+          "slowFrames": 0,
+          "longTasks": [],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 1608
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 1548
+            },
+            {
+              "id": "building-perimeter-shell-wall-5-0",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-6-1",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-7-2",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-9-3",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-19-4",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-28-5",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-31-6",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-32-7",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-37-8",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-38-9",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-39-10",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-41-11",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-42-12",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-43-13",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-44-14",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-46-15",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-47-16",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-48-17",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-52-18",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-53-19",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-54-20",
+              "count": 1
+            },
+            {
+              "id": "interior-light-pools",
+              "count": 138
+            },
+            {
+              "id": "interior-light-halos",
+              "count": 138
+            },
+            {
+              "id": "interior-light-fixtures",
+              "count": 138
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 1710,
+              "deleted": 1104,
+              "live": 606
+            },
+            "Texture": {
+              "created": 152,
+              "deleted": 95,
+              "live": 57
+            },
+            "Program": {
+              "created": 70,
+              "deleted": 21,
+              "live": 49
+            },
+            "Shader": {
+              "created": 141,
+              "deleted": 90,
+              "live": 51
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 450,
+              "deleted": 290,
+              "live": 160
+            }
+          },
+          "drawCalls": 12277,
+          "deckDrawCalls": 1350,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 1311,
+          "bufferBytes": 3243172,
+          "taskMs": 670.9429999999994,
+          "scriptMs": 584.8010000000006,
+          "heapMB": 133.4824447631836
+        },
+        {
+          "name": "night-gis-load",
+          "elapsedMs": 1431,
+          "rafFPS": 70.5800139762404,
+          "drawnFPS": 1.397624039133473,
+          "rafFrames": 101,
+          "drawnFrames": 2,
+          "p50FrameMs": 14.200000000000728,
+          "p95FrameMs": 14.899999999997817,
+          "p99FrameMs": 15,
+          "slowFrames": 0,
+          "longTasks": [],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 1608
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 1548
+            },
+            {
+              "id": "building-perimeter-shell-wall-5-0",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-6-1",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-7-2",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-9-3",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-19-4",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-28-5",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-31-6",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-32-7",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-37-8",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-38-9",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-39-10",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-41-11",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-42-12",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-43-13",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-44-14",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-46-15",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-47-16",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-48-17",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-52-18",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-53-19",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-54-20",
+              "count": 1
+            },
+            {
+              "id": "interior-light-pools",
+              "count": 138
+            },
+            {
+              "id": "interior-light-halos",
+              "count": 138
+            },
+            {
+              "id": "interior-light-fixtures",
+              "count": 138
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 1710,
+              "deleted": 1104,
+              "live": 606
+            },
+            "Texture": {
+              "created": 152,
+              "deleted": 95,
+              "live": 57
+            },
+            "Program": {
+              "created": 70,
+              "deleted": 21,
+              "live": 49
+            },
+            "Shader": {
+              "created": 141,
+              "deleted": 90,
+              "live": 51
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 450,
+              "deleted": 290,
+              "live": 160
+            }
+          },
+          "drawCalls": 56,
+          "deckDrawCalls": 56,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 29,
+          "bufferBytes": 955656,
+          "taskMs": 71.17500000000021,
+          "scriptMs": 32.385999999998916,
+          "heapMB": 136.49138641357422
+        },
+        {
+          "name": "night-gis-camera",
+          "elapsedMs": 2046.8999999985099,
+          "rafFPS": 70.35028579808727,
+          "drawnFPS": 54.22834530269227,
+          "rafFrames": 144,
+          "drawnFrames": 111,
+          "p50FrameMs": 14.200000000000728,
+          "p95FrameMs": 14.80000000000291,
+          "p99FrameMs": 15.900000000001455,
+          "slowFrames": 0,
+          "longTasks": [],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 1608
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 1548
+            },
+            {
+              "id": "building-perimeter-shell-wall-5-0",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-6-1",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-7-2",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-9-3",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-19-4",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-28-5",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-31-6",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-32-7",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-37-8",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-38-9",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-39-10",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-41-11",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-42-12",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-43-13",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-44-14",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-46-15",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-47-16",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-48-17",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-52-18",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-53-19",
+              "count": 1
+            },
+            {
+              "id": "building-perimeter-shell-wall-54-20",
+              "count": 1
+            },
+            {
+              "id": "interior-light-pools",
+              "count": 138
+            },
+            {
+              "id": "interior-light-halos",
+              "count": 138
+            },
+            {
+              "id": "interior-light-fixtures",
+              "count": 138
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 2150,
+              "deleted": 1104,
+              "live": 1046
+            },
+            "Texture": {
+              "created": 188,
+              "deleted": 95,
+              "live": 93
+            },
+            "Program": {
+              "created": 70,
+              "deleted": 21,
+              "live": 49
+            },
+            "Shader": {
+              "created": 141,
+              "deleted": 90,
+              "live": 51
+            },
+            "Framebuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "Renderbuffer": {
+              "created": 2,
+              "deleted": 0,
+              "live": 2
+            },
+            "VertexArray": {
+              "created": 593,
+              "deleted": 290,
+              "live": 303
+            }
+          },
+          "drawCalls": 25057,
+          "deckDrawCalls": 1350,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 2619,
+          "bufferBytes": 6478340,
+          "taskMs": 1001.4590000000005,
+          "scriptMs": 890.1260000000004,
+          "heapMB": 120.5550308227539
+        },
+        {
+          "name": "route-plan",
+          "elapsedMs": 2155.5,
+          "rafFPS": 30.619345859429366,
+          "drawnFPS": 29.227557411273484,
+          "rafFrames": 66,
+          "drawnFrames": 63,
+          "p50FrameMs": 14.200000000000728,
+          "p95FrameMs": 28.600000000002183,
+          "p99FrameMs": 583.7000000000007,
+          "slowFrames": 3,
+          "longTasks": [
+            {
+              "start": 28459.5,
+              "ms": 97
+            },
+            {
+              "start": 28603.400000002235,
+              "ms": 546
+            }
+          ],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 355
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 345
+            },
+            {
+              "id": "building-perimeter-wall-floor-1-2-0",
+              "count": 1
+            },
+            {
+              "id": "interior-light-pools",
+              "count": 20
+            },
+            {
+              "id": "interior-light-halos",
+              "count": 20
+            },
+            {
+              "id": "interior-light-fixtures",
+              "count": 20
+            },
+            {
+              "id": "route-focus-room-glow",
+              "count": 2
+            },
+            {
+              "id": "route-focus-start-end-markers",
+              "count": 2
+            },
+            {
+              "id": "route-focus-room-labels",
+              "count": 1
+            },
+            {
+              "id": "route-landmark-room-glow",
+              "count": 1
+            },
+            {
+              "id": "route-landmark-room-labels",
+              "count": 1
+            },
+            {
+              "id": "route-preview-remaining-border",
+              "count": 1
+            },
+            {
+              "id": "route-preview-remaining-main",
+              "count": 1
+            },
+            {
+              "id": "route-preview-cursor-halo",
+              "count": 1
+            },
+            {
+              "id": "route-preview-cursor-dot",
+              "count": 1
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 2738,
+              "deleted": 2120,
+              "live": 618
+            },
+            "Texture": {
+              "created": 239,
+              "deleted": 185,
+              "live": 54
+            },
+            "Program": {
+              "created": 75,
+              "deleted": 21,
+              "live": 54
+            },
+            "Shader": {
+              "created": 151,
+              "deleted": 90,
+              "live": 61
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 765,
+              "deleted": 585,
+              "live": 180
+            }
+          },
+          "drawCalls": 3514,
+          "deckDrawCalls": 1142,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 702,
+          "bufferBytes": 3426537,
+          "taskMs": 1120.0589999999995,
+          "scriptMs": 997.6339999999997,
+          "heapMB": 156.62414169311523
+        },
+        {
+          "name": "route-label-camera",
+          "elapsedMs": 2030.699999999255,
+          "rafFPS": 69.92662628652785,
+          "drawnFPS": 64.01733392428606,
+          "rafFrames": 142,
+          "drawnFrames": 130,
+          "p50FrameMs": 14.200000000000728,
+          "p95FrameMs": 14.80000000000291,
+          "p99FrameMs": 15.5,
+          "slowFrames": 0,
+          "longTasks": [],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 355
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 345
+            },
+            {
+              "id": "building-perimeter-wall-floor-1-2-0",
+              "count": 1
+            },
+            {
+              "id": "interior-light-pools",
+              "count": 20
+            },
+            {
+              "id": "interior-light-halos",
+              "count": 20
+            },
+            {
+              "id": "interior-light-fixtures",
+              "count": 20
+            },
+            {
+              "id": "route-focus-room-glow",
+              "count": 2
+            },
+            {
+              "id": "route-focus-start-end-markers",
+              "count": 2
+            },
+            {
+              "id": "route-focus-room-labels",
+              "count": 2
+            },
+            {
+              "id": "route-landmark-room-glow",
+              "count": 3
+            },
+            {
+              "id": "route-landmark-room-labels",
+              "count": 3
+            },
+            {
+              "id": "route-preview-remaining-border",
+              "count": 1
+            },
+            {
+              "id": "route-preview-remaining-main",
+              "count": 1
+            },
+            {
+              "id": "route-preview-traveled-border",
+              "count": 1
+            },
+            {
+              "id": "route-preview-traveled-main",
+              "count": 1
+            },
+            {
+              "id": "route-preview-cursor-halo",
+              "count": 1
+            },
+            {
+              "id": "route-preview-cursor-dot",
+              "count": 1
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 2821,
+              "deleted": 2120,
+              "live": 701
+            },
+            "Texture": {
+              "created": 245,
+              "deleted": 185,
+              "live": 60
+            },
+            "Program": {
+              "created": 75,
+              "deleted": 21,
+              "live": 54
+            },
+            "Shader": {
+              "created": 151,
+              "deleted": 90,
+              "live": 61
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 785,
+              "deleted": 585,
+              "live": 200
+            }
+          },
+          "drawCalls": 5512,
+          "deckDrawCalls": 1919,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 1013,
+          "bufferBytes": 568447,
+          "taskMs": 992.0379999999991,
+          "scriptMs": 788.8670000000016,
+          "heapMB": 60.7360954284668
+        },
+        {
+          "name": "route-animated-preview",
+          "elapsedMs": 4021.10000000149,
+          "rafFPS": 68.88662306331534,
+          "drawnFPS": 68.88662306331534,
+          "rafFrames": 277,
+          "drawnFrames": 277,
+          "p50FrameMs": 14.299999999995634,
+          "p95FrameMs": 14.900000000001455,
+          "p99FrameMs": 28.400000000001455,
+          "slowFrames": 0,
+          "longTasks": [],
+          "topLayers": [
+            {
+              "id": "indoor-building-layer",
+              "count": 355
+            },
+            {
+              "id": "procedural-interior-room-walls",
+              "count": 345
+            },
+            {
+              "id": "building-perimeter-wall-floor-1-2-0",
+              "count": 1
+            },
+            {
+              "id": "interior-light-pools",
+              "count": 20
+            },
+            {
+              "id": "interior-light-halos",
+              "count": 20
+            },
+            {
+              "id": "interior-light-fixtures",
+              "count": 20
+            },
+            {
+              "id": "route-focus-room-glow",
+              "count": 2
+            },
+            {
+              "id": "route-focus-start-end-markers",
+              "count": 2
+            },
+            {
+              "id": "route-focus-room-labels",
+              "count": 2
+            },
+            {
+              "id": "route-landmark-room-glow",
+              "count": 3
+            },
+            {
+              "id": "route-landmark-room-labels",
+              "count": 3
+            },
+            {
+              "id": "route-preview-remaining-border",
+              "count": 1
+            },
+            {
+              "id": "route-preview-remaining-main",
+              "count": 1
+            },
+            {
+              "id": "route-preview-traveled-border",
+              "count": 1
+            },
+            {
+              "id": "route-preview-traveled-main",
+              "count": 1
+            },
+            {
+              "id": "route-preview-cursor-halo",
+              "count": 1
+            },
+            {
+              "id": "route-preview-cursor-dot",
+              "count": 1
+            }
+          ],
+          "resources": {
+            "Buffer": {
+              "created": 2841,
+              "deleted": 2140,
+              "live": 701
+            },
+            "Texture": {
+              "created": 245,
+              "deleted": 185,
+              "live": 60
+            },
+            "Program": {
+              "created": 76,
+              "deleted": 22,
+              "live": 54
+            },
+            "Shader": {
+              "created": 153,
+              "deleted": 90,
+              "live": 63
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 790,
+              "deleted": 590,
+              "live": 200
+            }
+          },
+          "drawCalls": 6856,
+          "deckDrawCalls": 6856,
+          "wallMeshReplacements": 0,
+          "bufferUploads": 3163,
+          "bufferBytes": 77105124,
+          "taskMs": 2124.5539999999996,
+          "scriptMs": 1664.135999999999,
+          "heapMB": 174.85511779785156,
+          "previewLayers": [
+            "route-preview-remaining-border",
+            "route-preview-remaining-main",
+            "route-preview-traveled-border",
+            "route-preview-traveled-main",
+            "route-preview-cursor-halo",
+            "route-preview-cursor-dot"
+          ]
+        }
+      ],
+      "errors": [],
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 4060 Laptop GPU (0x000028E0) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "memoryCycles": [
+        {
+          "cycle": 0,
+          "Timestamp": 17747.49006,
+          "AudioHandlers": 0,
+          "AudioWorkletProcessors": 0,
+          "Documents": 4,
+          "Frames": 4,
+          "JSEventListeners": 257,
+          "LayoutObjects": 226,
+          "MediaKeySessions": 0,
+          "MediaKeys": 0,
+          "Nodes": 405,
+          "Resources": 4,
+          "ContextLifecycleStateObservers": 18,
+          "V8PerContextDatas": 2,
+          "WorkerGlobalScopes": 4,
+          "UACSSResources": 0,
+          "RTCPeerConnections": 0,
+          "ResourceFetchers": 8,
+          "AdSubframes": 0,
+          "DetachedScriptStates": 0,
+          "ArrayBufferContents": 1926,
+          "LayoutCount": 615,
+          "RecalcStyleCount": 411,
+          "LayoutDuration": 0.277207,
+          "RecalcStyleDuration": 0.081279,
+          "DevToolsCommandDuration": 0.240802,
+          "ScriptDuration": 14.796884,
+          "V8CompileDuration": 0,
+          "TaskDuration": 19.845697,
+          "TaskOtherDuration": 4.449525,
+          "ThreadTime": 17.481582,
+          "ProcessTime": 29.646688,
+          "JSHeapUsedSize": 51135080,
+          "JSHeapTotalSize": 56987648,
+          "FirstMeaningfulPaint": 17709.08949,
+          "DomContentLoaded": 17707.977256,
+          "NavigationStart": 17707.856936,
+          "time": 39636.70000000298,
+          "frame": 2149,
+          "draws": 98939,
+          "deckDraws": 18024,
+          "meshes": 0,
+          "uploads": 19638,
+          "bytes": 548407199,
+          "resources": {
+            "Buffer": {
+              "created": 2841,
+              "deleted": 2206,
+              "live": 635
+            },
+            "Texture": {
+              "created": 246,
+              "deleted": 189,
+              "live": 57
+            },
+            "Program": {
+              "created": 76,
+              "deleted": 27,
+              "live": 49
+            },
+            "Shader": {
+              "created": 153,
+              "deleted": 90,
+              "live": 63
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 790,
+              "deleted": 603,
+              "live": 187
+            }
+          }
+        },
+        {
+          "cycle": 1,
+          "Timestamp": 17748.924348,
+          "AudioHandlers": 0,
+          "AudioWorkletProcessors": 0,
+          "Documents": 4,
+          "Frames": 4,
+          "JSEventListeners": 257,
+          "LayoutObjects": 226,
+          "MediaKeySessions": 0,
+          "MediaKeys": 0,
+          "Nodes": 405,
+          "Resources": 4,
+          "ContextLifecycleStateObservers": 18,
+          "V8PerContextDatas": 2,
+          "WorkerGlobalScopes": 4,
+          "UACSSResources": 0,
+          "RTCPeerConnections": 0,
+          "ResourceFetchers": 8,
+          "AdSubframes": 0,
+          "DetachedScriptStates": 0,
+          "ArrayBufferContents": 1613,
+          "LayoutCount": 630,
+          "RecalcStyleCount": 471,
+          "LayoutDuration": 0.280376,
+          "RecalcStyleDuration": 0.099292,
+          "DevToolsCommandDuration": 0.261561,
+          "ScriptDuration": 15.229586,
+          "V8CompileDuration": 0,
+          "TaskDuration": 20.510744,
+          "TaskOtherDuration": 4.639929,
+          "ThreadTime": 18.128229,
+          "ProcessTime": 31.427511,
+          "JSHeapUsedSize": 48300968,
+          "JSHeapTotalSize": 52531200,
+          "FirstMeaningfulPaint": 17709.08949,
+          "DomContentLoaded": 17707.977256,
+          "NavigationStart": 17707.856936,
+          "time": 41069.10000000149,
+          "frame": 2229,
+          "draws": 100435,
+          "deckDraws": 18624,
+          "meshes": 0,
+          "uploads": 20364,
+          "bytes": 566520175,
+          "resources": {
+            "Buffer": {
+              "created": 3123,
+              "deleted": 3003,
+              "live": 120
+            },
+            "Texture": {
+              "created": 284,
+              "deleted": 269,
+              "live": 15
+            },
+            "Program": {
+              "created": 76,
+              "deleted": 27,
+              "live": 49
+            },
+            "Shader": {
+              "created": 153,
+              "deleted": 90,
+              "live": 63
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 848,
+              "deleted": 819,
+              "live": 29
+            }
+          }
+        },
+        {
+          "cycle": 2,
+          "Timestamp": 17750.541592,
+          "AudioHandlers": 0,
+          "AudioWorkletProcessors": 0,
+          "Documents": 4,
+          "Frames": 4,
+          "JSEventListeners": 257,
+          "LayoutObjects": 226,
+          "MediaKeySessions": 0,
+          "MediaKeys": 0,
+          "Nodes": 405,
+          "Resources": 4,
+          "ContextLifecycleStateObservers": 18,
+          "V8PerContextDatas": 2,
+          "WorkerGlobalScopes": 4,
+          "UACSSResources": 0,
+          "RTCPeerConnections": 0,
+          "ResourceFetchers": 7,
+          "AdSubframes": 0,
+          "DetachedScriptStates": 0,
+          "ArrayBufferContents": 1254,
+          "LayoutCount": 644,
+          "RecalcStyleCount": 531,
+          "LayoutDuration": 0.284375,
+          "RecalcStyleDuration": 0.118423,
+          "DevToolsCommandDuration": 0.285735,
+          "ScriptDuration": 15.820976,
+          "V8CompileDuration": 0,
+          "TaskDuration": 21.363563,
+          "TaskOtherDuration": 4.854054,
+          "ThreadTime": 18.934217,
+          "ProcessTime": 33.604901,
+          "JSHeapUsedSize": 48481360,
+          "JSHeapTotalSize": 52269056,
+          "FirstMeaningfulPaint": 17709.08949,
+          "DomContentLoaded": 17707.977256,
+          "NavigationStart": 17707.856936,
+          "time": 42686.10000000149,
+          "frame": 2311,
+          "draws": 101987,
+          "deckDraws": 19252,
+          "meshes": 0,
+          "uploads": 21082,
+          "bytes": 584616727,
+          "resources": {
+            "Buffer": {
+              "created": 3405,
+              "deleted": 3285,
+              "live": 120
+            },
+            "Texture": {
+              "created": 322,
+              "deleted": 307,
+              "live": 15
+            },
+            "Program": {
+              "created": 76,
+              "deleted": 27,
+              "live": 49
+            },
+            "Shader": {
+              "created": 153,
+              "deleted": 90,
+              "live": 63
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 906,
+              "deleted": 877,
+              "live": 29
+            }
+          }
+        },
+        {
+          "cycle": 3,
+          "Timestamp": 17751.917276,
+          "AudioHandlers": 0,
+          "AudioWorkletProcessors": 0,
+          "Documents": 4,
+          "Frames": 4,
+          "JSEventListeners": 257,
+          "LayoutObjects": 226,
+          "MediaKeySessions": 0,
+          "MediaKeys": 0,
+          "Nodes": 405,
+          "Resources": 4,
+          "ContextLifecycleStateObservers": 18,
+          "V8PerContextDatas": 2,
+          "WorkerGlobalScopes": 4,
+          "UACSSResources": 0,
+          "RTCPeerConnections": 0,
+          "ResourceFetchers": 7,
+          "AdSubframes": 0,
+          "DetachedScriptStates": 0,
+          "ArrayBufferContents": 1462,
+          "LayoutCount": 658,
+          "RecalcStyleCount": 592,
+          "LayoutDuration": 0.286692,
+          "RecalcStyleDuration": 0.137057,
+          "DevToolsCommandDuration": 0.305412,
+          "ScriptDuration": 16.206822,
+          "V8CompileDuration": 0,
+          "TaskDuration": 21.943406,
+          "TaskOtherDuration": 5.007423,
+          "ThreadTime": 19.496663,
+          "ProcessTime": 35.06381,
+          "JSHeapUsedSize": 48683132,
+          "JSHeapTotalSize": 52531200,
+          "FirstMeaningfulPaint": 17709.08949,
+          "DomContentLoaded": 17707.977256,
+          "NavigationStart": 17707.856936,
+          "time": 44061.70000000298,
+          "frame": 2395,
+          "draws": 103455,
+          "deckDraws": 19852,
+          "meshes": 0,
+          "uploads": 21798,
+          "bytes": 602712767,
+          "resources": {
+            "Buffer": {
+              "created": 3687,
+              "deleted": 3567,
+              "live": 120
+            },
+            "Texture": {
+              "created": 360,
+              "deleted": 345,
+              "live": 15
+            },
+            "Program": {
+              "created": 76,
+              "deleted": 27,
+              "live": 49
+            },
+            "Shader": {
+              "created": 153,
+              "deleted": 90,
+              "live": 63
+            },
+            "Framebuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "Renderbuffer": {
+              "created": 3,
+              "deleted": 0,
+              "live": 3
+            },
+            "VertexArray": {
+              "created": 964,
+              "deleted": 935,
+              "live": 29
+            }
+          }
+        }
+      ],
+      "network": {
+        "loads": [
+          {
+            "url": "/basemment_centerlines.geojson",
+            "headersMs": 17.100000001490116
+          },
+          {
+            "url": "/room_basement_walkable.geojson",
+            "headersMs": 16.699999999254942
+          },
+          {
+            "url": "/room_basement_obstacle_buffered.geojson",
+            "headersMs": 16.700000002980232
+          },
+          {
+            "url": "/rooms-basement-WGS.geojson",
+            "headersMs": 15.900000002235174
+          },
+          {
+            "url": "/rooms-level-01-WGS.geojson",
+            "headersMs": 15.899999998509884
+          },
+          {
+            "url": "/rooms-level-02-WGS.geojson",
+            "headersMs": 185.69999999925494
+          },
+          {
+            "url": "/rooms-level-03-WGS.geojson",
+            "headersMs": 186
+          },
+          {
+            "url": "/rooms-level-04-WGS.geojson",
+            "headersMs": 186
+          },
+          {
+            "url": "/rooms-level-5-WGS.geojson",
+            "headersMs": 186.10000000149012
+          },
+          {
+            "url": "/rooms-level-6-WGS.geojson",
+            "headersMs": 186.09999999776483
+          },
+          {
+            "url": "/rooms-level-7-WGS.geojson",
+            "headersMs": 186
+          },
+          {
+            "url": "/room_level_1_centerlines.geojson",
+            "headersMs": 34.100000001490116
+          },
+          {
+            "url": "/room_level_1_walkable.geojson",
+            "headersMs": 34
+          },
+          {
+            "url": "/room_level_1_obstacle_buffered.geojson",
+            "headersMs": 34.20000000298023
+          },
+          {
+            "url": "/rooms-all-WGS-v6.geojson",
+            "headersMs": 14.699999999254942
+          },
+          {
+            "url": "/room_level_2_centerlines.geojson",
+            "headersMs": 9.100000001490116
+          },
+          {
+            "url": "/room_level_2_walkable.geojson",
+            "headersMs": 8.899999998509884
+          },
+          {
+            "url": "/room_level_2_obstacle_buffered.geojson",
+            "headersMs": 8.900000002235174
+          },
+          {
+            "url": "/wall_room_level_1.geojson",
+            "headersMs": 25
+          },
+          {
+            "url": "/wall_room_basement.geojson",
+            "headersMs": 25.399999998509884
+          },
+          {
+            "url": "/wall_room_level_2.geojson",
+            "headersMs": 25.199999999254942
+          },
+          {
+            "url": "/wall_room_level_3.geojson",
+            "headersMs": 25.300000000745058
+          },
+          {
+            "url": "/wall_room_level_4.geojson",
+            "headersMs": 25.300000000745058
+          },
+          {
+            "url": "/wall_room_level_5.geojson",
+            "headersMs": 25.400000002235174
+          },
+          {
+            "url": "/wall_room_level_6.geojson",
+            "headersMs": 25.800000000745058
+          },
+          {
+            "url": "/wall_room_level_7.geojson",
+            "headersMs": 25.899999998509884
+          },
+          {
+            "url": "/wall_room_basement_stack.geojson",
+            "headersMs": 26
+          },
+          {
+            "url": "/wall_room_1_stack.geojson",
+            "headersMs": 26.099999997764826
+          },
+          {
+            "url": "/wall_room_2_stack.geojson",
+            "headersMs": 26.099999997764826
+          },
+          {
+            "url": "/wall_room_3_stack.geojson",
+            "headersMs": 26.199999999254942
+          },
+          {
+            "url": "/room_level_3_centerlines.geojson",
+            "headersMs": 13.300000000745058
+          },
+          {
+            "url": "/wall_room_4_stack.geojson",
+            "headersMs": 26.199999999254942
+          },
+          {
+            "url": "/wall_room_5_stack.geojson",
+            "headersMs": 26.199999999254942
+          },
+          {
+            "url": "/wall_room_6_stack.geojson",
+            "headersMs": 26.300000000745058
+          },
+          {
+            "url": "/room_level_3_walkable.geojson",
+            "headersMs": 13.400000002235174
+          },
+          {
+            "url": "/wall_room_7_stack.geojson",
+            "headersMs": 26.399999998509884
+          },
+          {
+            "url": "/room_level_3_obstacle_buffered.geojson",
+            "headersMs": 54.900000002235174
+          },
+          {
+            "url": "/room_level_4_centerlines.geojson",
+            "headersMs": 8
+          },
+          {
+            "url": "/room_level_4_walkable.geojson",
+            "headersMs": 8
+          },
+          {
+            "url": "/room_level_4_obstacle_buffered.geojson",
+            "headersMs": 8.100000001490116
+          },
+          {
+            "url": "/room_level_5_centerlines.geojson",
+            "headersMs": 36.5
+          },
+          {
+            "url": "/room_level_5_walkable.geojson",
+            "headersMs": 36.5
+          },
+          {
+            "url": "/room_level_5_obstacle_buffered.geojson",
+            "headersMs": 36.5
+          },
+          {
+            "url": "/room_level_6_centerlines.geojson",
+            "headersMs": 14.300000000745058
+          },
+          {
+            "url": "/room_level_7_centerlines.geojson",
+            "headersMs": 7.400000002235174
+          },
+          {
+            "url": "/room_level_7_walkable.geojson",
+            "headersMs": 7.399999998509884
+          },
+          {
+            "url": "/room_level_7_obstacle_buffered.geojson",
+            "headersMs": 7.5
+          },
+          {
+            "url": "/rooms-all-WGS-v6.geojson",
+            "headersMs": 37.100000001490116
+          },
+          {
+            "url": "/wall.geojson",
+            "headersMs": 36.599999997764826
+          },
+          {
+            "url": "/rooms-all-WGS-v6.geojson",
+            "headersMs": 35.30000000074506
+          },
+          {
+            "url": "/interior_lights.geojson",
+            "headersMs": 84.90000000223517
+          },
+          {
+            "url": "/rooms-all-WGS-v6.geojson",
+            "headersMs": 46
+          },
+          {
+            "url": "/rooms-all-WGS-v6.geojson",
+            "headersMs": 75.70000000298023
+          },
+          {
+            "url": "/rooms-all-WGS-v6.geojson",
+            "headersMs": 32.30000000074506
+          }
+        ],
+        "json": [
+          {
+            "url": "http://127.0.0.1:3005/basemment_centerlines.geojson",
+            "ms": 3.800000000745058,
+            "features": 83
+          },
+          {
+            "url": "http://127.0.0.1:3005/room_basement_walkable.geojson",
+            "ms": 7.199999999254942,
+            "features": 1
+          },
+          {
+            "url": "http://127.0.0.1:3005/room_basement_obstacle_buffered.geojson",
+            "ms": 7.899999998509884,
+            "features": 1
+          },
+          {
+            "url": "http://127.0.0.1:3005/rooms-basement-WGS.geojson",
+            "ms": 156,
+            "features": 148
+          },
+          {
+            "url": "http://127.0.0.1:3005/rooms-level-01-WGS.geojson",
+            "ms": 160.80000000074506,
+            "features": 355
+          },
+          {
+            "url": "http://127.0.0.1:3005/rooms-level-02-WGS.geojson",
+            "ms": 16.099999997764826,
+            "features": 243
+          },
+          {
+            "url": "http://127.0.0.1:3005/rooms-level-03-WGS.geojson",
+            "ms": 21.5,
+            "features": 288
+          },
+          {
+            "url": "http://127.0.0.1:3005/rooms-level-04-WGS.geojson",
+            "ms": 27,
+            "features": 199
+          },
+          {
+            "url": "http://127.0.0.1:3005/rooms-level-5-WGS.geojson",
+            "ms": 31.699999999254942,
+            "features": 149
+          },
+          {
+            "url": "http://127.0.0.1:3005/rooms-level-6-WGS.geojson",
+            "ms": 37.600000001490116,
+            "features": 138
+          },
+          {
+            "url": "http://127.0.0.1:3005/rooms-level-7-WGS.geojson",
+            "ms": 43.80000000074506,
+            "features": 90
+          },
+          {
+            "url": "http://127.0.0.1:3005/room_level_1_centerlines.geojson",
+            "ms": 74.19999999925494,
+            "features": 52
+          },
+          {
+            "url": "http://127.0.0.1:3005/room_level_1_walkable.geojson",
+            "ms": 74,
+            "features": 1
+          },
+          {
+            "url": "http://127.0.0.1:3005/room_level_1_obstacle_buffered.geojson",
+            "ms": 73.69999999925494,
+            "features": 1
+          },
+          {
+            "url": "http://127.0.0.1:3005/rooms-all-WGS-v6.geojson",
+            "ms": 617.5,
+            "features": 1608
+          },
+          {
+            "url": "http://127.0.0.1:3005/room_level_2_centerlines.geojson",
+            "ms": 299.8999999985099,
+            "features": 7
+          },
+          {
+            "url": "http://127.0.0.1:3005/room_level_2_walkable.geojson",
+            "ms": 299.80000000074506,
+            "features": 3
+          },
+          {
+            "url": "http://127.0.0.1:3005/room_level_2_obstacle_buffered.geojson",
+            "ms": 299.6000000014901,
+            "features": 1
+          },
+          {
+            "url": "http://127.0.0.1:3005/wall_room_level_1.geojson",
+            "ms": 310.30000000074506,
+            "features": 1
+          },
+          {
+            "url": "http://127.0.0.1:3005/wall_room_basement.geojson",
+            "ms": 310.20000000298023,
+            "features": 1
+          },
+          {
+            "url": "http://127.0.0.1:3005/wall_room_level_2.geojson",
+            "ms": 310.19999999925494,
+            "features": 1
+          },
+          {
+            "url": "http://127.0.0.1:3005/wall_room_level_3.geojson",
+            "ms": 310.0999999977648,
+            "features": 1
+          },
+          {
+            "url": "http://127.0.0.1:3005/wall_room_level_4.geojson",
+            "ms": 310,
+            "features": 1
+          },
+          {
+            "url": "http://127.0.0.1:3005/wall_room_level_5.geojson",
+            "ms": 309.8999999985099,
+            "features": 1
+          },
+          {
+            "url": "http://127.0.0.1:3005/wall_room_level_6.geojson",
+            "ms": 311.30000000074506,
+            "features": 1
+          },
+          {
+            "url": "http://127.0.0.1:3005/wall_room_level_7.geojson",
+            "ms": 312.80000000074506,
+            "features": 1
+          },
+          {
+            "url": "http://127.0.0.1:3005/room_level_3_centerlines.geojson",
+            "ms": 312.3999999985099,
+            "features": 129
+          },
+          {
+            "url": "http://127.0.0.1:3005/room_level_3_walkable.geojson",
+            "ms": 312.0999999977648,
+            "features": 2
+          },
+          {
+            "url": "http://127.0.0.1:3005/room_level_3_obstacle_buffered.geojson",
+            "ms": 688.8999999985099,
+            "features": 1
+          },
+          {
+            "url": "http://127.0.0.1:3005/room_level_4_centerlines.geojson",
+            "ms": 49.099999997764826,
+            "features": 12
+          },
+          {
+            "url": "http://127.0.0.1:3005/room_level_4_walkable.geojson",
+            "ms": 48.899999998509884,
+            "features": 2
+          },
+          {
+            "url": "http://127.0.0.1:3005/room_level_4_obstacle_buffered.geojson",
+            "ms": 48.79999999701977,
+            "features": 1
+          },
+          {
+            "url": "http://127.0.0.1:3005/room_level_5_centerlines.geojson",
+            "ms": 7.399999998509884,
+            "features": 74
+          },
+          {
+            "url": "http://127.0.0.1:3005/room_level_5_walkable.geojson",
+            "ms": 7.199999999254942,
+            "features": 1
+          },
+          {
+            "url": "http://127.0.0.1:3005/room_level_5_obstacle_buffered.geojson",
+            "ms": 7.100000001490116,
+            "features": 1
+          },
+          {
+            "url": "http://127.0.0.1:3005/room_level_6_centerlines.geojson",
+            "ms": 3.899999998509884,
+            "features": 38
+          },
+          {
+            "url": "http://127.0.0.1:3005/room_level_7_centerlines.geojson",
+            "ms": 1.0999999977648258,
+            "features": 22
+          },
+          {
+            "url": "http://127.0.0.1:3005/room_level_7_walkable.geojson",
+            "ms": 1,
+            "features": 1
+          },
+          {
+            "url": "http://127.0.0.1:3005/room_level_7_obstacle_buffered.geojson",
+            "ms": 0.8999999985098839,
+            "features": 1
+          },
+          {
+            "url": "http://127.0.0.1:3005/rooms-all-WGS-v6.geojson",
+            "ms": 14.300000000745058,
+            "features": 1608
+          },
+          {
+            "url": "http://127.0.0.1:3005/wall.geojson",
+            "ms": 15.600000001490116,
+            "features": 21
+          },
+          {
+            "url": "http://127.0.0.1:3005/rooms-all-WGS-v6.geojson",
+            "ms": 8.799999997019768,
+            "features": 1608
+          },
+          {
+            "url": "http://127.0.0.1:3005/interior_lights.geojson",
+            "ms": 1.5,
+            "features": 138
+          },
+          {
+            "url": "http://127.0.0.1:3005/rooms-all-WGS-v6.geojson",
+            "ms": 15.099999997764826,
+            "features": 1608
+          },
+          {
+            "url": "http://127.0.0.1:3005/rooms-all-WGS-v6.geojson",
+            "ms": 31.5,
+            "features": 1608
+          },
+          {
+            "url": "http://127.0.0.1:3005/rooms-all-WGS-v6.geojson",
+            "ms": 10,
+            "features": 1608
+          }
+        ],
+        "resources": [
+          {
+            "name": "http://127.0.0.1:3005/basemment_centerlines.geojson",
+            "duration": 11.5,
+            "transferSize": 73514
+          },
+          {
+            "name": "http://127.0.0.1:3005/room_basement_walkable.geojson",
+            "duration": 11.5,
+            "transferSize": 24029
+          },
+          {
+            "name": "http://127.0.0.1:3005/room_basement_obstacle_buffered.geojson",
+            "duration": 11.600000001490116,
+            "transferSize": 28260
+          },
+          {
+            "name": "http://127.0.0.1:3005/rooms-basement-WGS.geojson",
+            "duration": 11.099999997764826,
+            "transferSize": 102390
+          },
+          {
+            "name": "http://127.0.0.1:3005/rooms-level-01-WGS.geojson",
+            "duration": 11.899999998509884,
+            "transferSize": 269832
+          },
+          {
+            "name": "http://127.0.0.1:3005/rooms-level-02-WGS.geojson",
+            "duration": 19.600000001490116,
+            "transferSize": 152961
+          },
+          {
+            "name": "http://127.0.0.1:3005/rooms-level-03-WGS.geojson",
+            "duration": 19.899999998509884,
+            "transferSize": 183831
+          },
+          {
+            "name": "http://127.0.0.1:3005/rooms-level-04-WGS.geojson",
+            "duration": 20.800000000745058,
+            "transferSize": 116291
+          },
+          {
+            "name": "http://127.0.0.1:3005/rooms-level-5-WGS.geojson",
+            "duration": 21.299999997019768,
+            "transferSize": 93410
+          },
+          {
+            "name": "http://127.0.0.1:3005/rooms-level-6-WGS.geojson",
+            "duration": 21.800000000745058,
+            "transferSize": 94869
+          },
+          {
+            "name": "http://127.0.0.1:3005/rooms-level-7-WGS.geojson",
+            "duration": 24.800000000745058,
+            "transferSize": 79177
+          },
+          {
+            "name": "http://127.0.0.1:3005/room_level_1_centerlines.geojson",
+            "duration": 6.099999997764826,
+            "transferSize": 45244
+          },
+          {
+            "name": "http://127.0.0.1:3005/room_level_1_walkable.geojson",
+            "duration": 6.400000002235174,
+            "transferSize": 131798
+          },
+          {
+            "name": "http://127.0.0.1:3005/room_level_1_obstacle_buffered.geojson",
+            "duration": 6.399999998509884,
+            "transferSize": 169903
+          },
+          {
+            "name": "http://127.0.0.1:3005/rooms-all-WGS-v6.geojson",
+            "duration": 9.699999999254942,
+            "transferSize": 1282258
+          },
+          {
+            "name": "http://127.0.0.1:3005/room_level_2_centerlines.geojson",
+            "duration": 4,
+            "transferSize": 3299
+          },
+          {
+            "name": "http://127.0.0.1:3005/room_level_2_walkable.geojson",
+            "duration": 4.300000000745058,
+            "transferSize": 92643
+          },
+          {
+            "name": "http://127.0.0.1:3005/room_level_2_obstacle_buffered.geojson",
+            "duration": 5.900000002235174,
+            "transferSize": 59343
+          },
+          {
+            "name": "http://127.0.0.1:3005/wall_room_basement.geojson",
+            "duration": 5.5,
+            "transferSize": 2907
+          },
+          {
+            "name": "http://127.0.0.1:3005/wall_room_level_1.geojson",
+            "duration": 5.5,
+            "transferSize": 11234
+          },
+          {
+            "name": "http://127.0.0.1:3005/wall_room_level_2.geojson",
+            "duration": 5.699999999254942,
+            "transferSize": 4620
+          },
+          {
+            "name": "http://127.0.0.1:3005/wall_room_level_3.geojson",
+            "duration": 6,
+            "transferSize": 4510
+          },
+          {
+            "name": "http://127.0.0.1:3005/wall_room_level_4.geojson",
+            "duration": 5.800000000745058,
+            "transferSize": 1521
+          },
+          {
+            "name": "http://127.0.0.1:3005/wall_room_level_5.geojson",
+            "duration": 6.100000001490116,
+            "transferSize": 1854
+          },
+          {
+            "name": "http://127.0.0.1:3005/wall_room_level_6.geojson",
+            "duration": 12.199999999254942,
+            "transferSize": 1771
+          },
+          {
+            "name": "http://127.0.0.1:3005/wall_room_level_7.geojson",
+            "duration": 12.399999998509884,
+            "transferSize": 1770
+          },
+          {
+            "name": "http://127.0.0.1:3005/wall_room_basement_stack.geojson",
+            "duration": 12.5,
+            "transferSize": 1026
+          },
+          {
+            "name": "http://127.0.0.1:3005/wall_room_1_stack.geojson",
+            "duration": 12.899999998509884,
+            "transferSize": 1026
+          },
+          {
+            "name": "http://127.0.0.1:3005/wall_room_2_stack.geojson",
+            "duration": 13.099999997764826,
+            "transferSize": 1026
+          },
+          {
+            "name": "http://127.0.0.1:3005/wall_room_3_stack.geojson",
+            "duration": 13.199999999254942,
+            "transferSize": 1026
+          },
+          {
+            "name": "http://127.0.0.1:3005/wall_room_4_stack.geojson",
+            "duration": 18.699999999254942,
+            "transferSize": 1026
+          },
+          {
+            "name": "http://127.0.0.1:3005/wall_room_5_stack.geojson",
+            "duration": 18.800000000745058,
+            "transferSize": 1026
+          },
+          {
+            "name": "http://127.0.0.1:3005/wall_room_6_stack.geojson",
+            "duration": 19.300000000745058,
+            "transferSize": 1026
+          },
+          {
+            "name": "http://127.0.0.1:3005/wall_room_7_stack.geojson",
+            "duration": 19.5,
+            "transferSize": 1026
+          },
+          {
+            "name": "http://127.0.0.1:3005/room_level_3_centerlines.geojson",
+            "duration": 6.600000001490116,
+            "transferSize": 118432
+          },
+          {
+            "name": "http://127.0.0.1:3005/room_level_3_walkable.geojson",
+            "duration": 7.199999999254942,
+            "transferSize": 252669
+          },
+          {
+            "name": "http://127.0.0.1:3005/room_level_3_obstacle_buffered.geojson",
+            "duration": 10.5,
+            "transferSize": 145227
+          },
+          {
+            "name": "http://127.0.0.1:3005/room_level_4_centerlines.geojson",
+            "duration": 3.300000000745058,
+            "transferSize": 8351
+          },
+          {
+            "name": "http://127.0.0.1:3005/room_level_4_walkable.geojson",
+            "duration": 3.800000000745058,
+            "transferSize": 170111
+          },
+          {
+            "name": "http://127.0.0.1:3005/room_level_4_obstacle_buffered.geojson",
+            "duration": 4.100000001490116,
+            "transferSize": 100346
+          },
+          {
+            "name": "http://127.0.0.1:3005/room_level_5_centerlines.geojson",
+            "duration": 3.300000000745058,
+            "transferSize": 54820
+          },
+          {
+            "name": "http://127.0.0.1:3005/room_level_5_walkable.geojson",
+            "duration": 3.400000002235174,
+            "transferSize": 8777
+          },
+          {
+            "name": "http://127.0.0.1:3005/room_level_5_obstacle_buffered.geojson",
+            "duration": 3.7000000029802322,
+            "transferSize": 22364
+          },
+          {
+            "name": "http://127.0.0.1:3005/room_level_6_centerlines.geojson",
+            "duration": 3.5,
+            "transferSize": 23594
+          },
+          {
+            "name": "http://127.0.0.1:3005/room_level_7_centerlines.geojson",
+            "duration": 4.199999999254942,
+            "transferSize": 14671
+          },
+          {
+            "name": "http://127.0.0.1:3005/room_level_7_walkable.geojson",
+            "duration": 5.599999997764826,
+            "transferSize": 61239
+          },
+          {
+            "name": "http://127.0.0.1:3005/room_level_7_obstacle_buffered.geojson",
+            "duration": 5.700000002980232,
+            "transferSize": 62890
+          },
+          {
+            "name": "http://127.0.0.1:3005/rooms-all-WGS-v6.geojson",
+            "duration": 6.399999998509884,
+            "transferSize": 300
+          },
+          {
+            "name": "http://127.0.0.1:3005/wall.geojson",
+            "duration": 10.400000002235174,
+            "transferSize": 42516
+          },
+          {
+            "name": "http://127.0.0.1:3005/rooms-all-WGS-v6.geojson",
+            "duration": 3.199999999254942,
+            "transferSize": 300
+          },
+          {
+            "name": "http://127.0.0.1:3005/interior_lights.geojson",
+            "duration": 7.899999998509884,
+            "transferSize": 77056
+          },
+          {
+            "name": "http://127.0.0.1:3005/rooms-all-WGS-v6.geojson",
+            "duration": 5.300000000745058,
+            "transferSize": 300
+          },
+          {
+            "name": "http://127.0.0.1:3005/rooms-all-WGS-v6.geojson",
+            "duration": 6.800000000745058,
+            "transferSize": 300
+          },
+          {
+            "name": "http://127.0.0.1:3005/rooms-all-WGS-v6.geojson",
+            "duration": 2.599999997764826,
+            "transferSize": 300
+          }
+        ]
+      }
+    }
+  ],
+  "chrome": "155.0.8059.86",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "rendering": "Headless Chrome, ANGLE d3d11, deviceScaleFactor 1"
+}
