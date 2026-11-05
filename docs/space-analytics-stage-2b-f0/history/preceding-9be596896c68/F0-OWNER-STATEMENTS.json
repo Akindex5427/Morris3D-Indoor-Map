@@ -1,0 +1,78 @@
+{
+  "source": "C:/Users/ChristDNA/.codex/attachments/bf3d44c9-6286-4238-a562-d95b7bc3372d/Pasted text.txt",
+  "source_sha256": "d660fcc21af1d56e3d62b54677b937e15526d4b4b7f33f25511a6902581c0484",
+  "approval_imported": false,
+  "mechanical": {
+    "category": "building_services",
+    "subcategory": "mechanical_equipment_room",
+    "role": "room_boundary",
+    "physical_rooms": 1,
+    "logical_spaces": 1,
+    "entrance": "No entrance shown on floor plan",
+    "area_policy": "count once"
+  },
+  "scrc": {
+    "category": "collections_bookshelves",
+    "subcategory": "restricted_collection_stacks",
+    "role": "room_boundary",
+    "physical_rooms": 1,
+    "logical_spaces": 1,
+    "access": "staff_only",
+    "area_policy": "count once"
+  },
+  "collections": {
+    "category": "collections_bookshelves",
+    "role": "functional_zone",
+    "physical_rooms": 0,
+    "logical_spaces_per_verified_zone": 1
+  },
+  "fixtures": {
+    "names": [
+      "National Union Catalog",
+      "Storage 3 Books",
+      "Indexes"
+    ],
+    "category": "collections_bookshelves",
+    "role": "furniture_or_equipment",
+    "physical_rooms": 0,
+    "logical_spaces": 0
+  },
+  "restrooms": {
+    "role": "room_boundary",
+    "category": "restroom_facilities",
+    "physical_rooms_per_restroom": 1
+  },
+  "dewey_center": {
+    "category": "research_special_services",
+    "subcategory": "specialized_research_center",
+    "role": "room_boundary",
+    "physical_rooms": 1,
+    "logical_spaces": 1
+  },
+  "empty": {
+    "category": "vacant_unassigned",
+    "subcategory": "unused_space",
+    "role": "functional_zone",
+    "enclosure": "unverified"
+  },
+  "vertical": {
+    "stair_1": "open",
+    "stair_2": "enclosed",
+    "stair_3": "enclosed",
+    "elevator": "enclosed; shaft versus car unresolved",
+    "general_room_count": 0
+  },
+  "structural": {
+    "role": "structural_component",
+    "physical_rooms": 0
+  },
+  "floor": {
+    "role": "floor_background",
+    "physical_rooms": 0,
+    "area_policy": "Do not add to contained rooms or treat residual area as circulation"
+  },
+  "horizontal": {
+    "separately_digitized_circulation_confirmed": false,
+    "separate_elevator_lobby_confirmed": false
+  }
+}

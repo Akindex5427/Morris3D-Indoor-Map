@@ -3,7 +3,10 @@ import { createCorrespondenceIndex, resolveAndAnalyze } from "../utils/roomCorre
 let index;
 self.onmessage = ({ data: { id, datasets, feature } }) => {
   try {
-    if (datasets) index = createCorrespondenceIndex(datasets);
+    if (datasets) {
+      index = null; // Never fall back to an old index if replacement data is invalid.
+      index = createCorrespondenceIndex(datasets);
+    }
     if (!index) throw new Error("Floor geometries are not ready");
     self.postMessage({ id, result: resolveAndAnalyze(index, feature) });
   } catch (error) {

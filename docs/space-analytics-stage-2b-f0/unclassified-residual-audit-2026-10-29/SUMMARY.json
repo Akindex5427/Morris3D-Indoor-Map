@@ -1,0 +1,97 @@
+{
+  "audit_date": "2026-10-29",
+  "scope": "Read-only F0 source and owner-record audit; new reports only",
+  "current_polygon_count": 148,
+  "reconciliation_counts": {
+    "owner_verified_matched": 42,
+    "owner_verified_identity_pending": 104,
+    "technical_review_required": 1,
+    "unresolved_owner_review": 1
+  },
+  "direct_function_or_geometry_questions": 2,
+  "other_identity_or_membership_questions": 104,
+  "current_review_rows": 106,
+  "review_kind_counts": {
+    "numbered_stair_membership": 96,
+    "collection_range_identity": 3,
+    "collection_logical_membership": 3,
+    "geometry_representation": 1,
+    "functional_classification_and_geometry_role": 1,
+    "owner_to_polygon_binding": 2
+  },
+  "historical_or_unlocated_rows": 4,
+  "authoritative_footprint": {
+    "verified": true,
+    "historical_dataset": "public/rooms-all-WGS-v6.geojson",
+    "historical_objectid": 139,
+    "historical_name": "Structure",
+    "historical_base_heigh": 0,
+    "historical_height": 0.5,
+    "current_source": "public/rooms-basement-WGS.geojson",
+    "current_fid": 121,
+    "current_secondary_fid": 131,
+    "current_name": "floor",
+    "current_base_heigh": 0,
+    "current_height": 0.2,
+    "current_polygon_area_m2": 5627.0975462178685,
+    "projection": {
+      "method": "local spherical Lambert azimuthal equal-area",
+      "origin": [
+        -89.22042322309318,
+        37.715287983070255
+      ],
+      "units": "m2"
+    },
+    "evidence": "Unique reciprocal F0 full-footprint signature at established nine-decimal XY export precision; current raw geometry also exactly equals preserved Stage 2A and preceding Stage 2B floor geometry; owner floor_background meaning reliably reconciled.",
+    "matching_current_fids": [
+      121
+    ],
+    "baseline_fid": 123,
+    "preceding_audit_fid": 122,
+    "current_raw_geometry_sha256": "c0fe137d78dd0283a7c8aa06eb7adcc92a2a312e814148ef91cadb98cf9f0cb4",
+    "export_precision_signature_sha256": "0135552bff76cf04b2dec40c197634cff38c05471127424c8cbad00f7077abbc",
+    "warning": "OBJECTID 139 is a historical combined-export identity, not current FID 139. Combined name Structure and height 0.5 differ from individual floor and height 0.2; identity here is horizontal footprint only.",
+    "source_hashes": {
+      "public/rooms-basement-WGS.geojson": "a3de5bee376bf8cb644bcbef86464f432cdf194ed7b52f6702a55564c193fdc4",
+      "public/rooms-all-WGS-v6.geojson": "31309b325db7b8e378d909ae8facfbbe0005a290021f10cc262f08fc5d2945be",
+      "docs/space-analytics-stage-2b-f0/baseline-F0.geojson": "20b36e5d76af03730889b4fbc6f2d4b779aca17258ebdabd0dee8ce1dca11085",
+      "docs/space-analytics-stage-2b-f0/history/preceding-9be596896c68/F0-AUTHORITATIVE-SNAPSHOT.geojson": "9be596896c68c09320b932f48dfd42c8880892547847967f1bca268f7b4e9011",
+      "data/space-analytics/metadata.f6-sync.v1.json": "35ed743f6fb2edede40467496a8c2ba95a342f310dedd5e6e498511fd0690fb2",
+      "docs/space-analytics-stage-2b-f0/F0-LATEST-INVENTORY.json": "35291b371f85f38dac252da504d25a727b2f02fe2d3e4d838b63030de2b53a23",
+      "docs/space-analytics-stage-2b-f0/F0-STAGE2B-RECONCILIATION.json": "007afdbb86a6fefafb931e50147d52f05ef89386119f549de76c4e81d693f68a",
+      "docs/space-analytics-stage-2b-f0/F0-OWNER-STATEMENTS.json": "d6826b60cab76538407ca3fbfe7b5f9206a2797c50a6105815528b04feb7b542",
+      "docs/space-analytics-stage-2b-f0/OWNER-REQUEST.txt": "d660fcc21af1d56e3d62b54677b937e15526d4b4b7f33f25511a6902581c0484"
+    }
+  },
+  "residual_assessment": {
+    "authoritative_footprint_verified": true,
+    "allocation_rules_verified": false,
+    "status": "withheld_missing_verified_allocation_mask",
+    "reason": "Owner functions and modeled roles are recorded, but no current-version area-allocation mask or complete inclusion/overlap rules are established. Unknown allocation is not zero allocation.",
+    "formal_metadata_source_sha256": "20b36e5d76af03730889b4fbc6f2d4b779aca17258ebdabd0dee8ce1dca11085",
+    "formal_metadata_matches_current_source": false,
+    "formal_f0_row_count": 148,
+    "formal_f0_verified_count": 0,
+    "formal_f0_area_flags_non_null": 0,
+    "formal_approval_count": 0,
+    "approved_relationship_count": 0,
+    "stage2b_count_statuses": [
+      "report-only owner intent; not imported or allocated"
+    ],
+    "residual_geometry_computed": false,
+    "residual_geojson_exported": false,
+    "authoritative_residual_area_m2": null,
+    "residual_piece_count": null,
+    "temporary_residual_ids_assigned": [],
+    "missing_rules": [
+      "Which exact current polygon footprints are approved as spatial allocations, independent of room/logical-space counts.",
+      "Whether collection fixture footprints allocate floor area or only represent furniture within a zone, and how any overlap is handled.",
+      "How stair treads, landings and upper components project to a single basement allocation while their numbered-stair memberships remain pending.",
+      "How shaft/car extent and Emergency Exit geometry are treated.",
+      "Current-polygon bindings for Mechanical Room and SCRC and collection range/grouping cases.",
+      "Any missing allocations for unlocated Center for Dewey Studies, Empty and Journals 1995 owner statements."
+    ]
+  },
+  "area_method": "Existing project local spherical Lambert azimuthal equal-area at recorded Stage 2B origin; full polygon rings including holes; m2, not source Shape_Area.",
+  "polygon_areas_are_not_additive_allocated_area": true
+}

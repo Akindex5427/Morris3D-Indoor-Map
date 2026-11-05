@@ -1,0 +1,56 @@
+{
+  "checks": [
+    {
+      "name": "all current features inventoried with exact names and attributes",
+      "status": "passed"
+    },
+    {
+      "name": "unique export IDs and no accidental row identity matching",
+      "status": "passed"
+    },
+    {
+      "name": "strict predecessor crosswalk is reciprocal",
+      "status": "passed"
+    },
+    {
+      "name": "added, retained and removed accounting is complete",
+      "status": "passed"
+    },
+    {
+      "name": "full footprint F-ALL links are reciprocal and same-floor",
+      "status": "passed"
+    },
+    {
+      "name": "geometry validation, intersections and areas are valid",
+      "status": "passed"
+    },
+    {
+      "name": "matched owner records excluded from unresolved queue; no invented hierarchy",
+      "status": "passed"
+    },
+    {
+      "name": "near-coincident mechanical/structure conflict remains explicit",
+      "status": "passed"
+    },
+    {
+      "name": "ambiguous journal groups do not receive per-polygon logical counts",
+      "status": "passed"
+    },
+    {
+      "name": "unsupported taxonomy flagged without production schema changes",
+      "status": "passed"
+    },
+    {
+      "name": "all pre-existing protected files unchanged, including F4/F6 and owner metadata",
+      "status": "passed"
+    }
+  ],
+  "integrity": {
+    "protected_file_count": 892,
+    "changed": []
+  },
+  "browser_test_run": false,
+  "application_build_run": false,
+  "source_hash": "9be596896c68c09320b932f48dfd42c8880892547847967f1bca268f7b4e9011",
+  "combined_hash": "31309b325db7b8e378d909ae8facfbbe0005a290021f10cc262f08fc5d2945be"
+}

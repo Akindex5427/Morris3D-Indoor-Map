@@ -1,0 +1,1262 @@
+[
+  {
+    "source": "public/basement_centerlines.geojson",
+    "sha256": "7e24366c79d89bc78c3a77c735efa6bccb755973c96b450c2c9b6949fff9d0c6",
+    "features": 66,
+    "geometry_types": {
+      "LineString": 66
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Length",
+      "endroom",
+      "level",
+      "name",
+      "startroom",
+      "type",
+      "width"
+    ],
+    "extent": [
+      -89.22096906341886,
+      37.714999095067505,
+      -89.22010493551696,
+      37.71555289684482
+    ]
+  },
+  {
+    "source": "public/basemment_centerlines.geojson",
+    "sha256": "7ed8751ae8ba5664e6a8716eab34003c31d9c5b42940564d4f061c386d114cbd",
+    "features": 83,
+    "geometry_types": {
+      "LineString": 83
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Length",
+      "endroom",
+      "level",
+      "name",
+      "startroom",
+      "type",
+      "width"
+    ],
+    "extent": [
+      -89.22097625107224,
+      37.714999095067505,
+      -89.22010493551696,
+      37.71555289684482
+    ]
+  },
+  {
+    "source": "public/interior_lights.geojson",
+    "sha256": "97baa3a6d44b078211941effe8572f85b02a1d4df7b460123d67c280d3261568",
+    "features": 138,
+    "geometry_types": {
+      "Point": 138
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "base_height",
+      "color",
+      "enabled",
+      "floor_id",
+      "height",
+      "intensity",
+      "light_id",
+      "light_type",
+      "radius_m",
+      "z_height"
+    ],
+    "extent": [
+      -89.22096905064302,
+      37.71501658314099,
+      -89.21999591018728,
+      37.7156155871693
+    ]
+  },
+  {
+    "source": "public/interior_lights_basement.geojson",
+    "sha256": "a348c67961ab6090b506a61558d34cd9706d173d794821d57a864e16ad867342",
+    "features": 19,
+    "geometry_types": {
+      "Point": 19
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "base_height",
+      "color",
+      "enabled",
+      "floor_id",
+      "height",
+      "intensity",
+      "light_id",
+      "light_type",
+      "radius_m",
+      "z_height"
+    ],
+    "extent": [
+      -89.22090934681258,
+      37.71512256911021,
+      -89.22003817232816,
+      37.7156155871693
+    ]
+  },
+  {
+    "source": "public/interior_lights_level_1.geojson",
+    "sha256": "6615460a32d8ce71eb7d528e6212b854d280f56477eca691e55215fddc9b559a",
+    "features": 20,
+    "geometry_types": {
+      "Point": 20
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "base_height",
+      "color",
+      "enabled",
+      "floor_id",
+      "height",
+      "intensity",
+      "light_id",
+      "light_type",
+      "radius_m",
+      "z_height"
+    ],
+    "extent": [
+      -89.22089427757369,
+      37.71501658314099,
+      -89.22000370217407,
+      37.71555664134577
+    ]
+  },
+  {
+    "source": "public/interior_lights_level_2.geojson",
+    "sha256": "6bfa0a0df355b998806d7bf3a1ce303f1a82aaccb71a6b1b48e648007c4ff4a6",
+    "features": 23,
+    "geometry_types": {
+      "Point": 23
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "base_height",
+      "color",
+      "enabled",
+      "floor_id",
+      "height",
+      "intensity",
+      "light_id",
+      "light_type",
+      "radius_m",
+      "z_height"
+    ],
+    "extent": [
+      -89.22093109861889,
+      37.715022234024325,
+      -89.22003016025413,
+      37.71541694843934
+    ]
+  },
+  {
+    "source": "public/interior_lights_level_3.geojson",
+    "sha256": "2bbc6bebf4e20c5f16d26c4e5f421adb07f13ea2c29e776ecd9f8ea25a8bbe46",
+    "features": 16,
+    "geometry_types": {
+      "Point": 16
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "base_height",
+      "color",
+      "enabled",
+      "floor_id",
+      "height",
+      "intensity",
+      "light_id",
+      "light_type",
+      "radius_m",
+      "z_height"
+    ],
+    "extent": [
+      -89.22086985148282,
+      37.71514834909328,
+      -89.22006036071566,
+      37.715453378382726
+    ]
+  },
+  {
+    "source": "public/interior_lights_level_4.geojson",
+    "sha256": "182af493b9066023a309b53c194a55801761ff49281ad3c4fea893c9735bd86e",
+    "features": 23,
+    "geometry_types": {
+      "Point": 23
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "base_height",
+      "color",
+      "enabled",
+      "floor_id",
+      "height",
+      "intensity",
+      "light_id",
+      "light_type",
+      "radius_m",
+      "z_height"
+    ],
+    "extent": [
+      -89.22096905064302,
+      37.71503589719337,
+      -89.22004676022227,
+      37.71548826342106
+    ]
+  },
+  {
+    "source": "public/interior_lights_level_5.geojson",
+    "sha256": "e8d71ccbddca9fe833899fccbe7ed590e5d3dcdb5a0e365d57963e8aed36b701",
+    "features": 19,
+    "geometry_types": {
+      "Point": 19
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "base_height",
+      "color",
+      "enabled",
+      "floor_id",
+      "height",
+      "intensity",
+      "light_id",
+      "light_type",
+      "radius_m",
+      "z_height"
+    ],
+    "extent": [
+      -89.22095870294925,
+      37.71502125265239,
+      -89.21999591018728,
+      37.715510833408835
+    ]
+  },
+  {
+    "source": "public/interior_lights_level_6.geojson",
+    "sha256": "6263cf170fc09f7db0fa2fc10f8d30bd8a26447661784e8197b7be3685f875f3",
+    "features": 18,
+    "geometry_types": {
+      "Point": 18
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "base_height",
+      "color",
+      "enabled",
+      "floor_id",
+      "height",
+      "intensity",
+      "light_id",
+      "light_type",
+      "radius_m",
+      "z_height"
+    ],
+    "extent": [
+      -89.22092868843897,
+      37.71503488739666,
+      -89.22005722110376,
+      37.71549469381815
+    ]
+  },
+  {
+    "source": "public/rooms-all-WGS-v6.geojson",
+    "sha256": "52a6c9767615f44ec937a28e45d3fc74f1a69d2d8151af0ef5a0400676aaac79",
+    "features": 1608,
+    "geometry_types": {
+      "MultiPolygon": 1,
+      "Polygon": 1607
+    },
+    "declared_crs": null,
+    "fields": [
+      "FID",
+      "OBJECTID",
+      "OBJECTID_1",
+      "Shape_Area",
+      "Shape_Leng",
+      "Shape_Length",
+      "base_heigh",
+      "color",
+      "height",
+      "level",
+      "name",
+      "stack"
+    ],
+    "extent": [
+      -89.22109147799995,
+      37.714941628000076,
+      -89.21984219899997,
+      37.71564134000005
+    ]
+  },
+  {
+    "source": "public/rooms-basement-WGS.geojson",
+    "sha256": "20b36e5d76af03730889b4fbc6f2d4b779aca17258ebdabd0dee8ce1dca11085",
+    "features": 148,
+    "geometry_types": {
+      "Polygon": 148
+    },
+    "declared_crs": null,
+    "fields": [
+      "FID",
+      "FID_",
+      "Shape_Area",
+      "Shape_Leng",
+      "base_heigh",
+      "color",
+      "height",
+      "level",
+      "name",
+      "stack",
+      "z_values"
+    ],
+    "extent": [
+      -89.22100347318637,
+      37.71494162788463,
+      -89.21993321766192,
+      37.71563433825588
+    ]
+  },
+  {
+    "source": "public/rooms-level-01-WGS.geojson",
+    "sha256": "cbb34f79d4f84711467517b77ad57ae9c2d23e5c199fc0ff5d8a6e11c7f66daf",
+    "features": 355,
+    "geometry_types": {
+      "Polygon": 355
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Area",
+      "Shape_Length",
+      "base_height",
+      "height",
+      "level",
+      "name",
+      "stack"
+    ],
+    "extent": [
+      -89.22099750747458,
+      37.71498707446558,
+      -89.21984297290848,
+      37.71564109268222
+    ]
+  },
+  {
+    "source": "public/rooms-level-02-WGS.geojson",
+    "sha256": "d2fca1220a08324456495c3a33d644676cac6a3d49ed7b1f3cb808c99f08d981",
+    "features": 243,
+    "geometry_types": {
+      "Polygon": 243
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Area",
+      "Shape_Length",
+      "base_height",
+      "height",
+      "level",
+      "name",
+      "stack"
+    ],
+    "extent": [
+      -89.22100230717314,
+      37.7149904833311,
+      -89.219931505473,
+      37.71552667666783
+    ]
+  },
+  {
+    "source": "public/rooms-level-03-WGS.geojson",
+    "sha256": "febcb312fad3502d3d1372f8309144fbb95c4676803a96de2fbbdab11d2e5ce6",
+    "features": 288,
+    "geometry_types": {
+      "MultiPolygon": 1,
+      "Polygon": 287
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Area",
+      "Shape_Length",
+      "base_height",
+      "height",
+      "level",
+      "name",
+      "stack"
+    ],
+    "extent": [
+      -89.22097698995348,
+      37.71501344928823,
+      -89.21993714599466,
+      37.715632432377696
+    ]
+  },
+  {
+    "source": "public/rooms-level-04-WGS.geojson",
+    "sha256": "1d45f85e6c2d5b96ad02f10e220c1e26ef774e54e4f73d5fee87833fd39c3514",
+    "features": 199,
+    "geometry_types": {
+      "Polygon": 199
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Area",
+      "Shape_Length",
+      "base_height",
+      "height",
+      "level",
+      "name",
+      "stack"
+    ],
+    "extent": [
+      -89.22100067942584,
+      37.71499284402545,
+      -89.2199627318106,
+      37.7155318883496
+    ]
+  },
+  {
+    "source": "public/rooms-level-5-WGS.geojson",
+    "sha256": "d3809f371ef4c37d102ee873678ef5b50586234e32931da033d098006857e22e",
+    "features": 149,
+    "geometry_types": {
+      "Polygon": 149
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Area",
+      "Shape_Length",
+      "base_height",
+      "height",
+      "level",
+      "name",
+      "stack"
+    ],
+    "extent": [
+      -89.22109137872683,
+      37.71498924044892,
+      -89.21991058820161,
+      37.71553180591775
+    ]
+  },
+  {
+    "source": "public/rooms-level-6-WGS.geojson",
+    "sha256": "f565b07cf351558869299b2324b2703dd97d989c02e89bdf8742b10151f97a21",
+    "features": 138,
+    "geometry_types": {
+      "Polygon": 138
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Area",
+      "Shape_Length",
+      "base_height",
+      "height",
+      "level",
+      "name",
+      "stack"
+    ],
+    "extent": [
+      -89.22108361279118,
+      37.71499329740383,
+      -89.21991862003856,
+      37.7155251559425
+    ]
+  },
+  {
+    "source": "public/rooms-level-7-WGS.geojson",
+    "sha256": "1756772cc6363504d9005222a6f7909b94310ca2296f80a46ca9eeb85597553d",
+    "features": 90,
+    "geometry_types": {
+      "Polygon": 90
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Area",
+      "Shape_Length",
+      "base_height",
+      "height",
+      "level",
+      "name",
+      "stack"
+    ],
+    "extent": [
+      -89.22108274591693,
+      37.7149940904607,
+      -89.21991833617095,
+      37.71552187572369
+    ]
+  },
+  {
+    "source": "public/room_basement_obstacle_buffered.geojson",
+    "sha256": "00b3a25a70c08c89f02b627216b80ecd3c57a1cbb71e4320e857377bf40ad3de",
+    "features": 1,
+    "geometry_types": {
+      "Polygon": 1
+    },
+    "declared_crs": null,
+    "fields": [
+      "FID",
+      "Id"
+    ],
+    "extent": [
+      -89.22099632030148,
+      37.71494020372396,
+      -89.21993180713112,
+      37.71563421158889
+    ]
+  },
+  {
+    "source": "public/room_basement_walkable.geojson",
+    "sha256": "a75e39bf334e3cdca5201ec869e901d1c9704a85a90b89b73220009a5f2c134a",
+    "features": 1,
+    "geometry_types": {
+      "MultiPolygon": 1
+    },
+    "declared_crs": null,
+    "fields": [
+      "FID",
+      "Shape_Area",
+      "Shape_Leng",
+      "base_heigh",
+      "color",
+      "height",
+      "level",
+      "name",
+      "stack",
+      "z_values"
+    ],
+    "extent": [
+      -89.22100347318842,
+      37.71494162788733,
+      -89.21993388002986,
+      37.71563433825859
+    ]
+  },
+  {
+    "source": "public/room_level_1_centerlines.geojson",
+    "sha256": "16eb48facae7dc9be464eecbe132e594d7a582181cef089e9a4e03fa1572d5bf",
+    "features": 52,
+    "geometry_types": {
+      "LineString": 52
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Length",
+      "endroom",
+      "level",
+      "name",
+      "startroom",
+      "type",
+      "width"
+    ],
+    "extent": [
+      -89.22086855915452,
+      37.71504317758253,
+      -89.22000486320486,
+      37.715576760006776
+    ]
+  },
+  {
+    "source": "public/room_level_1_obstacle_buffered.geojson",
+    "sha256": "82c973ec10d335019cb661edeed3662d9dc4ae34aa97bf4fe6e7bb84ccdf1c99",
+    "features": 1,
+    "geometry_types": {
+      "MultiPolygon": 1
+    },
+    "declared_crs": null,
+    "fields": [
+      "FID",
+      "Id"
+    ],
+    "extent": [
+      -89.2210031781028,
+      37.71498257170828,
+      -89.21983730253203,
+      37.715645597332255
+    ]
+  },
+  {
+    "source": "public/room_level_1_walkable.geojson",
+    "sha256": "13ad945b7a5412b5edfcc176ed5caab3b23eb6f162a8eb75ea01c269e00a19ff",
+    "features": 1,
+    "geometry_types": {
+      "MultiPolygon": 1
+    },
+    "declared_crs": null,
+    "fields": [
+      "FID",
+      "Shape_Area",
+      "Shape_Leng",
+      "base_heigh",
+      "color",
+      "height",
+      "level",
+      "name",
+      "stack"
+    ],
+    "extent": [
+      -89.2209076817147,
+      37.7150254292909,
+      -89.21997923045413,
+      37.71563239400699
+    ]
+  },
+  {
+    "source": "public/room_level_2_centerlines.geojson",
+    "sha256": "9b56514bd6d5e30084eff53a9d8408e083bfd69314cf19cb7271771053fb4f12",
+    "features": 7,
+    "geometry_types": {
+      "LineString": 7
+    },
+    "declared_crs": null,
+    "fields": [
+      "FID",
+      "Shape_Leng",
+      "endroom",
+      "level",
+      "name",
+      "startroom",
+      "type",
+      "width"
+    ],
+    "extent": [
+      -89.22052637345156,
+      37.71511122787828,
+      -89.22043094698742,
+      37.715365186126974
+    ]
+  },
+  {
+    "source": "public/room_level_2_obstacle_buffered.geojson",
+    "sha256": "875e1c88b94ee06bb82b0ef96c022b514bd67a06dccbf29c2ba2c715fc02997a",
+    "features": 1,
+    "geometry_types": {
+      "MultiPolygon": 1
+    },
+    "declared_crs": null,
+    "fields": [
+      "FID",
+      "Id"
+    ],
+    "extent": [
+      -89.22093127335414,
+      37.71499146389822,
+      -89.21993117173002,
+      37.71552943471392
+    ]
+  },
+  {
+    "source": "public/room_level_2_walkable.geojson",
+    "sha256": "d4dd56a6ff2c01a4b9bd3b70e5e6989e86cf3c24475cc1fa2e2fb52ebc6dd9dc",
+    "features": 3,
+    "geometry_types": {
+      "MultiPolygon": 1,
+      "Polygon": 2
+    },
+    "declared_crs": null,
+    "fields": [
+      "FID",
+      "Shape_Area",
+      "Shape_Leng",
+      "base_heigh",
+      "color",
+      "height",
+      "level",
+      "name",
+      "stack",
+      "z_values"
+    ],
+    "extent": [
+      -89.22100230717523,
+      37.714990483333786,
+      -89.21993150547509,
+      37.71546683255268
+    ]
+  },
+  {
+    "source": "public/room_level_3_centerlines.geojson",
+    "sha256": "f100df1042ea22773e3baea0095ef9057d5d0d514ed5cecf6ccad45ab033d41c",
+    "features": 129,
+    "geometry_types": {
+      "LineString": 129
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Length",
+      "endroom",
+      "level",
+      "name",
+      "startroom",
+      "type",
+      "width"
+    ],
+    "extent": [
+      -89.22077269908011,
+      37.7150840276809,
+      -89.22008952412774,
+      37.71559493798191
+    ]
+  },
+  {
+    "source": "public/room_level_3_obstacle_buffered.geojson",
+    "sha256": "90a5b3a03212224b0e81807aad5978308f17d9fd3103df0a389033b7a6860708",
+    "features": 1,
+    "geometry_types": {
+      "MultiPolygon": 1
+    },
+    "declared_crs": null,
+    "fields": [
+      "FID",
+      "Id"
+    ],
+    "extent": [
+      -89.22098266044067,
+      37.71500894454966,
+      -89.21993147536777,
+      37.71563693712546
+    ]
+  },
+  {
+    "source": "public/room_level_3_walkable.geojson",
+    "sha256": "a7ac2852ebaabc58fc4d72a1bdaee3569c0580f27e4927019d591d2d4fdc90be",
+    "features": 2,
+    "geometry_types": {
+      "MultiPolygon": 1,
+      "Polygon": 1
+    },
+    "declared_crs": null,
+    "fields": [
+      "FID",
+      "Shape_Area",
+      "Shape_Leng",
+      "base_heigh",
+      "color",
+      "height",
+      "level",
+      "name",
+      "stack"
+    ],
+    "extent": [
+      -89.22100229729374,
+      37.71499187544706,
+      -89.2199324891303,
+      37.715627180745734
+    ]
+  },
+  {
+    "source": "public/room_level_4_centerlines.geojson",
+    "sha256": "4de6d60ed8b7fa3fa812b72b282b8660b55b8b1231fc7c003e30277299fc0114",
+    "features": 12,
+    "geometry_types": {
+      "LineString": 12
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Length",
+      "endroom",
+      "level",
+      "name",
+      "startroom",
+      "type",
+      "width"
+    ],
+    "extent": [
+      -89.2208584855546,
+      37.71508557577842,
+      -89.22008044228673,
+      37.715387842448266
+    ]
+  },
+  {
+    "source": "public/room_level_4_obstacle_buffered.geojson",
+    "sha256": "09ad46542be00d0ec2fc5ae55e126f58e7af23adacce1587a4e7676e7c8006ff",
+    "features": 1,
+    "geometry_types": {
+      "MultiPolygon": 1
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Area",
+      "Shape_Length"
+    ],
+    "extent": [
+      -89.22100635045054,
+      37.71498833970528,
+      -89.21995706103682,
+      37.71553639300131
+    ]
+  },
+  {
+    "source": "public/room_level_4_walkable.geojson",
+    "sha256": "d95f686fce8a4f67c4fa6d0d15920334c98d2fea25c9763bdedbb27e85083777",
+    "features": 2,
+    "geometry_types": {
+      "Polygon": 2
+    },
+    "declared_crs": null,
+    "fields": [
+      "FID",
+      "Shape_Area",
+      "Shape_Leng",
+      "base_heigh",
+      "color",
+      "height",
+      "level",
+      "name",
+      "stack",
+      "z_values"
+    ],
+    "extent": [
+      -89.22100432928288,
+      37.71499353307997,
+      -89.21996989592907,
+      37.71552333690989
+    ]
+  },
+  {
+    "source": "public/room_level_5_centerlines.geojson",
+    "sha256": "21d0b6fbaf4e6b6b9a5ca007d7a61d7752a0d941901f9a86debd8230827fd471",
+    "features": 74,
+    "geometry_types": {
+      "LineString": 74
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Length",
+      "endroom",
+      "level",
+      "name",
+      "startroom",
+      "type",
+      "width"
+    ],
+    "extent": [
+      -89.22097700279424,
+      37.71504294596146,
+      -89.22006395302473,
+      37.715505908433855
+    ]
+  },
+  {
+    "source": "public/room_level_5_obstacle_buffered.geojson",
+    "sha256": "db2de944aca61d0ce7e6db9b4b6bb88b214d4e86e3111cd544a058fa96b4db78",
+    "features": 1,
+    "geometry_types": {
+      "Polygon": 1
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Area",
+      "Shape_Length"
+    ],
+    "extent": [
+      -89.22109256790513,
+      37.714985920523524,
+      -89.21990943805902,
+      37.71553564873883
+    ]
+  },
+  {
+    "source": "public/room_level_5_walkable.geojson",
+    "sha256": "9c7f15660c3c7001c8bbfa1fabb8b40593ab77fe9e6a86145dd0153039e07b77",
+    "features": 1,
+    "geometry_types": {
+      "MultiPolygon": 1
+    },
+    "declared_crs": null,
+    "fields": [
+      "FID",
+      "Shape_Area",
+      "Shape_Leng",
+      "base_heigh",
+      "color",
+      "height",
+      "level",
+      "name",
+      "stack",
+      "z_values"
+    ],
+    "extent": [
+      -89.22109147800201,
+      37.71498927198254,
+      -89.219909798002,
+      37.71552925199738
+    ]
+  },
+  {
+    "source": "public/room_level_6_centerlines.geojson",
+    "sha256": "33a5eb382eddd510b328d2585e8506b982d18849159c2502d1c5459e4e22a6ed",
+    "features": 38,
+    "geometry_types": {
+      "LineString": 38
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Length",
+      "endroom",
+      "level",
+      "name",
+      "startroom",
+      "type",
+      "width"
+    ],
+    "extent": [
+      -89.22086329667434,
+      37.71505412773514,
+      -89.22013266423554,
+      37.71549970988711
+    ]
+  },
+  {
+    "source": "public/room_level_6_obstacle_buffered.geojson",
+    "sha256": "2c1086268b6fef6b7f5e13c9c5738342c50b7032574a0d7fd6885d1f23494e54",
+    "features": 1,
+    "geometry_types": {
+      "MultiPolygon": 1
+    },
+    "declared_crs": null,
+    "fields": [
+      "FID",
+      "Id"
+    ],
+    "extent": [
+      -89.22108928330394,
+      37.71498879266049,
+      -89.21991294938998,
+      37.71552799641889
+    ]
+  },
+  {
+    "source": "public/room_level_6_walkable.geojson",
+    "sha256": "f77e1354a3bb3ed75684ac1beb50303b35738785942a0980cc27b4a4d159113c",
+    "features": 1,
+    "geometry_types": {
+      "MultiPolygon": 1
+    },
+    "declared_crs": null,
+    "fields": [
+      "FID",
+      "OBJECTID_1",
+      "Shape_Area",
+      "Shape_Leng",
+      "base_heigh",
+      "height",
+      "level",
+      "name",
+      "stack",
+      "z_values"
+    ],
+    "extent": [
+      -89.22108887961576,
+      37.7149899428809,
+      -89.21991338915072,
+      37.71552879929035
+    ]
+  },
+  {
+    "source": "public/room_level_7_centerlines.geojson",
+    "sha256": "cafc02a031a0f3ae31cfe93b1fb719dd31a50bd0856266b56c6f05095b54ef57",
+    "features": 22,
+    "geometry_types": {
+      "LineString": 22
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Length",
+      "endroom",
+      "level",
+      "name",
+      "startroom",
+      "type",
+      "width"
+    ],
+    "extent": [
+      -89.2208828856555,
+      37.71504958067689,
+      -89.21998426003572,
+      37.715365545346984
+    ]
+  },
+  {
+    "source": "public/room_level_7_obstacle_buffered.geojson",
+    "sha256": "c5624c91efb275c05a8cf42f62d832345c0d3a72aa28bfa6ce30811ef05752f9",
+    "features": 1,
+    "geometry_types": {
+      "MultiPolygon": 1
+    },
+    "declared_crs": null,
+    "fields": [
+      "FID",
+      "Id"
+    ],
+    "extent": [
+      -89.2210884166456,
+      37.71498958526411,
+      -89.21991266535066,
+      37.71552267774752
+    ]
+  },
+  {
+    "source": "public/room_level_7_walkable.geojson",
+    "sha256": "e2598e7ec5ed5501d511c9cb6b1a4adc4db1e526f3efe4e4f0b9a942e622b7d8",
+    "features": 1,
+    "geometry_types": {
+      "MultiPolygon": 1
+    },
+    "declared_crs": null,
+    "fields": [
+      "FID",
+      "Shape_Area",
+      "Shape_Leng",
+      "base_heigh",
+      "color",
+      "height",
+      "level",
+      "name",
+      "stack",
+      "z_values"
+    ],
+    "extent": [
+      -89.22108790800203,
+      37.71499043900277,
+      -89.21991369200204,
+      37.71552610400273
+    ]
+  },
+  {
+    "source": "public/wall.geojson",
+    "sha256": "ea84527c4d056ff198ace646bd964d63c8ecb60903c6e9aa45a6231121088f1c",
+    "features": 21,
+    "geometry_types": {
+      "LineString": 21
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Length",
+      "base_height",
+      "color",
+      "height",
+      "name"
+    ],
+    "extent": [
+      -89.22109150269432,
+      37.714941615093366,
+      -89.219834668882,
+      37.71565362837575
+    ]
+  },
+  {
+    "source": "public/wall_room_basement.geojson",
+    "sha256": "0817e5255bcd53d900b5d5e04109b7ee596c0490385ce66a92ce04abc9564e34",
+    "features": 1,
+    "geometry_types": {
+      "LineString": 1
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Length",
+      "base_height",
+      "color",
+      "height",
+      "name"
+    ],
+    "extent": [
+      -89.22101932216293,
+      37.714934105208926,
+      -89.21991115683518,
+      37.71565224299158
+    ]
+  },
+  {
+    "source": "public/wall_room_level_1.geojson",
+    "sha256": "6dd011b9c2309fbf1cae4bc781ffb69bd7b65706abfa7905c3bb49a1d0d5edb1",
+    "features": 1,
+    "geometry_types": {
+      "LineString": 1
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Length",
+      "base_height",
+      "color",
+      "height",
+      "name"
+    ],
+    "extent": [
+      -89.2210087759415,
+      37.714976479764516,
+      -89.219834668882,
+      37.71565041528181
+    ]
+  },
+  {
+    "source": "public/wall_room_level_2.geojson",
+    "sha256": "42e0f8aaade621341259a83a0a7f253c9b30d04e2c10c0f3ca2387a086e32647",
+    "features": 1,
+    "geometry_types": {
+      "LineString": 1
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Length",
+      "base_height",
+      "color",
+      "height",
+      "name"
+    ],
+    "extent": [
+      -89.22102618169845,
+      37.71498614354748,
+      -89.2199231071234,
+      37.7155378220201
+    ]
+  },
+  {
+    "source": "public/wall_room_level_3.geojson",
+    "sha256": "4f769be9eac799df9cfe629c86438c29e9ede8a6a97a87b06ce784945af97176",
+    "features": 1,
+    "geometry_types": {
+      "LineString": 1
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Length",
+      "base_height",
+      "color",
+      "height",
+      "name"
+    ],
+    "extent": [
+      -89.22103582151975,
+      37.71497107049002,
+      -89.21990195898499,
+      37.71566164091528
+    ]
+  },
+  {
+    "source": "public/wall_room_level_4.geojson",
+    "sha256": "ce75ecfe1c049b2234fb721a7e19e491e256a37a7880f3ddfc70e3d2289f62a1",
+    "features": 1,
+    "geometry_types": {
+      "LineString": 1
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Length",
+      "base_height",
+      "color",
+      "height",
+      "name"
+    ],
+    "extent": [
+      -89.22103154374237,
+      37.71497814333663,
+      -89.21994181903078,
+      37.71555422168797
+    ]
+  },
+  {
+    "source": "public/wall_room_level_5.geojson",
+    "sha256": "bfa7ea766c4dbfcabbfdb3cdcc499259bfaae5ce72486c88831d6e59eb433e55",
+    "features": 1,
+    "geometry_types": {
+      "LineString": 1
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Length",
+      "base_height",
+      "color",
+      "height",
+      "name"
+    ],
+    "extent": [
+      -89.22111561796814,
+      37.714982720469294,
+      -89.21989142354333,
+      37.715545773137826
+    ]
+  },
+  {
+    "source": "public/wall_room_level_6.geojson",
+    "sha256": "b44a071a57187c4fd069cc16eba01a352529c374021d91379f7674968ddd5aac",
+    "features": 1,
+    "geometry_types": {
+      "LineString": 1
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Length",
+      "base_height",
+      "color",
+      "height",
+      "name"
+    ],
+    "extent": [
+      -89.22111618300845,
+      37.714967321234404,
+      -89.21988750688871,
+      37.715549020667076
+    ]
+  },
+  {
+    "source": "public/wall_room_level_7.geojson",
+    "sha256": "4db74ee662924bc22df449c0498ae375b48860c86e8b64efb26334f3c358d88f",
+    "features": 1,
+    "geometry_types": {
+      "LineString": 1
+    },
+    "declared_crs": null,
+    "fields": [
+      "OBJECTID",
+      "Shape_Length",
+      "base_height",
+      "color",
+      "height",
+      "name"
+    ],
+    "extent": [
+      -89.22111244511855,
+      37.714968069522186,
+      -89.21988019729724,
+      37.7155508540643
+    ]
+  }
+]

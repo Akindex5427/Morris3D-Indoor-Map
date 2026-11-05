@@ -1,0 +1,36 @@
+{
+  "supported": true,
+  "totalVoices": 3,
+  "localEnglishVoices": [
+    {
+      "name": "Microsoft David - English (United States)",
+      "lang": "en-US"
+    },
+    {
+      "name": "Microsoft Mark - English (United States)",
+      "lang": "en-US"
+    },
+    {
+      "name": "Microsoft Zira - English (United States)",
+      "lang": "en-US"
+    }
+  ],
+  "audiblePlaybackVerified": false,
+  "events": [
+    {
+      "type": "start"
+    },
+    {
+      "type": "pause"
+    },
+    {
+      "type": "resume"
+    },
+    {
+      "type": "error",
+      "error": "interrupted"
+    }
+  ],
+  "status": "Audio starts only when requested; uses a voice on this device.",
+  "stopped": true
+}

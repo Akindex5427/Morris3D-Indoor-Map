@@ -1,0 +1,134 @@
+{
+  "source_hash": "9be596896c68c09320b932f48dfd42c8880892547847967f1bca268f7b4e9011",
+  "combined_hash": "31309b325db7b8e378d909ae8facfbbe0005a290021f10cc262f08fc5d2945be",
+  "total_current_F0": 149,
+  "baseline_F0": 148,
+  "total_display_F0": 143,
+  "added_footprints": 2,
+  "removed_footprints": 1,
+  "strict_prior_matches": 147,
+  "proven_identifier_changes": 74,
+  "raw_geometry_changes_on_matched_footprints": 0,
+  "current_status_counts": {
+    "owner_verified_matched": 42,
+    "owner_verified_identity_pending": 104,
+    "technical_review_required": 2,
+    "unresolved_owner_review": 1
+  },
+  "historical_identity_pending": 1,
+  "unlocated_owner_statements": 3,
+  "current_unresolved_classifications": 1,
+  "display_strict_matches": 123,
+  "display_missing_strict_links": 26,
+  "display_extra_unmatched": 20,
+  "display_height_mismatches": 12,
+  "display_name_mismatches": 3,
+  "distinct_inconsistent_source_records": 58,
+  "exact_duplicate_current_footprints": [],
+  "near_coincident_pairs": [
+    {
+      "relationship_id": "spatial-pair-v1:[0,\"/rooms-basement-WGS.geojson#F0:FID:147\",\"/rooms-basement-WGS.geojson#F0:FID:96\"]",
+      "floor_id": 0,
+      "feature_a_id": "/rooms-basement-WGS.geojson#F0:FID:147",
+      "feature_b_id": "/rooms-basement-WGS.geojson#F0:FID:96",
+      "feature_a_name": "Mechanical Room (No Access)",
+      "feature_b_name": "structure",
+      "relationship_type": "near_coincident",
+      "area_a_m2": 397.3935368576013,
+      "area_b_m2": 397.3934517426818,
+      "intersection_area_m2": 397.3934515081768,
+      "overlap_pct_a": 99.99997852269435,
+      "overlap_pct_b": 99.9999999409892,
+      "containment_ratio": 0.999999999409892,
+      "intersection_over_union": 0.9999997846368357,
+      "outside_smaller_area_m2": 2.345050233998336e-7,
+      "symmetric_difference_area_m2": 0.000085583929603672,
+      "geometric_container_id": null,
+      "geometric_contained_id": null,
+      "topological_covers_a_b": false,
+      "topological_covers_b_a": false,
+      "significance": "material",
+      "numerical_tolerance_m2": 0.000003973934517426818
+    }
+  ],
+  "positive_intersection_pairs": 168,
+  "geometry_issues": [],
+  "spatial_errors": [],
+  "inventory_rows": 149,
+  "reconciliation_rows": 153,
+  "unresolved_rows": 111,
+  "formal_F0_approvals_found": 0,
+  "ready_for_stage2b_closure": false,
+  "first_ten_unresolved": [
+    {
+      "feature_id": "/rooms-basement-WGS.geojson#F0:FID:96",
+      "prior_feature_id": "/rooms-basement-WGS.geojson#F0:FID:97",
+      "original_name": "structure",
+      "priority": 1,
+      "owner_question": "This structure nearly covers the Mechanical Room footprint. Is it a slab/background representation or physical structural material? Confirm its role so the same area is not counted twice."
+    },
+    {
+      "feature_id": "/rooms-basement-WGS.geojson#F0:FID:125",
+      "prior_feature_id": "/rooms-basement-WGS.geojson#F0:FID:126",
+      "original_name": "dewey books 551 to 882",
+      "priority": 1,
+      "owner_question": "The source range is 551 to 882; your confirmed range is 551–823. Which range is intended for this exact footprint?"
+    },
+    {
+      "feature_id": "/rooms-basement-WGS.geojson#F0:FID:130",
+      "prior_feature_id": "/rooms-basement-WGS.geojson#F0:FID:131",
+      "original_name": "journals 1995 & older a to f",
+      "priority": 1,
+      "owner_question": "Does this journal-range footprint belong to one shared Journals 1995 & Older logical area, or a separate verified zone? Identify which footprint, if any, represents Journals 1995."
+    },
+    {
+      "feature_id": "/rooms-basement-WGS.geojson#F0:FID:131",
+      "prior_feature_id": "/rooms-basement-WGS.geojson#F0:FID:132",
+      "original_name": "oversized journal a - f",
+      "priority": 1,
+      "owner_question": "The source range is A–F; your confirmed range is A–D. Is this the same intended zone, and which range is correct?"
+    },
+    {
+      "feature_id": "/rooms-basement-WGS.geojson#F0:FID:132",
+      "prior_feature_id": "/rooms-basement-WGS.geojson#F0:FID:133",
+      "original_name": "journals 1995 & older f to i",
+      "priority": 1,
+      "owner_question": "Does this journal-range footprint belong to one shared Journals 1995 & Older logical area, or a separate verified zone? Identify which footprint, if any, represents Journals 1995."
+    },
+    {
+      "feature_id": "/rooms-basement-WGS.geojson#F0:FID:133",
+      "prior_feature_id": "/rooms-basement-WGS.geojson#F0:FID:134",
+      "original_name": "oversized journals f - h",
+      "priority": 1,
+      "owner_question": "The source range is F–H; your confirmed range is E–H. Is this the same intended zone, and which range is correct?"
+    },
+    {
+      "feature_id": "/rooms-basement-WGS.geojson#F0:FID:137",
+      "prior_feature_id": "/rooms-basement-WGS.geojson#F0:FID:138",
+      "original_name": "journals 1995 & older j to z",
+      "priority": 1,
+      "owner_question": "Does this journal-range footprint belong to one shared Journals 1995 & Older logical area, or a separate verified zone? Identify which footprint, if any, represents Journals 1995."
+    },
+    {
+      "feature_id": "/rooms-basement-WGS.geojson#F0:FID:139",
+      "prior_feature_id": "/rooms-basement-WGS.geojson#F0:FID:140",
+      "original_name": " elevator",
+      "priority": 1,
+      "owner_question": "Does this polygon depict the elevator shaft or the car footprint?"
+    },
+    {
+      "feature_id": "/rooms-basement-WGS.geojson#F0:FID:147",
+      "prior_feature_id": null,
+      "original_name": " Mechanical Room (No Access)",
+      "priority": 1,
+      "owner_question": "Confirm this new Mechanical Room polygon is the enclosed equipment room you described. Its nearly coincident Structure polygon also needs a distinct non-double-counting role."
+    },
+    {
+      "feature_id": "/rooms-basement-WGS.geojson#F0:FID:148",
+      "prior_feature_id": null,
+      "original_name": "SCRC Stocks (Staff Only)",
+      "priority": 1,
+      "owner_question": "Confirm SCRC Stocks (Staff Only) is the staff-only Stacks room you described, and whether Stocks is a label typo."
+    }
+  ]
+}

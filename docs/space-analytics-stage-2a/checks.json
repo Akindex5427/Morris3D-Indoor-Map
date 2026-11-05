@@ -1,0 +1,27 @@
+{
+  "unitExitCode": 1,
+  "buildExitCode": 0,
+  "total": 311,
+  "passed": 300,
+  "failed": 11,
+  "newFailures": [],
+  "stage2a": {
+    "total": 38,
+    "passed": 38,
+    "failed": 0
+  },
+  "baseline": "docs/workspace-layout/unit-tests.json",
+  "existingFailures": [
+    "featureColors restores missing level-6 room colors from the all-floor dataset",
+    "featureColors restores missing level-2 display colors from the all-floor dataset",
+    "room_level_1 routing anchors uses the encoded centerline anchor for University honors",
+    "room_level_1 routing anchors routes University honors to its centerline anchor without crossing obstacles",
+    "room_level_1 routing anchors keeps Center for Teaching Excellence routes on the graph and stops at its anchor",
+    "room_level_3 routing anchors routes SIU Press to Lerner music studio on the level-3 centerline graph",
+    "room_level_4 centerline routing routes from level 1 to F4 geospatial resources through the matching elevator component",
+    "room_level_5 centerline routing normalizes level-5 room name variants to explicit centerline anchors",
+    "inline door anchor on room polygon properties inline anchor takes precedence over an explicit centerline anchor",
+    "geometry-derived anchor as universal fallback never returns the old room_centroid source when no anchor index is provided",
+    "geometry-derived anchor as universal fallback geometry-derived anchor routes without crossing obstacles"
+  ]
+}

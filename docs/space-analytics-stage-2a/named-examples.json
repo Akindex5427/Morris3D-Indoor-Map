@@ -1,0 +1,1186 @@
+[
+  {
+    "example": "help-desk-geospatial",
+    "floor": 4,
+    "features": [
+      {
+        "feature_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:4",
+        "name": "Geospatial Resources",
+        "area_m2": 64.12323518435599,
+        "base_height": 0,
+        "height": 2
+      },
+      {
+        "feature_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:5",
+        "name": "Geospatial Resources",
+        "area_m2": 7.495344809313892,
+        "base_height": 0,
+        "height": 2
+      },
+      {
+        "feature_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:6",
+        "name": "Geospatial Resources",
+        "area_m2": 4.431120160769138,
+        "base_height": 0,
+        "height": 2
+      },
+      {
+        "feature_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:7",
+        "name": "Help Desk",
+        "area_m2": 37.67146415574406,
+        "base_height": 0,
+        "height": 2
+      }
+    ],
+    "relationships": [
+      {
+        "relationship_id": "spatial-pair-v1:[4,\"/rooms-level-04-WGS.geojson#F4:OBJECTID:4\",\"/rooms-level-04-WGS.geojson#F4:OBJECTID:5\"]",
+        "floor_id": 4,
+        "feature_a_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:4",
+        "feature_b_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:5",
+        "feature_a_name": "Geospatial Resources",
+        "feature_b_name": "Geospatial Resources",
+        "relationship_type": "near_contains",
+        "area_a_m2": 64.12323518435599,
+        "area_b_m2": 7.495344809313892,
+        "intersection_area_m2": 7.495180493504872,
+        "overlap_pct_a": 11.688712323943156,
+        "overlap_pct_b": 99.99780776184151,
+        "containment_ratio": 0.9999780776184152,
+        "intersection_over_union": 0.1168868237169114,
+        "outside_smaller_area_m2": 0.00016431580901965503,
+        "symmetric_difference_area_m2": 56.62821900666014,
+        "geometric_container_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:4",
+        "geometric_contained_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:5",
+        "topological_covers_a_b": false,
+        "topological_covers_b_a": false,
+        "significance": "material",
+        "numerical_tolerance_m2": 0.000001
+      },
+      {
+        "relationship_id": "spatial-pair-v1:[4,\"/rooms-level-04-WGS.geojson#F4:OBJECTID:4\",\"/rooms-level-04-WGS.geojson#F4:OBJECTID:6\"]",
+        "floor_id": 4,
+        "feature_a_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:4",
+        "feature_b_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:6",
+        "feature_a_name": "Geospatial Resources",
+        "feature_b_name": "Geospatial Resources",
+        "relationship_type": "near_contains",
+        "area_a_m2": 64.12323518435599,
+        "area_b_m2": 4.431120160769138,
+        "intersection_area_m2": 4.431116182574032,
+        "overlap_pct_a": 6.910312883987303,
+        "overlap_pct_b": 99.99991022145728,
+        "containment_ratio": 0.9999991022145728,
+        "intersection_over_union": 0.0691031245527264,
+        "outside_smaller_area_m2": 0.000003978195106668636,
+        "symmetric_difference_area_m2": 59.69212297997707,
+        "geometric_container_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:4",
+        "geometric_contained_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:6",
+        "topological_covers_a_b": false,
+        "topological_covers_b_a": false,
+        "significance": "material",
+        "numerical_tolerance_m2": 0.000001
+      },
+      {
+        "relationship_id": "spatial-pair-v1:[4,\"/rooms-level-04-WGS.geojson#F4:OBJECTID:4\",\"/rooms-level-04-WGS.geojson#F4:OBJECTID:7\"]",
+        "floor_id": 4,
+        "feature_a_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:4",
+        "feature_b_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:7",
+        "feature_a_name": "Geospatial Resources",
+        "feature_b_name": "Help Desk",
+        "relationship_type": "near_contains",
+        "area_a_m2": 64.12323518435599,
+        "area_b_m2": 37.67146415574406,
+        "intersection_area_m2": 37.671459201883444,
+        "overlap_pct_a": 58.74853178193054,
+        "overlap_pct_b": 99.99998684983254,
+        "containment_ratio": 0.9999998684983255,
+        "intersection_over_union": 0.5874852724329467,
+        "outside_smaller_area_m2": 0.0000049538606177179645,
+        "symmetric_difference_area_m2": 26.451780936333165,
+        "geometric_container_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:4",
+        "geometric_contained_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:7",
+        "topological_covers_a_b": false,
+        "topological_covers_b_a": false,
+        "significance": "material",
+        "numerical_tolerance_m2": 0.000001
+      },
+      {
+        "relationship_id": "spatial-pair-v1:[4,\"/rooms-level-04-WGS.geojson#F4:OBJECTID:5\",\"/rooms-level-04-WGS.geojson#F4:OBJECTID:7\"]",
+        "floor_id": 4,
+        "feature_a_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:5",
+        "feature_b_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:7",
+        "feature_a_name": "Geospatial Resources",
+        "feature_b_name": "Help Desk",
+        "relationship_type": "boundary_touch",
+        "area_a_m2": 7.495344809313892,
+        "area_b_m2": 37.67146415574406,
+        "intersection_area_m2": 0,
+        "overlap_pct_a": 0,
+        "overlap_pct_b": 0,
+        "containment_ratio": 0,
+        "intersection_over_union": 0,
+        "outside_smaller_area_m2": 7.495344809313892,
+        "symmetric_difference_area_m2": 45.16680896505795,
+        "geometric_container_id": null,
+        "geometric_contained_id": null,
+        "topological_covers_a_b": false,
+        "topological_covers_b_a": false,
+        "significance": "boundary_only",
+        "numerical_tolerance_m2": 0.000001
+      },
+      {
+        "relationship_id": "spatial-pair-v1:[4,\"/rooms-level-04-WGS.geojson#F4:OBJECTID:6\",\"/rooms-level-04-WGS.geojson#F4:OBJECTID:7\"]",
+        "floor_id": 4,
+        "feature_a_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:6",
+        "feature_b_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:7",
+        "feature_a_name": "Geospatial Resources",
+        "feature_b_name": "Help Desk",
+        "relationship_type": "boundary_touch",
+        "area_a_m2": 4.431120160769138,
+        "area_b_m2": 37.67146415574406,
+        "intersection_area_m2": 0,
+        "overlap_pct_a": 0,
+        "overlap_pct_b": 0,
+        "containment_ratio": 0,
+        "intersection_over_union": 0,
+        "outside_smaller_area_m2": 4.431120160769138,
+        "symmetric_difference_area_m2": 42.1025843165132,
+        "geometric_container_id": null,
+        "geometric_contained_id": null,
+        "topological_covers_a_b": false,
+        "topological_covers_b_a": false,
+        "significance": "boundary_only",
+        "numerical_tolerance_m2": 0.000001
+      }
+    ],
+    "groups": [
+      {
+        "proposal_id": "same-name-v1:[4,\"/rooms-level-04-WGS.geojson#F4:OBJECTID:4\",\"/rooms-level-04-WGS.geojson#F4:OBJECTID:5\",\"/rooms-level-04-WGS.geojson#F4:OBJECTID:6\"]",
+        "floor_id": 4,
+        "original_name": "Geospatial Resources",
+        "feature_ids": [
+          "/rooms-level-04-WGS.geojson#F4:OBJECTID:4",
+          "/rooms-level-04-WGS.geojson#F4:OBJECTID:5",
+          "/rooms-level-04-WGS.geojson#F4:OBJECTID:6"
+        ],
+        "feature_areas_m2": [
+          {
+            "feature_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:4",
+            "area_m2": 64.12323518435599
+          },
+          {
+            "feature_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:5",
+            "area_m2": 7.495344809313892
+          },
+          {
+            "feature_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:6",
+            "area_m2": 4.431120160769138
+          }
+        ],
+        "feature_area_sum_m2": 76.04970015443902,
+        "largest_feature_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:4",
+        "largest_area_fraction": 0.8431753847041712,
+        "compatible_modeled_heights": true,
+        "proximity_clusters": [
+          [
+            "/rooms-level-04-WGS.geojson#F4:OBJECTID:4",
+            "/rooms-level-04-WGS.geojson#F4:OBJECTID:5",
+            "/rooms-level-04-WGS.geojson#F4:OBJECTID:6"
+          ]
+        ],
+        "pair_distances": [
+          {
+            "feature_a_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:4",
+            "feature_b_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:5",
+            "gap_m": 0
+          },
+          {
+            "feature_a_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:4",
+            "feature_b_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:6",
+            "gap_m": 0
+          },
+          {
+            "feature_a_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:5",
+            "feature_b_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:6",
+            "gap_m": 4.320760061349662
+          }
+        ],
+        "proposed_membership_groups": [
+          [
+            "/rooms-level-04-WGS.geojson#F4:OBJECTID:4",
+            "/rooms-level-04-WGS.geojson#F4:OBJECTID:5",
+            "/rooms-level-04-WGS.geojson#F4:OBJECTID:6"
+          ]
+        ],
+        "logical_space_id": null,
+        "review_status": "pending",
+        "review_priority": 1,
+        "confidence": "medium",
+        "review_notes": "Same name is only supporting evidence. Proposed groups additionally require geometric contact/proximity and compatible modeled heights. No physical-room count or logical-space ID has been assigned.",
+        "decision": "",
+        "owner_notes": ""
+      }
+    ]
+  },
+  {
+    "example": "baker-desk",
+    "floor": 1,
+    "features": [
+      {
+        "feature_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:17",
+        "name": "Danielle C. Baker Research & Information Desk (0161)",
+        "area_m2": 0.37199688485864346,
+        "base_height": 0,
+        "height": 2
+      },
+      {
+        "feature_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:18",
+        "name": "Danielle C. Baker Research & Information Desk (0161)",
+        "area_m2": 0.3035730465324109,
+        "base_height": 0,
+        "height": 2
+      },
+      {
+        "feature_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:19",
+        "name": "Danielle C. Baker Research & Information Desk (0161)",
+        "area_m2": 23.2987433492407,
+        "base_height": 0,
+        "height": 2
+      },
+      {
+        "feature_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:20",
+        "name": "Danielle C. Baker Research & Information Desk (0161)",
+        "area_m2": 8.159962382250114,
+        "base_height": 0,
+        "height": 2
+      },
+      {
+        "feature_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:21",
+        "name": "Danielle C. Baker Research & Information Desk (0161)",
+        "area_m2": 1.4955324178637588,
+        "base_height": 0,
+        "height": 2
+      },
+      {
+        "feature_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:22",
+        "name": "Danielle C. Baker Research & Information Desk (0161)",
+        "area_m2": 2.632715942212492,
+        "base_height": 0,
+        "height": 2
+      },
+      {
+        "feature_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:23",
+        "name": "Danielle C. Baker Research & Information Desk (0161)",
+        "area_m2": 1.365649793872046,
+        "base_height": 0,
+        "height": 2
+      }
+    ],
+    "relationships": [
+      {
+        "relationship_id": "spatial-pair-v1:[1,\"/rooms-level-01-WGS.geojson#F1:OBJECTID:17\",\"/rooms-level-01-WGS.geojson#F1:OBJECTID:19\"]",
+        "floor_id": 1,
+        "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:17",
+        "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:19",
+        "feature_a_name": "Danielle C. Baker Research & Information Desk (0161)",
+        "feature_b_name": "Danielle C. Baker Research & Information Desk (0161)",
+        "relationship_type": "disjoint",
+        "area_a_m2": 0.37199688485864346,
+        "area_b_m2": 23.2987433492407,
+        "intersection_area_m2": 0,
+        "overlap_pct_a": 0,
+        "overlap_pct_b": 0,
+        "containment_ratio": 0,
+        "intersection_over_union": 0,
+        "outside_smaller_area_m2": 0.37199688485864346,
+        "symmetric_difference_area_m2": 23.67074023409934,
+        "geometric_container_id": null,
+        "geometric_contained_id": null,
+        "topological_covers_a_b": false,
+        "topological_covers_b_a": false,
+        "significance": "none",
+        "numerical_tolerance_m2": 0.000001
+      },
+      {
+        "relationship_id": "spatial-pair-v1:[1,\"/rooms-level-01-WGS.geojson#F1:OBJECTID:18\",\"/rooms-level-01-WGS.geojson#F1:OBJECTID:19\"]",
+        "floor_id": 1,
+        "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:18",
+        "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:19",
+        "feature_a_name": "Danielle C. Baker Research & Information Desk (0161)",
+        "feature_b_name": "Danielle C. Baker Research & Information Desk (0161)",
+        "relationship_type": "disjoint",
+        "area_a_m2": 0.3035730465324109,
+        "area_b_m2": 23.2987433492407,
+        "intersection_area_m2": 0,
+        "overlap_pct_a": 0,
+        "overlap_pct_b": 0,
+        "containment_ratio": 0,
+        "intersection_over_union": 0,
+        "outside_smaller_area_m2": 0.3035730465324109,
+        "symmetric_difference_area_m2": 23.60231639577311,
+        "geometric_container_id": null,
+        "geometric_contained_id": null,
+        "topological_covers_a_b": false,
+        "topological_covers_b_a": false,
+        "significance": "none",
+        "numerical_tolerance_m2": 0.000001
+      },
+      {
+        "relationship_id": "spatial-pair-v1:[1,\"/rooms-level-01-WGS.geojson#F1:OBJECTID:19\",\"/rooms-level-01-WGS.geojson#F1:OBJECTID:20\"]",
+        "floor_id": 1,
+        "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:19",
+        "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:20",
+        "feature_a_name": "Danielle C. Baker Research & Information Desk (0161)",
+        "feature_b_name": "Danielle C. Baker Research & Information Desk (0161)",
+        "relationship_type": "partial_overlap",
+        "area_a_m2": 23.2987433492407,
+        "area_b_m2": 8.159962382250114,
+        "intersection_area_m2": 0.000007855104349822374,
+        "overlap_pct_a": 0.00003371471255799884,
+        "overlap_pct_b": 0.00009626397747750798,
+        "containment_ratio": 9.626397747750798e-7,
+        "intersection_over_union": 2.4969578781321953e-7,
+        "outside_smaller_area_m2": 8.159954527145764,
+        "symmetric_difference_area_m2": 31.458690021282113,
+        "geometric_container_id": null,
+        "geometric_contained_id": null,
+        "topological_covers_a_b": false,
+        "topological_covers_b_a": false,
+        "significance": "small_overlap",
+        "numerical_tolerance_m2": 0.000001
+      },
+      {
+        "relationship_id": "spatial-pair-v1:[1,\"/rooms-level-01-WGS.geojson#F1:OBJECTID:19\",\"/rooms-level-01-WGS.geojson#F1:OBJECTID:21\"]",
+        "floor_id": 1,
+        "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:19",
+        "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:21",
+        "feature_a_name": "Danielle C. Baker Research & Information Desk (0161)",
+        "feature_b_name": "Danielle C. Baker Research & Information Desk (0161)",
+        "relationship_type": "disjoint",
+        "area_a_m2": 23.2987433492407,
+        "area_b_m2": 1.4955324178637588,
+        "intersection_area_m2": 0,
+        "overlap_pct_a": 0,
+        "overlap_pct_b": 0,
+        "containment_ratio": 0,
+        "intersection_over_union": 0,
+        "outside_smaller_area_m2": 1.4955324178637588,
+        "symmetric_difference_area_m2": 24.79427576710446,
+        "geometric_container_id": null,
+        "geometric_contained_id": null,
+        "topological_covers_a_b": false,
+        "topological_covers_b_a": false,
+        "significance": "none",
+        "numerical_tolerance_m2": 0.000001
+      },
+      {
+        "relationship_id": "spatial-pair-v1:[1,\"/rooms-level-01-WGS.geojson#F1:OBJECTID:19\",\"/rooms-level-01-WGS.geojson#F1:OBJECTID:22\"]",
+        "floor_id": 1,
+        "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:19",
+        "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:22",
+        "feature_a_name": "Danielle C. Baker Research & Information Desk (0161)",
+        "feature_b_name": "Danielle C. Baker Research & Information Desk (0161)",
+        "relationship_type": "disjoint",
+        "area_a_m2": 23.2987433492407,
+        "area_b_m2": 2.632715942212492,
+        "intersection_area_m2": 0,
+        "overlap_pct_a": 0,
+        "overlap_pct_b": 0,
+        "containment_ratio": 0,
+        "intersection_over_union": 0,
+        "outside_smaller_area_m2": 2.632715942212492,
+        "symmetric_difference_area_m2": 25.93145929145319,
+        "geometric_container_id": null,
+        "geometric_contained_id": null,
+        "topological_covers_a_b": false,
+        "topological_covers_b_a": false,
+        "significance": "none",
+        "numerical_tolerance_m2": 0.000001
+      },
+      {
+        "relationship_id": "spatial-pair-v1:[1,\"/rooms-level-01-WGS.geojson#F1:OBJECTID:19\",\"/rooms-level-01-WGS.geojson#F1:OBJECTID:23\"]",
+        "floor_id": 1,
+        "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:19",
+        "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:23",
+        "feature_a_name": "Danielle C. Baker Research & Information Desk (0161)",
+        "feature_b_name": "Danielle C. Baker Research & Information Desk (0161)",
+        "relationship_type": "disjoint",
+        "area_a_m2": 23.2987433492407,
+        "area_b_m2": 1.365649793872046,
+        "intersection_area_m2": 0,
+        "overlap_pct_a": 0,
+        "overlap_pct_b": 0,
+        "containment_ratio": 0,
+        "intersection_over_union": 0,
+        "outside_smaller_area_m2": 1.365649793872046,
+        "symmetric_difference_area_m2": 24.664393143112743,
+        "geometric_container_id": null,
+        "geometric_contained_id": null,
+        "topological_covers_a_b": false,
+        "topological_covers_b_a": false,
+        "significance": "none",
+        "numerical_tolerance_m2": 0.000001
+      },
+      {
+        "relationship_id": "spatial-pair-v1:[1,\"/rooms-level-01-WGS.geojson#F1:OBJECTID:20\",\"/rooms-level-01-WGS.geojson#F1:OBJECTID:21\"]",
+        "floor_id": 1,
+        "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:20",
+        "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:21",
+        "feature_a_name": "Danielle C. Baker Research & Information Desk (0161)",
+        "feature_b_name": "Danielle C. Baker Research & Information Desk (0161)",
+        "relationship_type": "contains",
+        "area_a_m2": 8.159962382250114,
+        "area_b_m2": 1.4955324178637588,
+        "intersection_area_m2": 1.4955324178637586,
+        "overlap_pct_a": 18.3276876510718,
+        "overlap_pct_b": 99.99999999999999,
+        "containment_ratio": 0.9999999999999999,
+        "intersection_over_union": 0.183276876510718,
+        "outside_smaller_area_m2": 2.220446049250313e-16,
+        "symmetric_difference_area_m2": 6.664429964386356,
+        "geometric_container_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:20",
+        "geometric_contained_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:21",
+        "topological_covers_a_b": true,
+        "topological_covers_b_a": false,
+        "significance": "material",
+        "numerical_tolerance_m2": 0.000001
+      },
+      {
+        "relationship_id": "spatial-pair-v1:[1,\"/rooms-level-01-WGS.geojson#F1:OBJECTID:20\",\"/rooms-level-01-WGS.geojson#F1:OBJECTID:22\"]",
+        "floor_id": 1,
+        "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:20",
+        "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:22",
+        "feature_a_name": "Danielle C. Baker Research & Information Desk (0161)",
+        "feature_b_name": "Danielle C. Baker Research & Information Desk (0161)",
+        "relationship_type": "contains",
+        "area_a_m2": 8.159962382250114,
+        "area_b_m2": 2.632715942212492,
+        "intersection_area_m2": 2.6327159422124913,
+        "overlap_pct_a": 32.26382449923156,
+        "overlap_pct_b": 99.99999999999997,
+        "containment_ratio": 0.9999999999999997,
+        "intersection_over_union": 0.3226382449923156,
+        "outside_smaller_area_m2": 8.881784197001252e-16,
+        "symmetric_difference_area_m2": 5.527246440037624,
+        "geometric_container_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:20",
+        "geometric_contained_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:22",
+        "topological_covers_a_b": true,
+        "topological_covers_b_a": false,
+        "significance": "material",
+        "numerical_tolerance_m2": 0.000001
+      },
+      {
+        "relationship_id": "spatial-pair-v1:[1,\"/rooms-level-01-WGS.geojson#F1:OBJECTID:20\",\"/rooms-level-01-WGS.geojson#F1:OBJECTID:23\"]",
+        "floor_id": 1,
+        "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:20",
+        "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:23",
+        "feature_a_name": "Danielle C. Baker Research & Information Desk (0161)",
+        "feature_b_name": "Danielle C. Baker Research & Information Desk (0161)",
+        "relationship_type": "contains",
+        "area_a_m2": 8.159962382250114,
+        "area_b_m2": 1.365649793872046,
+        "intersection_area_m2": 1.365649793872046,
+        "overlap_pct_a": 16.735981489849312,
+        "overlap_pct_b": 100,
+        "containment_ratio": 1,
+        "intersection_over_union": 0.1673598148984931,
+        "outside_smaller_area_m2": 0,
+        "symmetric_difference_area_m2": 6.7943125883780695,
+        "geometric_container_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:20",
+        "geometric_contained_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:23",
+        "topological_covers_a_b": true,
+        "topological_covers_b_a": false,
+        "significance": "material",
+        "numerical_tolerance_m2": 0.000001
+      },
+      {
+        "relationship_id": "spatial-pair-v1:[1,\"/rooms-level-01-WGS.geojson#F1:OBJECTID:21\",\"/rooms-level-01-WGS.geojson#F1:OBJECTID:22\"]",
+        "floor_id": 1,
+        "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:21",
+        "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:22",
+        "feature_a_name": "Danielle C. Baker Research & Information Desk (0161)",
+        "feature_b_name": "Danielle C. Baker Research & Information Desk (0161)",
+        "relationship_type": "disjoint",
+        "area_a_m2": 1.4955324178637588,
+        "area_b_m2": 2.632715942212492,
+        "intersection_area_m2": 0,
+        "overlap_pct_a": 0,
+        "overlap_pct_b": 0,
+        "containment_ratio": 0,
+        "intersection_over_union": 0,
+        "outside_smaller_area_m2": 1.4955324178637588,
+        "symmetric_difference_area_m2": 4.128248360076251,
+        "geometric_container_id": null,
+        "geometric_contained_id": null,
+        "topological_covers_a_b": false,
+        "topological_covers_b_a": false,
+        "significance": "none",
+        "numerical_tolerance_m2": 0.000001
+      },
+      {
+        "relationship_id": "spatial-pair-v1:[1,\"/rooms-level-01-WGS.geojson#F1:OBJECTID:22\",\"/rooms-level-01-WGS.geojson#F1:OBJECTID:23\"]",
+        "floor_id": 1,
+        "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:22",
+        "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:23",
+        "feature_a_name": "Danielle C. Baker Research & Information Desk (0161)",
+        "feature_b_name": "Danielle C. Baker Research & Information Desk (0161)",
+        "relationship_type": "disjoint",
+        "area_a_m2": 2.632715942212492,
+        "area_b_m2": 1.365649793872046,
+        "intersection_area_m2": 0,
+        "overlap_pct_a": 0,
+        "overlap_pct_b": 0,
+        "containment_ratio": 0,
+        "intersection_over_union": 0,
+        "outside_smaller_area_m2": 1.365649793872046,
+        "symmetric_difference_area_m2": 3.998365736084538,
+        "geometric_container_id": null,
+        "geometric_contained_id": null,
+        "topological_covers_a_b": false,
+        "topological_covers_b_a": false,
+        "significance": "none",
+        "numerical_tolerance_m2": 0.000001
+      }
+    ],
+    "groups": [
+      {
+        "proposal_id": "same-name-v1:[1,\"/rooms-level-01-WGS.geojson#F1:OBJECTID:17\",\"/rooms-level-01-WGS.geojson#F1:OBJECTID:18\",\"/rooms-level-01-WGS.geojson#F1:OBJECTID:19\",\"/rooms-level-01-WGS.geojson#F1:OBJECTID:20\",\"/rooms-level-01-WGS.geojson#F1:OBJECTID:21\",\"/rooms-level-01-WGS.geojson#F1:OBJECTID:22\",\"/rooms-level-01-WGS.geojson#F1:OBJECTID:23\"]",
+        "floor_id": 1,
+        "original_name": "Danielle C. Baker Research & Information Desk (0161)",
+        "feature_ids": [
+          "/rooms-level-01-WGS.geojson#F1:OBJECTID:17",
+          "/rooms-level-01-WGS.geojson#F1:OBJECTID:18",
+          "/rooms-level-01-WGS.geojson#F1:OBJECTID:19",
+          "/rooms-level-01-WGS.geojson#F1:OBJECTID:20",
+          "/rooms-level-01-WGS.geojson#F1:OBJECTID:21",
+          "/rooms-level-01-WGS.geojson#F1:OBJECTID:22",
+          "/rooms-level-01-WGS.geojson#F1:OBJECTID:23"
+        ],
+        "feature_areas_m2": [
+          {
+            "feature_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:17",
+            "area_m2": 0.37199688485864346
+          },
+          {
+            "feature_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:18",
+            "area_m2": 0.3035730465324109
+          },
+          {
+            "feature_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:19",
+            "area_m2": 23.2987433492407
+          },
+          {
+            "feature_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:20",
+            "area_m2": 8.159962382250114
+          },
+          {
+            "feature_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:21",
+            "area_m2": 1.4955324178637588
+          },
+          {
+            "feature_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:22",
+            "area_m2": 2.632715942212492
+          },
+          {
+            "feature_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:23",
+            "area_m2": 1.365649793872046
+          }
+        ],
+        "feature_area_sum_m2": 37.62817381683016,
+        "largest_feature_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:19",
+        "largest_area_fraction": 0.6191834730714394,
+        "compatible_modeled_heights": true,
+        "proximity_clusters": [
+          [
+            "/rooms-level-01-WGS.geojson#F1:OBJECTID:17",
+            "/rooms-level-01-WGS.geojson#F1:OBJECTID:18",
+            "/rooms-level-01-WGS.geojson#F1:OBJECTID:19",
+            "/rooms-level-01-WGS.geojson#F1:OBJECTID:20",
+            "/rooms-level-01-WGS.geojson#F1:OBJECTID:21",
+            "/rooms-level-01-WGS.geojson#F1:OBJECTID:22",
+            "/rooms-level-01-WGS.geojson#F1:OBJECTID:23"
+          ]
+        ],
+        "pair_distances": [
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:17",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:18",
+            "gap_m": 6.579090112568904
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:17",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:19",
+            "gap_m": 0.15908783379129843
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:17",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:20",
+            "gap_m": 0.833313638214291
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:17",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:21",
+            "gap_m": 1.0722165996549913
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:17",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:22",
+            "gap_m": 3.078235443537461
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:17",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:23",
+            "gap_m": 5.864776597765743
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:18",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:19",
+            "gap_m": 0.21210367970187077
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:18",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:20",
+            "gap_m": 0.9035239864570688
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:18",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:21",
+            "gap_m": 6.150383051885917
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:18",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:22",
+            "gap_m": 3.29836692930973
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:18",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:23",
+            "gap_m": 1.1402771826795781
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:19",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:20",
+            "gap_m": 0
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:19",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:21",
+            "gap_m": 0.0950977851548348
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:19",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:22",
+            "gap_m": 0.07652585812395744
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:19",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:23",
+            "gap_m": 0.07548203370902627
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:20",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:21",
+            "gap_m": 0
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:20",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:22",
+            "gap_m": 0
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:20",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:23",
+            "gap_m": 0
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:21",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:22",
+            "gap_m": 0.12983450331620777
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:21",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:23",
+            "gap_m": 4.088566078258596
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:22",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:23",
+            "gap_m": 0.1930284743137725
+          }
+        ],
+        "proposed_membership_groups": [
+          [
+            "/rooms-level-01-WGS.geojson#F1:OBJECTID:17",
+            "/rooms-level-01-WGS.geojson#F1:OBJECTID:18",
+            "/rooms-level-01-WGS.geojson#F1:OBJECTID:19",
+            "/rooms-level-01-WGS.geojson#F1:OBJECTID:20",
+            "/rooms-level-01-WGS.geojson#F1:OBJECTID:21",
+            "/rooms-level-01-WGS.geojson#F1:OBJECTID:22",
+            "/rooms-level-01-WGS.geojson#F1:OBJECTID:23"
+          ]
+        ],
+        "logical_space_id": null,
+        "review_status": "pending",
+        "review_priority": 1,
+        "confidence": "medium",
+        "review_notes": "Same name is only supporting evidence. Proposed groups additionally require geometric contact/proximity and compatible modeled heights. No physical-room count or logical-space ID has been assigned.",
+        "decision": "",
+        "owner_notes": ""
+      }
+    ]
+  },
+  {
+    "example": "auditorium",
+    "floor": 1,
+    "features": [
+      {
+        "feature_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:271",
+        "name": "John C Guyon Auditorium",
+        "area_m2": 16.592153635933418,
+        "base_height": 0,
+        "height": 4.5
+      },
+      {
+        "feature_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:273",
+        "name": "John C Guyon Auditorium",
+        "area_m2": 19.957749351064784,
+        "base_height": 0,
+        "height": 4.5
+      },
+      {
+        "feature_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:274",
+        "name": "John C Guyon Auditorium",
+        "area_m2": 6.5228356035671755,
+        "base_height": 0,
+        "height": 4.5
+      },
+      {
+        "feature_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:275",
+        "name": "John C Guyon Auditorium",
+        "area_m2": 211.33358900196663,
+        "base_height": 0,
+        "height": 4.5
+      }
+    ],
+    "relationships": [
+      {
+        "relationship_id": "spatial-pair-v1:[1,\"/rooms-level-01-WGS.geojson#F1:OBJECTID:271\",\"/rooms-level-01-WGS.geojson#F1:OBJECTID:275\"]",
+        "floor_id": 1,
+        "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:271",
+        "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:275",
+        "feature_a_name": "John C Guyon Auditorium",
+        "feature_b_name": "John C Guyon Auditorium",
+        "relationship_type": "disjoint",
+        "area_a_m2": 16.592153635933418,
+        "area_b_m2": 211.33358900196663,
+        "intersection_area_m2": 0,
+        "overlap_pct_a": 0,
+        "overlap_pct_b": 0,
+        "containment_ratio": 0,
+        "intersection_over_union": 0,
+        "outside_smaller_area_m2": 16.592153635933418,
+        "symmetric_difference_area_m2": 227.92574263790004,
+        "geometric_container_id": null,
+        "geometric_contained_id": null,
+        "topological_covers_a_b": false,
+        "topological_covers_b_a": false,
+        "significance": "none",
+        "numerical_tolerance_m2": 0.000001
+      },
+      {
+        "relationship_id": "spatial-pair-v1:[1,\"/rooms-level-01-WGS.geojson#F1:OBJECTID:273\",\"/rooms-level-01-WGS.geojson#F1:OBJECTID:275\"]",
+        "floor_id": 1,
+        "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:273",
+        "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:275",
+        "feature_a_name": "John C Guyon Auditorium",
+        "feature_b_name": "John C Guyon Auditorium",
+        "relationship_type": "disjoint",
+        "area_a_m2": 19.957749351064784,
+        "area_b_m2": 211.33358900196663,
+        "intersection_area_m2": 0,
+        "overlap_pct_a": 0,
+        "overlap_pct_b": 0,
+        "containment_ratio": 0,
+        "intersection_over_union": 0,
+        "outside_smaller_area_m2": 19.957749351064784,
+        "symmetric_difference_area_m2": 231.29133835303142,
+        "geometric_container_id": null,
+        "geometric_contained_id": null,
+        "topological_covers_a_b": false,
+        "topological_covers_b_a": false,
+        "significance": "none",
+        "numerical_tolerance_m2": 0.000001
+      },
+      {
+        "relationship_id": "spatial-pair-v1:[1,\"/rooms-level-01-WGS.geojson#F1:OBJECTID:274\",\"/rooms-level-01-WGS.geojson#F1:OBJECTID:275\"]",
+        "floor_id": 1,
+        "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:274",
+        "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:275",
+        "feature_a_name": "John C Guyon Auditorium",
+        "feature_b_name": "John C Guyon Auditorium",
+        "relationship_type": "disjoint",
+        "area_a_m2": 6.5228356035671755,
+        "area_b_m2": 211.33358900196663,
+        "intersection_area_m2": 0,
+        "overlap_pct_a": 0,
+        "overlap_pct_b": 0,
+        "containment_ratio": 0,
+        "intersection_over_union": 0,
+        "outside_smaller_area_m2": 6.5228356035671755,
+        "symmetric_difference_area_m2": 217.85642460553382,
+        "geometric_container_id": null,
+        "geometric_contained_id": null,
+        "topological_covers_a_b": false,
+        "topological_covers_b_a": false,
+        "significance": "none",
+        "numerical_tolerance_m2": 0.000001
+      }
+    ],
+    "groups": [
+      {
+        "proposal_id": "same-name-v1:[1,\"/rooms-level-01-WGS.geojson#F1:OBJECTID:271\",\"/rooms-level-01-WGS.geojson#F1:OBJECTID:273\",\"/rooms-level-01-WGS.geojson#F1:OBJECTID:274\",\"/rooms-level-01-WGS.geojson#F1:OBJECTID:275\"]",
+        "floor_id": 1,
+        "original_name": "John C Guyon Auditorium",
+        "feature_ids": [
+          "/rooms-level-01-WGS.geojson#F1:OBJECTID:271",
+          "/rooms-level-01-WGS.geojson#F1:OBJECTID:273",
+          "/rooms-level-01-WGS.geojson#F1:OBJECTID:274",
+          "/rooms-level-01-WGS.geojson#F1:OBJECTID:275"
+        ],
+        "feature_areas_m2": [
+          {
+            "feature_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:271",
+            "area_m2": 16.592153635933418
+          },
+          {
+            "feature_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:273",
+            "area_m2": 19.957749351064784
+          },
+          {
+            "feature_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:274",
+            "area_m2": 6.5228356035671755
+          },
+          {
+            "feature_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:275",
+            "area_m2": 211.33358900196663
+          }
+        ],
+        "feature_area_sum_m2": 254.40632759253202,
+        "largest_feature_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:275",
+        "largest_area_fraction": 0.8306931317386393,
+        "compatible_modeled_heights": true,
+        "proximity_clusters": [
+          [
+            "/rooms-level-01-WGS.geojson#F1:OBJECTID:271",
+            "/rooms-level-01-WGS.geojson#F1:OBJECTID:273",
+            "/rooms-level-01-WGS.geojson#F1:OBJECTID:274",
+            "/rooms-level-01-WGS.geojson#F1:OBJECTID:275"
+          ]
+        ],
+        "pair_distances": [
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:271",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:273",
+            "gap_m": 0.26679753613868584
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:271",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:274",
+            "gap_m": 7.483527330453813
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:271",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:275",
+            "gap_m": 0.08965512702375221
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:273",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:274",
+            "gap_m": 0.13821603428068358
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:273",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:275",
+            "gap_m": 0.18470228416691514
+          },
+          {
+            "feature_a_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:274",
+            "feature_b_id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:275",
+            "gap_m": 0.10752517457396073
+          }
+        ],
+        "proposed_membership_groups": [
+          [
+            "/rooms-level-01-WGS.geojson#F1:OBJECTID:271",
+            "/rooms-level-01-WGS.geojson#F1:OBJECTID:273",
+            "/rooms-level-01-WGS.geojson#F1:OBJECTID:274",
+            "/rooms-level-01-WGS.geojson#F1:OBJECTID:275"
+          ]
+        ],
+        "logical_space_id": null,
+        "review_status": "pending",
+        "review_priority": 1,
+        "confidence": "medium",
+        "review_notes": "Same name is only supporting evidence. Proposed groups additionally require geometric contact/proximity and compatible modeled heights. No physical-room count or logical-space ID has been assigned.",
+        "decision": "",
+        "owner_notes": ""
+      }
+    ]
+  },
+  {
+    "example": "group-study-0420d",
+    "floor": 4,
+    "features": [
+      {
+        "feature_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:69",
+        "name": "Group Study 0420D",
+        "area_m2": 37.547563565303,
+        "base_height": 0,
+        "height": 2
+      },
+      {
+        "feature_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:70",
+        "name": "Group Study 0420D",
+        "area_m2": 0.2604529857236858,
+        "base_height": 0,
+        "height": 2
+      },
+      {
+        "feature_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:71",
+        "name": "Group Study 0420D",
+        "area_m2": 0.8908127311861278,
+        "base_height": 0,
+        "height": 2
+      }
+    ],
+    "relationships": [
+      {
+        "relationship_id": "spatial-pair-v1:[4,\"/rooms-level-04-WGS.geojson#F4:OBJECTID:69\",\"/rooms-level-04-WGS.geojson#F4:OBJECTID:70\"]",
+        "floor_id": 4,
+        "feature_a_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:69",
+        "feature_b_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:70",
+        "feature_a_name": "Group Study 0420D",
+        "feature_b_name": "Group Study 0420D",
+        "relationship_type": "disjoint",
+        "area_a_m2": 37.547563565303,
+        "area_b_m2": 0.2604529857236858,
+        "intersection_area_m2": 0,
+        "overlap_pct_a": 0,
+        "overlap_pct_b": 0,
+        "containment_ratio": 0,
+        "intersection_over_union": 0,
+        "outside_smaller_area_m2": 0.2604529857236858,
+        "symmetric_difference_area_m2": 37.80801655102669,
+        "geometric_container_id": null,
+        "geometric_contained_id": null,
+        "topological_covers_a_b": false,
+        "topological_covers_b_a": false,
+        "significance": "none",
+        "numerical_tolerance_m2": 0.000001
+      }
+    ],
+    "groups": [
+      {
+        "proposal_id": "same-name-v1:[4,\"/rooms-level-04-WGS.geojson#F4:OBJECTID:69\",\"/rooms-level-04-WGS.geojson#F4:OBJECTID:70\",\"/rooms-level-04-WGS.geojson#F4:OBJECTID:71\"]",
+        "floor_id": 4,
+        "original_name": "Group Study 0420D",
+        "feature_ids": [
+          "/rooms-level-04-WGS.geojson#F4:OBJECTID:69",
+          "/rooms-level-04-WGS.geojson#F4:OBJECTID:70",
+          "/rooms-level-04-WGS.geojson#F4:OBJECTID:71"
+        ],
+        "feature_areas_m2": [
+          {
+            "feature_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:69",
+            "area_m2": 37.547563565303
+          },
+          {
+            "feature_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:70",
+            "area_m2": 0.2604529857236858
+          },
+          {
+            "feature_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:71",
+            "area_m2": 0.8908127311861278
+          }
+        ],
+        "feature_area_sum_m2": 38.69882928221282,
+        "largest_feature_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:69",
+        "largest_area_fraction": 0.9702506319115194,
+        "compatible_modeled_heights": true,
+        "proximity_clusters": [
+          [
+            "/rooms-level-04-WGS.geojson#F4:OBJECTID:69",
+            "/rooms-level-04-WGS.geojson#F4:OBJECTID:70",
+            "/rooms-level-04-WGS.geojson#F4:OBJECTID:71"
+          ]
+        ],
+        "pair_distances": [
+          {
+            "feature_a_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:69",
+            "feature_b_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:70",
+            "gap_m": 0.06745116440249724
+          },
+          {
+            "feature_a_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:69",
+            "feature_b_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:71",
+            "gap_m": 0.1978577768429147
+          },
+          {
+            "feature_a_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:70",
+            "feature_b_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:71",
+            "gap_m": 1.9703872025878066
+          }
+        ],
+        "proposed_membership_groups": [
+          [
+            "/rooms-level-04-WGS.geojson#F4:OBJECTID:69",
+            "/rooms-level-04-WGS.geojson#F4:OBJECTID:70",
+            "/rooms-level-04-WGS.geojson#F4:OBJECTID:71"
+          ]
+        ],
+        "logical_space_id": null,
+        "review_status": "pending",
+        "review_priority": 1,
+        "confidence": "medium",
+        "review_notes": "Same name is only supporting evidence. Proposed groups additionally require geometric contact/proximity and compatible modeled heights. No physical-room count or logical-space ID has been assigned.",
+        "decision": "",
+        "owner_notes": ""
+      }
+    ]
+  },
+  {
+    "example": "conference-0480a",
+    "floor": 4,
+    "features": [
+      {
+        "feature_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:60",
+        "name": "Library Conference 0480A",
+        "area_m2": 136.69452707606686,
+        "base_height": 0,
+        "height": 2
+      },
+      {
+        "feature_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:61",
+        "name": "Library Conference 0480A",
+        "area_m2": 141.32049413211067,
+        "base_height": 0,
+        "height": 2
+      }
+    ],
+    "relationships": [
+      {
+        "relationship_id": "spatial-pair-v1:[4,\"/rooms-level-04-WGS.geojson#F4:OBJECTID:60\",\"/rooms-level-04-WGS.geojson#F4:OBJECTID:61\"]",
+        "floor_id": 4,
+        "feature_a_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:60",
+        "feature_b_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:61",
+        "feature_a_name": "Library Conference 0480A",
+        "feature_b_name": "Library Conference 0480A",
+        "relationship_type": "within",
+        "area_a_m2": 136.69452707606686,
+        "area_b_m2": 141.32049413211067,
+        "intersection_area_m2": 136.69452707606683,
+        "overlap_pct_a": 99.99999999999997,
+        "overlap_pct_b": 96.72661273621125,
+        "containment_ratio": 0.9999999999999998,
+        "intersection_over_union": 0.9672661273621124,
+        "outside_smaller_area_m2": 2.842170943040401e-14,
+        "symmetric_difference_area_m2": 4.625967056043862,
+        "geometric_container_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:61",
+        "geometric_contained_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:60",
+        "topological_covers_a_b": false,
+        "topological_covers_b_a": true,
+        "significance": "material",
+        "numerical_tolerance_m2": 0.0000013669452707606687
+      }
+    ],
+    "groups": [
+      {
+        "proposal_id": "same-name-v1:[4,\"/rooms-level-04-WGS.geojson#F4:OBJECTID:60\",\"/rooms-level-04-WGS.geojson#F4:OBJECTID:61\"]",
+        "floor_id": 4,
+        "original_name": "Library Conference 0480A",
+        "feature_ids": [
+          "/rooms-level-04-WGS.geojson#F4:OBJECTID:60",
+          "/rooms-level-04-WGS.geojson#F4:OBJECTID:61"
+        ],
+        "feature_areas_m2": [
+          {
+            "feature_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:60",
+            "area_m2": 136.69452707606686
+          },
+          {
+            "feature_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:61",
+            "area_m2": 141.32049413211067
+          }
+        ],
+        "feature_area_sum_m2": 278.01502120817753,
+        "largest_feature_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:61",
+        "largest_area_fraction": 0.5083196350973063,
+        "compatible_modeled_heights": true,
+        "proximity_clusters": [
+          [
+            "/rooms-level-04-WGS.geojson#F4:OBJECTID:60",
+            "/rooms-level-04-WGS.geojson#F4:OBJECTID:61"
+          ]
+        ],
+        "pair_distances": [
+          {
+            "feature_a_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:60",
+            "feature_b_id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:61",
+            "gap_m": 0
+          }
+        ],
+        "proposed_membership_groups": [
+          [
+            "/rooms-level-04-WGS.geojson#F4:OBJECTID:60",
+            "/rooms-level-04-WGS.geojson#F4:OBJECTID:61"
+          ]
+        ],
+        "logical_space_id": null,
+        "review_status": "pending",
+        "review_priority": 1,
+        "confidence": "medium",
+        "review_notes": "Same name is only supporting evidence. Proposed groups additionally require geometric contact/proximity and compatible modeled heights. No physical-room count or logical-space ID has been assigned.",
+        "decision": "",
+        "owner_notes": ""
+      }
+    ]
+  },
+  {
+    "example": "floor-background",
+    "floor": 0,
+    "background_feature_ids": [
+      "/rooms-basement-WGS.geojson#F0:FID:123"
+    ],
+    "relationship_counts": {
+      "within": 28,
+      "contains": 119
+    },
+    "proposed_functional_parents": 0
+  },
+  {
+    "example": "floor-background",
+    "floor": 2,
+    "background_feature_ids": [
+      "/rooms-level-02-WGS.geojson#F2:OBJECTID:1",
+      "/rooms-level-02-WGS.geojson#F2:OBJECTID:3"
+    ],
+    "relationship_counts": {
+      "contains": 242,
+      "disjoint": 74
+    },
+    "proposed_functional_parents": 0
+  },
+  {
+    "example": "floor-background",
+    "floor": 5,
+    "background_feature_ids": [
+      "/rooms-level-5-WGS.geojson#F5:OBJECTID:171"
+    ],
+    "relationship_counts": {
+      "within": 69,
+      "contains": 79
+    },
+    "proposed_functional_parents": 0
+  }
+]

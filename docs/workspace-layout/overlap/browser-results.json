@@ -1,0 +1,130 @@
+{
+  "results": [
+    {
+      "phase": "f4-above-keyboard-exact-intersection-no-floor-camera-change",
+      "passed": true,
+      "reference": {
+        "key": "/rooms-level-04-WGS.geojson#F4:OBJECTID:69",
+        "floor": 4,
+        "label": "Group Study 0420D",
+        "name": "Group Study 0420D",
+        "classification": null,
+        "area": 37.54756356542778
+      },
+      "match": {
+        "key": "/rooms-level-5-WGS.geojson#F5:OBJECTID:148",
+        "floor": 5,
+        "label": "Lc Folios A To Z",
+        "name": "Lc Folios A To Z",
+        "classification": null,
+        "area": 44.452357597572245,
+        "referenceKey": "/rooms-level-04-WGS.geojson#F4:OBJECTID:69",
+        "referenceFloor": 4,
+        "intersectionGeometry": {
+          "type": "MultiPolygon",
+          "coordinates": [
+            [
+              [
+                [
+                  -89.22030809900303,
+                  37.71518021483975
+                ],
+                [
+                  -89.22027206394189,
+                  37.71518021484157
+                ],
+                [
+                  -89.22027211069613,
+                  37.71516516953604
+                ],
+                [
+                  -89.22027526557942,
+                  37.71516514608554
+                ],
+                [
+                  -89.22027512723884,
+                  37.7151282413042
+                ],
+                [
+                  -89.22027217627316,
+                  37.71512822638111
+                ],
+                [
+                  -89.22027218884956,
+                  37.71511125527781
+                ],
+                [
+                  -89.22030762607538,
+                  37.715111312736596
+                ],
+                [
+                  -89.22030809900303,
+                  37.71518021483975
+                ]
+              ]
+            ]
+          ]
+        },
+        "intersectionArea": 22.98129357175588,
+        "referencePercent": 61.20581840606055,
+        "candidatePercent": 51.69870579150339
+      }
+    },
+    {
+      "phase": "below-multiple-results-rapid-switch-model-and-analysis-reuse",
+      "passed": true
+    },
+    {
+      "phase": "clear-retains-reference-floor-camera",
+      "passed": true
+    },
+    {
+      "phase": "explicit-focus-keeps-orientation-manual-navigation-keeps-control",
+      "passed": true
+    },
+    {
+      "phase": "stacked-shared-footprint-two-actual-elevations",
+      "passed": true,
+      "elevations": [
+        {
+          "floor": 4,
+          "z": 20
+        },
+        {
+          "floor": 3,
+          "z": 17.5
+        }
+      ]
+    },
+    {
+      "phase": "cinematic-transition-both-presets-color-modes-no-reanalysis",
+      "passed": true
+    },
+    {
+      "phase": "manual-floor-switching-projection-hidden-on-unrelated-floor",
+      "passed": true
+    },
+    {
+      "phase": "close-reopen-no-stale-highlight-cached-geometry",
+      "passed": true
+    },
+    {
+      "phase": "boundary-floors-and-duplicate-names",
+      "passed": true,
+      "duplicateKeys": [
+        "/rooms-level-04-WGS.geojson#F4:OBJECTID:69",
+        "/rooms-level-04-WGS.geojson#F4:OBJECTID:71",
+        "/rooms-level-04-WGS.geojson#F4:OBJECTID:70"
+      ]
+    },
+    {
+      "phase": "route-geometry-camera-and-draw-priority-preserved",
+      "passed": true
+    },
+    {
+      "phase": "mobile-card-and-explicit-focus",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,353 @@
+{
+  "results": [
+    {
+      "phase": "adjacency-bars",
+      "floor": 0,
+      "passed": true,
+      "reference": {
+        "key": "/rooms-basement-WGS.geojson#F0:FID:124",
+        "floor": 0,
+        "label": "dewey books 001 to 330",
+        "name": "dewey books 001 to 330",
+        "classification": null,
+        "area": 220.85306273597973
+      },
+      "groups": [
+        {
+          "floor": 1,
+          "direction": "above",
+          "matches": [
+            {
+              "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:239",
+              "floor": 1,
+              "label": "Floor",
+              "name": "Floor",
+              "classification": null,
+              "area": 1929.2134611080987,
+              "intersectionArea": 220.85306273597973,
+              "referencePercent": 100,
+              "candidatePercent": 11.447829241722504
+            }
+          ],
+          "available": true,
+          "skipped": 0,
+          "failures": 0
+        }
+      ],
+      "bars": [
+        {
+          "percent": 100,
+          "width": 296,
+          "total": 296
+        }
+      ],
+      "analysisMs": 42.100000001490116
+    },
+    {
+      "phase": "adjacency-bars",
+      "floor": 1,
+      "passed": true,
+      "reference": {
+        "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:35",
+        "floor": 1,
+        "label": "Classroom 0174",
+        "name": "Classroom 0174",
+        "classification": null,
+        "area": 106.8201618215827
+      },
+      "groups": [
+        {
+          "floor": 2,
+          "direction": "above",
+          "matches": [
+            {
+              "key": "/rooms-level-02-WGS.geojson#F2:OBJECTID:1",
+              "floor": 2,
+              "label": "Floor",
+              "name": "Floor",
+              "classification": null,
+              "area": 4332.960267166294,
+              "intersectionArea": 106.82016182158266,
+              "referencePercent": 99.99999999999996,
+              "candidatePercent": 2.4652928998917827
+            },
+            {
+              "key": "/rooms-level-02-WGS.geojson#F2:OBJECTID:2",
+              "floor": 2,
+              "label": "Information Resources Management",
+              "name": "Information Resources Management",
+              "classification": null,
+              "area": 1075.9489371111529,
+              "intersectionArea": 106.82016182158266,
+              "referencePercent": 99.99999999999996,
+              "candidatePercent": 9.92799547796267
+            }
+          ],
+          "available": true,
+          "skipped": 0,
+          "failures": 0
+        },
+        {
+          "floor": 0,
+          "direction": "below",
+          "matches": [
+            {
+              "key": "/rooms-basement-WGS.geojson#F0:FID:123",
+              "floor": 0,
+              "label": "floor",
+              "name": "floor",
+              "classification": null,
+              "area": 5627.097546196661,
+              "intersectionArea": 106.82016182158266,
+              "referencePercent": 99.99999999999996,
+              "candidatePercent": 1.8983172220602804
+            },
+            {
+              "key": "/rooms-basement-WGS.geojson#F0:FID:133",
+              "floor": 0,
+              "label": "journals 1995 & older f to i",
+              "name": "journals 1995 & older f to i",
+              "classification": null,
+              "area": 67.74813351806904,
+              "intersectionArea": 58.15541308103482,
+              "referencePercent": 54.442356283048326,
+              "candidatePercent": 85.84061296024376
+            },
+            {
+              "key": "/rooms-basement-WGS.geojson#F0:FID:138",
+              "floor": 0,
+              "label": "journals 1995 & older j to z",
+              "name": "journals 1995 & older j to z",
+              "classification": null,
+              "area": 204.0425981351725,
+              "intersectionArea": 19.941949694399895,
+              "referencePercent": 18.668713241333702,
+              "candidatePercent": 9.773424704771163
+            },
+            {
+              "key": "/rooms-basement-WGS.geojson#F0:FID:7",
+              "floor": 0,
+              "label": "structure",
+              "name": "structure",
+              "classification": null,
+              "area": 14.926336042434933,
+              "intersectionArea": 2.5812372999803945,
+              "referencePercent": 2.4164326808376573,
+              "candidatePercent": 17.293174243444923
+            },
+            {
+              "key": "/rooms-basement-WGS.geojson#F0:FID:97",
+              "floor": 0,
+              "label": "structure",
+              "name": "structure",
+              "classification": null,
+              "area": 397.3934517353461,
+              "intersectionArea": 0.8508684087228691,
+              "referencePercent": 0.7965428943498881,
+              "candidatePercent": 0.2141123375353265
+            }
+          ],
+          "available": true,
+          "skipped": 0,
+          "failures": 0
+        }
+      ],
+      "bars": [
+        {
+          "percent": 100,
+          "width": 296,
+          "total": 296
+        },
+        {
+          "percent": 100,
+          "width": 296,
+          "total": 296
+        },
+        {
+          "percent": 100,
+          "width": 296,
+          "total": 296
+        },
+        {
+          "percent": 54.4424,
+          "width": 161.140625,
+          "total": 296
+        },
+        {
+          "percent": 18.6687,
+          "width": 55.25,
+          "total": 296
+        },
+        {
+          "percent": 2.41643,
+          "width": 7.140625,
+          "total": 296
+        },
+        {
+          "percent": 0.796543,
+          "width": 2.34375,
+          "total": 296
+        }
+      ],
+      "analysisMs": 17.700000002980232
+    },
+    {
+      "phase": "adjacency-bars",
+      "floor": 4,
+      "passed": true,
+      "reference": {
+        "key": "/rooms-level-04-WGS.geojson#F4:OBJECTID:69",
+        "floor": 4,
+        "label": "Group Study 0420D",
+        "name": "Group Study 0420D",
+        "classification": null,
+        "area": 37.54756356542778
+      },
+      "groups": [
+        {
+          "floor": 5,
+          "direction": "above",
+          "matches": [
+            {
+              "key": "/rooms-level-5-WGS.geojson#F5:OBJECTID:171",
+              "floor": 5,
+              "label": "Floor",
+              "name": "Floor",
+              "classification": null,
+              "area": 5693.897909902057,
+              "intersectionArea": 37.54756356542778,
+              "referencePercent": 100,
+              "candidatePercent": 0.6594351384511151
+            },
+            {
+              "key": "/rooms-level-5-WGS.geojson#F5:OBJECTID:148",
+              "floor": 5,
+              "label": "Lc Folios A To Z",
+              "name": "Lc Folios A To Z",
+              "classification": null,
+              "area": 44.452357597572245,
+              "intersectionArea": 22.98129357175588,
+              "referencePercent": 61.20581840606055,
+              "candidatePercent": 51.69870579150339
+            }
+          ],
+          "available": true,
+          "skipped": 0,
+          "failures": 0
+        },
+        {
+          "floor": 3,
+          "direction": "below",
+          "matches": [
+            {
+              "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:303",
+              "floor": 3,
+              "label": "Imc Books",
+              "name": "Imc Books",
+              "classification": null,
+              "area": 65.77777086893745,
+              "intersectionArea": 31.521139102665295,
+              "referencePercent": 83.94989210881484,
+              "candidatePercent": 47.92065569608816
+            }
+          ],
+          "available": true,
+          "skipped": 0,
+          "failures": 0
+        }
+      ],
+      "bars": [
+        {
+          "percent": 100,
+          "width": 296,
+          "total": 296
+        },
+        {
+          "percent": 61.2058,
+          "width": 181.15625,
+          "total": 296
+        },
+        {
+          "percent": 83.9499,
+          "width": 248.484375,
+          "total": 296
+        }
+      ],
+      "analysisMs": 9.299999997019768
+    },
+    {
+      "phase": "adjacency-bars",
+      "floor": 7,
+      "passed": true,
+      "reference": {
+        "key": "/rooms-level-7-WGS.geojson#F7:OBJECTID:3",
+        "floor": 7,
+        "label": "Classroom 0754",
+        "name": "Classroom 0754",
+        "classification": null,
+        "area": 214.65571326437396
+      },
+      "groups": [
+        {
+          "floor": 6,
+          "direction": "below",
+          "matches": [
+            {
+              "key": "/rooms-level-6-WGS.geojson#F6:OBJECTID:6",
+              "floor": 6,
+              "label": "Math Classroom 0654",
+              "name": "Math Classroom 0654",
+              "classification": null,
+              "area": 215.39606828214386,
+              "intersectionArea": 210.31289200199916,
+              "referencePercent": 97.97684338500412,
+              "candidatePercent": 97.64007935674745
+            }
+          ],
+          "available": true,
+          "skipped": 0,
+          "failures": 0
+        }
+      ],
+      "bars": [
+        {
+          "percent": 97.9768,
+          "width": 290,
+          "total": 296
+        }
+      ],
+      "analysisMs": 4.700000002980232
+    },
+    {
+      "phase": "shared-summary-and-controlled-speech-lifecycle",
+      "passed": true,
+      "summary": "You're viewing Group Study 0420D on floor F4, with a footprint of approximately 37.5 square meters. Immediately above, on F5, the feature labeled Lc Folios A To Z overlaps about 61 percent of the selected footprint. Immediately below, on F3, the feature labeled Imc Books overlaps about 84 percent of the selected footprint. Percentages describe this footprint; overlapping results must not be added. Footprint overlap does not establish physical connectivity, structural support, or shared building systems.",
+      "nativeAPIPresent": true
+    },
+    {
+      "phase": "pair-highlight-camera-night-color-no-reanalysis",
+      "passed": true
+    },
+    {
+      "phase": "unsupported-missing-voices-close-cleanup",
+      "passed": true
+    },
+    {
+      "phase": "f-all-reference-selection",
+      "passed": true
+    },
+    {
+      "phase": "mobile-layout",
+      "passed": true
+    },
+    {
+      "phase": "missing-adjacent-data-retry",
+      "passed": true
+    },
+    {
+      "phase": "route-preservation",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

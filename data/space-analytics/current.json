@@ -1,0 +1,7 @@
+{
+  "schema_version": "morris-space-metadata-pointer/v1",
+  "metadata": "metadata.f6-sync.v1.json",
+  "schema": "metadata.f6-sync.schema.json",
+  "dataset_version": "rooms-sha256:5d485006e252bc837e79a2dae69e8e60532e32a294e9a0d2421703829d016ee5",
+  "production_activation": false
+}

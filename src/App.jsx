@@ -175,6 +175,16 @@ const ROUTER_CONFIG = [
 function App() {
   const roomCatalog = useRoomCatalog();
   const correspondence = useRoomCorrespondence(roomCatalog);
+  const [overlapFocusRequest, setOverlapFocusRequest] = useState(null);
+  const overlapFocusSequence = useRef(0);
+  const correspondenceMatch = useMemo(() => {
+    if (correspondence.result?.status !== "ready") return null;
+    for (const group of correspondence.result.groups) {
+      const match = group.matches.find(item => item.key === correspondence.candidateKey);
+      if (match) return { ...match, direction: group.direction };
+    }
+    return null;
+  }, [correspondence.result, correspondence.candidateKey]);
   const [selectedFeatureDetails, setSelectedFeatureDetails] = useState(null);
   const authoritativeFeatures = useMemo(() => Object.values(roomCatalog.datasets).flatMap(data => data.features), [roomCatalog.datasets]);
   const correspondenceFeatures = useMemo(() => {
@@ -889,6 +899,7 @@ function App() {
   }, [selectedFloor, displayRetry, roomCatalog.datasets[selectedFloor]]);
 
   const handleFloorChange = (floor) => {
+    setOverlapFocusRequest(null);
     // Only update which floor is displayed — do NOT clear an active route.
     // visibleRouteContext will naturally return null when the new floor is not
     // part of the route, hiding the map overlay while preserving routeContext
@@ -914,7 +925,7 @@ function App() {
     });
 
   const handleRoomSelect = (roomOrProperties, roomId, options = {}) => {
-    if (!options.preserveCorrespondence) correspondence.close();
+    setOverlapFocusRequest(null);
     let selectedFeature =
       roomOrProperties?.type === "Feature" || roomOrProperties?.geometry
         ? roomOrProperties
@@ -922,6 +933,10 @@ function App() {
     if (selectedFeature && !selectedFeature.properties?.__roomSearchKey) {
       const exact = exactAuthoritativeMatches(selectedFeature, authoritativeFeatures);
       if (exact.length === 1) selectedFeature = exact[0];
+    }
+    if (!options.preserveCorrespondence) {
+      if (correspondence.request && selectedFeature) correspondence.start(selectedFeature);
+      else correspondence.close();
     }
     setSelectedFeatureDetails(selectedFeature || null);
     const roomProperties =
@@ -963,7 +978,7 @@ function App() {
     setBuildingFitRequest(null);
     // Inspect the result on one floor even when a multi-floor route timeline is open.
     if (routeContext?.type === "multi-floor") setRouteVisualizationMode("stacked");
-    if (layoutMode !== "desktop" && !options.preserveCorrespondence) setSidebarCollapsed(true);
+    if (layoutMode !== "desktop" && !options.preserveCorrespondence && !correspondence.request) setSidebarCollapsed(true);
     setHighlightedRoomId(resolvedRoomId);
     setCameraMode("overview");
 
@@ -1013,15 +1028,28 @@ function App() {
     if (!feature) return;
     correspondence.start(feature);
     setSidebarCollapsed(false);
-    window.setTimeout(() => document.getElementById("panel-correspondence")?.scrollIntoView({ block: "nearest" }), 100);
   };
   const selectCorrespondence = (key, isReference = false) => {
-    const feature = authoritativeFeatures.find(f => f.properties.__roomSearchKey === key);
-    if (!feature) return;
-    if (!isReference) correspondence.setCandidateKey(key);
-    handleRoomSelect(feature, key, { preserveCorrespondence: true, focus: false });
+    setOverlapFocusRequest(null);
+    if (isReference) {
+      const feature = authoritativeFeatures.find(f => f.properties.__roomSearchKey === key);
+      if (feature) handleRoomSelect(feature, key, { preserveCorrespondence: true, focus: false });
+      return;
+    }
+    // Selecting an analytical match must not change room selection, floor,
+    // camera, search focus, or the active route.
+    if (correspondence.result?.groups.some(group => group.matches.some(match => match.key === key))) correspondence.setCandidateKey(key);
+  };
+  const clearOverlapHighlight = () => { correspondence.setCandidateKey(null); setOverlapFocusRequest(null); };
+  const closeCorrespondence = () => { correspondence.close(); setOverlapFocusRequest(null); };
+  const focusOverlap = () => {
+    if (!correspondenceMatch) return;
+    setSearchFocusRequest(null); setBuildingFitRequest(null); setCameraMode("manual");
+    setOverlapFocusRequest({ key: ++overlapFocusSequence.current, referenceKey: correspondenceMatch.referenceKey, candidateKey: correspondenceMatch.key });
+    if (layoutMode !== "desktop") setSidebarCollapsed(true);
   };
   const inspectCorrespondenceAll = () => {
+    setOverlapFocusRequest(null);
     setSelectedFloor("all"); setSelectedFloors([]); setFilteredRooms([]);
     setRouteVisualizationMode("stacked"); setSearchFocusRequest(null); setBuildingFitRequest(null);
     // Explicitly retain XY, bearing, pitch, and zoom. Fit Building remains available.
@@ -1049,6 +1077,7 @@ function App() {
   };
 
   const handleViewReset = () => {
+    setOverlapFocusRequest(null);
     setSearchFocusRequest(null);
     setCameraMode("manual");
     setBuildingFitRequest({ kind: "reset" });
@@ -2241,6 +2270,7 @@ function App() {
     }
   };
   const handleUserCameraInteraction = () => {
+    setOverlapFocusRequest(null);
     setSearchFocusRequest(null);
     setBuildingFitRequest(null);
     setCameraMode("manual");
@@ -2274,15 +2304,6 @@ function App() {
     <div className="App">
       {/* Help Overlay */}
       {showHelp && <HelpOverlay onClose={() => setShowHelp(false)} />}
-
-      {/* Floating Action Buttons */}
-      <button
-        className="help-button"
-        onClick={() => setShowHelp(true)}
-        title="Keyboard Shortcuts (Press ?)"
-      >
-        ?
-      </button>
 
       <div className="app-container">
         {/* Header */}
@@ -2393,7 +2414,9 @@ function App() {
             </div>
 
             {correspondence.request && <div className="panel-section panel-card">
-              <RoomCorrespondencePanel analysis={correspondence} onClose={correspondence.close}
+              <RoomCorrespondencePanel analysis={correspondence} onClose={closeCorrespondence}
+                onClearHighlight={clearOverlapHighlight} onFocusOverlap={focusOverlap}
+                visibleFloors={selectedFloors.length ? selectedFloors : selectedFloor === "all" ? null : [Number(selectedFloor)]}
                 onRetry={() => openCorrespondence(correspondence.request.feature)}
                 onChooseReference={key => openCorrespondence(authoritativeFeatures.find(f => f.properties.__roomSearchKey === key))}
                 onSelect={selectCorrespondence}
@@ -2650,8 +2673,17 @@ function App() {
 
           {/* Map Container */}
           <div className="map-container">
+            <button
+              className="help-button"
+              onClick={() => setShowHelp(true)}
+              title="Keyboard Shortcuts (Press ?)"
+              aria-label="Help and keyboard shortcuts"
+            >
+              ?
+            </button>
             {isMultiFloorTimelineActive ? (
               <MultiFloorRouteTimeline
+                correspondenceFeatures={correspondenceFeatures} correspondenceMatch={correspondenceMatch} overlapFocusRequest={overlapFocusRequest}
                 authoritativeFeatures={authoritativeFeatures}
                 roomColorMode={roomColorMode}
                 route={visibleRouteContext.route}
@@ -2673,6 +2705,7 @@ function App() {
             ) : (
               <Map3D
                 correspondenceFeatures={correspondenceFeatures}
+                correspondenceMatch={correspondenceMatch} overlapFocusRequest={overlapFocusRequest}
                 authoritativeFeatures={authoritativeFeatures}
                 selectedFloor={selectedFloor}
                 selectedFloors={selectedFloors}
@@ -2739,10 +2772,6 @@ function App() {
           </div>
         </div>
 
-        {/* Footer */}
-        <footer className="app-footer">
-          <p>Built with React, Deck.gl & GeoJSON WGS84 Coordinate System</p>
-        </footer>
       </div>
     </div>
   );

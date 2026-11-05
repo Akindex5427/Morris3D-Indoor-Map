@@ -1,0 +1,572 @@
+{
+  "scope": "Lightweight read-only inventory/queue refresh; not a new F-ALL or full classification audit",
+  "preceding_source_sha256": "9be596896c68c09320b932f48dfd42c8880892547847967f1bca268f7b4e9011",
+  "current_source_sha256": "a3de5bee376bf8cb644bcbef86464f432cdf194ed7b52f6702a55564c193fdc4",
+  "preceding_count": 149,
+  "current_count": 148,
+  "removed": [
+    {
+      "preceding_feature_id": "/rooms-basement-WGS.geojson#F0:FID:96",
+      "name": "structure",
+      "secondary_FID_": 105
+    }
+  ],
+  "added": [],
+  "retained_geometry_changes": 0,
+  "identifier_changes": 52,
+  "attribute_changes": [
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:97",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:96",
+      "changes": {
+        "FID": {
+          "before": 97,
+          "after": 96
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:98",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:97",
+      "changes": {
+        "FID": {
+          "before": 98,
+          "after": 97
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:99",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:98",
+      "changes": {
+        "FID": {
+          "before": 99,
+          "after": 98
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:100",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:99",
+      "changes": {
+        "FID": {
+          "before": 100,
+          "after": 99
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:101",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:100",
+      "changes": {
+        "FID": {
+          "before": 101,
+          "after": 100
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:102",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:101",
+      "changes": {
+        "FID": {
+          "before": 102,
+          "after": 101
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:103",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:102",
+      "changes": {
+        "FID": {
+          "before": 103,
+          "after": 102
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:104",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:103",
+      "changes": {
+        "FID": {
+          "before": 104,
+          "after": 103
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:105",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:104",
+      "changes": {
+        "FID": {
+          "before": 105,
+          "after": 104
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:106",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:105",
+      "changes": {
+        "FID": {
+          "before": 106,
+          "after": 105
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:107",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:106",
+      "changes": {
+        "FID": {
+          "before": 107,
+          "after": 106
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:108",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:107",
+      "changes": {
+        "FID": {
+          "before": 108,
+          "after": 107
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:109",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:108",
+      "changes": {
+        "FID": {
+          "before": 109,
+          "after": 108
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:110",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:109",
+      "changes": {
+        "FID": {
+          "before": 110,
+          "after": 109
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:111",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:110",
+      "changes": {
+        "FID": {
+          "before": 111,
+          "after": 110
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:112",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:111",
+      "changes": {
+        "FID": {
+          "before": 112,
+          "after": 111
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:113",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:112",
+      "changes": {
+        "FID": {
+          "before": 113,
+          "after": 112
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:114",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:113",
+      "changes": {
+        "FID": {
+          "before": 114,
+          "after": 113
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:115",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:114",
+      "changes": {
+        "FID": {
+          "before": 115,
+          "after": 114
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:116",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:115",
+      "changes": {
+        "FID": {
+          "before": 116,
+          "after": 115
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:117",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:116",
+      "changes": {
+        "FID": {
+          "before": 117,
+          "after": 116
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:118",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:117",
+      "changes": {
+        "FID": {
+          "before": 118,
+          "after": 117
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:119",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:118",
+      "changes": {
+        "FID": {
+          "before": 119,
+          "after": 118
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:120",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:119",
+      "changes": {
+        "FID": {
+          "before": 120,
+          "after": 119
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:121",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:120",
+      "changes": {
+        "FID": {
+          "before": 121,
+          "after": 120
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:122",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:121",
+      "changes": {
+        "FID": {
+          "before": 122,
+          "after": 121
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:123",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:122",
+      "changes": {
+        "FID": {
+          "before": 123,
+          "after": 122
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:124",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:123",
+      "changes": {
+        "FID": {
+          "before": 124,
+          "after": 123
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:125",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:124",
+      "changes": {
+        "FID": {
+          "before": 125,
+          "after": 124
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:126",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:125",
+      "changes": {
+        "FID": {
+          "before": 126,
+          "after": 125
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:127",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:126",
+      "changes": {
+        "FID": {
+          "before": 127,
+          "after": 126
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:128",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:127",
+      "changes": {
+        "FID": {
+          "before": 128,
+          "after": 127
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:129",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:128",
+      "changes": {
+        "FID": {
+          "before": 129,
+          "after": 128
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:130",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:129",
+      "changes": {
+        "FID": {
+          "before": 130,
+          "after": 129
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:131",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:130",
+      "changes": {
+        "FID": {
+          "before": 131,
+          "after": 130
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:132",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:131",
+      "changes": {
+        "FID": {
+          "before": 132,
+          "after": 131
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:133",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:132",
+      "changes": {
+        "FID": {
+          "before": 133,
+          "after": 132
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:134",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:133",
+      "changes": {
+        "FID": {
+          "before": 134,
+          "after": 133
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:135",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:134",
+      "changes": {
+        "FID": {
+          "before": 135,
+          "after": 134
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:136",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:135",
+      "changes": {
+        "FID": {
+          "before": 136,
+          "after": 135
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:137",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:136",
+      "changes": {
+        "FID": {
+          "before": 137,
+          "after": 136
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:138",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:137",
+      "changes": {
+        "FID": {
+          "before": 138,
+          "after": 137
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:139",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:138",
+      "changes": {
+        "FID": {
+          "before": 139,
+          "after": 138
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:140",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:139",
+      "changes": {
+        "FID": {
+          "before": 140,
+          "after": 139
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:141",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:140",
+      "changes": {
+        "FID": {
+          "before": 141,
+          "after": 140
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:142",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:141",
+      "changes": {
+        "FID": {
+          "before": 142,
+          "after": 141
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:143",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:142",
+      "changes": {
+        "FID": {
+          "before": 143,
+          "after": 142
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:144",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:143",
+      "changes": {
+        "FID": {
+          "before": 144,
+          "after": 143
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:145",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:144",
+      "changes": {
+        "FID": {
+          "before": 145,
+          "after": 144
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:146",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:145",
+      "changes": {
+        "FID": {
+          "before": 146,
+          "after": 145
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:147",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:146",
+      "changes": {
+        "name": {
+          "before": " Mechanical Room (No Access)",
+          "after": "Mechanical Room (No Access)"
+        },
+        "FID": {
+          "before": 147,
+          "after": 146
+        }
+      }
+    },
+    {
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:148",
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:147",
+      "changes": {
+        "FID": {
+          "before": 148,
+          "after": 147
+        }
+      }
+    }
+  ],
+  "rooms": [
+    {
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:146",
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:147",
+      "secondary_FID_": 156,
+      "name": "Mechanical Room (No Access)",
+      "area_m2": 397.3935368576013
+    },
+    {
+      "current_id": "/rooms-basement-WGS.geojson#F0:FID:147",
+      "preceding_id": "/rooms-basement-WGS.geojson#F0:FID:148",
+      "secondary_FID_": 157,
+      "name": "SCRC Stocks (Staff Only)",
+      "area_m2": 457.0841977261256
+    }
+  ],
+  "current_status_counts": {
+    "owner_verified_identity_pending": 104,
+    "owner_verified_matched": 42,
+    "technical_review_required": 1,
+    "unresolved_owner_review": 1
+  },
+  "unresolved_rows": 110,
+  "unresolved_current_rows": 106,
+  "retained_historical_or_unlocated_rows": 4,
+  "preceding_snapshot_hash_verified": true,
+  "source_geometry_modified_by_refresh": false,
+  "full_spatial_analysis_rerun": false,
+  "fall_reaudited": false
+}

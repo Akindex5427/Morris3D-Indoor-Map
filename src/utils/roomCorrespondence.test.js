@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { createCorrespondenceIndex, analyzeCorrespondence, resolveAndAnalyze, createMetricProjection } from "./roomCorrespondence";
 import { exactAuthoritativeMatches } from "./roomCorrespondenceIdentity";
-import { buildFloorCatalog, FLOOR_POLYGON_MAP } from "./roomCatalog";
+import { buildFloorCatalog, FLOOR_POLYGON_MAP, adjacentRoomFloors } from "./roomCatalog";
 import { correspondenceOverlayData } from "../layers/roomCorrespondenceLayers";
 
 const project = createMetricProjection([-89.217, 37.714]);
@@ -13,7 +13,7 @@ const datasets = features => Object.fromEntries([...new Set(features.map(f=>f.pr
 const matches = result => result.groups.flatMap(g=>g.matches);
 
 describe("vertical room correspondence", () => {
-  it("computes metric intersections and both percentages; sorts floors by proximity and area", () => {
+  it("computes metric intersections and both percentages; limits analysis to adjacent floors and sorts by area", () => {
     const index = createCorrespondenceIndex(datasets([box("reference",3,0,0,10,10), box("above",4,0,0,10,10), box("partial",4,5,0,10,10), box("far",7,0,0,5,5), box("below",2,0,0,2,10)]));
     const result = analyzeCorrespondence(index,"reference"), rows=matches(result);
     expect(result.reference.area).toBeCloseTo(100,4);
@@ -21,7 +21,7 @@ describe("vertical room correspondence", () => {
     expect(rows.find(r=>r.key==="partial")).toMatchObject({floor:4});
     expect(rows.find(r=>r.key==="partial").referencePercent).toBeCloseTo(50,4);
     expect(rows.find(r=>r.key==="partial").candidatePercent).toBeCloseTo(50,4);
-    expect(result.groups.filter(g=>g.direction==="above").map(g=>g.floor)).toEqual([4,5,6,7]);
+    expect(result.groups.filter(g=>g.direction==="above").map(g=>g.floor)).toEqual([4]);
     expect(result.groups.find(g=>g.floor===4).matches.map(r=>r.key)).toEqual(["above","partial"]);
     expect(analyzeCorrespondence(index,"reference").cacheHit).toBe(true);
     const reverse=matches(analyzeCorrespondence(index,"partial")).find(r=>r.key==="reference");
@@ -39,10 +39,10 @@ describe("vertical room correspondence", () => {
     expect(rows[1].candidatePercent).toBeCloseTo(100,4);
   });
   it("excludes boundary-only contacts and correctly reports empty overlap and F0/F7 limits", () => {
-    const index=createCorrespondenceIndex(datasets([box("ground",0,0,0,10,10),box("touch",7,10,0,10,10),box("away",7,100,100,1,1)]));
+    const index=createCorrespondenceIndex(datasets([box("ground",0,0,0,10,10),box("touch",1,10,0,10,10),box("away",7,100,100,1,1)]));
     expect(matches(analyzeCorrespondence(index,"ground"))).toEqual([]);
     expect(analyzeCorrespondence(index,"ground").groups.every(g=>g.direction==="above")).toBe(true);
-    expect(analyzeCorrespondence(index,"touch").groups.every(g=>g.direction==="below")).toBe(true);
+    expect(analyzeCorrespondence(index,"away").groups.every(g=>g.direction==="below")).toBe(true);
     expect(analyzeCorrespondence(index,"ground").candidatesTested).toBeLessThan(2);
   });
   it("rejects self crossings, bad holes, unclosed rings, and nonfinite coordinates without silently repairing", () => {
@@ -58,7 +58,7 @@ describe("vertical room correspondence", () => {
   it("reports missing floors and uses source identifiers when names are absent", () => {
     const index=createCorrespondenceIndex(datasets([box("a",0,0,0,10,10),box("b",1,0,0,5,5,{name:null,OBJECTID:42})]));
     expect(matches(analyzeCorrespondence(index,"a"))[0].label).toBe("OBJECTID 42");
-    expect(analyzeCorrespondence(index,"a").groups.find(g=>g.floor===7).available).toBe(false);
+    expect(analyzeCorrespondence(index,"b").groups.find(g=>g.floor===2).available).toBe(false);
   });
   it("resolves exact XY independently of Z/name and refuses ambiguous or changed F-ALL identities", () => {
     const a=box("a",1,0,0,10,10),b=box("b",1,20,0,10,10);
@@ -83,33 +83,53 @@ describe("vertical room correspondence", () => {
     const a=box("a",3,0,0,10,10,{base_height:12,height:15,__correspondenceRole:"reference"});
     const b=box("b",4,0,0,10,10,{base_height:17,height:20,__correspondenceRole:"candidate"});
     const before=JSON.stringify([a,b]);
-    const data=correspondenceOverlayData([a,b],[a,b],[0,1,2,3,4,5,6,7]);
+    const data=correspondenceOverlayData([a,b],[a,b],[0,1,2,3,4,5,6,7],4.5,1,{key:"b",referenceKey:"a",direction:"above"});
     expect(data.paths.length).toBe(2);
     data.features.forEach((f,i)=>{
       expect(f.geometry.coordinates[0].map(p=>p.slice(0,2))).toEqual([a,b][i].geometry.coordinates[0]);
-      expect(f.geometry.coordinates[0][0][2]).toBeCloseTo([28.58,38.08][i],6);
+      expect(f.geometry.coordinates[0][0][2]).toBeCloseTo([28.5,38][i],6);
     });
     expect(JSON.stringify([a,b])).toBe(before);
-    const single=correspondenceOverlayData([b],[b,box("slab",4,0,0,30,30,{base_height:15,height:17})],[4]);
-    expect(single.features[0].geometry.coordinates[0][0][2]).toBeCloseTo(5.08,6);
+    const single=correspondenceOverlayData([{...b,properties:{...b.properties,__correspondenceRole:"reference"}}],[b,box("slab",4,0,0,30,30,{base_height:15,height:17})],[4]);
+    expect(single.features[0].geometry.coordinates[0][0][2]).toBeCloseTo(5,6);
   });
   it("audits the real eight floors and computes the SIU Press example from geometry", () => {
     const sources=Object.fromEntries(Array.from({length:8},(_,floor)=>[floor,buildFloorCatalog(JSON.parse(readFileSync(`public${FLOOR_POLYGON_MAP[floor]}`,"utf8")),floor).data]));
     const before=JSON.stringify(sources),index=createCorrespondenceIndex(sources);
-    writeFileSync("docs/stage-6-correspondence/validation-audit.json", JSON.stringify({ valid: index.rows.size, issues: index.issues }, null, 2));
     const press=[...index.rows.values()].find(row=>row.floor===3&&/university press/i.test(row.label));
     expect(press).toBeTruthy();
     const result=analyzeCorrespondence(index,press.key);
-    expect(result.groups.length).toBe(7);expect(matches(result).length).toBeGreaterThan(0);
+    expect(result.groups.map(g=>g.floor)).toEqual([4,2]);expect(matches(result).length).toBeGreaterThan(0);
     for(const row of matches(result)) {
       expect(row.intersectionArea).toBeGreaterThan(0);
       expect(row.referencePercent).toBeCloseTo(100*row.intersectionArea/result.reference.area,8);
       expect(row.referencePercent).toBeLessThanOrEqual(100);expect(row.candidatePercent).toBeLessThanOrEqual(100);
     }
     expect(JSON.stringify(sources)).toBe(before);
-    const audit={origin:index.origin,extent:index.extent,preparationMs:index.preparationMs,
-      floors:Array.from({length:8},(_,floor)=>({floor,total:sources[floor].features.length,valid:index.floors.get(floor)?.length||0,invalid:index.issues.filter(i=>i.floor===floor).length})),
-      example:result,issues:index.issues};
-    writeFileSync("docs/stage-6-correspondence/data-audit.json",JSON.stringify(audit,null,2));
   });
+});
+
+it("uses ordered floor configuration, including nonconsecutive identifiers", () => {
+  expect(adjacentRoomFloors(4, [0, 4, 9])).toEqual({ above: 9, below: 0 });
+  const index = createCorrespondenceIndex(datasets([box("a",4,0,0,10,10),box("b",9,0,0,2,2)]), {floorOrder:[0,4,9]});
+  const result = analyzeCorrespondence(index,"a");
+  expect(result.adjacentFloors).toEqual({above:9,below:0});
+  expect(result.groups.map(g=>g.floor)).toEqual([9,0]);
+  expect(result.groups[1].available).toBe(false);
+});
+it.each([[0,[1]],[1,[2,0]],[4,[5,3]],[7,[6]]])("restricts F%s to its immediate neighbors", (floor, expected) => {
+  const index=createCorrespondenceIndex(datasets(Array.from({length:8},(_,f)=>box(`F${f}`,f,0,0,10,10))));
+  const result=analyzeCorrespondence(index,`F${floor}`);
+  expect(result.groups.map(g=>g.floor)).toEqual(expected);
+  expect(result.candidatesTested).toBe(expected.length);
+  expect(result.units.percentDenominator).toBe("reference-footprint");
+});
+it("retains duplicate names and positive small overlaps on concave footprints", () => {
+  const concave=feature("ref",4,[[[0,0],[10,0],[10,3],[3,3],[3,10],[0,10],[0,0]].map(p=>project.invert(p))]);
+  const index=createCorrespondenceIndex(datasets([concave,box("a",5,0,0,1,1,{name:"Same"}),box("b",5,2,0,1,1,{name:"Same"}),box("tiny",5,1,1,0.002,0.002),box("notch",5,5,5,1,1)]));
+  const result=analyzeCorrespondence(index,"ref"), rows=matches(result);
+  expect(rows.filter(r=>r.label==="Same").map(r=>r.key).sort()).toEqual(["a","b"]);
+  expect(rows.some(r=>r.key==="notch")).toBe(false);
+  expect(rows.find(r=>r.key==="tiny").intersectionArea).toBeGreaterThan(1e-6);
+  expect(result.reference.area).toBeCloseTo(51,4);
 });

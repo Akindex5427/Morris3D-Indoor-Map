@@ -1,0 +1,90 @@
+[
+  {
+    "proposal_id": "same-name-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:147\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:148\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:149\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:150\"]",
+    "floor_id": 6,
+    "original_name": "Group Study Space",
+    "feature_ids": [
+      "/rooms-level-6-WGS.geojson#F6:OBJECTID:147",
+      "/rooms-level-6-WGS.geojson#F6:OBJECTID:148",
+      "/rooms-level-6-WGS.geojson#F6:OBJECTID:149",
+      "/rooms-level-6-WGS.geojson#F6:OBJECTID:150"
+    ],
+    "feature_areas_m2": [
+      {
+        "feature_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:147",
+        "area_m2": 4.344470887472565
+      },
+      {
+        "feature_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:148",
+        "area_m2": 2.6288937166314676
+      },
+      {
+        "feature_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:149",
+        "area_m2": 3.2055142016380165
+      },
+      {
+        "feature_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:150",
+        "area_m2": 2.736641856311138
+      }
+    ],
+    "feature_area_sum_m2": 12.915520662053186,
+    "largest_feature_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:147",
+    "largest_area_fraction": 0.3363759774886166,
+    "compatible_modeled_heights": true,
+    "proximity_clusters": [
+      [
+        "/rooms-level-6-WGS.geojson#F6:OBJECTID:147",
+        "/rooms-level-6-WGS.geojson#F6:OBJECTID:148",
+        "/rooms-level-6-WGS.geojson#F6:OBJECTID:149",
+        "/rooms-level-6-WGS.geojson#F6:OBJECTID:150"
+      ]
+    ],
+    "pair_distances": [
+      {
+        "feature_a_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:147",
+        "feature_b_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:148",
+        "gap_m": 0
+      },
+      {
+        "feature_a_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:147",
+        "feature_b_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:149",
+        "gap_m": 5.849336704077194
+      },
+      {
+        "feature_a_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:147",
+        "feature_b_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:150",
+        "gap_m": 11.833112485371126
+      },
+      {
+        "feature_a_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:148",
+        "feature_b_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:149",
+        "gap_m": 0
+      },
+      {
+        "feature_a_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:148",
+        "feature_b_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:150",
+        "gap_m": 5.983641636131734
+      },
+      {
+        "feature_a_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:149",
+        "feature_b_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:150",
+        "gap_m": 0
+      }
+    ],
+    "proposed_membership_groups": [
+      [
+        "/rooms-level-6-WGS.geojson#F6:OBJECTID:147",
+        "/rooms-level-6-WGS.geojson#F6:OBJECTID:148",
+        "/rooms-level-6-WGS.geojson#F6:OBJECTID:149",
+        "/rooms-level-6-WGS.geojson#F6:OBJECTID:150"
+      ]
+    ],
+    "logical_space_id": null,
+    "review_status": "pending",
+    "review_priority": 1,
+    "confidence": "medium",
+    "review_notes": "Same name is only supporting evidence. Proposed groups additionally require geometric contact/proximity and compatible modeled heights. No physical-room count or logical-space ID has been assigned.",
+    "decision": "",
+    "owner_notes": ""
+  }
+]

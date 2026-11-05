@@ -1,0 +1,380 @@
+{
+  "results": [
+    {
+      "floor": 0,
+      "budget": 6,
+      "labels": [
+        {
+          "id": "/rooms-basement-WGS.geojson#F0:FID:4",
+          "type": "connector",
+          "name": "stairs area",
+          "floor": 0,
+          "z": 0.98,
+          "group": "route-room-labels",
+          "size": 10.5,
+          "units": "pixels"
+        },
+        {
+          "id": "/rooms-basement-WGS.geojson#F0:FID:100",
+          "type": "end",
+          "name": "stairs area upper",
+          "floor": 0,
+          "z": 1.1,
+          "group": "route-room-labels",
+          "size": 12,
+          "units": "pixels"
+        },
+        {
+          "id": "/rooms-basement-WGS.geojson#F0:FID:17",
+          "type": "start",
+          "name": "stairs area upper",
+          "floor": 0,
+          "z": 1.1,
+          "group": "route-room-labels",
+          "size": 12,
+          "units": "pixels"
+        },
+        {
+          "id": "/rooms-basement-WGS.geojson#F0:FID:131",
+          "type": "landmark",
+          "name": "journals 1995 & older a to f",
+          "floor": 0,
+          "z": 0.86,
+          "group": "route-room-labels",
+          "size": 10.5,
+          "units": "pixels"
+        }
+      ]
+    },
+    {
+      "floor": 1,
+      "budget": 3,
+      "labels": [
+        {
+          "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:102",
+          "type": "connector",
+          "name": "Stairs Area",
+          "floor": 1,
+          "z": 0.98,
+          "group": "route-room-labels",
+          "size": 10.5,
+          "units": "pixels"
+        },
+        {
+          "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:5",
+          "type": "end",
+          "name": "Printers",
+          "floor": 1,
+          "z": 1.1,
+          "group": "route-room-labels",
+          "size": 12,
+          "units": "pixels"
+        },
+        {
+          "id": "/rooms-level-01-WGS.geojson#F1:OBJECTID:2",
+          "type": "start",
+          "name": "Printers",
+          "floor": 1,
+          "z": 1.1,
+          "group": "route-room-labels",
+          "size": 12,
+          "units": "pixels"
+        }
+      ]
+    },
+    {
+      "floor": 2,
+      "budget": 3,
+      "labels": [
+        {
+          "id": "/rooms-level-02-WGS.geojson#F2:OBJECTID:195",
+          "type": "connector",
+          "name": "Stairs Area",
+          "floor": 2,
+          "z": 0.98,
+          "group": "route-room-labels",
+          "size": 10.5,
+          "units": "pixels"
+        },
+        {
+          "id": "/rooms-level-02-WGS.geojson#F2:OBJECTID:223",
+          "type": "end",
+          "name": "Stair Case",
+          "floor": 2,
+          "z": 1.1,
+          "group": "route-room-labels",
+          "size": 12,
+          "units": "pixels"
+        },
+        {
+          "id": "/rooms-level-02-WGS.geojson#F2:OBJECTID:14",
+          "type": "start",
+          "name": "Stair Case",
+          "floor": 2,
+          "z": 1.1,
+          "group": "route-room-labels",
+          "size": 12,
+          "units": "pixels"
+        }
+      ]
+    },
+    {
+      "floor": 3,
+      "budget": 4,
+      "labels": [
+        {
+          "id": "/rooms-level-03-WGS.geojson#F3:OBJECTID:377",
+          "type": "end",
+          "name": "Stairs Area Upper",
+          "floor": 3,
+          "z": 1.1,
+          "group": "route-room-labels",
+          "size": 12,
+          "units": "pixels"
+        },
+        {
+          "id": "/rooms-level-03-WGS.geojson#F3:OBJECTID:62",
+          "type": "start",
+          "name": "Stairs Area Upper",
+          "floor": 3,
+          "z": 1.1,
+          "group": "route-room-labels",
+          "size": 12,
+          "units": "pixels"
+        },
+        {
+          "id": "/rooms-level-03-WGS.geojson#F3:OBJECTID:239",
+          "type": "landmark",
+          "name": "Southern Illinois University Press (0362)",
+          "floor": 3,
+          "z": 0.86,
+          "group": "route-room-labels",
+          "size": 10.5,
+          "units": "pixels"
+        }
+      ]
+    },
+    {
+      "floor": 4,
+      "budget": 3,
+      "labels": [
+        {
+          "id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:83",
+          "type": "connector",
+          "name": "Stairs Area",
+          "floor": 4,
+          "z": 0.98,
+          "group": "route-room-labels",
+          "size": 10.5,
+          "units": "pixels"
+        },
+        {
+          "id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:6",
+          "type": "end",
+          "name": "Geospatial Resources",
+          "floor": 4,
+          "z": 1.1,
+          "group": "route-room-labels",
+          "size": 12,
+          "units": "pixels"
+        },
+        {
+          "id": "/rooms-level-04-WGS.geojson#F4:OBJECTID:4",
+          "type": "start",
+          "name": "Geospatial Resources",
+          "floor": 4,
+          "z": 1.1,
+          "group": "route-room-labels",
+          "size": 12,
+          "units": "pixels"
+        }
+      ]
+    },
+    {
+      "floor": 5,
+      "budget": 4,
+      "labels": [
+        {
+          "id": "/rooms-level-5-WGS.geojson#F5:OBJECTID:72",
+          "type": "end",
+          "name": "Stairs Area",
+          "floor": 5,
+          "z": 1.1,
+          "group": "route-room-labels",
+          "size": 12,
+          "units": "pixels"
+        },
+        {
+          "id": "/rooms-level-5-WGS.geojson#F5:OBJECTID:10",
+          "type": "start",
+          "name": "Stairs Area",
+          "floor": 5,
+          "z": 1.1,
+          "group": "route-room-labels",
+          "size": 12,
+          "units": "pixels"
+        },
+        {
+          "id": "/rooms-level-5-WGS.geojson#F5:OBJECTID:121",
+          "type": "landmark",
+          "name": "Faculty Research 0580B",
+          "floor": 5,
+          "z": 0.86,
+          "group": "route-room-labels",
+          "size": 10.5,
+          "units": "pixels"
+        }
+      ]
+    },
+    {
+      "floor": 6,
+      "budget": 4,
+      "labels": [
+        {
+          "id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:61",
+          "type": "end",
+          "name": "Stairs Area Upper",
+          "floor": 6,
+          "z": 1.1,
+          "group": "route-room-labels",
+          "size": 12,
+          "units": "pixels"
+        },
+        {
+          "id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:10",
+          "type": "start",
+          "name": "Stairs Area Upper",
+          "floor": 6,
+          "z": 1.1,
+          "group": "route-room-labels",
+          "size": 12,
+          "units": "pixels"
+        },
+        {
+          "id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:126",
+          "type": "landmark",
+          "name": "Southern Illinois African American Heritage Center 0640A",
+          "floor": 6,
+          "z": 0.86,
+          "group": "route-room-labels",
+          "size": 10.5,
+          "units": "pixels"
+        }
+      ]
+    },
+    {
+      "floor": 7,
+      "budget": 4,
+      "labels": [
+        {
+          "id": "/rooms-level-7-WGS.geojson#F7:OBJECTID:35",
+          "type": "connector",
+          "name": "Stairs Upper Area",
+          "floor": 7,
+          "z": 0.98,
+          "group": "route-room-labels",
+          "size": 10.5,
+          "units": "pixels"
+        },
+        {
+          "id": "/rooms-level-7-WGS.geojson#F7:OBJECTID:88",
+          "type": "end",
+          "name": "Stair Case",
+          "floor": 7,
+          "z": 1.1,
+          "group": "route-room-labels",
+          "size": 12,
+          "units": "pixels"
+        },
+        {
+          "id": "/rooms-level-7-WGS.geojson#F7:OBJECTID:39",
+          "type": "start",
+          "name": "Stair Case",
+          "floor": 7,
+          "z": 1.1,
+          "group": "route-room-labels",
+          "size": 12,
+          "units": "pixels"
+        },
+        {
+          "id": "/rooms-level-7-WGS.geojson#F7:OBJECTID:13",
+          "type": "landmark",
+          "name": "Center For Learning Support Services",
+          "floor": 7,
+          "z": 0.86,
+          "group": "route-room-labels",
+          "size": 10.5,
+          "units": "pixels"
+        }
+      ]
+    },
+    {
+      "floor": "all",
+      "budget": 4,
+      "labels": [
+        {
+          "id": "/rooms-basement-WGS.geojson#F0:FID:4",
+          "type": "connector",
+          "name": "stairs area",
+          "floor": 0,
+          "z": 0.98,
+          "group": "route-room-labels",
+          "size": 10.5,
+          "units": "pixels"
+        },
+        {
+          "id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:144",
+          "type": "end",
+          "name": "Emergency Exit",
+          "floor": 6,
+          "z": 28.1,
+          "group": "route-room-labels",
+          "size": 12,
+          "units": "pixels"
+        },
+        {
+          "id": "/rooms-basement-WGS.geojson#F0:FID:141",
+          "type": "start",
+          "name": "Emergency Exit",
+          "floor": 0,
+          "z": 1.1,
+          "group": "route-room-labels",
+          "size": 12,
+          "units": "pixels"
+        },
+        {
+          "id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:126",
+          "type": "landmark",
+          "name": "Southern Illinois African American Heritage Center 0640A",
+          "floor": 6,
+          "z": 27.86,
+          "group": "route-room-labels",
+          "size": 10.5,
+          "units": "pixels"
+        }
+      ]
+    },
+    {
+      "case": "transition fallback in shared collision group",
+      "fallback": [
+        {
+          "name": "Ramp",
+          "key": "connector:transition:1:ramp:-89.22075859992253,37.715435358836906"
+        }
+      ]
+    },
+    {
+      "case": "architectural",
+      "passed": true
+    },
+    {
+      "case": "gis",
+      "passed": true
+    },
+    {
+      "case": "day",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

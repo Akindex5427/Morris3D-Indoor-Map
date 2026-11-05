@@ -13,6 +13,12 @@ export const FLOOR_POLYGON_MAP = Object.freeze({
   all: '/rooms-all-WGS-v6.geojson',
 });
 export const ROOM_FLOORS = Object.freeze([0, 1, 2, 3, 4, 5, 6, 7]);
+// Ordered physical floors, not arithmetic on IDs (which may become nonconsecutive).
+export function adjacentRoomFloors(floor, floorOrder = ROOM_FLOORS) {
+  const index = floorOrder.indexOf(Number(floor));
+  if (index < 0) throw new Error("Reference floor is not in the building floor configuration");
+  return { above: floorOrder[index + 1] ?? null, below: floorOrder[index - 1] ?? null };
+}
 const NAME_FIELDS = ['name', 'roomname'];
 const ID_FIELDS = ['room_id', 'id', 'number', 'OBJECTID', 'FID', 'FID_'];
 const scalar = value => typeof value === 'string' ? value.trim()

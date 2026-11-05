@@ -1,0 +1,5 @@
+﻿"category","subcategory","recommendation","category_supported","subcategory_supported"
+"building_services","mechanical_equipment_room","Existing building_support / mechanical, preserving room_boundary and the owner meaning; alternatively an explicitly approved schema extension.","false","false"
+"collections_bookshelves","restricted_collection_stacks","Existing collections_bookshelves / book_stacks with staff_only access metadata; alternatively an explicitly approved new subcategory.","true","false"
+"research_special_services","specialized_research_center","Closest existing category research_cultural_resources; approve a specialized_research_center subtype. Do not silently substitute research_lab.","false","false"
+"vacant_unassigned","unused_space","Explicit schema extension recommended. unclassified is only a temporary technical state, not the owner-confirmed meaning.","false","false"

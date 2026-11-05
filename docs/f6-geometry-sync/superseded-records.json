@@ -1,0 +1,1410 @@
+{
+  "previous_dataset_version": "rooms-sha256:2079997fb7b77b426dac455f06b7ac773c757f4dfe7075420be47b70ebd13930",
+  "current_dataset_version": "rooms-sha256:5d485006e252bc837e79a2dae69e8e60532e32a294e9a0d2421703829d016ee5",
+  "original_records_preserved_in": "docs/space-analytics-stage-2a and data/space-analytics/metadata.proposals.v1.json",
+  "records": [
+    {
+      "record_type": "grouped_classification_review",
+      "record_id": "classification-proposal-v1:[6,[\"/rooms-level-6-WGS.geojson#F6:OBJECTID:112\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:113\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:114\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:115\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:118\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:119\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:120\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:121\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:124\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:125\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:129\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:131\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:132\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:134\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:135\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:2\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:3\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:4\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:5\"]]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/classification-review.csv"
+    },
+    {
+      "record_type": "grouped_classification_review",
+      "record_id": "classification-proposal-v1:[6,[\"/rooms-level-6-WGS.geojson#F6:OBJECTID:6\"]]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/classification-review.csv"
+    },
+    {
+      "record_type": "grouped_classification_review",
+      "record_id": "classification-proposal-v1:[6,[\"/rooms-level-6-WGS.geojson#F6:OBJECTID:7\"]]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/classification-review.csv"
+    },
+    {
+      "record_type": "grouped_classification_review",
+      "record_id": "classification-proposal-v1:[6,[\"/rooms-level-6-WGS.geojson#F6:OBJECTID:8\"]]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/classification-review.csv"
+    },
+    {
+      "record_type": "grouped_classification_review",
+      "record_id": "classification-proposal-v1:[6,[\"/rooms-level-6-WGS.geojson#F6:OBJECTID:9\"]]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/classification-review.csv"
+    },
+    {
+      "record_type": "grouped_classification_review",
+      "record_id": "classification-proposal-v1:[6,[\"/rooms-level-6-WGS.geojson#F6:OBJECTID:10\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:61\"]]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/classification-review.csv"
+    },
+    {
+      "record_type": "grouped_classification_review",
+      "record_id": "classification-proposal-v1:[6,[\"/rooms-level-6-WGS.geojson#F6:OBJECTID:100\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:101\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:102\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:103\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:104\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:105\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:106\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:107\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:108\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:109\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:110\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:111\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:12\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:13\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:14\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:15\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:16\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:17\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:18\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:19\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:20\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:21\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:22\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:23\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:24\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:25\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:26\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:27\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:28\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:29\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:30\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:31\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:32\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:33\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:34\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:35\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:36\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:37\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:38\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:39\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:40\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:41\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:42\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:43\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:44\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:45\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:46\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:47\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:48\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:49\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:50\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:51\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:52\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:53\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:54\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:55\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:56\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:57\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:58\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:59\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:64\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:65\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:66\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:67\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:68\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:69\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:70\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:71\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:72\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:73\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:74\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:75\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:76\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:77\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:78\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:79\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:80\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:81\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:82\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:83\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:84\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:85\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:86\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:87\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:88\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:89\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:90\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:91\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:92\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:93\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:94\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:95\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:96\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:97\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:98\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:99\"]]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/classification-review.csv"
+    },
+    {
+      "record_type": "grouped_classification_review",
+      "record_id": "classification-proposal-v1:[6,[\"/rooms-level-6-WGS.geojson#F6:OBJECTID:60\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:63\"]]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/classification-review.csv"
+    },
+    {
+      "record_type": "grouped_classification_review",
+      "record_id": "classification-proposal-v1:[6,[\"/rooms-level-6-WGS.geojson#F6:OBJECTID:116\"]]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/classification-review.csv"
+    },
+    {
+      "record_type": "grouped_classification_review",
+      "record_id": "classification-proposal-v1:[6,[\"/rooms-level-6-WGS.geojson#F6:OBJECTID:126\"]]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/classification-review.csv"
+    },
+    {
+      "record_type": "grouped_classification_review",
+      "record_id": "classification-proposal-v1:[6,[\"/rooms-level-6-WGS.geojson#F6:OBJECTID:127\"]]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/classification-review.csv"
+    },
+    {
+      "record_type": "grouped_classification_review",
+      "record_id": "classification-proposal-v1:[6,[\"/rooms-level-6-WGS.geojson#F6:OBJECTID:128\"]]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/classification-review.csv"
+    },
+    {
+      "record_type": "grouped_classification_review",
+      "record_id": "classification-proposal-v1:[6,[\"/rooms-level-6-WGS.geojson#F6:OBJECTID:133\"]]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/classification-review.csv"
+    },
+    {
+      "record_type": "grouped_classification_review",
+      "record_id": "classification-proposal-v1:[6,[\"/rooms-level-6-WGS.geojson#F6:OBJECTID:136\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:142\"]]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/classification-review.csv"
+    },
+    {
+      "record_type": "grouped_classification_review",
+      "record_id": "classification-proposal-v1:[6,[\"/rooms-level-6-WGS.geojson#F6:OBJECTID:137\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:138\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:139\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:140\"]]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/classification-review.csv"
+    },
+    {
+      "record_type": "grouped_classification_review",
+      "record_id": "classification-proposal-v1:[6,[\"/rooms-level-6-WGS.geojson#F6:OBJECTID:141\"]]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/classification-review.csv"
+    },
+    {
+      "record_type": "grouped_classification_review",
+      "record_id": "classification-proposal-v1:[6,[\"/rooms-level-6-WGS.geojson#F6:OBJECTID:143\"]]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/classification-review.csv"
+    },
+    {
+      "record_type": "grouped_classification_review",
+      "record_id": "classification-proposal-v1:[6,[\"/rooms-level-6-WGS.geojson#F6:OBJECTID:144\"]]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/classification-review.csv"
+    },
+    {
+      "record_type": "grouped_classification_review",
+      "record_id": "classification-proposal-v1:[6,[\"/rooms-level-6-WGS.geojson#F6:OBJECTID:146\"]]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/classification-review.csv"
+    },
+    {
+      "record_type": "removed_F_ALL_identity_link",
+      "record_id": "/rooms-all-WGS-v6.geojson#F6:OBJECTID:1508",
+      "record_status": "superseded",
+      "replacement": null,
+      "reason": "Owner F-ALL export removed this feature; new footprints are not exact matches"
+    },
+    {
+      "record_type": "removed_F_ALL_identity_link",
+      "record_id": "/rooms-all-WGS-v6.geojson#F6:OBJECTID:1509",
+      "record_status": "superseded",
+      "replacement": null,
+      "reason": "Owner F-ALL export removed this feature; new footprints are not exact matches"
+    },
+    {
+      "record_type": "removed_F_ALL_identity_link",
+      "record_id": "/rooms-all-WGS-v6.geojson#F6:OBJECTID:1510",
+      "record_status": "superseded",
+      "replacement": null,
+      "reason": "Owner F-ALL export removed this feature; new footprints are not exact matches"
+    },
+    {
+      "record_type": "removed_F_ALL_identity_link",
+      "record_id": "/rooms-all-WGS-v6.geojson#F6:OBJECTID:1511",
+      "record_status": "superseded",
+      "replacement": null,
+      "reason": "Owner F-ALL export removed this feature; new footprints are not exact matches"
+    },
+    {
+      "record_type": "interim_metadata_snapshot",
+      "record_id": "rooms-sha256:0e3c7b8a710b00b42bc1d92b9981aa4588611598dca407435d33a377fff6e188",
+      "record_status": "superseded",
+      "replacement": "data/space-analytics/metadata.f6-sync.v1.json",
+      "reason": "Owner replaced F-ALL during assessment; prior unapproved snapshot retained in superseded-interim/"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:2",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:3",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:4",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:5",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:6",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:7",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:8",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:9",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:10",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:12",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:13",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:14",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:15",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:16",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:17",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:18",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:19",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:20",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:21",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:22",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:23",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:24",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:25",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:26",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:27",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:28",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:29",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:30",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:31",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:32",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:33",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:34",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:35",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:36",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:37",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:38",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:39",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:40",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:41",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:42",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:43",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:44",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:45",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:46",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:47",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:48",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:49",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:50",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:51",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:52",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:53",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:54",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:55",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:56",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:57",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:58",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:59",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:60",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:61",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:63",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:64",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:65",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:66",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:67",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:68",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:69",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:70",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:71",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:72",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:73",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:74",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:75",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:76",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:77",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:78",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:79",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:80",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:81",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:82",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:83",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:84",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:85",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:86",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:87",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:88",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:89",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:90",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:91",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:92",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:93",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:94",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:95",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:96",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:97",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:98",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:99",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:100",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:101",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:102",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:103",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:104",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:105",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:106",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:107",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:108",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:109",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:110",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:111",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:112",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:113",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:114",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:115",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:116",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:118",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:119",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:120",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:121",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:124",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:125",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:126",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:127",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:128",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:129",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:131",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:132",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:133",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:134",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:135",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:136",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:137",
+      "record_status": "superseded",
+      "reason": "feature_removed",
+      "replacement": null
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:138",
+      "record_status": "superseded",
+      "reason": "feature_removed",
+      "replacement": null
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:139",
+      "record_status": "superseded",
+      "reason": "feature_removed",
+      "replacement": null
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:140",
+      "record_status": "superseded",
+      "reason": "feature_removed",
+      "replacement": null
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:141",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:142",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:143",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:144",
+      "record_status": "superseded",
+      "reason": "source_version_changed",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "feature_metadata_and_classification_review",
+      "record_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:146",
+      "record_status": "superseded",
+      "reason": "source_attributes_modified",
+      "replacement": "docs/f6-geometry-sync/feature-inventory.csv"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:10\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:12\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:10\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:24\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:10\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:36\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:10\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:48\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:10\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:60\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:100\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:61\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:111\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:143\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:112\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:9\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:113\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:119\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:113\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:120\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:114\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:120\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:115\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:120\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:116\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:121\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:119\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:120\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:119\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:9\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:124\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:143\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:124\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:146\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:125\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:143\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:126\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:146\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:129\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:142\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:131\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:132\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:131\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:142\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:132\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:142\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:133\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:135\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:133\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:142\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:135\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:142\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:136\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:142\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:140\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:146\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:141\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:146\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:143\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:75\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:143\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:87\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:143\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:99\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:144\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:23\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:144\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:35\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:144\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:47\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:144\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:59\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:144\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:60\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:146\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:61\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:2\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:4\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:2\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:6\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:2\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:8\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:3\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:4\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:4\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:8\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:61\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:63\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:61\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:64\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:61\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:76\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "geometric_relationship",
+      "record_id": "spatial-pair-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:61\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:88\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/spatial-diagnostics.json"
+    },
+    {
+      "record_type": "membership_proposal",
+      "record_id": "same-name-v1:[6,\"/rooms-level-6-WGS.geojson#F6:OBJECTID:137\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:138\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:139\",\"/rooms-level-6-WGS.geojson#F6:OBJECTID:140\"]",
+      "record_status": "superseded",
+      "replacement": "docs/f6-geometry-sync/membership-proposals.json"
+    }
+  ]
+}

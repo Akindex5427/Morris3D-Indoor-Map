@@ -1,0 +1,16 @@
+{
+  "results": [
+    {
+      "phase": "pitched-single-and-stacked-focus-both-presets",
+      "passed": true,
+      "camera": {
+        "longitude": -89.22021765511688,
+        "latitude": 37.71523339913142,
+        "zoom": 20.175372898578644,
+        "bearing": 30,
+        "pitch": 40
+      }
+    }
+  ],
+  "errors": []
+}

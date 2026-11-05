@@ -1,0 +1,106 @@
+{
+  "active_f6_source": "/rooms-level-6-WGS.geojson",
+  "new_export_active_in_repository": true,
+  "old_source_sha256": "f565b07cf351558869299b2324b2703dd97d989c02e89bdf8742b10151f97a21",
+  "new_source_sha256": "114a3fe7a87dcc30cfe61e8ec4f29a4ea25082da653f96920b2079a3be3480e3",
+  "old_dataset_version": "rooms-sha256:2079997fb7b77b426dac455f06b7ac773c757f4dfe7075420be47b70ebd13930",
+  "new_dataset_version": "rooms-sha256:5d485006e252bc837e79a2dae69e8e60532e32a294e9a0d2421703829d016ee5",
+  "counts": {
+    "before": 138,
+    "after": 138,
+    "removed": 4,
+    "added": 4,
+    "modified": 1,
+    "unchanged": 133
+  },
+  "changed_ids": [
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:137",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:138",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:139",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:140",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:147",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:148",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:149",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:150",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:146"
+  ],
+  "f_all": {
+    "source": "owner replacement export",
+    "source_sha256": "28938d26e27e723e8d485793b729998efbe5fb526c2d74c40bcb51dd084b407b",
+    "modified_by_tool": false,
+    "removed_display_ids": [
+      "6:1508",
+      "6:1509",
+      "6:1510",
+      "6:1511"
+    ],
+    "added_display_ids": [
+      "6:1609",
+      "6:1610",
+      "6:1611",
+      "6:1612",
+      "6:1613"
+    ],
+    "before_count": 1608,
+    "after_count": 1609,
+    "preserved_feature_objects": 1604,
+    "unrelated_floor_changes": [],
+    "links": [],
+    "unresolved_modified_features": [
+      "/rooms-level-6-WGS.geojson#F6:OBJECTID:146"
+    ],
+    "unresolved_F6_links": 11,
+    "approximate_comparisons": [
+      {
+        "display_id": "6:1609",
+        "highest_iou_feature": "/rooms-level-6-WGS.geojson#F6:OBJECTID:147",
+        "intersection_over_union": 0.9284712730598293,
+        "identity_status": "unresolved"
+      },
+      {
+        "display_id": "6:1610",
+        "highest_iou_feature": "/rooms-level-6-WGS.geojson#F6:OBJECTID:148",
+        "intersection_over_union": 0.8215147116273738,
+        "identity_status": "unresolved"
+      },
+      {
+        "display_id": "6:1611",
+        "highest_iou_feature": "/rooms-level-6-WGS.geojson#F6:OBJECTID:149",
+        "intersection_over_union": 0.7762758651936956,
+        "identity_status": "unresolved"
+      },
+      {
+        "display_id": "6:1612",
+        "highest_iou_feature": "/rooms-level-6-WGS.geojson#F6:OBJECTID:150",
+        "intersection_over_union": 0.5382164995996059,
+        "identity_status": "unresolved"
+      },
+      {
+        "display_id": "6:1613",
+        "highest_iou_feature": "/rooms-level-6-WGS.geojson#F6:OBJECTID:146",
+        "intersection_over_union": 0.9992615206626134,
+        "identity_status": "unresolved"
+      }
+    ]
+  },
+  "analysis": {
+    "valid_authoritative_features": 1610,
+    "valid_F6_features": 138,
+    "issues": [],
+    "errors": [],
+    "stats": {
+      "possible_pairs": 9453,
+      "bbox_candidate_pairs": 51,
+      "bbox_disjoint_pairs": 9402
+    },
+    "positive_area_pairs": 13,
+    "review_pairs": 0,
+    "membership_groups": 1,
+    "partition_area_m2": 12.915520662053186
+  },
+  "preserved_approval_records": 0,
+  "preserved_other_floor_metadata": 1472,
+  "superseded_records": 210,
+  "metadata_valid": true,
+  "unresolved_display_warnings": 140
+}

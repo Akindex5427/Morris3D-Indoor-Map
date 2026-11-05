@@ -1,0 +1,29 @@
+{
+  "authoritative_footprint_verified": true,
+  "allocation_rules_verified": false,
+  "status": "withheld_missing_verified_allocation_mask",
+  "reason": "Owner functions and modeled roles are recorded, but no current-version area-allocation mask or complete inclusion/overlap rules are established. Unknown allocation is not zero allocation.",
+  "formal_metadata_source_sha256": "20b36e5d76af03730889b4fbc6f2d4b779aca17258ebdabd0dee8ce1dca11085",
+  "formal_metadata_matches_current_source": false,
+  "formal_f0_row_count": 148,
+  "formal_f0_verified_count": 0,
+  "formal_f0_area_flags_non_null": 0,
+  "formal_approval_count": 0,
+  "approved_relationship_count": 0,
+  "stage2b_count_statuses": [
+    "report-only owner intent; not imported or allocated"
+  ],
+  "residual_geometry_computed": false,
+  "residual_geojson_exported": false,
+  "authoritative_residual_area_m2": null,
+  "residual_piece_count": null,
+  "temporary_residual_ids_assigned": [],
+  "missing_rules": [
+    "Which exact current polygon footprints are approved as spatial allocations, independent of room/logical-space counts.",
+    "Whether collection fixture footprints allocate floor area or only represent furniture within a zone, and how any overlap is handled.",
+    "How stair treads, landings and upper components project to a single basement allocation while their numbered-stair memberships remain pending.",
+    "How shaft/car extent and Emergency Exit geometry are treated.",
+    "Current-polygon bindings for Mechanical Room and SCRC and collection range/grouping cases.",
+    "Any missing allocations for unlocated Center for Dewey Studies, Empty and Journals 1995 owner statements."
+  ]
+}

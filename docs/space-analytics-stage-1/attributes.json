@@ -1,0 +1,6357 @@
+{
+  "public/basement_centerlines.geojson": {
+    "OBJECTID": {
+      "populated": 66,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 66
+      },
+      "distinct": 66,
+      "min": 1,
+      "max": 94
+    },
+    "Shape_Length": {
+      "populated": 66,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 66
+      },
+      "distinct": 66,
+      "min": 0.6935294651313145,
+      "max": 115.13922810370576
+    },
+    "endroom": {
+      "populated": 66,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 66
+      },
+      "distinct": 17,
+      "values": {
+        "dewey books 001 to 330": 4,
+        "dewey books 330 to 551": 5,
+        "dewey books 551 to 882": 3,
+        "dewey books 823 to 914": 4,
+        "dewey books q001 to q998": 5,
+        "dewey folios 001 to 999": 1,
+        "indexes": 3,
+        "journals 1995 & older a to f": 1,
+        "journals 1995 & older f to i": 3,
+        "journals 1995 & older j to z": 2,
+        "journals 1995 and older j to z": 1,
+        "national union catalog": 11,
+        "national union of catalog": 1,
+        "oversized journals a - f": 2,
+        "oversized journals f - h": 6,
+        "oversized journals i - z": 11,
+        "storage 3 books": 3
+      }
+    },
+    "level": {
+      "populated": 0,
+      "missing": 66,
+      "whitespace_only": 0,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    },
+    "name": {
+      "populated": 66,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 66
+      },
+      "distinct": 1,
+      "values": {
+        "centerline": 66
+      }
+    },
+    "startroom": {
+      "populated": 66,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 66
+      },
+      "distinct": 13,
+      "values": {
+        "dewey books 001 to 330": 3,
+        "dewey books 330 to 551": 5,
+        "dewey books 823 to 914": 4,
+        "dewey books 914 to 999": 11,
+        "dewey books q001 to q998": 4,
+        "dewey folios 001 to 999": 7,
+        "indexes": 10,
+        "journals 1995 & older a to f": 6,
+        "journals 1995 & older f to i": 1,
+        "journals 1995 & older j to z": 1,
+        "oversized journals a - f": 5,
+        "oversized journals a - f ": 1,
+        "storage 3 books": 8
+      }
+    },
+    "type": {
+      "populated": 0,
+      "missing": 66,
+      "whitespace_only": 0,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    },
+    "width": {
+      "populated": 0,
+      "missing": 66,
+      "whitespace_only": 0,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    }
+  },
+  "public/basemment_centerlines.geojson": {
+    "OBJECTID": {
+      "populated": 83,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 83
+      },
+      "distinct": 83,
+      "min": 1,
+      "max": 112
+    },
+    "Shape_Length": {
+      "populated": 83,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 83
+      },
+      "distinct": 83,
+      "min": 0.6935294651313145,
+      "max": 115.13922810370576
+    },
+    "endroom": {
+      "populated": 83,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 83
+      },
+      "distinct": 20,
+      "values": {
+        "center for dewey studies": 1,
+        "dewey books 001 to 330": 6,
+        "dewey books 330 to 551": 6,
+        "dewey books 551 to 882": 4,
+        "dewey books 823 to 914": 5,
+        "dewey books 914 to 999": 1,
+        "dewey books q001 to q998": 6,
+        "dewey folios 001 to 999": 2,
+        "indexes": 4,
+        "journals 1995 & older a to f": 1,
+        "journals 1995 & older f to i": 3,
+        "journals 1995 & older j to z": 3,
+        "journals 1995 and older j to z": 1,
+        "journlas 1995 & older a to f": 1,
+        "national union catalog": 12,
+        "national union of catalog": 1,
+        "oversized journals a to f": 3,
+        "oversized journals f to h": 7,
+        "oversized journals i to z": 12,
+        "storage 3 books": 4
+      }
+    },
+    "level": {
+      "populated": 0,
+      "missing": 83,
+      "whitespace_only": 0,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    },
+    "name": {
+      "populated": 83,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 83
+      },
+      "distinct": 1,
+      "values": {
+        "centerline": 83
+      }
+    },
+    "startroom": {
+      "populated": 83,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 83
+      },
+      "distinct": 14,
+      "values": {
+        "dewey books 001 to 330": 3,
+        "dewey books 330 to 551": 5,
+        "dewey books 823 to 914": 4,
+        "dewey books 914 to 999": 11,
+        "dewey books q001 to q998": 4,
+        "dewey folios 001 to 999": 7,
+        "elevator": 17,
+        "indexes": 10,
+        "journals 1995 & older a to f": 6,
+        "journals 1995 & older f to i": 1,
+        "journals 1995 & older j to z": 1,
+        "oversized journals a to f": 5,
+        "oversized journals a to f ": 1,
+        "storage 3 books": 8
+      }
+    },
+    "type": {
+      "populated": 0,
+      "missing": 83,
+      "whitespace_only": 0,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    },
+    "width": {
+      "populated": 0,
+      "missing": 83,
+      "whitespace_only": 0,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    }
+  },
+  "public/interior_lights.geojson": {
+    "OBJECTID": {
+      "populated": 138,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 138
+      },
+      "distinct": 24,
+      "values": {
+        "1": 6,
+        "2": 7,
+        "3": 7,
+        "4": 7,
+        "5": 7,
+        "6": 6,
+        "7": 7,
+        "8": 6,
+        "9": 7,
+        "10": 7,
+        "11": 6,
+        "12": 7,
+        "13": 7,
+        "14": 7,
+        "15": 7,
+        "16": 6,
+        "17": 7,
+        "18": 6,
+        "19": 6,
+        "20": 4,
+        "21": 3,
+        "22": 2,
+        "23": 2,
+        "24": 1
+      },
+      "min": 1,
+      "max": 24
+    },
+    "base_height": {
+      "populated": 138,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 138
+      },
+      "distinct": 1,
+      "values": {
+        "4.3": 138
+      },
+      "min": 4.3,
+      "max": 4.3
+    },
+    "color": {
+      "populated": 138,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 138
+      },
+      "distinct": 1,
+      "values": {
+        "#FFD08A": 138
+      }
+    },
+    "enabled": {
+      "populated": 138,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 138
+      },
+      "distinct": 1,
+      "values": {
+        "1": 138
+      },
+      "min": 1,
+      "max": 1
+    },
+    "floor_id": {
+      "populated": 138,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 138
+      },
+      "distinct": 7,
+      "values": {
+        "F0": 19,
+        "F1": 20,
+        "F2": 23,
+        "F3": 16,
+        "F4": 23,
+        "F5": 19,
+        "F6": 18
+      }
+    },
+    "height": {
+      "populated": 138,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 138
+      },
+      "distinct": 1,
+      "values": {
+        "4.4": 138
+      },
+      "min": 4.4,
+      "max": 4.4
+    },
+    "intensity": {
+      "populated": 138,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 138
+      },
+      "distinct": 1,
+      "values": {
+        "0.85": 138
+      },
+      "min": 0.85,
+      "max": 0.85
+    },
+    "light_id": {
+      "populated": 138,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 138
+      },
+      "distinct": 138
+    },
+    "light_type": {
+      "populated": 138,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 138
+      },
+      "distinct": 1,
+      "values": {
+        "interior-light": 138
+      }
+    },
+    "radius_m": {
+      "populated": 138,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 138
+      },
+      "distinct": 45,
+      "values": {
+        "6": 36,
+        "7": 3,
+        "8": 2,
+        "10": 2,
+        "11": 2,
+        "14": 19,
+        "10.1": 3,
+        "10.2": 2,
+        "10.3": 1,
+        "10.5": 1,
+        "10.7": 1,
+        "10.8": 2,
+        "11.1": 2,
+        "11.2": 3,
+        "11.3": 1,
+        "11.4": 2,
+        "11.8": 1,
+        "12.1": 2,
+        "12.2": 3,
+        "12.3": 1,
+        "13.3": 1,
+        "13.6": 1,
+        "13.8": 1,
+        "6.1": 1,
+        "6.4": 1,
+        "6.5": 2,
+        "6.6": 2,
+        "6.9": 2,
+        "7.1": 2,
+        "7.4": 2,
+        "7.5": 3,
+        "7.6": 3,
+        "7.7": 4,
+        "7.8": 2,
+        "7.9": 4,
+        "8.2": 1,
+        "8.3": 2,
+        "8.5": 2,
+        "8.6": 2,
+        "8.9": 2,
+        "9.1": 2,
+        "9.4": 3,
+        "9.5": 1,
+        "9.6": 2,
+        "9.9": 1
+      },
+      "min": 6,
+      "max": 14
+    },
+    "z_height": {
+      "populated": 138,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 138
+      },
+      "distinct": 1,
+      "values": {
+        "4.3": 138
+      },
+      "min": 4.3,
+      "max": 4.3
+    }
+  },
+  "public/interior_lights_basement.geojson": {
+    "OBJECTID": {
+      "populated": 19,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 19
+      },
+      "distinct": 19,
+      "values": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1,
+        "7": 1,
+        "8": 1,
+        "9": 1,
+        "10": 1,
+        "11": 1,
+        "12": 1,
+        "13": 1,
+        "14": 1,
+        "15": 1,
+        "16": 1,
+        "17": 1,
+        "18": 1,
+        "19": 1,
+        "20": 1
+      },
+      "min": 1,
+      "max": 20
+    },
+    "base_height": {
+      "populated": 19,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 19
+      },
+      "distinct": 1,
+      "values": {
+        "4.3": 19
+      },
+      "min": 4.3,
+      "max": 4.3
+    },
+    "color": {
+      "populated": 19,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 19
+      },
+      "distinct": 1,
+      "values": {
+        "#FFD08A": 19
+      }
+    },
+    "enabled": {
+      "populated": 19,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 19
+      },
+      "distinct": 1,
+      "values": {
+        "1": 19
+      },
+      "min": 1,
+      "max": 1
+    },
+    "floor_id": {
+      "populated": 19,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 19
+      },
+      "distinct": 1,
+      "values": {
+        "F0": 19
+      }
+    },
+    "height": {
+      "populated": 19,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 19
+      },
+      "distinct": 1,
+      "values": {
+        "4.4": 19
+      },
+      "min": 4.4,
+      "max": 4.4
+    },
+    "intensity": {
+      "populated": 19,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 19
+      },
+      "distinct": 1,
+      "values": {
+        "0.85": 19
+      },
+      "min": 0.85,
+      "max": 0.85
+    },
+    "light_id": {
+      "populated": 19,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 19
+      },
+      "distinct": 19,
+      "values": {
+        "F0-light-01": 1,
+        "F0-light-02": 1,
+        "F0-light-03": 1,
+        "F0-light-04": 1,
+        "F0-light-05": 1,
+        "F0-light-06": 1,
+        "F0-light-07": 1,
+        "F0-light-08": 1,
+        "F0-light-10": 1,
+        "F0-light-11": 1,
+        "F0-light-12": 1,
+        "F0-light-13": 1,
+        "F0-light-14": 1,
+        "F0-light-15": 1,
+        "F0-light-16": 1,
+        "F0-light-17": 1,
+        "F0-light-18": 1,
+        "F0-light-19": 1,
+        "F0-light-20": 1
+      }
+    },
+    "light_type": {
+      "populated": 19,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 19
+      },
+      "distinct": 1,
+      "values": {
+        "interior-light": 19
+      }
+    },
+    "radius_m": {
+      "populated": 19,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 19
+      },
+      "distinct": 1,
+      "values": {
+        "1": 19
+      },
+      "min": 1,
+      "max": 1
+    },
+    "z_height": {
+      "populated": 19,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 19
+      },
+      "distinct": 1,
+      "values": {
+        "4.3": 19
+      },
+      "min": 4.3,
+      "max": 4.3
+    }
+  },
+  "public/interior_lights_level_1.geojson": {
+    "OBJECTID": {
+      "populated": 20,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 20
+      },
+      "distinct": 20,
+      "values": {
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "8": 1,
+        "9": 1,
+        "10": 1,
+        "11": 1,
+        "12": 1,
+        "13": 1,
+        "14": 1,
+        "15": 1,
+        "16": 1,
+        "17": 1,
+        "18": 1,
+        "19": 1,
+        "20": 1,
+        "21": 1
+      },
+      "min": 2,
+      "max": 21
+    },
+    "base_height": {
+      "populated": 20,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 20
+      },
+      "distinct": 1,
+      "values": {
+        "4.3": 20
+      },
+      "min": 4.3,
+      "max": 4.3
+    },
+    "color": {
+      "populated": 20,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 20
+      },
+      "distinct": 1,
+      "values": {
+        "#FFD08A": 20
+      }
+    },
+    "enabled": {
+      "populated": 20,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 20
+      },
+      "distinct": 1,
+      "values": {
+        "1": 20
+      },
+      "min": 1,
+      "max": 1
+    },
+    "floor_id": {
+      "populated": 20,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 20
+      },
+      "distinct": 1,
+      "values": {
+        "F1": 20
+      }
+    },
+    "height": {
+      "populated": 20,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 20
+      },
+      "distinct": 1,
+      "values": {
+        "4.4": 20
+      },
+      "min": 4.4,
+      "max": 4.4
+    },
+    "intensity": {
+      "populated": 20,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 20
+      },
+      "distinct": 1,
+      "values": {
+        "0.85": 20
+      },
+      "min": 0.85,
+      "max": 0.85
+    },
+    "light_id": {
+      "populated": 20,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 20
+      },
+      "distinct": 20,
+      "values": {
+        "F1-light-02": 1,
+        "F1-light-03": 1,
+        "F1-light-04": 1,
+        "F1-light-05": 1,
+        "F1-light-06": 1,
+        "F1-light-07": 1,
+        "F1-light-08": 1,
+        "F1-light-09": 1,
+        "F1-light-10": 1,
+        "F1-light-11": 1,
+        "F1-light-12": 1,
+        "F1-light-13": 1,
+        "F1-light-14": 1,
+        "F1-light-15": 1,
+        "F1-light-16": 1,
+        "F1-light-17": 1,
+        "F1-light-18": 1,
+        "F1-light-19": 1,
+        "F1-light-20": 1,
+        "F1-light-21": 1
+      }
+    },
+    "light_type": {
+      "populated": 20,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 20
+      },
+      "distinct": 1,
+      "values": {
+        "interior-light": 20
+      }
+    },
+    "radius_m": {
+      "populated": 20,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 20
+      },
+      "distinct": 1,
+      "values": {
+        "1": 20
+      },
+      "min": 1,
+      "max": 1
+    },
+    "z_height": {
+      "populated": 20,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 20
+      },
+      "distinct": 1,
+      "values": {
+        "4.3": 20
+      },
+      "min": 4.3,
+      "max": 4.3
+    }
+  },
+  "public/interior_lights_level_2.geojson": {
+    "OBJECTID": {
+      "populated": 23,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 23
+      },
+      "distinct": 23,
+      "values": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "8": 1,
+        "9": 1,
+        "10": 1,
+        "11": 1,
+        "12": 1,
+        "13": 1,
+        "14": 1,
+        "15": 1,
+        "16": 1,
+        "17": 1,
+        "19": 1,
+        "20": 1,
+        "21": 1,
+        "22": 1,
+        "23": 1,
+        "24": 1
+      },
+      "min": 1,
+      "max": 24
+    },
+    "base_height": {
+      "populated": 23,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 23
+      },
+      "distinct": 1,
+      "values": {
+        "4.3": 23
+      },
+      "min": 4.3,
+      "max": 4.3
+    },
+    "color": {
+      "populated": 23,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 23
+      },
+      "distinct": 1,
+      "values": {
+        "#FFD08A": 23
+      }
+    },
+    "enabled": {
+      "populated": 23,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 23
+      },
+      "distinct": 1,
+      "values": {
+        "1": 23
+      },
+      "min": 1,
+      "max": 1
+    },
+    "floor_id": {
+      "populated": 23,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 23
+      },
+      "distinct": 1,
+      "values": {
+        "F2": 23
+      }
+    },
+    "height": {
+      "populated": 23,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 23
+      },
+      "distinct": 1,
+      "values": {
+        "4.4": 23
+      },
+      "min": 4.4,
+      "max": 4.4
+    },
+    "intensity": {
+      "populated": 23,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 23
+      },
+      "distinct": 1,
+      "values": {
+        "0.85": 23
+      },
+      "min": 0.85,
+      "max": 0.85
+    },
+    "light_id": {
+      "populated": 23,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 23
+      },
+      "distinct": 23,
+      "values": {
+        "F2-light-01": 1,
+        "F2-light-02": 1,
+        "F2-light-03": 1,
+        "F2-light-04": 1,
+        "F2-light-05": 1,
+        "F2-light-06": 1,
+        "F2-light-08": 1,
+        "F2-light-09": 1,
+        "F2-light-10": 1,
+        "F2-light-11": 1,
+        "F2-light-12": 1,
+        "F2-light-13": 1,
+        "F2-light-14": 1,
+        "F2-light-15": 1,
+        "F2-light-16": 1,
+        "F2-light-17": 1,
+        "F2-light-18": 1,
+        "F2-light-19": 1,
+        "F2-light-20": 1,
+        "F2-light-21": 1,
+        "F2-light-22": 1,
+        "F2-light-23": 1,
+        "F2-light-24": 1
+      }
+    },
+    "light_type": {
+      "populated": 23,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 23
+      },
+      "distinct": 1,
+      "values": {
+        "interior-light": 23
+      }
+    },
+    "radius_m": {
+      "populated": 23,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 23
+      },
+      "distinct": 1,
+      "values": {
+        "1": 23
+      },
+      "min": 1,
+      "max": 1
+    },
+    "z_height": {
+      "populated": 23,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 23
+      },
+      "distinct": 1,
+      "values": {
+        "4.3": 23
+      },
+      "min": 4.3,
+      "max": 4.3
+    }
+  },
+  "public/interior_lights_level_3.geojson": {
+    "OBJECTID": {
+      "populated": 16,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 16
+      },
+      "distinct": 16,
+      "values": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "9": 1,
+        "10": 1,
+        "12": 1,
+        "13": 1,
+        "14": 1,
+        "15": 1,
+        "16": 1,
+        "17": 1,
+        "18": 1
+      },
+      "min": 1,
+      "max": 18
+    },
+    "base_height": {
+      "populated": 16,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 16
+      },
+      "distinct": 1,
+      "values": {
+        "4.3": 16
+      },
+      "min": 4.3,
+      "max": 4.3
+    },
+    "color": {
+      "populated": 16,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 16
+      },
+      "distinct": 1,
+      "values": {
+        "#FFD08A": 16
+      }
+    },
+    "enabled": {
+      "populated": 16,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 16
+      },
+      "distinct": 1,
+      "values": {
+        "1": 16
+      },
+      "min": 1,
+      "max": 1
+    },
+    "floor_id": {
+      "populated": 16,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 16
+      },
+      "distinct": 1,
+      "values": {
+        "F3": 16
+      }
+    },
+    "height": {
+      "populated": 16,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 16
+      },
+      "distinct": 1,
+      "values": {
+        "4.4": 16
+      },
+      "min": 4.4,
+      "max": 4.4
+    },
+    "intensity": {
+      "populated": 16,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 16
+      },
+      "distinct": 1,
+      "values": {
+        "0.85": 16
+      },
+      "min": 0.85,
+      "max": 0.85
+    },
+    "light_id": {
+      "populated": 16,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 16
+      },
+      "distinct": 16,
+      "values": {
+        "F3-light-01": 1,
+        "F3-light-02": 1,
+        "F3-light-03": 1,
+        "F3-light-04": 1,
+        "F3-light-05": 1,
+        "F3-light-06": 1,
+        "F3-light-07": 1,
+        "F3-light-08": 1,
+        "F3-light-09": 1,
+        "F3-light-10": 1,
+        "F3-light-11": 1,
+        "F3-light-12": 1,
+        "F3-light-13": 1,
+        "F3-light-14": 1,
+        "F3-light-15": 1,
+        "F3-light-16": 1
+      }
+    },
+    "light_type": {
+      "populated": 16,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 16
+      },
+      "distinct": 1,
+      "values": {
+        "interior-light": 16
+      }
+    },
+    "radius_m": {
+      "populated": 16,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 16
+      },
+      "distinct": 1,
+      "values": {
+        "1": 16
+      },
+      "min": 1,
+      "max": 1
+    },
+    "z_height": {
+      "populated": 16,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 16
+      },
+      "distinct": 1,
+      "values": {
+        "4.3": 16
+      },
+      "min": 4.3,
+      "max": 4.3
+    }
+  },
+  "public/interior_lights_level_4.geojson": {
+    "OBJECTID": {
+      "populated": 23,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 23
+      },
+      "distinct": 23,
+      "values": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "8": 1,
+        "9": 1,
+        "10": 1,
+        "11": 1,
+        "12": 1,
+        "13": 1,
+        "14": 1,
+        "15": 1,
+        "16": 1,
+        "17": 1,
+        "18": 1,
+        "19": 1,
+        "20": 1,
+        "21": 1,
+        "22": 1,
+        "23": 1
+      },
+      "min": 1,
+      "max": 23
+    },
+    "base_height": {
+      "populated": 23,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 23
+      },
+      "distinct": 1,
+      "values": {
+        "4.3": 23
+      },
+      "min": 4.3,
+      "max": 4.3
+    },
+    "color": {
+      "populated": 23,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 23
+      },
+      "distinct": 1,
+      "values": {
+        "#FFD08A": 23
+      }
+    },
+    "enabled": {
+      "populated": 23,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 23
+      },
+      "distinct": 1,
+      "values": {
+        "1": 23
+      },
+      "min": 1,
+      "max": 1
+    },
+    "floor_id": {
+      "populated": 23,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 23
+      },
+      "distinct": 1,
+      "values": {
+        "F4": 23
+      }
+    },
+    "height": {
+      "populated": 23,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 23
+      },
+      "distinct": 1,
+      "values": {
+        "4.4": 23
+      },
+      "min": 4.4,
+      "max": 4.4
+    },
+    "intensity": {
+      "populated": 23,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 23
+      },
+      "distinct": 1,
+      "values": {
+        "0.85": 23
+      },
+      "min": 0.85,
+      "max": 0.85
+    },
+    "light_id": {
+      "populated": 23,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 23
+      },
+      "distinct": 23,
+      "values": {
+        "F4-light-01": 1,
+        "F4-light-02": 1,
+        "F4-light-03": 1,
+        "F4-light-04": 1,
+        "F4-light-05": 1,
+        "F4-light-06": 1,
+        "F4-light-07": 1,
+        "F4-light-08": 1,
+        "F4-light-09": 1,
+        "F4-light-10": 1,
+        "F4-light-11": 1,
+        "F4-light-12": 1,
+        "F4-light-13": 1,
+        "F4-light-14": 1,
+        "F4-light-15": 1,
+        "F4-light-16": 1,
+        "F4-light-17": 1,
+        "F4-light-18": 1,
+        "F4-light-19": 1,
+        "F4-light-20": 1,
+        "F4-light-21": 1,
+        "F4-light-22": 1,
+        "F4-light-23": 1
+      }
+    },
+    "light_type": {
+      "populated": 23,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 23
+      },
+      "distinct": 1,
+      "values": {
+        "interior-light": 23
+      }
+    },
+    "radius_m": {
+      "populated": 23,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 23
+      },
+      "distinct": 1,
+      "values": {
+        "1": 23
+      },
+      "min": 1,
+      "max": 1
+    },
+    "z_height": {
+      "populated": 23,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 23
+      },
+      "distinct": 1,
+      "values": {
+        "4.3": 23
+      },
+      "min": 4.3,
+      "max": 4.3
+    }
+  },
+  "public/interior_lights_level_5.geojson": {
+    "OBJECTID": {
+      "populated": 19,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 19
+      },
+      "distinct": 19,
+      "values": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "8": 1,
+        "9": 1,
+        "10": 1,
+        "11": 1,
+        "12": 1,
+        "13": 1,
+        "14": 1,
+        "15": 1,
+        "16": 1,
+        "17": 1,
+        "18": 1,
+        "19": 1
+      },
+      "min": 1,
+      "max": 19
+    },
+    "base_height": {
+      "populated": 19,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 19
+      },
+      "distinct": 1,
+      "values": {
+        "4.3": 19
+      },
+      "min": 4.3,
+      "max": 4.3
+    },
+    "color": {
+      "populated": 19,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 19
+      },
+      "distinct": 1,
+      "values": {
+        "#FFD08A": 19
+      }
+    },
+    "enabled": {
+      "populated": 19,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 19
+      },
+      "distinct": 1,
+      "values": {
+        "1": 19
+      },
+      "min": 1,
+      "max": 1
+    },
+    "floor_id": {
+      "populated": 19,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 19
+      },
+      "distinct": 1,
+      "values": {
+        "F5": 19
+      }
+    },
+    "height": {
+      "populated": 19,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 19
+      },
+      "distinct": 1,
+      "values": {
+        "4.4": 19
+      },
+      "min": 4.4,
+      "max": 4.4
+    },
+    "intensity": {
+      "populated": 19,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 19
+      },
+      "distinct": 1,
+      "values": {
+        "0.85": 19
+      },
+      "min": 0.85,
+      "max": 0.85
+    },
+    "light_id": {
+      "populated": 19,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 19
+      },
+      "distinct": 19,
+      "values": {
+        "F5-light-01": 1,
+        "F5-light-02": 1,
+        "F5-light-03": 1,
+        "F5-light-04": 1,
+        "F5-light-05": 1,
+        "F5-light-06": 1,
+        "F5-light-07": 1,
+        "F5-light-08": 1,
+        "F5-light-09": 1,
+        "F5-light-10": 1,
+        "F5-light-11": 1,
+        "F5-light-12": 1,
+        "F5-light-13": 1,
+        "F5-light-14": 1,
+        "F5-light-15": 1,
+        "F5-light-16": 1,
+        "F5-light-17": 1,
+        "F5-light-18": 1,
+        "F5-light-19": 1
+      }
+    },
+    "light_type": {
+      "populated": 19,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 19
+      },
+      "distinct": 1,
+      "values": {
+        "interior-light": 19
+      }
+    },
+    "radius_m": {
+      "populated": 19,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 19
+      },
+      "distinct": 1,
+      "values": {
+        "1": 19
+      },
+      "min": 1,
+      "max": 1
+    },
+    "z_height": {
+      "populated": 19,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 19
+      },
+      "distinct": 1,
+      "values": {
+        "4.3": 19
+      },
+      "min": 4.3,
+      "max": 4.3
+    }
+  },
+  "public/interior_lights_level_6.geojson": {
+    "OBJECTID": {
+      "populated": 18,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 18
+      },
+      "distinct": 18,
+      "values": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "8": 1,
+        "9": 1,
+        "10": 1,
+        "11": 1,
+        "12": 1,
+        "13": 1,
+        "14": 1,
+        "15": 1,
+        "17": 1,
+        "18": 1,
+        "19": 1
+      },
+      "min": 1,
+      "max": 19
+    },
+    "base_height": {
+      "populated": 18,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 18
+      },
+      "distinct": 1,
+      "values": {
+        "4.3": 18
+      },
+      "min": 4.3,
+      "max": 4.3
+    },
+    "color": {
+      "populated": 18,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 18
+      },
+      "distinct": 1,
+      "values": {
+        "#FFD08A": 18
+      }
+    },
+    "enabled": {
+      "populated": 18,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 18
+      },
+      "distinct": 1,
+      "values": {
+        "1": 18
+      },
+      "min": 1,
+      "max": 1
+    },
+    "floor_id": {
+      "populated": 18,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 18
+      },
+      "distinct": 1,
+      "values": {
+        "F6": 18
+      }
+    },
+    "height": {
+      "populated": 18,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 18
+      },
+      "distinct": 1,
+      "values": {
+        "4.4": 18
+      },
+      "min": 4.4,
+      "max": 4.4
+    },
+    "intensity": {
+      "populated": 18,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 18
+      },
+      "distinct": 1,
+      "values": {
+        "0.85": 18
+      },
+      "min": 0.85,
+      "max": 0.85
+    },
+    "light_id": {
+      "populated": 18,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 18
+      },
+      "distinct": 18,
+      "values": {
+        "F5-light-18": 1,
+        "F6-light-01": 1,
+        "F6-light-02": 1,
+        "F6-light-03": 1,
+        "F6-light-04": 1,
+        "F6-light-05": 1,
+        "F6-light-06": 1,
+        "F6-light-07": 1,
+        "F6-light-08": 1,
+        "F6-light-09": 1,
+        "F6-light-10": 1,
+        "F6-light-11": 1,
+        "F6-light-12": 1,
+        "F6-light-13": 1,
+        "F6-light-14": 1,
+        "F6-light-15": 1,
+        "F6-light-16": 1,
+        "F6-light-17": 1
+      }
+    },
+    "light_type": {
+      "populated": 18,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 18
+      },
+      "distinct": 1,
+      "values": {
+        "interior-light": 18
+      }
+    },
+    "radius_m": {
+      "populated": 18,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 18
+      },
+      "distinct": 1,
+      "values": {
+        "1": 18
+      },
+      "min": 1,
+      "max": 1
+    },
+    "z_height": {
+      "populated": 18,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 18
+      },
+      "distinct": 1,
+      "values": {
+        "4.3": 18
+      },
+      "min": 4.3,
+      "max": 4.3
+    }
+  },
+  "public/rooms-all-WGS-v6.geojson": {
+    "FID": {
+      "populated": 1608,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1608
+      },
+      "distinct": 1608,
+      "min": 0,
+      "max": 1607
+    },
+    "OBJECTID": {
+      "populated": 1608,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1608
+      },
+      "distinct": 1608,
+      "min": 1,
+      "max": 1608
+    },
+    "OBJECTID_1": {
+      "populated": 1608,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1608
+      },
+      "distinct": 1608,
+      "min": 1,
+      "max": 1608
+    },
+    "Shape_Area": {
+      "populated": 1608,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1608
+      },
+      "distinct": 1606,
+      "min": 1.3444749982587496e-12,
+      "max": 6.109637728434752e-7
+    },
+    "Shape_Leng": {
+      "populated": 1608,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1608
+      },
+      "distinct": 1603,
+      "min": 0,
+      "max": 0.00543445033735
+    },
+    "Shape_Length": {
+      "populated": 1608,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1608
+      },
+      "distinct": 1607,
+      "min": 0.000004650156761065469,
+      "max": 0.00543445033735217
+    },
+    "base_heigh": {
+      "populated": 1608,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1608
+      },
+      "distinct": 162,
+      "min": 0,
+      "max": 34.7
+    },
+    "color": {
+      "populated": 1559,
+      "missing": 49,
+      "whitespace_only": 49,
+      "types": {
+        "string": 1559
+      },
+      "distinct": 38,
+      "values": {
+        "blue": 1,
+        "brown": 957,
+        "coral": 3,
+        "cyan": 1,
+        "darkcyan": 1,
+        "darkorange": 13,
+        "darkviolet": 2,
+        "forestgreen": 1,
+        "gold": 2,
+        "green": 1,
+        "grey": 439,
+        "ightskyblue": 1,
+        "indigo": 19,
+        "lightblue": 4,
+        "lightcoral": 2,
+        "lightcyan": 1,
+        "lightgreen": 1,
+        "lightgrey": 16,
+        "lightpink": 4,
+        "lime": 2,
+        "magenta": 8,
+        "magneta": 2,
+        "maroon": 1,
+        "orange": 23,
+        "palegreen": 2,
+        "pink": 6,
+        "purple": 7,
+        "red": 1,
+        "rosybrown": 1,
+        "royalblue": 1,
+        "salmon": 1,
+        "seagreen": 1,
+        "silver": 1,
+        "tan": 1,
+        "violet": 6,
+        "white": 21,
+        "yellow": 4,
+        "yellowgreen": 1
+      }
+    },
+    "height": {
+      "populated": 1608,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1608
+      },
+      "distinct": 207,
+      "min": 0,
+      "max": 35
+    },
+    "level": {
+      "populated": 1608,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1608
+      },
+      "distinct": 8,
+      "values": {
+        "0": 143,
+        "1": 342,
+        "2": 247,
+        "3": 283,
+        "4": 203,
+        "5": 160,
+        "6": 138,
+        "7": 92
+      },
+      "min": 0,
+      "max": 7
+    },
+    "name": {
+      "populated": 1608,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1608
+      },
+      "distinct": 97
+    },
+    "stack": {
+      "populated": 1608,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1608
+      },
+      "distinct": 9,
+      "values": {
+        "stack B": 4,
+        "Stack B": 342,
+        "Stack C": 247,
+        "Stack D": 283,
+        "Stack E": 203,
+        "Stack F": 160,
+        "Stack G": 138,
+        "stack H": 92,
+        "Stacks A": 139
+      }
+    }
+  },
+  "public/rooms-basement-WGS.geojson": {
+    "FID": {
+      "populated": 148,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 148
+      },
+      "distinct": 148,
+      "min": 0,
+      "max": 147
+    },
+    "FID_": {
+      "populated": 148,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 148
+      },
+      "distinct": 148,
+      "min": 0,
+      "max": 155
+    },
+    "Shape_Area": {
+      "populated": 148,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 148
+      },
+      "distinct": 125,
+      "min": 0,
+      "max": 9012.31538704
+    },
+    "Shape_Leng": {
+      "populated": 148,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 148
+      },
+      "distinct": 125,
+      "min": 0,
+      "max": 459.565355829
+    },
+    "base_heigh": {
+      "populated": 148,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 148
+      },
+      "distinct": 36,
+      "values": {
+        "0": 66,
+        "1": 4,
+        "2": 3,
+        "3": 3,
+        "4": 4,
+        "0.3": 4,
+        "0.4": 2,
+        "0.6": 2,
+        "0.7": 3,
+        "0.8": 1,
+        "0.9": 1,
+        "1.1": 1,
+        "1.2": 1,
+        "1.3": 3,
+        "1.4": 2,
+        "1.5": 1,
+        "1.6": 1,
+        "1.7": 2,
+        "1.8": 3,
+        "1.9": 1,
+        "2.2": 2,
+        "2.3": 2,
+        "2.4": 3,
+        "2.5": 1,
+        "2.6": 1,
+        "2.7": 4,
+        "2.8": 1,
+        "3.1": 4,
+        "3.2": 1,
+        "3.4": 2,
+        "3.5": 5,
+        "3.6": 1,
+        "3.8": 2,
+        "3.9": 3,
+        "4.1": 6,
+        "4.2": 2
+      },
+      "min": 0,
+      "max": 4.2
+    },
+    "color": {
+      "populated": 132,
+      "missing": 16,
+      "whitespace_only": 16,
+      "types": {
+        "string": 132
+      },
+      "distinct": 5,
+      "values": {
+        "brown": 98,
+        "grey": 31,
+        "lightgrey": 1,
+        "lightpink": 1,
+        "pink": 1
+      }
+    },
+    "height": {
+      "populated": 148,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 148
+      },
+      "distinct": 38,
+      "values": {
+        "0": 6,
+        "1": 13,
+        "2": 9,
+        "3": 26,
+        "4": 6,
+        "0.2": 7,
+        "0.3": 4,
+        "0.4": 2,
+        "0.6": 1,
+        "0.7": 3,
+        "0.8": 1,
+        "0.9": 1,
+        "1.1": 1,
+        "1.2": 1,
+        "1.3": 3,
+        "1.4": 2,
+        "1.5": 1,
+        "1.6": 1,
+        "1.7": 2,
+        "1.8": 3,
+        "1.9": 1,
+        "2.2": 2,
+        "2.3": 2,
+        "2.4": 3,
+        "2.5": 1,
+        "2.6": 1,
+        "2.7": 4,
+        "2.8": 1,
+        "3.1": 4,
+        "3.2": 1,
+        "3.4": 2,
+        "3.5": 5,
+        "3.6": 1,
+        "3.8": 2,
+        "3.9": 3,
+        "4.1": 3,
+        "4.2": 2,
+        "4.5": 17
+      },
+      "min": 0,
+      "max": 4.5
+    },
+    "level": {
+      "populated": 148,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 148
+      },
+      "distinct": 1,
+      "values": {
+        "0": 148
+      },
+      "min": 0,
+      "max": 0
+    },
+    "name": {
+      "populated": 148,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 148
+      },
+      "distinct": 27,
+      "values": {
+        " elevator": 1,
+        "dewey books 001 to 330": 1,
+        "dewey books 330 to 551": 1,
+        "dewey books 551 to 882": 1,
+        "dewey books 823 to 914": 1,
+        "dewey books 914 to 999": 1,
+        "dewey books q001 to q998": 1,
+        "dewey folios 001 to 999": 1,
+        "Emergency Exit": 1,
+        "floor": 1,
+        "indexes": 1,
+        "journals 1995 & older a to f": 1,
+        "journals 1995 & older f to i": 1,
+        "journals 1995 & older j to z": 1,
+        "national union catalog": 1,
+        "oversized journal a - f": 1,
+        "oversized journals f - h": 1,
+        "oversized journals i - z": 1,
+        "rest room female": 1,
+        "rest room male": 1,
+        "stair case": 86,
+        "stairs area": 1,
+        "stairs area base": 5,
+        "stairs area upper": 4,
+        "storage 3 books": 1,
+        "structure": 25,
+        "Structure": 6
+      }
+    },
+    "stack": {
+      "populated": 148,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 148
+      },
+      "distinct": 3,
+      "values": {
+        "Stack A": 7,
+        "Stacks A": 140,
+        "stairs": 1
+      }
+    },
+    "z_values": {
+      "populated": 148,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 148
+      },
+      "distinct": 2,
+      "values": {
+        "0": 24,
+        "4.5": 124
+      },
+      "min": 0,
+      "max": 4.5
+    }
+  },
+  "public/rooms-level-01-WGS.geojson": {
+    "OBJECTID": {
+      "populated": 355,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 355
+      },
+      "distinct": 355,
+      "min": 2,
+      "max": 386
+    },
+    "Shape_Area": {
+      "populated": 355,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 355
+      },
+      "distinct": 355,
+      "min": 0.021067154878852218,
+      "max": 3089.827456467248
+    },
+    "Shape_Length": {
+      "populated": 355,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 355
+      },
+      "distinct": 355,
+      "min": 0.5812174741096229,
+      "max": 587.1200167869564
+    },
+    "base_height": {
+      "populated": 355,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 355
+      },
+      "distinct": 29,
+      "values": {
+        "0": 201,
+        "1": 2,
+        "2": 2,
+        "0.1": 10,
+        "0.2": 4,
+        "0.3": 10,
+        "0.4": 2,
+        "0.5": 4,
+        "0.6": 10,
+        "1.1": 10,
+        "1.2": 2,
+        "1.4": 2,
+        "1.5": 10,
+        "1.6": 2,
+        "1.8": 2,
+        "1.9": 8,
+        "2.3": 10,
+        "2.4": 2,
+        "2.5": 2,
+        "2.7": 10,
+        "2.8": 2,
+        "3.1": 10,
+        "3.3": 2,
+        "3.4": 10,
+        "3.5": 2,
+        "3.7": 2,
+        "3.8": 10,
+        "4.1": 2,
+        "4.2": 10
+      },
+      "min": 0,
+      "max": 4.2
+    },
+    "height": {
+      "populated": 355,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 355
+      },
+      "distinct": 30,
+      "values": {
+        "1": 29,
+        "2": 22,
+        "3": 16,
+        "4": 28,
+        "0.1": 2,
+        "0.2": 6,
+        "0.3": 10,
+        "0.5": 4,
+        "0.6": 14,
+        "1.1": 10,
+        "1.2": 2,
+        "1.4": 2,
+        "1.5": 24,
+        "1.6": 2,
+        "1.8": 2,
+        "1.9": 8,
+        "2.3": 10,
+        "2.4": 2,
+        "2.5": 13,
+        "2.7": 10,
+        "2.8": 2,
+        "3.1": 10,
+        "3.3": 2,
+        "3.4": 10,
+        "3.5": 22,
+        "3.7": 2,
+        "3.8": 10,
+        "4.1": 2,
+        "4.2": 10,
+        "4.5": 69
+      },
+      "min": 0.1,
+      "max": 4.5
+    },
+    "level": {
+      "populated": 355,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 355
+      },
+      "distinct": 1,
+      "values": {
+        "1": 355
+      },
+      "min": 1,
+      "max": 1
+    },
+    "name": {
+      "populated": 348,
+      "missing": 7,
+      "whitespace_only": 0,
+      "types": {
+        "string": 348
+      },
+      "distinct": 26,
+      "values": {
+        "Access Services (0130) & Offices": 1,
+        "Back Entrance/Emergency Exit": 1,
+        "Browsing Room": 4,
+        "Center for Teaching Excellence (0110)": 1,
+        "Classroom 0174": 1,
+        "Computer Lab 0139": 1,
+        "Danielle C. Baker Research & Information Desk (0161)": 7,
+        "Delytes Cafe": 16,
+        "Elevator": 1,
+        "Emergency Exit": 9,
+        "Floor": 1,
+        "Front Entrance/Emergency Exit": 1,
+        "Hall Of Presidents And Chancellors": 1,
+        "John C Guyon Auditorium": 4,
+        "Printers": 4,
+        "Private Room": 4,
+        "Rest Room Female": 2,
+        "Rest Room Male": 2,
+        "Special Collections Research Center Reading Room": 1,
+        "Staff Only": 1,
+        "Stair Case": 152,
+        "Stairs": 2,
+        "Stairs Area": 10,
+        "Stairs Area Upper": 4,
+        "Structure": 116,
+        "University Honors (0181)": 1
+      }
+    },
+    "stack": {
+      "populated": 355,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 355
+      },
+      "distinct": 1,
+      "values": {
+        "Stack B": 355
+      }
+    }
+  },
+  "public/rooms-level-02-WGS.geojson": {
+    "OBJECTID": {
+      "populated": 243,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 243
+      },
+      "distinct": 243,
+      "min": 1,
+      "max": 268
+    },
+    "Shape_Area": {
+      "populated": 243,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 243
+      },
+      "distinct": 243,
+      "min": 0.06578482925954282,
+      "max": 6939.622399945795
+    },
+    "Shape_Length": {
+      "populated": 243,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 243
+      },
+      "distinct": 243,
+      "min": 1.0263024163647025,
+      "max": 398.83955850034874
+    },
+    "base_height": {
+      "populated": 243,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 243
+      },
+      "distinct": 24,
+      "values": {
+        "0": 103,
+        "1": 8,
+        "2": 4,
+        "3": 7,
+        "0.3": 10,
+        "0.4": 2,
+        "0.5": 2,
+        "0.6": 8,
+        "0.8": 2,
+        "1.1": 2,
+        "1.2": 2,
+        "1.4": 10,
+        "1.6": 2,
+        "1.8": 10,
+        "2.1": 2,
+        "2.2": 8,
+        "2.4": 4,
+        "2.6": 8,
+        "2.8": 6,
+        "3.1": 4,
+        "3.4": 12,
+        "3.6": 2,
+        "3.8": 13,
+        "4.2": 12
+      },
+      "min": 0,
+      "max": 4.2
+    },
+    "height": {
+      "populated": 243,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 243
+      },
+      "distinct": 29,
+      "values": {
+        "1": 23,
+        "2": 30,
+        "3": 9,
+        "4": 3,
+        "0.1": 1,
+        "0.2": 9,
+        "0.3": 10,
+        "0.4": 4,
+        "0.5": 3,
+        "0.6": 12,
+        "0.7": 1,
+        "0.8": 2,
+        "1.1": 2,
+        "1.2": 2,
+        "1.4": 8,
+        "1.6": 2,
+        "1.8": 10,
+        "2.1": 2,
+        "2.2": 8,
+        "2.4": 4,
+        "2.5": 6,
+        "2.6": 8,
+        "2.8": 6,
+        "3.1": 4,
+        "3.4": 11,
+        "3.6": 2,
+        "3.8": 12,
+        "4.2": 13,
+        "4.5": 36
+      },
+      "min": 0.1,
+      "max": 4.5
+    },
+    "level": {
+      "populated": 243,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 243
+      },
+      "distinct": 1,
+      "values": {
+        "2": 243
+      },
+      "min": 2,
+      "max": 2
+    },
+    "name": {
+      "populated": 243,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 243
+      },
+      "distinct": 15,
+      "values": {
+        "All Gender Restroom": 1,
+        "Classroom 0261": 1,
+        "Elevator": 1,
+        "Emergency Exit": 3,
+        "Faulty And Staff Offices": 1,
+        "Floor": 2,
+        "Information Resources Management": 1,
+        "Library Administration": 1,
+        "Private Room": 2,
+        "Rest Room Female": 1,
+        "Rest Room Male": 1,
+        "Stair Case": 154,
+        "Stairs Area": 9,
+        "Structure": 64,
+        "Writing Center": 1
+      }
+    },
+    "stack": {
+      "populated": 243,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 243
+      },
+      "distinct": 1,
+      "values": {
+        "Stack C": 243
+      }
+    }
+  },
+  "public/rooms-level-03-WGS.geojson": {
+    "OBJECTID": {
+      "populated": 288,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 288
+      },
+      "distinct": 288,
+      "min": 2,
+      "max": 384
+    },
+    "Shape_Area": {
+      "populated": 288,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 288
+      },
+      "distinct": 288,
+      "min": 0.055611217744494526,
+      "max": 978.6668220983876
+    },
+    "Shape_Length": {
+      "populated": 288,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 288
+      },
+      "distinct": 288,
+      "min": 1.3670041122050882,
+      "max": 239.23943991941326
+    },
+    "base_height": {
+      "populated": 288,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 288
+      },
+      "distinct": 33,
+      "values": {
+        "0": 130,
+        "1": 4,
+        "2": 9,
+        "3": 5,
+        "4": 5,
+        "0.2": 4,
+        "0.3": 4,
+        "0.4": 9,
+        "0.5": 1,
+        "0.6": 4,
+        "0.8": 13,
+        "0.9": 1,
+        "1.1": 4,
+        "1.2": 5,
+        "1.4": 5,
+        "1.5": 4,
+        "1.6": 5,
+        "1.8": 5,
+        "1.9": 4,
+        "2.2": 1,
+        "2.3": 4,
+        "2.4": 9,
+        "2.6": 1,
+        "2.7": 4,
+        "2.8": 9,
+        "3.2": 5,
+        "3.3": 4,
+        "3.4": 5,
+        "3.6": 5,
+        "3.7": 4,
+        "3.8": 5,
+        "4.1": 10,
+        "4.4": 1
+      },
+      "min": 0,
+      "max": 4.4
+    },
+    "height": {
+      "populated": 288,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 288
+      },
+      "distinct": 35,
+      "values": {
+        "1": 49,
+        "2": 11,
+        "3": 12,
+        "4": 20,
+        "0.2": 4,
+        "0.3": 4,
+        "0.4": 9,
+        "0.5": 1,
+        "0.6": 8,
+        "0.7": 1,
+        "0.8": 13,
+        "0.9": 1,
+        "1.1": 4,
+        "1.2": 5,
+        "1.4": 5,
+        "1.5": 4,
+        "1.6": 5,
+        "1.8": 5,
+        "1.9": 4,
+        "2.2": 1,
+        "2.3": 4,
+        "2.4": 9,
+        "2.5": 17,
+        "2.6": 1,
+        "2.7": 4,
+        "2.8": 9,
+        "3.2": 5,
+        "3.3": 4,
+        "3.4": 5,
+        "3.5": 1,
+        "3.6": 5,
+        "3.7": 4,
+        "3.8": 5,
+        "4.1": 9,
+        "4.5": 40
+      },
+      "min": 0.2,
+      "max": 4.5
+    },
+    "level": {
+      "populated": 288,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 288
+      },
+      "distinct": 1,
+      "values": {
+        "3": 288
+      },
+      "min": 3,
+      "max": 3
+    },
+    "name": {
+      "populated": 286,
+      "missing": 2,
+      "whitespace_only": 0,
+      "types": {
+        "string": 286
+      },
+      "distinct": 29,
+      "values": {
+        "3Rd Floor Rotunda": 1,
+        "Dejarnett American Heritage Room": 3,
+        "Dvds Videos": 1,
+        "Elevator": 1,
+        "Emergency Exit": 4,
+        "Family Study 0320D": 1,
+        "Government Documents": 1,
+        "Group Study 0320A": 1,
+        "Group Study 0320B": 1,
+        "Group Study 0320C": 1,
+        "Imc Books": 1,
+        "Journals A To E": 1,
+        "Journals F To J": 1,
+        "Journals J To N": 1,
+        "Journals N To Z": 1,
+        "Lactation Room 0323": 1,
+        "Lerner Music Studio": 1,
+        "Microforms": 1,
+        "Music Scores": 1,
+        "Newspaper": 1,
+        "Oversized Lc Books A To Z": 1,
+        "Rest Room Female": 1,
+        "Rest Room Male": 1,
+        "Southern Illinois University Press (0362)": 1,
+        "Stair Case": 169,
+        "Stairs Area": 5,
+        "Stairs Area Upper": 4,
+        "Structure": 78,
+        "Theses & Dissertations": 1
+      }
+    },
+    "stack": {
+      "populated": 285,
+      "missing": 3,
+      "whitespace_only": 0,
+      "types": {
+        "string": 285
+      },
+      "distinct": 1,
+      "values": {
+        "Stack D": 285
+      }
+    }
+  },
+  "public/rooms-level-04-WGS.geojson": {
+    "OBJECTID": {
+      "populated": 199,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 199
+      },
+      "distinct": 199,
+      "min": 2,
+      "max": 210
+    },
+    "Shape_Area": {
+      "populated": 199,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 199
+      },
+      "distinct": 199,
+      "min": 0.14566657408398315,
+      "max": 533.3832979106231
+    },
+    "Shape_Length": {
+      "populated": 199,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 199
+      },
+      "distinct": 199,
+      "min": 2.9976096504965417,
+      "max": 176.5342229221223
+    },
+    "base_height": {
+      "populated": 199,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 199
+      },
+      "distinct": 12,
+      "values": {
+        "0": 111,
+        "2": 8,
+        "4": 8,
+        "0.4": 6,
+        "0.8": 8,
+        "1.2": 8,
+        "1.6": 8,
+        "2.4": 8,
+        "2.8": 8,
+        "3.2": 8,
+        "3.6": 8,
+        "4.4": 10
+      },
+      "min": 0,
+      "max": 4.4
+    },
+    "height": {
+      "populated": 199,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 199
+      },
+      "distinct": 16,
+      "values": {
+        "1": 64,
+        "2": 29,
+        "3": 4,
+        "4": 10,
+        "0.2": 1,
+        "0.4": 6,
+        "0.6": 2,
+        "0.8": 8,
+        "1.2": 8,
+        "1.6": 8,
+        "2.4": 8,
+        "2.8": 8,
+        "3.2": 8,
+        "3.6": 8,
+        "4.4": 8,
+        "4.5": 19
+      },
+      "min": 0.2,
+      "max": 4.5
+    },
+    "level": {
+      "populated": 199,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 199
+      },
+      "distinct": 1,
+      "values": {
+        "4": 199
+      },
+      "min": 4,
+      "max": 4
+    },
+    "name": {
+      "populated": 199,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 199
+      },
+      "distinct": 22,
+      "values": {
+        "Elevator": 1,
+        "Emergency Exit": 2,
+        "Geospatial Resources": 3,
+        "Group Study 0420A": 2,
+        "Group Study 0420B": 2,
+        "Group Study 0420C": 2,
+        "Group Study 0420D": 3,
+        "Help Desk": 1,
+        "Lc Books R To TK": 1,
+        "Lc Books TK To TX": 1,
+        "Lc Books TX To Z": 1,
+        "Library Conference 0480A": 2,
+        "Map Books": 1,
+        "Office": 1,
+        "Rest Room Female": 1,
+        "Rest Room Male": 1,
+        "Staff": 5,
+        "Stair Case": 94,
+        "Stairs Area": 7,
+        "Stairs Area Upper": 3,
+        "Structure": 64,
+        "Structure Stairs Base": 1
+      }
+    },
+    "stack": {
+      "populated": 199,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 199
+      },
+      "distinct": 1,
+      "values": {
+        "Stack E": 199
+      }
+    }
+  },
+  "public/rooms-level-5-WGS.geojson": {
+    "OBJECTID": {
+      "populated": 149,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 149
+      },
+      "distinct": 149,
+      "min": 4,
+      "max": 172
+    },
+    "Shape_Area": {
+      "populated": 149,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 149
+      },
+      "distinct": 149,
+      "min": 0.35145949861879644,
+      "max": 9119.299450142691
+    },
+    "Shape_Length": {
+      "populated": 149,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 149
+      },
+      "distinct": 149,
+      "min": 4.777149325139095,
+      "max": 416.5365486276245
+    },
+    "base_height": {
+      "populated": 149,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 149
+      },
+      "distinct": 20,
+      "values": {
+        "0": 53,
+        "3": 4,
+        "0.2": 8,
+        "0.4": 8,
+        "0.7": 4,
+        "0.8": 4,
+        "1.1": 4,
+        "1.3": 4,
+        "1.5": 4,
+        "1.7": 4,
+        "1.8": 4,
+        "2.1": 4,
+        "2.2": 4,
+        "2.4": 4,
+        "2.6": 4,
+        "2.8": 4,
+        "3.1": 4,
+        "3.4": 8,
+        "3.8": 8,
+        "4.2": 8
+      },
+      "min": 0,
+      "max": 4.2
+    },
+    "height": {
+      "populated": 149,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 149
+      },
+      "distinct": 25,
+      "values": {
+        "1": 1,
+        "3": 14,
+        "4": 2,
+        "0.2": 21,
+        "0.4": 8,
+        "0.6": 2,
+        "0.7": 5,
+        "0.8": 4,
+        "1.1": 4,
+        "1.3": 4,
+        "1.5": 4,
+        "1.7": 4,
+        "1.8": 4,
+        "2.1": 4,
+        "2.2": 4,
+        "2.4": 4,
+        "2.5": 1,
+        "2.6": 4,
+        "2.8": 4,
+        "3.1": 4,
+        "3.4": 8,
+        "3.5": 4,
+        "3.8": 8,
+        "4.2": 8,
+        "4.5": 19
+      },
+      "min": 0.2,
+      "max": 4.5
+    },
+    "level": {
+      "populated": 149,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 149
+      },
+      "distinct": 1,
+      "values": {
+        "5": 149
+      },
+      "min": 5,
+      "max": 5
+    },
+    "name": {
+      "populated": 149,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 149
+      },
+      "distinct": 26,
+      "values": {
+        "Elevator": 1,
+        "Emergency Exit": 1,
+        "Emergency Exit Only": 1,
+        "Faculty Research 0580B": 1,
+        "Faculty Research 0580C": 1,
+        "Faculty Writing 0580D": 1,
+        "Floor": 1,
+        "Group  Study 0550A": 1,
+        "Group Study 0510A": 1,
+        "Group Study 0510B": 1,
+        "Group Study 0540A": 1,
+        "Group Study 0540B": 1,
+        "Group Study 0550B": 1,
+        "Groups Study 0580A": 1,
+        "Lc Books HJ To JC": 1,
+        "Lc Books HV To PG": 1,
+        "Lc Books PG To PS": 1,
+        "Lc Books QR To PS": 1,
+        "Lc Folios A To Z": 1,
+        "Rest Room Male": 1,
+        "Srairs Area Upper": 1,
+        "Stair Case": 60,
+        "Stairs Area": 2,
+        "Stairs Area Upper": 1,
+        "Stairs Case": 36,
+        "Structure": 29
+      }
+    },
+    "stack": {
+      "populated": 149,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 149
+      },
+      "distinct": 1,
+      "values": {
+        "Stack F": 149
+      }
+    }
+  },
+  "public/rooms-level-6-WGS.geojson": {
+    "OBJECTID": {
+      "populated": 138,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 138
+      },
+      "distinct": 138,
+      "min": 2,
+      "max": 146
+    },
+    "Shape_Area": {
+      "populated": 138,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 138
+      },
+      "distinct": 138,
+      "min": 0.3027735286385578,
+      "max": 1383.3178117684672
+    },
+    "Shape_Length": {
+      "populated": 138,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 138
+      },
+      "distinct": 138,
+      "min": 4.066528868192172,
+      "max": 173.28755687692933
+    },
+    "base_height": {
+      "populated": 138,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 138
+      },
+      "distinct": 13,
+      "values": {
+        "0": 42,
+        "2": 8,
+        "0.2": 8,
+        "0.4": 8,
+        "0.8": 8,
+        "1.2": 8,
+        "1.6": 8,
+        "2.4": 8,
+        "2.8": 8,
+        "3.1": 8,
+        "3.4": 8,
+        "3.8": 8,
+        "4.1": 8
+      },
+      "min": 0,
+      "max": 4.1
+    },
+    "height": {
+      "populated": 138,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 138
+      },
+      "distinct": 18,
+      "values": {
+        "1": 4,
+        "2": 9,
+        "3": 13,
+        "4": 2,
+        "0.2": 3,
+        "0.3": 1,
+        "0.4": 8,
+        "0.6": 2,
+        "0.8": 8,
+        "1.2": 8,
+        "1.6": 8,
+        "2.4": 8,
+        "2.8": 8,
+        "3.1": 8,
+        "3.4": 8,
+        "3.8": 8,
+        "4.1": 8,
+        "4.5": 24
+      },
+      "min": 0.2,
+      "max": 4.5
+    },
+    "level": {
+      "populated": 138,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 138
+      },
+      "distinct": 1,
+      "values": {
+        "6": 138
+      },
+      "min": 6,
+      "max": 6
+    },
+    "name": {
+      "populated": 138,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 138
+      },
+      "distinct": 19,
+      "values": {
+        "Classroom 0610A": 1,
+        "Collaborative Space": 1,
+        "Elevator": 2,
+        "Emergency Exit": 1,
+        "Emergency Exit Only": 1,
+        "Group Study Space": 4,
+        "Lc Books A To DA": 1,
+        "Lc Books DA To HG": 1,
+        "Math Classroom 0652": 1,
+        "Math Classroom 0654": 1,
+        "Math Lab 0677": 1,
+        "Math Lab 0680": 1,
+        "Rest Room Female": 1,
+        "Rest Room Male": 1,
+        "Southern Illinois African American Heritage Center 0640A": 1,
+        "Stair Case": 96,
+        "Stairs Area": 2,
+        "Stairs Area Upper": 2,
+        "Structure": 19
+      }
+    },
+    "stack": {
+      "populated": 138,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 138
+      },
+      "distinct": 1,
+      "values": {
+        "Stack G": 138
+      }
+    }
+  },
+  "public/rooms-level-7-WGS.geojson": {
+    "OBJECTID": {
+      "populated": 90,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 90
+      },
+      "distinct": 90,
+      "min": 2,
+      "max": 95
+    },
+    "Shape_Area": {
+      "populated": 90,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 90
+      },
+      "distinct": 90,
+      "min": 0.3642315745050155,
+      "max": 1564.8175602783617
+    },
+    "Shape_Length": {
+      "populated": 90,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 90
+      },
+      "distinct": 90,
+      "min": 4.670503300746559,
+      "max": 188.3639888787872
+    },
+    "base_height": {
+      "populated": 90,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 90
+      },
+      "distinct": 25,
+      "values": {
+        "0": 52,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "0.2": 2,
+        "0.3": 2,
+        "0.4": 1,
+        "0.8": 4,
+        "1.1": 2,
+        "1.3": 1,
+        "1.5": 2,
+        "1.6": 1,
+        "1.7": 1,
+        "1.8": 1,
+        "2.1": 2,
+        "2.4": 2,
+        "2.5": 2,
+        "2.7": 1,
+        "2.8": 1,
+        "3.1": 2,
+        "3.4": 1,
+        "3.5": 3,
+        "3.8": 2,
+        "4.1": 1,
+        "4.2": 1
+      },
+      "min": 0,
+      "max": 4.2
+    },
+    "height": {
+      "populated": 90,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 90
+      },
+      "distinct": 28,
+      "values": {
+        "1": 1,
+        "2": 6,
+        "3": 11,
+        "4": 3,
+        "0.5": 3,
+        "0.6": 8,
+        "0.8": 5,
+        "1.1": 1,
+        "1.2": 1,
+        "1.3": 1,
+        "1.5": 3,
+        "1.6": 1,
+        "1.7": 1,
+        "1.8": 1,
+        "2.1": 3,
+        "2.4": 2,
+        "2.5": 6,
+        "2.7": 2,
+        "2.8": 1,
+        "3.1": 2,
+        "3.3": 1,
+        "3.4": 1,
+        "3.5": 4,
+        "3.8": 2,
+        "3.9": 1,
+        "4.1": 1,
+        "4.2": 1,
+        "4.5": 17
+      },
+      "min": 0.5,
+      "max": 4.5
+    },
+    "level": {
+      "populated": 90,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 90
+      },
+      "distinct": 1,
+      "values": {
+        "7": 90
+      },
+      "min": 7,
+      "max": 7
+    },
+    "name": {
+      "populated": 90,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 90
+      },
+      "distinct": 17,
+      "values": {
+        "Center For Learning Support Services": 1,
+        "Classroom 0722": 1,
+        "Classroom 0724": 1,
+        "Classroom 0752": 1,
+        "Classroom 0754": 1,
+        "Elevator": 1,
+        "Emergency Exit Only": 2,
+        "Rest Room Female": 1,
+        "Rest Room Male": 1,
+        "Stair Case": 44,
+        "Stairs Area": 1,
+        "Stairs Area Lower": 1,
+        "Stairs Area Upper": 1,
+        "Stairs Upper Area": 1,
+        "Structure": 30,
+        "Testing Services": 1,
+        "Tutoring Center": 1
+      }
+    },
+    "stack": {
+      "populated": 90,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 90
+      },
+      "distinct": 1,
+      "values": {
+        "stack H": 90
+      }
+    }
+  },
+  "public/room_basement_obstacle_buffered.geojson": {
+    "FID": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    },
+    "Id": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    }
+  },
+  "public/room_basement_walkable.geojson": {
+    "FID": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    },
+    "Shape_Area": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "9012.31538704": 1
+      },
+      "min": 9012.31538704,
+      "max": 9012.31538704
+    },
+    "Shape_Leng": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "459.565355829": 1
+      },
+      "min": 459.565355829,
+      "max": 459.565355829
+    },
+    "base_heigh": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    },
+    "color": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "lightgrey": 1
+      }
+    },
+    "height": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0.2": 1
+      },
+      "min": 0.2,
+      "max": 0.2
+    },
+    "level": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    },
+    "name": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "floor": 1
+      }
+    },
+    "stack": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "Stacks A": 1
+      }
+    },
+    "z_values": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "4.5": 1
+      },
+      "min": 4.5,
+      "max": 4.5
+    }
+  },
+  "public/room_level_1_centerlines.geojson": {
+    "OBJECTID": {
+      "populated": 52,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 52
+      },
+      "distinct": 52,
+      "min": 56,
+      "max": 185
+    },
+    "Shape_Length": {
+      "populated": 52,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 52
+      },
+      "distinct": 52,
+      "min": 11.18793758388987,
+      "max": 98.252509787655
+    },
+    "endroom": {
+      "populated": 49,
+      "missing": 3,
+      "whitespace_only": 0,
+      "types": {
+        "string": 49
+      },
+      "distinct": 15,
+      "values": {
+        "Access Services (0130) & Offices": 4,
+        "browsing room": 5,
+        "center for teaching excellence": 2,
+        "Center for Teaching Excellence (0110)": 2,
+        "classroom 0174": 4,
+        "computer lab 0139": 4,
+        "Danielle C. Baker Research & Information Desk (0161)": 2,
+        "delyte's cafe": 2,
+        "delytes cafe": 1,
+        "hall of presidents and chancellors": 5,
+        "john c guyon auditorium": 4,
+        "john c. guyon auditorium": 1,
+        "printers": 5,
+        "special collections research center reading room": 3,
+        "vending": 5
+      }
+    },
+    "level": {
+      "populated": 0,
+      "missing": 52,
+      "whitespace_only": 0,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    },
+    "name": {
+      "populated": 51,
+      "missing": 1,
+      "whitespace_only": 0,
+      "types": {
+        "string": 51
+      },
+      "distinct": 1,
+      "values": {
+        "centerlines": 51
+      }
+    },
+    "startroom": {
+      "populated": 52,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 52
+      },
+      "distinct": 6,
+      "values": {
+        "Center for Teaching Excellence (0110)": 12,
+        "Danielle C. Baker Research & Information Desk (0161)": 5,
+        "delytes cafe": 1,
+        "elevator": 12,
+        "front entrance": 10,
+        "University Honors (0181)": 12
+      }
+    },
+    "type": {
+      "populated": 0,
+      "missing": 52,
+      "whitespace_only": 0,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    },
+    "width": {
+      "populated": 0,
+      "missing": 52,
+      "whitespace_only": 0,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    }
+  },
+  "public/room_level_1_obstacle_buffered.geojson": {
+    "FID": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    },
+    "Id": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    }
+  },
+  "public/room_level_1_walkable.geojson": {
+    "FID": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    },
+    "Shape_Area": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "9497.86359094": 1
+      },
+      "min": 9497.86359094,
+      "max": 9497.86359094
+    },
+    "Shape_Leng": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "504.203535807": 1
+      },
+      "min": 504.203535807,
+      "max": 504.203535807
+    },
+    "base_heigh": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    },
+    "color": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "grey": 1
+      }
+    },
+    "height": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0.2": 1
+      },
+      "min": 0.2,
+      "max": 0.2
+    },
+    "level": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "1": 1
+      },
+      "min": 1,
+      "max": 1
+    },
+    "name": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "floor": 1
+      }
+    },
+    "stack": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "Stack B": 1
+      }
+    }
+  },
+  "public/room_level_2_centerlines.geojson": {
+    "FID": {
+      "populated": 7,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 7
+      },
+      "distinct": 7,
+      "values": {
+        "0": 1,
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1,
+        "6": 1
+      },
+      "min": 0,
+      "max": 6
+    },
+    "Shape_Leng": {
+      "populated": 7,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 7
+      },
+      "distinct": 1,
+      "values": {
+        "0": 7
+      },
+      "min": 0,
+      "max": 0
+    },
+    "endroom": {
+      "populated": 7,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 7
+      },
+      "distinct": 4,
+      "values": {
+        "classroom 0261": 2,
+        "faulty and staff offices": 1,
+        "library administration": 3,
+        "writing center": 1
+      }
+    },
+    "level": {
+      "populated": 7,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 7
+      },
+      "distinct": 1,
+      "values": {
+        "0": 7
+      },
+      "min": 0,
+      "max": 0
+    },
+    "name": {
+      "populated": 0,
+      "missing": 7,
+      "whitespace_only": 7,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    },
+    "startroom": {
+      "populated": 7,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 7
+      },
+      "distinct": 3,
+      "values": {
+        "classroom 0261": 1,
+        "elevator": 4,
+        "writing center": 2
+      }
+    },
+    "type": {
+      "populated": 0,
+      "missing": 7,
+      "whitespace_only": 7,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    },
+    "width": {
+      "populated": 7,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 7
+      },
+      "distinct": 1,
+      "values": {
+        "0": 7
+      },
+      "min": 0,
+      "max": 0
+    }
+  },
+  "public/room_level_2_obstacle_buffered.geojson": {
+    "FID": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    },
+    "Id": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    }
+  },
+  "public/room_level_2_walkable.geojson": {
+    "FID": {
+      "populated": 3,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 3
+      },
+      "distinct": 3,
+      "values": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "min": 0,
+      "max": 2
+    },
+    "Shape_Area": {
+      "populated": 3,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 3
+      },
+      "distinct": 3,
+      "values": {
+        "1221.69734883": 1,
+        "1723.226698": 1,
+        "6939.62239995": 1
+      },
+      "min": 1221.69734883,
+      "max": 6939.62239995
+    },
+    "Shape_Leng": {
+      "populated": 3,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 3
+      },
+      "distinct": 3,
+      "values": {
+        "185.412045414": 1,
+        "302.037553405": 1,
+        "398.8395585": 1
+      },
+      "min": 185.412045414,
+      "max": 398.8395585
+    },
+    "base_heigh": {
+      "populated": 3,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 3
+      },
+      "distinct": 1,
+      "values": {
+        "0": 3
+      },
+      "min": 0,
+      "max": 0
+    },
+    "color": {
+      "populated": 3,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 3
+      },
+      "distinct": 1,
+      "values": {
+        "#613ce7": 3
+      }
+    },
+    "height": {
+      "populated": 3,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 3
+      },
+      "distinct": 1,
+      "values": {
+        "0.2": 3
+      },
+      "min": 0.2,
+      "max": 0.2
+    },
+    "level": {
+      "populated": 3,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 3
+      },
+      "distinct": 1,
+      "values": {
+        "2": 3
+      },
+      "min": 2,
+      "max": 2
+    },
+    "name": {
+      "populated": 3,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 3
+      },
+      "distinct": 1,
+      "values": {
+        "floor": 3
+      }
+    },
+    "stack": {
+      "populated": 3,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 3
+      },
+      "distinct": 1,
+      "values": {
+        "Stack C": 3
+      }
+    },
+    "z_values": {
+      "populated": 3,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 3
+      },
+      "distinct": 1,
+      "values": {
+        "22.5": 3
+      },
+      "min": 22.5,
+      "max": 22.5
+    }
+  },
+  "public/room_level_3_centerlines.geojson": {
+    "OBJECTID": {
+      "populated": 129,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 129
+      },
+      "distinct": 129,
+      "min": 1,
+      "max": 163
+    },
+    "Shape_Length": {
+      "populated": 129,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 129
+      },
+      "distinct": 129,
+      "min": 2.1316604635955305,
+      "max": 87.07897331509015
+    },
+    "endroom": {
+      "populated": 129,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 129
+      },
+      "distinct": 27,
+      "values": {
+        "3rd floor rotunda": 1,
+        "dejarnett american heritage room": 6,
+        "dvds & videos": 10,
+        "family study 0320d": 4,
+        "family study room 0320d": 3,
+        "government documents": 5,
+        "group study 0320a": 6,
+        "group study 0320b": 3,
+        "group study 0320c": 2,
+        "group study 0320d": 1,
+        "imc books": 4,
+        "jornals f to j": 1,
+        "journals a to e": 7,
+        "journals f to j": 7,
+        "journals j to n": 11,
+        "journals n to z": 4,
+        "lacation room 0323": 1,
+        "lactation room 0323": 10,
+        "lerner music studio": 8,
+        "microforms": 7,
+        "mircoforms": 1,
+        "music scores": 9,
+        "news papers": 1,
+        "newspapers": 1,
+        "oversized lc books a to z": 4,
+        "siu press": 1,
+        "theses & dissertations": 11
+      }
+    },
+    "level": {
+      "populated": 0,
+      "missing": 129,
+      "whitespace_only": 0,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    },
+    "name": {
+      "populated": 129,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 129
+      },
+      "distinct": 1,
+      "values": {
+        "centerlines": 129
+      }
+    },
+    "startroom": {
+      "populated": 129,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 129
+      },
+      "distinct": 13,
+      "values": {
+        "dejarnett american heritage room": 14,
+        "elevator": 17,
+        "government documents": 19,
+        "group study 0320a": 9,
+        "group study 0320b": 10,
+        "group study 0320c": 10,
+        "journals a to e": 2,
+        "journals n to z": 3,
+        "journlas a to e": 1,
+        "microforms": 18,
+        "newspapers": 2,
+        "oversized lc books a to z": 7,
+        "Southern Illinois University Press (0362)": 17
+      }
+    },
+    "type": {
+      "populated": 0,
+      "missing": 129,
+      "whitespace_only": 0,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    },
+    "width": {
+      "populated": 0,
+      "missing": 129,
+      "whitespace_only": 0,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    }
+  },
+  "public/room_level_3_obstacle_buffered.geojson": {
+    "FID": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    },
+    "Id": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    }
+  },
+  "public/room_level_3_walkable.geojson": {
+    "FID": {
+      "populated": 2,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 2
+      },
+      "distinct": 2,
+      "values": {
+        "0": 1,
+        "1": 1
+      },
+      "min": 0,
+      "max": 1
+    },
+    "Shape_Area": {
+      "populated": 2,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 2
+      },
+      "distinct": 2,
+      "values": {
+        "7719.77528749": 1,
+        "8868.43298767": 1
+      },
+      "min": 7719.77528749,
+      "max": 8868.43298767
+    },
+    "Shape_Leng": {
+      "populated": 2,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 2
+      },
+      "distinct": 2,
+      "values": {
+        "432.317758866": 1,
+        "527.509595435": 1
+      },
+      "min": 432.317758866,
+      "max": 527.509595435
+    },
+    "base_heigh": {
+      "populated": 2,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 2
+      },
+      "distinct": 1,
+      "values": {
+        "0": 2
+      },
+      "min": 0,
+      "max": 0
+    },
+    "color": {
+      "populated": 2,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 2
+      },
+      "distinct": 1,
+      "values": {
+        "#0a0d19": 2
+      }
+    },
+    "height": {
+      "populated": 2,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 2
+      },
+      "distinct": 1,
+      "values": {
+        "1": 2
+      },
+      "min": 1,
+      "max": 1
+    },
+    "level": {
+      "populated": 2,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 2
+      },
+      "distinct": 1,
+      "values": {
+        "3": 2
+      },
+      "min": 3,
+      "max": 3
+    },
+    "name": {
+      "populated": 2,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 2
+      },
+      "distinct": 1,
+      "values": {
+        "floor": 2
+      }
+    },
+    "stack": {
+      "populated": 2,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 2
+      },
+      "distinct": 1,
+      "values": {
+        "Stack D": 2
+      }
+    }
+  },
+  "public/room_level_4_centerlines.geojson": {
+    "OBJECTID": {
+      "populated": 12,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 12
+      },
+      "distinct": 12,
+      "values": {
+        "23": 1,
+        "24": 1,
+        "25": 1,
+        "26": 1,
+        "27": 1,
+        "28": 1,
+        "29": 1,
+        "30": 1,
+        "31": 1,
+        "32": 1,
+        "33": 1,
+        "34": 1
+      },
+      "min": 23,
+      "max": 34
+    },
+    "Shape_Length": {
+      "populated": 12,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 12
+      },
+      "distinct": 12,
+      "values": {
+        "14.918079608325607": 1,
+        "15.457164904417692": 1,
+        "2.3774190621551057": 1,
+        "23.94317406213909": 1,
+        "29.581274277589905": 1,
+        "31.029237524257177": 1,
+        "38.30172192300454": 1,
+        "44.027451548021695": 1,
+        "48.806783086578264": 1,
+        "63.4812395318098": 1,
+        "64.93858772092126": 1,
+        "72.21097215913265": 1
+      },
+      "min": 2.3774190621551057,
+      "max": 72.21097215913265
+    },
+    "endroom": {
+      "populated": 12,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 12
+      },
+      "distinct": 7,
+      "values": {
+        "elevator": 1,
+        "geospatial resources": 1,
+        "group study 0420a": 2,
+        "group study 0420b": 2,
+        "group study 0420c": 3,
+        "group study 0420d": 2,
+        "lc books tx to z": 1
+      }
+    },
+    "level": {
+      "populated": 0,
+      "missing": 12,
+      "whitespace_only": 0,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    },
+    "name": {
+      "populated": 12,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 12
+      },
+      "distinct": 1,
+      "values": {
+        "centerlines": 12
+      }
+    },
+    "startroom": {
+      "populated": 12,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 12
+      },
+      "distinct": 3,
+      "values": {
+        "elevator": 5,
+        "group study 0420d": 1,
+        "library conference 0480a": 6
+      }
+    },
+    "type": {
+      "populated": 0,
+      "missing": 12,
+      "whitespace_only": 0,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    },
+    "width": {
+      "populated": 0,
+      "missing": 12,
+      "whitespace_only": 0,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    }
+  },
+  "public/room_level_4_obstacle_buffered.geojson": {
+    "OBJECTID": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "1": 1
+      },
+      "min": 1,
+      "max": 1
+    },
+    "Shape_Area": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "3066.437246318994": 1
+      },
+      "min": 3066.437246318994,
+      "max": 3066.437246318994
+    },
+    "Shape_Length": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "1173.1106905637341": 1
+      },
+      "min": 1173.1106905637341,
+      "max": 1173.1106905637341
+    }
+  },
+  "public/room_level_4_walkable.geojson": {
+    "FID": {
+      "populated": 2,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 2
+      },
+      "distinct": 2,
+      "values": {
+        "0": 1,
+        "1": 1
+      },
+      "min": 0,
+      "max": 1
+    },
+    "Shape_Area": {
+      "populated": 2,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 2
+      },
+      "distinct": 2,
+      "values": {
+        "7214.2104362": 1,
+        "8760.29915034": 1
+      },
+      "min": 7214.2104362,
+      "max": 8760.29915034
+    },
+    "Shape_Leng": {
+      "populated": 2,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 2
+      },
+      "distinct": 2,
+      "values": {
+        "385.680027753": 1,
+        "416.009339974": 1
+      },
+      "min": 385.680027753,
+      "max": 416.009339974
+    },
+    "base_heigh": {
+      "populated": 2,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 2
+      },
+      "distinct": 1,
+      "values": {
+        "0": 2
+      },
+      "min": 0,
+      "max": 0
+    },
+    "color": {
+      "populated": 2,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 2
+      },
+      "distinct": 1,
+      "values": {
+        "#03e220": 2
+      }
+    },
+    "height": {
+      "populated": 2,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 2
+      },
+      "distinct": 1,
+      "values": {
+        "0.2": 2
+      },
+      "min": 0.2,
+      "max": 0.2
+    },
+    "level": {
+      "populated": 2,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 2
+      },
+      "distinct": 1,
+      "values": {
+        "4": 2
+      },
+      "min": 4,
+      "max": 4
+    },
+    "name": {
+      "populated": 2,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 2
+      },
+      "distinct": 1,
+      "values": {
+        "floor": 2
+      }
+    },
+    "stack": {
+      "populated": 2,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 2
+      },
+      "distinct": 1,
+      "values": {
+        "Stack E": 2
+      }
+    },
+    "z_values": {
+      "populated": 2,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 2
+      },
+      "distinct": 1,
+      "values": {
+        "0": 2
+      },
+      "min": 0,
+      "max": 0
+    }
+  },
+  "public/room_level_5_centerlines.geojson": {
+    "OBJECTID": {
+      "populated": 74,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 74
+      },
+      "distinct": 74,
+      "min": 1,
+      "max": 98
+    },
+    "Shape_Length": {
+      "populated": 74,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 74
+      },
+      "distinct": 74,
+      "min": 4.288968326296224,
+      "max": 131.45000383720728
+    },
+    "endroom": {
+      "populated": 74,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 74
+      },
+      "distinct": 20,
+      "values": {
+        "faculty research 0580b": 1,
+        "faculty research 0580c": 1,
+        "group study 0510a": 7,
+        "group study 0510b": 3,
+        "group study 0540a": 5,
+        "group study 0540b": 8,
+        "group study 0550a": 9,
+        "group study 0550b": 8,
+        "group study 0580a": 2,
+        "Lc Books HJ To JC": 5,
+        "Lc Books HV to PG": 7,
+        "Lc Books HV To PG": 5,
+        "Lc Books P To PS": 4,
+        "LC Books P to PS": 1,
+        "Lc books QR To PS": 2,
+        "Lc Books QR To PS": 2,
+        "LC Books QR To PS": 1,
+        "Lc Folios 0510a": 1,
+        "Lc Folios A To Z": 1,
+        "LC Folios A to Z": 1
+      }
+    },
+    "level": {
+      "populated": 0,
+      "missing": 74,
+      "whitespace_only": 0,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    },
+    "name": {
+      "populated": 74,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 74
+      },
+      "distinct": 1,
+      "values": {
+        "centerline": 74
+      }
+    },
+    "startroom": {
+      "populated": 74,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 74
+      },
+      "distinct": 15,
+      "values": {
+        "elevator": 16,
+        "faculty research 0580b": 5,
+        "faculty research 0580c": 3,
+        "faculty writing 0580d": 2,
+        "faculty writing 0580d ": 1,
+        "group study 0510a": 5,
+        "group study 0510b": 5,
+        "group study 0580a": 9,
+        "group study 0580b": 5,
+        "group study 0580c": 7,
+        "group study 0580d": 7,
+        "Lc Books HJ To JC": 4,
+        "LC Books HJ To JC": 2,
+        "LC Books PS To Q": 1,
+        "LC Folios A To Z": 2
+      }
+    },
+    "type": {
+      "populated": 0,
+      "missing": 74,
+      "whitespace_only": 0,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    },
+    "width": {
+      "populated": 0,
+      "missing": 74,
+      "whitespace_only": 0,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    }
+  },
+  "public/room_level_5_obstacle_buffered.geojson": {
+    "OBJECTID": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "1": 1
+      },
+      "min": 1,
+      "max": 1
+    },
+    "Shape_Area": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "5688.173231521622": 1
+      },
+      "min": 5688.173231521622,
+      "max": 5688.173231521622
+    },
+    "Shape_Length": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "344.1340862337388": 1
+      },
+      "min": 344.1340862337388,
+      "max": 344.1340862337388
+    }
+  },
+  "public/room_level_5_walkable.geojson": {
+    "FID": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    },
+    "Shape_Area": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "5.82744353085e-7": 1
+      },
+      "min": 5.82744353085e-7,
+      "max": 5.82744353085e-7
+    },
+    "Shape_Leng": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0.0034595618754": 1
+      },
+      "min": 0.0034595618754,
+      "max": 0.0034595618754
+    },
+    "base_heigh": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    },
+    "color": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "lightgrey": 1
+      }
+    },
+    "height": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0.2": 1
+      },
+      "min": 0.2,
+      "max": 0.2
+    },
+    "level": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "5": 1
+      },
+      "min": 5,
+      "max": 5
+    },
+    "name": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "floor": 1
+      }
+    },
+    "stack": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "Stack F": 1
+      }
+    },
+    "z_values": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    }
+  },
+  "public/room_level_6_centerlines.geojson": {
+    "OBJECTID": {
+      "populated": 38,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 38
+      },
+      "distinct": 38,
+      "values": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "14": 1,
+        "16": 1,
+        "18": 1,
+        "19": 1,
+        "20": 1,
+        "21": 1,
+        "23": 1,
+        "24": 1,
+        "25": 1,
+        "27": 1,
+        "28": 1,
+        "30": 1,
+        "31": 1,
+        "32": 1,
+        "33": 1,
+        "34": 1,
+        "35": 1,
+        "36": 1,
+        "37": 1,
+        "38": 1,
+        "39": 1,
+        "40": 1,
+        "48": 1,
+        "49": 1,
+        "50": 1,
+        "51": 1,
+        "52": 1,
+        "53": 1,
+        "54": 1,
+        "56": 1,
+        "57": 1
+      },
+      "min": 1,
+      "max": 57
+    },
+    "Shape_Length": {
+      "populated": 38,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 38
+      },
+      "distinct": 38,
+      "values": {
+        "13.392562681601454": 1,
+        "16.682969021695467": 1,
+        "16.720382613277486": 1,
+        "18.07608596071703": 1,
+        "22.655993765335648": 1,
+        "25.120163407573678": 1,
+        "25.53556505193997": 1,
+        "39.629414738117816": 1,
+        "41.00747116047222": 1,
+        "43.305819242918474": 1,
+        "43.376164946164316": 1,
+        "44.7961342908968": 1,
+        "47.80177641467769": 1,
+        "50.100022972444435": 1,
+        "50.10002297291516": 1,
+        "50.19677170837699": 1,
+        "55.569921466036476": 1,
+        "55.63236653670165": 1,
+        "58.48503843600145": 1,
+        "58.728005183620375": 1,
+        "58.72810672841677": 1,
+        "6.344699232289981": 1,
+        "62.152211451642074": 1,
+        "65.52231041797546": 1,
+        "66.14584869846922": 1,
+        "68.94641517313079": 1,
+        "69.41389751384229": 1,
+        "7.313769189776199": 1,
+        "78.30293679768118": 1,
+        "80.26408554775952": 1,
+        "80.53970974961993": 1,
+        "81.36972686008274": 1,
+        "81.7270415552643": 1,
+        "82.94302217389483": 1,
+        "83.33727048567619": 1,
+        "87.05828924987196": 1,
+        "87.0582892515809": 1,
+        "9.366222626271027": 1
+      },
+      "min": 6.344699232289981,
+      "max": 87.0582892515809
+    },
+    "endroom": {
+      "populated": 38,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 38
+      },
+      "distinct": 9,
+      "values": {
+        "classroom 0610a": 3,
+        "cmath classroom 0654": 1,
+        "lc books a to da": 5,
+        "lc books da to hg": 7,
+        "math classroom 0652": 5,
+        "math classroom 0654": 4,
+        "math lab 0677": 4,
+        "math lab 0680": 3,
+        "southern illinois african american heritage center 0640a": 6
+      }
+    },
+    "level": {
+      "populated": 0,
+      "missing": 38,
+      "whitespace_only": 0,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    },
+    "name": {
+      "populated": 38,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 38
+      },
+      "distinct": 1,
+      "values": {
+        "centerline": 38
+      }
+    },
+    "startroom": {
+      "populated": 38,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 38
+      },
+      "distinct": 6,
+      "values": {
+        "classroom 0610a": 6,
+        "elevator": 11,
+        "math classroom 0654": 4,
+        "math lab 0677": 3,
+        "math lab 0680": 7,
+        "southern illinois african american heritage center 0640a": 7
+      }
+    },
+    "type": {
+      "populated": 0,
+      "missing": 38,
+      "whitespace_only": 0,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    },
+    "width": {
+      "populated": 0,
+      "missing": 38,
+      "whitespace_only": 0,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    }
+  },
+  "public/room_level_6_obstacle_buffered.geojson": {
+    "FID": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    },
+    "Id": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    }
+  },
+  "public/room_level_6_walkable.geojson": {
+    "FID": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    },
+    "OBJECTID_1": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "1770": 1
+      },
+      "min": 1770,
+      "max": 1770
+    },
+    "Shape_Area": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "9063.22690469": 1
+      },
+      "min": 9063.22690469,
+      "max": 9063.22690469
+    },
+    "Shape_Leng": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "413.611479179": 1
+      },
+      "min": 413.611479179,
+      "max": 413.611479179
+    },
+    "base_heigh": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    },
+    "height": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0.2": 1
+      },
+      "min": 0.2,
+      "max": 0.2
+    },
+    "level": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "6": 1
+      },
+      "min": 6,
+      "max": 6
+    },
+    "name": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "floor": 1
+      }
+    },
+    "stack": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "Stack G": 1
+      }
+    },
+    "z_values": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    }
+  },
+  "public/room_level_7_centerlines.geojson": {
+    "OBJECTID": {
+      "populated": 22,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 22
+      },
+      "distinct": 22,
+      "values": {
+        "1": 1,
+        "2": 1,
+        "3": 1,
+        "5": 1,
+        "6": 1,
+        "15": 1,
+        "16": 1,
+        "18": 1,
+        "19": 1,
+        "20": 1,
+        "21": 1,
+        "22": 1,
+        "23": 1,
+        "25": 1,
+        "26": 1,
+        "35": 1,
+        "37": 1,
+        "38": 1,
+        "39": 1,
+        "40": 1,
+        "41": 1,
+        "42": 1
+      },
+      "min": 1,
+      "max": 42
+    },
+    "Shape_Length": {
+      "populated": 22,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 22
+      },
+      "distinct": 22,
+      "values": {
+        "109.66007292014784": 1,
+        "18.056802274387355": 1,
+        "22.538260069726643": 1,
+        "26.192371677868607": 1,
+        "30.43344851402581": 1,
+        "30.5532331547812": 1,
+        "37.08815491823621": 1,
+        "39.25415052010108": 1,
+        "43.60611630629182": 1,
+        "48.822507718955094": 1,
+        "51.65983535112046": 1,
+        "56.52545554743675": 1,
+        "6.3297557964329485": 1,
+        "64.3469432566128": 1,
+        "65.28241757963379": 1,
+        "70.41027643447592": 1,
+        "72.11846423484194": 1,
+        "78.20175682268997": 1,
+        "83.32971350763925": 1,
+        "83.67147678368778": 1,
+        "91.27101371912441": 1,
+        "96.59081602407451": 1
+      },
+      "min": 6.3297557964329485,
+      "max": 109.66007292014784
+    },
+    "endroom": {
+      "populated": 22,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 22
+      },
+      "distinct": 10,
+      "values": {
+        " classroom 0722": 1,
+        " classroom 0724": 1,
+        " classroom 0754": 1,
+        "center for learning support services": 2,
+        "classroom 0722": 1,
+        "classroom 0724": 1,
+        "classroom 0752": 4,
+        "classroom 0754": 3,
+        "testing services": 6,
+        "tutoring center": 2
+      }
+    },
+    "level": {
+      "populated": 0,
+      "missing": 22,
+      "whitespace_only": 0,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    },
+    "name": {
+      "populated": 15,
+      "missing": 7,
+      "whitespace_only": 0,
+      "types": {
+        "string": 15
+      },
+      "distinct": 2,
+      "values": {
+        "center line": 7,
+        "centerline": 8
+      }
+    },
+    "startroom": {
+      "populated": 22,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 22
+      },
+      "distinct": 8,
+      "values": {
+        "center for learning support services": 5,
+        "clasroom 0572": 1,
+        "classroom 0722": 3,
+        "classroom 0724": 3,
+        "classroom 0752": 1,
+        "classroom 0754": 1,
+        "elevator": 6,
+        "tutoring center": 2
+      }
+    },
+    "type": {
+      "populated": 0,
+      "missing": 22,
+      "whitespace_only": 0,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    },
+    "width": {
+      "populated": 0,
+      "missing": 22,
+      "whitespace_only": 0,
+      "types": {},
+      "distinct": 0,
+      "values": {}
+    }
+  },
+  "public/room_level_7_obstacle_buffered.geojson": {
+    "FID": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    },
+    "Id": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    }
+  },
+  "public/room_level_7_walkable.geojson": {
+    "FID": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    },
+    "Shape_Area": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "5.7525766887e-7": 1
+      },
+      "min": 5.7525766887e-7,
+      "max": 5.7525766887e-7
+    },
+    "Shape_Leng": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0.00342641685657": 1
+      },
+      "min": 0.00342641685657,
+      "max": 0.00342641685657
+    },
+    "base_heigh": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    },
+    "color": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "lightgrey": 1
+      }
+    },
+    "height": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0.2": 1
+      },
+      "min": 0.2,
+      "max": 0.2
+    },
+    "level": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "7": 1
+      },
+      "min": 7,
+      "max": 7
+    },
+    "name": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "floor": 1
+      }
+    },
+    "stack": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "stack H": 1
+      }
+    },
+    "z_values": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      },
+      "min": 0,
+      "max": 0
+    }
+  },
+  "public/wall.geojson": {
+    "OBJECTID": {
+      "populated": 21,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 21
+      },
+      "distinct": 21,
+      "values": {
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "9": 1,
+        "19": 1,
+        "28": 1,
+        "31": 1,
+        "32": 1,
+        "37": 1,
+        "38": 1,
+        "39": 1,
+        "41": 1,
+        "42": 1,
+        "43": 1,
+        "44": 1,
+        "46": 1,
+        "47": 1,
+        "48": 1,
+        "52": 1,
+        "53": 1,
+        "54": 1
+      },
+      "min": 5,
+      "max": 54
+    },
+    "Shape_Length": {
+      "populated": 21,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 21
+      },
+      "distinct": 21,
+      "values": {
+        "11.514652430223888": 1,
+        "13.081145804446768": 1,
+        "13.359059922112142": 1,
+        "15.48196046320522": 1,
+        "16.42557834909212": 1,
+        "172.77865085402343": 1,
+        "18.631325582450405": 1,
+        "22.835568311153136": 1,
+        "27.074966961401344": 1,
+        "32.18952600385979": 1,
+        "40.28546199967696": 1,
+        "421.8375417978179": 1,
+        "44.31825959601833": 1,
+        "55.99830287842061": 1,
+        "7.610989091304821": 1,
+        "7.8391677398038615": 1,
+        "72.58245858897632": 1,
+        "8.109191491545285": 1,
+        "9.538797504562375": 1,
+        "95.75389365301656": 1,
+        "96.29386628678617": 1
+      },
+      "min": 7.610989091304821,
+      "max": 421.8375417978179
+    },
+    "base_height": {
+      "populated": 21,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 21
+      },
+      "distinct": 4,
+      "values": {
+        "0": 14,
+        "5": 5,
+        "35": 1,
+        "45": 1
+      },
+      "min": 0,
+      "max": 45
+    },
+    "color": {
+      "populated": 21,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 21
+      },
+      "distinct": 6,
+      "values": {
+        "#0B0100": 1,
+        "#28592b": 5,
+        "#363636": 1,
+        "#3d1b1b": 1,
+        "#5e1f32": 8,
+        "#ffffff00": 5
+      }
+    },
+    "height": {
+      "populated": 21,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 21
+      },
+      "distinct": 10,
+      "values": {
+        "5": 1,
+        "15": 5,
+        "33": 1,
+        "35": 1,
+        "40": 3,
+        "45": 4,
+        "50": 1,
+        "55": 2,
+        "65": 2,
+        "70": 1
+      },
+      "min": 5,
+      "max": 70
+    },
+    "name": {
+      "populated": 21,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 21
+      },
+      "distinct": 1,
+      "values": {
+        "wall": 21
+      }
+    }
+  },
+  "public/wall_room_basement.geojson": {
+    "OBJECTID": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "4": 1
+      },
+      "min": 4,
+      "max": 4
+    },
+    "Shape_Length": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "471.9252532685763": 1
+      },
+      "min": 471.9252532685763,
+      "max": 471.9252532685763
+    },
+    "base_height": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      }
+    },
+    "color": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "#ffffff00": 1
+      }
+    },
+    "height": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "4.5": 1
+      }
+    },
+    "name": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "wall": 1
+      }
+    }
+  },
+  "public/wall_room_level_1.geojson": {
+    "OBJECTID": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "2": 1
+      },
+      "min": 2,
+      "max": 2
+    },
+    "Shape_Length": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "518.0666621022294": 1
+      },
+      "min": 518.0666621022294,
+      "max": 518.0666621022294
+    },
+    "base_height": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      }
+    },
+    "color": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "#ffffff00": 1
+      }
+    },
+    "height": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "4.5": 1
+      }
+    },
+    "name": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "wall": 1
+      }
+    }
+  },
+  "public/wall_room_level_2.geojson": {
+    "OBJECTID": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "2": 1
+      },
+      "min": 2,
+      "max": 2
+    },
+    "Shape_Length": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "413.4490156859763": 1
+      },
+      "min": 413.4490156859763,
+      "max": 413.4490156859763
+    },
+    "base_height": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      }
+    },
+    "color": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "#ffffff00": 1
+      }
+    },
+    "height": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "4.5": 1
+      }
+    },
+    "name": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "wall": 1
+      }
+    }
+  },
+  "public/wall_room_level_3.geojson": {
+    "OBJECTID": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "2": 1
+      },
+      "min": 2,
+      "max": 2
+    },
+    "Shape_Length": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "466.45483771905384": 1
+      },
+      "min": 466.45483771905384,
+      "max": 466.45483771905384
+    },
+    "base_height": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      }
+    },
+    "color": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "#ffffff00": 1
+      }
+    },
+    "height": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "4.5": 1
+      }
+    },
+    "name": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "wall": 1
+      }
+    }
+  },
+  "public/wall_room_level_4.geojson": {
+    "OBJECTID": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "2": 1
+      },
+      "min": 2,
+      "max": 2
+    },
+    "Shape_Length": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "404.7306513564599": 1
+      },
+      "min": 404.7306513564599,
+      "max": 404.7306513564599
+    },
+    "base_height": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      }
+    },
+    "color": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "#ffffff00": 1
+      }
+    },
+    "height": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "4.5": 1
+      }
+    },
+    "name": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "wall": 1
+      }
+    }
+  },
+  "public/wall_room_level_5.geojson": {
+    "OBJECTID": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "2": 1
+      },
+      "min": 2,
+      "max": 2
+    },
+    "Shape_Length": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "431.9103126487112": 1
+      },
+      "min": 431.9103126487112,
+      "max": 431.9103126487112
+    },
+    "base_height": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      }
+    },
+    "color": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "#ffffff00": 1
+      }
+    },
+    "height": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "4.5": 1
+      }
+    },
+    "name": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "wall": 1
+      }
+    }
+  },
+  "public/wall_room_level_6.geojson": {
+    "OBJECTID": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "2": 1
+      },
+      "min": 2,
+      "max": 2
+    },
+    "Shape_Length": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "436.7119258817298": 1
+      },
+      "min": 436.7119258817298,
+      "max": 436.7119258817298
+    },
+    "base_height": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      }
+    },
+    "color": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "#ffffff00": 1
+      }
+    },
+    "height": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "4.5": 1
+      }
+    },
+    "name": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "wall": 1
+      }
+    }
+  },
+  "public/wall_room_level_7.geojson": {
+    "OBJECTID": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "2": 1
+      },
+      "min": 2,
+      "max": 2
+    },
+    "Shape_Length": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "number": 1
+      },
+      "distinct": 1,
+      "values": {
+        "438.27917789444064": 1
+      },
+      "min": 438.27917789444064,
+      "max": 438.27917789444064
+    },
+    "base_height": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "0": 1
+      }
+    },
+    "color": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "#ffffff00": 1
+      }
+    },
+    "height": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "4.5": 1
+      }
+    },
+    "name": {
+      "populated": 1,
+      "missing": 0,
+      "whitespace_only": 0,
+      "types": {
+        "string": 1
+      },
+      "distinct": 1,
+      "values": {
+        "wall": 1
+      }
+    }
+  }
+}

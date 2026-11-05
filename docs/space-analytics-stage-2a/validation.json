@@ -1,0 +1,681 @@
+{
+  "valid": true,
+  "errors": [],
+  "warnings": [
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F0:OBJECTID:1",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F0:OBJECTID:7",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F0:OBJECTID:8",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F0:OBJECTID:9",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F0:OBJECTID:10",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F0:OBJECTID:11",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F0:OBJECTID:12",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F0:OBJECTID:17",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F0:OBJECTID:18",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F0:OBJECTID:21",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F0:OBJECTID:22",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F0:OBJECTID:24",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F0:OBJECTID:31",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F0:OBJECTID:84",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F0:OBJECTID:85",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F1:OBJECTID:194",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F1:OBJECTID:286",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F1:OBJECTID:297",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F1:OBJECTID:465",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F2:OBJECTID:484",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F2:OBJECTID:531",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F2:OBJECTID:557",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F2:OBJECTID:588",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F2:OBJECTID:589",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F2:OBJECTID:607",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F2:OBJECTID:648",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F2:OBJECTID:649",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:718",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:753",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:887",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:894",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:930",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F4:OBJECTID:943",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F4:OBJECTID:945",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:949",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:952",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F4:OBJECTID:1026",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F4:OBJECTID:1142",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F4:OBJECTID:1143",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F4:OBJECTID:1145",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1150",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1151",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1152",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1153",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1154",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1155",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1156",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1157",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1158",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1159",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1160",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1161",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1162",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1163",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1164",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1165",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1166",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1167",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1168",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1169",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1170",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1171",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1172",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1173",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1174",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1175",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1176",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1177",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1178",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1179",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1180",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1181",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1182",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1183",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1184",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1185",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1186",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1187",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1188",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1189",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1190",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1191",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1192",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1193",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1194",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1195",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1196",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1197",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1198",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1199",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1200",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1201",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F1:OBJECTID:1202",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F1:OBJECTID:1203",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F1:OBJECTID:1204",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F1:OBJECTID:1205",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F1:OBJECTID:1206",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F2:OBJECTID:1207",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F2:OBJECTID:1208",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F2:OBJECTID:1209",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F2:OBJECTID:1210",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F2:OBJECTID:1211",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F2:OBJECTID:1212",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1213",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F3:OBJECTID:1214",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F5:OBJECTID:1215",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F5:OBJECTID:1216",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F5:OBJECTID:1217",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F5:OBJECTID:1219",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F5:OBJECTID:1225",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F5:OBJECTID:1274",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F5:OBJECTID:1275",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F5:OBJECTID:1276",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F5:OBJECTID:1277",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F5:OBJECTID:1283",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F5:OBJECTID:1320",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F5:OBJECTID:1321",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F5:OBJECTID:1325",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F5:OBJECTID:1342",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F5:OBJECTID:1357",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F6:OBJECTID:1375",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F6:OBJECTID:1385",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F6:OBJECTID:1436",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F6:OBJECTID:1491",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F6:OBJECTID:1496",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F6:OBJECTID:1497",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F7:OBJECTID:1513",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F7:OBJECTID:1527",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F7:OBJECTID:1528",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F7:OBJECTID:1532",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F0:OBJECTID:1604",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F0:OBJECTID:1605",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F0:OBJECTID:1606",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F0:OBJECTID:1607",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    },
+    {
+      "code": "unresolved_display_mapping",
+      "id": "/rooms-all-WGS-v6.geojson#F7:OBJECTID:1608",
+      "message": "No metadata may be activated for this unresolved F-ALL feature"
+    }
+  ]
+}

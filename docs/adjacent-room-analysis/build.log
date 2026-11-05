@@ -1,0 +1,17 @@
+[33mThe CJS build of Vite's Node API is deprecated. See https://vite.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated for more details.[39m
+vite v5.4.21 building for production...
+transforming...
+✓ 1030 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                        0.73 kB │ gzip:   0.42 kB
+dist/assets/roomCorrespondence.worker-K4ZW9BTo.js    273.54 kB
+dist/assets/index-Ca5oj3Mf.css                        95.50 kB │ gzip:  15.87 kB
+dist/assets/index-GK9or_mK.js                      1,517.42 kB │ gzip: 429.55 kB │ map: 5,301.46 kB
+dist/assets/mapbox-gl-lyPpaxVf.js                  1,677.30 kB │ gzip: 463.92 kB │ map: 3,481.93 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 26.22s

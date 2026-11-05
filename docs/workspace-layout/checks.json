@@ -1,0 +1,8 @@
+{
+  "unitExitCode": 1,
+  "buildExitCode": 0,
+  "total": 273,
+  "passed": 262,
+  "failed": 11,
+  "newFailures": []
+}

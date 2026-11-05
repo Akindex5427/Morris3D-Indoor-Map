@@ -1,0 +1,152 @@
+{
+  "results": [
+    {
+      "case": "main app F1 day/night",
+      "day": [
+        {
+          "camera": [
+            -89.22043121436764,
+            37.71528624931064,
+            18.74234962463379,
+            45,
+            0
+          ],
+          "gain": 0,
+          "environment": 0
+        }
+      ],
+      "night": [
+        {
+          "camera": [
+            -89.22043121436764,
+            37.71528624931064,
+            18.74234962463379,
+            45,
+            0
+          ],
+          "gain": 1,
+          "environment": 1
+        }
+      ]
+    },
+    {
+      "case": "shared sunset across paused route panels",
+      "baseline": [
+        {
+          "camera": [
+            -89.22055213657151,
+            37.71519129520808,
+            19.157537162235386,
+            0,
+            0
+          ],
+          "gain": 0,
+          "environment": 0
+        },
+        {
+          "camera": [
+            -89.22054839691862,
+            37.7152483583112,
+            19.449159586291888,
+            0,
+            0
+          ],
+          "gain": 0,
+          "environment": 0
+        }
+      ],
+      "sunset": [
+        {
+          "camera": [
+            -89.22055213657151,
+            37.71519129520808,
+            19.157537162235386,
+            0,
+            0
+          ],
+          "gain": 0,
+          "environment": 0.31095000000074513
+        },
+        {
+          "camera": [
+            -89.22054839691862,
+            37.7152483583112,
+            19.449159586291888,
+            0,
+            0
+          ],
+          "gain": 0,
+          "environment": 0.31095000000074513
+        }
+      ],
+      "previewProgress": "0.005"
+    },
+    {
+      "case": "shared activation ramp across paused route panels; cameras, preview and GPU resources preserved",
+      "ramp": [
+        {
+          "camera": [
+            -89.22055213657151,
+            37.71519129520808,
+            19.157537162235386,
+            0,
+            0
+          ],
+          "gain": 0.9728933240780383,
+          "environment": 1
+        },
+        {
+          "camera": [
+            -89.22054839691862,
+            37.7152483583112,
+            19.449159586291888,
+            0,
+            0
+          ],
+          "gain": 0.9728933240780383,
+          "environment": 1
+        }
+      ]
+    },
+    {
+      "case": "preview continues through sunset",
+      "before": 0.005,
+      "after": 0.025
+    },
+    {
+      "case": "preview continues during full-night light activation",
+      "rampBefore": 0.11,
+      "rampAfter": 0.125
+    },
+    {
+      "case": "F-ALL route camera preserved",
+      "stack": [
+        {
+          "camera": [
+            -89.22046683849997,
+            37.715291484826075,
+            18.79475315547551,
+            0,
+            84.71865094585996
+          ],
+          "gain": 1,
+          "environment": 1
+        }
+      ],
+      "stackDay": [
+        {
+          "camera": [
+            -89.22046683849997,
+            37.715291484826075,
+            18.79475315547551,
+            0,
+            84.71865094585996
+          ],
+          "gain": 0,
+          "environment": 0
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,29 @@
+{
+  "owner_export_hashes": {
+    "public/rooms-all-WGS-v6.geojson": "28938d26e27e723e8d485793b729998efbe5fb526c2d74c40bcb51dd084b407b",
+    "public/rooms-level-6-WGS.geojson": "114a3fe7a87dcc30cfe61e8ec4f29a4ea25082da653f96920b2079a3be3480e3"
+  },
+  "owner_exports_unchanged": true,
+  "built_exports_match_owner": {
+    "public/rooms-all-WGS-v6.geojson": true,
+    "public/rooms-level-6-WGS.geojson": true
+  },
+  "unrelated_combined_floors_unchanged": {
+    "0": true,
+    "1": true,
+    "2": true,
+    "3": true,
+    "4": true,
+    "5": true,
+    "7": true
+  },
+  "changed_preexisting_files": [
+    "src/spaceAnalytics/metadata.js",
+    "src/spaceAnalytics/relationships.test.js",
+    "src/spaceAnalytics/schema.js",
+    "public/rooms-all-WGS-v6.geojson"
+  ],
+  "unexpected_changes": [],
+  "production_sourcemap_entries": [],
+  "broken_document_links": []
+}

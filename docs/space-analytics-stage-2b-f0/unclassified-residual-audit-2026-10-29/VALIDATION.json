@@ -1,0 +1,28 @@
+{
+  "current_source_matches_latest_snapshot": true,
+  "current_inventory_and_reconciliation_match_source": true,
+  "all_current_geometries_equal_retained_predecessors": true,
+  "historical_139_unique_reciprocal_current_match": true,
+  "footprint_matches_two_preserved_individual_snapshots": true,
+  "valid_current_geometries": 148,
+  "maximum_area_recalculation_delta_m2": 0,
+  "unresolved_queue_complete": true,
+  "direct_review_rows": 2,
+  "other_current_review_rows": 104,
+  "residual_gate_enforced": true,
+  "residual_geometry_computed": false,
+  "protected_file_count": 1011,
+  "changed_protected_files": [],
+  "application_build_run": false,
+  "browser_tests_run": false,
+  "independent_csv_validation": {
+    "all_current_rows": 148,
+    "review_rows": 106,
+    "source_names_exact": true,
+    "current_fids_unique": true,
+    "blank_residual_ids": true,
+    "intersection_area_bounds_passed": true,
+    "residual_geojson_absent": true,
+    "pre_existing_hashes_rechecked": 1011
+  }
+}

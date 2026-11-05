@@ -1,0 +1,42 @@
+// Exact-name proposal evidence reviewed in Stage 1. No approvals are implied.
+import {normalizeSearchText} from '../utils/roomCatalog';
+export const PROPOSAL_RULE_VERSION = 'morris-name-proposals-v1';
+export const exactNameProposals = new Map();
+function propose(names, category, subcategory, confidence, evidence, status = 'name_supported_unverified') {
+ for (const name of names.split('|')) exactNameProposals.set(normalizeSearchText(name), Object.freeze({category, subcategory, confidence, evidence, auditStatus: status}));
+}
+propose('Structure|Structures','structure_non_occupiable','modeled_structure','high','Owner guidance for exact Structure/Structures names; non-occupiable, not evidence of load-bearing function','owner_guidance_provisional');
+propose('Floor','floor_background','unresolved_floor_surface','high','Exact Floor name identifies modeled surface; reading/circulation use and boundary meaning unknown','needs_manual_review');
+propose('Stair Case|Stairs Case|Stairs|Stairs Area|Stairs Area Upper|Stairs Area Base|Stairs Upper Area|Stairs Area Lower','circulation_vertical_access','staircase','high','Explicit stair name; modeled components must not be counted as distinct stairwells');
+propose('Srairs Area Upper','circulation_vertical_access','staircase','low','Likely source spelling error; requires confirmation','needs_manual_review');
+propose('Structure Stairs Base','structure_non_occupiable','stair_base','medium','Mixed structural/stair name; not covered by exact-name owner rule','needs_manual_review');
+propose('Elevator','circulation_vertical_access','elevator','high','Explicit elevator name; polygon extent and physical lift identity need verification');
+propose('Emergency Exit|Emergency Exit Only|Front Entrance/Emergency Exit|Back Entrance/Emergency Exit','circulation_vertical_access','entrance_exit','high','Explicit access/exit name; modeled doorway is not a room');
+propose('Rest Room Male|Rest Room Female|All Gender Restroom','restroom_facilities','restroom','high','Explicit restroom name plus owner guidance; not study-room area');
+propose('Classroom 0174|Classroom 0261|Math Classroom 0654|Math Classroom 0652|Classroom 0610A|Classroom 0754|Classroom 0752|Classroom 0722|Classroom 0724','study_learning','classroom','high','Explicit classroom name and owner guidance');
+propose('Group Study 0320A|Group Study 0320B|Group Study 0320C|Group Study 0420A|Group Study 0420B|Group Study 0420C|Group Study 0420D|Group Study 0510A|Group Study 0510B|Group Study 0550A|Group Study 0550B|Group Study 0540A|Group Study 0540B','study_learning','group_study','high','Explicit Group Study name; repeated names are distinct source components until reviewed');
+propose('Groups Study 0580A','study_learning','group_study','medium','Plural Groups Study name; source alias needs review','needs_manual_review');
+propose('Family Study 0320D','study_learning','family_study','high','Explicit Family Study name and owner guidance');
+propose('Group Study Space|Collaborative Space|Browsing Room','open_reading_study','candidate_open_study','low','Suggests study/reading use but enclosure, modeled furniture, and zone extent are unknown','needs_manual_review');
+propose('Faculty Research 0580B|Faculty Research 0580C','research_cultural_resources','faculty_research','high','Explicit faculty research name; preserve distinct research function');
+propose('Faculty Writing 0580D','research_cultural_resources','faculty_writing','medium','Writing label; detailed function requires owner confirmation','needs_manual_review');
+propose('Geospatial Resources','research_cultural_resources','geospatial_resources','medium','Owner identifies research/learning resource; repeated polygons may model fixtures rather than whole room','needs_manual_review');
+propose('Special Collections Research Center Reading Room','research_cultural_resources','special_collections_reading','high','Owner-provided exact service/reading name, not generic book stacks');
+propose('Dejarnett American Heritage Room|Southern Illinois African American Heritage Center 0640A','research_cultural_resources','cultural_heritage','high','Owner identifies cultural/research resource; original names retained');
+propose('Computer Lab 0139|Math Lab 0677|Math Lab 0680','study_learning','laboratory','medium','Named lab; lab type and instructional/research allocation require review','needs_manual_review');
+propose('John C Guyon Auditorium','auditorium_events','auditorium','high','Owner identifies auditorium; four source polygons are not four auditoria');
+propose('Library Conference 0480A','auditorium_events','conference','medium','Conference label; departmental/learning/event use unresolved','needs_manual_review');
+propose('Danielle C. Baker Research & Information Desk (0161)|Help Desk','library_services','service_desk','medium','Owner identifies service locations; area basis may be counter or furniture, not service-zone footprint','needs_manual_review');
+propose('Access Services (0130) & Offices','library_services','mixed_service_office','medium','Owner service location and explicit mixed-use name; no defensible allocation between uses','needs_manual_review');
+propose('Writing Center|Testing Services|Center For Learning Support Services|Tutoring Center','library_services','student_support','medium','Student-facing service candidate; do not silently classify as office','needs_manual_review');
+propose('Information Resources Management|Library Administration|Office|Faulty And Staff Offices','offices_administration','administrative_office','medium','Office/administration candidate; Faulty source spelling preserved and department/use unverified','needs_manual_review');
+propose('Southern Illinois University Press (0362)','offices_administration','publisher_office','medium','Prior project example describes SIU Press office; current name alone does not prove entire footprint use','needs_manual_review');
+propose('Delytes Cafe','building_support','food_service','medium','Cafe name; sixteen modeled pieces do not establish sixteen rooms','needs_manual_review');
+propose('Printers','building_support','print_equipment','high','Explicit equipment name; exclude from conventional room counts pending space-role confirmation','needs_manual_review');
+propose('Lactation Room 0323','building_support','wellbeing','high','Explicit lactation room name');
+propose('Lerner Music Studio','study_learning','music_studio','medium','Named studio; learning/research and actual allocation require review','needs_manual_review');
+propose('dewey books 001 to 330|dewey books q001 to q998|dewey books 551 to 882|dewey books 330 to 551|dewey books 823 to 914|dewey books 914 to 999|oversized lc books a to z|imc books|lc books tx to z|lc books tk to tx|lc books r to tk|map books|lc books pg to ps|lc books hv to pg|lc books hj to jc|lc books qr to ps|lc books da to hg|lc books a to da','collections_bookshelves','book_collection','high','Explicit Books name; footprint may be collection zone, not shelf count');
+propose('dewey folios 001 to 999|lc folios a to z','collections_bookshelves','folio_collection','high','Explicit Folios name');
+propose('journals 1995 & older a to f|oversized journal a - f|journals 1995 & older f to i|oversized journals f - h|oversized journals i - z|journals 1995 & older j to z|journals a to e|journals f to j|journals j to n|journals n to z','collections_bookshelves','journal_collection','high','Explicit Journal/Journals name');
+propose('storage 3 books','collections_bookshelves','book_storage','medium','Books and Storage mixed label; public collection versus support storage unresolved','needs_manual_review');
+propose('national union catalog|indexes|dvds videos|theses & dissertations|music scores|government documents|microforms|newspaper','collections_bookshelves','special_format_materials','medium','Named material format suggests collections; owner should verify modeled footprint/use','needs_manual_review');

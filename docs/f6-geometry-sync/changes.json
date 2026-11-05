@@ -1,0 +1,1037 @@
+{
+  "floor": 6,
+  "added": [
+    {
+      "feature_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:147",
+      "feature": {
+        "type": "Feature",
+        "id": 147,
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -89.22079509278655,
+                37.71531408749332
+              ],
+              [
+                -89.2208075155886,
+                37.71531408891458
+              ],
+              [
+                -89.22080723711088,
+                37.715311554128206
+              ],
+              [
+                -89.22080723441593,
+                37.71531191796636
+              ],
+              [
+                -89.2207989456608,
+                37.71531195207618
+              ],
+              [
+                -89.22079894476249,
+                37.71526962177101
+              ],
+              [
+                -89.2207989627288,
+                37.71525550811078
+              ],
+              [
+                -89.22079896362712,
+                37.71525476693214
+              ],
+              [
+                -89.22072682890979,
+                37.715254749166604
+              ],
+              [
+                -89.22072635998921,
+                37.71531434331699
+              ],
+              [
+                -89.2207289516288,
+                37.71531433407891
+              ],
+              [
+                -89.22072851235262,
+                37.71525588758289
+              ],
+              [
+                -89.22079527424624,
+                37.71525589468913
+              ],
+              [
+                -89.22079509278655,
+                37.71531408749332
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "OBJECTID": 147,
+          "level": 6,
+          "base_height": 0,
+          "height": 2,
+          "Shape_Length": 51.31269509113045,
+          "Shape_Area": 6.9580722207485675,
+          "name": "Group Study Space",
+          "stack": "Stack G",
+          "floor": 6,
+          "__roomSearchKey": "/rooms-level-6-WGS.geojson#F6:OBJECTID:147"
+        }
+      }
+    },
+    {
+      "feature_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:148",
+      "feature": {
+        "type": "Feature",
+        "id": 148,
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -89.2207263240566,
+                37.71531434331699
+              ],
+              [
+                -89.22072635998921,
+                37.71531434331699
+              ],
+              [
+                -89.22072638693868,
+                37.71531095010004
+              ],
+              [
+                -89.22072682890979,
+                37.715254749166604
+              ],
+              [
+                -89.22065988196326,
+                37.71525479748887
+              ],
+              [
+                -89.220659861302,
+                37.71531499495676
+              ],
+              [
+                -89.2206608907713,
+                37.715314985008064
+              ],
+              [
+                -89.22066078836338,
+                37.7152564070475
+              ],
+              [
+                -89.22072496849884,
+                37.71525628268868
+              ],
+              [
+                -89.22072452652772,
+                37.71531437742686
+              ],
+              [
+                -89.2207263240566,
+                37.71531434331699
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "OBJECTID": 148,
+          "level": 6,
+          "base_height": 0,
+          "height": 2,
+          "Shape_Length": 48.19180934303899,
+          "Shape_Area": 4.2104155944508355,
+          "name": "Group Study Space",
+          "stack": "Stack G",
+          "floor": 6,
+          "__roomSearchKey": "/rooms-level-6-WGS.geojson#F6:OBJECTID:148"
+        }
+      }
+    },
+    {
+      "feature_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:149",
+      "feature": {
+        "type": "Feature",
+        "id": 149,
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -89.220659861302,
+                37.71531499495676
+              ],
+              [
+                -89.22065988196326,
+                37.71525479748887
+              ],
+              [
+                -89.2205917070197,
+                37.71525473637541
+              ],
+              [
+                -89.22059183727542,
+                37.7153156423328
+              ],
+              [
+                -89.22059391507867,
+                37.71531562243538
+              ],
+              [
+                -89.22059333656362,
+                37.715256515061995
+              ],
+              [
+                -89.22065792992414,
+                37.715256455369754
+              ],
+              [
+                -89.22065835752221,
+                37.715314985008064
+              ],
+              [
+                -89.220659861302,
+                37.71531499495676
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "OBJECTID": 149,
+          "level": 6,
+          "base_height": 0,
+          "height": 2,
+          "Shape_Length": 48.7748320113478,
+          "Shape_Area": 5.133926654040145,
+          "name": "Group Study Space",
+          "stack": "Stack G",
+          "floor": 6,
+          "__roomSearchKey": "/rooms-level-6-WGS.geojson#F6:OBJECTID:149"
+        }
+      }
+    },
+    {
+      "feature_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:150",
+      "feature": {
+        "type": "Feature",
+        "id": 150,
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -89.22059183727542,
+                37.7153156423328
+              ],
+              [
+                -89.2205917070197,
+                37.71525473637541
+              ],
+              [
+                -89.2205243684077,
+                37.71525475271972
+              ],
+              [
+                -89.2205260040194,
+                37.71526872130006
+              ],
+              [
+                -89.2205300356099,
+                37.715282195079816
+              ],
+              [
+                -89.22053634117871,
+                37.71529476632733
+              ],
+              [
+                -89.22054472991233,
+                37.71530605462264
+              ],
+              [
+                -89.22055494795828,
+                37.7153157183693
+              ],
+              [
+                -89.22055567559364,
+                37.715314550107806
+              ],
+              [
+                -89.22054737734972,
+                37.71530701816963
+              ],
+              [
+                -89.22054026926622,
+                37.71529835410051
+              ],
+              [
+                -89.22053450405356,
+                37.71528874403975
+              ],
+              [
+                -89.22053020557189,
+                37.71527839445039
+              ],
+              [
+                -89.22052746616998,
+                37.71526752768352
+              ],
+              [
+                -89.22052634470131,
+                37.71525637720134
+              ],
+              [
+                -89.2205906838386,
+                37.715256500849584
+              ],
+              [
+                -89.22059042871706,
+                37.715315652281504
+              ],
+              [
+                -89.22059183727542,
+                37.7153156423328
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "OBJECTID": 150,
+          "level": 6,
+          "base_height": 0,
+          "height": 2,
+          "Shape_Length": 50.36794450985128,
+          "Shape_Area": 4.462483846164894,
+          "name": "Group Study Space",
+          "stack": "Stack G",
+          "floor": 6,
+          "__roomSearchKey": "/rooms-level-6-WGS.geojson#F6:OBJECTID:150"
+        }
+      }
+    }
+  ],
+  "removed": [
+    {
+      "feature_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:137",
+      "feature": {
+        "type": "Feature",
+        "id": 137,
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -89.22079512332927,
+                37.7153144065623
+              ],
+              [
+                -89.22079522034733,
+                37.71525594087953
+              ],
+              [
+                -89.22072828957045,
+                37.715255935905155
+              ],
+              [
+                -89.22072901181593,
+                37.715314392349896
+              ],
+              [
+                -89.22078228370891,
+                37.71531441295789
+              ],
+              [
+                -89.22079512332927,
+                37.7153144065623
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "OBJECTID": 137,
+          "level": 6,
+          "base_height": 0,
+          "height": 4.5,
+          "Shape_Length": 31.264101012749663,
+          "Shape_Area": 60.92460052924254,
+          "name": "Group Study Space",
+          "stack": "Stack G",
+          "floor": 6,
+          "__roomSearchKey": "/rooms-level-6-WGS.geojson#F6:OBJECTID:137"
+        }
+      }
+    },
+    {
+      "feature_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:138",
+      "feature": {
+        "type": "Feature",
+        "id": 138,
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -89.22072770746215,
+                37.71531439163926
+              ],
+              [
+                -89.22072712804878,
+                37.715255825758796
+              ],
+              [
+                -89.22066080183808,
+                37.71525591245466
+              ],
+              [
+                -89.22066083327913,
+                37.71531439874549
+              ],
+              [
+                -89.22071178841699,
+                37.7153143859543
+              ],
+              [
+                -89.22072770746215,
+                37.71531439163926
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "OBJECTID": 138,
+          "level": 6,
+          "base_height": 0,
+          "height": 4.5,
+          "Shape_Length": 31.299863683703634,
+          "Shape_Area": 61.05649960934289,
+          "name": "Group Study Space",
+          "stack": "Stack G",
+          "floor": 6,
+          "__roomSearchKey": "/rooms-level-6-WGS.geojson#F6:OBJECTID:138"
+        }
+      }
+    },
+    {
+      "feature_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:139",
+      "feature": {
+        "type": "Feature",
+        "id": 139,
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -89.22066006971114,
+                37.71531439874549
+              ],
+              [
+                -89.22066008947408,
+                37.71525591245466
+              ],
+              [
+                -89.22059272750586,
+                37.715255935905155
+              ],
+              [
+                -89.22059322337589,
+                37.715314463412014
+              ],
+              [
+                -89.22065738644338,
+                37.71531439945607
+              ],
+              [
+                -89.22066006971114,
+                37.71531439874549
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "OBJECTID": 139,
+          "level": 6,
+          "base_height": 0,
+          "height": 4.5,
+          "Shape_Length": 31.406591692041275,
+          "Shape_Area": 61.50118128275959,
+          "name": "Group Study Space",
+          "stack": "Stack G",
+          "floor": 6,
+          "__roomSearchKey": "/rooms-level-6-WGS.geojson#F6:OBJECTID:139"
+        }
+      }
+    },
+    {
+      "feature_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:140",
+      "feature": {
+        "type": "Feature",
+        "id": 140,
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -89.22059253077481,
+                37.71531446412265
+              ],
+              [
+                -89.22059225319539,
+                37.71525591245466
+              ],
+              [
+                -89.22052410160805,
+                37.715256006256745
+              ],
+              [
+                -89.22052409621814,
+                37.71525681494443
+              ],
+              [
+                -89.22052447800215,
+                37.71526071270539
+              ],
+              [
+                -89.22052541225005,
+                37.71526534951284
+              ],
+              [
+                -89.22052779098891,
+                37.71527566489825
+              ],
+              [
+                -89.2205317399829,
+                37.715286490508554
+              ],
+              [
+                -89.22053946010446,
+                37.7152984253974
+              ],
+              [
+                -89.22054511410086,
+                37.715305887633264
+              ],
+              [
+                -89.22055101333733,
+                37.71531190872828
+              ],
+              [
+                -89.22055389423446,
+                37.71531455366092
+              ],
+              [
+                -89.22058898871764,
+                37.71531446767577
+              ],
+              [
+                -89.22059253077481,
+                37.71531446412265
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "OBJECTID": 140,
+          "level": 6,
+          "base_height": 0,
+          "height": 4.5,
+          "Shape_Length": 29.18716844599281,
+          "Shape_Area": 53.50701681491998,
+          "name": "Group Study Space",
+          "stack": "Stack G",
+          "floor": 6,
+          "__roomSearchKey": "/rooms-level-6-WGS.geojson#F6:OBJECTID:140"
+        }
+      }
+    }
+  ],
+  "modified": [
+    {
+      "feature_id": "/rooms-level-6-WGS.geojson#F6:OBJECTID:146",
+      "geometry_changed": false,
+      "changed_properties": [
+        "height"
+      ],
+      "before": {
+        "type": "Feature",
+        "id": 146,
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -89.22027674420636,
+                37.7155251559425
+              ],
+              [
+                -89.22055086331868,
+                37.715523392895975
+              ],
+              [
+                -89.22055101513395,
+                37.71552009633284
+              ],
+              [
+                -89.22056159369474,
+                37.71552022850805
+              ],
+              [
+                -89.22056125502989,
+                37.71538007647201
+              ],
+              [
+                -89.22055795282292,
+                37.7153800388091
+              ],
+              [
+                -89.22054078153263,
+                37.71537800705633
+              ],
+              [
+                -89.22052407321856,
+                37.715373555823874
+              ],
+              [
+                -89.22050816699857,
+                37.71536677545553
+              ],
+              [
+                -89.22049338571094,
+                37.71535780356804
+              ],
+              [
+                -89.2204800293619,
+                37.71534682225802
+              ],
+              [
+                -89.22047211574404,
+                37.71533620571646
+              ],
+              [
+                -89.22046248653263,
+                37.71532711645964
+              ],
+              [
+                -89.2204514314701,
+                37.71531982798281
+              ],
+              [
+                -89.22043928320268,
+                37.71531455959586
+              ],
+              [
+                -89.22042640727112,
+                37.715311469824265
+              ],
+              [
+                -89.2204131911115,
+                37.71531065163909
+              ],
+              [
+                -89.22041430592077,
+                37.715469287741655
+              ],
+              [
+                -89.22023490068042,
+                37.71546921383716
+              ],
+              [
+                -89.22015496409487,
+                37.71546906744948
+              ],
+              [
+                -89.22015084262435,
+                37.71546913851145
+              ],
+              [
+                -89.22015084442098,
+                37.715472035708544
+              ],
+              [
+                -89.22015084442098,
+                37.71548726428978
+              ],
+              [
+                -89.22014960744083,
+                37.715487255762355
+              ],
+              [
+                -89.2201483776472,
+                37.71548733535174
+              ],
+              [
+                -89.22014672654372,
+                37.715487650156284
+              ],
+              [
+                -89.22014405405575,
+                37.71548813835201
+              ],
+              [
+                -89.22014084617187,
+                37.71548953685146
+              ],
+              [
+                -89.22013796796968,
+                37.71549113077135
+              ],
+              [
+                -89.22013562426511,
+                37.715493342219645
+              ],
+              [
+                -89.22013348627473,
+                37.71549594450864
+              ],
+              [
+                -89.22013266431625,
+                37.71549851410902
+              ],
+              [
+                -89.22013266431625,
+                37.71550173463688
+              ],
+              [
+                -89.22015161966705,
+                37.71550170194835
+              ],
+              [
+                -89.22015170231208,
+                37.71552339787029
+              ],
+              [
+                -89.22027686637725,
+                37.715522795975744
+              ],
+              [
+                -89.22027674420636,
+                37.7155251559425
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "OBJECTID": 146,
+          "level": 6,
+          "base_height": 0,
+          "height": 0.3,
+          "Shape_Length": 148.78590761925332,
+          "Shape_Area": 635.1957701912099,
+          "name": "Collaborative Space",
+          "stack": "Stack G",
+          "floor": 6,
+          "__roomSearchKey": "/rooms-level-6-WGS.geojson#F6:OBJECTID:146"
+        }
+      },
+      "after": {
+        "type": "Feature",
+        "id": 146,
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -89.22027674420636,
+                37.7155251559425
+              ],
+              [
+                -89.22055086331868,
+                37.715523392895975
+              ],
+              [
+                -89.22055101513395,
+                37.71552009633284
+              ],
+              [
+                -89.22056159369474,
+                37.71552022850805
+              ],
+              [
+                -89.22056125502989,
+                37.71538007647201
+              ],
+              [
+                -89.22055795282292,
+                37.7153800388091
+              ],
+              [
+                -89.22054078153263,
+                37.71537800705633
+              ],
+              [
+                -89.22052407321856,
+                37.715373555823874
+              ],
+              [
+                -89.22050816699857,
+                37.71536677545553
+              ],
+              [
+                -89.22049338571094,
+                37.71535780356804
+              ],
+              [
+                -89.2204800293619,
+                37.71534682225802
+              ],
+              [
+                -89.22047211574404,
+                37.71533620571646
+              ],
+              [
+                -89.22046248653263,
+                37.71532711645964
+              ],
+              [
+                -89.2204514314701,
+                37.71531982798281
+              ],
+              [
+                -89.22043928320268,
+                37.71531455959586
+              ],
+              [
+                -89.22042640727112,
+                37.715311469824265
+              ],
+              [
+                -89.2204131911115,
+                37.71531065163909
+              ],
+              [
+                -89.22041430592077,
+                37.715469287741655
+              ],
+              [
+                -89.22023490068042,
+                37.71546921383716
+              ],
+              [
+                -89.22015496409487,
+                37.71546906744948
+              ],
+              [
+                -89.22015084262435,
+                37.71546913851145
+              ],
+              [
+                -89.22015084442098,
+                37.715472035708544
+              ],
+              [
+                -89.22015084442098,
+                37.71548726428978
+              ],
+              [
+                -89.22014960744083,
+                37.715487255762355
+              ],
+              [
+                -89.2201483776472,
+                37.71548733535174
+              ],
+              [
+                -89.22014672654372,
+                37.715487650156284
+              ],
+              [
+                -89.22014405405575,
+                37.71548813835201
+              ],
+              [
+                -89.22014084617187,
+                37.71548953685146
+              ],
+              [
+                -89.22013796796968,
+                37.71549113077135
+              ],
+              [
+                -89.22013562426511,
+                37.715493342219645
+              ],
+              [
+                -89.22013348627473,
+                37.71549594450864
+              ],
+              [
+                -89.22013266431625,
+                37.71549851410902
+              ],
+              [
+                -89.22013266431625,
+                37.71550173463688
+              ],
+              [
+                -89.22015161966705,
+                37.71550170194835
+              ],
+              [
+                -89.22015170231208,
+                37.71552339787029
+              ],
+              [
+                -89.22027686637725,
+                37.715522795975744
+              ],
+              [
+                -89.22027674420636,
+                37.7155251559425
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "OBJECTID": 146,
+          "level": 6,
+          "base_height": 0,
+          "height": 4,
+          "Shape_Length": 148.78590761925332,
+          "Shape_Area": 635.1957701912099,
+          "name": "Collaborative Space",
+          "stack": "Stack G",
+          "floor": 6,
+          "__roomSearchKey": "/rooms-level-6-WGS.geojson#F6:OBJECTID:146"
+        }
+      }
+    }
+  ],
+  "unchanged": [
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:2",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:3",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:4",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:5",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:6",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:7",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:8",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:9",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:10",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:12",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:13",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:14",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:15",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:16",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:17",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:18",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:19",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:20",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:21",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:22",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:23",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:24",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:25",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:26",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:27",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:28",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:29",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:30",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:31",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:32",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:33",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:34",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:35",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:36",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:37",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:38",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:39",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:40",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:41",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:42",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:43",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:44",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:45",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:46",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:47",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:48",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:49",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:50",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:51",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:52",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:53",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:54",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:55",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:56",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:57",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:58",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:59",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:60",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:61",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:63",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:64",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:65",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:66",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:67",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:68",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:69",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:70",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:71",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:72",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:73",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:74",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:75",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:76",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:77",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:78",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:79",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:80",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:81",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:82",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:83",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:84",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:85",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:86",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:87",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:88",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:89",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:90",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:91",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:92",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:93",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:94",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:95",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:96",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:97",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:98",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:99",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:100",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:101",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:102",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:103",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:104",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:105",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:106",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:107",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:108",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:109",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:110",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:111",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:112",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:113",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:114",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:115",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:116",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:118",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:119",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:120",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:121",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:124",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:125",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:126",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:127",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:128",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:129",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:131",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:132",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:133",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:134",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:135",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:136",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:141",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:142",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:143",
+    "/rooms-level-6-WGS.geojson#F6:OBJECTID:144"
+  ]
+}

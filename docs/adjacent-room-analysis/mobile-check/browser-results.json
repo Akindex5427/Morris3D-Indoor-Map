@@ -1,0 +1,22 @@
+{
+  "results": [
+    {
+      "phase": "failure",
+      "message": "page.waitForFunction: Timeout 30000ms exceeded.",
+      "diagnostics": {
+        "sent": [
+          4
+        ],
+        "messages": [
+          {
+            "id": 4,
+            "status": "ready",
+            "floor": 4
+          }
+        ],
+        "panel": "Rooms Above & Below×Immediate neighboring floors · horizontal footprint analysisReference · F4Group Study 0420D37.55 m² footprintImmediately Above F52 overlapping featuresFloorF5 · 37.55 m²100.0% overlapPercentage of the selected reference footprint, on a zero to one hundred percent scale.Lc Folios A To ZF5 · 22.98 m²61.2% overlapPercentage of the selected reference footprint, on a zero to one hundred percent scale.Immediately Below F31 overlapping featureImc BooksF3 · 31.52 m²83.9% overlapPercentage of the selected reference footprint, on a zero to one hundred percent scale.Bars use a fixed 0–100% scale of the reference footprint. Features may overlap each other; do not add percentages.Listen to AnalysisAudio starts only when requested; uses a voice on this device.Read analysis summaryYou're viewing Group Study 0420D on floor F4, with a footprint of approximately 37.5 square meters. Immediately above, on F5, the feature labeled Lc Folios A To Z overlaps about 61 percent of the selected footprint. Immediately below, on F3, the feature labeled Imc Books overlaps about 84 percent of the selected footprint. Percentages describe this footprint; overlapping results must not be added. Footprint overlap does not establish physical connectivity, structural support, or shared building systems.Footprint overlap does not establish doors, stairs, elevators, physical connectivity, structural support, or shared building systems."
+      }
+    }
+  ],
+  "errors": []
+}

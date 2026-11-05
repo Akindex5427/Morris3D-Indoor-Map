@@ -3,7 +3,7 @@ import { WebMercatorViewport } from '@deck.gl/core';
 import { attachRouteLabelProgress, buildLabelRouteModel, layoutRouteLabels } from '../utils/routeLabelLayout';
 
 const EMPTY = Object.freeze([]);
-const UI = '.map-camera-controls, .room-color-legend, .sidebar-toggle, .mobile-drawer-toggle, .left-panel, .drawer-backdrop, .directions-sidebar, .app-header, .help-button, .room-info-popup-floating, .directions-sidebar-badge, .room-load-status, .mapboxgl-ctrl-bottom-right, .mapboxgl-ctrl-bottom-left';
+const UI = '.overlap-map-note, .map-camera-controls, .room-color-legend, .sidebar-toggle, .mobile-drawer-toggle, .left-panel, .drawer-backdrop, .directions-sidebar, .app-header, .help-button, .room-info-popup-floating, .directions-sidebar-badge, .room-load-status, .mapboxgl-ctrl-bottom-right, .mapboxgl-ctrl-bottom-left';
 
 export function useRouteLabelLayout({containerRef,deckRef,viewState,candidates,path,buildingPoints,markers,preview,layoutSignal}) {
   const [screen,setScreen]=useState({width:1,height:1,obstructions:EMPTY});

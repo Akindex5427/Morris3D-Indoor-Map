@@ -1,0 +1,11 @@
+{
+  "mainBrowserScenarios": 11,
+  "perspectiveScenarioPassed": true,
+  "mobileNoticeCheckPassed": true,
+  "existingRegressionSuites": 4,
+  "unitPassed": 262,
+  "unitFailed": 11,
+  "newUnitFailures": [],
+  "finalBuildExitCode": 0,
+  "unchangedGeojsonFiles": 51
+}

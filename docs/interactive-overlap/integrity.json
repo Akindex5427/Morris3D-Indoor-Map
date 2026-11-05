@@ -1,0 +1,19 @@
+{
+  "geojsonChecked": 51,
+  "changedGeojson": [],
+  "existingSourceFilesChanged": [
+    "src/App.css",
+    "src/App.jsx",
+    "src/components/Map3D.jsx",
+    "src/components/MultiFloorRouteTimeline.jsx",
+    "src/components/RoomCorrespondencePanel.jsx",
+    "src/components/RoomCorrespondencePanel.test.jsx",
+    "src/hooks/useRouteLabelLayout.js",
+    "src/layers/roomCorrespondenceLayers.js",
+    "src/utils/roomCorrespondence.js",
+    "src/utils/roomCorrespondence.test.js"
+  ],
+  "newSourceFiles": [
+    "src/layers/roomOverlapLayers.test.js"
+  ]
+}

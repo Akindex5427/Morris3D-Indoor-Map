@@ -68,6 +68,7 @@
 .App {
   width: 100%;
   height: 100vh;
+  height: 100dvh;
   position: relative;
   overflow: hidden;
 }
@@ -108,7 +109,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  padding: 12px 18px;
+  padding: 4px 18px;
   background: var(--bg-layer-1);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
@@ -119,7 +120,7 @@
 .app-header-copy {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
   min-width: 0;
 }
 
@@ -155,6 +156,7 @@
 
 .app-header-meta {
   display: flex;
+  flex-shrink: 0;
   gap: 12px;
   flex-wrap: wrap;
 }
@@ -340,6 +342,18 @@
   position: relative;
 }
 
+/* Deck's event manager listens on its wrapper. Let pointer events reach the
+   native attribution controls beneath its canvas/view instead of intercepting
+   them with those full-size surfaces. Keep the basemap's visual order intact. */
+.map-3d-container #deckgl-wrapper > canvas,
+.map-3d-container #deckgl-wrapper > [id^="view-"] {
+  pointer-events: none;
+}
+
+.map-3d-container .mapboxgl-ctrl {
+  pointer-events: auto;
+}
+
 .map-camera-controls {
   position: absolute;
   top: 12px;
@@ -392,7 +406,7 @@
 
 /* The map can be short in landscape or inside a route timeline card. */
 .map-3d-container { container-type: size; }
-@container (max-height: 320px) {
+@container (max-height: 400px) {
   .map-zoom-slider { display: none; }
 }
 
@@ -1556,19 +1570,12 @@
   color: var(--text-muted);
 }
 
-.app-footer {
-  flex: 0 0 auto;
-  padding: 0 6px;
-  text-align: right;
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-
 .help-button {
-  position: fixed;
-  right: max(24px, env(safe-area-inset-right));
-  bottom: max(24px, env(safe-area-inset-bottom));
-  z-index: 999;
+  position: absolute;
+  right: 12px;
+  /* Keep the attribution strip and compact attribution toggle accessible. */
+  bottom: 44px;
+  z-index: 330;
   width: 54px;
   height: 54px;
   border: none;
@@ -1861,9 +1868,6 @@
   }
 
 
-  .app-footer {
-    text-align: left;
-  }
 }
 
 @media (max-width: 720px) {
@@ -1879,10 +1883,13 @@
     padding: 10px 12px;
   }
 
-  .app-kicker,
-  .app-header p,
-  .app-header-meta {
+  .app-header p {
     display: none;
+  }
+
+  .app-kicker {
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
   }
 
   .app-header h1 {
@@ -1892,7 +1899,14 @@
   }
 
   .header-chip {
-    flex: 1;
+    min-width: 74px;
+    gap: 2px;
+    padding: 6px 8px;
+  }
+
+  .header-chip-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.04em;
   }
 
   .shortcuts-grid {
@@ -1941,6 +1955,8 @@
     inset: auto auto 0 0;
     width: 100%;
     height: min(78vh, 680px);
+    height: min(78dvh, 680px);
+    max-height: 100%;
     border-radius: 22px 22px 0 0;
     padding-bottom: max(16px, env(safe-area-inset-bottom));
     transform: translateY(0);
@@ -1996,8 +2012,6 @@
   }
 
   .help-button {
-    right: max(14px, env(safe-area-inset-right));
-    bottom: max(14px, env(safe-area-inset-bottom));
     width: 48px;
     height: 48px;
     border-radius: 16px;
@@ -2026,8 +2040,7 @@
 }
 
 @media (orientation: landscape) and (max-height: 560px) and (max-width: 1023px) {
-  .app-header,
-  .app-footer {
+  .app-header {
     display: none;
   }
 
@@ -2138,7 +2151,7 @@
 .correspondence-result span { font-size: 0.75rem; }
 .correspondence-reference { text-align: left; width: 100%; }
 .correspondence-swatch { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
-.correspondence-swatch.reference { background: #4f46e5; }
+.correspondence-swatch.reference { background: #ffc800; border: 1px solid #755900; }
 .correspondence-swatch.candidate { background: #0d9488; }
 .correspondence-groups { max-height: 52vh; overflow-y: auto; overscroll-behavior: contain; margin-top: 10px; }
 .correspondence-groups h4 { margin: 12px 0 6px; font-size: 0.9rem; }
@@ -2146,3 +2159,36 @@
 .correspondence-data-notes ul { max-height: 180px; overflow-y: auto; padding-left: 18px; }
 .correspondence-note, .correspondence-inspect p { font-size: 0.75rem; }
 .room-correspondence-panel button:focus-visible, .room-correspondence-action:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* Adjacent-floor analysis: static bars use the reference footprint, never row-relative scales. */
+.correspondence-reference { display: flex; flex-direction: column; gap: 5px; }
+.correspondence-reference > span { font-size: 0.75rem; }
+.correspondence-direction { --overlap-color: #0f8b80; padding: 0 2px 12px; }
+.correspondence-direction.below { --overlap-color: #7775dc; }
+.correspondence-direction + .correspondence-direction { border-top: 1px solid var(--border-subtle); }
+.correspondence-direction h4 { display: flex; justify-content: space-between; gap: 8px; }
+.correspondence-count { font-size: 0.75rem; color: var(--text-muted); }
+.correspondence-metrics { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 8px; font-variant-numeric: tabular-nums; }
+.correspondence-bar { display: block; height: 7px; width: 100%; overflow: hidden; border-radius: 6px; background: var(--border-subtle); margin-top: 3px; }
+.correspondence-bar > span { display: block; height: 100%; border-radius: inherit; background: var(--overlap-color, #0f8b80); }
+.correspondence-result strong { font-weight: 500; }
+.correspondence-result.specific-name strong { font-weight: 700; }
+.correspondence-result.active { outline-color: var(--overlap-color, #0f8b80); }
+.analysis-narration { border-top: 1px solid var(--border-subtle); padding-top: 10px; margin-top: 10px; }
+.analysis-speech-controls { display: flex; flex-wrap: wrap; gap: 6px; }
+.analysis-speech-controls button { min-height: 40px; font-size: 0.75rem; }
+.analysis-speech-controls button:disabled { opacity: 0.65; cursor: default; }
+.analysis-speech-status { font-size: 0.75rem; color: var(--text-muted); }
+.analysis-summary summary { cursor: pointer; padding: 6px 0; font-weight: 600; }
+.analysis-summary summary:focus-visible, .correspondence-data-notes summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.room-correspondence-panel .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.left-panel:has(.room-correspondence-panel) .drawer-header,
+.left-panel:has(.room-correspondence-panel) .drawer-tabs { z-index: 30; }
+.correspondence-swatch.candidate.below { background: #7775dc; }
+.overlap-selected-state { font-weight: 700; color: var(--text-strong); }
+.overlap-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+.overlap-actions button:disabled { opacity: 0.6; cursor: default; }
+.overlap-key { display: flex; flex-direction: column; gap: 2px; }
+.overlap-map-note { position: absolute; z-index: 3; top: 14px; left: 14px; max-width: min(320px, calc(100% - 110px)); padding: 8px 10px; border-radius: 8px; border: 1px solid var(--border-subtle); background: var(--bg-layer-2); color: var(--text-strong); font-size: 0.72rem; pointer-events: none; }
+.overlap-map-note strong, .overlap-map-note span { display: block; }
+@media (max-width: 1024px) { .overlap-map-note { top: 72px; } }

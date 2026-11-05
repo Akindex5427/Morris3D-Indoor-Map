@@ -15,7 +15,7 @@ import { EnvironmentDepthEffect } from "../layers/environmentDepthEffect";
 import { useIndoorBuilding, buildFilteredIndoorFeatureCollection, computeElevation } from "./IndoorBuilding";
 import MapCameraControls from "./MapCameraControls";
 import RoomColorLegend from "./RoomColorLegend";
-import { createCorrespondenceLayers } from "../layers/roomCorrespondenceLayers";
+import { createCorrespondenceLayers, correspondenceOverlayData } from "../layers/roomCorrespondenceLayers";
 import { useMapCameraNavigation } from "../hooks/useMapCameraNavigation";
 import { DEFAULT_BUILDING_ORIENTATION, MIN_MAP_ZOOM, MAX_MAP_ZOOM, fitBuildingCamera, getBuildingFitPoints, getWallFitPoints } from "../utils/buildingCamera";
 import { useBuildingWallLayers } from "../layers/buildingWallLayer";
@@ -243,6 +243,7 @@ const Map3D = ({
   onRoomHover,
   roomColorMode = "original",
   correspondenceFeatures,
+  correspondenceMatch = null, overlapFocusRequest = null,
   authoritativeFeatures = EMPTY_FEATURES,
   viewState: externalViewState,
   onViewStateChange,
@@ -648,10 +649,31 @@ const Map3D = ({
   });
 
 
-  const correspondenceLayers = useMemo(() => createCorrespondenceLayers({
-    features: correspondenceFeatures, authoritativeFeatures, floors: floorsToDisplay,
-    spacing: BUILDING_FLOOR_SPACING, heightExaggeration,
-  }), [correspondenceFeatures, authoritativeFeatures, floorsToDisplay, heightExaggeration]);
+  const correspondenceData = useMemo(() => correspondenceOverlayData(correspondenceFeatures,
+    authoritativeFeatures, floorsToDisplay, BUILDING_FLOOR_SPACING, heightExaggeration, correspondenceMatch),
+    [correspondenceFeatures, authoritativeFeatures, floorsToDisplay, heightExaggeration, correspondenceMatch]);
+  const correspondenceLayers = useMemo(() => createCorrespondenceLayers({ data: correspondenceData }), [correspondenceData]);
+  const lastOverlapFocusKey = useRef(null);
+  useEffect(() => {
+    if (!overlapFocusRequest || lastOverlapFocusKey.current === overlapFocusRequest.key || !isDeckReady ||
+        overlapFocusRequest.candidateKey !== correspondenceMatch?.key || overlapFocusRequest.referenceKey !== correspondenceMatch?.referenceKey ||
+        !correspondenceData.intersections.length || !correspondenceData.focusPoints.length) return;
+    const timer = setTimeout(() => {
+      const rect = containerRef.current?.getBoundingClientRect();
+      if (!rect || rect.width < 100 || rect.height < 100) return;
+      const base = externalViewState || internalViewState;
+      const rail = containerRef.current.querySelector(".map-camera-controls")?.getBoundingClientRect();
+      const fitted = fitBuildingCamera({ points: correspondenceData.focusPoints, width:rect.width, height:rect.height,
+        insets:{left:24,right:rail ? rect.right-rail.left+16 : 24,top:72,bottom:36},
+        orientation:{pitch:base.pitch,bearing:base.bearing},maxZoom:21 });
+      if (!fitted) return;
+      lastOverlapFocusKey.current = overlapFocusRequest.key;
+      const next = {...base,...fitted, transitionDuration:window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ? 0 : ROUTE_CAMERA_TRANSITION_MS,
+        transitionInterpolator:new FlyToInterpolator()};
+      setInternalViewState(next); onViewStateChange?.(next);
+    },250);
+    return () => clearTimeout(timer);
+  }, [overlapFocusRequest,correspondenceMatch,correspondenceData,isDeckReady,externalViewState,internalViewState,onViewStateChange,layoutSignal]);
 
   const layers = [
     ...indoorLayers,
@@ -1992,6 +2014,12 @@ const Map3D = ({
       {nightMode && (lightStatus === 'loading' || lightError) && <div className="interior-light-status" role="status">
         {lightError ? <>{lightError} Ambient night lighting remains available. <button type="button" onClick={retryLights}>Retry interior lights</button></>
           : 'Preparing interior lights… You can continue using the map.'}
+      </div>}
+      {correspondenceMatch && correspondenceData.intersections.length > 0 && <div className="overlap-map-note" role="status">
+        <strong>Analytical footprint overlay</strong>
+        <span>{correspondenceData.projection
+          ? `F${correspondenceData.projection.sourceFloor} footprint projected onto F${correspondenceData.projection.displayFloor}; not a room on this floor.`
+          : `Shared footprint at ${correspondenceData.intersections.map(feature => `F${feature.properties.floor}`).join(" and ")} elevations; not a physical connection.`}</span>
       </div>}
       <RoomColorLegend mode={roomColorMode} summary={indoorBuildingResult?.colorSummary} />
       <DeckGL

@@ -1,0 +1,12 @@
+{
+  "preceding_snapshot_sha256_matches": true,
+  "all_retained_geometries_equal": true,
+  "removed_structure_absent": true,
+  "both_rooms_present": true,
+  "queue_deleted_row_absent": true,
+  "csv_roundtrip_counts_passed": true,
+  "protected_files": 892,
+  "changed_protected_files": [],
+  "browser_test_run": false,
+  "application_build_run": false
+}

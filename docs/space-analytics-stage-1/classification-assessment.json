@@ -1,0 +1,315 @@
+[
+  {
+    "category": "auditorium_events",
+    "candidate_features": 6,
+    "candidate_area_sum_m2": 532.4213488007096,
+    "confidence": {
+      "high": 4,
+      "medium": 2
+    },
+    "status": {
+      "name_supported_unverified": 4,
+      "needs_manual_review": 2
+    },
+    "names": [
+      "John C Guyon Auditorium",
+      "Library Conference 0480A"
+    ]
+  },
+  {
+    "category": "building_support",
+    "candidate_features": 21,
+    "candidate_area_sum_m2": 97.04041916720476,
+    "confidence": {
+      "high": 5,
+      "medium": 16
+    },
+    "status": {
+      "name_supported_unverified": 1,
+      "needs_manual_review": 20
+    },
+    "names": [
+      "Printers",
+      "Delytes Cafe",
+      "Lactation Room 0323"
+    ]
+  },
+  {
+    "category": "circulation_vertical_access",
+    "candidate_features": 993,
+    "candidate_area_sum_m2": 1670.4932864501775,
+    "confidence": {
+      "high": 992,
+      "low": 1
+    },
+    "status": {
+      "name_supported_unverified": 992,
+      "needs_manual_review": 1
+    },
+    "names": [
+      "stairs area",
+      "stairs area upper",
+      "stairs area base",
+      "stair case",
+      " elevator",
+      "Emergency Exit",
+      "Stair Case",
+      "Stairs Area",
+      "Back Entrance/Emergency Exit",
+      "Front Entrance/Emergency Exit",
+      "Stairs Area Upper",
+      "Elevator",
+      "Stairs",
+      "Srairs Area Upper",
+      "Stairs Case",
+      "Emergency Exit Only",
+      "Stairs Upper Area",
+      "Stairs Area Lower"
+    ]
+  },
+  {
+    "category": "collections_bookshelves",
+    "candidate_features": 39,
+    "candidate_area_sum_m2": 7752.024294813183,
+    "confidence": {
+      "high": 30,
+      "medium": 9
+    },
+    "status": {
+      "name_supported_unverified": 30,
+      "needs_manual_review": 9
+    },
+    "names": [
+      "dewey books 001 to 330",
+      "dewey books q001 to q998",
+      "dewey books 551 to 882",
+      "dewey books 330 to 551",
+      "dewey books 823 to 914",
+      "dewey folios 001 to 999",
+      "dewey books 914 to 999",
+      "journals 1995 & older a to f",
+      "oversized journal a - f",
+      "journals 1995 & older f to i",
+      "oversized journals f - h",
+      "national union catalog",
+      "oversized journals i - z",
+      "storage 3 books",
+      "journals 1995 & older j to z",
+      "indexes",
+      "Dvds Videos",
+      "Theses & Dissertations",
+      "Journals A To E",
+      "Journals F To J",
+      "Music Scores",
+      "Journals J To N",
+      "Journals N To Z",
+      "Oversized Lc Books A To Z",
+      "Imc Books",
+      "Government Documents",
+      "Microforms",
+      "Newspaper",
+      "Lc Books TX To Z",
+      "Lc Books TK To TX",
+      "Lc Books R To TK",
+      "Map Books",
+      "Lc Books PG To PS",
+      "Lc Books HV To PG",
+      "Lc Books HJ To JC",
+      "Lc Folios A To Z",
+      "Lc Books QR To PS",
+      "Lc Books DA To HG",
+      "Lc Books A To DA"
+    ]
+  },
+  {
+    "category": "floor_background",
+    "candidate_features": 5,
+    "candidate_area_sum_m2": 18345.973629583328,
+    "confidence": {
+      "high": 5
+    },
+    "status": {
+      "needs_manual_review": 5
+    },
+    "names": [
+      "floor",
+      "Floor"
+    ]
+  },
+  {
+    "category": "library_services",
+    "candidate_features": 13,
+    "candidate_area_sum_m2": 1454.2395385868485,
+    "confidence": {
+      "medium": 13
+    },
+    "status": {
+      "needs_manual_review": 13
+    },
+    "names": [
+      "Danielle C. Baker Research & Information Desk (0161)",
+      "Access Services (0130) & Offices",
+      "Writing Center",
+      "Help Desk",
+      "Testing Services",
+      "Center For Learning Support Services",
+      "Tutoring Center"
+    ]
+  },
+  {
+    "category": "offices_administration",
+    "candidate_features": 5,
+    "candidate_area_sum_m2": 1804.7054515998766,
+    "confidence": {
+      "medium": 5
+    },
+    "status": {
+      "needs_manual_review": 5
+    },
+    "names": [
+      "Information Resources Management",
+      "Faulty And Staff Offices",
+      "Library Administration",
+      "Southern Illinois University Press (0362)",
+      "Office"
+    ]
+  },
+  {
+    "category": "open_reading_study",
+    "candidate_features": 9,
+    "candidate_area_sum_m2": 555.8725782416282,
+    "confidence": {
+      "low": 9
+    },
+    "status": {
+      "needs_manual_review": 9
+    },
+    "names": [
+      "Browsing Room",
+      "Group Study Space",
+      "Collaborative Space"
+    ]
+  },
+  {
+    "category": "research_cultural_resources",
+    "candidate_features": 11,
+    "candidate_area_sum_m2": 653.364569572755,
+    "confidence": {
+      "high": 7,
+      "medium": 4
+    },
+    "status": {
+      "name_supported_unverified": 7,
+      "needs_manual_review": 4
+    },
+    "names": [
+      "Special Collections Research Center Reading Room",
+      "Dejarnett American Heritage Room",
+      "Geospatial Resources",
+      "Faculty Research 0580B",
+      "Faculty Research 0580C",
+      "Faculty Writing 0580D",
+      "Southern Illinois African American Heritage Center 0640A"
+    ]
+  },
+  {
+    "category": "restroom_facilities",
+    "candidate_features": 18,
+    "candidate_area_sum_m2": 766.8100337141361,
+    "confidence": {
+      "high": 18
+    },
+    "status": {
+      "name_supported_unverified": 18
+    },
+    "names": [
+      "rest room male",
+      "rest room female",
+      "Rest Room Female",
+      "Rest Room Male",
+      "All Gender Restroom"
+    ]
+  },
+  {
+    "category": "structure_non_occupiable",
+    "candidate_features": 432,
+    "candidate_area_sum_m2": 5670.3772402206705,
+    "confidence": {
+      "high": 431,
+      "medium": 1
+    },
+    "status": {
+      "needs_manual_review": 1,
+      "owner_guidance_provisional": 431
+    },
+    "names": [
+      "structure",
+      "Structure",
+      "Structure Stairs Base"
+    ]
+  },
+  {
+    "category": "study_learning",
+    "candidate_features": 33,
+    "candidate_area_sum_m2": 3247.5475914401427,
+    "confidence": {
+      "high": 28,
+      "medium": 5
+    },
+    "status": {
+      "name_supported_unverified": 28,
+      "needs_manual_review": 5
+    },
+    "names": [
+      "Classroom 0174",
+      "Computer Lab 0139",
+      "Classroom 0261",
+      "Family Study 0320D",
+      "Group Study 0320A",
+      "Group Study 0320B",
+      "Group Study 0320C",
+      "Lerner Music Studio",
+      "Group Study 0420D",
+      "Group Study 0420C",
+      "Group Study 0420B",
+      "Group Study 0420A",
+      "Groups Study 0580A",
+      "Group Study 0510A",
+      "Group Study 0510B",
+      "Group Study 0550B",
+      "Group  Study 0550A",
+      "Group Study 0540A",
+      "Group Study 0540B",
+      "Math Classroom 0654",
+      "Math Classroom 0652",
+      "Math Lab 0677",
+      "Math Lab 0680",
+      "Classroom 0610A",
+      "Classroom 0754",
+      "Classroom 0752",
+      "Classroom 0722",
+      "Classroom 0724"
+    ]
+  },
+  {
+    "category": "unclassified",
+    "candidate_features": 25,
+    "candidate_area_sum_m2": 2587.59119469614,
+    "confidence": {
+      "none": 25
+    },
+    "status": {
+      "needs_manual_review": 25
+    },
+    "names": [
+      "",
+      "Private Room",
+      "University Honors (0181)",
+      "Center for Teaching Excellence (0110)",
+      "Hall Of Presidents And Chancellors",
+      "Staff Only",
+      "3Rd Floor Rotunda",
+      "Staff"
+    ]
+  }
+]

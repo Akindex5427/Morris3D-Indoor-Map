@@ -1,0 +1,107 @@
+{
+  "dataset_version": "rooms-sha256:2079997fb7b77b426dac455f06b7ac773c757f4dfe7075420be47b70ebd13930",
+  "authoritative_features": 1610,
+  "approved_classifications": 0,
+  "approved_logical_spaces": 0,
+  "approved_parents": 0,
+  "geometry_issues": [],
+  "geometry_errors": [],
+  "relationship_counts": {
+    "within": 122,
+    "partial_overlap": 94,
+    "disjoint": 1385,
+    "contains": 574,
+    "boundary_touch": 125,
+    "near_contains": 25,
+    "near_coincident": 3
+  },
+  "significance_counts": {
+    "material": 724,
+    "small_overlap": 64,
+    "none": 1385,
+    "numerical_sliver": 30,
+    "boundary_only": 125
+  },
+  "stats": {
+    "possible_pairs": 188629,
+    "bbox_candidate_pairs": 2328,
+    "bbox_disjoint_pairs": 186301
+  },
+  "preparation_ms": 210.65020000000004,
+  "analysis_ms": 5448.7704,
+  "classification_review_rows": 189,
+  "priority_classification_rows": 127,
+  "relationship_review_rows": 43,
+  "background_diagnostic_rows": 2208,
+  "membership_review_rows": 13,
+  "review_by_floor": [
+    {
+      "floor": 0,
+      "classification": 26,
+      "priority_classification": 18,
+      "spatial": 0,
+      "membership": 0
+    },
+    {
+      "floor": 1,
+      "classification": 33,
+      "priority_classification": 23,
+      "spatial": 38,
+      "membership": 5
+    },
+    {
+      "floor": 2,
+      "classification": 15,
+      "priority_classification": 9,
+      "spatial": 0,
+      "membership": 0
+    },
+    {
+      "floor": 3,
+      "classification": 31,
+      "priority_classification": 25,
+      "spatial": 0,
+      "membership": 1
+    },
+    {
+      "floor": 4,
+      "classification": 22,
+      "priority_classification": 15,
+      "spatial": 4,
+      "membership": 6
+    },
+    {
+      "floor": 5,
+      "classification": 26,
+      "priority_classification": 16,
+      "spatial": 1,
+      "membership": 0
+    },
+    {
+      "floor": 6,
+      "classification": 19,
+      "priority_classification": 12,
+      "spatial": 0,
+      "membership": 1
+    },
+    {
+      "floor": 7,
+      "classification": 17,
+      "priority_classification": 9,
+      "spatial": 0,
+      "membership": 0
+    }
+  ],
+  "validation": {
+    "valid": true,
+    "error_count": 0,
+    "warning_count": 135,
+    "warning_codes": {
+      "unresolved_display_mapping": 135
+    }
+  },
+  "integrity": {
+    "protected_files": 170,
+    "changed": []
+  }
+}

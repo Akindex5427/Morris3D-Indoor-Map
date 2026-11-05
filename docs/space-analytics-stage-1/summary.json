@@ -1,0 +1,728 @@
+{
+  "date": "2026-10-27",
+  "source_count": 51,
+  "authoritative_features": 1610,
+  "existing_verified_functions": 0,
+  "origin": [
+    -89.22046717581765,
+    37.71529136028342
+  ],
+  "extent": [
+    -89.22109137872683,
+    37.71494162788463,
+    -89.21984297290848,
+    37.71564109268222
+  ],
+  "projection": "Local spherical Lambert azimuthal equal-area; R=6371008.8 m",
+  "area_epsilon_m2": 0.000001,
+  "geometry_issues": [],
+  "combined_count": 1608,
+  "combined_status": {
+    "unique_at_export_precision": 1473,
+    "unmatched": 135
+  },
+  "combined_exact": {
+    "none": 1608
+  },
+  "authoritative_without_unique_combined_match": [
+    {
+      "key": "/rooms-basement-WGS.geojson#F0:FID:124",
+      "floor": 0,
+      "name": "dewey books 001 to 330"
+    },
+    {
+      "key": "/rooms-basement-WGS.geojson#F0:FID:125",
+      "floor": 0,
+      "name": "dewey books q001 to q998"
+    },
+    {
+      "key": "/rooms-basement-WGS.geojson#F0:FID:126",
+      "floor": 0,
+      "name": "dewey books 551 to 882"
+    },
+    {
+      "key": "/rooms-basement-WGS.geojson#F0:FID:127",
+      "floor": 0,
+      "name": "dewey books 330 to 551"
+    },
+    {
+      "key": "/rooms-basement-WGS.geojson#F0:FID:128",
+      "floor": 0,
+      "name": "dewey books 823 to 914"
+    },
+    {
+      "key": "/rooms-basement-WGS.geojson#F0:FID:129",
+      "floor": 0,
+      "name": "dewey folios 001 to 999"
+    },
+    {
+      "key": "/rooms-basement-WGS.geojson#F0:FID:130",
+      "floor": 0,
+      "name": "dewey books 914 to 999"
+    },
+    {
+      "key": "/rooms-basement-WGS.geojson#F0:FID:131",
+      "floor": 0,
+      "name": "journals 1995 & older a to f"
+    },
+    {
+      "key": "/rooms-basement-WGS.geojson#F0:FID:132",
+      "floor": 0,
+      "name": "oversized journal a - f"
+    },
+    {
+      "key": "/rooms-basement-WGS.geojson#F0:FID:133",
+      "floor": 0,
+      "name": "journals 1995 & older f to i"
+    },
+    {
+      "key": "/rooms-basement-WGS.geojson#F0:FID:134",
+      "floor": 0,
+      "name": "oversized journals f - h"
+    },
+    {
+      "key": "/rooms-basement-WGS.geojson#F0:FID:135",
+      "floor": 0,
+      "name": "national union catalog"
+    },
+    {
+      "key": "/rooms-basement-WGS.geojson#F0:FID:136",
+      "floor": 0,
+      "name": "oversized journals i - z"
+    },
+    {
+      "key": "/rooms-basement-WGS.geojson#F0:FID:137",
+      "floor": 0,
+      "name": "storage 3 books"
+    },
+    {
+      "key": "/rooms-basement-WGS.geojson#F0:FID:138",
+      "floor": 0,
+      "name": "journals 1995 & older j to z"
+    },
+    {
+      "key": "/rooms-basement-WGS.geojson#F0:FID:139",
+      "floor": 0,
+      "name": "indexes"
+    },
+    {
+      "key": "/rooms-basement-WGS.geojson#F0:FID:140",
+      "floor": 0,
+      "name": " elevator"
+    },
+    {
+      "key": "/rooms-basement-WGS.geojson#F0:FID:141",
+      "floor": 0,
+      "name": "Emergency Exit"
+    },
+    {
+      "key": "/rooms-basement-WGS.geojson#F0:FID:142",
+      "floor": 0,
+      "name": "Structure"
+    },
+    {
+      "key": "/rooms-basement-WGS.geojson#F0:FID:143",
+      "floor": 0,
+      "name": "Structure"
+    },
+    {
+      "key": "/rooms-basement-WGS.geojson#F0:FID:144",
+      "floor": 0,
+      "name": "Structure"
+    },
+    {
+      "key": "/rooms-basement-WGS.geojson#F0:FID:145",
+      "floor": 0,
+      "name": "Structure"
+    },
+    {
+      "key": "/rooms-basement-WGS.geojson#F0:FID:146",
+      "floor": 0,
+      "name": "Structure"
+    },
+    {
+      "key": "/rooms-basement-WGS.geojson#F0:FID:147",
+      "floor": 0,
+      "name": "Structure"
+    },
+    {
+      "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:159",
+      "floor": 1,
+      "name": "Back Entrance/Emergency Exit"
+    },
+    {
+      "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:189",
+      "floor": 1,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:214",
+      "floor": 1,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:215",
+      "floor": 1,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:365",
+      "floor": 1,
+      "name": "Stairs Area Upper"
+    },
+    {
+      "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:366",
+      "floor": 1,
+      "name": "Stairs Area"
+    },
+    {
+      "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:367",
+      "floor": 1,
+      "name": "Stairs Area Upper"
+    },
+    {
+      "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:368",
+      "floor": 1,
+      "name": "Stairs Area"
+    },
+    {
+      "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:369",
+      "floor": 1,
+      "name": "Stairs Area Upper"
+    },
+    {
+      "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:370",
+      "floor": 1,
+      "name": "Stairs Area"
+    },
+    {
+      "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:373",
+      "floor": 1,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:375",
+      "floor": 1,
+      "name": "Elevator"
+    },
+    {
+      "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:376",
+      "floor": 1,
+      "name": "Emergency Exit"
+    },
+    {
+      "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:377",
+      "floor": 1,
+      "name": "Emergency Exit"
+    },
+    {
+      "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:378",
+      "floor": 1,
+      "name": "Emergency Exit"
+    },
+    {
+      "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:379",
+      "floor": 1,
+      "name": "Emergency Exit"
+    },
+    {
+      "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:380",
+      "floor": 1,
+      "name": "Emergency Exit"
+    },
+    {
+      "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:381",
+      "floor": 1,
+      "name": "Emergency Exit"
+    },
+    {
+      "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:382",
+      "floor": 1,
+      "name": "Stairs"
+    },
+    {
+      "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:383",
+      "floor": 1,
+      "name": "Stairs"
+    },
+    {
+      "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:384",
+      "floor": 1,
+      "name": "Emergency Exit"
+    },
+    {
+      "key": "/rooms-level-01-WGS.geojson#F1:OBJECTID:386",
+      "floor": 1,
+      "name": "Emergency Exit"
+    },
+    {
+      "key": "/rooms-level-02-WGS.geojson#F2:OBJECTID:259",
+      "floor": 2,
+      "name": "Stairs Area"
+    },
+    {
+      "key": "/rooms-level-02-WGS.geojson#F2:OBJECTID:260",
+      "floor": 2,
+      "name": "Stairs Area"
+    },
+    {
+      "key": "/rooms-level-02-WGS.geojson#F2:OBJECTID:261",
+      "floor": 2,
+      "name": "Stairs Area"
+    },
+    {
+      "key": "/rooms-level-02-WGS.geojson#F2:OBJECTID:262",
+      "floor": 2,
+      "name": "Stairs Area"
+    },
+    {
+      "key": "/rooms-level-02-WGS.geojson#F2:OBJECTID:263",
+      "floor": 2,
+      "name": "Stairs Area"
+    },
+    {
+      "key": "/rooms-level-02-WGS.geojson#F2:OBJECTID:264",
+      "floor": 2,
+      "name": "Stairs Area"
+    },
+    {
+      "key": "/rooms-level-02-WGS.geojson#F2:OBJECTID:265",
+      "floor": 2,
+      "name": "Elevator"
+    },
+    {
+      "key": "/rooms-level-02-WGS.geojson#F2:OBJECTID:266",
+      "floor": 2,
+      "name": "Emergency Exit"
+    },
+    {
+      "key": "/rooms-level-02-WGS.geojson#F2:OBJECTID:267",
+      "floor": 2,
+      "name": "Emergency Exit"
+    },
+    {
+      "key": "/rooms-level-02-WGS.geojson#F2:OBJECTID:268",
+      "floor": 2,
+      "name": "Emergency Exit"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:212",
+      "floor": 3,
+      "name": "Emergency Exit"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:219",
+      "floor": 3,
+      "name": "Emergency Exit"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:307",
+      "floor": 3,
+      "name": "Emergency Exit"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:308",
+      "floor": 3,
+      "name": "Structure"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:309",
+      "floor": 3,
+      "name": "Structure"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:310",
+      "floor": 3,
+      "name": "Structure"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:311",
+      "floor": 3,
+      "name": "Structure"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:312",
+      "floor": 3,
+      "name": "Structure"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:313",
+      "floor": 3,
+      "name": "Structure"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:320",
+      "floor": 3,
+      "name": "Stairs Area Upper"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:321",
+      "floor": 3,
+      "name": "Stairs Area"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:322",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:323",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:324",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:325",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:326",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:327",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:328",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:329",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:330",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:331",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:332",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:333",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:334",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:335",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:336",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:337",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:338",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:339",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:340",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:341",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:342",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:343",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:344",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:345",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:346",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:347",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:352",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:353",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:355",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:356",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:357",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:358",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:359",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:360",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:361",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:362",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:363",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:364",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:365",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:366",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:367",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:368",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:369",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:370",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:371",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:372",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:373",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:374",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:376",
+      "floor": 3,
+      "name": "Stair Case"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:377",
+      "floor": 3,
+      "name": "Stairs Area Upper"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:379",
+      "floor": 3,
+      "name": "Stairs Area"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:381",
+      "floor": 3,
+      "name": "Structure"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:382",
+      "floor": 3,
+      "name": "Dejarnett American Heritage Room"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:383",
+      "floor": 3,
+      "name": "Newspaper"
+    },
+    {
+      "key": "/rooms-level-03-WGS.geojson#F3:OBJECTID:384",
+      "floor": 3,
+      "name": "Elevator"
+    },
+    {
+      "key": "/rooms-level-04-WGS.geojson#F4:OBJECTID:141",
+      "floor": 4,
+      "name": "Emergency Exit"
+    },
+    {
+      "key": "/rooms-level-04-WGS.geojson#F4:OBJECTID:210",
+      "floor": 4,
+      "name": "Elevator"
+    },
+    {
+      "key": "/rooms-level-5-WGS.geojson#F5:OBJECTID:169",
+      "floor": 5,
+      "name": "Elevator"
+    },
+    {
+      "key": "/rooms-level-5-WGS.geojson#F5:OBJECTID:170",
+      "floor": 5,
+      "name": "Emergency Exit Only"
+    },
+    {
+      "key": "/rooms-level-5-WGS.geojson#F5:OBJECTID:171",
+      "floor": 5,
+      "name": "Floor"
+    },
+    {
+      "key": "/rooms-level-5-WGS.geojson#F5:OBJECTID:172",
+      "floor": 5,
+      "name": "Emergency Exit"
+    },
+    {
+      "key": "/rooms-level-6-WGS.geojson#F6:OBJECTID:129",
+      "floor": 6,
+      "name": "Structure"
+    },
+    {
+      "key": "/rooms-level-6-WGS.geojson#F6:OBJECTID:131",
+      "floor": 6,
+      "name": "Structure"
+    },
+    {
+      "key": "/rooms-level-6-WGS.geojson#F6:OBJECTID:142",
+      "floor": 6,
+      "name": "Elevator"
+    },
+    {
+      "key": "/rooms-level-6-WGS.geojson#F6:OBJECTID:143",
+      "floor": 6,
+      "name": "Emergency Exit Only"
+    },
+    {
+      "key": "/rooms-level-6-WGS.geojson#F6:OBJECTID:144",
+      "floor": 6,
+      "name": "Emergency Exit"
+    },
+    {
+      "key": "/rooms-level-6-WGS.geojson#F6:OBJECTID:146",
+      "floor": 6,
+      "name": "Collaborative Space"
+    },
+    {
+      "key": "/rooms-level-7-WGS.geojson#F7:OBJECTID:7",
+      "floor": 7,
+      "name": "Structure"
+    },
+    {
+      "key": "/rooms-level-7-WGS.geojson#F7:OBJECTID:94",
+      "floor": 7,
+      "name": "Elevator"
+    },
+    {
+      "key": "/rooms-level-7-WGS.geojson#F7:OBJECTID:95",
+      "floor": 7,
+      "name": "Emergency Exit Only"
+    }
+  ],
+  "combined_per_floor": {
+    "0": 143,
+    "1": 342,
+    "2": 247,
+    "3": 283,
+    "4": 203,
+    "5": 160,
+    "6": 138,
+    "7": 92
+  },
+  "overlap_errors": [],
+  "total_positive_pairs": 788,
+  "total_duplicate_groups": 0,
+  "category_count": 13
+}

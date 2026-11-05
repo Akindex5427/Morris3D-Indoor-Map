@@ -1,0 +1,36 @@
+{
+  "results": [
+    {
+      "case": "basemap/deck projection after pan and sidebar resize",
+      "collapsed": true,
+      "maxPixelError": 3.124831407571757e-8
+    },
+    {
+      "case": "basemap/deck projection after pan and sidebar resize",
+      "collapsed": false,
+      "maxPixelError": 3.049589027895967e-8
+    },
+    {
+      "case": "real GPU picking and room click after resize",
+      "name": "Classroom 0174",
+      "x": 682.6935263474782,
+      "y": 429.02189779281616
+    },
+    {
+      "case": "fresh mobile load and expanded licensing attribution",
+      "attribution": {
+        "x": 71.1875,
+        "y": 797,
+        "width": 295.8125,
+        "height": 24
+      },
+      "help": {
+        "x": 317,
+        "y": 739,
+        "width": 48,
+        "height": 48
+      }
+    }
+  ],
+  "errors": []
+}

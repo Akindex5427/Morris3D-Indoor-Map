@@ -32,6 +32,7 @@ const floorRoleLabel = (panel) => {
 
 const MultiFloorRoutePanelMap = ({
   authoritativeFeatures,
+  correspondenceFeatures, correspondenceMatch, overlapFocusRequest,
   panel,
   roomsData,
   centerlinesData,
@@ -76,6 +77,7 @@ const MultiFloorRoutePanelMap = ({
   return (
     <Map3D
       authoritativeFeatures={authoritativeFeatures}
+      correspondenceFeatures={correspondenceFeatures} correspondenceMatch={correspondenceMatch} overlapFocusRequest={overlapFocusRequest}
       selectedFloor={panel.floorId}
       selectedFloors={EMPTY_SELECTION}
       filteredRooms={EMPTY_SELECTION}
@@ -127,6 +129,7 @@ const MultiFloorRoutePanelMap = ({
 
 const MultiFloorRouteTimeline = ({
   authoritativeFeatures,
+  correspondenceFeatures, correspondenceMatch, overlapFocusRequest,
   route,
   roomsData,
   centerlinesData,
@@ -244,6 +247,7 @@ const MultiFloorRouteTimeline = ({
                 <div className="route-timeline-map">
                   <MultiFloorRoutePanelMap
                     authoritativeFeatures={authoritativeFeatures}
+                    correspondenceFeatures={correspondenceFeatures} correspondenceMatch={correspondenceMatch} overlapFocusRequest={overlapFocusRequest}
                     panel={panel}
                     roomsData={roomsData}
                     centerlinesData={centerlinesData}

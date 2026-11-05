@@ -1,0 +1,11 @@
+{
+  "authoritative_inventory_rows": 1610,
+  "unique_keys": 1610,
+  "auxiliary_polygon_rows": 1628,
+  "geometry_issues": 0,
+  "manual_review_rows": 99,
+  "inventory_and_category_counts_agree": true,
+  "inventory_and_category_area_sums_agree": true,
+  "protected_files_unchanged": 170,
+  "changed_production_files": []
+}

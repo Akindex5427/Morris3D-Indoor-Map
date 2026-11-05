@@ -1,0 +1,291 @@
+# TASK: Targeted F0 Re-Audit and Stage 2B Owner-Verification Reconciliation
+
+## Project
+Morris Library 3D Indoor Map Viewer — Room Classification and Space Analytics
+
+## Objective
+
+Re-audit the latest authoritative F0 (Basement) GeoJSON after recent geometry edits, identify all unresolved F0 classification cases, and reconcile the results against the owner's previously confirmed Stage 2B decisions.
+
+**Do not proceed to F1 yet.**
+
+This is an incremental audit and reconciliation task, not a request to rebuild the entire classification system.
+
+## 1. Locate and inspect authoritative sources
+
+Identify the current files for:
+
+- Individual F0 GeoJSON
+- Combined F-ALL GeoJSON
+- Stage 1 geometry inventory
+- Stage 2A classification proposals
+- Stage 2A spatial relationship proposals
+- Stage 2A logical-space membership proposals
+- Stage 2B review and approval/import workflows
+
+Use the repository's actual file names and schemas.
+
+Treat the latest individual F0 GeoJSON as the authoritative source for F0 classification.
+
+Treat F-ALL as a separate combined visualization dataset, not an additional source of rooms for counting.
+
+Do not assume feature IDs have remained unchanged after redigitization.
+
+## 2. Re-inventory all F0 polygons
+
+For every F0 feature, extract:
+
+- Current stable feature identifier, where available
+- Original feature name
+- Current geometry type
+- Geometry validity
+- Geometry area in square meters using the project's established methodology
+- Existing classification metadata
+- Proposed functional category
+- Proposed subcategory
+- Proposed geometry role
+- Review status
+- Potential parent/child relationships
+- Potential logical-space membership
+- Any overlap or containment requiring review
+
+Identify:
+
+1. Newly added features
+2. Deleted features
+3. Changed geometries
+4. Changed feature identifiers
+5. Duplicate or overlapping features
+6. Unclassified features
+7. Previously reviewed features whose identities can no longer be established reliably
+
+Never match changed features solely by row order, feature name, or spatial overlap.
+
+## 3. Verify two newly added F0 rooms
+
+The owner has confirmed the following:
+
+### A. Mechanical Room (No entrance)
+
+- Physical arrangement: One enclosed mechanical/equipment room
+- Entrance: No entrance shown on the floor plan
+- Proposed functional category: `building_services`
+- Proposed subcategory: `mechanical_equipment_room`
+- Geometry role: `room_boundary`
+- Physical room count: 1
+- Logical space count: 1
+- Area: Count once as building-services area
+
+### B. SCRC Stacks Staff only
+
+- Physical arrangement: One enclosed, staff-only collection-storage room
+- Proposed functional category: `collections_bookshelves`
+- Proposed subcategory: `restricted_collection_stacks`
+- Geometry role: `room_boundary`
+- Physical room count: 1
+- Logical space count: 1
+- Access restriction: Staff only
+- Area: Count once as enclosed collection-storage area
+
+Locate the corresponding new polygons and report their current identifiers.
+
+Do not invent missing identifiers or assume that the polygons are correctly represented in F-ALL.
+
+## 4. Reconcile previously confirmed F0 owner decisions
+
+The following decisions have already been confirmed by the owner.
+
+### Open collection zones
+
+Classify these as `functional_zone`, not independent enclosed rooms:
+
+- Dewey Books 001 to 330
+- Dewey Books 330 to 551
+- Q Books
+- Journals 1995 & Older
+- Journals 1995
+- Dewey Books 551–823 — verify exact source name; earlier audit also referenced 551 to 882
+- Dewey Books 823–914
+- Dewey Books 914–999
+- Oversized Journals A–D
+- Oversized Journals E–H
+- Oversized Journals I–Z
+- Dewey Folios 001–999
+
+Use `collections_bookshelves` as the functional category and the appropriate collection subtype.
+
+Each verified collection zone is one logical collection area, with zero independently enclosed rooms.
+
+Do not count internal shelving footprints or circulation aisles twice.
+
+### Shelving and storage fixtures
+
+Classify these as `furniture_or_equipment`, not rooms or independent collection zones:
+
+- National Union Catalog
+- Storage 3 Books
+- Indexes
+
+Retain the `collections_bookshelves` functional category, with appropriate subcategories.
+
+### Restrooms
+
+- Rest Room Male: One enclosed restroom
+- Rest Room Female: One enclosed restroom
+
+Both use `room_boundary` and `restroom_facilities`.
+
+Internal stalls and fixtures must not increase the independent restroom count.
+
+### Specialized research facility
+
+Center for Dewey Studies:
+
+- One enclosed research and special-services office
+- One physical room
+- One logical space
+- Proposed category: `research_special_services`
+- Proposed subcategory: `specialized_research_center`
+- Geometry role: `room_boundary`
+- The visible door is the entrance to the center, not evidence of another internal room
+
+### Vacant space
+
+Empty:
+
+- Intentionally vacant/unassigned area
+- No assigned functional use
+- Proposed category: `vacant_unassigned`
+- Proposed subcategory: `unused_space`
+- Geometry role: `functional_zone` provisionally
+- Physical enclosure remains unverified
+
+### Vertical circulation
+
+- Stair 1: Open staircase
+- Stair 2: Enclosed stairwell
+- Stair 3: Enclosed stairwell
+- Elevator: Enclosed elevator infrastructure; shaft versus car footprint not yet distinguished
+
+Do not count these as general-purpose rooms.
+
+### Horizontal circulation
+
+- General circulation occurs through open floor space
+- No separately digitized general-circulation polygons were confirmed
+- The area outside the elevator is part of general circulation
+- No separately mapped elevator lobby exists
+
+Do not automatically classify all remaining floor/background area as circulation.
+
+### Structural features
+
+- Structural columns: Individual physical columns with their own polygon footprints
+- Structural walls: Separately digitized polygon footprints
+- Floor/background: Overall basement floor footprint containing rooms, collections, circulation, and structural elements
+
+Structural polygons do not represent independently occupiable rooms.
+
+The floor footprint must not be added to the areas of the features it contains.
+
+## 5. Validate taxonomy compatibility
+
+Check whether the proposed category, subcategory, and geometry-role values above exist in the project's current classification schema.
+
+Where they do not exist:
+
+- Identify the unsupported value
+- Recommend an existing compatible value or a schema extension
+- Preserve the owner's intended meaning
+- Do not silently introduce new enum values into application code
+
+Keep functional category, geometry role, physical room count, and logical-space membership conceptually separate.
+
+## 6. Reconcile F0 with F-ALL
+
+Check whether the two newly added polygons and all other current F0 features have appropriate representations in F-ALL.
+
+Report:
+
+- Missing correspondences
+- Extra F-ALL features
+- Geometry mismatches
+- Height mismatches
+- Identity-matching failures
+- Any changed or invalid feature IDs
+
+Apply the project's existing strict geometry-identity rule when reporting identity status.
+
+Do not declare two polygons identical merely because they have the same name or high spatial overlap.
+
+Do not modify either GeoJSON file during this audit.
+
+## 7. Identify remaining unresolved F0 cases
+
+Produce a prioritized list of F0 features that still require owner verification.
+
+Exclude features whose owner-confirmed interpretations can be matched reliably to the current geometry.
+
+For each unresolved feature, provide:
+
+- Exact current feature ID
+- Exact source feature name
+- Proposed classification
+- Reason verification is required
+- Potential classification alternatives
+- Recommended question for the owner
+- Priority level
+
+Distinguish genuine functional uncertainty from technical geometry/identity problems.
+
+## 8. Generate audit deliverables
+
+Create these reports under an appropriate existing reports or audit directory:
+
+1. `F0-LATEST-INVENTORY.csv`
+2. `F0-STAGE2B-RECONCILIATION.csv`
+3. `F0-UNRESOLVED-VERIFICATION.csv`
+4. `F0-FALL-CONSISTENCY.md`
+5. `F0-STAGE2B-RECHECK-SUMMARY.md`
+
+The reconciliation CSV should distinguish:
+
+- `owner_verified_matched`
+- `owner_verified_identity_pending`
+- `unresolved_owner_review`
+- `technical_review_required`
+- `new_feature`
+- `retired_feature`
+
+Preserve source names and IDs exactly.
+
+## 9. Safety constraints
+
+- Do not modify authoritative GeoJSON.
+- Do not modify F-ALL.
+- Do not overwrite previous owner-verification records.
+- Do not automatically approve uncertain polygon mappings.
+- Do not infer that similarly named polygons are the same physical space.
+- Do not perform destructive geometry operations.
+- Do not implement the Stage 3 area engine.
+- Do not implement the Stage 4 analytics dashboard.
+- Do not begin F1 classification.
+- Preserve the existing F4 owner verifications and the separate F6 reconciliation requirements.
+
+This is a read-only analysis and report-generation task.
+
+## 10. Final response required
+
+At completion, report:
+
+1. Total current F0 polygons
+2. Number of newly added polygons
+3. Number of reliably matched owner-verified features
+4. Number of owner-verified features with unresolved identity
+5. Number of remaining unresolved F0 classifications
+6. Number of F0/F-ALL inconsistencies
+7. Whether F0 is ready for Stage 2B closure
+
+Then display the first 10 unresolved F0 cases, ordered by priority, with their exact identifiers and recommended verification questions.
+
+Do not mark F0 verification complete unless all remaining unresolved classifications and identity issues have been addressed.
